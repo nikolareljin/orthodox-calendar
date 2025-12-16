@@ -1,0 +1,13 @@
+**/__pycache__/
+**/*.pyc
+**/.venv
+**/venv
+**/.env
+node_modules
+dist
+frontend/node_modules
+frontend/dist
+backend/.venv
+backend/venv
+backend/.env
+docker-compose.override.yml

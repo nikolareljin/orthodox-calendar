@@ -1,0 +1,3 @@
+[submodule "script-helpers"]
+	path = script-helpers
+	url = git@github.com:nikolareljin/script-helpers.git

@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: orthodox-calendar-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - ORTHODOX_CALENDAR_DATA_PATH=/data
+    volumes:
+      - ./backend/app/data:/data:ro
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: orthodox-calendar-frontend
+    ports:
+      - "4173:4173"
+    environment:
+      - VITE_API_BASE=http://backend:8000
+    depends_on:
+      - backend

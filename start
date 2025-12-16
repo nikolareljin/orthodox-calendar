@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+load_helpers() {
+  local helper_paths=(
+    "${SCRIPT_HELPERS_DIR:-}"
+    "${ROOT_DIR}/script-helpers"
+    "${ROOT_DIR}/../script-helpers"
+  )
+  for path in "${helper_paths[@]}"; do
+    if [[ -n "$path" && -f "$path/helpers.sh" ]]; then
+      # shellcheck disable=SC1090
+      source "$path/helpers.sh"
+      return 0
+    fi
+  done
+  echo "script-helpers not found. Init submodule or set SCRIPT_HELPERS_DIR." >&2
+  exit 1
+}
+
+load_helpers
+shlib_import logging docker help
+
+usage() {
+  cat <<'EOF'
+Usage: ./start [-b] [-h]
+  -b  Rebuild Docker images before starting
+  -h  Show this help message
+EOF
+}
+
+rebuild=false
+while getopts "bh" opt; do
+  case "$opt" in
+    b) rebuild=true ;;
+    h) usage; exit 0 ;;
+    *) usage; exit 1 ;;
+  esac
+done
+
+cd "$ROOT_DIR"
+
+if ! check_docker; then
+  exit 1
+fi
+
+log_info "Starting dockerized stack (backend + frontend)"
+if $rebuild; then
+  docker_compose up -d --build
+else
+  docker_compose up -d
+fi
+
+log_info "Backend: http://localhost:8000"
+log_info "Frontend: http://localhost:4173"

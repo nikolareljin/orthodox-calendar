@@ -1,0 +1,160 @@
+[
+  {
+    "month_day": "12-25",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nativity of Christ",
+        "feast_type": "Great Feast",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/12/25",
+        "icon_url": "https://example.com/icons/nativity.png",
+        "notes": "Christmas according to the Julian calendar."
+      }
+    ],
+    "notes": "Fixed feast on the Julian calendar."
+  },
+  {
+    "month_day": "01-01",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Basil",
+        "title": "St Basil the Great",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/01/01/100001",
+        "icon_url": "https://example.com/icons/basil.png"
+      }
+    ]
+  },
+  {
+    "month_day": "12-25",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nativity of Christ",
+        "feast_type": "Great Feast",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/12/25",
+        "icon_url": "https://example.com/icons/nativity.png"
+      }
+    ]
+  },
+  {
+    "month_day": "08-15",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Dormition of the Theotokos",
+        "feast_type": "Great Feast",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=104",
+        "icon_url": "https://example.com/icons/dormition.png"
+      }
+    ],
+    "notes": "New Calendar observance."
+  },
+  {
+    "month_day": "10-26",
+    "tradition": "antioch",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Dimitrios",
+        "title": "St Demetrios the Myrrh-streamer",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/10/26/103089",
+        "icon_url": "https://example.com/icons/demetrios.png"
+      }
+    ]
+  },
+  {
+    "month_day": "06-29",
+    "tradition": "alexandria",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Peter",
+        "title": "St Peter the Apostle",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/06/29/102019",
+        "icon_url": "https://example.com/icons/peter.png"
+      },
+      {
+        "name": "Paul",
+        "title": "St Paul the Apostle",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/06/29/102019",
+        "icon_url": "https://example.com/icons/paul.png"
+      }
+    ]
+  },
+  {
+    "month_day": "05-24",
+    "tradition": "bulgarian",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Cyril",
+        "title": "St Cyril Equal-to-the-Apostles",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/05/11/101370",
+        "icon_url": "https://example.com/icons/cyril.png"
+      },
+      {
+        "name": "Methodius",
+        "title": "St Methodius Equal-to-the-Apostles",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/05/11/101370",
+        "icon_url": "https://example.com/icons/methodius.png"
+      }
+    ],
+    "notes": "Observed as Saints Cyril and Methodius Day."
+  },
+  {
+    "month_day": "11-30",
+    "tradition": "romanian",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Andrew",
+        "title": "St Andrew the First-Called",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/11/30/103488",
+        "icon_url": "https://example.com/icons/andrew.png"
+      }
+    ]
+  },
+  {
+    "month_day": "09-27",
+    "tradition": "jerusalem",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Exaltation of the Holy Cross",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/09/27/102740",
+        "icon_url": "https://example.com/icons/cross.png"
+      }
+    ]
+  },
+  {
+    "month_day": "01-19",
+    "tradition": "ethiopian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Timkat",
+        "title": "Theophany (Baptism of Christ)",
+        "hagiography_url": "https://www.ethiopianorthodox.org/english/calendar/timket.html",
+        "icon_url": "https://example.com/icons/theophany.png"
+      }
+    ]
+  },
+  {
+    "month_day": "01-07",
+    "tradition": "oriental",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nativity (Coptic)",
+        "feast_type": "Great Feast",
+        "hagiography_url": "https://www.copticchurch.net/synaxarium/",
+        "icon_url": "https://example.com/icons/nativity.png"
+      }
+    ]
+  }
+]

@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+load_helpers() {
+  local helper_paths=(
+    "${SCRIPT_HELPERS_DIR:-}"
+    "${ROOT_DIR}/script-helpers"
+    "${ROOT_DIR}/../script-helpers"
+  )
+  for path in "${helper_paths[@]}"; do
+    if [[ -n "$path" && -f "$path/helpers.sh" ]]; then
+      # shellcheck disable=SC1090
+      source "$path/helpers.sh"
+      return 0
+    fi
+  done
+  echo "script-helpers not found. Init submodule or set SCRIPT_HELPERS_DIR." >&2
+  exit 1
+}
+
+load_helpers
+shlib_import logging traps
+
+BACKEND_DIR="${ROOT_DIR}/backend"
+FRONTEND_DIR="${ROOT_DIR}/frontend"
+VENV_DIR="${BACKEND_DIR}/.venv"
+
+if [[ ! -d "$VENV_DIR" ]]; then
+  log_warn "Backend virtualenv not found; running build first."
+  "${ROOT_DIR}/build"
+fi
+
+if ! command -v npm >/dev/null 2>&1; then
+  log_error "npm not found"
+  exit 1
+fi
+
+BACKEND_PORT=8000
+FRONTEND_PORT=5173
+BACKEND_PID=""
+FRONTEND_PID=""
+
+start_backend() {
+  log_info "Starting backend on :${BACKEND_PORT}"
+  # shellcheck source=/dev/null
+  source "${VENV_DIR}/bin/activate"
+  UVICORN_CMD=("uvicorn" "app.main:app" "--host" "0.0.0.0" "--port" "${BACKEND_PORT}")
+  (cd "$BACKEND_DIR" && "${UVICORN_CMD[@]}") &
+  BACKEND_PID=$!
+}
+
+start_frontend() {
+  log_info "Starting frontend dev server on :${FRONTEND_PORT}"
+  (cd "$FRONTEND_DIR" && npm install && npm run dev -- --host --port "${FRONTEND_PORT}") &
+  FRONTEND_PID=$!
+}
+
+cleanup() {
+  log_info "Shutting down services"
+  [[ -n "$FRONTEND_PID" ]] && kill "$FRONTEND_PID" >/dev/null 2>&1 || true
+  [[ -n "$BACKEND_PID" ]] && kill "$BACKEND_PID" >/dev/null 2>&1 || true
+}
+
+trap cleanup EXIT
+
+start_backend
+start_frontend
+
+log_info "Backend: http://localhost:${BACKEND_PORT}"
+log_info "Frontend: http://localhost:${FRONTEND_PORT}"
+log_info "Press Ctrl+C to stop."
+
+wait -n

@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+load_helpers() {
+  local helper_paths=(
+    "${SCRIPT_HELPERS_DIR:-}"
+    "${ROOT_DIR}/script-helpers"
+    "${ROOT_DIR}/../script-helpers"
+  )
+  for path in "${helper_paths[@]}"; do
+    if [[ -n "$path" && -f "$path/helpers.sh" ]]; then
+      # shellcheck disable=SC1090
+      source "$path/helpers.sh"
+      return 0
+    fi
+  done
+  echo "script-helpers not found. Init submodule or set SCRIPT_HELPERS_DIR." >&2
+  exit 1
+}
+
+load_helpers
+shlib_import logging docker
+
+cd "$ROOT_DIR"
+
+if ! check_docker; then
+  exit 1
+fi
+
+log_info "Stopping dockerized stack"
+docker_compose down
