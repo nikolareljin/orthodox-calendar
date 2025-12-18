@@ -16,7 +16,7 @@ load_helpers() {
       return 0
     fi
   done
-  echo "script-helpers not found. Init submodule or set SCRIPT_HELPERS_DIR." >&2
+  echo "script-helpers not found. Run ./update to fetch submodules (or set SCRIPT_HELPERS_DIR)." >&2
   exit 1
 }
 
