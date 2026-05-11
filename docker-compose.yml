@@ -6,21 +6,31 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     container_name: orthodox-calendar-backend
+    restart: unless-stopped
     ports:
       - "8000:8000"
     environment:
       - ORTHODOX_CALENDAR_DATA_PATH=/data
     volumes:
       - ./backend/app/data:/data:ro
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE=${VITE_API_BASE:-http://localhost:8000}
     container_name: orthodox-calendar-frontend
+    restart: unless-stopped
     ports:
       - "4173:4173"
-    environment:
-      - VITE_API_BASE=http://backend:8000
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy

@@ -28,6 +28,23 @@ export async function fetchNameDays(date, traditions, contacts) {
   return res.json();
 }
 
+export async function fetchMonthCalendar(year, month, tradition) {
+  const params = new URLSearchParams({ year, month, tradition });
+  const res = await fetch(`${API_BASE}/api/v1/calendar?${params.toString()}`);
+  if (!res.ok) throw new Error("Failed to fetch month calendar");
+  return res.json();
+}
+
+export async function fetchReadings(date, tradition) {
+  const params = new URLSearchParams();
+  if (date) params.append("day", date);
+  if (tradition) params.append("tradition", tradition);
+
+  const res = await fetch(`${API_BASE}/api/v1/readings?${params.toString()}`);
+  if (!res.ok) throw new Error("Failed to fetch readings");
+  return res.json();
+}
+
 export function buildIcsUrl(tradition, start, days) {
   const params = new URLSearchParams();
   if (tradition) params.append("tradition", tradition);

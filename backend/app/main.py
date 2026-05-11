@@ -1,14 +1,17 @@
 from __future__ import annotations
 
+import json
+import urllib.request as _urllib_request
 from datetime import date
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException, Query, Response
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from .calendar_logic import canonical_tradition_key
 from .config import TRADITIONS
-from .models import Contact, NameDayResponse, SaintsResponse
+from .models import CalendarSystem, Contact, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
 from .services.saints import get_saints_for_date
 from .services.ical import generate_ical_feed
@@ -23,7 +26,14 @@ class NameDayRequest(BaseModel):
 app = FastAPI(
     title="orthodox-calendar",
     description="Orthodox and Oriental Orthodox saints of the day with calendar/contacts hooks.",
-    version="0.1.0",
+    version="0.2.0",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["GET", "POST"],
+    allow_headers=["*"],
 )
 
 
@@ -57,6 +67,59 @@ def name_days(payload: NameDayRequest) -> NameDayResponse:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     return find_name_days(payload.date, canonicalized, payload.contacts)
+
+
+@app.get("/api/v1/calendar")
+def month_calendar(
+    year: int = Query(..., ge=1, le=9999),
+    month: int = Query(..., ge=1, le=12),
+    tradition: str = Query(default="serbian"),
+) -> Dict[str, Any]:
+    import calendar as _cal
+
+    try:
+        canonical = canonical_tradition_key(tradition)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    days_in_month = _cal.monthrange(year, month)[1]
+    result: Dict[str, Any] = {}
+
+    for day in range(1, days_in_month + 1):
+        d = date(year, month, day)
+        entries = get_saints_for_date(d, [canonical])
+        if not entries or not entries[0].saints:
+            continue
+        saints_list = entries[0].saints
+        feast_types = [s.feast_type for s in saints_list if s.feast_type]
+        top = saints_list[0]
+        result[d.isoformat()] = {
+            "feast_types": feast_types,
+            "main_feast": top.title or top.name,
+            "calendar_date": entries[0].calendar_date,
+        }
+
+    return result
+
+
+@app.get("/api/v1/readings")
+def readings(
+    day: date = Query(default_factory=date.today),
+    tradition: str = Query(default="greek"),
+) -> Dict[str, Any]:
+    try:
+        canonical = canonical_tradition_key(tradition)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    trad = TRADITIONS[canonical]
+    cal = "julian" if trad.calendar == CalendarSystem.JULIAN else "gregorian"
+    url = f"https://orthocal.info/api/{cal}/{day.year}/{day.month}/{day.day}/"
+    try:
+        with _urllib_request.urlopen(url, timeout=8) as resp:  # noqa: S310
+            return json.loads(resp.read())
+    except Exception:
+        return {}
 
 
 @app.get("/api/v1/saints.ics")
