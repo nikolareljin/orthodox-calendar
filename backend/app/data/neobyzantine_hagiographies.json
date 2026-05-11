@@ -1,0 +1,483 @@
+[
+  {
+    "month_day": "01-01",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Circumcision of Our Lord and God and Savior Jesus Christ",
+        "title": "Circumcision of Our Lord and God and Savior Jesus Christ",
+        "feast_type": "Great Feast",
+        "notes": null
+      },
+      {
+        "name": "Basil the Great",
+        "title": "Saint Basil the Great, Archbishop of Caesarea",
+        "feast_type": "Hierarch",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-02",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Sylvester",
+        "title": "Saint Sylvester, Bishop of Rome",
+        "feast_type": "Hierarch",
+        "notes": null
+      },
+      {
+        "name": "Seraphim of Sarov",
+        "title": "Venerable Seraphim of Sarov",
+        "feast_type": "Venerable",
+        "notes": null
+      },
+      {
+        "name": "Theodota",
+        "title": "Saint Theodota",
+        "feast_type": "Saint",
+        "notes": null
+      },
+      {
+        "name": "Ammon",
+        "title": "Venerable Ammon",
+        "feast_type": "Venerable",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-03",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Prophet Malachi",
+        "title": "Prophet Malachi",
+        "feast_type": "Saint",
+        "notes": null
+      },
+      {
+        "name": "Gordius",
+        "title": "Hieromartyr Gordius",
+        "feast_type": "Hieromartyr",
+        "notes": null
+      },
+      {
+        "name": "Genevieve",
+        "title": "Saint Genevieve",
+        "feast_type": "Saint",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-04",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Synaxsis of the Seventy Holy Apostles",
+        "title": "Synaxsis of the Seventy Holy Apostles",
+        "feast_type": "Saint",
+        "notes": null
+      },
+      {
+        "name": "Eustathius",
+        "title": "Saint Eustathius, Archbishop of the Serbs",
+        "feast_type": "Hierarch",
+        "notes": null
+      },
+      {
+        "name": "Eunuch of Queen Candace",
+        "title": "Eunuch of Queen Candace",
+        "feast_type": "Saint",
+        "notes": null
+      },
+      {
+        "name": "Martyr Onuphrius of Hilandar Monastery",
+        "title": "Venerable Martyr Onuphrius of Hilandar Monastery (Mount Athos)",
+        "feast_type": "Martyr",
+        "notes": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-05",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Theopempos and the Martyr Thoenas",
+        "title": "Hieromartyr Theopempos and the Martyr Thoenas",
+        "feast_type": "Hieromartyr",
+        "notes": "Theopempos was severely beaten, suffered from hunger and tortured in \n\t\tvarious ways. Finally, the emperor summoned a certain magician, Theonas \n\t\tby name, to outwit this godly man through magic. Theonas dissolved the \n\t\tmost potent poison in water and gave it to Theopempos to drink. Theopempos \n\t\ttraced the sign of the cross over the glass and drank the poison. Theonas, \n\t\tupon seeing that the poison had no effect on Theopempos, turned to the \n\t\temperor and shouted, \" I, too, am a Christian …"
+      },
+      {
+        "name": "010502. Holy Prophet Micaiah the First",
+        "title": "010502. Holy Prophet Micaiah the First",
+        "feast_type": "Saint",
+        "notes": "Мicaiah was a contemporary of the Prophet Elijah. He foretold the death \n\t\tof the pernicious King Ahab in battle against the Assyrians (I Kings, \n\t\tChapter 22, II Chronicles, Chapter 18). Micaiah (Micah) prophesied everything \n\t\torally and did not put anything down in writing. However the other Prophet \n\t\tMicah was the one who prophesied the birth of the Lord in Bethlehem. \"But \n\t\tyou, Bethlehem-Ephrathah too small to be among the clans of Judah; From \n\t\tyou shall come forth for me one who is…"
+      },
+      {
+        "name": "010503. Venerable Mother Syncletica",
+        "title": "010503. Venerable Mother Syncletica",
+        "feast_type": "Venerable",
+        "notes": "She further spoke, \"As when uncovered treasure is quickly seized, so \n\t\tit is with virtue; when it is made public becomes eclipsed and becomes \n\t\tlost."
+      },
+      {
+        "name": "010504. Venerable Apollinaria",
+        "title": "010504. Venerable Apollinaria",
+        "feast_type": "Venerable",
+        "notes": "Apollinaria was the daughter of Anthemius, the regent of the adolescent \n\t\tEmperor Theodosius the Younger. She was the eldest daughter of Anthemius \n\t\twhose younger daughter was insane. Apollinaria, who did not wish to marry \n\t\tbecause in her heart she was betrothed to Christ, withdrew into the Egyptian \n\t\twilderness. In men's attire and under the masculine name of Dorotheus, \n\t\tApollinaria entered a monastery for men, where she lived an ascetical \n\t\tlife, uplifting her spirit continuously to…"
+      }
+    ]
+  },
+  {
+    "month_day": "01-06",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "010601. Theophany of Our Lord and Savior Jesus Christ",
+        "title": "010601. Theophany of Our Lord and Savior Jesus Christ",
+        "feast_type": "Great Feast",
+        "notes": "At the time of the baptism of the Lord in water, that mystery \n\t\t\t\t\twas declared to the world: that mystery which was prophesied \n\t\t\t\t\tin the Old Testament; the mystery about which in ancient Egypt \n\t\t\t\t\tand India was only fabled; i.e., the mystery of the Divine \n\t\t\t\t\tHoly Trinity. The Father was revealed to the sense of hearing; \n\t\t\t\t\tthe Spirit was revealed to the sense of sight, and in addition \n\t\t\t\t\tto these, the Son was revealed to the sense of touch. The \n\t\t\t\t\tFather uttered His witness…"
+      }
+    ]
+  },
+  {
+    "month_day": "01-07",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "010701. Saint John the Baptist",
+        "title": "010701. Saint John the Baptist",
+        "feast_type": "Saint",
+        "notes": "Because John's main role in his life was played out on \n\t\t\t\t\tthe day of the Theophany, the Church from earliest times dedicated \n\t\t\t\t\tthe day following Theophany to his memory. To this feast is \n\t\t\t\t\talso linked the incident with the hand of the Forerunner. \n\t\t\t\t\tThe Evangelist Luke desired to remove the body of John from \n\t\t\t\t\tSebaste, where the great prophet was beheaded by Herod, to \n\t\t\t\t\tAntioch his place of birth. He succeeded though, in acquiring \n\t\t\t\t\tand translating only one hand whic…"
+      },
+      {
+        "name": "010702. Holy Martyr Athanasius",
+        "title": "010702. Holy Martyr Athanasius",
+        "feast_type": "Martyr",
+        "notes": "his martyr of Christ was a simple and poor man but rich \n\t\t\t\t\tin faith and wise through the Spirit of God. Once, unintentionally, \n\t\t\t\t\tAthanasius entered into a debate about the Faith with a certain \n\t\t\t\t\tTurk. The Turk was educated and adroit with words, but Athanasius \n\t\t\t\t\tendeavored with all his strength to emphasize and to establish \n\t\t\t\t\tthe truth of and preference for the Christian Faith over Islam. \n\t\t\t\t\tAfter that, they departed. The next day Athanasius was summoned \n\t\t\t\t\tbefore the…"
+      }
+    ]
+  },
+  {
+    "month_day": "01-08",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "010801. Holy Martyrs Julian and Basilissa",
+        "title": "010801. Holy Martyrs Julian and Basilissa",
+        "feast_type": "Saint",
+        "notes": "Julian and Basilissa were of noble and wealthy parents. \n\t\t\t\t\tUnited in marriage, they vowed to live chastely as brother \n\t\t\t\t\tand sister. They distributed all of their property to the \n\t\t\t\t\tpoor and both were tonsured. Julian founded a monastery and \n\t\t\t\t\tBasilissa founded a convent. Julian had about ten-thousand \n\t\t\t\t\tmonks and Basilissa about a thousand nuns. When a terrible \n\t\t\t\t\tpersecution began under Diocletian, Basilissa implored God \n\t\t\t\t\tthat none of her nuns would become frightened…"
+      },
+      {
+        "name": "010802. Venerable George the Chozibite",
+        "title": "010802. Venerable George the Chozibite",
+        "feast_type": "Venerable",
+        "notes": "George lived an ascetical life in the seventh century in \n\t\t\t\t\tChoziba Monastery in Jericho on the road from Jerusalem, the \n\t\t\t\t\tmonastery where the Venerable John Chozibite first led an \n\t\t\t\t\tascetical life."
+      },
+      {
+        "name": "010803. Saint Domnica",
+        "title": "010803. Saint Domnica",
+        "feast_type": "Saint",
+        "notes": "During the reign of Emperor Theodosius, Domnica, unbaptized, \n\t\t\t\t\tcame from Carthage to Constantinople with four other pagan \n\t\t\t\t\tmaidens. Patriarch Macarius baptized them and gave his blessing \n\t\t\t\t\tto them to live as nuns. With great zeal, St. Domnica gave \n\t\t\t\t\therself up to a life of asceticism and in that zeal did not \n\t\t\t\t\twaver until her death in extreme old age. She died in the \n\t\t\t\t\tLord about 474 A.D. She was so enlightened by the Holy Spirit \n\t\t\t\t\tthat she was able to discern eve…"
+      },
+      {
+        "name": "010804. Saint Gregory",
+        "title": "010804. Saint Gregory, Bishop of Ohrid",
+        "feast_type": "Hierarch",
+        "notes": "regory was a devout teacher and shepherd of Christ's flock. \n\t\t\t\t\tHe died in the year 1012 A.D. In one of the inscriptions in \n\t\t\t\t\tthe Church of St. Sophia in Ohrid, he is referred to as \"Gregory, \n\t\t\t\t\tthe all-wise."
+      }
+    ]
+  },
+  {
+    "month_day": "01-09",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "010901. Holy Martyr Polyeuctus",
+        "title": "010901. Holy Martyr Polyeuctus",
+        "feast_type": "Martyr",
+        "notes": "The Armenian city of Melitene was drenched with the blood \n\t\t\t\t\tof Christians as was the entire country of Armenia. The first \n\t\t\t\t\tblood shed for Christ in this city was that of Saint Polyeuctus \n\t\t\t\t\tin the year 259 A.D. during the reign of Valerian. In this \n\t\t\t\t\tcity (Melitene) were two friends: both Nearchus and Polyeuctus \n\t\t\t\t\twere officers, Nearchus baptized and Polyeuctus unbaptized. \n\t\t\t\t\tWhen the command of the emperor was sent out concerning the \n\t\t\t\t\tpersecution of the Christians…"
+      },
+      {
+        "name": "010902. Venerable Eustratius",
+        "title": "010902. Venerable Eustratius",
+        "feast_type": "Venerable",
+        "notes": "Еustratius was a native of Tarsus. He was a great ascetic \n\t\t\t\t\tand a man of prayer. During the seventy-five years he spent \n\t\t\t\t\tin the monastery, Eustratius never laid down to sleep on his \n\t\t\t\t\tleft side but always on his right side. Throughout the Divine \n\t\t\t\t\tServices, from the beginning to the end, he repeated to himself: \n\t\t\t\t\t\"Lord have mercy! He died in his ninety-fifth year."
+      },
+      {
+        "name": "010903. Saint Philip",
+        "title": "010903. Saint Philip, Metropolitan of Moscow",
+        "feast_type": "Hierarch",
+        "notes": "Philip was born February 11, 1507 A.D. Once, while standing \n\t\t\t\t\tin church as a young boy, he heard the priest read from the \n\t\t\t\t\tGospel: \"No one can serve two masters (St. Matthew 6:24). \n\t\t\t\t\tHe became very frightened by these words, as though these \n\t\t\t\t\twords were exclusively spoken to him and at that same time \n\t\t\t\t\tbecame enlightened by them. He then withdrew to the Solovetsk \n\t\t\t\t\tMonastery where he, after a long and difficult period of probation, \n\t\t\t\t\twas tonsured a monk. In time, …"
+      }
+    ]
+  },
+  {
+    "month_day": "01-10",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011001. Saint Gregory",
+        "title": "011001. Saint Gregory, Bishop of Nyssa",
+        "feast_type": "Hierarch",
+        "notes": "Gregory was the brother of Basil the Great. At first, he \n\t\t\t\t\twas only a presbyter since he was married; but when his wife \n\t\t\t\t\tBlessed Theosevia died, Gregory was chosen and consecrated \n\t\t\t\t\tas bishop of Nyssa. He was distinguished by his great secular \n\t\t\t\t\tlearning and spiritual experience. He participated at the \n\t\t\t\t\tSecond Ecumenical Council (Constantinople, 381 A.D). It is \n\t\t\t\t\tthought that he composed the second half of the Symbol of \n\t\t\t\t\tFaith. He was a great orator, an exegete …"
+      },
+      {
+        "name": "011002. Venerable Ammon",
+        "title": "011002. Venerable Ammon, Epyptian Ascetic",
+        "feast_type": "Venerable",
+        "notes": "For fourteen years, Ammon prayed to God and struggled to \n\t\t\t\t\tconquer anger within himself. He attained such perfection \n\t\t\t\t\tof goodness, that he was not even conscious that evil existed \n\t\t\t\t\tin the world. He was particularly knowledgeable in Holy Scripture. \n\t\t\t\t\tHe died at the beginning of the fifth century."
+      },
+      {
+        "name": "011003. Saint Marcian",
+        "title": "011003. Saint Marcian",
+        "feast_type": "Saint",
+        "notes": "(I Timothy 6:8). It is written about him: \"He was totally \n\t\t\t\t\tin God and God in him, and presented himself to God in fullness \n\t\t\t\t\tof years and good works, in the year 471 A.D."
+      }
+    ]
+  },
+  {
+    "month_day": "01-11",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011101. Venerable Theodosius the Great",
+        "title": "011101. Venerable Theodosius the Great",
+        "feast_type": "Venerable",
+        "notes": "Theodosius was the first founder and organizer of the cenobitic \n\t\t\t\t\tway of monastic life. He was born in the province of Cappadocia \n\t\t\t\t\tin the village of Mogarissus of devout parents. As a child, \n\t\t\t\t\the visited St. Simeon the Stylite who blessed him and prophesied \n\t\t\t\t\tgreat and spiritual honors about him. With a thurible (censer) \n\t\t\t\t\tin which he placed unburned charcoal and incense, Theodosius \n\t\t\t\t\tsought out a place where he could settle and establish his \n\t\t\t\t\tmonastery and stopp…"
+      },
+      {
+        "name": "011102. Blessed Michael",
+        "title": "011102. Blessed Michael",
+        "feast_type": "Saint",
+        "notes": "Blessed Michael was a Russian of a princely family. He \n\t\t\t\t\tmade himself appear foolish so as to conceal his virtues from \n\t\t\t\t\tthe world and to avoid the praise of men. Thus, he prepared \n\t\t\t\t\thimself for praise before God. He died in the year 1453 A.D. \n\t\t\t\t\tin the Klops Monastery near Novgorod where his relics repose."
+      }
+    ]
+  },
+  {
+    "month_day": "01-12",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011201. Holy Martyr Tatiana",
+        "title": "011201. Holy Martyr Tatiana",
+        "feast_type": "Martyr",
+        "notes": "Tatiana was a Roman whose parents were of great nobility. \n\t\t\t\t\tShe was a Christian and a deaconess in the church. After the \n\t\t\t\t\tdeath of Emperor Heliogabalus, Emperor Alexander, whose mother \n\t\t\t\t\tMammaea was a Christian, reigned in Rome. The emperor himself \n\t\t\t\t\twas wavering and indecisive in the Faith for he kept statues \n\t\t\t\t\tof Christ, Apollo, Abraham and Orpheus in his palace. His \n\t\t\t\t\tchief assistants persecuted the Christians without the emperor's \n\t\t\t\t\torders. When they brought o…"
+      },
+      {
+        "name": "011202. Holy Martyr Peter Apselamus",
+        "title": "011202. Holy Martyr Peter Apselamus",
+        "feast_type": "Martyr",
+        "notes": "eter was born in Eleutheropolis in Palestine. In his youth, \n\t\t\t\t\tPeter suffered for the Faith of Christ in 311 A.D., during \n\t\t\t\t\tthe reign of Emperor Maximian. After much torture, he was \n\t\t\t\t\tcondemned to death. Upon hearing his death sentence, he rejoicefully \n\t\t\t\t\tcried out: \"That is my one wish; to die for my God! Peter \n\t\t\t\t\twas crucified in the same manner as our Lord Himself and expired \n\t\t\t\t\ton the cross."
+      }
+    ]
+  },
+  {
+    "month_day": "01-13",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011301. Holy Martyrs Hermylas and Stratonicus",
+        "title": "011301. Holy Martyrs Hermylas and Stratonicus",
+        "feast_type": "Saint",
+        "notes": "The Emperor Licinius raised up a persecution against Christians. \n\t\t\t\t\tSt. Hermylas, a Christian and a deacon in the Church, was \n\t\t\t\t\tcaptured and led to court. When Hermylas was informed that \n\t\t\t\t\the was being led away to be tortured, he greatly rejoiced. \n\t\t\t\t\tIn vain did the emperor threaten him. Hermylas openly confessed \n\t\t\t\t\this faith in Christ and responded to all the threats of the \n\t\t\t\t\temperor saying, \"The Lord is with me; I fear not; What can \n\t\t\t\t\tman do against me? (Psalm 118:6…"
+      },
+      {
+        "name": "011302. Saint James",
+        "title": "011302. Saint James, Bishop of Nisibis",
+        "feast_type": "Hierarch",
+        "notes": "As a hermit, James lived in an open field in the summer \n\t\t\t\t\tand in winter he lived in a cave. On one occasion, he went \n\t\t\t\t\tdown to the town of Nisibis to see how the Christian Faith \n\t\t\t\t\twas prospering and to see how Christians live. There, he was \n\t\t\t\t\telected bishop. He participated in the First Ecumenical Council \n\t\t\t\t\t(Nicaea, 325 A.D.) and protected Orthodoxy against the Arian \n\t\t\t\t\theresy. It happened once that the infidel Persians with their \n\t\t\t\t\tarmies attacked Nisibis. St. Jame…"
+      },
+      {
+        "name": "011303. Venerable Maximus Kapsokalivitos",
+        "title": "011303. Venerable Maximus Kapsokalivitos",
+        "feast_type": "Venerable",
+        "notes": "An angel in the flesh.\" He died in the Lord in the year \n\t\t\t\t\t1320 A.D."
+      }
+    ]
+  },
+  {
+    "month_day": "01-14",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011401. Saint Sava",
+        "title": "011401. Saint Sava (Sabas), Archbishop of the Serbs",
+        "feast_type": "Hierarch",
+        "notes": "Sava was born in 1169 A.D. He was the son of Stephen (Stefan) \n\t\t\t\t\tNemanja the Grand Zupan of the Serbs. As a young man, Sava \n\t\t\t\t\tyearned for the spiritual life for which he fled to the Holy \n\t\t\t\t\tMountain (Mt. Athos) where he was tonsured a monk and with \n\t\t\t\t\trare zeal lived according to the ascetical rule. Stefan Nemanja \n\t\t\t\t\tfollowed the example of his son and came to the Holy Mountain \n\t\t\t\t\twhere he was tonsured a monk and died as Simeon, the monk. \n\t\t\t\t\tSava obtained the independenc…"
+      },
+      {
+        "name": "011402. Venerable Martyrs: the Fathers of Sinai and Raithu",
+        "title": "011402. Venerable Martyrs: the Fathers of Sinai and Raithu",
+        "feast_type": "Venerable",
+        "notes": "These holy martyrs, were slain by the Saracens, those fathers \n\t\t\t\t\tof Sinai in the fourth century and those fathers of Raithu \n\t\t\t\t\tin the fifth century."
+      },
+      {
+        "name": "011403. Saint Hilary",
+        "title": "011403. Saint Hilary, Bishop of Poiters",
+        "feast_type": "Hierarch",
+        "notes": "Hilary was an ardent combatant against the heresy of Arius \n\t\t\t\t\tin the west. He suffered much because of his defense of Orthodoxy. \n\t\t\t\t\tHilary wrote many papers; the most important thesis was about \n\t\t\t\t\tthe Holy Trinity. He died in the Lord in the year 362 A.D."
+      },
+      {
+        "name": "011404. Saint Nina",
+        "title": "011404. Saint Nina, the Enlightener of the Georgians",
+        "feast_type": "Saint",
+        "notes": "Nina was a relative of St. George the Great Martyr and \n\t\t\t\t\tJuvenal, the Patriarch of Jerusalem. Her parents belonged \n\t\t\t\t\tto the nobility in Cappadocia and since they both were tonsured \n\t\t\t\t\tin the monastic state, Nina was educated under the tutelage \n\t\t\t\t\tof Patriarch Juvenal. Hearing about the people of Georgia, \n\t\t\t\t\tthe virgin Nina, from an early age, desired to go to Georgia \n\t\t\t\t\tand to baptize the Georgians. The All-Holy Mother of God appeared \n\t\t\t\t\tto Nina and promised to take her…"
+      }
+    ]
+  },
+  {
+    "month_day": "01-15",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011501. Venerable Paul of Thebes",
+        "title": "011501. Venerable Paul of Thebes",
+        "feast_type": "Venerable",
+        "notes": "Paul was born of wealthy parents in Lower Thebes in Egypt \n\t\t\t\t\tduring the reign of Emperor Decius. Paul, along with his sister, \n\t\t\t\t\tinherited all the property of their parents. But his brother-in-law, \n\t\t\t\t\tan idolater, wanted to confiscate Paul's share of the property \n\t\t\t\t\tand threatened to betray Paul before the judge as a Christian \n\t\t\t\t\tif he did not cede his property to him. On one hand, that \n\t\t\t\t\tmisfortune and on the other hand those heroic examples of \n\t\t\t\t\tself-sacrifices of Chr…"
+      },
+      {
+        "name": "011502. Venerable John Kushchnik",
+        "title": "011502. Venerable John Kushchnik (Kalyvites - the Hut Dweller)",
+        "feast_type": "Venerable",
+        "notes": "John was born in Constantinople of wealthy and distinguished \n\t\t\t\t\tparents during the reign of Leo I. He was the only child of \n\t\t\t\t\this parents. Drawn by the inclination for the spiritual life, \n\t\t\t\t\tthe young John secretly fled with a monk to a monastery in \n\t\t\t\t\tAsia Minor. In this monastery he remained for six years in \n\t\t\t\t\tthe greatest restraint, prayer and obedience toward the abbot. \n\t\t\t\t\tThen the devil assailed him with temptation that he should \n\t\t\t\t\tleave the monastery and return h…"
+      },
+      {
+        "name": "011503. Venerable Gabriel of Lesnov",
+        "title": "011503. Venerable Gabriel of Lesnov",
+        "feast_type": "Venerable",
+        "notes": "Gabriel was a Slav and companion of Prochorus of Pchinja \n\t\t\t\t\tand St. John of Rila. He lived a life of asceticism in the \n\t\t\t\t\ttenth century at Kratov on Mt. Lesnov where he erected a church \n\t\t\t\t\tdedicated to the Holy Archangel Michael. He was a miracle-worker \n\t\t\t\t\tduring his life and after his death. The present-day beautiful \n\t\t\t\t\tchurch located there was built by John Oliver, a duke of Tsar \n\t\t\t\t\tDushan. St. Gabriel died in the Lord toward the end of the \n\t\t\t\t\ttenth century."
+      },
+      {
+        "name": "011504. Holy Martyr Pansophius",
+        "title": "011504. Holy Martyr Pansophius",
+        "feast_type": "Martyr",
+        "notes": "Pansophius was the son of the Alexandrian Pro-consul Nilus. \n\t\t\t\t\tHe abandoned worldly honor and riches and as a young man was \n\t\t\t\t\ttonsured a monk. For twenty-seven years, he lived a strict \n\t\t\t\t\tlife of asceticism, uplifting his spirit to the higher world. \n\t\t\t\t\tDuring the reign of Decius, he was dragged before the court \n\t\t\t\t\twhere he was flogged for the Name of Christ until he gave \n\t\t\t\t\tup his soul to his God in great torment."
+      }
+    ]
+  },
+  {
+    "month_day": "01-16",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011601. Saint Peter the Apostle",
+        "title": "011601. Saint Peter the Apostle (The Chains of St. Peter)",
+        "feast_type": "Apostle",
+        "notes": "(Acts of the Apostles 12:7). The chains were preserved \n\t\t\t\t\tby Christians as much for the memory of this great apostle \n\t\t\t\t\tas well as for their healing power, for many of the sick were \n\t\t\t\t\thealed by touching them as well as with the towel of the Apostle \n\t\t\t\t\tPaul, \"then when the face cloths or aprons that touched his \n\t\t\t\t\tskin were applied to the sick, their diseases left them and \n\t\t\t\t\tthe evil spirits came out of them (Acts of the Apostles 19:12). \n\t\t\t\t\tSt. Juvenal, the Patriarch of …"
+      },
+      {
+        "name": "011602. Holy Martyrs Speusippus",
+        "title": "011602. Holy Martyrs Speusippus, Eleusippus, Meleusippus and Their Grandmother Leonilla",
+        "feast_type": "Saint",
+        "notes": "after which, they were flogged and finally burned in fire. \n\t\t\t\t\tA certain woman, Jovilla, enthusiastic at the courage of these \n\t\t\t\t\tmartyrs cried out: \"I am a Christian also! They immediately \n\t\t\t\t\tapprehended her who, together with the elderly Leonilla, was \n\t\t\t\t\tbeheaded."
+      },
+      {
+        "name": "011603. Venerable Martyr Damaskin of Gabrovo",
+        "title": "011603. Venerable Martyr Damaskin of Gabrovo",
+        "feast_type": "Martyr",
+        "notes": "Damaskin led a life of asceticism in Hilandar (Mt. Athos) \n\t\t\t\t\twhere he became the abbot. When he sought from some Turks \n\t\t\t\t\tpayment of a debt due to the monastery, they persuaded a Muslim \n\t\t\t\t\twoman to enter the house where Damaskin lived. Then, those \n\t\t\t\t\tsame Turks came and, finding this woman, dragged Damaskin \n\t\t\t\t\tbefore the Cadi (Muslim Judge) who then proposed to him: either \n\t\t\t\t\tbe hanged or convert to Islam. To this Damaskin decisively \n\t\t\t\t\tresponded, \"It would be insanity if…"
+      },
+      {
+        "name": "011604. Venerable Romil",
+        "title": "011604. Venerable Romil",
+        "feast_type": "Venerable",
+        "notes": "Romil was born in Vidin. He was a disciple of St. Gregory \n\t\t\t\t\tSinaite. He lived a life of asceticism in several monasteries. \n\t\t\t\t\tTogether with him in the Monastery Ravanica (Serbia) lived \n\t\t\t\t\tConstantine Camblak. St. Romil died in the Lord about the \n\t\t\t\t\tyear 1375 A.D. in the Monastery Ravanica."
+      }
+    ]
+  },
+  {
+    "month_day": "01-17",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011701. Venerable Anthony the Great",
+        "title": "011701. Venerable Anthony the Great",
+        "feast_type": "Venerable",
+        "notes": "Anthony was an Egyptian and was born about the year 250 \n\t\t\t\t\tA.D. in the village of Koman near Herculea. Following the \n\t\t\t\t\tdemise of his noble and wealthy parents, he divided the inherited \n\t\t\t\t\testate with his sister, who was a minor, and provided for \n\t\t\t\t\ther with some relatives. Anthony distributed his half of the \n\t\t\t\t\testate to the poor and, he, in his twentieth year, dedicated \n\t\t\t\t\thimself to the ascetical life for which he yearned from his \n\t\t\t\t\tchildhood. In the beginning Anthony…"
+      },
+      {
+        "name": "011702. Holy Emperor Theodosius the Great",
+        "title": "011702. Holy Emperor Theodosius the Great",
+        "feast_type": "Saint",
+        "notes": "This glorious and zealous emperor in the Faith reigned \n\t\t\t\t\tfrom 379 A.D. to 395 A.D. Constantine the Great banned the \n\t\t\t\t\tpersecution of Christians. Theodosius the Great went one step \n\t\t\t\t\tfurther, he outlawed the offering of idolatrous sacrifices \n\t\t\t\t\tin his realm. He assisted with strengthening and spreading \n\t\t\t\t\tthe Christian Faith throughout the world."
+      },
+      {
+        "name": "011703. Holy Neo-Martyr George of Ioannina",
+        "title": "011703. Holy Neo-Martyr George of Ioannina",
+        "feast_type": "Martyr",
+        "notes": "George was an Albanian. He was born in the village of Churkli, \n\t\t\t\t\tAlbania of very impoverished farmer parents. The Turks used \n\t\t\t\t\tforce to persuade George to embrace Islam, but he remained \n\t\t\t\t\tsteadfast in the Christian Faith for which he was hanged in \n\t\t\t\t\tIoannina on January 17, 1838 A.D. Even unto today, George \n\t\t\t\t\tis a great miracle-worker and healer."
+      }
+    ]
+  },
+  {
+    "month_day": "01-19",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "011901. Venerable Macarius the Great",
+        "title": "011901. Venerable Macarius the Great",
+        "feast_type": "Venerable",
+        "notes": "Macarius was an Egyptian and one of the younger contemporaries \n\t\t\t\t\tof Anthony the Great. His father was a priest. Out of obedience \n\t\t\t\t\tto his parents, Macarius married. However, his wife died shortly \n\t\t\t\t\tthereafter and he withdrew into the wilderness where he spent \n\t\t\t\t\tsixty years in labor and struggle, both internally and externally \n\t\t\t\t\tfor the Kingdom of Heaven. When they asked him: \"Why \n\t\t\t\t\tis he so thin when he eats and when he does not eat?\" \n\t\t\t\t\tHe responded: \"From the fear…"
+      },
+      {
+        "name": "011902. Venerable Marcarius of Alexandria",
+        "title": "011902. Venerable Marcarius of Alexandria",
+        "feast_type": "Venerable",
+        "notes": "Macarius was born in Alexandria and, at first, was a fruit \n\t\t\t\t\tvendor. He was baptized at age forty and as soon as he was \n\t\t\t\t\tbaptized, he immediately withdrew to lead a life of asceticism. \n\t\t\t\t\tAt first, he, together with Macarius the Great, was a disciple \n\t\t\t\t\tof St. Anthony. After that, he became the abbot of the Monastery \n\t\t\t\t\tcalled the Cells, located between Nitria and Skete. He was \n\t\t\t\t\tsomewhat younger than Macarius the Great and also lived longer. \n\t\t\t\t\tHe lived to be more th…"
+      },
+      {
+        "name": "011903. Saint Arsenius",
+        "title": "011903. Saint Arsenius, Bishop of Corfu",
+        "feast_type": "Hierarch",
+        "notes": "Arsenius augmented and structured the Rite of the Sacrament \n\t\t\t\t\tof Holy Unction (Anointing with Oil) to its present form. \n\t\t\t\t\tHe died in the year 959 A.D. His relics repose in the cathedral \n\t\t\t\t\tchurch in Corfu. 011904. Saint Mark, Archbishop of Ephesus Mark was famous for his courageous defense of Orthodoxy at \n\t\t\t\t\tthe Council of Florence (1439 A.D.) in spite of the emperor \n\t\t\t\t\tand the pope. He died peacefully in the year 1452 A.D. On \n\t\t\t\t\this death bed, Mark implored Gregory, his d…"
+      },
+      {
+        "name": "011904. Saint Mark",
+        "title": "011904. Saint Mark, Archbishop of Ephesus",
+        "feast_type": "Hierarch",
+        "notes": "Mark was famous for his courageous defense of Orthodoxy \n\t\t\t\t\tat the Council of Florence (1439 A.D.) in spite of the emperor \n\t\t\t\t\tand the pope. He died peacefully in the year 1452 A.D. On \n\t\t\t\t\this death bed, Mark implored Gregory, his disciple, and later \n\t\t\t\t\tthe glorious Patriarch Genadius, to be careful of the snares \n\t\t\t\t\tof the West and to defend Orthodoxy."
+      },
+      {
+        "name": "11905. Blessed Theodore",
+        "title": "11905. Blessed Theodore, \"Fool For Christ From Novgorod",
+        "feast_type": "Saint",
+        "notes": "Prior to his death, Theodore ran up and down the streets \n\t\t\t\t\tshouting to everyone: \"Farewell, I am traveling far away!\" \n\t\t\t\t\tHe died in the year 1392 A.D."
+      }
+    ]
+  },
+  {
+    "month_day": "02-09",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "HYMN OF PRAISE",
+        "title": "HYMN OF PRAISE",
+        "feast_type": "Saint",
+        "notes": "SAINT PETER DAMASKIN Damaskin numbers eight types of knowledge For men of spiritual and divine background: FIRST The knowledge of sorrow and all temptations, SECOND The knowledge of the sum of one's transgressions, one's transgressions and God's forgiveness. THIRD The knowledge of horror, pain and fear, Before death, in death and after separation, when before the righteous judgement, the soul stands. FOURTH The knowledge of Christ, the Savior, His life and all the saints, Of the saints; their…"
+      }
+    ]
+  }
+]

@@ -1,5 +1,16 @@
 /ignore/
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+
 # Ignore Claude memory files outside the repo root
 CLAUDE.md
 !/CLAUDE.md
