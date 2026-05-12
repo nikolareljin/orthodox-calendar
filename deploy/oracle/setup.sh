@@ -26,10 +26,11 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   certbot python3-certbot-nginx \
   iptables iptables-persistent
 
-echo "==> Opening port 80 in OS firewall (Oracle Cloud blocks this by default)"
+echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"
 iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
 ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-# Port 443 is opened automatically by certbot when TLS is configured.
+iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
 # Persist so rules survive reboot
 netfilter-persistent save
 
@@ -70,7 +71,7 @@ systemctl reload nginx
 echo ""
 echo "==> Setup complete."
 echo ""
-echo "    Backend API:  http://$(curl -s ifconfig.me)/docs"
+echo "    Backend API:  http://$(curl -s ifconfig.me)/api/v1/docs"
 echo ""
 echo "    Next steps:"
 echo "    1. In Oracle Cloud console → Networking → VCN → Security Lists:"

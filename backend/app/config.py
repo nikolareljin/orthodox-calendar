@@ -23,7 +23,7 @@ TRADITIONS: Dict[str, Tradition] = {
     "greek": Tradition(
         name="Ecumenical Patriarchate of Constantinople",
         calendar=CalendarSystem.REVISED,
-        aliases=["greece", "hellenic", "ecumenical", "constantinople"],
+        aliases=["greece", "hellenic", "ecumenical", "constantinople", "greek orthodox"],
         data_key="oca",
     ),
     "russian": Tradition(
@@ -94,7 +94,7 @@ TRADITIONS: Dict[str, Tradition] = {
     "oriental": Tradition(
         name="Coptic Orthodox Church of Alexandria",
         calendar=CalendarSystem.JULIAN,
-        aliases=["coptic"],
+        aliases=["coptic", "oriental orthodox", "oriental-orthodox"],
     ),
     "malankara": Tradition(
         name="Malankara Orthodox Syrian Church",
