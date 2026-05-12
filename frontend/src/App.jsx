@@ -129,6 +129,42 @@ function SaintCard({ saint }) {
   );
 }
 
+// ── ReadingCard ─────────────────────────────────────────────────────────────
+function ReadingCard({ reading }) {
+  const [expanded, setExpanded] = useState(false);
+  const hasText = Array.isArray(reading.passage) && reading.passage.length > 0;
+  const ref = reading.display || reading.short_display || `${reading.book} ${reading.passage}`;
+
+  return (
+    <div className="reading-card">
+      <button
+        className="reading-header"
+        onClick={() => hasText && setExpanded((e) => !e)}
+        disabled={!hasText}
+        aria-expanded={expanded}
+      >
+        <div className="reading-header-left">
+          {reading.source && <span className="reading-source">{reading.source}</span>}
+          <span className="reading-ref">{ref}</span>
+          {reading.description && <span className="reading-desc">{reading.description}</span>}
+        </div>
+        {hasText && <span className="expand-icon">{expanded ? "▲" : "▼"}</span>}
+      </button>
+      {expanded && hasText && (
+        <div className="reading-body">
+          {reading.passage.map((v, i) => (
+            <span key={i}>
+              {v.paragraph_start && i > 0 && <br />}
+              <sup className="verse-num">{v.verse}</sup>
+              {v.content}{" "}
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function fastingGlyph(fastLevel, fastException) {
   if (!fastLevel || fastLevel === 0) return { emoji: "✅", label: "No fast" };
   // fast_exception from orthocal: 2=fish+wine+oil, 1=wine+oil, 4=wine only
@@ -219,10 +255,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
             <div className="readings-section">
               <p className="section-label">Liturgical Readings</p>
               {readingsList.map((r, i) => (
-                <div key={i} className="reading-item">
-                  <span className="reading-ref">{r.display || `${r.book} ${r.passage}`}</span>
-                  {r.desc && <span className="reading-desc">{r.desc}</span>}
-                </div>
+                <ReadingCard key={i} reading={r} />
               ))}
             </div>
           )}
