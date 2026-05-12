@@ -9,9 +9,10 @@ from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from .calendar_logic import canonical_tradition_key
+from .calendar_logic import canonical_tradition_key, julian_pascha_as_gregorian
+from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _moon_phase
 from .config import TRADITIONS
-from .models import CalendarSystem, Contact, NameDayResponse, SaintsResponse
+from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
 from .services.saints import get_saints_for_date
 from .services.ical import generate_ical_feed
@@ -135,3 +136,26 @@ def saints_ical(
 
     ical = generate_ical_feed(tradition, start, days)
     return Response(content=ical, media_type="text/calendar")
+
+
+@app.get("/api/v1/movable-feasts")
+def get_movable_feasts(
+    year: int = Query(..., ge=1, le=9999),
+) -> dict:
+    """Return all Eastern Orthodox movable feasts for the given year (Gregorian dates)."""
+    pascha = julian_pascha_as_gregorian(year)
+    feasts = _movable_feasts(year)
+    return {
+        "year": year,
+        "pascha_gregorian": pascha.isoformat(),
+        "feasts": feasts,
+    }
+
+
+@app.get("/api/v1/moon-phase")
+def get_moon_phase(
+    day: date = Query(default_factory=date.today),
+) -> dict:
+    """Return lunar phase info for a given date."""
+    info = _moon_phase(day)
+    return {"date": day.isoformat(), **info}

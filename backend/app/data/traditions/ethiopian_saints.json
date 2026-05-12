@@ -1,0 +1,74 @@
+[
+  {
+    "month_day": "05-22",
+    "tradition": "ethiopian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Yared the Hymnographer",
+        "title": "Saint Yared, Father of Ethiopian Sacred Music",
+        "feast_type": "Saint",
+        "notes": "Saint Yared (505–571 AD) is the father of Ethiopian sacred music (Zema). Tradition holds he was inspired by three birds sent from Paradise who taught him divine melodies. He composed the three sacred modes of Ethiopian liturgical chant — Ge'ez, Ezel, and Araray — still used in Tewahedo worship today. Feast: Ethiopian Ginbot 11 ≈ Julian May 22.",
+        "hagiography_url": null,
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Ethiopian Ginbot 11 ≈ Julian May 22."
+  },
+  {
+    "month_day": "06-12",
+    "tradition": "ethiopian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Lalibela",
+        "title": "Saint Lalibela, Righteous King and Builder of the Rock-Hewn Churches",
+        "feast_type": "Righteous King",
+        "notes": "King Lalibela (c. 1181–1221) commissioned eleven rock-hewn monolithic churches in Roha (now Lalibela), Ethiopia, a UNESCO World Heritage Site. He intended the site as a 'New Jerusalem' for Ethiopian Christians who could not travel to the Holy Land. Venerated as a saint by the Ethiopian Orthodox Tewahedo Church. Feast: Ethiopian Sene 5 ≈ Julian June 12.",
+        "hagiography_url": null,
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Ethiopian Sene 5 ≈ Julian June 12."
+  },
+  {
+    "month_day": "06-30",
+    "tradition": "ethiopian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Tekle Haymanot",
+        "title": "Saint Tekle Haymanot of Debre Libanos, Pillar of Ethiopian Monasticism",
+        "feast_type": "Venerable",
+        "notes": "The greatest Ethiopian saint, Abba Tekle Haymanot (14th century) founded Ethiopian monasticism at Debre Asbo (later Debre Libanos). Ethiopian tradition records he stood in prayer for 7 years until one leg fell off, then stood on one leg for 7 more years. He is depicted with one leg and six wings, symbolizing angelic holiness. Feast: Ethiopian Sene 24 ≈ Julian June 30.",
+        "hagiography_url": null,
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Ethiopian Sene 24 ≈ Julian June 30."
+  },
+  {
+    "month_day": "07-24",
+    "tradition": "ethiopian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "The Nine Saints",
+        "title": "The Nine Saints (Tsatew Qiddusan), Missionaries and Monastic Founders of Ethiopia",
+        "feast_type": "Saints",
+        "notes": "The Nine Saints (5th century) were missionaries from Syria, Rome, and Constantinople who came to Ethiopia after the Council of Chalcedon. Rejecting the Chalcedonian definition, they joined the Ethiopian church, spreading Christianity through the highlands and founding monasteries that translated the Bible into Ge'ez. Feast: Ethiopian Hamle 17 ≈ Julian July 24.",
+        "hagiography_url": null,
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Ethiopian Hamle 17 ≈ Julian July 24."
+  }
+]

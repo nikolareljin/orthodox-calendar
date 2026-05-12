@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { buildIcsUrl, fetchMonthCalendar, fetchReadings, fetchSaints } from "./api";
+import { buildIcsUrl, fetchMonthCalendar, fetchMoonPhase, fetchReadings, fetchSaints } from "./api";
 import HagiaSophia from "./HagiaSophia";
 import { TRADITIONS } from "./traditions";
 
@@ -82,6 +82,13 @@ function CalendarGrid({ year, month, selectedDay, onDaySelect, todayYear, todayM
   );
 }
 
+const SCOPE_LABEL = {
+  universal: "Universal",
+  "pan-orthodox": "Pan-Orthodox",
+  local: "Local",
+  oriental: "Oriental",
+};
+
 // ── SaintCard ───────────────────────────────────────────────────────────────
 function SaintCard({ saint }) {
   const [expanded, setExpanded] = useState(false);
@@ -93,7 +100,18 @@ function SaintCard({ saint }) {
       <div className="saint-header" onClick={() => hasBody && setExpanded((e) => !e)}>
         <div className="saint-header-left">
           <span className="saint-name">{saint.title || saint.name}</span>
-          {saint.feast_type && <span className={pillClass}>{saint.feast_type}</span>}
+          <div className="saint-pills">
+            {saint.feast_type && <span className={pillClass}>{saint.feast_type}</span>}
+            {saint.canonized_by && (
+              <span
+                className={`canonized-pill scope-${saint.canonization_scope || "local"}`}
+                title={`Canonized by ${saint.canonized_by}${saint.year_canonized ? ` (${saint.year_canonized})` : ""}`}
+              >
+                {SCOPE_LABEL[saint.canonization_scope] || "Local"} · {saint.canonized_by}
+                {saint.year_canonized ? ` ${saint.year_canonized}` : ""}
+              </span>
+            )}
+          </div>
         </div>
         {hasBody && <span className="expand-icon">{expanded ? "▲" : "▼"}</span>}
       </div>
@@ -111,12 +129,24 @@ function SaintCard({ saint }) {
   );
 }
 
+function fastingGlyph(fastLevel, fastException) {
+  if (!fastLevel || fastLevel === 0) return { emoji: "✅", label: "No fast" };
+  // fast_exception from orthocal: 2=fish+wine+oil, 1=wine+oil, 4=wine only
+  if (fastException === 2) return { emoji: "🐟", label: "Fish, Wine & Oil" };
+  if (fastException === 1) return { emoji: "🍷", label: "Wine & Oil allowed" };
+  if (fastException === 4) return { emoji: "🍷", label: "Wine allowed" };
+  return { emoji: "🌿", label: "Strict fast" };
+}
+
 // ── DayDetail ───────────────────────────────────────────────────────────────
-function DayDetail({ saints, readings, loading, error, year, month, day }) {
+function DayDetail({ saints, readings, moonPhase, loading, error, year, month, day }) {
   if (!day) return null;
 
   const entry = saints && saints[0];
   const fastText = readings?.fast_level_desc || null;
+  const fastLevel = readings?.fast_level ?? null;
+  const fastException = readings?.fast_exception ?? null;
+  const fasting = fastLevel !== null ? fastingGlyph(fastLevel, fastException) : null;
   const tone = readings?.tone ? `Tone ${readings.tone}` : null;
   const titles = readings?.titles?.length ? readings.titles : null;
   const feasts = readings?.feasts?.length ? readings.feasts : null;
@@ -146,11 +176,17 @@ function DayDetail({ saints, readings, loading, error, year, month, day }) {
             </div>
           )}
 
-          <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "16px" }}>
-            {fastText && (
-              <div className="fast-info">
-                <span>🕯</span>
-                <span>{fastText}</span>
+          <div className="day-badges">
+            {moonPhase && (
+              <div className="fast-info moon-info" title={`Lunar phase: ${moonPhase.phase_name} (${Math.round(moonPhase.illumination * 100)}% illuminated)`}>
+                <span>{moonPhase.emoji}</span>
+                <span>{moonPhase.phase_name}</span>
+              </div>
+            )}
+            {fasting && (
+              <div className="fast-info" title={fastText || fasting.label}>
+                <span>{fasting.emoji}</span>
+                <span>{fastText || fasting.label}</span>
               </div>
             )}
             {tone && (
@@ -208,6 +244,7 @@ export default function App() {
   const [monthData, setMonthData] = useState({});
   const [saints, setSaints] = useState([]);
   const [readings, setReadings] = useState(null);
+  const [moonPhase, setMoonPhase] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -240,14 +277,17 @@ export default function App() {
     setError("");
     setSaints([]);
     setReadings(null);
+    setMoonPhase(null);
     try {
-      const [saintsData, readingsData] = await Promise.allSettled([
+      const [saintsData, readingsData, moonData] = await Promise.allSettled([
         fetchSaints(selectedDate, [tradition]),
         fetchReadings(selectedDate, tradition),
+        fetchMoonPhase(selectedDate),
       ]);
       if (saintsData.status === "fulfilled") setSaints(saintsData.value);
       else setError("Could not load saints.");
       if (readingsData.status === "fulfilled") setReadings(readingsData.value);
+      if (moonData.status === "fulfilled") setMoonPhase(moonData.value);
     } finally {
       setLoading(false);
     }
@@ -303,6 +343,7 @@ export default function App() {
               onClick={() => setTradition(key)}
             >
               {info.label}
+              {info.note && <span className="tradition-note">{info.note}</span>}
               <span className="tradition-calendar-badge">{info.calendar}</span>
             </button>
           ))}
@@ -330,6 +371,7 @@ export default function App() {
           <DayDetail
             saints={saints}
             readings={readings}
+            moonPhase={moonPhase}
             loading={loading}
             error={error}
             year={year}
@@ -371,7 +413,7 @@ function AboutSection() {
             <div className="about-card">
               <h3 className="about-heading">How to use</h3>
               <ol className="about-list">
-                <li>Select your <strong>tradition</strong> from the sidebar — Serbian, Greek, Russian, Romanian, and seven others are supported, each mapped to its calendar system (Julian or Revised).</li>
+                <li>Select your <strong>tradition</strong> from the sidebar — Serbian, Greek, Russian, Georgian, Jerusalem, Armenian, and others are supported, each mapped to its calendar system (Julian or Revised).</li>
                 <li>Navigate months with <strong>‹ ›</strong> or jump to today. Days with commemorations show a <strong>coloured dot</strong> — gold for Great Feasts, blue for regular saints.</li>
                 <li>Click any day to see the <strong>saints and feasts</strong> celebrated that day, fasting rule, tone of the week, and the full Epistle and Gospel readings.</li>
                 <li>Expand a saint card to read the <strong>hagiography</strong> excerpt and follow the link to the full biography.</li>
@@ -420,6 +462,36 @@ function AboutSection() {
                 </a>
                 , or contact us through the repository. All are welcome.
               </p>
+            </div>
+
+            <div className="about-card about-card-full">
+              <h3 className="about-heading">Orthodox Churches</h3>
+              <p className="about-text" style={{ marginBottom: "16px" }}>
+                Each tradition in this calendar corresponds to an autocephalous or autonomous church.
+                Below is a brief overview of each, with links to their official websites.
+              </p>
+              <div className="churches-grid">
+                {Object.entries(TRADITIONS).map(([key, info]) => (
+                  <div key={key} className="church-card">
+                    <div className="church-logo">{info.logo}</div>
+                    <div className="church-info">
+                      <a
+                        href={info.website}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="church-name"
+                      >
+                        {info.label} Orthodox{key === "armenian" ? " (Apostolic)" : key === "oriental" ? " (Coptic)" : ""}
+                      </a>
+                      <span className="church-founded">Est. {info.founded}</span>
+                      {info.patron && (
+                        <span className="church-patron">Patron: {info.patron}</span>
+                      )}
+                      <p className="church-desc">{info.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="about-card about-card-full about-card-support">

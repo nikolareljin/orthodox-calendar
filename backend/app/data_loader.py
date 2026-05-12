@@ -8,7 +8,7 @@ from typing import Dict, Iterable, List
 
 from .models import CalendarEntry
 
-DEFAULT_DATA_FILES = ["saints_sample.json"]
+DEFAULT_DATA_FILES = ["saints_sample.json", "oca_julian.json"]
 
 
 def _iter_data_files() -> Iterable[Path]:
@@ -23,6 +23,11 @@ def _iter_data_files() -> Iterable[Path]:
 
     for filename in DEFAULT_DATA_FILES:
         yield base / filename
+
+    # Tradition-specific overlay files (auto-discovered)
+    traditions_dir = base / "traditions"
+    if traditions_dir.is_dir():
+        yield from sorted(traditions_dir.glob("*.json"))
 
 
 @lru_cache(maxsize=1)

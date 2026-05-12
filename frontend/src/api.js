@@ -45,6 +45,19 @@ export async function fetchReadings(date, tradition) {
   return res.json();
 }
 
+export async function fetchMoonPhase(date) {
+  const params = new URLSearchParams({ day: date });
+  const res = await fetch(`${API_BASE}/api/v1/moon-phase?${params}`);
+  if (!res.ok) return null;
+  return res.json();
+}
+
+export async function fetchMovableFeasts(year) {
+  const res = await fetch(`${API_BASE}/api/v1/movable-feasts?year=${year}`);
+  if (!res.ok) return null;
+  return res.json();
+}
+
 export function buildIcsUrl(tradition, start, days) {
   const params = new URLSearchParams();
   if (tradition) params.append("tradition", tradition);

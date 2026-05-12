@@ -1,0 +1,70 @@
+[
+  {
+    "month_day": "03-25",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Tikhon, Patriarch of Moscow",
+        "title": "Saint Tikhon, Patriarch of Moscow and all Russia, Confessor",
+        "feast_type": "Hierarch",
+        "notes": "Patriarch Tikhon Bellavin (1865–1925) was elected the first Patriarch of the Russian Orthodox Church in 1917 after the Sobor restored the patriarchate. He led the Church through the Bolshevik revolution, enduring imprisonment and persecution, anathematizing Soviet anti-religious terror. Canonized in 1989 and glorified as a saint in 2000 by the Russian Orthodox Church.",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/04/07/101060",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": 2000
+      }
+    ]
+  },
+  {
+    "month_day": "07-05",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Elizabeth Feodorovna",
+        "title": "Holy New Martyr Elizabeth Feodorovna, Grand Duchess and Abbess",
+        "feast_type": "Martyr",
+        "notes": "Grand Duchess Elizabeth Feodorovna (1864–1918), sister of Empress Alexandra, founded the Martha and Mary Convent of Mercy in Moscow after her husband's assassination. She embraced monasticism fully, dedicating herself to the poor and sick. Martyred by the Bolsheviks at Alapayevsk in 1918. Canonized in 1992 by the Russian Orthodox Church.",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/07/05/102029",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": 1992
+      }
+    ]
+  },
+  {
+    "month_day": "04-19",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Blessed Matrona of Moscow",
+        "title": "Blessed Matrona of Moscow, Wonderworker",
+        "feast_type": "Saint",
+        "notes": "Matrona Nikonova (1881–1952) was born blind in the village of Sebino and from childhood displayed gifts of healing and clairvoyance. She lived her adult life in Moscow, secretly sheltering thousands seeking counsel and healing during the Soviet era. One of the most venerated saints of 20th-century Russia. Canonized in 1998 by the Russian Orthodox Church.",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/05/02/101394",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": 1998
+      }
+    ]
+  },
+  {
+    "month_day": "01-02",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Seraphim of Sarov",
+        "title": "Saint Seraphim of Sarov, Wonderworker and Great Ascetic",
+        "feast_type": "Venerable",
+        "notes": "Seraphim of Sarov (1754–1833) is the most beloved Russian saint of modern times. He spent decades in intense asceticism at Sarov monastery, including a thousand-day vigil on a rock in prayer. His greeting — 'My joy, Christ is Risen!' — and teachings on acquiring the Holy Spirit have inspired generations. Canonized in 1903 by the Russian Orthodox Church.",
+        "hagiography_url": "https://www.oca.org/saints/lives/2024/01/02/100005",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": 1903
+      }
+    ]
+  }
+]
