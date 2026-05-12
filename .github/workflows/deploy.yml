@@ -11,9 +11,10 @@ permissions:
   pull-requests: read
 
 concurrency:
-  group: pages
+  group: deploy
   cancel-in-progress: false
 
+# ── Stage 1: security gate (both deploy targets wait for this) ────────────────
 jobs:
   security:
     uses: nikolareljin/ci-helpers/.github/workflows/gitleaks-scan.yml@production
@@ -40,12 +41,63 @@ jobs:
           [[ $found -eq 0 ]] || exit 1
           echo "Data safety check passed."
 
+# ── Stage 2: auto-tag (version tag from release/* branch name) ───────────────
   tag:
     needs: [security, data-safety]
     uses: nikolareljin/ci-helpers/.github/workflows/auto-tag-release.yml@production
     with:
       update_production_tag: false
 
+# ── Stage 2: backend → Oracle Cloud (parallel with frontend build) ────────────
+  backend-deploy:
+    needs: [security, data-safety]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Set up SSH agent
+        shell: bash
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.OCI_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "${{ secrets.OCI_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+
+      - name: Deploy backend to Oracle Cloud
+        shell: bash
+        env:
+          OCI_USER: ${{ secrets.OCI_USER }}
+          OCI_HOST: ${{ secrets.OCI_HOST }}
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/deploy_key \
+              -o BatchMode=yes \
+              -o ConnectTimeout=15 \
+              "${OCI_USER}@${OCI_HOST}" \
+              'APP_DIR=/home/'"${OCI_USER}"'/orthodox-calendar bash -s' \
+              < deploy/oracle/deploy.sh
+
+      - name: Verify backend health
+        shell: bash
+        env:
+          VITE_API_BASE: ${{ secrets.VITE_API_BASE }}
+        run: |
+          set -euo pipefail
+          url="${VITE_API_BASE}/health"
+          echo "Checking ${url}"
+          for i in $(seq 1 6); do
+            status=$(curl -sf -o /dev/null -w "%{http_code}" "${url}" 2>/dev/null || echo "000")
+            if [[ "${status}" == "200" ]]; then
+              echo "Backend healthy (HTTP ${status})"
+              exit 0
+            fi
+            echo "Attempt ${i}/6 — HTTP ${status}, waiting 10 s"
+            sleep 10
+          done
+          echo "::error::Backend health check failed after 60 s"
+          exit 1
+
+# ── Stage 2: frontend → GitHub Pages (parallel with backend deploy) ───────────
   build:
     needs: [security, data-safety]
     runs-on: ubuntu-latest
