@@ -22,12 +22,16 @@ What began as a Pascal/DOS screen is now a React front end backed by a FastAPI s
 - **Monthly calendar grid** — navigate any month; Great Feast days are highlighted in gold, regular commemorations in blue.
 - **Day detail** — click any day for saints, feast type, fasting rule, tone of the week, and full Epistle/Gospel readings.
 - **Expandable hagiographies** — biography excerpts with links to full texts.
-- **10 traditions** — Serbian, Russian, Greek, Romanian, Bulgarian, Antiochian, Alexandrian, Jerusalem, Ethiopian, Oriental Orthodox.
+- **12 traditions** — Serbian, Russian, Greek, Romanian, Bulgarian, Antiochian, Alexandrian, Jerusalem, Georgian, Ethiopian, Oriental Orthodox, Armenian Apostolic.
+- **Full liturgical readings** — Epistle and Gospel verses inline with superscript verse numbers; expand each reading to see the full text.
+- **Moon phase + fasting glyph** — lunar phase indicator and GOARCH-style fasting icon per day.
+- **Canonization attribution** — each saint card shows which church canonized the saint and the scope (Universal / Pan-Orthodox / Local / Oriental).
+- **Church directory** — history, patron, and official link for all 12 supported traditions.
 - **Dual calendar** — Julian and Revised/New Calendar traditions handled transparently.
 - **iCal feed** — subscribe to any tradition's feast calendar in Google Calendar, Apple Calendar, or Outlook.
 - **Name-day checker** — paste a contact list; get back who celebrates today.
 - **Dark / light themes** — dark theme follows the neobyzantine.org palette (navy, gold, royal blue); light theme uses Byzantine crimson on white. NB-Byzantine display typeface throughout.
-- **REST API** — `GET /api/v1/saints`, `/api/v1/calendar`, `/api/v1/readings`, `/api/v1/saints.ics` documented at `/docs`.
+- **REST API** — `GET /api/v1/saints`, `/api/v1/calendar`, `/api/v1/readings`, `/api/v1/moon-phase`, `/api/v1/movable-feasts`, `/api/v1/saints.ics` documented at `/api/v1/docs`.
 
 ---
 
@@ -48,11 +52,14 @@ What began as a Pascal/DOS screen is now a React front end backed by a FastAPI s
 ```bash
 git clone https://github.com/nikolareljin/orthodox-calendar.git
 cd orthodox-calendar
+cp .env.example .env   # review and adjust if needed
 docker compose up --build
 ```
 
-Frontend → `http://localhost:4173`  
-Backend API → `http://localhost:8000/docs`
+Frontend → `http://localhost`  
+API docs → `http://localhost/api/v1/docs` (proxied through nginx)
+
+The backend is never exposed directly to the host. All `/api/` traffic flows through the nginx reverse proxy on port 80. To override the port, set `PORT=8080` in `.env`.
 
 ### Local development
 
@@ -68,10 +75,8 @@ ORTHODOX_CALENDAR_DATA_PATH=app/data uvicorn app.main:app --reload
 ```bash
 cd frontend
 npm install
-npm run dev          # http://localhost:5173
+VITE_API_BASE=http://localhost:8000 npm run dev   # http://localhost:5173
 ```
-
-Set `VITE_API_BASE=http://localhost:8000` if the backend is not on the default port.
 
 ---
 
