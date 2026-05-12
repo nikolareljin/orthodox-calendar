@@ -4,10 +4,20 @@ Open-source liturgical calendar for all canonical Orthodox and Oriental Orthodox
 
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolareljin)
 
-![Orthodox Calendar — Greek tradition, Ascension of the Lord with tone popup](docs/screenshots/greek-ascension.png)
-![Orthodox Calendar — Georgian tradition, readings expanded](docs/screenshots/georgian-readings.png)
-![Orthodox Calendar — Serbian tradition, Transfiguration day detail](docs/screenshots/serbian-detail.png)
-![Orthodox Calendar — mobile view, Serbian tradition](docs/screenshots/mobile-view.png)
+## Screenshots
+
+<table>
+<tr>
+<td width="70%" valign="top">
+<img src="docs/screenshots/greek-ascension.png" alt="Two-column layout: Greek tradition, Ascension of the Lord — calendar grid left, day detail right showing feast banner, moon phase, fasting badge, tone popup, saints list, and liturgical readings"/>
+<br/><sub><b>Day detail view</b> — Greek tradition, Ascension of the Lord. Calendar grid (left) and day panel (right) showing feast banner, moon phase, fasting badge, Octoechos tone, saints list with canonization badges, and liturgical readings.</sub>
+</td>
+<td width="30%" valign="top">
+<img src="docs/screenshots/mobile-view.png" alt="Mobile view — Serbian tradition, saints list and expanded liturgical reading (Acts 12.25–13.12) with full verse text"/>
+<br/><sub><b>Mobile view</b> — saints list and expanded Epistle reading with full verse text.</sub>
+</td>
+</tr>
+</table>
 
 ---
 
@@ -147,4 +157,4 @@ orthodox-calendar/
 - `./run` — backend + frontend dev servers with auto-cleanup on Ctrl+C.
 - `./start [-b]` / `./stop` — Docker Compose shortcuts.
 
-See `backend/README.md` and `frontend/README.md` for deeper details.
+Full documentation: [`docs/`](docs/README.md) — architecture, API reference, frontend guide, and dev workflows.
