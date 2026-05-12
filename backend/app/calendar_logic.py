@@ -3,7 +3,7 @@ from __future__ import annotations
 import math as _math
 from datetime import date, timedelta
 from datetime import date as _date
-from typing import Tuple, Union
+from typing import Tuple
 
 from .config import TRADITIONS
 from .models import CalendarSystem, Tradition
@@ -133,8 +133,6 @@ def moon_phase(d: "date") -> dict:
     synodic = 29.53058867  # days
     delta = (d - reference).days
     phase = (delta % synodic) / synodic
-    if phase < 0:
-        phase += 1.0
 
     illumination = (1 - _math.cos(2 * _math.pi * phase)) / 2
 

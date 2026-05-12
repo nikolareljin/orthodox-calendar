@@ -344,7 +344,7 @@ export default function App() {
   const [error, setError] = useState("");
 
   const selectedDate = useMemo(
-    () => toDateStr(year, month, selectedDay),
+    () => selectedDay ? toDateStr(year, month, selectedDay) : null,
     [year, month, selectedDay]
   );
 
@@ -368,6 +368,7 @@ export default function App() {
   }, [loadMonth]);
 
   const loadDay = useCallback(async () => {
+    if (!selectedDate) return;
     setLoading(true);
     setError("");
     setSaints([]);

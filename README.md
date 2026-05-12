@@ -26,11 +26,11 @@ What began as a Pascal/DOS screen is now a React front end backed by a FastAPI s
 - **Monthly calendar grid** — navigate any month; Great Feast days are highlighted in gold, regular commemorations in blue.
 - **Day detail** — click any day for saints, feast type, fasting rule, tone of the week, and full Epistle/Gospel readings.
 - **Expandable hagiographies** — biography excerpts with links to full texts.
-- **12 traditions** — Serbian, Russian, Greek, Romanian, Bulgarian, Antiochian, Alexandrian, Jerusalem, Georgian, Ethiopian, Oriental Orthodox, Armenian Apostolic.
+- **16 traditions** — Serbian, Russian, Greek, Romanian, Bulgarian, Antiochian, Alexandrian, Jerusalem, Georgian, Ethiopian, Oriental Orthodox (Coptic), Armenian Apostolic, Cyprus, Syriac, Malankara, Assyrian.
 - **Full liturgical readings** — Epistle and Gospel verses inline with superscript verse numbers; expand each reading to see the full text.
 - **Moon phase + fasting glyph** — lunar phase indicator and GOARCH-style fasting icon per day.
 - **Canonization attribution** — each saint card shows which church canonized the saint and the scope (Universal / Pan-Orthodox / Local / Oriental).
-- **Church directory** — history, patron, and official link for all 12 supported traditions.
+- **Church directory** — history, patron, and official link for all 16 supported traditions.
 - **Dual calendar** — Julian and Revised/New Calendar traditions handled transparently.
 - **iCal feed** — subscribe to any tradition's feast calendar in Google Calendar, Apple Calendar, or Outlook.
 - **Name-day checker** — paste a contact list; get back who celebrates today.
