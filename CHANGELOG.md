@@ -9,7 +9,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 - **Full liturgical reading texts** — Epistle and Gospel verses are now displayed inline with superscript verse numbers and paragraph breaks. Each reading is a collapsible card (source label + reference + expand toggle). Text is sourced from the `passage[]` array already embedded in orthocal.info responses — no additional API calls required.
-- **Church directory** — "Orthodox Churches" grid in the About section with history, founding date, patron saint, website link, and cross glyph for all 12 supported traditions.
+- **Church directory** — "Orthodox Churches" grid in the About section with history, founding date, patron saint, website link, and cross glyph for all 16 supported traditions.
 - **Moon phase indicator** — lunar phase emoji, name, and illumination percentage displayed in the day-detail badge row (`GET /api/v1/moon-phase`).
 - **Fasting glyph** — GOARCH-style fast type shown per day (no fast ✅, fish 🐟, oil+wine 🍷, strict 🌿).
 - **Canonization attribution** — saint cards display which church canonized the saint and the scope (Universal / Pan-Orthodox / Local / Oriental) as coloured pills.

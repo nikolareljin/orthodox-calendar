@@ -146,7 +146,7 @@ function ReadingCard({ reading }) {
         <div className="reading-header-left">
           {reading.source && <span className="reading-source">{reading.source}</span>}
           <span className="reading-ref">{ref}</span>
-          {reading.description && <span className="reading-desc">{reading.description}</span>}
+          {(reading.desc || reading.description) && <span className="reading-desc">{reading.desc || reading.description}</span>}
         </div>
         {hasText && <span className="expand-icon">{expanded ? "▲" : "▼"}</span>}
       </button>
@@ -640,7 +640,7 @@ function AboutSection() {
                         rel="noreferrer"
                         className="church-name"
                       >
-                        {info.label} Orthodox{key === "armenian" ? " (Apostolic)" : key === "oriental" ? " (Coptic)" : ""}
+                        {info.label}
                       </a>
                       <span className="church-founded">Est. {info.founded}</span>
                       {info.patron && (

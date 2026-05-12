@@ -53,8 +53,8 @@ else
   docker_compose up -d
 fi
 
-# Read PORT from .env if present, fall back to compose default (80)
-FRONTEND_PORT="$(grep -E '^PORT=' "${ROOT_DIR}/.env" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')"
+# Prefer shell PORT env var; fall back to .env file; fall back to 80
+FRONTEND_PORT="${PORT:-$(grep -E '^PORT=' "${ROOT_DIR}/.env" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')}"
 FRONTEND_PORT="${FRONTEND_PORT:-80}"
 
 log_info "Frontend: http://localhost:${FRONTEND_PORT}"

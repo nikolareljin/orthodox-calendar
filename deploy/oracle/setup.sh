@@ -26,11 +26,10 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   certbot python3-certbot-nginx \
   iptables iptables-persistent
 
-echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"
+echo "==> Opening port 80 in OS firewall (Oracle Cloud blocks this by default)"
 iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-iptables  -I INPUT  7 -m state --state NEW -p tcp --dport 443 -j ACCEPT
 ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-ip6tables -I INPUT  7 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+# Port 443 is opened automatically by certbot when TLS is configured.
 # Persist so rules survive reboot
 netfilter-persistent save
 
