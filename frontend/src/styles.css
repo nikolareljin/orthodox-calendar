@@ -1102,6 +1102,96 @@ sup.verse-num {
   line-height: 1.5;
 }
 
+/* ── Tradition type symbol (sidebar) ── */
+.trad-type-sym {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-right: 5px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ── World Orthodox Directory ── */
+.world-dir {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.world-dir-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.world-dir-legend b {
+  color: var(--accent);
+}
+
+.world-dir-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.world-dir-group-head {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.world-dir-sym {
+  font-size: 16px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.world-dir-subtitle {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.world-dir-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.world-dir-item {
+  font-size: 13px;
+}
+
+.world-dir-link {
+  color: var(--text-secondary, var(--text-muted));
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.world-dir-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   .cal-detail-row,

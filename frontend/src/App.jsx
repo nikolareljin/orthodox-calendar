@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { buildIcsUrl, fetchMonthCalendar, fetchMoonPhase, fetchReadings, fetchSaints } from "./api";
 import HagiaSophia from "./HagiaSophia";
-import { TRADITIONS } from "./traditions";
+import { TRADITIONS, WORLD_CHURCHES } from "./traditions";
 
 const MONTH_NAMES = [
   "January","February","March","April","May","June",
@@ -437,6 +437,13 @@ export default function App() {
               className={`tradition-item ${tradition === key ? "active" : ""}`}
               onClick={() => setTradition(key)}
             >
+              <span
+                className="trad-type-sym"
+                aria-hidden="true"
+                title={info.note || "Eastern Orthodox (Chalcedonian)"}
+              >
+                {info.note === "Church of the East" ? "✝" : info.note === "Non-Chalcedonian" ? "✙" : "☦"}
+              </span>
               {info.label}
               {info.note && <span className="tradition-note">{info.note}</span>}
               <span className="tradition-calendar-badge">{info.calendar}</span>
@@ -490,6 +497,37 @@ export default function App() {
           <AboutSection />
         </main>
       </div>
+    </div>
+  );
+}
+
+// ── World Orthodox Directory ──────────────────────────────────────────────────
+function WorldDirectory() {
+  return (
+    <div className="world-dir">
+      <div className="world-dir-legend">
+        <span><b>☦</b> Eastern Orthodox</span>
+        <span><b>✙</b> Oriental Orthodox (Non-Chalcedonian)</span>
+        <span><b>✝</b> Church of the East</span>
+      </div>
+      {WORLD_CHURCHES.map((group) => (
+        <div key={group.category} className="world-dir-group">
+          <h4 className="world-dir-group-head">
+            <span className="world-dir-sym">{group.symbol}</span>
+            {group.category}
+            <span className="world-dir-subtitle"> — {group.subtitle}</span>
+          </h4>
+          <ul className="world-dir-list">
+            {group.churches.map((c) => (
+              <li key={c.name} className="world-dir-item">
+                <a href={c.url} target="_blank" rel="noreferrer noopener" className="world-dir-link">
+                  {c.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
     </div>
   );
 }
@@ -590,6 +628,15 @@ function AboutSection() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="about-card about-card-full">
+              <h3 className="about-heading">World Orthodox Directory</h3>
+              <p className="about-text" style={{ marginBottom: "16px" }}>
+                All recognized canonical Orthodox, Oriental Orthodox, and Church of the East communities worldwide.
+                Links only — no commentary on questions of jurisdiction or recognition.
+              </p>
+              <WorldDirectory />
             </div>
 
             <div className="about-card about-card-full about-card-support">

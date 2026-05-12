@@ -44,6 +44,12 @@ TRADITIONS: Dict[str, Tradition] = {
         aliases=["bogk"],
         data_key="oca",
     ),
+    "cyprus": Tradition(
+        name="Church of Cyprus",
+        calendar=CalendarSystem.REVISED,
+        aliases=["cypriot", "cyprus-orthodox"],
+        data_key="oca",
+    ),
     "romanian": Tradition(
         name="Romanian Orthodox",
         calendar=CalendarSystem.REVISED,
@@ -79,10 +85,28 @@ TRADITIONS: Dict[str, Tradition] = {
         calendar=CalendarSystem.JULIAN,
         aliases=["tewahedo"],
     ),
+    "syriac": Tradition(
+        name="Syriac Orthodox Church of Antioch",
+        calendar=CalendarSystem.JULIAN,
+        aliases=["jacobite", "syriac-orthodox", "suryoyo"],
+        data_key="oriental",   # shares Oriental Orthodox sanctoral data until Syriac-specific set is built
+    ),
     "oriental": Tradition(
         name="Coptic Orthodox Church of Alexandria",
         calendar=CalendarSystem.JULIAN,
-        aliases=["coptic", "syriac", "malankara"],
+        aliases=["coptic"],
+    ),
+    "malankara": Tradition(
+        name="Malankara Orthodox Syrian Church",
+        calendar=CalendarSystem.JULIAN,
+        aliases=["mosc", "indian-orthodox", "thomas-christians"],
+        data_key="oriental",   # shares Oriental Orthodox sanctoral data until Malankara-specific set is built
+    ),
+    "assyrian": Tradition(
+        name="Assyrian Church of the East",
+        calendar=CalendarSystem.JULIAN,
+        aliases=["church-of-the-east", "coe", "nestorian"],
+        # No data_key: distinct sanctoral calendar — returns empty saints list until dedicated dataset is added
     ),
     # Armenian Apostolic is Oriental/Non-Chalcedonian, included alongside the Orthodox churches.
     "armenian": Tradition(
