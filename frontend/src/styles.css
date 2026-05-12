@@ -482,6 +482,67 @@ body {
   border-color: rgba(100,120,200,0.25);
 }
 
+/* ── Tone badge & popup ── */
+.tone-badge-wrap {
+  position: relative;
+}
+
+.tone-badge {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  letter-spacing: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.tone-badge:hover,
+.tone-badge--open {
+  background: var(--hover-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tone-info-icon {
+  font-size: 11px;
+  opacity: 0.55;
+  margin-left: 2px;
+}
+
+.tone-popup {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 200;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-width: 230px;
+  max-width: 290px;
+  box-shadow: var(--shadow);
+}
+
+.tone-popup-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--accent);
+  margin: 0 0 5px;
+}
+
+.tone-popup-char {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0 0 7px;
+  font-style: italic;
+}
+
+.tone-popup-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
 /* ── Feast items ── */
 .feasts-section {
   margin-bottom: 16px;

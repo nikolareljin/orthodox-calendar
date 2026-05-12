@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { buildIcsUrl, fetchMonthCalendar, fetchMoonPhase, fetchReadings, fetchSaints } from "./api";
 import HagiaSophia from "./HagiaSophia";
 import { TRADITIONS } from "./traditions";
@@ -174,6 +174,59 @@ function fastingGlyph(fastLevel, fastException) {
   return { emoji: "🌿", label: "Strict fast" };
 }
 
+// ── Octoechos tone descriptions ─────────────────────────────────────────────
+const TONE_INFO = {
+  1: { name: "First Tone",        character: "Solemn and majestic — the mode of the Resurrection",    note: "Opens the eight-week Octoechos cycle after Pascha. Associated with resurrectional troparions and stichera." },
+  2: { name: "Second Tone",       character: "Gentle and tender — humble and meditative",             note: "A subdued, introspective mode suited to prayers of contrition and quiet praise." },
+  3: { name: "Third Tone",        character: "Balanced and calm — steady devotional reverence",       note: "A middle ground between the solemn and the joyful; used for unhurried, contemplative singing." },
+  4: { name: "Fourth Tone",       character: "Festive and bright — joyful and triumphant",            note: "Warm and expressive; often chosen for festal hymns and vigil canons." },
+  5: { name: "Plagal First Tone", character: "Tender and lyrical — sweet and intimate",              note: "Plagal (derived) form of Tone 1, softer in character; the \"tone of love\" in some traditions." },
+  6: { name: "Plagal Second Tone",character: "Mournful — penitential sorrow and longing",            note: "The tone of mourning; associated with repentance and deep longing for God." },
+  7: { name: "Grave Tone",        character: "Solemn and weighty — deep contemplation",              note: "Dark and serious; reserved for the most solemn moments in the liturgical year." },
+  8: { name: "Plagal Fourth Tone",character: "Grand and majestic — the fullness of praise",          note: "Richest and most complete tone; brings the eight-week Octoechos cycle to a noble close." },
+};
+
+function ToneBadge({ toneNum }) {
+  const [open, setOpen] = useState(false);
+  const wrapRef = useRef(null);
+  const info = TONE_INFO[toneNum];
+
+  useEffect(() => {
+    if (!open) return;
+    function onOutside(e) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
+    }
+    document.addEventListener("mousedown", onOutside);
+    return () => document.removeEventListener("mousedown", onOutside);
+  }, [open]);
+
+  if (!info) return (
+    <div className="fast-info"><span>♪</span><span>Tone {toneNum}</span></div>
+  );
+
+  return (
+    <div className="tone-badge-wrap" ref={wrapRef}>
+      <button
+        className={`fast-info tone-badge${open ? " tone-badge--open" : ""}`}
+        onClick={() => setOpen(o => !o)}
+        aria-expanded={open}
+        aria-label={`Tone ${toneNum} — click for info`}
+      >
+        <span>♪</span>
+        <span>Tone {toneNum}</span>
+        <span className="tone-info-icon">ⓘ</span>
+      </button>
+      {open && (
+        <div className="tone-popup" role="tooltip">
+          <p className="tone-popup-name">{info.name}</p>
+          <p className="tone-popup-char">{info.character}</p>
+          <p className="tone-popup-note">{info.note}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── DayDetail ───────────────────────────────────────────────────────────────
 function DayDetail({ saints, readings, moonPhase, loading, error, year, month, day }) {
   if (!day) return null;
@@ -183,7 +236,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
   const fastLevel = readings?.fast_level ?? null;
   const fastException = readings?.fast_exception ?? null;
   const fasting = fastLevel !== null ? fastingGlyph(fastLevel, fastException) : null;
-  const tone = readings?.tone ? `Tone ${readings.tone}` : null;
+  const toneNum = readings?.tone || null;
   const titles = readings?.titles?.length ? readings.titles : null;
   const feasts = readings?.feasts?.length ? readings.feasts : null;
   const readingsList = readings?.readings?.length ? readings.readings : null;
@@ -225,12 +278,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
                 <span>{fastText || fasting.label}</span>
               </div>
             )}
-            {tone && (
-              <div className="fast-info">
-                <span>♪</span>
-                <span>{tone}</span>
-              </div>
-            )}
+            {toneNum && <ToneBadge toneNum={toneNum} />}
           </div>
 
           {feasts && (
