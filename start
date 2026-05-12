@@ -53,5 +53,10 @@ else
   docker_compose up -d
 fi
 
-log_info "Backend: http://localhost:8000"
-log_info "Frontend: http://localhost:4173"
+# Read PORT from .env if present, fall back to compose default (80)
+FRONTEND_PORT="$(grep -E '^PORT=' "${ROOT_DIR}/.env" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')"
+FRONTEND_PORT="${FRONTEND_PORT:-80}"
+
+log_info "Frontend: http://localhost:${FRONTEND_PORT}"
+log_info "API docs: http://localhost:${FRONTEND_PORT}/api/v1/docs"
+log_info "Backend is internal-only (proxied via nginx, not exposed to host)"
