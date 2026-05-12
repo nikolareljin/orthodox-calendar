@@ -566,8 +566,24 @@ body {
 .tone-popup-note {
   font-size: 12px;
   color: var(--text-muted);
-  margin: 0;
+  margin: 0 0 10px;
   line-height: 1.5;
+}
+
+.tone-popup-listen {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.tone-popup-listen:hover {
+  background: var(--accent);
+  color: var(--accent-text);
 }
 
 /* ── Feast items ── */
@@ -1127,5 +1143,51 @@ sup.verse-num {
 
   .main {
     padding: 16px;
+  }
+
+  /* Reading cards — more breathing room on small screens */
+  .reading-header {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .reading-header-left {
+    gap: 6px;
+  }
+
+  .reading-ref {
+    font-size: 15px;
+  }
+
+  .reading-body {
+    padding: 14px 16px 16px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .reading-source {
+    font-size: 11px;
+  }
+
+  /* Tone popup — prevent overflow on narrow screens */
+  .tone-popup {
+    max-width: calc(100vw - 32px);
+    left: 0;
+    right: auto;
+  }
+
+  /* Day detail — tighter padding on phone */
+  .day-detail {
+    padding: 16px;
+  }
+
+  .day-detail-header h2 {
+    font-size: 18px;
+  }
+
+  /* Badges wrap nicely */
+  .day-badges {
+    flex-wrap: wrap;
+    gap: 6px;
   }
 }

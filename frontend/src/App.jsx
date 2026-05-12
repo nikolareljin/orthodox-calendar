@@ -176,14 +176,14 @@ function fastingGlyph(fastLevel, fastException) {
 
 // ── Octoechos tone descriptions ─────────────────────────────────────────────
 const TONE_INFO = {
-  1: { name: "First Tone",        character: "Solemn and majestic — the mode of the Resurrection",    note: "Opens the eight-week Octoechos cycle after Pascha. Associated with resurrectional troparions and stichera." },
-  2: { name: "Second Tone",       character: "Gentle and tender — humble and meditative",             note: "A subdued, introspective mode suited to prayers of contrition and quiet praise." },
-  3: { name: "Third Tone",        character: "Balanced and calm — steady devotional reverence",       note: "A middle ground between the solemn and the joyful; used for unhurried, contemplative singing." },
-  4: { name: "Fourth Tone",       character: "Festive and bright — joyful and triumphant",            note: "Warm and expressive; often chosen for festal hymns and vigil canons." },
-  5: { name: "Plagal First Tone", character: "Tender and lyrical — sweet and intimate",              note: "Plagal (derived) form of Tone 1, softer in character; the \"tone of love\" in some traditions." },
-  6: { name: "Plagal Second Tone",character: "Mournful — penitential sorrow and longing",            note: "The tone of mourning; associated with repentance and deep longing for God." },
-  7: { name: "Grave Tone",        character: "Solemn and weighty — deep contemplation",              note: "Dark and serious; reserved for the most solemn moments in the liturgical year." },
-  8: { name: "Plagal Fourth Tone",character: "Grand and majestic — the fullness of praise",          note: "Richest and most complete tone; brings the eight-week Octoechos cycle to a noble close." },
+  1: { name: "First Tone",        character: "Solemn and majestic — the mode of the Resurrection",    note: "Opens the eight-week Octoechos cycle after Pascha. Associated with resurrectional troparions and stichera.",  youtube: "https://www.youtube.com/watch?v=_V_c2adKRbQ" },
+  2: { name: "Second Tone",       character: "Gentle and tender — humble and meditative",             note: "A subdued, introspective mode suited to prayers of contrition and quiet praise.",                             youtube: "https://www.youtube.com/watch?v=M0TwBgpyhko" },
+  3: { name: "Third Tone",        character: "Balanced and calm — steady devotional reverence",       note: "A middle ground between the solemn and the joyful; used for unhurried, contemplative singing.",              youtube: "https://www.youtube.com/watch?v=zJP_1RPGm_I" },
+  4: { name: "Fourth Tone",       character: "Festive and bright — joyful and triumphant",            note: "Warm and expressive; often chosen for festal hymns and vigil canons.",                                       youtube: "https://www.youtube.com/watch?v=H9-wPlQltpM" },
+  5: { name: "Plagal First Tone", character: "Tender and lyrical — sweet and intimate",              note: "Plagal (derived) form of Tone 1, softer in character; the \"tone of love\" in some traditions.",             youtube: "https://www.youtube.com/watch?v=KmiXfJ00am4" },
+  6: { name: "Plagal Second Tone",character: "Mournful — penitential sorrow and longing",            note: "The tone of mourning; associated with repentance and deep longing for God.",                                  youtube: "https://www.youtube.com/watch?v=VNKIcZP6ook" },
+  7: { name: "Grave Tone",        character: "Solemn and weighty — deep contemplation",              note: "Dark and serious; reserved for the most solemn moments in the liturgical year.",                             youtube: "https://www.youtube.com/watch?v=0vz8UIVy7LI" },
+  8: { name: "Plagal Fourth Tone",character: "Grand and majestic — the fullness of praise",          note: "Richest and most complete tone; brings the eight-week Octoechos cycle to a noble close.",                    youtube: "https://www.youtube.com/watch?v=xBo4eODl-yA" },
 };
 
 function ToneBadge({ toneNum }) {
@@ -221,6 +221,16 @@ function ToneBadge({ toneNum }) {
           <p className="tone-popup-name">{info.name}</p>
           <p className="tone-popup-char">{info.character}</p>
           <p className="tone-popup-note">{info.note}</p>
+          {info.youtube && (
+            <a
+              href={info.youtube}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="tone-popup-listen"
+            >
+              ▶ Listen — Resurrectional Troparion
+            </a>
+          )}
         </div>
       )}
     </div>

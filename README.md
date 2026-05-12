@@ -4,9 +4,10 @@ Open-source liturgical calendar for all canonical Orthodox and Oriental Orthodox
 
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolareljin)
 
-![Orthodox Calendar — Greek tradition, Ascension of the Lord](docs/screenshots/greek-ascension.png)
+![Orthodox Calendar — Greek tradition, Ascension of the Lord with tone popup](docs/screenshots/greek-ascension.png)
 ![Orthodox Calendar — Georgian tradition, readings expanded](docs/screenshots/georgian-readings.png)
-![Orthodox Calendar — Serbian tradition, day detail](docs/screenshots/serbian-detail.png)
+![Orthodox Calendar — Serbian tradition, Transfiguration day detail](docs/screenshots/serbian-detail.png)
+![Orthodox Calendar — mobile view, Serbian tradition](docs/screenshots/mobile-view.png)
 
 ---
 
