@@ -346,8 +346,121 @@ export default function App() {
               </a>
             </div>
           </div>
+
+          <AboutSection />
         </main>
       </div>
+    </div>
+  );
+}
+
+// ── About ─────────────────────────────────────────────────────────────────────
+function AboutSection() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="about-section">
+      <button className="about-toggle" onClick={() => setOpen((o) => !o)}>
+        <span className="section-label" style={{ margin: 0 }}>About this calendar</span>
+        <span className="expand-icon">{open ? "▲" : "▼"}</span>
+      </button>
+
+      {open && (
+        <div className="about-body">
+          <div className="about-grid">
+
+            <div className="about-card">
+              <h3 className="about-heading">How to use</h3>
+              <ol className="about-list">
+                <li>Select your <strong>tradition</strong> from the sidebar — Serbian, Greek, Russian, Romanian, and seven others are supported, each mapped to its calendar system (Julian or Revised).</li>
+                <li>Navigate months with <strong>‹ ›</strong> or jump to today. Days with commemorations show a <strong>coloured dot</strong> — gold for Great Feasts, blue for regular saints.</li>
+                <li>Click any day to see the <strong>saints and feasts</strong> celebrated that day, fasting rule, tone of the week, and the full Epistle and Gospel readings.</li>
+                <li>Expand a saint card to read the <strong>hagiography</strong> excerpt and follow the link to the full biography.</li>
+                <li>Use <strong>Subscribe via iCal</strong> to add the feast calendar for your tradition directly to Google Calendar, Apple Calendar, or Outlook.</li>
+              </ol>
+            </div>
+
+            <div className="about-card">
+              <h3 className="about-heading">History</h3>
+              <p className="about-text">
+                This calendar began life in <strong>1993</strong> as a program written in <strong>Pascal</strong>,
+                running on <strong>DOS</strong>. Its sole purpose was to display the <strong>Julian calendar
+                saints' days of the Serbian Orthodox Church</strong> — a simple liturgical aid for a single
+                community on a single machine.
+              </p>
+              <p className="about-text">
+                Over the following decades it grew alongside the web, absorbing hagiographies, feast readings,
+                and the calendar systems of every canonical Orthodox church — Greek, Russian, Romanian, Bulgarian,
+                Antiochian, Alexandrian, Jerusalem, Ethiopian, and Oriental Orthodox. What began as a DOS screen
+                is now an open API with an iCal feed, a React front end, and data spanning more than 2,970 saints
+                across the full liturgical year.
+              </p>
+              <p className="about-text">
+                The project remains a labour of faith and a work in progress. The Synaxarion of the whole Orthodox
+                world is vast; no single team can cover it alone.
+              </p>
+            </div>
+
+            <div className="about-card about-card-full">
+              <h3 className="about-heading">Join the effort</h3>
+              <p className="about-text">
+                If you maintain or have built an Orthodox calendar application — whether a mobile app, a parish
+                website widget, a printed typikon generator, or a liturgical data set — we would like to hear
+                from you. This project is open-source and community-owned. We are looking for:
+              </p>
+              <ul className="about-list">
+                <li><strong>Data contributors</strong> — Synaxarion entries, Octoechos tone schedules, movable-feast logic, translations into Greek, Russian, Serbian, Romanian, Arabic, Amharic, or any other liturgical language.</li>
+                <li><strong>Calendar developers</strong> — if your app already models Orthodox feast logic, let us compare notes, merge data sets, or federate APIs rather than duplicating work. Thirty years of reinventing this wheel is enough.</li>
+                <li><strong>Hosting and infrastructure</strong> — the backend needs a permanent public home so the iCal feeds and API can be a shared community resource.</li>
+                <li><strong>Parishes and monasteries</strong> — if you need a custom deployment, a printed format, or a specific tradition not yet covered, open an issue and describe what you need.</li>
+              </ul>
+              <p className="about-text">
+                Open an issue or pull request at{" "}
+                <a href="https://github.com/nikolareljin/orthodox-calendar" target="_blank" rel="noreferrer" className="saint-link">
+                  github.com/nikolareljin/orthodox-calendar
+                </a>
+                , or contact us through the repository. All are welcome.
+              </p>
+            </div>
+
+            <div className="about-card about-card-full about-card-support">
+              <h3 className="about-heading">Support this project</h3>
+              <p className="about-text">
+                This calendar has been built and maintained by volunteers since 1993. Running a public
+                API and iCal feed costs real money — server hosting, bandwidth, and the many hours spent
+                curating and verifying liturgical data. If this calendar is useful to you, your parish,
+                or your community, please consider a donation.
+              </p>
+              <p className="about-text">
+                Every contribution — large or small — goes directly toward keeping the service free,
+                expanding the data set to more traditions, and improving the application for everyone.
+              </p>
+              <div className="support-links">
+                <a
+                  href="https://ko-fi.com/nikolareljin"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="support-btn support-kofi"
+                >
+                  ☕ Support on Ko-fi
+                </a>
+                <a
+                  href="https://github.com/sponsors/nikolareljin"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="support-btn support-github"
+                >
+                  ♥ GitHub Sponsors
+                </a>
+              </div>
+              <p className="about-text" style={{ marginTop: "12px", fontSize: "13px" }}>
+                You can also contribute by improving the code, adding hagiography data, translating the
+                interface, or simply spreading the word. All forms of support are deeply appreciated.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      )}
     </div>
   );
 }

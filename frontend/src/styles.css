@@ -701,6 +701,134 @@ body {
   color: var(--accent);
 }
 
+/* ── About section ── */
+.about-section {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.about-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s;
+}
+
+.about-toggle:hover {
+  background: var(--hover-bg);
+}
+
+.about-body {
+  border-top: 1px solid var(--border);
+  padding: 20px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.about-card-full {
+  grid-column: 1 / -1;
+}
+
+.about-heading {
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+.about-text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.about-text:last-child {
+  margin-bottom: 0;
+}
+
+.about-list {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  padding-left: 20px;
+  margin: 0 0 10px;
+}
+
+.about-list li {
+  margin-bottom: 6px;
+}
+
+.about-list strong,
+.about-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.about-card-support {
+  border-color: var(--accent);
+  background: var(--feast-great-bg);
+}
+
+.support-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.support-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.support-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.support-kofi {
+  background: #ff5e5b;
+  color: #ffffff;
+}
+
+.support-github {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
 /* ── Responsive ── */
 @media (max-width: 700px) {
   .app-body {
