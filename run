@@ -46,7 +46,7 @@ start_backend() {
   log_info "Starting backend on :${BACKEND_PORT}"
   # shellcheck source=/dev/null
   source "${VENV_DIR}/bin/activate"
-  UVICORN_CMD=("uvicorn" "app.main:app" "--host" "0.0.0.0" "--port" "${BACKEND_PORT}")
+  UVICORN_CMD=("uvicorn" "app.main:app" "--host" "0.0.0.0" "--port" "${BACKEND_PORT}" "--reload")
   (cd "$BACKEND_DIR" && "${UVICORN_CMD[@]}") &
   BACKEND_PID=$!
 }
