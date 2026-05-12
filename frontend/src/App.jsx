@@ -494,6 +494,7 @@ export default function App() {
             </div>
           </div>
 
+          <OrthodoxWorldSection />
           <AboutSection />
         </main>
       </div>
@@ -528,6 +529,27 @@ function WorldDirectory() {
           </ul>
         </div>
       ))}
+    </div>
+  );
+}
+
+// ── Orthodox World Section ────────────────────────────────────────────────────
+function OrthodoxWorldSection() {
+  const [open, setOpen] = useState(false);
+  return (
+    <div className="about-section">
+      <button className="about-toggle" onClick={() => setOpen((o) => !o)}>
+        <span className="section-label" style={{ margin: 0 }}>Orthodox Churches Worldwide</span>
+        <span className="expand-icon">{open ? "▲" : "▼"}</span>
+      </button>
+      {open && (
+        <div className="about-body">
+          <p className="about-text" style={{ marginBottom: "16px" }}>
+            All recognized canonical churches worldwide. Links only — no commentary on questions of jurisdiction or recognition.
+          </p>
+          <WorldDirectory />
+        </div>
+      )}
     </div>
   );
 }
@@ -628,15 +650,6 @@ function AboutSection() {
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div className="about-card about-card-full">
-              <h3 className="about-heading">World Orthodox Directory</h3>
-              <p className="about-text" style={{ marginBottom: "16px" }}>
-                All recognized canonical Orthodox, Oriental Orthodox, and Church of the East communities worldwide.
-                Links only — no commentary on questions of jurisdiction or recognition.
-              </p>
-              <WorldDirectory />
             </div>
 
             <div className="about-card about-card-full about-card-support">
