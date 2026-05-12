@@ -8,13 +8,13 @@ Fetches all 366 days of saint data from orthocal.info.
 # Byzantine Julian (Serbian, Russian, Jerusalem, Georgian)
 python3 scripts/import_orthocal.py \
     --calendar julian \
-    --tradition serbian \
+    --data-key oca \
     --out backend/app/data/oca_julian.json
 
 # Byzantine Revised (Greek, Bulgarian, Romanian, Antioch, Alexandria)
 python3 scripts/import_orthocal.py \
     --calendar gregorian \
-    --tradition greek \
+    --data-key oca \
     --out backend/app/data/oca_revised.json
 ```
 

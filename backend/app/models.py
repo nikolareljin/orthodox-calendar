@@ -72,8 +72,6 @@ class NameDayResponse(BaseModel):
 
 class MovableFeastsResponse(BaseModel):
     year: int
-    tradition: str
-    calendar_system: CalendarSystem
     pascha_gregorian: str  # ISO date
     feasts: Dict[str, str]  # feast_key -> ISO date (Gregorian)
 

@@ -8,26 +8,32 @@ from typing import Dict, Iterable, List
 
 from .models import CalendarEntry
 
-DEFAULT_DATA_FILES = ["saints_sample.json", "oca_julian.json"]
+DEFAULT_DATA_FILES = ["oca_julian.json"]
 
 
 def _iter_data_files() -> Iterable[Path]:
     base = Path(__file__).resolve().parent / "data"
     custom_path = os.getenv("ORTHODOX_CALENDAR_DATA_PATH")
+    custom_dir_mode = False
     if custom_path:
         custom = Path(custom_path)
         if custom.is_file():
             yield custom
         elif custom.is_dir():
+            custom_dir_mode = True
             yield from sorted(custom.glob("*.json"))
+            custom_traditions = custom / "traditions"
+            if custom_traditions.is_dir():
+                yield from sorted(custom_traditions.glob("*.json"))
 
-    for filename in DEFAULT_DATA_FILES:
-        yield base / filename
+    if not custom_dir_mode:
+        for filename in DEFAULT_DATA_FILES:
+            yield base / filename
 
-    # Tradition-specific overlay files (auto-discovered)
-    traditions_dir = base / "traditions"
-    if traditions_dir.is_dir():
-        yield from sorted(traditions_dir.glob("*.json"))
+        # Tradition-specific overlay files (auto-discovered)
+        traditions_dir = base / "traditions"
+        if traditions_dir.is_dir():
+            yield from sorted(traditions_dir.glob("*.json"))
 
 
 @lru_cache(maxsize=1)

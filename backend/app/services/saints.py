@@ -46,7 +46,7 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
             SaintsResponse(
                 date=day,
                 tradition=tradition.name,
-                calendar_date=calendar_date.strftime("%Y-%m-%d"),
+                calendar_date=calendar_date,
                 saints=merged,
                 calendar_system=tradition.calendar,
                 notes=merged_notes,

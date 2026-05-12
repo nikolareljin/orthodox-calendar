@@ -3,7 +3,7 @@ from __future__ import annotations
 import math as _math
 from datetime import date, timedelta
 from datetime import date as _date
-from typing import Tuple
+from typing import Tuple, Union
 
 from .config import TRADITIONS
 from .models import CalendarSystem, Tradition
@@ -31,21 +31,23 @@ def canonical_tradition_key(name: str) -> str:
     raise ValueError(f"Unknown tradition '{name}'.")
 
 
-def convert_to_tradition_month_day(day: date, tradition: Tradition) -> Tuple[str, date]:
+def convert_to_tradition_month_day(day: date, tradition: Tradition) -> Tuple[str, str]:
     """
     Convert a civil (Gregorian) date to the month-day string used by the
-    tradition's calendar. Returns (MM-DD, converted_date).
+    tradition's calendar. Returns (MM-DD, YYYY-MM-DD as string).
     """
     if tradition.calendar == CalendarSystem.JULIAN:
-        converted = _gregorian_to_julian(day)
-    else:
-        converted = day
-
-    return converted.strftime("%m-%d"), converted
+        jyear, jmonth, jday = _gregorian_to_julian(day)
+        return f"{jmonth:02d}-{jday:02d}", f"{jyear:04d}-{jmonth:02d}-{jday:02d}"
+    return day.strftime("%m-%d"), day.isoformat()
 
 
-def _gregorian_to_julian(d: date) -> date:
-    """Convert Gregorian date to Julian calendar date via Julian Day Number."""
+def _gregorian_to_julian(d: date) -> Tuple[int, int, int]:
+    """Convert Gregorian date to Julian calendar date via Julian Day Number.
+
+    Returns (year, month, day) as integers to avoid Gregorian validation of
+    Julian leap days (e.g. Julian Feb 29 in century years like 2100).
+    """
     # Gregorian JDN
     a = (14 - d.month) // 12
     y = d.year + 4800 - a
@@ -59,14 +61,14 @@ def _gregorian_to_julian(d: date) -> date:
     jday = e4 - (153 * m4 + 2) // 5 + 1
     jmonth = m4 + 3 - 12 * (m4 // 10)
     jyear = d4 - 4800 + m4 // 10
-    return date(jyear, jmonth, jday)
+    return jyear, jmonth, jday
 
 
 def julian_pascha_as_gregorian(year: int) -> _date:
     """
     Compute Eastern Pascha (Easter) for the given year using the Julian computus,
     returned as a proleptic Gregorian calendar date.
-    Works for all years (0 AD to far future) using Julian Day Numbers.
+    Supported range: years 1–9999 (Python datetime.date constraint).
     """
     # Julian Easter (Meeus algorithm)
     a = year % 4

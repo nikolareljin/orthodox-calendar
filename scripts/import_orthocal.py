@@ -3,8 +3,8 @@
 Import Byzantine saints from orthocal.info API.
 
 Usage:
-    python3 scripts/import_orthocal.py --calendar julian --tradition serbian --out backend/app/data/oca_julian.json
-    python3 scripts/import_orthocal.py --calendar gregorian --tradition greek --out backend/app/data/oca_revised.json
+    python3 scripts/import_orthocal.py --calendar julian --data-key oca --out backend/app/data/oca_julian.json
+    python3 scripts/import_orthocal.py --calendar gregorian --data-key oca --out backend/app/data/oca_revised.json
 
 The orthocal.info API supports:
     GET https://orthocal.info/api/{julian|gregorian}/{year}/{month}/{day}/
@@ -70,7 +70,7 @@ def parse_saints(data: dict, tradition: str, calendar: str, month_day: str) -> d
 
     # orthocal.info uses "commemorations" field
     commemorations = data.get("commemorations", [])
-    stories_by_title = {s["title"]: s for s in data.get("stories", [])}
+    stories_by_title = {s["title"]: s for s in data.get("stories", []) if s.get("title")}
 
     for comm in commemorations:
         title = comm.get("title", "")
@@ -104,7 +104,8 @@ def parse_saints(data: dict, tradition: str, calendar: str, month_day: str) -> d
 def main():
     parser = argparse.ArgumentParser(description="Import saints from orthocal.info")
     parser.add_argument("--calendar", choices=["julian", "gregorian"], default="julian")
-    parser.add_argument("--tradition", default="serbian")
+    parser.add_argument("--data-key", default="oca", dest="data_key",
+                        help="Tradition/data key written into each output entry (default: oca)")
     parser.add_argument("--out", default=None, help="Output JSON file path")
     parser.add_argument(
         "--year",
@@ -137,7 +138,7 @@ def main():
             seen_month_days.add(month_day)
             try:
                 data = fetch_day(args.calendar, d.year, d.month, d.day)
-                entry = parse_saints(data, args.tradition, args.calendar, month_day)
+                entry = parse_saints(data, args.data_key, args.calendar, month_day)
                 if entry:
                     entries.append(entry)
                     print(f"  {month_day}: {len(entry['saints'])} saints", file=sys.stderr)
