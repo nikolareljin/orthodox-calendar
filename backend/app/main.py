@@ -12,7 +12,7 @@ from pydantic import BaseModel
 from .calendar_logic import canonical_tradition_key, julian_pascha_as_gregorian
 from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _moon_phase
 from .config import TRADITIONS
-from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
+from .models import CalendarSystem, Contact, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
 from .services.saints import get_saints_for_date
 from .services.ical import generate_ical_feed

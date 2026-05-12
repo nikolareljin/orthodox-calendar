@@ -4,7 +4,7 @@ import re
 from datetime import date
 from typing import List
 
-from ..models import Contact, NameDayMatch, NameDayResponse, Saint
+from ..models import Contact, NameDayMatch, NameDayResponse
 from .saints import get_saints_for_date
 
 
