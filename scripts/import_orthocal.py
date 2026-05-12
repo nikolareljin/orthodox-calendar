@@ -68,8 +68,8 @@ def parse_saints(data: dict, tradition: str, calendar: str, month_day: str) -> d
     """Parse orthocal.info response into a CalendarEntry dict."""
     saints = []
 
-    # orthocal.info uses "commemorations" field
-    commemorations = data.get("commemorations", [])
+    # orthocal.info uses "commemorations"; some responses use "saints" instead
+    commemorations = data.get("commemorations") or data.get("saints", [])
     stories_by_title = {s["title"]: s for s in data.get("stories", []) if s.get("title")}
 
     for comm in commemorations:

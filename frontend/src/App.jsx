@@ -146,7 +146,13 @@ function SaintCard({ saint }) {
 function ReadingCard({ reading }) {
   const [expanded, setExpanded] = useState(false);
   const hasText = Array.isArray(reading.passage) && reading.passage.length > 0;
-  const ref = reading.display || reading.short_display || `${reading.book} ${reading.passage}`;
+  const ref = reading.display || reading.short_display || (() => {
+    if (!reading.book) return "Reading";
+    if (!Array.isArray(reading.passage) || reading.passage.length === 0) return reading.book;
+    const first = reading.passage[0].verse;
+    const last = reading.passage[reading.passage.length - 1].verse;
+    return first === last ? `${reading.book} ${first}` : `${reading.book} ${first}–${last}`;
+  })();
 
   return (
     <div className="reading-card">

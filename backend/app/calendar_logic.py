@@ -115,12 +115,14 @@ def _julian_to_gregorian(year: int, month: int, day: int) -> _date:
     return _date(gyear, gmonth, gday)
 
 
-def movable_feasts(year: int) -> dict:
+def movable_feasts(year: int, pascha: "_date | None" = None) -> dict:
     """
     Return a dict of movable feast names -> Gregorian dates for Eastern Orthodoxy.
     All traditions share the same movable feast schedule (Julian computus).
+    Pass a precomputed *pascha* date to avoid recomputing it.
     """
-    pascha = julian_pascha_as_gregorian(year)
+    if pascha is None:
+        pascha = julian_pascha_as_gregorian(year)
     return {
         "great_lent_start": (pascha - timedelta(days=48)).isoformat(),
         "lazarus_saturday": (pascha - timedelta(days=8)).isoformat(),

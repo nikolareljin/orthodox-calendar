@@ -147,7 +147,7 @@ def get_movable_feasts(
 ) -> MovableFeastsResponse:
     """Return all Eastern Orthodox movable feasts for the given year (Gregorian dates)."""
     pascha = julian_pascha_as_gregorian(year)
-    feasts = _movable_feasts(year)
+    feasts = _movable_feasts(year, pascha=pascha)
     return MovableFeastsResponse(year=year, pascha_gregorian=pascha.isoformat(), feasts=feasts)
 
 
