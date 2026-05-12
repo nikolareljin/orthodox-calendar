@@ -229,7 +229,11 @@ function ToneBadge({ toneNum }) {
 
 // ── DayDetail ───────────────────────────────────────────────────────────────
 function DayDetail({ saints, readings, moonPhase, loading, error, year, month, day }) {
-  if (!day) return null;
+  if (!day) return (
+    <div className="day-detail day-detail--empty">
+      <p>Select a day to see saints, fasting rule, and readings.</p>
+    </div>
+  );
 
   const entry = saints && saints[0];
   const fastText = readings?.fast_level_desc || null;
@@ -431,34 +435,37 @@ export default function App() {
         </aside>
 
         <main className="main">
-          <div className="month-nav">
-            <h2 className="month-label">{MONTH_NAMES[month - 1]} {year}</h2>
-            <button className="nav-btn" onClick={prevMonth}>‹</button>
-            <button className="nav-btn" onClick={nextMonth}>›</button>
-            <button className="today-btn" onClick={goToToday}>Today</button>
+          <div className={`cal-detail-row${selectedDay ? " has-detail" : ""}`}>
+            <div className="cal-col">
+              <div className="month-nav">
+                <h2 className="month-label">{MONTH_NAMES[month - 1]} {year}</h2>
+                <button className="nav-btn" onClick={prevMonth}>‹</button>
+                <button className="nav-btn" onClick={nextMonth}>›</button>
+                <button className="today-btn" onClick={goToToday}>Today</button>
+              </div>
+              <CalendarGrid
+                year={year}
+                month={month}
+                selectedDay={selectedDay}
+                onDaySelect={setSelectedDay}
+                todayYear={now.getFullYear()}
+                todayMonth={now.getMonth() + 1}
+                todayDay={now.getDate()}
+                monthData={monthData}
+              />
+            </div>
+
+            <DayDetail
+              saints={saints}
+              readings={readings}
+              moonPhase={moonPhase}
+              loading={loading}
+              error={error}
+              year={year}
+              month={month}
+              day={selectedDay}
+            />
           </div>
-
-          <CalendarGrid
-            year={year}
-            month={month}
-            selectedDay={selectedDay}
-            onDaySelect={setSelectedDay}
-            todayYear={now.getFullYear()}
-            todayMonth={now.getMonth() + 1}
-            todayDay={now.getDate()}
-            monthData={monthData}
-          />
-
-          <DayDetail
-            saints={saints}
-            readings={readings}
-            moonPhase={moonPhase}
-            loading={loading}
-            error={error}
-            year={year}
-            month={month}
-            day={selectedDay}
-          />
 
           <div className="ics-section">
             <h3>Subscribe via iCal</h3>
