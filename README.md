@@ -2,8 +2,11 @@
 
 Open-source liturgical calendar for all canonical Orthodox and Oriental Orthodox churches, with saints, hagiographies, fasting rules, and Epistle/Gospel readings for every day of the year.
 
-![Orthodox Calendar — dark theme](docs/screenshots/dark-calendar.png)
-![Orthodox Calendar — day detail](docs/screenshots/dark-detail.png)
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolareljin)
+
+![Orthodox Calendar — Greek tradition, Ascension of the Lord](docs/screenshots/greek-ascension.png)
+![Orthodox Calendar — Georgian tradition, readings expanded](docs/screenshots/georgian-readings.png)
+![Orthodox Calendar — Serbian tradition, day detail](docs/screenshots/serbian-detail.png)
 
 ---
 
@@ -95,8 +98,7 @@ This calendar has been maintained by volunteers since 1993. A public API and iCa
 
 | Platform | Link |
 |---|---|
-| ☕ Ko-fi (one-off or monthly, 0% fee) | [ko-fi.com/nikolareljin](https://ko-fi.com/nikolareljin) |
-| ♥ GitHub Sponsors (monthly tiers) | [github.com/sponsors/nikolareljin](https://github.com/sponsors/nikolareljin) |
+[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolareljin)
 
 Every contribution goes directly toward keeping the service free, expanding the data set, and improving the application for all Orthodox communities.
 

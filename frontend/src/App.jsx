@@ -596,14 +596,6 @@ function AboutSection() {
                 >
                   ☕ Support on Ko-fi
                 </a>
-                <a
-                  href="https://github.com/sponsors/nikolareljin"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="support-btn support-github"
-                >
-                  ♥ GitHub Sponsors
-                </a>
               </div>
               <p className="about-text" style={{ marginTop: "12px", fontSize: "13px" }}>
                 You can also contribute by improving the code, adding hagiography data, translating the

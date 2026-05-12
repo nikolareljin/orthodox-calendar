@@ -997,10 +997,6 @@ sup.verse-num {
   color: #ffffff;
 }
 
-.support-github {
-  background: var(--accent);
-  color: var(--accent-text);
-}
 
 /* ── Churches grid ── */
 .churches-grid {
