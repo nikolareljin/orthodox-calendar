@@ -132,7 +132,7 @@ export const TRADITIONS = {
     founded: "1st century AD (Apostolic)",
     patron: "Saints Thomas, Addai, and Mari",
     description: "The Assyrian Church of the East — one of Christianity's oldest institutions, tracing its origins to the apostolic mission of Saints Thomas, Addai, and Mari in Mesopotamia. Independent of both Chalcedonian and non-Chalcedonian councils, it preserves the ancient East Syriac liturgical tradition, including the Anaphora of Addai and Mari, one of the oldest Eucharistic prayers in existence.",
-    logo: "✙",
+    logo: "✝",
   },
 };
 

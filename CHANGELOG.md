@@ -35,7 +35,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Nginx — font cache** — `/fonts/` served with 1-year immutable cache, same as `/assets/`.
 - **Nginx — health-check endpoint** — `GET /health-check` returns 200 for load-balancer / Docker health checks.
 - **`data_key` renamed to `"oca"`** — was `"serbian"` in config and data files (semantically incorrect).
-- **JDN-based Julian↔Gregorian conversion** — replaced hardcoded 13-day offset with full Julian Day Number algorithm valid for any year from 0 AD onward.
+- **JDN-based Julian↔Gregorian conversion** — replaced hardcoded 13-day offset with full Julian Day Number algorithm; supported range is years 1–9999 (Python `datetime.date` constraint).
 - **.dockerignore expanded** — excludes `.git`, `docs/`, `scripts/`, `deploy/`, `*.md`, `.github/` from build contexts.
 - **`.env.example` added** — documents `PORT`, `WEB_CONCURRENCY`, and `VITE_API_BASE` variables.
 
