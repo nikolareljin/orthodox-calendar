@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { buildIcsUrl, fetchMonthCalendar, fetchMoonPhase, fetchReadings, fetchSaints } from "./api";
 import HagiaSophia from "./HagiaSophia";
 import { TRADITIONS, WORLD_CHURCHES } from "./traditions";
@@ -9,28 +9,41 @@ const MONTH_NAMES = [
 ];
 
 
+const MIN_YEAR = 1;
+const MAX_YEAR = 9999;
+const DAY_NAMES = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+// new Date(year, ...) treats years 0–99 as 1900+year; setFullYear avoids that.
+function makeDate(year, month0, day) {
+  const d = new Date(0);
+  d.setFullYear(year, month0, day);
+  return d;
+}
+
 function getCalendarCells(year, month) {
-  const firstDow = new Date(year, month - 1, 1).getDay();
-  const daysInMonth = new Date(year, month, 0).getDate();
+  const firstDow = makeDate(year, month - 1, 1).getDay();
+  const daysInMonth = makeDate(year, month, 0).getDate(); // day 0 of next month = last day of this
   const cells = [];
   for (let i = 0; i < firstDow; i++) cells.push(null);
   for (let d = 1; d <= daysInMonth; d++) cells.push(d);
   return cells;
 }
 
-function pad2(n) {
-  return String(n).padStart(2, "0");
-}
+function pad2(n) { return String(n).padStart(2, "0"); }
 
 function toDateStr(year, month, day) {
-  return `${year}-${pad2(month)}-${pad2(day)}`;
+  // Zero-pad year to 4 digits so Python's date.fromisoformat() accepts it (e.g. "0033-01-02")
+  return `${String(year).padStart(4, "0")}-${pad2(month)}-${pad2(day)}`;
 }
 
 function formatGregorianDate(year, month, day) {
-  return new Date(year, month - 1, day).toLocaleDateString("en-US", {
-    weekday: "long", year: "numeric", month: "long", day: "numeric",
-  });
+  const d = makeDate(year, month - 1, day);
+  const dow = DAY_NAMES[d.getDay()];
+  const yearStr = year < 1000 ? `${year} AD` : String(year);
+  return `${dow}, ${MONTH_NAMES[month - 1]} ${day}, ${yearStr}`;
 }
+
+function clampYear(y) { return Math.max(MIN_YEAR, Math.min(MAX_YEAR, y)); }
 
 function feastClass(info) {
   if (!info) return "";
@@ -335,6 +348,9 @@ export default function App() {
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth() + 1);
   const [selectedDay, setSelectedDay] = useState(now.getDate());
+  const [yearEditing, setYearEditing] = useState(false);
+  const [yearDraft, setYearDraft] = useState(String(now.getFullYear()));
+  const yearInputRef = useRef(null);
 
   const [monthData, setMonthData] = useState({});
   const [saints, setSaints] = useState([]);
@@ -393,19 +409,67 @@ export default function App() {
     loadDay();
   }, [loadDay]);
 
+  // Focus and select the year input as soon as it mounts
+  useLayoutEffect(() => {
+    if (yearEditing && yearInputRef.current) yearInputRef.current.select();
+  }, [yearEditing]);
+
+  function cancelYearEdit() { setYearEditing(false); }
+
+  function startYearEdit() {
+    setYearDraft(String(year));
+    setYearEditing(true);
+  }
+
+  function commitYear() {
+    const parsed = parseInt(yearDraft, 10);
+    if (!isNaN(parsed)) {
+      const clamped = clampYear(parsed);
+      setYear(clamped);
+      setSelectedDay(null);
+    }
+    setYearEditing(false);
+  }
+
+  function handleYearKey(e) {
+    if (e.key === "Enter") commitYear();
+    if (e.key === "Escape") cancelYearEdit();
+  }
+
+  function prevYear() {
+    cancelYearEdit();
+    setYear((y) => clampYear(y - 1));
+    setSelectedDay(null);
+  }
+
+  function nextYear() {
+    cancelYearEdit();
+    setYear((y) => clampYear(y + 1));
+    setSelectedDay(null);
+  }
+
   function prevMonth() {
-    if (month === 1) { setYear((y) => y - 1); setMonth(12); }
-    else setMonth((m) => m - 1);
+    cancelYearEdit();
+    if (month === 1) {
+      if (year > MIN_YEAR) { setYear((y) => y - 1); setMonth(12); }
+    } else {
+      setMonth((m) => m - 1);
+    }
     setSelectedDay(null);
   }
 
   function nextMonth() {
-    if (month === 12) { setYear((y) => y + 1); setMonth(1); }
-    else setMonth((m) => m + 1);
+    cancelYearEdit();
+    if (month === 12) {
+      if (year < MAX_YEAR) { setYear((y) => y + 1); setMonth(1); }
+    } else {
+      setMonth((m) => m + 1);
+    }
     setSelectedDay(null);
   }
 
   function goToToday() {
+    cancelYearEdit();
     setYear(now.getFullYear());
     setMonth(now.getMonth() + 1);
     setSelectedDay(now.getDate());
@@ -456,9 +520,38 @@ export default function App() {
           <div className={`cal-detail-row${selectedDay ? " has-detail" : ""}`}>
             <div className="cal-col">
               <div className="month-nav">
-                <h2 className="month-label">{MONTH_NAMES[month - 1]} {year}</h2>
-                <button className="nav-btn" onClick={prevMonth}>‹</button>
-                <button className="nav-btn" onClick={nextMonth}>›</button>
+                <button className="nav-btn year-btn" onClick={prevYear} title="Previous year" aria-label="Previous year">«</button>
+                <button className="nav-btn" onClick={prevMonth} aria-label="Previous month">‹</button>
+                <h2 className="month-label">
+                  {MONTH_NAMES[month - 1]}{" "}
+                  {yearEditing ? (
+                    <input
+                      ref={yearInputRef}
+                      className="year-input"
+                      type="number"
+                      min={MIN_YEAR}
+                      max={MAX_YEAR}
+                      value={yearDraft}
+                      onChange={(e) => setYearDraft(e.target.value)}
+                      onBlur={commitYear}
+                      onKeyDown={handleYearKey}
+                      aria-label="Year"
+                    />
+                  ) : (
+                    <span
+                      className="year-display"
+                      onClick={startYearEdit}
+                      title="Click to enter a year"
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => e.key === "Enter" && startYearEdit()}
+                    >
+                      {year}
+                    </span>
+                  )}
+                </h2>
+                <button className="nav-btn" onClick={nextMonth} aria-label="Next month">›</button>
+                <button className="nav-btn year-btn" onClick={nextYear} title="Next year" aria-label="Next year">»</button>
                 <button className="today-btn" onClick={goToToday}>Today</button>
               </div>
               <CalendarGrid

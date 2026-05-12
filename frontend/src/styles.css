@@ -272,8 +272,9 @@ body {
 .month-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .month-label {
@@ -285,6 +286,48 @@ body {
   flex: 1;
   margin: 0;
   color: var(--text);
+  white-space: nowrap;
+}
+
+.year-display {
+  cursor: pointer;
+  border-bottom: 1px dashed var(--text-muted);
+  padding-bottom: 1px;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.year-display:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.year-input {
+  width: 5ch;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  color: var(--text);
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.year-btn {
+  font-size: 14px;
+  padding: 6px 10px;
+  opacity: 0.75;
 }
 
 .nav-btn {
