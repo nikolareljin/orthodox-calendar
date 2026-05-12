@@ -1,3 +1,13 @@
+/* ── NB-Byzantine display font (neobyzantine.org heading face, uppercase-only) ── */
+@font-face {
+  font-family: 'NB-Byzantine';
+  src: url('/fonts/NEOBRG__1.ttf') format('truetype'),
+       url('/fonts/nbyzn.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ── CSS custom properties ── */
 :root {
   --bg: #ffffff;
@@ -30,6 +40,8 @@
   --fast-color: #7a4200;
   --fast-bg: #fff4e6;
   --reading-border: #e0d8cc;
+  --sophia-color: rgba(139, 21, 21, 0.12);
+  --sophia-color-strong: rgba(139, 21, 21, 0.22);
 
   font-family: "Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
   color: var(--text);
@@ -67,6 +79,8 @@
   --fast-color: #cfb53b;
   --fast-bg: #1e1a00;
   --reading-border: #2a3a5c;
+  --sophia-color: rgba(207, 181, 59, 0.13);
+  --sophia-color-strong: rgba(207, 181, 59, 0.25);
 }
 
 * { box-sizing: border-box; }
@@ -90,20 +104,42 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 24px;
+  padding: 0 24px;
   border-bottom: 1px solid var(--border);
   background: var(--surface);
   position: sticky;
   top: 0;
   z-index: 10;
+  overflow: hidden;
+  min-height: 64px;
 }
 
 .app-header h1 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 22px;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--accent);
+  position: relative;
+  z-index: 1;
+}
+
+/* Hagia Sophia silhouette */
+.header-sophia {
+  position: absolute;
+  right: 120px;
+  top: -10px;
+  width: 340px;
+  height: 100px;
+  color: var(--sophia-color-strong);
+  pointer-events: none;
+  user-select: none;
+}
+
+[data-theme="dark"] .header-sophia {
+  color: var(--sophia-color-strong);
 }
 
 .header-right {
@@ -206,8 +242,11 @@ body {
 }
 
 .month-label {
-  font-size: 22px;
-  font-weight: 700;
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 20px;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   flex: 1;
   margin: 0;
   color: var(--text);
@@ -429,9 +468,10 @@ body {
 }
 
 .feast-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-muted);
   margin: 0 0 8px;
@@ -453,9 +493,10 @@ body {
 }
 
 .section-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--text-muted);
   margin: 0 0 10px;

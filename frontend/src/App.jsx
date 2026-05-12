@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { buildIcsUrl, fetchMonthCalendar, fetchReadings, fetchSaints } from "./api";
+import HagiaSophia from "./HagiaSophia";
 import { TRADITIONS } from "./traditions";
 
 const MONTH_NAMES = [
@@ -280,6 +281,7 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <h1>Orthodox Calendar</h1>
+        <HagiaSophia className="header-sophia" />
         <div className="header-right">
           <button
             className="theme-toggle"
