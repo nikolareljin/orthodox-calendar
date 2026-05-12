@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import date
 from typing import Dict, List, Optional
 
-from ..calendar_logic import canonical_tradition_key, convert_to_tradition_month_day, resolve_tradition
+from ..calendar_logic import canonical_tradition_key, convert_to_tradition_month_day, effective_calendar, resolve_tradition
 from ..data_loader import build_index
 from ..models import Saint, SaintsResponse
 
@@ -71,7 +71,7 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
                 tradition=tradition.name,
                 calendar_date=calendar_date,
                 saints=list(merged.values()),
-                calendar_system=tradition.calendar,
+                calendar_system=effective_calendar(day, tradition),
                 notes=merged_notes,
             )
         )

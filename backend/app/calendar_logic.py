@@ -31,12 +31,26 @@ def canonical_tradition_key(name: str) -> str:
     raise ValueError(f"Unknown tradition '{name}'.")
 
 
+# The Revised Julian (Milanković) calendar was first adopted by the Greek church
+# on November 1, 1923 (new style). Before this date every Orthodox church
+# used the Julian calendar, so pre-reform dates must always use Julian computation
+# regardless of what the tradition's calendar field says.
+_REVISED_JULIAN_EPOCH = date(1923, 11, 1)
+
+
+def effective_calendar(day: date, tradition: Tradition) -> CalendarSystem:
+    """Return the calendar system actually in use for this tradition on this date."""
+    if tradition.calendar == CalendarSystem.JULIAN:
+        return CalendarSystem.JULIAN
+    return CalendarSystem.REVISED if day >= _REVISED_JULIAN_EPOCH else CalendarSystem.JULIAN
+
+
 def convert_to_tradition_month_day(day: date, tradition: Tradition) -> Tuple[str, str]:
     """
     Convert a civil (Gregorian) date to the month-day string used by the
     tradition's calendar. Returns (MM-DD, YYYY-MM-DD as string).
     """
-    if tradition.calendar == CalendarSystem.JULIAN:
+    if effective_calendar(day, tradition) == CalendarSystem.JULIAN:
         jyear, jmonth, jday = _gregorian_to_julian(day)
         return f"{jmonth:02d}-{jday:02d}", f"{jyear:04d}-{jmonth:02d}-{jday:02d}"
     return day.strftime("%m-%d"), day.isoformat()
