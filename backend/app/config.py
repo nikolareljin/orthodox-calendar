@@ -21,9 +21,9 @@ from .models import CalendarSystem, Tradition
 # data/traditions/<tradition>.json and merged automatically on top of the base dataset.
 TRADITIONS: Dict[str, Tradition] = {
     "greek": Tradition(
-        name="Greek Orthodox",
+        name="Ecumenical Patriarchate of Constantinople",
         calendar=CalendarSystem.REVISED,
-        aliases=["greece", "hellenic", "ecumenical"],
+        aliases=["greece", "hellenic", "ecumenical", "constantinople"],
         data_key="oca",
     ),
     "russian": Tradition(
@@ -80,12 +80,11 @@ TRADITIONS: Dict[str, Tradition] = {
         aliases=["tewahedo"],
     ),
     "oriental": Tradition(
-        name="Oriental Orthodox",
+        name="Coptic Orthodox Church of Alexandria",
         calendar=CalendarSystem.JULIAN,
         aliases=["coptic", "syriac", "malankara"],
     ),
-    # Armenian Apostolic is Oriental (non-Chalcedonian), not Eastern Orthodox,
-    # but included for reference alongside the Orthodox churches.
+    # Armenian Apostolic is Oriental/Non-Chalcedonian, included alongside the Orthodox churches.
     "armenian": Tradition(
         name="Armenian Apostolic",
         calendar=CalendarSystem.JULIAN,
