@@ -109,7 +109,7 @@ This calendar has been maintained by volunteers since 1993. A public API and iCa
 
 | Platform | Link |
 |---|---|
-[![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolareljin)
+| Ko-fi | [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolareljin) |
 
 Every contribution goes directly toward keeping the service free, expanding the data set, and improving the application for all Orthodox communities.
 

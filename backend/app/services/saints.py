@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re as _re
 from datetime import date
 from typing import Dict, List, Optional
 
@@ -9,15 +10,23 @@ from ..models import Saint, SaintsResponse
 
 _INDEX = build_index()
 
+# Common honorific prefixes that vary across sources for the same saint
+# (e.g. base has "Seraphim of Sarov", overlay has "Saint Seraphim of Sarov").
+_HONORIFIC_RE = _re.compile(
+    r"^(?:saint|st\.|st|venerable|blessed|holy|new martyr|hieromartyr|martyr)\s+",
+    _re.IGNORECASE,
+)
+
 
 def _saint_key(saint: Saint) -> str:
-    """Stable dedup key: normalized name.
+    """Stable dedup key: normalized name with honorific prefixes stripped.
 
-    URL-first keying breaks dedup when the same saint appears in multiple
-    sources with different (or absent) hagiography URLs. Name is the stable
-    cross-source identifier; URL is enriched via _apply_overlay after merge.
+    Different sources prefix the same saint differently (e.g. "Seraphim of
+    Sarov" vs "Saint Seraphim of Sarov"). Stripping known prefixes before
+    keying lets overlays merge correctly instead of producing duplicates.
     """
-    return saint.name.lower().strip()
+    name = saint.name.lower().strip()
+    return _HONORIFIC_RE.sub("", name)
 
 
 def _apply_overlay(base: Saint, overlay: Saint) -> None:
