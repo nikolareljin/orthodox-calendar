@@ -23,7 +23,7 @@ from .models import CalendarSystem, Tradition
 # traditions are treated as Julian for historical lookups.
 #
 # Tradition-specific saints (local canonizations, regional martyrs) are stored in
-# data/traditions/<tradition>.json and merged automatically on top of the base dataset.
+# data/traditions/<tradition>_saints.json and merged automatically on top of the base dataset.
 TRADITIONS: Dict[str, Tradition] = {
     "greek": Tradition(
         name="Ecumenical Patriarchate of Constantinople",
