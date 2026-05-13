@@ -110,10 +110,16 @@ function SaintCard({ saint }) {
 
   return (
     <div className="saint-card">
-      <div className="saint-header" onClick={() => hasBody && setExpanded((e) => !e)}>
-        <div className="saint-header-left">
+      <button
+        type="button"
+        className="saint-header"
+        onClick={() => hasBody && setExpanded((e) => !e)}
+        disabled={!hasBody}
+        aria-expanded={hasBody ? expanded : undefined}
+      >
+        <span className="saint-header-left">
           <span className="saint-name">{saint.title || saint.name}</span>
-          <div className="saint-pills">
+          <span className="saint-pills">
             {saint.feast_type && <span className={pillClass}>{saint.feast_type}</span>}
             {saint.canonized_by && (
               <span
@@ -124,10 +130,10 @@ function SaintCard({ saint }) {
                 {saint.year_canonized ? ` ${saint.year_canonized}` : ""}
               </span>
             )}
-          </div>
-        </div>
+          </span>
+        </span>
         {hasBody && <span className="expand-icon">{expanded ? "▲" : "▼"}</span>}
-      </div>
+      </button>
       {expanded && hasBody && (
         <div className="saint-body">
           {saint.notes && <p className="saint-hagio">{saint.notes}</p>}
@@ -544,16 +550,20 @@ export default function App() {
                       aria-label="Year"
                     />
                   ) : (
-                    <span
+                    <button
+                      type="button"
                       className="year-display"
                       onClick={startYearEdit}
                       title="Click to enter a year"
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && startYearEdit()}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          startYearEdit();
+                        }
+                      }}
                     >
                       {year}
-                    </span>
+                    </button>
                   )}
                 </h2>
                 <button className="nav-btn" onClick={nextMonth} aria-label="Next month">›</button>

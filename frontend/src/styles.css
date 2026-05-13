@@ -290,7 +290,11 @@ body {
 }
 
 .year-display {
+  background: transparent;
+  border: 0;
+  color: inherit;
   cursor: pointer;
+  font: inherit;
   border-bottom: 1px dashed var(--text-muted);
   padding-bottom: 1px;
   transition: color 0.12s, border-color 0.12s;
@@ -678,16 +682,26 @@ body {
 }
 
 .saint-header {
+  background: transparent;
+  border: 0;
+  color: inherit;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font: inherit;
   padding: 12px 14px;
+  text-align: left;
+  width: 100%;
   cursor: pointer;
   transition: background 0.12s;
 }
 
-.saint-header:hover {
+.saint-header:hover:not(:disabled) {
   background: var(--hover-bg);
+}
+
+.saint-header:disabled {
+  cursor: default;
 }
 
 .saint-header-left {

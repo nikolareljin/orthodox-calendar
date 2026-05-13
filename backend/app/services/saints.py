@@ -16,17 +16,55 @@ _HONORIFIC_RE = _re.compile(
     r"^(?:(?:saint|st\.|st|venerable|blessed|holy|new martyr|hieromartyr|martyr)\s+)+",
     _re.IGNORECASE,
 )
+_EVENT_PREFIX_RE = _re.compile(
+    r"^(?:(?:translation|uncovering|discovery|opening) of (?:the )?relics of "
+    r"|(?:repose|translation|uncovering|discovery|opening) of (?:the )?)+",
+    _re.IGNORECASE,
+)
+_DROP_TOKENS = {
+    "saint",
+    "st",
+    "venerable",
+    "blessed",
+    "holy",
+    "hieromartyr",
+    "martyr",
+    "new",
+    "righteous",
+    "wonderworker",
+    "great",
+    "of",
+    "the",
+}
 
 
-def _saint_key(saint: Saint) -> str:
-    """Stable dedup key: normalized name with honorific prefixes stripped.
+def _normalize_saint_text(value: str) -> str:
+    value = _EVENT_PREFIX_RE.sub("", value.lower().strip())
+    value = _HONORIFIC_RE.sub("", value)
+    value = _re.sub(r"[^a-z0-9]+", " ", value)
+    tokens = [token for token in value.split() if token not in _DROP_TOKENS]
+    return " ".join(tokens)
 
-    Different sources prefix the same saint differently (e.g. "Seraphim of
-    Sarov" vs "Saint Seraphim of Sarov"). Stripping known prefixes before
-    keying lets overlays merge correctly instead of producing duplicates.
+
+def _saint_keys(saint: Saint) -> List[str]:
+    """Stable dedup aliases from normalized title, name, and hagiography slug.
+
+    Different sources phrase the same commemoration differently (e.g. "Repose
+    of Venerable Seraphim" vs "Seraphim of Sarov"). Multiple aliases let
+    overlays merge when any stable representation matches.
     """
-    name = saint.name.lower().strip()
-    return _HONORIFIC_RE.sub("", name)
+    raw_values = [saint.title, saint.name]
+    if saint.hagiography_url:
+        raw_values.append(saint.hagiography_url.rsplit("/", 1)[-1])
+
+    keys: List[str] = []
+    for raw in raw_values:
+        if not raw:
+            continue
+        key = _normalize_saint_text(raw)
+        if key and key not in keys:
+            keys.append(key)
+    return keys or [saint.name.lower().strip()]
 
 
 def _apply_overlay(base: Saint, overlay: Saint) -> None:
@@ -72,18 +110,25 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         if not day_entries:
             continue
 
-        # Merge saints from all entries; dedup by normalized name (honorifics
-        # stripped). Overlay entries enrich base canonization fields rather
+        # Merge saints from all entries; dedup by normalized aliases from title,
+        # name, and hagiography slug. Overlay entries enrich base fields rather
         # than being skipped entirely.
         merged: Dict[str, Saint] = {}
+        key_index: Dict[str, str] = {}
         merged_notes: Optional[str] = None
         for entry in day_entries:
             for saint in entry.saints:
-                key = _saint_key(saint)
-                if key in merged:
-                    _apply_overlay(merged[key], saint)
+                keys = _saint_keys(saint)
+                primary_key = next((key_index[key] for key in keys if key in key_index), None)
+                if primary_key:
+                    _apply_overlay(merged[primary_key], saint)
+                    for key in keys:
+                        key_index.setdefault(key, primary_key)
                 else:
-                    merged[key] = saint.model_copy()
+                    primary_key = keys[0]
+                    merged[primary_key] = saint.model_copy()
+                    for key in keys:
+                        key_index[key] = primary_key
             if entry.notes and not merged_notes:
                 merged_notes = entry.notes
 

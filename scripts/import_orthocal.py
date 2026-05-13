@@ -142,9 +142,10 @@ def main():
                 if entry:
                     entries.append(entry)
                     print(f"  {month_day}: {len(entry['saints'])} saints", file=sys.stderr)
-                time.sleep(args.delay)
             except Exception as exc:
                 print(f"  {month_day}: ERROR - {exc}", file=sys.stderr)
+            finally:
+                time.sleep(args.delay)
 
         d += timedelta(days=1)
 
