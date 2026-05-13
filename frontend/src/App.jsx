@@ -736,7 +736,7 @@ function AboutSection() {
                       <a
                         href={info.website}
                         target="_blank"
-                        rel="noreferrer"
+                        rel="noreferrer noopener"
                         className="church-name"
                       >
                         {info.label}

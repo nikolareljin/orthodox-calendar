@@ -13,7 +13,7 @@ _INDEX = build_index()
 # Common honorific prefixes that vary across sources for the same saint
 # (e.g. base has "Seraphim of Sarov", overlay has "Saint Seraphim of Sarov").
 _HONORIFIC_RE = _re.compile(
-    r"^(?:saint|st\.|st|venerable|blessed|holy|new martyr|hieromartyr|martyr)\s+",
+    r"^(?:(?:saint|st\.|st|venerable|blessed|holy|new martyr|hieromartyr|martyr)\s+)+",
     _re.IGNORECASE,
 )
 
@@ -64,9 +64,9 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         if not day_entries:
             continue
 
-        # Merge saints from all entries; dedup by stable key (hagiography_url
-        # or normalized name). Overlay entries enrich base canonization fields
-        # rather than being skipped entirely.
+        # Merge saints from all entries; dedup by normalized name (honorifics
+        # stripped). Overlay entries enrich base canonization fields rather
+        # than being skipped entirely.
         merged: Dict[str, Saint] = {}
         merged_notes: Optional[str] = None
         for entry in day_entries:
