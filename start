@@ -54,7 +54,8 @@ else
 fi
 
 # Prefer shell PORT env var; fall back to .env file; fall back to 80
-FRONTEND_PORT="${PORT:-$(grep -E '^PORT=' "${ROOT_DIR}/.env" 2>/dev/null | cut -d= -f2 | tr -d '[:space:]')}"
+# Strip inline comments (e.g. PORT=8080 # dev) and surrounding quotes/spaces.
+FRONTEND_PORT="${PORT:-$(grep -E '^PORT=' "${ROOT_DIR}/.env" 2>/dev/null | head -1 | cut -d= -f2 | sed "s/[[:space:]]*#.*//; s/[[:space:]'\"]*//g")}"
 FRONTEND_PORT="${FRONTEND_PORT:-80}"
 
 log_info "Frontend: http://localhost:${FRONTEND_PORT}"

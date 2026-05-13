@@ -11,8 +11,13 @@ _INDEX = build_index()
 
 
 def _saint_key(saint: Saint) -> str:
-    """Stable dedup key: hagiography_url when present, else normalized name."""
-    return saint.hagiography_url or saint.name.lower().strip()
+    """Stable dedup key: normalized name.
+
+    URL-first keying breaks dedup when the same saint appears in multiple
+    sources with different (or absent) hagiography URLs. Name is the stable
+    cross-source identifier; URL is enriched via _apply_overlay after merge.
+    """
+    return saint.name.lower().strip()
 
 
 def _apply_overlay(base: Saint, overlay: Saint) -> None:

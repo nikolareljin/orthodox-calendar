@@ -10,6 +10,9 @@ from .models import CalendarEntry
 
 DEFAULT_DATA_FILES = ["oca_julian.json"]
 
+# Files excluded from directory scans (demo/sample data not for production).
+_EXCLUDED_FILENAMES = frozenset({"saints_sample.json"})
+
 
 def _iter_data_files() -> Iterable[Path]:
     base = Path(__file__).resolve().parent / "data"
@@ -21,7 +24,7 @@ def _iter_data_files() -> Iterable[Path]:
             yield custom
         elif custom.is_dir():
             custom_dir_mode = True
-            yield from sorted(custom.glob("*.json"))
+            yield from (p for p in sorted(custom.glob("*.json")) if p.name not in _EXCLUDED_FILENAMES)
             custom_traditions = custom / "traditions"
             if custom_traditions.is_dir():
                 yield from sorted(custom_traditions.glob("*.json"))
