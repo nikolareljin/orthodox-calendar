@@ -8,7 +8,7 @@ from typing import Dict, Iterable, List
 
 from .models import CalendarEntry
 
-DEFAULT_DATA_FILES = ["oca_julian.json"]
+DEFAULT_DATA_FILES = ["oca_julian.json", "neobyzantine_hagiographies.json"]
 
 # Files excluded from directory scans (demo/sample data not for production).
 _EXCLUDED_FILENAMES = frozenset({"saints_sample.json"})

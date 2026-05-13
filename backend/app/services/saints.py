@@ -30,19 +30,27 @@ def _saint_key(saint: Saint) -> str:
 
 
 def _apply_overlay(base: Saint, overlay: Saint) -> None:
-    """Merge overlay canonization metadata into base saint in-place.
+    """Merge overlay fields into base saint in-place.
 
-    Overlay entries carry tradition-specific canonization data that the shared
-    base dataset lacks; prefer non-None overlay values for those fields only.
+    Overlay entries carry tradition-specific canonization data and richer
+    hagiography fields that the shared base dataset may lack.
     """
+    if overlay.title and not base.title:
+        base.title = overlay.title
+    if overlay.feast_type and not base.feast_type:
+        base.feast_type = overlay.feast_type
+    if overlay.hagiography_url and not base.hagiography_url:
+        base.hagiography_url = overlay.hagiography_url
+    if overlay.icon_url and not base.icon_url:
+        base.icon_url = overlay.icon_url
+    if overlay.notes and not base.notes:
+        base.notes = overlay.notes
     if overlay.canonized_by and not base.canonized_by:
         base.canonized_by = overlay.canonized_by
     if overlay.canonization_scope and not base.canonization_scope:
         base.canonization_scope = overlay.canonization_scope
     if overlay.year_canonized and not base.year_canonized:
         base.year_canonized = overlay.year_canonized
-    if overlay.hagiography_url and not base.hagiography_url:
-        base.hagiography_url = overlay.hagiography_url
 
 
 def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse]:

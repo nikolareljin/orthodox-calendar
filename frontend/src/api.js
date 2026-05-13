@@ -1,4 +1,9 @@
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const configuredApiBase = import.meta.env.VITE_API_BASE;
+const API_BASE = configuredApiBase !== undefined
+  ? configuredApiBase
+  : import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "";
 
 export async function fetchSaints(date, traditions) {
   const params = new URLSearchParams();
