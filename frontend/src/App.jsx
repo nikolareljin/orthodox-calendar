@@ -166,7 +166,7 @@ function ReadingCard({ reading }) {
         className="reading-header"
         onClick={() => hasText && setExpanded((e) => !e)}
         disabled={!hasText}
-        aria-expanded={expanded}
+        aria-expanded={hasText ? expanded : undefined}
       >
         <div className="reading-header-left">
           {reading.source && <span className="reading-source">{reading.source}</span>}

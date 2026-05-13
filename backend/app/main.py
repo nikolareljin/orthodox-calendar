@@ -9,7 +9,12 @@ from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from .calendar_logic import canonical_tradition_key, effective_calendar, julian_pascha_as_gregorian
+from .calendar_logic import (
+    canonical_tradition_key,
+    convert_to_tradition_month_day,
+    effective_calendar,
+    julian_pascha_as_gregorian,
+)
 from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _moon_phase
 from .config import TRADITIONS
 from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
@@ -117,8 +122,14 @@ def readings(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     trad = TRADITIONS[canonical]
-    cal = "julian" if effective_calendar(day, trad) == CalendarSystem.JULIAN else "gregorian"
-    url = f"https://orthocal.info/api/{cal}/{day.year}/{day.month}/{day.day}/"
+    if effective_calendar(day, trad) == CalendarSystem.JULIAN:
+        cal = "julian"
+        _, calendar_date = convert_to_tradition_month_day(day, trad)
+        api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
+    else:
+        cal = "gregorian"
+        api_year, api_month, api_day = day.year, day.month, day.day
+    url = f"https://orthocal.info/api/{cal}/{api_year}/{api_month}/{api_day}/"
     try:
         with _urllib_request.urlopen(url, timeout=8) as resp:  # noqa: S310
             return json.loads(resp.read())
