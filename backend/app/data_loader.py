@@ -18,11 +18,17 @@ def _iter_data_files() -> Iterable[Path]:
     base = Path(__file__).resolve().parent / "data"
     custom_path = os.getenv("ORTHODOX_CALENDAR_DATA_PATH")
     yielded: set[Path] = set()
+    yielded_names: set[str] = set()
 
     def yield_once(path: Path) -> Iterable[Path]:
         resolved = path.resolve()
-        if resolved not in yielded and path.name not in _EXCLUDED_FILENAMES:
+        if path.name in _EXCLUDED_FILENAMES:
+            return
+        if custom_path and path.name in yielded_names:
+            return
+        if resolved not in yielded:
             yielded.add(resolved)
+            yielded_names.add(path.name)
             yield path
 
     if custom_path:
