@@ -11,6 +11,7 @@ services:
     environment:
       - ORTHODOX_CALENDAR_DATA_PATH=/data
       - WEB_CONCURRENCY=${WEB_CONCURRENCY:-2}
+      - ORTHODOX_CALENDAR_CORS_ORIGINS=${ORTHODOX_CALENDAR_CORS_ORIGINS:-}
     volumes:
       - ./backend/app/data:/data:ro
     networks:

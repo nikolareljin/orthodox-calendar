@@ -111,12 +111,6 @@
     "calendar": "julian",
     "saints": [
       {
-        "name": "05 January",
-        "title": "05 JANUARY",
-        "feast_type": "Saint",
-        "notes": null
-      },
-      {
         "name": "Theopempos and the Martyr Thoenas",
         "title": "Hieromartyr Theopempos and the Martyr Thoenas",
         "feast_type": "Hieromartyr",
@@ -201,7 +195,7 @@
         "name": "010804. Saint Gregory",
         "title": "010804. Saint Gregory, Bishop of Ohrid",
         "feast_type": "Hierarch",
-        "notes": "regory was a devout teacher and shepherd of Christ's flock. He died in the year 1012 A.D. In one of the inscriptions in the Church of St. Sophia in Ohrid, he is referred to as \"Gregory, the all-wise."
+        "notes": "Gregory was a devout teacher and shepherd of Christ's flock. He died in the year 1012 A.D. In one of the inscriptions in the Church of St. Sophia in Ohrid, he is referred to as \"Gregory, the all-wise.\""
       }
     ]
   },

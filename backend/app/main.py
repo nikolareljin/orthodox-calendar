@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import os
+import urllib.error as _urllib_error
 import urllib.request as _urllib_request
 from datetime import date
 from typing import Any, Dict, List, Optional
@@ -23,6 +25,21 @@ from .services.saints import get_saints_for_date
 from .services.ical import generate_ical_feed
 
 
+DEFAULT_CORS_ORIGINS = [
+    "http://localhost",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://nikolareljin.github.io",
+]
+
+
+def _cors_origins() -> list[str]:
+    raw = os.getenv("ORTHODOX_CALENDAR_CORS_ORIGINS", "")
+    if not raw.strip():
+        return DEFAULT_CORS_ORIGINS
+    return [origin.strip() for origin in raw.split(",") if origin.strip()]
+
+
 class NameDayRequest(BaseModel):
     date: date
     traditions: Optional[List[str]] = None
@@ -40,7 +57,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=_cors_origins(),
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
@@ -134,8 +151,12 @@ def readings(
     try:
         with _urllib_request.urlopen(url, timeout=8) as resp:  # noqa: S310
             return json.loads(resp.read())
-    except Exception:
-        return {}
+    except _urllib_error.HTTPError as exc:
+        raise HTTPException(status_code=502, detail=f"Readings upstream returned HTTP {exc.code}") from exc
+    except (_urllib_error.URLError, TimeoutError) as exc:
+        raise HTTPException(status_code=502, detail="Readings upstream is unavailable") from exc
+    except json.JSONDecodeError as exc:
+        raise HTTPException(status_code=502, detail="Readings upstream returned invalid JSON") from exc
 
 
 @app.get("/api/v1/saints.ics")

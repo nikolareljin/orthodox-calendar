@@ -31,13 +31,12 @@ jobs:
         run: |
           set -euo pipefail
           found=0
-          for f in backend/app/data/*.json; do
-            [[ -f "$f" ]] || continue
+          while IFS= read -r -d '' f; do
             if grep -qiE '"(api_key|api_secret|password|passwd|token|secret|auth|cookie|session|credential|private_key)"\s*:' "$f"; then
               echo "::error::Potentially sensitive key found in $f"
               found=1
             fi
-          done
+          done < <(find backend/app/data -type f -name '*.json' -print0)
           [[ $found -eq 0 ]] || exit 1
           echo "Data safety check passed."
 

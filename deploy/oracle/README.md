@@ -60,7 +60,7 @@ Verify:
 
 ```bash
 curl http://localhost:8000/health        # should return {"status":"ok"}
-curl http://<YOUR_VM_IP>/docs            # FastAPI Swagger UI
+curl http://<YOUR_VM_IP>/api/v1/docs     # FastAPI Swagger UI
 ```
 
 ### Optional — TLS with Let's Encrypt

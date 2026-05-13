@@ -1,13 +1,3 @@
-/* ── NB-Byzantine display font (neobyzantine.org heading face, uppercase-only) ── */
-@font-face {
-  font-family: 'NB-Byzantine';
-  src: url('/fonts/NEOBRG__1.ttf') format('truetype'),
-       url('/fonts/nbyzn.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* ── CSS custom properties ── */
 :root {
   --bg: #ffffff;

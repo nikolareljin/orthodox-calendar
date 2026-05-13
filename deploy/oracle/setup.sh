@@ -48,8 +48,12 @@ sudo -u "${APP_USER}" "${APP_DIR}/.venv/bin/pip" install --quiet -r "${APP_DIR}/
 
 echo "==> Installing systemd service"
 cp "$(dirname "$0")/orthodox-calendar.service" /etc/systemd/system/
-# Patch the user in the unit file if APP_USER is not ubuntu
-sed -i "s/User=ubuntu/User=${APP_USER}/" /etc/systemd/system/"${SERVICE}.service"
+unit_file="/etc/systemd/system/${SERVICE}.service"
+escaped_app_dir="${APP_DIR//\//\\/}"
+sed -i \
+  -e "s/__APP_USER__/${APP_USER}/g" \
+  -e "s/__APP_DIR__/${escaped_app_dir}/g" \
+  "${unit_file}"
 systemctl daemon-reload
 systemctl enable "${SERVICE}"
 systemctl start "${SERVICE}"
@@ -71,7 +75,12 @@ systemctl reload nginx
 echo ""
 echo "==> Setup complete."
 echo ""
-echo "    Backend API:  http://$(curl -s ifconfig.me)/api/v1/docs"
+public_ip="$(curl -fsS ifconfig.me 2>/dev/null || true)"
+if [[ -n "${public_ip}" ]]; then
+  echo "    Backend API:  http://${public_ip}/api/v1/docs"
+else
+  echo "    Backend API:  http://<VM_PUBLIC_IP>/api/v1/docs"
+fi
 echo ""
 echo "    Next steps:"
 echo "    1. In Oracle Cloud console → Networking → VCN → Security Lists:"

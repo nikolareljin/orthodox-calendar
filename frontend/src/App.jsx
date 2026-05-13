@@ -371,6 +371,17 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    const baseUrl = import.meta.env.BASE_URL || "/";
+    const fontUrl = (file) => `${baseUrl.replace(/\/?$/, "/")}fonts/${file}`;
+    const font = new FontFace(
+      "NB-Byzantine",
+      `url(${fontUrl("NEOBRG__1.ttf")}) format("truetype"), url(${fontUrl("nbyzn.ttf")}) format("truetype")`,
+      { display: "swap" }
+    );
+    font.load().then((loaded) => document.fonts.add(loaded)).catch(() => {});
+  }, []);
+
   const selectedDate = useMemo(
     () => selectedDay ? toDateStr(year, month, selectedDay) : null,
     [year, month, selectedDay]
