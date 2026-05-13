@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import date
 from typing import Dict
 
 from .models import CalendarSystem, Tradition
@@ -11,11 +12,16 @@ from .models import CalendarSystem, Tradition
 # The base dataset is keyed as "oca" (Orthodox Church of America Julian Synaxarion) —
 # a neutral, tradition-agnostic source for the full Byzantine sanctoral year.
 #
-# The Revised Julian calendar keeps the same NUMERICAL month/day for fixed feasts as
-# the Old Julian (e.g., Christmas = "12-25" in both systems), so all Byzantine traditions
-# can share the "oca" dataset regardless of calendar system. The civil date differs
-# (Julian Dec 25 = Gregorian Jan 7; Revised Dec 25 = Gregorian Dec 25), but the
-# month_day lookup key is identical — this is intentional and correct.
+# The Revised Julian (Milankovich/New Calendar) keeps the same NUMERICAL month/day
+# for fixed feasts as the Old Julian (e.g., Christmas = "12-25" in both systems),
+# so all Byzantine traditions can share the "oca" dataset regardless of calendar
+# system. The civil date differs (Julian Dec 25 = Gregorian Jan 7; Revised Dec 25
+# = Gregorian Dec 25), but the month_day lookup key is identical — this is
+# intentional and correct.
+#
+# reform_date: first Gregorian date on which this church follows the Revised Julian
+# (Milankovich/New Calendar) for fixed feasts. Before that date, revised-calendar
+# traditions are treated as Julian for historical lookups.
 #
 # Tradition-specific saints (local canonizations, regional martyrs) are stored in
 # data/traditions/<tradition>.json and merged automatically on top of the base dataset.
@@ -24,6 +30,7 @@ TRADITIONS: Dict[str, Tradition] = {
         name="Ecumenical Patriarchate of Constantinople",
         calendar=CalendarSystem.REVISED,
         aliases=["greece", "hellenic", "ecumenical", "constantinople", "greek orthodox"],
+        reform_date=date(1924, 3, 23),
         data_key="oca",
     ),
     "russian": Tradition(
@@ -42,18 +49,21 @@ TRADITIONS: Dict[str, Tradition] = {
         name="Bulgarian Orthodox",
         calendar=CalendarSystem.REVISED,
         aliases=["bogk"],
+        reform_date=date(1968, 12, 20),
         data_key="oca",
     ),
     "cyprus": Tradition(
         name="Church of Cyprus",
         calendar=CalendarSystem.REVISED,
         aliases=["cypriot", "cyprus-orthodox"],
+        reform_date=date(1924, 3, 23),
         data_key="oca",
     ),
     "romanian": Tradition(
         name="Romanian Orthodox",
         calendar=CalendarSystem.REVISED,
         aliases=["patriarchate-of-romania"],
+        reform_date=date(1924, 10, 14),
         data_key="oca",
     ),
     "jerusalem": Tradition(
@@ -72,12 +82,14 @@ TRADITIONS: Dict[str, Tradition] = {
         name="Antiochian Orthodox",
         calendar=CalendarSystem.REVISED,
         aliases=["antiochian"],
+        reform_date=date(1928, 10, 14),
         data_key="oca",
     ),
     "alexandria": Tradition(
         name="Patriarchate of Alexandria",
         calendar=CalendarSystem.REVISED,
         aliases=["alexandrian"],
+        reform_date=date(1928, 10, 14),
         data_key="oca",
     ),
     "ethiopian": Tradition(
@@ -115,4 +127,3 @@ TRADITIONS: Dict[str, Tradition] = {
         aliases=["aac", "armenian-orthodox", "apostolic-armenian"],
     ),
 }
-

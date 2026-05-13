@@ -17,6 +17,8 @@ class Tradition(BaseModel):
     name: str
     calendar: CalendarSystem
     aliases: List[str] = Field(default_factory=list)
+    # Gregorian date when a Revised Julian (Milankovich/New Calendar) tradition adopted it.
+    reform_date: Optional[date] = None
     # When set, saints lookup uses this tradition's data instead of the tradition's own key.
     # Lets Jerusalem/Russian/Georgian share the Byzantine Julian sanctoral data without duplication.
     data_key: Optional[str] = None
@@ -82,4 +84,3 @@ class MoonPhaseResponse(BaseModel):
     phase_name: str       # "New Moon", "Waxing Crescent", etc.
     emoji: str            # moon emoji
     illumination: float   # 0.0 to 1.0 approximate
-

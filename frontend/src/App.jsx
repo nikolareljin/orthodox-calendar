@@ -711,6 +711,28 @@ function AboutSection() {
             </div>
 
             <div className="about-card about-card-full">
+              <h3 className="about-heading">Milankovich Calendar</h3>
+              <p className="about-text">
+                The <strong>Revised Julian calendar</strong>, often called the <strong>Milankovich</strong>
+                or <strong>New Calendar</strong>, was proposed at the 1923 Pan-Orthodox congress in
+                Constantinople to reduce the growing mismatch between the old Julian dates used by Orthodox
+                churches and the civil Gregorian dates used by most surrounding societies.
+              </p>
+              <p className="about-text">
+                It is named for <strong>Milutin Milankovich</strong>, the Serbian mathematician, astronomer,
+                and geophysicist who designed the leap-year rule. For fixed feasts, the Revised Julian
+                calendar currently matches the Gregorian calendar, which is why many New Calendar Orthodox
+                churches celebrate fixed-date feasts such as Christmas on December 25 while still using the
+                Orthodox Paschalion for Pascha and the movable cycle.
+              </p>
+              <p className="about-text">
+                The match with the Gregorian calendar is not permanent. The two calendars remain aligned
+                until 2800 AD; in that year Gregorian adds a leap day that the Milankovich rule omits, so
+                from March 2800 the Gregorian calendar will be one day behind the Revised Julian calendar.
+              </p>
+            </div>
+
+            <div className="about-card about-card-full">
               <h3 className="about-heading">Join the effort</h3>
               <p className="about-text">
                 If you maintain or have built an Orthodox calendar application — whether a mobile app, a parish
