@@ -550,7 +550,7 @@ export default function App() {
                       title="Click to enter a year"
                       role="button"
                       tabIndex={0}
-                      onKeyDown={(e) => e.key === "Enter" && startYearEdit()}
+                      onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && startYearEdit()}
                     >
                       {year}
                     </span>
