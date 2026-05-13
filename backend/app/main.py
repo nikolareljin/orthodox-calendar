@@ -127,10 +127,6 @@ def readings(
         cal = "julian"
         _, calendar_date = convert_to_tradition_month_day(day, trad)
         api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
-    elif calendar == CalendarSystem.REVISED:
-        cal = "gregorian"
-        _, calendar_date = convert_to_tradition_month_day(day, trad)
-        api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
     else:
         cal = "gregorian"
         api_year, api_month, api_day = day.year, day.month, day.day

@@ -4,7 +4,7 @@ Import Byzantine saints from orthocal.info API.
 
 Usage:
     python3 scripts/import_orthocal.py --calendar julian --data-key oca --out backend/app/data/oca_julian.json
-    python3 scripts/import_orthocal.py --calendar gregorian --data-key oca --out backend/app/data/oca_revised.json
+    python3 scripts/import_orthocal.py --calendar revised --data-key oca --out backend/app/data/oca_revised.json
 
 The orthocal.info API supports:
     GET https://orthocal.info/api/{julian|gregorian}/{year}/{month}/{day}/
@@ -58,7 +58,16 @@ FEAST_TYPE_NAMES = {
 BASE_URL = "https://orthocal.info/api"
 
 
+def _api_calendar(calendar: str) -> str:
+    return "gregorian" if calendar in {"revised", "gregorian"} else calendar
+
+
+def _entry_calendar(calendar: str) -> str:
+    return "revised" if calendar in {"revised", "gregorian"} else calendar
+
+
 def fetch_day(calendar: str, year: int, month: int, day: int) -> dict:
+    calendar = _api_calendar(calendar)
     url = f"{BASE_URL}/{calendar}/{year}/{month}/{day}/"
     with urllib.request.urlopen(url, timeout=15) as resp:
         return json.loads(resp.read())
@@ -103,7 +112,12 @@ def parse_saints(data: dict, tradition: str, calendar: str, month_day: str) -> d
 
 def main():
     parser = argparse.ArgumentParser(description="Import saints from orthocal.info")
-    parser.add_argument("--calendar", choices=["julian", "gregorian"], default="julian")
+    parser.add_argument(
+        "--calendar",
+        choices=["julian", "revised", "gregorian"],
+        default="julian",
+        help="'revised' writes CalendarSystem.REVISED entries; 'gregorian' is kept as a compatibility alias",
+    )
     parser.add_argument("--data-key", default="oca", dest="data_key",
                         help="Tradition/data key written into each output entry (default: oca)")
     parser.add_argument("--out", default=None, help="Output JSON file path")
@@ -121,7 +135,8 @@ def main():
     )
     args = parser.parse_args()
 
-    out_path = args.out or f"backend/app/data/oca_{args.calendar}.json"
+    entry_calendar = _entry_calendar(args.calendar)
+    out_path = args.out or f"backend/app/data/oca_{entry_calendar}.json"
 
     d = date(args.year, 1, 1)
     end = date(args.year + 1, 1, 1)
@@ -129,7 +144,7 @@ def main():
     entries = []
     seen_month_days: set[str] = set()
 
-    print(f"Fetching {args.calendar} calendar for year {args.year}...", file=sys.stderr)
+    print(f"Fetching {entry_calendar} calendar for year {args.year}...", file=sys.stderr)
 
     while d < end:
         month_day = d.strftime("%m-%d")
@@ -138,7 +153,7 @@ def main():
             seen_month_days.add(month_day)
             try:
                 data = fetch_day(args.calendar, d.year, d.month, d.day)
-                entry = parse_saints(data, args.data_key, args.calendar, month_day)
+                entry = parse_saints(data, args.data_key, entry_calendar, month_day)
                 if entry:
                     entries.append(entry)
                     print(f"  {month_day}: {len(entry['saints'])} saints", file=sys.stderr)

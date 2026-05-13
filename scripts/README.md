@@ -13,10 +13,14 @@ python3 scripts/import_orthocal.py \
 
 # Byzantine Revised (Greek, Bulgarian, Romanian, Antioch, Alexandria)
 python3 scripts/import_orthocal.py \
-    --calendar gregorian \
+    --calendar revised \
     --data-key oca \
     --out backend/app/data/oca_revised.json
 ```
+
+The `revised` option calls orthocal.info's `gregorian` endpoint because that is
+how the source exposes New Calendar fixed feasts, but generated entries are
+written with `"calendar": "revised"` to match the app's data model.
 
 The resulting files can be used directly or as base datasets. Tradition-specific overlays go in `backend/app/data/traditions/`.
 

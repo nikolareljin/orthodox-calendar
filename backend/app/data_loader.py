@@ -17,26 +17,34 @@ _EXCLUDED_FILENAMES = frozenset({"saints_sample.json"})
 def _iter_data_files() -> Iterable[Path]:
     base = Path(__file__).resolve().parent / "data"
     custom_path = os.getenv("ORTHODOX_CALENDAR_DATA_PATH")
-    custom_dir_mode = False
+    yielded: set[Path] = set()
+
+    def yield_once(path: Path) -> Iterable[Path]:
+        resolved = path.resolve()
+        if resolved not in yielded and path.name not in _EXCLUDED_FILENAMES:
+            yielded.add(resolved)
+            yield path
+
     if custom_path:
         custom = Path(custom_path)
         if custom.is_file():
-            yield custom
+            yield from yield_once(custom)
         elif custom.is_dir():
-            custom_dir_mode = True
-            yield from (p for p in sorted(custom.glob("*.json")) if p.name not in _EXCLUDED_FILENAMES)
+            for data_file in sorted(custom.glob("*.json")):
+                yield from yield_once(data_file)
             custom_traditions = custom / "traditions"
             if custom_traditions.is_dir():
-                yield from sorted(custom_traditions.glob("*.json"))
+                for data_file in sorted(custom_traditions.glob("*.json")):
+                    yield from yield_once(data_file)
 
-    if not custom_dir_mode:
-        for filename in DEFAULT_DATA_FILES:
-            yield base / filename
+    for filename in DEFAULT_DATA_FILES:
+        yield from yield_once(base / filename)
 
-        # Tradition-specific overlay files (auto-discovered)
-        traditions_dir = base / "traditions"
-        if traditions_dir.is_dir():
-            yield from sorted(traditions_dir.glob("*.json"))
+    # Tradition-specific overlay files (auto-discovered)
+    traditions_dir = base / "traditions"
+    if traditions_dir.is_dir():
+        for data_file in sorted(traditions_dir.glob("*.json")):
+            yield from yield_once(data_file)
 
 
 @lru_cache(maxsize=1)
