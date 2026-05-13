@@ -12,12 +12,11 @@ from .models import CalendarSystem, Tradition
 # The base dataset is keyed as "oca" (Orthodox Church of America Julian Synaxarion) —
 # a neutral, tradition-agnostic source for the full Byzantine sanctoral year.
 #
-# The Revised Julian (Milankovich/New Calendar) keeps the same NUMERICAL month/day
-# for fixed feasts as the Old Julian (e.g., Christmas = "12-25" in both systems),
-# so all Byzantine traditions can share the "oca" dataset regardless of calendar
-# system. The civil date differs (Julian Dec 25 = Gregorian Jan 7; Revised Dec 25
-# = Gregorian Dec 25), but the month_day lookup key is identical — this is
-# intentional and correct.
+# The Revised Julian (Milankovich/New Calendar) uses the same fixed-feast
+# month/day keys as the Old Julian calendar (e.g., Christmas = "12-25"), so all
+# Byzantine traditions can share the "oca" dataset. Civil-date conversion is
+# still calendar-specific: Revised and Gregorian align through February 2800,
+# then diverge under Milankovich's 900-year leap rule.
 #
 # reform_date: first Gregorian date on which this church follows the Revised Julian
 # (Milankovich/New Calendar) for fixed feasts. Before that date, revised-calendar

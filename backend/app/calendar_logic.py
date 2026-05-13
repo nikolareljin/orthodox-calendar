@@ -35,6 +35,9 @@ def canonical_tradition_key(name: str) -> str:
 # adds one without specifying its own adoption date. Built-in traditions set this
 # per church.
 _DEFAULT_REVISED_JULIAN_REFORM_DATE = date(1923, 10, 14)
+_REVISED_ALIGNMENT_DATE = date(1923, 10, 14)
+_MONTH_DAYS_COMMON = (31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+_MONTH_DAYS_LEAP = (31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
 
 
 def effective_calendar(day: date, tradition: Tradition) -> CalendarSystem:
@@ -53,9 +56,13 @@ def convert_to_tradition_month_day(day: date, tradition: Tradition) -> Tuple[str
     Convert a civil (Gregorian) date to the month-day string used by the
     tradition's calendar. Returns (MM-DD, YYYY-MM-DD as string).
     """
-    if effective_calendar(day, tradition) == CalendarSystem.JULIAN:
+    calendar = effective_calendar(day, tradition)
+    if calendar == CalendarSystem.JULIAN:
         jyear, jmonth, jday = _gregorian_to_julian(day)
         return f"{jmonth:02d}-{jday:02d}", f"{jyear:04d}-{jmonth:02d}-{jday:02d}"
+    if calendar == CalendarSystem.REVISED:
+        ryear, rmonth, rday = _gregorian_to_revised_julian(day)
+        return f"{rmonth:02d}-{rday:02d}", f"{ryear:04d}-{rmonth:02d}-{rday:02d}"
     return day.strftime("%m-%d"), day.isoformat()
 
 
@@ -79,6 +86,78 @@ def _gregorian_to_julian(d: date) -> Tuple[int, int, int]:
     jmonth = m4 + 3 - 12 * (m4 // 10)
     jyear = d4 - 4800 + m4 // 10
     return jyear, jmonth, jday
+
+
+def _gregorian_to_revised_julian(d: date) -> Tuple[int, int, int]:
+    """Convert Gregorian date to Revised Julian (Milankovich) calendar date."""
+    jdn = _gregorian_jdn(d)
+    alignment_jdn = _gregorian_jdn(_REVISED_ALIGNMENT_DATE)
+    alignment_ordinal = _revised_julian_ordinal(
+        _REVISED_ALIGNMENT_DATE.year,
+        _REVISED_ALIGNMENT_DATE.month,
+        _REVISED_ALIGNMENT_DATE.day,
+    )
+    return _revised_julian_from_ordinal(alignment_ordinal + (jdn - alignment_jdn))
+
+
+def _gregorian_jdn(d: date) -> int:
+    """Return the Julian Day Number for a Gregorian date."""
+    a = (14 - d.month) // 12
+    y = d.year + 4800 - a
+    m = d.month + 12 * a - 3
+    return d.day + (153 * m + 2) // 5 + 365 * y + y // 4 - y // 100 + y // 400 - 32045
+
+
+def _revised_julian_leap_year(year: int) -> bool:
+    """Return true for leap years under Milankovich's 900-year rule."""
+    if year % 4 != 0:
+        return False
+    if year % 100 != 0:
+        return True
+    return year % 900 in (200, 600)
+
+
+def _revised_julian_leaps_before(year: int) -> int:
+    years = year - 1
+    restored_century_leaps = sum(
+        ((years - remainder) // 900 + 1) if years >= remainder else 0
+        for remainder in (200, 600)
+    )
+    return years // 4 - years // 100 + restored_century_leaps
+
+
+def _revised_julian_ordinal(year: int, month: int, day: int) -> int:
+    month_days = _MONTH_DAYS_LEAP if _revised_julian_leap_year(year) else _MONTH_DAYS_COMMON
+    return (
+        365 * (year - 1)
+        + _revised_julian_leaps_before(year)
+        + sum(month_days[: month - 1])
+        + day
+    )
+
+
+def _revised_julian_from_ordinal(ordinal: int) -> Tuple[int, int, int]:
+    low, high = 1, 10000
+    while _revised_julian_ordinal(high, 12, 31) < ordinal:
+        high *= 2
+
+    while low < high:
+        mid = (low + high) // 2
+        if _revised_julian_ordinal(mid + 1, 1, 1) <= ordinal:
+            low = mid + 1
+        else:
+            high = mid
+
+    year = low
+    day_of_year = ordinal - _revised_julian_ordinal(year, 1, 1) + 1
+    month_days = _MONTH_DAYS_LEAP if _revised_julian_leap_year(year) else _MONTH_DAYS_COMMON
+    month = 1
+    for days_in_month in month_days:
+        if day_of_year <= days_in_month:
+            return year, month, day_of_year
+        day_of_year -= days_in_month
+        month += 1
+    raise ValueError(f"Invalid Revised Julian ordinal: {ordinal}")
 
 
 def julian_pascha_as_gregorian(year: int) -> _date:

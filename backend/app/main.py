@@ -122,8 +122,13 @@ def readings(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     trad = TRADITIONS[canonical]
-    if effective_calendar(day, trad) == CalendarSystem.JULIAN:
+    calendar = effective_calendar(day, trad)
+    if calendar == CalendarSystem.JULIAN:
         cal = "julian"
+        _, calendar_date = convert_to_tradition_month_day(day, trad)
+        api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
+    elif calendar == CalendarSystem.REVISED:
+        cal = "gregorian"
         _, calendar_date = convert_to_tradition_month_day(day, trad)
         api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
     else:
