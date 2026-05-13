@@ -28,9 +28,9 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"
 iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-iptables  -I INPUT  7 -m state --state NEW -p tcp --dport 443 -j ACCEPT
 ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-ip6tables -I INPUT  7 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
 # Persist so rules survive reboot
 netfilter-persistent save
 
@@ -71,7 +71,7 @@ systemctl reload nginx
 echo ""
 echo "==> Setup complete."
 echo ""
-echo "    Backend API:  http://$(curl -s ifconfig.me)/docs"
+echo "    Backend API:  http://$(curl -s ifconfig.me)/api/v1/docs"
 echo ""
 echo "    Next steps:"
 echo "    1. In Oracle Cloud console → Networking → VCN → Security Lists:"

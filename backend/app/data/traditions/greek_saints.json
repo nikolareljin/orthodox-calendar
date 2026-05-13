@@ -1,0 +1,87 @@
+[
+  {
+    "month_day": "07-12",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Saint Paisios of Mount Athos",
+        "title": "Saint Paisios of Mount Athos, Athonite Elder",
+        "feast_type": "Venerable",
+        "notes": "Elder Paisios Eznepidis (1924–1994) was one of the most beloved Athonite monks of the 20th century, renowned for his gifts of discernment, prophecy, and healing. Born in Cappadocia, he spent decades on Mount Athos and Sinai offering spiritual counsel to thousands of pilgrims. Canonized in 2015 by the Holy and Sacred Synod of the Ecumenical Patriarchate.",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1330",
+        "canonized_by": "Ecumenical Patriarchate",
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": 2015
+      }
+    ]
+  },
+  {
+    "month_day": "12-02",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Saint Porphyrios of Kafsokalivia",
+        "title": "Saint Porphyrios of Kafsokalivia, Elder of the Holy Mountain",
+        "feast_type": "Venerable",
+        "notes": "Elder Porphyrios Bairaktaris (1906–1991) was an Athonite elder venerated for extraordinary gifts of spiritual perception, healing, and love. He spent years in the Kafsokalivia skete and later founded the Convent of the Transfiguration in Milesi, Athens. Canonized in 2013 by the Ecumenical Patriarchate.",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1331",
+        "canonized_by": "Ecumenical Patriarchate",
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": 2013
+      }
+    ]
+  },
+  {
+    "month_day": "08-24",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Saint Kosmas of Aetolia",
+        "title": "Saint Kosmas of Aetolia, Equal-to-the-Apostles and New Martyr",
+        "feast_type": "Equal-to-Apostles",
+        "notes": "Cosmas of Aetolia (1714–1779), monk of Mount Athos, became a tireless missionary throughout Greece, Albania, and the Balkans. He founded hundreds of schools and churches, teaching in villages and preaching Christian values. Martyred by hanging in 1779. Glorified as Equal-to-the-Apostles by the Ecumenical Patriarchate in 1961.",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=268",
+        "canonized_by": "Ecumenical Patriarchate",
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": 1961
+      }
+    ]
+  },
+  {
+    "month_day": "11-09",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Saint Nektarios of Aegina",
+        "title": "Saint Nektarios of Pentapolis, Wonder-worker of Aegina",
+        "feast_type": "Hierarch",
+        "notes": "Nektarios Kephalas (1846–1920), Metropolitan of Pentapolis, was unjustly exiled from Alexandria and endured years of slander and poverty before being vindicated. He founded the Convent of the Holy Trinity on Aegina, where he died. Known for countless posthumous miracles. Canonized in 1961 by the Ecumenical Patriarchate.",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=350",
+        "canonized_by": "Ecumenical Patriarchate",
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": 1961
+      }
+    ]
+  },
+  {
+    "month_day": "11-22",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Saint Iakovos of Evia",
+        "title": "Saint Iakovos Tsalikis of Evia, Venerable Elder",
+        "feast_type": "Venerable",
+        "notes": "Elder Iakovos Tsalikis (1920–1991) was abbot of the Monastery of Saint David of Evia, Greece, a man of deep asceticism and wonder-working prayer. He bore invisible stigmata and was gifted with clairvoyance and healing. He tirelessly cared for pilgrims and the sick. Canonized in 1997 by the Holy and Sacred Synod of the Ecumenical Patriarchate.",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1287",
+        "canonized_by": "Ecumenical Patriarchate",
+        "canonization_scope": "local",
+        "year_canonized": 1997
+      }
+    ]
+  }
+]

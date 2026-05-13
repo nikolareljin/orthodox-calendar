@@ -5,6 +5,42 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [Unreleased]
+
+### Added
+- **Full liturgical reading texts** — Epistle and Gospel verses are now displayed inline with superscript verse numbers and paragraph breaks. Each reading is a collapsible card (source label + reference + expand toggle). Text is sourced from the `passage[]` array already embedded in orthocal.info responses — no additional API calls required.
+- **Church directory** — "Orthodox Churches" grid in the About section with history, founding date, patron saint, website link, and cross glyph for all 16 supported traditions.
+- **Moon phase indicator** — lunar phase emoji, name, and illumination percentage displayed in the day-detail badge row (`GET /api/v1/moon-phase`).
+- **Fasting glyph** — GOARCH-style fast type shown per day (no fast ✅, fish 🐟, oil+wine 🍷, strict 🌿).
+- **Canonization attribution** — saint cards display which church canonized the saint and the scope (Universal / Pan-Orthodox / Local / Oriental) as coloured pills.
+- **All-traditions saints** — OCA Julian Synaxarion (`oca_julian.json`, 366 days, 2970 saints) now loads as the shared base for all Byzantine-rite churches. Tradition-specific overlays in `data/traditions/` extend it with recently canonized local saints.
+- **Tradition-specific saint overlays** — `serbian_saints.json` (Justin Popović, WWII hierarchs), `greek_saints.json` (Paisios, Porphyrios, Nektarios…), `russian_saints.json` (Tikhon, Elizabeth Feodorovna, Matrona…), `armenian_saints.json`, `coptic_saints.json`, `ethiopian_saints.json`, `georgian_saints.json`.
+- **Movable feasts endpoint** — `GET /api/v1/movable-feasts?year=YYYY` returns all 14 Eastern Orthodox movable feast dates via Julian computus + JDN conversion.
+- **`import_orthocal.py` script** — fetches all 366 days from orthocal.info for any calendar/tradition and writes a ready-to-use JSON data file.
+
+### Changed
+- **Docker — multi-stage backend build** — deps installed in a builder stage and copied to a clean `python:3.12-slim-bookworm` runtime; no build tools in the final image.
+- **Docker — non-root runtime user** — backend container now runs as `appuser` (uid 1001), not root.
+- **Docker — configurable worker count** — `WEB_CONCURRENCY` env var (default 2) controls uvicorn workers.
+- **Docker — backend not exposed to host** — port 8000 removed from `docker-compose.yml`; traffic flows through nginx internal proxy only.
+- **Docker — nginx API proxy** — nginx now proxies `/api/` to `backend:8000` internally; `VITE_API_BASE` defaults to `""` so built JS uses relative URLs.
+- **Docker — port standardised to 80** — frontend listens on port 80 (configurable via `PORT` env var). Override at `http://localhost:80`.
+- **Docker — logging limits** — both containers use `json-file` driver with 10 MB / 3 files rotation to prevent disk fill.
+- **Docker — `node:22-alpine` builder** — updated from `node:20-alpine` (22 is current LTS).
+- **Docker — `nginx:1.27-alpine` pinned** — was unpinned `nginx:alpine`.
+- **Docker — compose version key removed** — deprecated `version: "3.9"` header dropped.
+- **Nginx — security headers** — `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` added.
+- **Nginx — `server_tokens off`** — nginx version no longer exposed in response headers.
+- **Nginx — compression tuning** — `gzip_comp_level 6`, `gzip_vary on`, `gzip_proxied any`, added `font/woff2` MIME type.
+- **Nginx — font cache** — `/fonts/` served with 1-year immutable cache, same as `/assets/`.
+- **Nginx — health-check endpoint** — `GET /health-check` returns 200 for load-balancer / Docker health checks.
+- **`data_key` renamed to `"oca"`** — was `"serbian"` in config and data files (semantically incorrect).
+- **JDN-based Julian↔Gregorian conversion** — replaced hardcoded 13-day offset with full Julian Day Number algorithm; supported range is years 1–9999 (Python `datetime.date` constraint).
+- **.dockerignore expanded** — excludes `.git`, `docs/`, `scripts/`, `deploy/`, `*.md`, `.github/` from build contexts.
+- **`.env.example` added** — documents `PORT`, `WEB_CONCURRENCY`, and `VITE_API_BASE` variables.
+
+---
+
 ## [0.2.0] - 2026-05-11
 
 ### Added

@@ -1,4 +1,9 @@
-const API_BASE = import.meta.env.VITE_API_BASE || "http://localhost:8000";
+const configuredApiBase = import.meta.env.VITE_API_BASE;
+const API_BASE = configuredApiBase !== undefined
+  ? configuredApiBase
+  : import.meta.env.DEV
+    ? "http://localhost:8000"
+    : "";
 
 export async function fetchSaints(date, traditions) {
   const params = new URLSearchParams();
@@ -42,6 +47,19 @@ export async function fetchReadings(date, tradition) {
 
   const res = await fetch(`${API_BASE}/api/v1/readings?${params.toString()}`);
   if (!res.ok) throw new Error("Failed to fetch readings");
+  return res.json();
+}
+
+export async function fetchMoonPhase(date) {
+  const params = new URLSearchParams({ day: date });
+  const res = await fetch(`${API_BASE}/api/v1/moon-phase?${params}`);
+  if (!res.ok) return null;
+  return res.json();
+}
+
+export async function fetchMovableFeasts(year) {
+  const res = await fetch(`${API_BASE}/api/v1/movable-feasts?year=${year}`);
+  if (!res.ok) return null;
   return res.json();
 }
 

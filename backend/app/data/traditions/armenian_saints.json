@@ -1,0 +1,65 @@
+[
+  {
+    "month_day": "09-30",
+    "tradition": "armenian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Gregory the Illuminator",
+        "title": "Saint Gregory the Illuminator, First Catholicos of Armenia",
+        "feast_type": "Equal-to-Apostles",
+        "notes": "Apostle to the Armenians and first Catholicos. After 13 years imprisoned in the Khor Virap pit, Gregory was freed by King Tiridates III, whom he baptized in 301 AD. Armenia thereby became the first nation to adopt Christianity as state religion. Gregory established the Armenian Apostolic Church and baptized the entire nation.",
+        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      },
+      {
+        "name": "Saints Hripsime, Gaiane and 35 companions",
+        "title": "The Holy Virgin Martyrs Hripsime, Gaiane, and Their 35 Companions",
+        "feast_type": "Virgin Martyrs",
+        "notes": "Hripsime and Gaiane fled Rome with 35 companions to escape persecution, arriving in Armenia in 301 AD. When King Tiridates ordered them martyred after Hripsime refused his advances, their deaths moved Saint Gregory's prayers and led directly to the king's conversion and Armenia's adoption of Christianity.",
+        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Julian September 30 corresponds to Gregorian October 13. Shared feast of the Enlighteners of Armenia."
+  },
+  {
+    "month_day": "04-24",
+    "tradition": "armenian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy Martyrs of the Armenian Genocide",
+        "title": "The 1.5 Million Holy Martyrs of the Armenian Genocide (1915–1923)",
+        "feast_type": "New Martyrs",
+        "notes": "On April 24, 1915, Ottoman authorities arrested Armenian leaders in Constantinople, beginning the Genocide. An estimated 1.5 million Armenians perished through mass executions, death marches, and starvation. Canonized collectively by the Armenian Apostolic Church in 2015 by Catholicos Karekin II during the centennial commemoration in Yerevan.",
+        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": 2015
+      }
+    ],
+    "notes": "Julian April 24 corresponds to Gregorian May 7. Armenian Genocide Remembrance Day."
+  },
+  {
+    "month_day": "06-19",
+    "tradition": "armenian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saints Thaddaeus and Bartholomew",
+        "title": "The Holy Apostles Thaddaeus (Jude) and Bartholomew, Founders of the Armenian Church",
+        "feast_type": "Apostles",
+        "notes": "The Apostles Thaddaeus and Bartholomew brought Christianity to Armenia in the 1st century AD, making it one of the first nations to receive the Christian faith. Thaddaeus preached in Armenia from 43–66 AD and was martyred there. Bartholomew followed and was also martyred in Armenia. The Armenian Apostolic Church traces its foundation to these two apostles.",
+        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
+        "canonized_by": null,
+        "canonization_scope": "universal",
+        "year_canonized": null
+      }
+    ]
+  }
+]

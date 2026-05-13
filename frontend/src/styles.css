@@ -225,20 +225,56 @@ body {
   font-weight: 400;
 }
 
+.tradition-note {
+  font-size: 9px;
+  color: var(--accent);
+  display: block;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
 /* ── Main ── */
 .main {
   flex: 1;
   padding: 24px;
-  max-width: 900px;
+  max-width: 1200px;
   overflow-y: auto;
+}
+
+/* ── Two-column layout: calendar left, detail right ── */
+.cal-detail-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.cal-detail-row.has-detail {
+  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+}
+
+.cal-col {
+  min-width: 0;
+}
+
+.day-detail--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-style: italic;
 }
 
 /* ── Month navigation ── */
 .month-nav {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .month-label {
@@ -250,6 +286,52 @@ body {
   flex: 1;
   margin: 0;
   color: var(--text);
+  white-space: nowrap;
+}
+
+.year-display {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  border-bottom: 1px dashed var(--text-muted);
+  padding-bottom: 1px;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.year-display:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.year-input {
+  width: 5ch;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  color: var(--text);
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.year-btn {
+  font-size: 14px;
+  padding: 6px 10px;
+  opacity: 0.75;
 }
 
 .nav-btn {
@@ -448,6 +530,13 @@ body {
 }
 
 /* ── Fast/Feast badge ── */
+.day-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
 .fast-info {
   display: inline-flex;
   align-items: center;
@@ -459,7 +548,89 @@ body {
   padding: 5px 14px;
   font-size: 13px;
   font-weight: 600;
-  margin-bottom: 16px;
+}
+
+.moon-info {
+  background: rgba(100,120,200,0.1);
+  color: var(--text-muted);
+  border-color: rgba(100,120,200,0.25);
+}
+
+/* ── Tone badge & popup ── */
+.tone-badge-wrap {
+  position: relative;
+}
+
+.tone-badge {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  letter-spacing: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.tone-badge:hover,
+.tone-badge--open {
+  background: var(--hover-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tone-info-icon {
+  font-size: 11px;
+  opacity: 0.55;
+  margin-left: 2px;
+}
+
+.tone-popup {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 200;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-width: 230px;
+  max-width: 290px;
+  box-shadow: var(--shadow);
+}
+
+.tone-popup-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--accent);
+  margin: 0 0 5px;
+}
+
+.tone-popup-char {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0 0 7px;
+  font-style: italic;
+}
+
+.tone-popup-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.tone-popup-listen {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.tone-popup-listen:hover {
+  background: var(--accent);
+  color: var(--accent-text);
 }
 
 /* ── Feast items ── */
@@ -511,24 +682,40 @@ body {
 }
 
 .saint-header {
+  background: transparent;
+  border: 0;
+  color: inherit;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  font: inherit;
   padding: 12px 14px;
+  text-align: left;
+  width: 100%;
   cursor: pointer;
   transition: background 0.12s;
 }
 
-.saint-header:hover {
+.saint-header:hover:not(:disabled) {
   background: var(--hover-bg);
+}
+
+.saint-header:disabled {
+  cursor: default;
 }
 
 .saint-header-left {
   display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
+  flex-direction: column;
+  gap: 4px;
   flex: 1;
+}
+
+.saint-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
 }
 
 .saint-name {
@@ -552,6 +739,20 @@ body {
   background: var(--feast-great-bg);
   color: var(--feast-great-color);
 }
+
+/* canonization badge */
+.canonized-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.canonized-pill.scope-universal  { background: rgba(255,215,0,0.15); color: #c8a800; border: 1px solid rgba(255,215,0,0.3); }
+.canonized-pill.scope-pan-orthodox { background: rgba(100,160,255,0.15); color: #5090e0; border: 1px solid rgba(100,160,255,0.3); }
+.canonized-pill.scope-local      { background: rgba(120,200,120,0.15); color: #5a9e5a; border: 1px solid rgba(120,200,120,0.3); }
+.canonized-pill.scope-oriental   { background: rgba(200,130,50,0.15);  color: #b07030; border: 1px solid rgba(200,130,50,0.3); }
 
 .expand-icon {
   font-size: 12px;
@@ -603,15 +804,87 @@ body {
   border-bottom: none;
 }
 
+.reading-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.reading-card:last-child {
+  margin-bottom: 0;
+}
+
+.reading-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--card);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 12px;
+  transition: background 0.15s;
+}
+
+.reading-header:hover:not(:disabled) {
+  background: var(--hover-bg);
+}
+
+.reading-header:disabled {
+  cursor: default;
+}
+
+.reading-header-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  flex: 1;
+}
+
+.reading-source {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
 .reading-ref {
   font-weight: 700;
   color: var(--link);
-  flex-shrink: 0;
+  font-size: 14px;
 }
 
 .reading-desc {
   font-size: 12px;
   color: var(--text-muted);
+}
+
+.reading-body {
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+}
+
+sup.verse-num {
+  font-size: 10px;
+  color: var(--text-muted);
+  vertical-align: super;
+  margin-right: 2px;
+  margin-left: 4px;
+  font-weight: 600;
+  user-select: none;
 }
 
 /* ── Loading / error ── */
@@ -824,12 +1097,166 @@ body {
   color: #ffffff;
 }
 
-.support-github {
-  background: var(--accent);
-  color: var(--accent-text);
+
+/* ── Churches grid ── */
+.churches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.church-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.church-logo {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+  padding-top: 2px;
+  opacity: 0.8;
+}
+
+.church-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.church-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.church-name:hover {
+  text-decoration: underline;
+}
+
+.church-founded {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.church-patron {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.church-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
+
+/* ── Tradition type symbol (sidebar) ── */
+.trad-type-sym {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-right: 5px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ── World Orthodox Directory ── */
+.world-dir {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.world-dir-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.world-dir-legend b {
+  color: var(--accent);
+}
+
+.world-dir-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.world-dir-group-head {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.world-dir-sym {
+  font-size: 16px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.world-dir-subtitle {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.world-dir-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.world-dir-item {
+  font-size: 13px;
+}
+
+.world-dir-link {
+  color: var(--text-secondary, var(--text-muted));
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.world-dir-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 /* ── Responsive ── */
+@media (max-width: 1024px) {
+  .cal-detail-row,
+  .cal-detail-row.has-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 700px) {
   .app-body {
     flex-direction: column;
@@ -863,5 +1290,51 @@ body {
 
   .main {
     padding: 16px;
+  }
+
+  /* Reading cards — more breathing room on small screens */
+  .reading-header {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .reading-header-left {
+    gap: 6px;
+  }
+
+  .reading-ref {
+    font-size: 15px;
+  }
+
+  .reading-body {
+    padding: 14px 16px 16px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .reading-source {
+    font-size: 11px;
+  }
+
+  /* Tone popup — prevent overflow on narrow screens */
+  .tone-popup {
+    max-width: calc(100vw - 32px);
+    left: 0;
+    right: auto;
+  }
+
+  /* Day detail — tighter padding on phone */
+  .day-detail {
+    padding: 16px;
+  }
+
+  .day-detail-header h2 {
+    font-size: 18px;
+  }
+
+  /* Badges wrap nicely */
+  .day-badges {
+    flex-wrap: wrap;
+    gap: 6px;
   }
 }

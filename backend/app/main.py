@@ -9,9 +9,15 @@ from fastapi import FastAPI, HTTPException, Query, Response
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from .calendar_logic import canonical_tradition_key
+from .calendar_logic import (
+    canonical_tradition_key,
+    convert_to_tradition_month_day,
+    effective_calendar,
+    julian_pascha_as_gregorian,
+)
+from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _moon_phase
 from .config import TRADITIONS
-from .models import CalendarSystem, Contact, NameDayResponse, SaintsResponse
+from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
 from .services.saints import get_saints_for_date
 from .services.ical import generate_ical_feed
@@ -27,6 +33,9 @@ app = FastAPI(
     title="orthodox-calendar",
     description="Orthodox and Oriental Orthodox saints of the day with calendar/contacts hooks.",
     version="0.2.0",
+    docs_url="/api/v1/docs",
+    redoc_url="/api/v1/redoc",
+    openapi_url="/api/v1/openapi.json",
 )
 
 app.add_middleware(
@@ -113,8 +122,15 @@ def readings(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     trad = TRADITIONS[canonical]
-    cal = "julian" if trad.calendar == CalendarSystem.JULIAN else "gregorian"
-    url = f"https://orthocal.info/api/{cal}/{day.year}/{day.month}/{day.day}/"
+    calendar = effective_calendar(day, trad)
+    if calendar == CalendarSystem.JULIAN:
+        cal = "julian"
+        _, calendar_date = convert_to_tradition_month_day(day, trad)
+        api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
+    else:
+        cal = "gregorian"
+        api_year, api_month, api_day = day.year, day.month, day.day
+    url = f"https://orthocal.info/api/{cal}/{api_year}/{api_month}/{api_day}/"
     try:
         with _urllib_request.urlopen(url, timeout=8) as resp:  # noqa: S310
             return json.loads(resp.read())
@@ -135,3 +151,22 @@ def saints_ical(
 
     ical = generate_ical_feed(tradition, start, days)
     return Response(content=ical, media_type="text/calendar")
+
+
+@app.get("/api/v1/movable-feasts", response_model=MovableFeastsResponse)
+def get_movable_feasts(
+    year: int = Query(..., ge=1, le=9999),
+) -> MovableFeastsResponse:
+    """Return all Eastern Orthodox movable feasts for the given year (Gregorian dates)."""
+    pascha = julian_pascha_as_gregorian(year)
+    feasts = _movable_feasts(year, pascha=pascha)
+    return MovableFeastsResponse(year=year, pascha_gregorian=pascha.isoformat(), feasts=feasts)
+
+
+@app.get("/api/v1/moon-phase", response_model=MoonPhaseResponse)
+def get_moon_phase(
+    day: date = Query(default_factory=date.today),
+) -> MoonPhaseResponse:
+    """Return lunar phase info for a given date."""
+    info = _moon_phase(day)
+    return MoonPhaseResponse(date=day, **info)
