@@ -33,10 +33,17 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   iptables iptables-persistent
 
 echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"
-iptables  -I INPUT  5 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-ip6tables -I INPUT  5 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-iptables  -I INPUT  5 -m state --state NEW -p tcp --dport 443 -j ACCEPT
-ip6tables -I INPUT  5 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+# Use -C (check) before -A (append) so this is idempotent and safe on chains
+# with any number of existing rules (avoids the failure mode of -I N when N > chain length).
+_open_port() {
+  local ipt="$1" dport="$2"
+  "${ipt}" -C INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null \
+    || "${ipt}" -A INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
+}
+_open_port iptables  80
+_open_port ip6tables 80
+_open_port iptables  443
+_open_port ip6tables 443
 # Persist so rules survive reboot
 netfilter-persistent save
 

@@ -85,6 +85,8 @@ echo "==> IP: ${PUBLIC_IP}  →  domain: ${NIP_DOMAIN}"
 if ! command -v certbot > /dev/null 2>&1; then
   echo "==> Installing certbot"
   _apt_install certbot
+fi
+if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
   _apt_install python3-certbot-nginx
 fi
 

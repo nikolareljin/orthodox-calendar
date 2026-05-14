@@ -20,7 +20,7 @@ _apt_install() {
     _apt_updated=true
   fi
   echo "    Installing missing package: $1"
-  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$1"
+  sudo apt-get install -y "$1"
 }
 
 echo "==> Pre-flight checks"

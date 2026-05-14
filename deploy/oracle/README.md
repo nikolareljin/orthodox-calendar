@@ -103,8 +103,9 @@ Set VITE_API_BASE=https://1-2-3-4.nip.io in GitHub Actions secrets.
 ```
 
 > **Note:** if the Oracle VM is ever reprovisioned with a new public IP, re-run
-> `setup-tls.sh` — it will obtain a new certificate for the new nip.io hostname
-> and update the nginx config automatically.
+> `setup-tls.sh` to obtain a new certificate for the new nip.io hostname. The
+> nginx `server_name` in `/etc/nginx/sites-available/orthodox-calendar` must also
+> be updated manually (or by re-running `deploy.sh`) to reflect the new hostname.
 
 ---
 
