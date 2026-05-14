@@ -20,12 +20,15 @@ PYTHON="python3.12"
 
 echo "==> Installing system packages"
 apt-get update -qq
-DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
+# software-properties-common provides add-apt-repository (missing on minimal images)
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  software-properties-common ca-certificates gnupg2 lsb-release
 add-apt-repository -y ppa:deadsnakes/ppa
 apt-get update -qq
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  "${PYTHON}" "${PYTHON}-venv" \
-  nginx git curl \
+  "${PYTHON}" "${PYTHON}-venv" "${PYTHON}-distutils" \
+  nginx nginx-common \
+  git curl \
   certbot python3-certbot-nginx \
   iptables iptables-persistent
 
@@ -66,7 +69,11 @@ systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — c
 echo "==> Adding sudoers rules for the deploy user"
 cat > /etc/sudoers.d/orthodox-calendar <<SUDOERS
 ${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl restart ${SERVICE}
+${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl enable nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3.12-venv
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y curl
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y nginx
 SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 

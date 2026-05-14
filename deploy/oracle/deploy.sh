@@ -7,6 +7,38 @@ APP_DIR="${APP_DIR:-/home/ubuntu/orthodox-calendar}"
 RELEASE_ARCHIVE="${RELEASE_ARCHIVE:-}"
 SERVICE="orthodox-calendar"
 
+# ---------------------------------------------------------------------------
+# Pre-flight: ensure runtime tools are present (minimal Oracle Ubuntu may
+# lack these even after initial setup.sh if packages were purged/upgraded).
+# setup.sh must have granted the deploy user the matching sudoers entries.
+# ---------------------------------------------------------------------------
+_apt_install() {
+  echo "    Installing missing package: $1"
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$1"
+}
+
+echo "==> Pre-flight checks"
+if ! command -v curl > /dev/null 2>&1; then
+  _apt_install curl
+fi
+if ! command -v python3.12 > /dev/null 2>&1; then
+  echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
+  exit 1
+fi
+if ! python3.12 -c 'import venv' 2>/dev/null; then
+  _apt_install python3.12-venv
+fi
+if ! systemctl is-active --quiet nginx 2>/dev/null; then
+  echo "WARNING: nginx is not active — verifying it is installed"
+  if ! command -v nginx > /dev/null 2>&1; then
+    _apt_install nginx
+    sudo systemctl enable nginx
+    sudo systemctl start nginx
+  else
+    sudo systemctl start nginx || true
+  fi
+fi
+
 echo "==> Installing scoped backend release"
 mkdir -p "${APP_DIR}/backend"
 if [[ -n "${RELEASE_ARCHIVE}" ]]; then
@@ -53,16 +85,8 @@ if [[ -f ".venv/bin/pip" ]] && .venv/bin/python -c 'import sys' > /dev/null 2>&1
   fi
 fi
 if [[ "${_venv_ok}" == "false" ]]; then
-  if ! command -v python3.12 > /dev/null 2>&1; then
-    echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
-    exit 1
-  fi
   rm -rf .venv
-  if ! python3.12 -m venv .venv 2>/dev/null; then
-    echo "    python3.12-venv missing — installing via apt"
-    sudo apt-get install -y python3.12-venv
-    python3.12 -m venv .venv
-  fi
+  python3.12 -m venv .venv
   echo "    Created virtualenv with python3.12"
   # Note: a broken interpreter symlink is already caught by the import-sys
   # check above (triggers a rebuild). Only an in-place patch upgrade that
