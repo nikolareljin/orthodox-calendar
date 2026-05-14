@@ -89,7 +89,7 @@ What the script does:
 | Flag | Default | Purpose |
 |------|---------|---------|
 | `--ip <address>` | auto-detected | Override the public IP |
-| `--email <address>` | **required** (or `CERTBOT_EMAIL` env) | Let's Encrypt expiry notifications |
+| `--email <address>` | **required** | Let's Encrypt expiry notifications |
 
 Once HTTPS is live the script prints the `VITE_API_BASE` value to set in
 GitHub Actions secrets:

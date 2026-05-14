@@ -6,7 +6,8 @@
 #   sudo bash setup-tls.sh --email you@example.com
 #   sudo bash setup-tls.sh --email you@example.com --ip 1.2.3.4
 #
-# --email is required (or set CERTBOT_EMAIL env var before calling sudo).
+# --email is required. sudo resets the environment, so env-var workarounds
+# are unreliable; pass the address via --email instead.
 #
 # nip.io maps <dashed-ip>.nip.io → the same IP automatically, so no domain
 # registration is needed. Certificates are valid for 90 days; this script also
