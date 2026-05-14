@@ -16,9 +16,12 @@ APP_USER="${APP_USER:-ubuntu}"
 APP_DIR="/home/${APP_USER}/orthodox-calendar"
 REPO="https://github.com/nikolareljin/orthodox-calendar.git"
 SERVICE="orthodox-calendar"
-PYTHON="python3.11"
+PYTHON="python3.12"
 
 echo "==> Installing system packages"
+apt-get update -qq
+DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
+add-apt-repository -y ppa:deadsnakes/ppa
 apt-get update -qq
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
   "${PYTHON}" "${PYTHON}-venv" \
