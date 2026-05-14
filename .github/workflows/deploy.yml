@@ -270,7 +270,7 @@ jobs:
 # ── Stage 3: Pages publish (after build) ──────────────────────────────────────
   deploy:
     if: needs.release-check.outputs.is_release == 'true'
-    needs: [release-check, build]
+    needs: [release-check, build, backend-deploy]
     concurrency:
       group: pages-deploy
       cancel-in-progress: false

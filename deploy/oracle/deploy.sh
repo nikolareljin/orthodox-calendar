@@ -26,6 +26,22 @@ _apt_install() {
 }
 
 echo "==> Pre-flight checks"
+# Check setup.sh artifacts first — fail fast before any apt operations on an
+# unprepared VM (avoids misleading sudo/apt errors masking the real cause).
+UNIT_FILE="/etc/systemd/system/${SERVICE}.service"
+if [[ ! -f "${UNIT_FILE}" ]]; then
+  echo "ERROR: systemd unit ${UNIT_FILE} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
+fi
+
+NGINX_SITE="/etc/nginx/sites-available/${SERVICE}"
+if [[ ! -f "${NGINX_SITE}" ]]; then
+  echo "ERROR: nginx site config ${NGINX_SITE} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
+fi
+
 if ! command -v curl > /dev/null 2>&1; then
   _apt_install curl
 fi
@@ -70,23 +86,6 @@ if [[ -n "${PUBLIC_IP}" ]]; then
   echo "    Public IP: ${PUBLIC_IP} → ${NIP_DOMAIN}"
 else
   echo "    Could not detect public IP — skipping TLS step"
-fi
-
-# Systemd unit and nginx site config are created by setup.sh (root-only).
-# Writing the unit file from a deploy user + daemon-reload + restart is a
-# privilege-escalation path; require setup.sh to have been run instead.
-UNIT_FILE="/etc/systemd/system/${SERVICE}.service"
-if [[ ! -f "${UNIT_FILE}" ]]; then
-  echo "ERROR: systemd unit ${UNIT_FILE} not found." >&2
-  echo "       Run deploy/oracle/setup.sh on the server first." >&2
-  exit 1
-fi
-
-NGINX_SITE="/etc/nginx/sites-available/${SERVICE}"
-if [[ ! -f "${NGINX_SITE}" ]]; then
-  echo "ERROR: nginx site config ${NGINX_SITE} not found." >&2
-  echo "       Run deploy/oracle/setup.sh on the server first." >&2
-  exit 1
 fi
 
 if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
