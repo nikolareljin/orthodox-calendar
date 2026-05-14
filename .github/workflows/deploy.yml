@@ -1,8 +1,10 @@
 name: Deploy
 
 on:
-  pull_request:
-    types: [closed]
+  # Every push to main runs release-check (one gh api call, ~5 s, no-op for
+  # non-release pushes). Only a merged release/* PR sets is_release=true and
+  # unlocks the security gate and deploy stages.
+  push:
     branches: [main]
 
 permissions:
@@ -11,20 +13,124 @@ permissions:
   id-token: write
   pull-requests: read
 
+# Opt into Node.js 24 for JS actions. GitHub migration timeline:
+#   2026-06-02 — Node 24 becomes the default runner-wide (this env var becomes a no-op)
+#   Sep 2026   — Node 20 is fully removed from runners
+# Set here at workflow env: scope rather than as a repo variable so the override
+# lives with the code and needs no out-of-band setup.
+# TODO: Remove this env block after 2026-06-02.
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+# Serialize entire deploy runs so two rapid pushes to main (e.g. a release
+# merge followed by a hotfix) do not race through release-check in parallel
+# and then collide at the per-job concurrency groups.
 concurrency:
   group: deploy
   cancel-in-progress: false
 
-# ── Stage 1: security gate (both deploy targets wait for this) ────────────────
 jobs:
+# ── Stage 0: detect if push came from a merged release/* PR ──────────────────
+  release-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      is_release: ${{ steps.check.outputs.is_release }}
+    steps:
+      - name: Detect merged release/* PR
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
+          GITHUB_EVENT_FORCED: ${{ github.event.forced }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          is_release="false"
+
+          # Guard: only deploy from refs/heads/main (defense in depth should
+          # a second trigger such as workflow_dispatch or tags be added later).
+          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            echo "::notice::Push is not to refs/heads/main — release deploy skipped."
+            echo "is_release=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Guard: force-pushes can replay an old release SHA — skip and annotate
+          # so the decision is visible in the workflow run history.
+          if [[ "${GITHUB_EVENT_FORCED}" == "true" ]]; then
+            echo "::notice::Force-push detected — release deploy skipped to prevent replaying an old release SHA."
+            echo "is_release=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Primary: GitHub API — reliable for standard and squash merges.
+          # Limitation: if the API succeeds but returns 0 (e.g. squash/rebase
+          # merge not yet indexed), api_ok stays true and only the merge-commit
+          # subject fallback below acts as a secondary check. There is no
+          # additional warning in that case; a manual re-run would catch it.
+          api_ok=true
+          count=0
+          _api_err=$(mktemp)
+          count=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
+            -F per_page=100 \
+            --jq '[.[] | select(.merged_at != null and (.head.ref | startswith("release/")))] | length' \
+            2>"${_api_err}") \
+            || { echo "::warning::gh api call failed ($(< "${_api_err}")); relying on commit-message fallback"; count=0; api_ok=false; }
+          rm -f "${_api_err}"
+          count="${count:-0}"
+
+          if [[ "${count}" -gt 0 ]]; then
+            is_release="true"
+          elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request #[0-9]+ from [^ ]+/release/'; then
+            # Fallback: standard merge-commit subject. [^ ]+ allows slashes so
+            # fork-based PRs (fork-owner/release/x) are also matched.
+            is_release="true"
+          else
+            # Squash-merge fallback: subjects end with (#NNN) — extract the PR
+            # number and verify its head branch via the API.
+            _squash_pr=$(echo "${HEAD_COMMIT_MSG}" | grep -oE '\(#[0-9]+\)$' | tr -d '(#)' || true)
+            if [[ -n "${_squash_pr}" ]]; then
+              _squash_ref=$(gh api "repos/${{ github.repository }}/pulls/${_squash_pr}" \
+                --jq '.head.ref' 2>/dev/null || echo "")
+              if echo "${_squash_ref}" | grep -q '^release/'; then
+                is_release="true"
+              fi
+            fi
+          fi
+
+          # API failed and no fallback matched: fail loudly if message hints at a
+          # release branch so the run is re-runnable; otherwise warn only.
+          if [[ "${is_release}" == "false" && "${api_ok}" == "false" ]]; then
+            if echo "${HEAD_COMMIT_MSG}" | grep -qi 'release/'; then
+              echo "::error::gh api failed on a commit that may be a release merge. Re-run the workflow to retry."
+              exit 1
+            else
+              echo "::warning::gh api failed; no release pattern in commit message — assuming non-release push. Re-run if a deploy was expected."
+            fi
+          fi
+
+          # Warn when API succeeded with 0 PRs but commit message hints at a
+          # release/ branch — possible squash/rebase merge with delayed indexing.
+          if [[ "${is_release}" == "false" && "${api_ok}" == "true" ]] \
+              && echo "${HEAD_COMMIT_MSG}" | grep -qi 'release/'; then
+            echo "::warning::API returned no release PRs but commit message contains 'release/' — possible squash/rebase merge with delayed indexing. Re-run if a deploy was expected."
+          fi
+
+          echo "is_release=${is_release}" >> "$GITHUB_OUTPUT"
+          echo "Release deploy: ${is_release}"
+
+# ── Stage 1: security gate (runs only on release merges) ─────────────────────
   security:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check]
     uses: nikolareljin/ci-helpers/.github/workflows/gitleaks-scan.yml@production
     with:
       fail_on_findings: true
 
   data-safety:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -43,18 +149,26 @@ jobs:
           [[ $found -eq 0 ]] || exit 1
           echo "Data safety check passed."
 
-# ── Stage 2: auto-tag (version tag from release/* branch name) ───────────────
+# ── Stage 2 (parallel): auto-tag ─────────────────────────────────────────────
+# auto-tag-release.yml uses context.sha + listPullRequestsAssociatedWithCommit
+# (not github.event.pull_request), so it works correctly under a push event.
   tag:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: [security, data-safety]
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, security, data-safety]
+    concurrency:
+      group: release-tag
+      cancel-in-progress: false
     uses: nikolareljin/ci-helpers/.github/workflows/auto-tag-release.yml@production
     with:
       update_production_tag: false
 
-# ── Stage 2: backend → Oracle Cloud (parallel with frontend build) ────────────
+# ── Stage 2 (parallel): backend → Oracle Cloud ───────────────────────────────
   backend-deploy:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: [security, data-safety]
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, security, data-safety]
+    concurrency:
+      group: backend-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -116,10 +230,11 @@ jobs:
           echo "::error::Backend health check failed after 60 s"
           exit 1
 
-# ── Stage 2: frontend → GitHub Pages (parallel with backend deploy) ───────────
+# ── Stage 2 (parallel): frontend build → GitHub Pages ────────────────────────
+# Pages environment only allows refs/heads/main — single push trigger satisfies this.
   build:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: [security, data-safety]
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, security, data-safety]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -145,9 +260,13 @@ jobs:
         with:
           path: frontend/dist
 
+# ── Stage 3: Pages publish (after build) ──────────────────────────────────────
   deploy:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: build
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, build]
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages
