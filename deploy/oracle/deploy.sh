@@ -82,29 +82,12 @@ else
   echo "    Could not detect public IP — skipping TLS step"
 fi
 
-if [[ -n "${NIP_DOMAIN}" && ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
-  echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
-  echo "       Re-run deploy/oracle/setup.sh to install the TLS wrapper, then redeploy." >&2
-  exit 1
-fi
-
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
   sudo systemctl enable nginx
   sudo systemctl start nginx
 fi
 
 if [[ -n "${NIP_DOMAIN}" ]]; then
-  if [[ -z "${CERTBOT_EMAIL}" ]]; then
-    echo "ERROR: CERTBOT_EMAIL is not set." >&2
-    echo "       Set the CERTBOT_EMAIL GitHub secret before deploying the HTTPS API endpoint." >&2
-    exit 1
-  fi
-  if ! command -v certbot > /dev/null 2>&1; then
-    _apt_install certbot
-  fi
-  if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
-    _apt_install python3-certbot-nginx
-  fi
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
@@ -113,6 +96,25 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
+    # CERTBOT_EMAIL and the oc-certbot-provision wrapper are only required when
+    # actually provisioning a new certificate, not on routine redeploys where TLS
+    # is already active. Checking them here avoids breaking existing-cert deploys.
+    if [[ -z "${CERTBOT_EMAIL}" ]]; then
+      echo "ERROR: CERTBOT_EMAIL is not set." >&2
+      echo "       Set the CERTBOT_EMAIL GitHub secret before deploying the HTTPS API endpoint." >&2
+      exit 1
+    fi
+    if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
+      echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
+      echo "       Re-run deploy/oracle/setup.sh to install the TLS wrapper, then redeploy." >&2
+      exit 1
+    fi
+    if ! command -v certbot > /dev/null 2>&1; then
+      _apt_install certbot
+    fi
+    if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
+      _apt_install python3-certbot-nginx
+    fi
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
     if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then
