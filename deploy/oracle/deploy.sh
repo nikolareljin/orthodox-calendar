@@ -103,6 +103,9 @@ NGINXCONF
   sudo ln -sf "${NGINX_SITE}" "/etc/nginx/sites-enabled/${SERVICE}"
   sudo rm -f /etc/nginx/sites-enabled/default
   sudo nginx -t
+  if systemctl is-active --quiet nginx 2>/dev/null; then
+    sudo systemctl reload nginx
+  fi
 fi
 
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
