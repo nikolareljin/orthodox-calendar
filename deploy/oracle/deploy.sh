@@ -63,6 +63,9 @@ if [[ "${_venv_ok}" == "false" ]]; then
     exit 1
   fi
   echo "    Created virtualenv with python3.12"
+  # Note: a same-major.minor Python patch upgrade (3.12.x → 3.12.y) that
+  # changes ABI for compiled wheels is not detected here. Force a rebuild by
+  # removing .venv manually before deploying if that situation arises.
 fi
 
 echo "==> Installing/updating Python dependencies"

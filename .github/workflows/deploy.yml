@@ -73,11 +73,11 @@ jobs:
 
           if [[ "${count}" -gt 0 ]]; then
             is_release="true"
-          elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request #[0-9]+ from [^/]+/release/'; then
+          elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request #[0-9]+ from [^ ]+/release/'; then
             # Fallback: merge-commit subject — redundant guard for the standard
-            # merge strategy. Pattern anchors release/ immediately after the
-            # owner segment, matching the API's startswith("release/") check.
-            # Squash/rebase subjects do not match this pattern.
+            # merge strategy. [^ ]+ (vs [^/]+) allows slashes so fork-based PRs
+            # (fork-owner/release/x) are also matched. Squash/rebase subjects do
+            # not match this pattern.
             is_release="true"
           elif [[ "${api_ok}" == "false" ]]; then
             # API failed and no fallback matched. If the commit message hints at
@@ -89,6 +89,13 @@ jobs:
             else
               echo "::warning::gh api failed; no release pattern in commit message — assuming non-release push. Re-run if a deploy was expected." >&2
             fi
+          fi
+
+          # Warn when API succeeded with 0 PRs but commit message hints at a
+          # release/ branch — possible squash/rebase merge with delayed indexing.
+          if [[ "${is_release}" == "false" && "${api_ok}" == "true" ]] \
+              && echo "${HEAD_COMMIT_MSG}" | grep -qi 'release/'; then
+            echo "::warning::API returned no release PRs but commit message contains 'release/' — possible squash/rebase merge with delayed indexing. Re-run if a deploy was expected." >&2
           fi
 
           echo "is_release=${is_release}" >> "$GITHUB_OUTPUT"
@@ -129,6 +136,9 @@ jobs:
   tag:
     if: needs.release-check.outputs.is_release == 'true'
     needs: [release-check, security, data-safety]
+    concurrency:
+      group: release-tag
+      cancel-in-progress: false
     uses: nikolareljin/ci-helpers/.github/workflows/auto-tag-release.yml@production
     with:
       update_production_tag: false
