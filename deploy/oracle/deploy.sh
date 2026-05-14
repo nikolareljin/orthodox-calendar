@@ -74,78 +74,21 @@ else
   echo "    Could not detect public IP — nginx will use catch-all server_name"
 fi
 
-# Install systemd service unit if missing or stale
+# Systemd unit and nginx site config are created by setup.sh (root-only).
+# Writing the unit file from a deploy user + daemon-reload + restart is a
+# privilege-escalation path; require setup.sh to have been run instead.
 UNIT_FILE="/etc/systemd/system/${SERVICE}.service"
 if [[ ! -f "${UNIT_FILE}" ]]; then
-  echo "==> Installing systemd service unit"
-  sudo tee "${UNIT_FILE}" > /dev/null <<UNIT
-[Unit]
-Description=Orthodox Calendar — FastAPI backend
-After=network.target
-StartLimitIntervalSec=60
-StartLimitBurst=5
-
-[Service]
-User=${APP_USER}
-WorkingDirectory=${APP_DIR}/backend
-Environment="ORTHODOX_CALENDAR_DATA_PATH=${APP_DIR}/backend/app/data"
-ExecStart=${APP_DIR}/.venv/bin/uvicorn app.main:app \\
-          --host 127.0.0.1 --port 8000 \\
-          --workers 2 \\
-          --log-level info
-Restart=always
-RestartSec=5
-
-[Install]
-WantedBy=multi-user.target
-UNIT
-  sudo systemctl daemon-reload
-  sudo systemctl enable "${SERVICE}"
+  echo "ERROR: systemd unit ${UNIT_FILE} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
 fi
 
-# Write nginx site config if missing, or if it still has the server_name _
-# placeholder left by setup.sh (which sets no real hostname).
 NGINX_SITE="/etc/nginx/sites-available/${SERVICE}"
-_nginx_needs_write=false
 if [[ ! -f "${NGINX_SITE}" ]]; then
-  _nginx_needs_write=true
-elif grep -qE '^\s*server_name\s+_;' "${NGINX_SITE}" 2>/dev/null; then
-  echo "==> Updating nginx site config (server_name _ → ${SERVER_NAME})"
-  _nginx_needs_write=true
-fi
-if [[ "${_nginx_needs_write}" == "true" ]]; then
-  echo "==> Writing nginx site config (server_name: ${SERVER_NAME})"
-  sudo tee "${NGINX_SITE}" > /dev/null <<NGINXCONF
-server {
-    listen 80;
-    listen [::]:80;
-    server_name ${SERVER_NAME};
-
-    add_header X-Content-Type-Options nosniff;
-    add_header X-Frame-Options DENY;
-    add_header Referrer-Policy strict-origin-when-cross-origin;
-
-    location / {
-        proxy_pass         http://127.0.0.1:8000;
-        proxy_http_version 1.1;
-        proxy_set_header   Host              \$host;
-        proxy_set_header   X-Real-IP         \$remote_addr;
-        proxy_set_header   X-Forwarded-For   \$proxy_add_x_forwarded_for;
-        proxy_set_header   X-Forwarded-Proto \$scheme;
-        proxy_read_timeout 30s;
-    }
-
-    location = /nginx-health {
-        access_log off;
-        return 200 "ok\n";
-        add_header Content-Type text/plain;
-    }
-}
-NGINXCONF
-  sudo ln -sf "${NGINX_SITE}" "/etc/nginx/sites-enabled/${SERVICE}"
-  sudo rm -f /etc/nginx/sites-enabled/default
-  sudo nginx -t
-  sudo systemctl restart nginx
+  echo "ERROR: nginx site config ${NGINX_SITE} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
 fi
 
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
@@ -153,15 +96,20 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
   sudo systemctl start nginx
 fi
 
-if [[ -n "${NIP_DOMAIN}" ]] && [[ ! -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]]; then
-  echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
-  sudo certbot --nginx -d "${NIP_DOMAIN}" \
-    --non-interactive --agree-tos \
-    -m "nikola.reljin@gmail.com" \
-    --redirect
-  echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
-elif [[ -n "${NIP_DOMAIN}" ]]; then
-  echo "==> TLS certificate for ${NIP_DOMAIN} already present"
+if [[ -n "${NIP_DOMAIN}" ]]; then
+  # Cert file existing is not enough — nginx may have been reset (e.g. by
+  # re-running setup.sh) and lost the SSL server block. Check both.
+  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
+      && grep -q "ssl_certificate" "${NGINX_SITE}" 2>/dev/null; then
+    echo "==> TLS already active for ${NIP_DOMAIN}"
+  else
+    echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
+    sudo certbot --nginx -d "${NIP_DOMAIN}" \
+      --non-interactive --agree-tos \
+      -m "nikola.reljin@gmail.com" \
+      --redirect
+    echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
+  fi
 fi
 
 # Enable automatic cert renewal — certbot renew is a no-op until 30 days before

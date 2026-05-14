@@ -114,8 +114,10 @@ fi
 # 3 — Obtain certificate (skip if already present for this domain)
 # ---------------------------------------------------------------------------
 CERT_PATH="/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem"
-if [[ -f "${CERT_PATH}" ]]; then
-  echo "==> Certificate already present: ${CERT_PATH}"
+# Check both the cert file and the nginx SSL block — the site config may have
+# been reset (e.g. by re-running setup.sh) even if the cert still exists.
+if [[ -f "${CERT_PATH}" ]] && grep -q "ssl_certificate" "${NGINX_SITE}" 2>/dev/null; then
+  echo "==> TLS already active for ${NIP_DOMAIN}: ${CERT_PATH}"
 else
   echo "==> Requesting certificate for ${NIP_DOMAIN}"
   certbot --nginx \

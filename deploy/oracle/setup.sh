@@ -92,23 +92,14 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3.12-venv
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y certbot
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3-certbot-nginx
-# tee — write systemd unit and nginx site config files
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/systemd/system/${SERVICE}.service
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/nginx/sites-available/${SERVICE}
-# systemctl — service management
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl daemon-reload
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable ${SERVICE}
+# systemctl — only service restart and nginx lifecycle; no unit-file writes or
+# daemon-reload (writing the unit and reloading systemd is root-only via setup.sh)
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart ${SERVICE}
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl start nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
-# nginx — config test
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t
-# nginx site symlink management
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/ln -sf /etc/nginx/sites-available/${SERVICE} /etc/nginx/sites-enabled/${SERVICE}
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/rm -f /etc/nginx/sites-enabled/default
 # certbot — exact invocations used by deploy.sh (* matches domain/email, no spaces)
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot --nginx -d * --non-interactive --agree-tos -m * --redirect
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet

@@ -56,7 +56,7 @@ function getStoredTheme() {
 function getStoredTradition() {
   try {
     const stored = localStorage.getItem("oc-tradition");
-    if (stored && stored in TRADITIONS) return stored;
+    if (stored && Object.hasOwn(TRADITIONS, stored)) return stored;
   } catch {
     // ignore storage errors
   }
