@@ -50,7 +50,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Expandable hagiographies** — each saint card expands to show the biography excerpt and a link to the full hagiography.
 - **Liturgical readings** — `GET /api/v1/readings` proxies orthocal.info (Julian or Gregorian based on tradition) for Epistle/Gospel readings.
 - **Month summary endpoint** — `GET /api/v1/calendar?year=&month=&tradition=` returns feast data for the whole month in one call (all in-memory, sub-millisecond).
-- **CORS middleware** — backend now allows browser access from any origin, enabling the Vite dev server and GitHub Pages to call the API directly.
+- **CORS middleware** — backend now allows browser access from local development and the project GitHub Pages origin by default, with additional origins configurable via `ORTHODOX_CALENDAR_CORS_ORIGINS`.
 - **Dark and light themes** — dark theme uses neobyzantine-org palette (navy `#0d1220`, gold `#CFB53B`, royal blue `#3366CC`); light theme uses Byzantine crimson on white. Theme toggle is persisted in `localStorage`.
 - **Tradition sidebar** — vertical sidebar listing all 10 Orthodox traditions; switching tradition reloads both the month summary and day detail instantly.
 - **GitHub Actions CI** (`.github/workflows/ci.yml`) — PR gate: gitleaks secret scan, react-scan, python-scan, and data-safety check.
