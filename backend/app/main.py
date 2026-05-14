@@ -140,8 +140,8 @@ def readings(
 
     trad = TRADITIONS[canonical]
     calendar = effective_calendar(day, trad)
-    if calendar == CalendarSystem.JULIAN:
-        cal = "julian"
+    if calendar in {CalendarSystem.JULIAN, CalendarSystem.REVISED}:
+        cal = "julian" if calendar == CalendarSystem.JULIAN else "gregorian"
         _, calendar_date = convert_to_tradition_month_day(day, trad)
         api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
     else:

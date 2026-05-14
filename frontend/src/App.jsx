@@ -45,6 +45,14 @@ function formatGregorianDate(year, month, day) {
 
 function clampYear(y) { return Math.max(MIN_YEAR, Math.min(MAX_YEAR, y)); }
 
+function getStoredTheme() {
+  try {
+    return localStorage.getItem("oc-theme") || "dark";
+  } catch {
+    return "dark";
+  }
+}
+
 function feastClass(info) {
   if (!info) return "";
   if (info.feast_types.includes("Great Feast")) return "great-feast";
@@ -356,7 +364,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
 export default function App() {
   const getToday = () => new Date();
   const initialToday = useMemo(getToday, []);
-  const [theme, setTheme] = useState(() => localStorage.getItem("oc-theme") || "dark");
+  const [theme, setTheme] = useState(getStoredTheme);
   const [tradition, setTradition] = useState("serbian");
   const [year, setYear] = useState(initialToday.getFullYear());
   const [month, setMonth] = useState(initialToday.getMonth() + 1);
@@ -372,6 +380,7 @@ export default function App() {
   const [moonPhase, setMoonPhase] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const loadDayRequestRef = useRef(0);
 
   useEffect(() => {
     const baseUrl = import.meta.env.BASE_URL || "/";
@@ -391,7 +400,11 @@ export default function App() {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("oc-theme", theme);
+    try {
+      localStorage.setItem("oc-theme", theme);
+    } catch {
+      // Browsers can disable storage; the selected theme still applies for this session.
+    }
   }, [theme]);
 
   const loadMonth = useCallback(async () => {
@@ -409,7 +422,13 @@ export default function App() {
   }, [loadMonth]);
 
   const loadDay = useCallback(async () => {
-    if (!selectedDate) return;
+    const requestId = loadDayRequestRef.current + 1;
+    loadDayRequestRef.current = requestId;
+    if (!selectedDate) {
+      setLoading(false);
+      return;
+    }
+    const isCurrentRequest = () => loadDayRequestRef.current === requestId;
     setLoading(true);
     setError("");
     setSaints([]);
@@ -421,12 +440,13 @@ export default function App() {
         fetchReadings(selectedDate, tradition),
         fetchMoonPhase(selectedDate),
       ]);
+      if (!isCurrentRequest()) return;
       if (saintsData.status === "fulfilled") setSaints(saintsData.value);
       else setError("Could not load saints.");
       if (readingsData.status === "fulfilled") setReadings(readingsData.value);
       if (moonData.status === "fulfilled") setMoonPhase(moonData.value);
     } finally {
-      setLoading(false);
+      if (isCurrentRequest()) setLoading(false);
     }
   }, [selectedDate, tradition]);
 

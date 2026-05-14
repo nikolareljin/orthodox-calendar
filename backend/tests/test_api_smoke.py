@@ -1,4 +1,5 @@
 import urllib.error
+from io import BytesIO
 
 from fastapi.testclient import TestClient
 
@@ -25,6 +26,28 @@ def test_readings_upstream_failure_returns_502(monkeypatch) -> None:
 
     assert response.status_code == 502
     assert response.json()["detail"] == "Readings upstream is unavailable"
+
+
+def test_revised_julian_readings_use_revised_calendar_date_after_divergence(monkeypatch) -> None:
+    requested_urls = []
+
+    class FakeResponse(BytesIO):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, traceback):
+            return False
+
+    def fake_urlopen(url, *args, **kwargs):
+        requested_urls.append(url)
+        return FakeResponse(b'{"readings": []}')
+
+    monkeypatch.setattr(main._urllib_request, "urlopen", fake_urlopen)
+
+    response = client.get("/api/v1/readings?day=2800-03-01&tradition=greek")
+
+    assert response.status_code == 200
+    assert requested_urls == ["https://orthocal.info/api/gregorian/2800/3/2/"]
 
 
 def test_month_calendar_returns_date_keyed_summary() -> None:

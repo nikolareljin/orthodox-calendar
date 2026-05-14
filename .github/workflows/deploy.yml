@@ -1,7 +1,8 @@
 name: Deploy
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches: [main]
 
 permissions:
@@ -17,11 +18,13 @@ concurrency:
 # ── Stage 1: security gate (both deploy targets wait for this) ────────────────
 jobs:
   security:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     uses: nikolareljin/ci-helpers/.github/workflows/gitleaks-scan.yml@production
     with:
       fail_on_findings: true
 
   data-safety:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -42,6 +45,7 @@ jobs:
 
 # ── Stage 2: auto-tag (version tag from release/* branch name) ───────────────
   tag:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     needs: [security, data-safety]
     uses: nikolareljin/ci-helpers/.github/workflows/auto-tag-release.yml@production
     with:
@@ -49,6 +53,7 @@ jobs:
 
 # ── Stage 2: backend → Oracle Cloud (parallel with frontend build) ────────────
   backend-deploy:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     needs: [security, data-safety]
     runs-on: ubuntu-latest
     steps:
@@ -98,6 +103,7 @@ jobs:
 
 # ── Stage 2: frontend → GitHub Pages (parallel with backend deploy) ───────────
   build:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     needs: [security, data-safety]
     runs-on: ubuntu-latest
     steps:
@@ -125,6 +131,7 @@ jobs:
           path: frontend/dist
 
   deploy:
+    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
     needs: build
     runs-on: ubuntu-latest
     environment:
