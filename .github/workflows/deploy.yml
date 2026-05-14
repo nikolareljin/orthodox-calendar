@@ -22,10 +22,6 @@ permissions:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
-concurrency:
-  group: deploy
-  cancel-in-progress: false
-
 jobs:
 # ── Stage 0: detect if push came from a merged release/* PR ──────────────────
   release-check:
@@ -61,6 +57,10 @@ jobs:
           fi
 
           # Primary: GitHub API — reliable for standard and squash merges.
+          # Limitation: if the API succeeds but returns 0 (e.g. squash/rebase
+          # merge not yet indexed), api_ok stays true and only the merge-commit
+          # subject fallback below acts as a secondary check. There is no
+          # additional warning in that case; a manual re-run would catch it.
           api_ok=true
           count=0
           _api_err=$(mktemp)
@@ -137,6 +137,9 @@ jobs:
   backend-deploy:
     if: needs.release-check.outputs.is_release == 'true'
     needs: [release-check, security, data-safety]
+    concurrency:
+      group: backend-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -231,6 +234,9 @@ jobs:
   deploy:
     if: needs.release-check.outputs.is_release == 'true'
     needs: [release-check, build]
+    concurrency:
+      group: pages-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     environment:
       name: github-pages

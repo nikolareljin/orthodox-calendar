@@ -43,7 +43,16 @@ fi
 cd "${APP_DIR}"
 
 echo "==> Ensuring Python virtualenv"
-if [[ ! -f ".venv/bin/pip" ]] || ! .venv/bin/python -c 'import sys' > /dev/null 2>&1; then
+_venv_ok=false
+if [[ -f ".venv/bin/pip" ]] && .venv/bin/python -c 'import sys' > /dev/null 2>&1; then
+  _py_ver=$(.venv/bin/python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")' 2>/dev/null || echo "")
+  if [[ "${_py_ver}" == "3.12" ]]; then
+    _venv_ok=true
+  else
+    echo "    Existing venv uses Python ${_py_ver:-unknown} (expected 3.12) — rebuilding"
+  fi
+fi
+if [[ "${_venv_ok}" == "false" ]]; then
   if ! command -v python3.12 > /dev/null 2>&1; then
     echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
     exit 1
