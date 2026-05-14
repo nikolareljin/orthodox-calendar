@@ -118,6 +118,12 @@ fi
 # The default config from setup.sh uses server_name _ (catch-all); certbot
 # --nginx matches vhosts by domain name, so it cannot select that block.
 # ---------------------------------------------------------------------------
+if ! systemctl is-active --quiet nginx 2>/dev/null; then
+  echo "==> Starting nginx"
+  systemctl enable nginx
+  systemctl start nginx
+fi
+
 NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
 if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${NIP_DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
   echo "==> Updating nginx server_name → ${NIP_DOMAIN}"

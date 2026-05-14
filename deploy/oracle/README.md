@@ -122,7 +122,7 @@ and add:
 | `OCI_USER` | `ubuntu` (Ubuntu images) or `opc` (Oracle Linux) |
 | `OCI_SSH_KEY` | Contents of the **private** SSH key that matches the public key on the VM |
 | `OCI_KNOWN_HOSTS` | Output of: `ssh-keyscan -H <YOUR_VM_IP>` run from your laptop |
-| `VITE_API_BASE` | `http://<YOUR_VM_IP>` (or `https://your.domain.com` after TLS) |
+| `VITE_API_BASE` | `https://<ip-with-hyphens>.nip.io` (set this **before** first deploy; deploy.sh provisions TLS and nginx will redirect HTTP → HTTPS) |
 | `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications (**required** — TLS is skipped if unset) |
 
 Generate `OCI_KNOWN_HOSTS` on your machine (not the VM):
