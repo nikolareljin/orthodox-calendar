@@ -44,9 +44,13 @@ cd "${APP_DIR}"
 
 echo "==> Ensuring Python virtualenv"
 if [[ ! -f ".venv/bin/pip" ]] || ! .venv/bin/python -c 'import sys' > /dev/null 2>&1; then
+  if ! command -v python3.12 > /dev/null 2>&1; then
+    echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
+    exit 1
+  fi
   rm -rf .venv
   if ! python3.12 -m venv .venv; then
-    echo "ERROR: python3.12 is required but unavailable — run deploy/oracle/setup.sh on the server first" >&2
+    echo "ERROR: python3.12 -m venv failed — ensure python3.12-venv is installed (run setup.sh)" >&2
     exit 1
   fi
   echo "    Created virtualenv with python3.12"
