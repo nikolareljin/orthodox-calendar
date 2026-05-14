@@ -381,6 +381,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const loadDayRequestRef = useRef(0);
+  const loadMonthRequestRef = useRef(0);
 
   useEffect(() => {
     const baseUrl = import.meta.env.BASE_URL || "/";
@@ -408,9 +409,12 @@ export default function App() {
   }, [theme]);
 
   const loadMonth = useCallback(async () => {
+    const requestId = loadMonthRequestRef.current + 1;
+    loadMonthRequestRef.current = requestId;
     setMonthData({});
     try {
       const data = await fetchMonthCalendar(year, month, tradition);
+      if (loadMonthRequestRef.current !== requestId) return;
       setMonthData(data);
     } catch {
       // month dots are non-critical; silently ignore

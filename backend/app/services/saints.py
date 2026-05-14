@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import calendar as _cal
 import re as _re
 from datetime import date
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
 from ..calendar_logic import canonical_tradition_key, convert_to_tradition_month_day, effective_calendar, resolve_tradition
 from ..data_loader import build_index
-from ..models import Saint, SaintsResponse
+from ..models import CalendarEntry, Saint, SaintsResponse
 
 _INDEX = build_index()
 
@@ -91,6 +92,49 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.year_canonized = overlay.year_canonized
 
 
+def _build_month_day_index(entries: List[CalendarEntry]) -> Dict[str, List[CalendarEntry]]:
+    by_md: Dict[str, List[CalendarEntry]] = {}
+    for e in entries:
+        by_md.setdefault(e.month_day, []).append(e)
+    return by_md
+
+
+def _merge_entries(
+    day: date,
+    tradition_name: str,
+    calendar_date: str,
+    day_entries: List[CalendarEntry],
+) -> SaintsResponse:
+    from ..calendar_logic import resolve_tradition as _resolve
+    tradition = _resolve(tradition_name)
+    merged: Dict[str, Saint] = {}
+    key_index: Dict[str, str] = {}
+    merged_notes: Optional[str] = None
+    for entry in day_entries:
+        for saint in entry.saints:
+            keys = _saint_keys(saint)
+            primary_key = next((key_index[key] for key in keys if key in key_index), None)
+            if primary_key:
+                _apply_overlay(merged[primary_key], saint)
+                for key in keys:
+                    key_index.setdefault(key, primary_key)
+            else:
+                primary_key = keys[0]
+                merged[primary_key] = saint.model_copy()
+                for key in keys:
+                    key_index[key] = primary_key
+        if entry.notes and not merged_notes:
+            merged_notes = entry.notes
+    return SaintsResponse(
+        date=day,
+        tradition=tradition.name,
+        calendar_date=calendar_date,
+        saints=list(merged.values()),
+        calendar_system=effective_calendar(day, tradition),
+        notes=merged_notes,
+    )
+
+
 def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse]:
     responses: List[SaintsResponse] = []
     for tradition_name in traditions:
@@ -110,36 +154,43 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         if not day_entries:
             continue
 
-        # Merge saints from all entries; dedup by normalized aliases from title,
-        # name, and hagiography slug. Overlay entries enrich base fields rather
-        # than being skipped entirely.
-        merged: Dict[str, Saint] = {}
-        key_index: Dict[str, str] = {}
-        merged_notes: Optional[str] = None
-        for entry in day_entries:
-            for saint in entry.saints:
-                keys = _saint_keys(saint)
-                primary_key = next((key_index[key] for key in keys if key in key_index), None)
-                if primary_key:
-                    _apply_overlay(merged[primary_key], saint)
-                    for key in keys:
-                        key_index.setdefault(key, primary_key)
-                else:
-                    primary_key = keys[0]
-                    merged[primary_key] = saint.model_copy()
-                    for key in keys:
-                        key_index[key] = primary_key
-            if entry.notes and not merged_notes:
-                merged_notes = entry.notes
-
-        responses.append(
-            SaintsResponse(
-                date=day,
-                tradition=tradition.name,
-                calendar_date=calendar_date,
-                saints=list(merged.values()),
-                calendar_system=effective_calendar(day, tradition),
-                notes=merged_notes,
-            )
-        )
+        responses.append(_merge_entries(day, tradition_name, calendar_date, day_entries))
     return responses
+
+
+def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str, Any]:
+    """Return {date_iso: {feast_types, main_feast, calendar_date}} for days with saints.
+
+    Pre-groups the index by month_day once (O(N)) instead of scanning per day
+    (O(N * days_in_month)).
+    """
+    tradition = resolve_tradition(tradition_name)
+    canonical = canonical_tradition_key(tradition_name)
+    base_key = tradition.data_key or canonical
+
+    base_by_md = _build_month_day_index(_INDEX.get(base_key, []))
+    overlay_by_md = _build_month_day_index(_INDEX.get(canonical, [])) if tradition.data_key else {}
+
+    result: Dict[str, Any] = {}
+    for day_num in range(1, _cal.monthrange(year, month)[1] + 1):
+        d = date(year, month, day_num)
+        month_day, calendar_date = convert_to_tradition_month_day(d, tradition)
+
+        day_entries = base_by_md.get(month_day, [])
+        if overlay_by_md:
+            day_entries = day_entries + overlay_by_md.get(month_day, [])
+        if not day_entries:
+            continue
+
+        resp = _merge_entries(d, tradition_name, calendar_date, day_entries)
+        if not resp.saints:
+            continue
+
+        feast_types = [s.feast_type for s in resp.saints if s.feast_type]
+        top = resp.saints[0]
+        result[d.isoformat()] = {
+            "feast_types": feast_types,
+            "main_feast": top.title or top.name,
+            "calendar_date": calendar_date,
+        }
+    return result

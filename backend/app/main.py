@@ -21,7 +21,7 @@ from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _mo
 from .config import TRADITIONS
 from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
-from .services.saints import get_saints_for_date
+from .services.saints import get_saints_for_date, get_saints_for_month
 from .services.ical import generate_ical_feed
 
 
@@ -101,31 +101,12 @@ def month_calendar(
     month: int = Query(..., ge=1, le=12),
     tradition: str = Query(default="serbian"),
 ) -> Dict[str, Any]:
-    import calendar as _cal
-
     try:
         canonical = canonical_tradition_key(tradition)
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-    days_in_month = _cal.monthrange(year, month)[1]
-    result: Dict[str, Any] = {}
-
-    for day in range(1, days_in_month + 1):
-        d = date(year, month, day)
-        entries = get_saints_for_date(d, [canonical])
-        if not entries or not entries[0].saints:
-            continue
-        saints_list = entries[0].saints
-        feast_types = [s.feast_type for s in saints_list if s.feast_type]
-        top = saints_list[0]
-        result[d.isoformat()] = {
-            "feast_types": feast_types,
-            "main_feast": top.title or top.name,
-            "calendar_date": entries[0].calendar_date,
-        }
-
-    return result
+    return get_saints_for_month(year, month, canonical)
 
 
 @app.get("/api/v1/readings")
