@@ -134,7 +134,9 @@ if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^c
   if sudo systemctl enable --now certbot.timer 2>/dev/null; then
     echo "==> certbot.timer enabled for automatic renewal"
   else
-    echo "    WARNING: certbot.timer enable failed — re-run deploy/oracle/setup.sh to update sudoers"
+    echo "ERROR: certbot.timer exists but could not be enabled." >&2
+    echo "       Re-run deploy/oracle/setup.sh to update sudoers/systemd, then redeploy." >&2
+    exit 1
   fi
 else
   # certbot.timer unit absent (not installed by this certbot package).
