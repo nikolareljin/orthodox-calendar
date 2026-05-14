@@ -63,9 +63,11 @@ systemctl start "${SERVICE}"
 echo "    Service status:"
 systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — check: journalctl -u ${SERVICE}"
 
-echo "==> Adding sudoers rule so the deploy user can restart the service without a password"
-echo "${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl restart ${SERVICE}" \
-  > /etc/sudoers.d/orthodox-calendar
+echo "==> Adding sudoers rules for the deploy user"
+cat > /etc/sudoers.d/orthodox-calendar <<SUDOERS
+${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl restart ${SERVICE}
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3.12-venv
+SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 
 echo "==> Installing nginx config"

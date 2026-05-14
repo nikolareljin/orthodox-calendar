@@ -58,9 +58,10 @@ if [[ "${_venv_ok}" == "false" ]]; then
     exit 1
   fi
   rm -rf .venv
-  if ! python3.12 -m venv .venv; then
-    echo "ERROR: python3.12 -m venv failed — ensure python3.12-venv is installed (run setup.sh)" >&2
-    exit 1
+  if ! python3.12 -m venv .venv 2>/dev/null; then
+    echo "    python3.12-venv missing — installing via apt"
+    sudo apt-get install -y python3.12-venv
+    python3.12 -m venv .venv
   fi
   echo "    Created virtualenv with python3.12"
   # Note: a broken interpreter symlink is already caught by the import-sys
