@@ -47,7 +47,7 @@ if [[ ! -f ".venv/bin/pip" ]]; then
   if python3.12 -m venv .venv; then
     echo "    Created virtualenv with python3.12"
   elif python3.11 -m venv .venv; then
-    echo "::warning::python3.12 unavailable; created virtualenv with python3.11 — run setup.sh to upgrade" >&2
+    echo "::warning::python3.12 unavailable — falling back to python3.11 (deployment continues; run setup.sh on the server to install python3.12-venv)" >&2
   else
     echo "ERROR: cannot create virtualenv — run setup.sh on the server first" >&2
     exit 1

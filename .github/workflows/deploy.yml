@@ -10,8 +10,9 @@ permissions:
   id-token: write
   pull-requests: read
 
-# Opt into Node.js 24 early — Node 20 actions are deprecated (removed Sep 2026)
-# TODO: Remove after 2026-06-02 when Node 24 becomes the default runner
+# Opt into Node.js 24 for JS actions; Node 20 is fully removed from runners Sep 2026.
+# TODO: Remove after 2026-06-02 — GitHub makes Node 24 the default for JS actions
+#       runner-wide on that date, making this override redundant.
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -30,13 +31,22 @@ jobs:
         id: check
         env:
           GH_TOKEN: ${{ github.token }}
+          HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
         shell: bash
         run: |
           set -euo pipefail
+          is_release="false"
+
+          # Primary: GitHub API — reliable for standard merge commits
           count=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
             --jq '[.[] | select(.merged_at != null and (.head.ref | startswith("release/")))] | length')
-          is_release="false"
-          [[ "${count}" -gt 0 ]] && is_release="true"
+          if [[ "${count}" -gt 0 ]]; then
+            is_release="true"
+          elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request .+/release/'; then
+            # Fallback: merge-commit subject line (catches squash/rebase strategies)
+            is_release="true"
+          fi
+
           echo "is_release=${is_release}" >> "$GITHUB_OUTPUT"
           echo "Release deploy: ${is_release}"
 
@@ -173,7 +183,8 @@ jobs:
           path: frontend/dist
 
   deploy:
-    needs: [build]
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, build]
     runs-on: ubuntu-latest
     environment:
       name: github-pages
