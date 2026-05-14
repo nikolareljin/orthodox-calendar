@@ -147,6 +147,20 @@ elif [[ -n "${NIP_DOMAIN}" ]]; then
   echo "==> TLS certificate for ${NIP_DOMAIN} already present"
 fi
 
+# Enable automatic cert renewal — certbot renew is a no-op until 30 days before
+# expiry, so a daily check is fine. Prefer the systemd timer that certbot installs
+# via apt; fall back to a single crontab line if the timer is absent.
+if systemctl list-unit-files certbot.timer > /dev/null 2>&1; then
+  sudo systemctl enable --now certbot.timer
+  echo "==> certbot.timer enabled for automatic renewal"
+else
+  CRON_JOB="0 3 * * * certbot renew --quiet"
+  if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
+    ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
+    echo "==> Daily certbot renewal cron installed (03:00)"
+  fi
+fi
+
 echo "==> Installing scoped backend release"
 mkdir -p "${APP_DIR}/backend"
 if [[ -n "${RELEASE_ARCHIVE}" ]]; then
