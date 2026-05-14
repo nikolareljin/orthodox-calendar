@@ -37,8 +37,33 @@ fi
 if ! command -v nginx > /dev/null 2>&1; then
   _apt_install nginx
 fi
+if ! command -v certbot > /dev/null 2>&1; then
+  _apt_install certbot
+  _apt_install python3-certbot-nginx
+fi
 
 APP_USER="$(id -un)"
+
+echo "==> Detecting public IP"
+_raw="$(curl -sf --max-time 5 -H 'Authorization: Bearer Oracle' 'http://169.254.169.254/opc/v2/vnics/' 2>/dev/null || true)"
+PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
+if [[ -z "${PUBLIC_IP}" ]]; then
+  _raw="$(curl -sf --max-time 5 'http://169.254.169.254/opc/v1/vnics/' 2>/dev/null || true)"
+  PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
+fi
+if [[ -z "${PUBLIC_IP}" ]]; then
+  PUBLIC_IP="$(curl -sf --max-time 10 ifconfig.me 2>/dev/null || true)"
+fi
+unset _raw
+NIP_DOMAIN=""
+SERVER_NAME="_"
+if [[ -n "${PUBLIC_IP}" ]]; then
+  NIP_DOMAIN="${PUBLIC_IP//./-}.nip.io"
+  SERVER_NAME="${NIP_DOMAIN}"
+  echo "    Public IP: ${PUBLIC_IP} → ${NIP_DOMAIN}"
+else
+  echo "    Could not detect public IP — nginx will use catch-all server_name"
+fi
 
 # Install systemd service unit if missing or stale
 UNIT_FILE="/etc/systemd/system/${SERVICE}.service"
@@ -72,12 +97,12 @@ fi
 # Install nginx site config if missing
 NGINX_SITE="/etc/nginx/sites-available/${SERVICE}"
 if [[ ! -f "${NGINX_SITE}" ]]; then
-  echo "==> Installing nginx site config"
-  sudo tee "${NGINX_SITE}" > /dev/null <<'NGINXCONF'
+  echo "==> Installing nginx site config (server_name: ${SERVER_NAME})"
+  sudo tee "${NGINX_SITE}" > /dev/null <<NGINXCONF
 server {
     listen 80;
     listen [::]:80;
-    server_name _;
+    server_name ${SERVER_NAME};
 
     add_header X-Content-Type-Options nosniff;
     add_header X-Frame-Options DENY;
@@ -86,10 +111,10 @@ server {
     location / {
         proxy_pass         http://127.0.0.1:8000;
         proxy_http_version 1.1;
-        proxy_set_header   Host              $host;
-        proxy_set_header   X-Real-IP         $remote_addr;
-        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
-        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_set_header   Host              \$host;
+        proxy_set_header   X-Real-IP         \$remote_addr;
+        proxy_set_header   X-Forwarded-For   \$proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto \$scheme;
         proxy_read_timeout 30s;
     }
 
@@ -109,6 +134,17 @@ fi
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
   sudo systemctl enable nginx
   sudo systemctl start nginx
+fi
+
+if [[ -n "${NIP_DOMAIN}" ]] && [[ ! -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]]; then
+  echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
+  sudo certbot --nginx -d "${NIP_DOMAIN}" \
+    --non-interactive --agree-tos \
+    -m "nikola.reljin@gmail.com" \
+    --redirect
+  echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
+elif [[ -n "${NIP_DOMAIN}" ]]; then
+  echo "==> TLS certificate for ${NIP_DOMAIN} already present"
 fi
 
 echo "==> Installing scoped backend release"

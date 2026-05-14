@@ -33,10 +33,10 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   iptables iptables-persistent
 
 echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"
-iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
-ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+iptables  -I INPUT  5 -m state --state NEW -p tcp --dport 80  -j ACCEPT
+ip6tables -I INPUT  5 -m state --state NEW -p tcp --dport 80  -j ACCEPT
+iptables  -I INPUT  5 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+ip6tables -I INPUT  5 -m state --state NEW -p tcp --dport 443 -j ACCEPT
 # Persist so rules survive reboot
 netfilter-persistent save
 
@@ -74,6 +74,9 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl enable nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3.12-venv
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y curl
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y certbot
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3-certbot-nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot
 SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 
@@ -97,6 +100,8 @@ echo ""
 echo "    Next steps:"
 echo "    1. In Oracle Cloud console → Networking → VCN → Security Lists:"
 echo "       Add Ingress rules for TCP 80 and TCP 443 (from 0.0.0.0/0)."
-echo "    2. Point a domain at this IP, then run:"
-echo "       sudo certbot --nginx -d your.domain.com"
-echo "    3. Set GitHub secrets (see deploy/oracle/README.md)."
+echo "    2. Run the first deploy (deploy.sh or manual-deploy.sh) — TLS is auto-"
+echo "       provisioned via nip.io + Let's Encrypt using the public IP above."
+echo "    3. Set GitHub secrets:"
+echo "       VITE_API_BASE = https://<ip-with-hyphens>.nip.io"
+echo "       (see deploy/oracle/README.md for all required secrets)"
