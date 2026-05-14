@@ -1,11 +1,6 @@
 name: Deploy
 
 on:
-  pull_request:
-    types: [closed]
-    branches: [main]
-  # GitHub Pages environment only allows deployments from the default branch.
-  # Triggering on push (after merge) puts the job in refs/heads/main context.
   push:
     branches: [main]
 
@@ -16,6 +11,7 @@ permissions:
   pull-requests: read
 
 # Opt into Node.js 24 early — Node 20 actions are deprecated (removed Sep 2026)
+# TODO: Remove after 2026-06-02 when Node 24 becomes the default runner
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
@@ -23,16 +19,38 @@ concurrency:
   group: deploy
   cancel-in-progress: false
 
-# ── Stage 1: security gate (both deploy targets wait for this) ────────────────
 jobs:
+# ── Stage 0: detect if push came from a merged release/* PR ──────────────────
+  release-check:
+    runs-on: ubuntu-latest
+    outputs:
+      is_release: ${{ steps.check.outputs.is_release }}
+    steps:
+      - name: Detect merged release/* PR
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          count=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
+            --jq '[.[] | select(.merged_at != null and (.head.ref | startswith("release/")))] | length')
+          is_release="false"
+          [[ "${count}" -gt 0 ]] && is_release="true"
+          echo "is_release=${is_release}" >> "$GITHUB_OUTPUT"
+          echo "Release deploy: ${is_release}"
+
+# ── Stage 1: security gate (runs only on release merges) ─────────────────────
   security:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check]
     uses: nikolareljin/ci-helpers/.github/workflows/gitleaks-scan.yml@production
     with:
       fail_on_findings: true
 
   data-safety:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -53,16 +71,16 @@ jobs:
 
 # ── Stage 2: auto-tag (version tag from release/* branch name) ───────────────
   tag:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: [security, data-safety]
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, security, data-safety]
     uses: nikolareljin/ci-helpers/.github/workflows/auto-tag-release.yml@production
     with:
       update_production_tag: false
 
 # ── Stage 2: backend → Oracle Cloud (parallel with frontend build) ────────────
   backend-deploy:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: [security, data-safety]
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, security, data-safety]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -124,10 +142,11 @@ jobs:
           echo "::error::Backend health check failed after 60 s"
           exit 1
 
-# ── Stage 2: frontend → GitHub Pages (triggers on push to main after merge) ───
-# Pages environment protection only allows refs/heads/main, not refs/pull/N/merge.
+# ── Stage 2: frontend → GitHub Pages ──────────────────────────────────────────
+# Pages environment only allows refs/heads/main — single push trigger satisfies this.
   build:
-    if: github.event_name == 'push'
+    if: needs.release-check.outputs.is_release == 'true'
+    needs: [release-check, security, data-safety]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -154,8 +173,7 @@ jobs:
           path: frontend/dist
 
   deploy:
-    if: github.event_name == 'push'
-    needs: build
+    needs: [build]
     runs-on: ubuntu-latest
     environment:
       name: github-pages

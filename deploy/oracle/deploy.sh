@@ -44,9 +44,14 @@ cd "${APP_DIR}"
 
 echo "==> Ensuring Python virtualenv"
 if [[ ! -f ".venv/bin/pip" ]]; then
-  python3.12 -m venv .venv 2>/dev/null \
-    || python3.11 -m venv .venv \
-    || { echo "ERROR: cannot create virtualenv — run setup.sh on the server first" >&2; exit 1; }
+  if python3.12 -m venv .venv; then
+    echo "    Created virtualenv with python3.12"
+  elif python3.11 -m venv .venv; then
+    echo "::warning::python3.12 unavailable; created virtualenv with python3.11 — run setup.sh to upgrade" >&2
+  else
+    echo "ERROR: cannot create virtualenv — run setup.sh on the server first" >&2
+    exit 1
+  fi
 fi
 
 echo "==> Installing/updating Python dependencies"
