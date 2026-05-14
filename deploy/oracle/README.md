@@ -70,6 +70,9 @@ wildcard DNS service that maps `<dashed-ip>.nip.io` to the same IP automatically
 (e.g. `1-2-3-4.nip.io` → `1.2.3.4`). Run it once on the VM:
 
 ```bash
+# setup.sh clones the repo to ~/orthodox-calendar; use the absolute path:
+sudo bash ~/orthodox-calendar/deploy/oracle/setup-tls.sh
+# — or from inside the cloned repo directory:
 sudo bash deploy/oracle/setup-tls.sh
 ```
 

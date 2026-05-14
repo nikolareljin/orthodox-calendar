@@ -25,6 +25,11 @@ source "${ENV_FILE}"
 : "${OCI_USER:?OCI_USER must be set in ${ENV_FILE}}"
 : "${OCI_HOST:?OCI_HOST must be set in ${ENV_FILE}}"
 : "${OCI_SSH_KEY_FILE:?OCI_SSH_KEY_FILE must be set in ${ENV_FILE}}"
+: "${OCI_KNOWN_HOSTS:?OCI_KNOWN_HOSTS must be set in ${ENV_FILE}}"
+
+KNOWN_HOSTS_FILE="$(mktemp)"
+printf '%s\n' "${OCI_KNOWN_HOSTS}" > "${KNOWN_HOSTS_FILE}"
+trap 'rm -f "${KNOWN_HOSTS_FILE}"' EXIT
 
 echo "==> Building minimal backend archive"
 ARCHIVE="/tmp/orthodox-calendar-backend.tar.gz"
@@ -40,7 +45,8 @@ echo "==> Uploading archive to ${OCI_USER}@${OCI_HOST}"
 scp -i "${OCI_SSH_KEY_FILE}" \
     -o BatchMode=yes \
     -o ConnectTimeout=15 \
-    -o StrictHostKeyChecking=accept-new \
+    -o UserKnownHostsFile="${KNOWN_HOSTS_FILE}" \
+    -o StrictHostKeyChecking=yes \
     "${ARCHIVE}" \
     "${OCI_USER}@${OCI_HOST}:/tmp/orthodox-calendar-backend.tar.gz"
 
@@ -48,7 +54,8 @@ echo "==> Running deploy.sh on Oracle VM"
 ssh -i "${OCI_SSH_KEY_FILE}" \
     -o BatchMode=yes \
     -o ConnectTimeout=15 \
-    -o StrictHostKeyChecking=accept-new \
+    -o UserKnownHostsFile="${KNOWN_HOSTS_FILE}" \
+    -o StrictHostKeyChecking=yes \
     "${OCI_USER}@${OCI_HOST}" \
     'APP_DIR=/home/'"${OCI_USER}"'/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
     < "${SCRIPT_DIR}/deploy.sh"

@@ -150,11 +150,12 @@ fi
 # Enable automatic cert renewal — certbot renew is a no-op until 30 days before
 # expiry, so a daily check is fine. Prefer the systemd timer that certbot installs
 # via apt; fall back to a single crontab line if the timer is absent.
-if systemctl list-unit-files certbot.timer > /dev/null 2>&1; then
+if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
   sudo systemctl enable --now certbot.timer
   echo "==> certbot.timer enabled for automatic renewal"
 else
-  CRON_JOB="0 3 * * * certbot renew --quiet"
+  # certbot renew needs root; use sudo (deploy user has NOPASSWD for certbot in sudoers)
+  CRON_JOB="0 3 * * * sudo certbot renew --quiet"
   if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
     ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
     echo "==> Daily certbot renewal cron installed (03:00)"

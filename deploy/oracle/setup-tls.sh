@@ -23,9 +23,13 @@ FORCED_IP=""
 # ---------------------------------------------------------------------------
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --ip)    FORCED_IP="$2";       shift 2 ;;
-    --email) CERTBOT_EMAIL="$2";   shift 2 ;;
-    *)       echo "Unknown option: $1" >&2; exit 1 ;;
+    --ip)
+      if [[ $# -lt 2 ]]; then echo "ERROR: --ip requires an argument" >&2; exit 1; fi
+      FORCED_IP="$2"; shift 2 ;;
+    --email)
+      if [[ $# -lt 2 ]]; then echo "ERROR: --email requires an argument" >&2; exit 1; fi
+      CERTBOT_EMAIL="$2"; shift 2 ;;
+    *) echo "Unknown option: $1" >&2; exit 1 ;;
   esac
 done
 
@@ -104,7 +108,7 @@ fi
 # ---------------------------------------------------------------------------
 # 4 — Enable automatic renewal (once daily, no-op until 30 days before expiry)
 # ---------------------------------------------------------------------------
-if systemctl list-unit-files certbot.timer > /dev/null 2>&1; then
+if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
   systemctl enable --now certbot.timer
   echo "==> certbot.timer enabled (systemd)"
 else

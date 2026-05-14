@@ -68,26 +68,29 @@ systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — c
 
 echo "==> Adding sudoers rules for the deploy user"
 cat > /etc/sudoers.d/orthodox-calendar <<SUDOERS
-${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl restart ${SERVICE}
-${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl daemon-reload
-${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl start nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl enable nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl reload nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl restart nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl enable certbot.timer
+# apt — update cache and install packages needed by deploy.sh pre-flight
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get update
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get update -qq
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3.12-venv
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y curl
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y certbot
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3-certbot-nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/nginx/sites-available/${SERVICE}
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y *
+# tee — write systemd unit and nginx site config files
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/systemd/system/${SERVICE}.service
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/nginx/sites-available/${SERVICE}
+# systemctl — service management
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl daemon-reload
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable ${SERVICE}
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart ${SERVICE}
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl start nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
+# nginx — config test
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t
+# nginx site symlink management
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/ln -sf /etc/nginx/sites-available/${SERVICE} /etc/nginx/sites-enabled/${SERVICE}
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/rm -f /etc/nginx/sites-enabled/default
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot
+# certbot — TLS provisioning and renewal
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot *
 SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 

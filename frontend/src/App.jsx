@@ -55,10 +55,12 @@ function getStoredTheme() {
 
 function getStoredTradition() {
   try {
-    return localStorage.getItem("oc-tradition") || "serbian";
+    const stored = localStorage.getItem("oc-tradition");
+    if (stored && stored in TRADITIONS) return stored;
   } catch {
-    return "serbian";
+    // ignore storage errors
   }
+  return "serbian";
 }
 
 function feastClass(info) {
