@@ -12,7 +12,13 @@ SERVICE="orthodox-calendar"
 # lack these even after initial setup.sh if packages were purged/upgraded).
 # setup.sh must have granted the deploy user the matching sudoers entries.
 # ---------------------------------------------------------------------------
+_apt_updated=false
 _apt_install() {
+  if [[ "${_apt_updated}" == "false" ]]; then
+    echo "    Updating apt cache"
+    sudo apt-get update -qq
+    _apt_updated=true
+  fi
   echo "    Installing missing package: $1"
   sudo DEBIAN_FRONTEND=noninteractive apt-get install -y "$1"
 }
@@ -25,18 +31,83 @@ if ! command -v python3.12 > /dev/null 2>&1; then
   echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
   exit 1
 fi
-if ! python3.12 -c 'import venv' 2>/dev/null; then
+if ! dpkg -s python3.12-venv > /dev/null 2>&1; then
   _apt_install python3.12-venv
 fi
+if ! command -v nginx > /dev/null 2>&1; then
+  _apt_install nginx
+fi
+
+APP_USER="$(id -un)"
+
+# Install systemd service unit if missing or stale
+UNIT_FILE="/etc/systemd/system/${SERVICE}.service"
+if [[ ! -f "${UNIT_FILE}" ]]; then
+  echo "==> Installing systemd service unit"
+  sudo tee "${UNIT_FILE}" > /dev/null <<UNIT
+[Unit]
+Description=Orthodox Calendar — FastAPI backend
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+User=${APP_USER}
+WorkingDirectory=${APP_DIR}/backend
+Environment="ORTHODOX_CALENDAR_DATA_PATH=${APP_DIR}/backend/app/data"
+ExecStart=${APP_DIR}/.venv/bin/uvicorn app.main:app \\
+          --host 127.0.0.1 --port 8000 \\
+          --workers 2 \\
+          --log-level info
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+UNIT
+  sudo systemctl daemon-reload
+  sudo systemctl enable "${SERVICE}"
+fi
+
+# Install nginx site config if missing
+NGINX_SITE="/etc/nginx/sites-available/${SERVICE}"
+if [[ ! -f "${NGINX_SITE}" ]]; then
+  echo "==> Installing nginx site config"
+  sudo tee "${NGINX_SITE}" > /dev/null <<'NGINXCONF'
+server {
+    listen 80;
+    listen [::]:80;
+    server_name _;
+
+    add_header X-Content-Type-Options nosniff;
+    add_header X-Frame-Options DENY;
+    add_header Referrer-Policy strict-origin-when-cross-origin;
+
+    location / {
+        proxy_pass         http://127.0.0.1:8000;
+        proxy_http_version 1.1;
+        proxy_set_header   Host              $host;
+        proxy_set_header   X-Real-IP         $remote_addr;
+        proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto $scheme;
+        proxy_read_timeout 30s;
+    }
+
+    location = /nginx-health {
+        access_log off;
+        return 200 "ok\n";
+        add_header Content-Type text/plain;
+    }
+}
+NGINXCONF
+  sudo ln -sf "${NGINX_SITE}" "/etc/nginx/sites-enabled/${SERVICE}"
+  sudo rm -f /etc/nginx/sites-enabled/default
+  sudo nginx -t
+fi
+
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
-  echo "WARNING: nginx is not active — verifying it is installed"
-  if ! command -v nginx > /dev/null 2>&1; then
-    _apt_install nginx
-    sudo systemctl enable nginx
-    sudo systemctl start nginx
-  else
-    sudo systemctl start nginx || true
-  fi
+  sudo systemctl enable nginx
+  sudo systemctl start nginx
 fi
 
 echo "==> Installing scoped backend release"
@@ -86,7 +157,10 @@ if [[ -f ".venv/bin/pip" ]] && .venv/bin/python -c 'import sys' > /dev/null 2>&1
 fi
 if [[ "${_venv_ok}" == "false" ]]; then
   rm -rf .venv
-  python3.12 -m venv .venv
+  if ! python3.12 -m venv .venv 2>/dev/null; then
+    _apt_install python3.12-venv
+    python3.12 -m venv .venv
+  fi
   echo "    Created virtualenv with python3.12"
   # Note: a broken interpreter symlink is already caught by the import-sys
   # check above (triggers a rebuild). Only an in-place patch upgrade that
