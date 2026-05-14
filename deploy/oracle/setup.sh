@@ -31,6 +31,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   nginx nginx-common \
   git curl \
   certbot python3-certbot-nginx \
+  cron \
   iptables iptables-persistent
 
 echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"

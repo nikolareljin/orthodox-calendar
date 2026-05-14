@@ -162,6 +162,10 @@ if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^c
   systemctl enable --now certbot.timer
   echo "==> certbot.timer enabled (systemd)"
 else
+  if ! command -v crontab > /dev/null 2>&1; then
+    echo "==> Installing cron for renewal fallback"
+    _apt_install cron
+  fi
   CRON_JOB="0 3 * * * certbot renew --quiet"
   if crontab -l 2>/dev/null | grep -qF "certbot renew"; then
     echo "==> certbot renewal cron already present"

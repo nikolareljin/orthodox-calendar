@@ -139,6 +139,11 @@ if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^c
 else
   # certbot.timer unit absent (not installed by this certbot package).
   # The deploy user has NOPASSWD for certbot renew --quiet via setup.sh sudoers.
+  if ! command -v crontab > /dev/null 2>&1; then
+    echo "ERROR: certbot.timer is absent and crontab is not installed." >&2
+    echo "       Re-run deploy/oracle/setup.sh to install cron, then redeploy." >&2
+    exit 1
+  fi
   CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
   if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
     ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
