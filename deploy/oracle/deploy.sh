@@ -44,8 +44,6 @@ if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
   _apt_install python3-certbot-nginx
 fi
 
-APP_USER="$(id -un)"
-
 echo "==> Detecting public IP"
 _raw="$(curl -sf --max-time 5 -H 'Authorization: Bearer Oracle' 'http://169.254.169.254/opc/v2/vnics/' 2>/dev/null || true)"
 PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
@@ -90,9 +88,9 @@ if [[ ! -f "${NGINX_SITE}" ]]; then
 fi
 
 if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
-  echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
-  echo "       Run deploy/oracle/setup.sh on the server first." >&2
-  exit 1
+  echo "    WARNING: /usr/local/bin/oc-certbot-provision not found — TLS provisioning skipped." >&2
+  echo "             Re-run deploy/oracle/setup.sh to install the wrapper, then redeploy." >&2
+  NIP_DOMAIN=""
 fi
 
 if ! systemctl is-active --quiet nginx 2>/dev/null; then

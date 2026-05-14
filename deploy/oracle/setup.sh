@@ -34,8 +34,8 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   iptables iptables-persistent
 
 echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"
-# Use -C (check) before -A (append) so this is idempotent and safe on chains
-# with any number of existing rules (avoids the failure mode of -I N when N > chain length).
+# Idempotent: delete all existing copies, then insert before the first REJECT/DROP
+# so the ACCEPT is reachable even on chains with a terminal deny rule.
 _open_port() {
   local ipt="$1" dport="$2"
   # Delete all existing copies of this rule — a stale appended rule may sit
@@ -89,10 +89,17 @@ echo "==> Installing certbot provision wrapper"
 cat > /usr/local/bin/oc-certbot-provision <<'WRAPPER'
 #!/usr/bin/env bash
 # Usage: oc-certbot-provision <nip-domain> <email>
-# Installs by setup.sh; run only via sudo from the deploy user.
+# Installed by setup.sh; run only via sudo from the deploy user.
 set -euo pipefail
 DOMAIN="$1"
 EMAIL="$2"
+# Validate domain is a well-formed nip.io hostname derived from an IPv4 address.
+# Rejects anything with spaces, shell metacharacters, or nginx config syntax.
+_nip_re='^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io$'
+if ! [[ "${DOMAIN}" =~ ${_nip_re} ]]; then
+  echo "ERROR: oc-certbot-provision: '${DOMAIN}' is not a valid nip.io hostname" >&2
+  exit 1
+fi
 NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
 # Update server_name before certbot so --nginx can match this vhost by name.
 if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
