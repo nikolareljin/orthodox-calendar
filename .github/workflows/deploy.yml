@@ -20,12 +20,20 @@ permissions:
 # lives with the code and needs no out-of-band setup.
 # TODO: Remove this env block after 2026-06-02.
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
+# Serialize entire deploy runs so two rapid pushes to main (e.g. a release
+# merge followed by a hotfix) do not race through release-check in parallel
+# and then collide at the per-job concurrency groups.
+concurrency:
+  group: deploy
+  cancel-in-progress: false
 
 jobs:
 # ── Stage 0: detect if push came from a merged release/* PR ──────────────────
   release-check:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       is_release: ${{ steps.check.outputs.is_release }}
     steps:
@@ -65,6 +73,7 @@ jobs:
           count=0
           _api_err=$(mktemp)
           count=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
+            -F per_page=100 \
             --jq '[.[] | select(.merged_at != null and (.head.ref | startswith("release/")))] | length' \
             2>"${_api_err}") \
             || { echo "::warning::gh api call failed ($(< "${_api_err}")); relying on commit-message fallback"; count=0; api_ok=false; }
@@ -74,15 +83,25 @@ jobs:
           if [[ "${count}" -gt 0 ]]; then
             is_release="true"
           elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request #[0-9]+ from [^ ]+/release/'; then
-            # Fallback: merge-commit subject — redundant guard for the standard
-            # merge strategy. [^ ]+ (vs [^/]+) allows slashes so fork-based PRs
-            # (fork-owner/release/x) are also matched. Squash/rebase subjects do
-            # not match this pattern.
+            # Fallback: standard merge-commit subject. [^ ]+ allows slashes so
+            # fork-based PRs (fork-owner/release/x) are also matched.
             is_release="true"
-          elif [[ "${api_ok}" == "false" ]]; then
-            # API failed and no fallback matched. If the commit message hints at
-            # a release/ branch (e.g. squash/rebase merge) fail loudly so the
-            # run is re-runnable. Otherwise assume non-release and warn only.
+          else
+            # Squash-merge fallback: subjects end with (#NNN) — extract the PR
+            # number and verify its head branch via the API.
+            _squash_pr=$(echo "${HEAD_COMMIT_MSG}" | grep -oE '\(#[0-9]+\)$' | tr -d '(#)' || true)
+            if [[ -n "${_squash_pr}" ]]; then
+              _squash_ref=$(gh api "repos/${{ github.repository }}/pulls/${_squash_pr}" \
+                --jq '.head.ref' 2>/dev/null || echo "")
+              if echo "${_squash_ref}" | grep -q '^release/'; then
+                is_release="true"
+              fi
+            fi
+          fi
+
+          # API failed and no fallback matched: fail loudly if message hints at a
+          # release branch so the run is re-runnable; otherwise warn only.
+          if [[ "${is_release}" == "false" && "${api_ok}" == "false" ]]; then
             if echo "${HEAD_COMMIT_MSG}" | grep -qi 'release/'; then
               echo "::error::gh api failed on a commit that may be a release merge. Re-run the workflow to retry."
               exit 1

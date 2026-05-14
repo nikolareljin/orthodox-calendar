@@ -45,7 +45,7 @@ cd "${APP_DIR}"
 echo "==> Ensuring Python virtualenv"
 _venv_ok=false
 if [[ -f ".venv/bin/pip" ]] && .venv/bin/python -c 'import sys' > /dev/null 2>&1; then
-  _py_ver=$(.venv/bin/python -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")' 2>/dev/null || echo "")
+  _py_ver=$(.venv/bin/python -c 'import sys; print("%d.%d" % (sys.version_info.major, sys.version_info.minor))' 2>/dev/null || echo "")
   if [[ "${_py_ver}" == "3.12" ]]; then
     _venv_ok=true
   else
