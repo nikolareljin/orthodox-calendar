@@ -101,9 +101,10 @@ fi
 
 if [[ -n "${NIP_DOMAIN}" ]]; then
   # Cert file existing is not enough — nginx may have been reset (e.g. by
-  # re-running setup.sh) and lost the SSL server block. Check both.
+  # re-running setup.sh) and lost the SSL server block. Also verify nginx
+  # references the cert for THIS domain, not a stale cert from an old IP.
   if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
-      && grep -q "ssl_certificate" "${NGINX_SITE}" 2>/dev/null; then
+      && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
