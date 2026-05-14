@@ -53,6 +53,14 @@ function getStoredTheme() {
   }
 }
 
+function getStoredTradition() {
+  try {
+    return localStorage.getItem("oc-tradition") || "serbian";
+  } catch {
+    return "serbian";
+  }
+}
+
 function feastClass(info) {
   if (!info) return "";
   if (info.feast_types.includes("Great Feast")) return "great-feast";
@@ -365,7 +373,7 @@ export default function App() {
   const getToday = () => new Date();
   const initialToday = useMemo(getToday, []);
   const [theme, setTheme] = useState(getStoredTheme);
-  const [tradition, setTradition] = useState("serbian");
+  const [tradition, setTradition] = useState(getStoredTradition);
   const [year, setYear] = useState(initialToday.getFullYear());
   const [month, setMonth] = useState(initialToday.getMonth() + 1);
   const [selectedDay, setSelectedDay] = useState(initialToday.getDate());
@@ -407,6 +415,14 @@ export default function App() {
       // Browsers can disable storage; the selected theme still applies for this session.
     }
   }, [theme]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("oc-tradition", tradition);
+    } catch {
+      // ignore storage errors
+    }
+  }, [tradition]);
 
   const loadMonth = useCallback(async () => {
     const requestId = loadMonthRequestRef.current + 1;

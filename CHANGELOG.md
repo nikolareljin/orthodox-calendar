@@ -8,6 +8,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Tradition persistence** — selected tradition is now saved to `localStorage` (`oc-tradition` key) and restored on next visit; falls back to Serbian if no preference is stored.
+
+### Added
 - **Full liturgical reading texts** — Epistle and Gospel verses are now displayed inline with superscript verse numbers and paragraph breaks. Each reading is a collapsible card (source label + reference + expand toggle). Text is sourced from the `passage[]` array already embedded in orthocal.info responses — no additional API calls required.
 - **Church directory** — "Orthodox Churches" grid in the About section with history, founding date, patron saint, website link, and cross glyph for all 16 supported traditions.
 - **Moon phase indicator** — lunar phase emoji, name, and illumination percentage displayed in the day-detail badge row (`GET /api/v1/moon-phase`).
