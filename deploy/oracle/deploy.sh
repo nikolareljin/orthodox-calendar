@@ -53,7 +53,7 @@ if [[ -z "${PUBLIC_IP}" ]]; then
   PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
 fi
 if [[ -z "${PUBLIC_IP}" ]]; then
-  PUBLIC_IP="$(curl -sf --max-time 10 ifconfig.me 2>/dev/null || true)"
+  PUBLIC_IP="$(curl -sf --max-time 10 https://ifconfig.me 2>/dev/null || true)"
 fi
 unset _raw
 # Validate before use — reject anything that is not a plain IPv4 address to

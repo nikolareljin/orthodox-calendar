@@ -48,6 +48,14 @@ _apt_install() {
 }
 
 # ---------------------------------------------------------------------------
+# 0 — Ensure curl is present (needed for IP detection below)
+# ---------------------------------------------------------------------------
+if ! command -v curl > /dev/null 2>&1; then
+  echo "==> Installing curl"
+  _apt_install curl
+fi
+
+# ---------------------------------------------------------------------------
 # 1 — Resolve public IP → nip.io domain
 # ---------------------------------------------------------------------------
 if [[ -n "${FORCED_IP}" ]]; then
@@ -66,7 +74,7 @@ else
       2>/dev/null || true)"
   fi
   if [[ -z "${PUBLIC_IP}" ]]; then
-    PUBLIC_IP="$(curl -sf --max-time 10 ifconfig.me 2>/dev/null || true)"
+    PUBLIC_IP="$(curl -sf --max-time 10 https://ifconfig.me 2>/dev/null || true)"
   fi
   unset _raw
 fi
