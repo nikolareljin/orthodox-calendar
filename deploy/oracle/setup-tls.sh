@@ -102,6 +102,12 @@ fi
 NIP_DOMAIN="${PUBLIC_IP//./-}.nip.io"
 echo "==> IP: ${PUBLIC_IP}  →  domain: ${NIP_DOMAIN}"
 
+NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
+if [[ ! -f "${NGINX_SITE}" ]]; then
+  echo "ERROR: nginx site ${NGINX_SITE} not found — run setup.sh first." >&2
+  exit 1
+fi
+
 # ---------------------------------------------------------------------------
 # 2 — Install certbot if absent
 # ---------------------------------------------------------------------------
@@ -122,12 +128,6 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
   echo "==> Starting nginx"
   systemctl enable nginx
   systemctl start nginx
-fi
-
-NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
-if [[ ! -f "${NGINX_SITE}" ]]; then
-  echo "ERROR: nginx site ${NGINX_SITE} not found — run setup.sh first." >&2
-  exit 1
 fi
 if ! grep -q "server_name ${NIP_DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
   echo "==> Updating nginx server_name → ${NIP_DOMAIN}"

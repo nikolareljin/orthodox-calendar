@@ -88,10 +88,10 @@ else
   echo "    Could not detect public IP — skipping TLS step"
 fi
 
-if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
-  echo "    WARNING: /usr/local/bin/oc-certbot-provision not found — TLS provisioning skipped." >&2
-  echo "             Re-run deploy/oracle/setup.sh to install the wrapper, then redeploy." >&2
-  NIP_DOMAIN=""
+if [[ -n "${NIP_DOMAIN}" && ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
+  echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
+  echo "       Re-run deploy/oracle/setup.sh to install the TLS wrapper, then redeploy." >&2
+  exit 1
 fi
 
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
@@ -101,8 +101,9 @@ fi
 
 if [[ -n "${NIP_DOMAIN}" ]]; then
   if [[ -z "${CERTBOT_EMAIL}" ]]; then
-    echo "    WARNING: CERTBOT_EMAIL is not set — skipping TLS provisioning." >&2
-    echo "             Set the CERTBOT_EMAIL GitHub secret and redeploy to enable HTTPS." >&2
+    echo "ERROR: CERTBOT_EMAIL is not set." >&2
+    echo "       Set the CERTBOT_EMAIL GitHub secret before deploying the HTTPS API endpoint." >&2
+    exit 1
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
@@ -113,13 +114,12 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
-    # Non-fatal: a transient Let's Encrypt/DNS/port-80 failure must not block the
-    # backend release from being installed and restarted.
     if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then
       echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
     else
-      echo "    WARNING: TLS provisioning failed — backend will continue on HTTP." >&2
-      echo "             Redeploy once the certbot issue is resolved." >&2
+      echo "ERROR: TLS provisioning failed for https://${NIP_DOMAIN}." >&2
+      echo "       Fix the certbot/nginx issue and redeploy before publishing the frontend." >&2
+      exit 1
     fi
   fi
 fi
