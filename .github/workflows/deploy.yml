@@ -197,6 +197,7 @@ jobs:
         env:
           OCI_USER: ${{ secrets.OCI_USER }}
           OCI_HOST: ${{ secrets.OCI_HOST }}
+          CERTBOT_EMAIL: ${{ secrets.CERTBOT_EMAIL }}
         run: |
           set -euo pipefail
           scp -i ~/.ssh/deploy_key \
@@ -204,11 +205,15 @@ jobs:
               -o ConnectTimeout=15 \
               /tmp/orthodox-calendar-backend.tar.gz \
               "${OCI_USER}@${OCI_HOST}:/tmp/orthodox-calendar-backend.tar.gz"
+          _deploy_env="APP_DIR=/home/${OCI_USER}/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz"
+          if [[ -n "${CERTBOT_EMAIL:-}" ]]; then
+            _deploy_env="${_deploy_env} CERTBOT_EMAIL=${CERTBOT_EMAIL}"
+          fi
           ssh -i ~/.ssh/deploy_key \
               -o BatchMode=yes \
               -o ConnectTimeout=15 \
               "${OCI_USER}@${OCI_HOST}" \
-              'APP_DIR=/home/'"${OCI_USER}"'/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
+              "${_deploy_env} bash -s" \
               < deploy/oracle/deploy.sh
 
       - name: Verify backend health

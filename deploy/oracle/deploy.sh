@@ -115,13 +115,19 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
 fi
 
 # Enable automatic cert renewal — certbot renew is a no-op until 30 days before
-# expiry, so a daily check is fine. Prefer the systemd timer that certbot installs
-# via apt; fall back to a single crontab line if the timer is absent.
+# expiry, so a daily check is fine. Prefer the systemd timer; fall back to cron.
+# The timer enable may fail on servers provisioned before the certbot.timer
+# sudoers entry was added — treat that as non-fatal and install cron instead.
+_renewal_set=false
 if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
-  sudo systemctl enable --now certbot.timer
-  echo "==> certbot.timer enabled for automatic renewal"
-else
-  # certbot renew needs root; use sudo (deploy user has NOPASSWD for certbot in sudoers)
+  if sudo systemctl enable --now certbot.timer 2>/dev/null; then
+    echo "==> certbot.timer enabled for automatic renewal"
+    _renewal_set=true
+  else
+    echo "    WARNING: certbot.timer enable failed (sudoers may predate this change) — using cron fallback"
+  fi
+fi
+if [[ "${_renewal_set}" == "false" ]]; then
   CRON_JOB="0 3 * * * sudo certbot renew --quiet"
   if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
     ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -

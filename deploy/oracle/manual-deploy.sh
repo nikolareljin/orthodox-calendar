@@ -51,13 +51,17 @@ scp -i "${OCI_SSH_KEY_FILE}" \
     "${OCI_USER}@${OCI_HOST}:/tmp/orthodox-calendar-backend.tar.gz"
 
 echo "==> Running deploy.sh on Oracle VM"
+_deploy_env="APP_DIR=/home/${OCI_USER}/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz"
+if [[ -n "${CERTBOT_EMAIL:-}" ]]; then
+  _deploy_env="${_deploy_env} CERTBOT_EMAIL=${CERTBOT_EMAIL}"
+fi
 ssh -i "${OCI_SSH_KEY_FILE}" \
     -o BatchMode=yes \
     -o ConnectTimeout=15 \
     -o UserKnownHostsFile="${KNOWN_HOSTS_FILE}" \
     -o StrictHostKeyChecking=yes \
     "${OCI_USER}@${OCI_HOST}" \
-    'APP_DIR=/home/'"${OCI_USER}"'/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
+    "${_deploy_env} bash -s" \
     < "${SCRIPT_DIR}/deploy.sh"
 
 echo ""
