@@ -55,12 +55,6 @@ fi
 if ! command -v nginx > /dev/null 2>&1; then
   _apt_install nginx
 fi
-if ! command -v certbot > /dev/null 2>&1; then
-  _apt_install certbot
-fi
-if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
-  _apt_install python3-certbot-nginx
-fi
 
 echo "==> Detecting public IP"
 _raw="$(curl -sf --max-time 5 -H 'Authorization: Bearer Oracle' 'http://169.254.169.254/opc/v2/vnics/' 2>/dev/null || true)"
@@ -104,10 +98,17 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     echo "ERROR: CERTBOT_EMAIL is not set." >&2
     echo "       Set the CERTBOT_EMAIL GitHub secret before deploying the HTTPS API endpoint." >&2
     exit 1
+  fi
+  if ! command -v certbot > /dev/null 2>&1; then
+    _apt_install certbot
+  fi
+  if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
+    _apt_install python3-certbot-nginx
+  fi
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
-  elif [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
+  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
       && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
