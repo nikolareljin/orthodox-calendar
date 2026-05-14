@@ -43,6 +43,14 @@ jobs:
           set -euo pipefail
           is_release="false"
 
+          # Guard: only deploy from refs/heads/main (defense in depth should
+          # a second trigger such as workflow_dispatch or tags be added later).
+          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            echo "::notice::Push is not to refs/heads/main — release deploy skipped."
+            echo "is_release=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
           # Guard: force-pushes can replay an old release SHA — skip and annotate
           # so the decision is visible in the workflow run history.
           if [[ "${GITHUB_EVENT_FORCED}" == "true" ]]; then
@@ -53,10 +61,12 @@ jobs:
 
           # Primary: GitHub API — reliable for standard and squash merges.
           api_ok=true
+          count=0
           count=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
             --jq '[.[] | select(.merged_at != null and (.head.ref | startswith("release/")))] | length' \
             2>/dev/null) \
             || { echo "::warning::gh api call failed; relying on commit-message fallback" >&2; count=0; api_ok=false; }
+          count="${count:-0}"
 
           if [[ "${count}" -gt 0 ]]; then
             is_release="true"
@@ -67,10 +77,9 @@ jobs:
             # Squash/rebase subjects do not match this pattern.
             is_release="true"
           elif [[ "${api_ok}" == "false" ]]; then
-            # API failed and no fallback matched (e.g. squash/rebase merge):
-            # fail so the job is re-runnable rather than silently skipping.
-            echo "::error::gh api failed and commit-message fallback did not match. Re-run the workflow to retry." >&2
-            exit 1
+            # API failed and no fallback matched — can't determine intent.
+            # Default to no-deploy with a warning; re-run if this was a release merge.
+            echo "::warning::gh api failed and commit-message fallback did not match. If this was a release merge, re-run the workflow." >&2
           fi
 
           echo "is_release=${is_release}" >> "$GITHUB_OUTPUT"
