@@ -27,7 +27,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
 add-apt-repository -y ppa:deadsnakes/ppa
 apt-get update -qq
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  "${PYTHON}" "${PYTHON}-venv" "${PYTHON}-distutils" \
+  "${PYTHON}" "${PYTHON}-venv" \
   nginx nginx-common \
   git curl \
   certbot python3-certbot-nginx \

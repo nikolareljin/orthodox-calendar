@@ -6,6 +6,7 @@ set -euo pipefail
 APP_DIR="${APP_DIR:-/home/ubuntu/orthodox-calendar}"
 RELEASE_ARCHIVE="${RELEASE_ARCHIVE:-}"
 SERVICE="orthodox-calendar"
+CERTBOT_EMAIL="${CERTBOT_EMAIL:-nikola.reljin@gmail.com}"
 
 # ---------------------------------------------------------------------------
 # Pre-flight: ensure runtime tools are present (minimal Oracle Ubuntu may
@@ -108,7 +109,7 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
-    sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "nikola.reljin@gmail.com"
+    sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"
     echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
   fi
 fi

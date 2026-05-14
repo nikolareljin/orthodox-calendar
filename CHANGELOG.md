@@ -9,7 +9,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
-## [0.3.0]
+## [0.3.0] - 2026-05-14
 
 ### Added
 - **Tradition persistence** — selected tradition is now saved to `localStorage` (`oc-tradition` key) and restored on next visit; falls back to Serbian if no preference is stored.

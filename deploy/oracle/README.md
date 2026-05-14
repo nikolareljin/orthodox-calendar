@@ -103,8 +103,13 @@ Set VITE_API_BASE=https://1-2-3-4.nip.io in GitHub Actions secrets.
 ```
 
 > **Note:** if the Oracle VM is ever reprovisioned with a new public IP, re-run
-> `setup-tls.sh` — it will detect the new IP, update the nginx `server_name` to
-> the new nip.io hostname, and obtain a fresh certificate automatically.
+> `setup-tls.sh` from the raw GitHub URL (the cloned repo is pruned to just
+> `backend/` after each deploy):
+> ```bash
+> curl -fsSL https://raw.githubusercontent.com/nikolareljin/orthodox-calendar/main/deploy/oracle/setup-tls.sh | sudo bash
+> ```
+> It will detect the new IP, update the nginx `server_name` to the new nip.io
+> hostname, and obtain a fresh certificate automatically.
 
 ---
 
@@ -120,6 +125,7 @@ and add:
 | `OCI_SSH_KEY` | Contents of the **private** SSH key that matches the public key on the VM |
 | `OCI_KNOWN_HOSTS` | Output of: `ssh-keyscan -H <YOUR_VM_IP>` run from your laptop |
 | `VITE_API_BASE` | `http://<YOUR_VM_IP>` (or `https://your.domain.com` after TLS) |
+| `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications (optional; falls back to the default) |
 
 Generate `OCI_KNOWN_HOSTS` on your machine (not the VM):
 
