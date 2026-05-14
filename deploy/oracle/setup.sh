@@ -42,7 +42,7 @@ _open_port() {
   # Insert before the first REJECT/DROP so the ACCEPT is reachable on Oracle
   # images that ship with a terminal deny rule in INPUT.
   local pos
-  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/REJECT|DROP/{print $1; exit}')"
+  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && /REJECT|DROP/ {print $1; exit}')"
   if [[ -n "${pos}" ]]; then
     "${ipt}" -I INPUT "${pos}" -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
   else

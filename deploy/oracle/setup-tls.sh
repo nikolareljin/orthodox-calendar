@@ -75,6 +75,12 @@ if [[ -z "${PUBLIC_IP}" ]]; then
   echo "ERROR: could not determine public IP. Pass it with --ip <address>." >&2
   exit 1
 fi
+# Reject non-IPv4 values to prevent nginx config injection from a malformed
+# IMDS/ifconfig.me response or an invalid --ip argument.
+if ! [[ "${PUBLIC_IP}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+  echo "ERROR: '${PUBLIC_IP}' is not a valid IPv4 address." >&2
+  exit 1
+fi
 
 NIP_DOMAIN="${PUBLIC_IP//./-}.nip.io"
 echo "==> IP: ${PUBLIC_IP}  →  domain: ${NIP_DOMAIN}"

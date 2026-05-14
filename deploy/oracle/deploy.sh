@@ -57,6 +57,12 @@ if [[ -z "${PUBLIC_IP}" ]]; then
   PUBLIC_IP="$(curl -sf --max-time 10 ifconfig.me 2>/dev/null || true)"
 fi
 unset _raw
+# Validate before use — reject anything that is not a plain IPv4 address to
+# prevent nginx config injection from a malformed or intercepted HTTP response.
+if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+  echo "    WARNING: detected value '${PUBLIC_IP}' is not a valid IPv4 address — ignoring"
+  PUBLIC_IP=""
+fi
 NIP_DOMAIN=""
 SERVER_NAME="_"
 if [[ -n "${PUBLIC_IP}" ]]; then
