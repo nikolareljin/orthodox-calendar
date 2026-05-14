@@ -8,7 +8,8 @@
 #   sudo bash deploy/oracle/setup.sh
 #
 # After this script, the backend is live on port 80.
-# Add a domain + TLS with:  sudo certbot --nginx -d your.domain.com
+# Add TLS with:  sudo bash deploy/oracle/setup-tls.sh
+# deploy.sh (CI) calls /usr/local/bin/oc-certbot-provision (installed below).
 
 set -euo pipefail
 
@@ -37,10 +38,10 @@ echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by 
 # with any number of existing rules (avoids the failure mode of -I N when N > chain length).
 _open_port() {
   local ipt="$1" dport="$2"
-  # Skip if the rule already exists
-  "${ipt}" -C INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null && return 0
-  # Insert before the first REJECT/DROP so the ACCEPT is reachable on Oracle
-  # images that ship with a terminal deny rule in INPUT.
+  # Delete all existing copies of this rule — a stale appended rule may sit
+  # after a terminal REJECT/DROP and be unreachable; -C cannot detect that.
+  while "${ipt}" -D INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null; do :; done
+  # Re-insert before the first REJECT/DROP so the ACCEPT is reachable
   local pos
   pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && /REJECT|DROP/ {print $1; exit}')"
   if [[ -n "${pos}" ]]; then
@@ -82,6 +83,32 @@ systemctl start "${SERVICE}"
 echo "    Service status:"
 systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — check: journalctl -u ${SERVICE}"
 
+echo "==> Installing certbot provision wrapper"
+# Root-owned wrapper with hardcoded certbot flags — eliminates hook-injection risk
+# from a wildcard sudoers entry. deploy.sh calls this via sudo with two args only.
+cat > /usr/local/bin/oc-certbot-provision <<'WRAPPER'
+#!/usr/bin/env bash
+# Usage: oc-certbot-provision <nip-domain> <email>
+# Installs by setup.sh; run only via sudo from the deploy user.
+set -euo pipefail
+DOMAIN="$1"
+EMAIL="$2"
+NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
+# Update server_name before certbot so --nginx can match this vhost by name.
+if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
+  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/" "${NGINX_SITE}"
+  nginx -t
+  systemctl reload nginx
+fi
+certbot --nginx \
+  -d "${DOMAIN}" \
+  --non-interactive \
+  --agree-tos \
+  -m "${EMAIL}" \
+  --redirect
+WRAPPER
+chmod 755 /usr/local/bin/oc-certbot-provision
+
 echo "==> Adding sudoers rules for the deploy user"
 cat > /etc/sudoers.d/orthodox-calendar <<SUDOERS
 # apt — update cache and exact packages that deploy.sh may install as pre-flight
@@ -100,9 +127,10 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl start nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
-# certbot — exact invocations used by deploy.sh (* matches domain/email, no spaces)
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot --nginx -d * --non-interactive --agree-tos -m * --redirect
+# certbot — renewal only (no flags, no injection surface)
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet
+# Wrapper for TLS provisioning — hardcoded flags, no wildcard injection surface
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-provision
 SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 

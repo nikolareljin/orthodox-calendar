@@ -89,6 +89,12 @@ if [[ ! -f "${NGINX_SITE}" ]]; then
   exit 1
 fi
 
+if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
+  echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
+fi
+
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
   sudo systemctl enable nginx
   sudo systemctl start nginx
@@ -102,10 +108,9 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
-    sudo certbot --nginx -d "${NIP_DOMAIN}" \
-      --non-interactive --agree-tos \
-      -m "nikola.reljin@gmail.com" \
-      --redirect
+    # oc-certbot-provision updates server_name then calls certbot with fixed flags.
+    # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
+    sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "nikola.reljin@gmail.com"
     echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
   fi
 fi
