@@ -26,6 +26,9 @@ concurrency:
 jobs:
 # ── Stage 0: detect if push came from a merged release/* PR ──────────────────
   release-check:
+    # Skip on force-pushes: a forced push can replay an old release merge SHA
+    # and trigger an unintended re-deploy of a past version.
+    if: github.event.forced != true
     runs-on: ubuntu-latest
     outputs:
       is_release: ${{ steps.check.outputs.is_release }}
@@ -40,15 +43,19 @@ jobs:
           set -euo pipefail
           is_release="false"
 
-          # Primary: GitHub API — reliable for standard merge commits
+          # Primary: GitHub API — reliable for standard and squash merges.
+          # On transient API failure fall through to the commit-message check.
           count=$(gh api "repos/${{ github.repository }}/commits/${{ github.sha }}/pulls" \
-            --jq '[.[] | select(.merged_at != null and (.head.ref | startswith("release/")))] | length')
+            --jq '[.[] | select(.merged_at != null and (.head.ref | startswith("release/")))] | length' \
+            2>/dev/null) \
+            || { echo "::warning::gh api call failed; relying on commit-message fallback" >&2; count=0; }
           if [[ "${count}" -gt 0 ]]; then
             is_release="true"
-          elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request .+/release/'; then
+          elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request #[0-9]+ from [^/]+/release/'; then
             # Fallback: merge-commit subject — redundant guard for the standard
-            # merge strategy. Squash/rebase subjects do not match this pattern;
-            # those are already handled by the API call above.
+            # merge strategy. Pattern anchors release/ immediately after the
+            # owner segment, matching the API's startswith("release/") check.
+            # Squash/rebase subjects do not match this pattern.
             is_release="true"
           fi
 
