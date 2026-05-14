@@ -3,9 +3,10 @@
 # automatic renewal. Safe to run multiple times (idempotent).
 #
 # Usage:
-#   sudo bash setup-tls.sh
-#   sudo bash setup-tls.sh --ip 1.2.3.4       # override auto-detected IP
-#   sudo bash setup-tls.sh --email you@x.com  # override notification address
+#   sudo bash setup-tls.sh --email you@example.com
+#   sudo bash setup-tls.sh --email you@example.com --ip 1.2.3.4
+#
+# --email is required (or set CERTBOT_EMAIL env var before calling sudo).
 #
 # nip.io maps <dashed-ip>.nip.io → the same IP automatically, so no domain
 # registration is needed. Certificates are valid for 90 days; this script also
