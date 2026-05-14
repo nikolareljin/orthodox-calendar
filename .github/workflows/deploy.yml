@@ -1,6 +1,9 @@
 name: Deploy
 
 on:
+  # Every push to main runs release-check as a lightweight no-op (~5 s) for
+  # non-release pushes; only a merged release/* PR sets is_release=true and
+  # unlocks the security gate and deploy stages.
   push:
     branches: [main]
 
@@ -43,7 +46,9 @@ jobs:
           if [[ "${count}" -gt 0 ]]; then
             is_release="true"
           elif echo "${HEAD_COMMIT_MSG}" | grep -qE '^Merge pull request .+/release/'; then
-            # Fallback: merge-commit subject line (catches squash/rebase strategies)
+            # Fallback: merge-commit subject — redundant guard for the standard
+            # merge strategy. Squash/rebase subjects do not match this pattern;
+            # those are already handled by the API call above.
             is_release="true"
           fi
 
@@ -80,6 +85,8 @@ jobs:
           echo "Data safety check passed."
 
 # ── Stage 2: auto-tag (version tag from release/* branch name) ───────────────
+# auto-tag-release.yml uses context.sha + listPullRequestsAssociatedWithCommit
+# (not github.event.pull_request), so it works correctly under a push event.
   tag:
     if: needs.release-check.outputs.is_release == 'true'
     needs: [release-check, security, data-safety]
