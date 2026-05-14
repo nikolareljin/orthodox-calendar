@@ -39,6 +39,8 @@ if ! command -v nginx > /dev/null 2>&1; then
 fi
 if ! command -v certbot > /dev/null 2>&1; then
   _apt_install certbot
+fi
+if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
   _apt_install python3-certbot-nginx
 fi
 
@@ -94,10 +96,18 @@ UNIT
   sudo systemctl enable "${SERVICE}"
 fi
 
-# Install nginx site config if missing
+# Write nginx site config if missing, or if it still has the server_name _
+# placeholder left by setup.sh (which sets no real hostname).
 NGINX_SITE="/etc/nginx/sites-available/${SERVICE}"
+_nginx_needs_write=false
 if [[ ! -f "${NGINX_SITE}" ]]; then
-  echo "==> Installing nginx site config (server_name: ${SERVER_NAME})"
+  _nginx_needs_write=true
+elif grep -qE '^\s*server_name\s+_;' "${NGINX_SITE}" 2>/dev/null; then
+  echo "==> Updating nginx site config (server_name _ → ${SERVER_NAME})"
+  _nginx_needs_write=true
+fi
+if [[ "${_nginx_needs_write}" == "true" ]]; then
+  echo "==> Writing nginx site config (server_name: ${SERVER_NAME})"
   sudo tee "${NGINX_SITE}" > /dev/null <<NGINXCONF
 server {
     listen 80;

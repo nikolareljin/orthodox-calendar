@@ -91,6 +91,19 @@ if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
 fi
 
 # ---------------------------------------------------------------------------
+# 2.5 — Ensure nginx vhost has the correct server_name before certbot runs.
+# The default config from setup.sh uses server_name _ (catch-all); certbot
+# --nginx matches vhosts by domain name, so it cannot select that block.
+# ---------------------------------------------------------------------------
+NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
+if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${NIP_DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
+  echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
+  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/" "${NGINX_SITE}"
+  nginx -t
+  systemctl reload nginx
+fi
+
+# ---------------------------------------------------------------------------
 # 3 — Obtain certificate (skip if already present for this domain)
 # ---------------------------------------------------------------------------
 CERT_PATH="/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem"

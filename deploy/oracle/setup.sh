@@ -37,8 +37,17 @@ echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by 
 # with any number of existing rules (avoids the failure mode of -I N when N > chain length).
 _open_port() {
   local ipt="$1" dport="$2"
-  "${ipt}" -C INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null \
-    || "${ipt}" -A INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
+  # Skip if the rule already exists
+  "${ipt}" -C INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null && return 0
+  # Insert before the first REJECT/DROP so the ACCEPT is reachable on Oracle
+  # images that ship with a terminal deny rule in INPUT.
+  local pos
+  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/REJECT|DROP/{print $1; exit}')"
+  if [[ -n "${pos}" ]]; then
+    "${ipt}" -I INPUT "${pos}" -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
+  else
+    "${ipt}" -A INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
+  fi
 }
 _open_port iptables  80
 _open_port ip6tables 80
@@ -75,10 +84,14 @@ systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — c
 
 echo "==> Adding sudoers rules for the deploy user"
 cat > /etc/sudoers.d/orthodox-calendar <<SUDOERS
-# apt — update cache and install packages needed by deploy.sh pre-flight
+# apt — update cache and exact packages that deploy.sh may install as pre-flight
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get update
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get update -qq
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y *
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y curl
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3.12-venv
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y certbot
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3-certbot-nginx
 # tee — write systemd unit and nginx site config files
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/systemd/system/${SERVICE}.service
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/tee /etc/nginx/sites-available/${SERVICE}
@@ -96,8 +109,9 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/sbin/nginx -t
 # nginx site symlink management
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/ln -sf /etc/nginx/sites-available/${SERVICE} /etc/nginx/sites-enabled/${SERVICE}
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/rm -f /etc/nginx/sites-enabled/default
-# certbot — TLS provisioning and renewal
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot *
+# certbot — exact invocations used by deploy.sh (* matches domain/email, no spaces)
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot --nginx -d * --non-interactive --agree-tos -m * --redirect
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet
 SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 
