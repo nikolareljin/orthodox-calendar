@@ -15,7 +15,7 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 # Defaults
 # ---------------------------------------------------------------------------
-CERTBOT_EMAIL="nikola.reljin@gmail.com"
+CERTBOT_EMAIL="${CERTBOT_EMAIL:-}"
 FORCED_IP=""
 
 # ---------------------------------------------------------------------------
@@ -32,6 +32,12 @@ while [[ $# -gt 0 ]]; do
     *) echo "Unknown option: $1" >&2; exit 1 ;;
   esac
 done
+
+if [[ -z "${CERTBOT_EMAIL}" ]]; then
+  echo "ERROR: --email <address> is required for Let's Encrypt registration." >&2
+  echo "       Usage: sudo bash setup-tls.sh --email you@example.com" >&2
+  exit 1
+fi
 
 # ---------------------------------------------------------------------------
 # Helpers

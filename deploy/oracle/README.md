@@ -70,10 +70,7 @@ wildcard DNS service that maps `<dashed-ip>.nip.io` to the same IP automatically
 (e.g. `1-2-3-4.nip.io` → `1.2.3.4`). Run it once on the VM:
 
 ```bash
-# setup.sh clones the repo to ~/orthodox-calendar; use the absolute path:
-sudo bash ~/orthodox-calendar/deploy/oracle/setup-tls.sh
-# — or from inside the cloned repo directory:
-sudo bash deploy/oracle/setup-tls.sh
+sudo bash ~/orthodox-calendar/deploy/oracle/setup-tls.sh --email you@example.com
 ```
 
 What the script does:
@@ -92,7 +89,7 @@ What the script does:
 | Flag | Default | Purpose |
 |------|---------|---------|
 | `--ip <address>` | auto-detected | Override the public IP |
-| `--email <address>` | `nikola.reljin@gmail.com` | Let's Encrypt expiry notifications |
+| `--email <address>` | **required** (or `CERTBOT_EMAIL` env) | Let's Encrypt expiry notifications |
 
 Once HTTPS is live the script prints the `VITE_API_BASE` value to set in
 GitHub Actions secrets:
@@ -142,6 +139,8 @@ Settings → Pages → Source: **GitHub Actions** (not a branch).
 ---
 
 ## 4 — How deployment works
+
+**Prerequisite:** `deploy/oracle/setup.sh` must have been run once on the VM before any CI deploy. `deploy.sh` fails fast if the systemd unit or nginx site config are absent.
 
 On every merge of a `release/x.y.z` branch into `main`:
 

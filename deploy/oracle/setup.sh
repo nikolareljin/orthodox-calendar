@@ -151,8 +151,10 @@ systemctl reload nginx
 echo ""
 echo "==> Setup complete."
 echo ""
-public_ip="$(curl -fsS ifconfig.me 2>/dev/null || true)"
+public_ip="$(curl -fsS https://ifconfig.me 2>/dev/null || true)"
+nip_domain=""
 if [[ -n "${public_ip}" ]]; then
+  nip_domain="${public_ip//./-}.nip.io"
   echo "    Backend API:  http://${public_ip}/api/v1/docs"
 else
   echo "    Backend API:  http://<VM_PUBLIC_IP>/api/v1/docs"
@@ -161,8 +163,15 @@ echo ""
 echo "    Next steps:"
 echo "    1. In Oracle Cloud console → Networking → VCN → Security Lists:"
 echo "       Add Ingress rules for TCP 80 and TCP 443 (from 0.0.0.0/0)."
-echo "    2. Run the first deploy (deploy.sh or manual-deploy.sh) — TLS is auto-"
-echo "       provisioned via nip.io + Let's Encrypt using the public IP above."
-echo "    3. Set GitHub secrets:"
-echo "       VITE_API_BASE = https://<ip-with-hyphens>.nip.io"
-echo "       (see deploy/oracle/README.md for all required secrets)"
+echo "    2. Set GitHub secrets BEFORE running the first deploy:"
+echo "       OCI_HOST, OCI_USER, OCI_SSH_KEY, OCI_KNOWN_HOSTS"
+if [[ -n "${nip_domain}" ]]; then
+  echo "       VITE_API_BASE   = https://${nip_domain}"
+  echo "       CERTBOT_EMAIL   = <your-email>"
+else
+  echo "       VITE_API_BASE   = https://<ip-with-hyphens>.nip.io"
+  echo "       CERTBOT_EMAIL   = <your-email>"
+fi
+echo "       (see deploy/oracle/README.md for details)"
+echo "    3. Run the first CI deploy — TLS is auto-provisioned via nip.io +"
+echo "       Let's Encrypt using CERTBOT_EMAIL and the public IP above."

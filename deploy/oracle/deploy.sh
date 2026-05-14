@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # Called by GitHub Actions over SSH to deploy a new backend version.
+# Prerequisite: deploy/oracle/setup.sh must have been run on the server first.
 # Must be idempotent — safe to run multiple times.
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/home/ubuntu/orthodox-calendar}"
 RELEASE_ARCHIVE="${RELEASE_ARCHIVE:-}"
 SERVICE="orthodox-calendar"
-CERTBOT_EMAIL="${CERTBOT_EMAIL:-nikola.reljin@gmail.com}"
+CERTBOT_EMAIL="${CERTBOT_EMAIL:-}"
 
 # ---------------------------------------------------------------------------
 # Pre-flight: ensure runtime tools are present (minimal Oracle Ubuntu may
@@ -100,10 +101,13 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
 fi
 
 if [[ -n "${NIP_DOMAIN}" ]]; then
+  if [[ -z "${CERTBOT_EMAIL}" ]]; then
+    echo "    WARNING: CERTBOT_EMAIL is not set — skipping TLS provisioning." >&2
+    echo "             Set the CERTBOT_EMAIL GitHub secret and redeploy to enable HTTPS." >&2
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
-  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
+  elif [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
       && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
