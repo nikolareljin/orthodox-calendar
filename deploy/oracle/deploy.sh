@@ -42,6 +42,13 @@ fi
 
 cd "${APP_DIR}"
 
+echo "==> Ensuring Python virtualenv"
+if [[ ! -f ".venv/bin/pip" ]]; then
+  python3.12 -m venv .venv 2>/dev/null \
+    || python3.11 -m venv .venv \
+    || { echo "ERROR: cannot create virtualenv — run setup.sh on the server first" >&2; exit 1; }
+fi
+
 echo "==> Installing/updating Python dependencies"
 .venv/bin/pip install --quiet --upgrade pip
 .venv/bin/pip install --quiet -r backend/requirements.txt

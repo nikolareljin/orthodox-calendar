@@ -4,12 +4,20 @@ on:
   pull_request:
     types: [closed]
     branches: [main]
+  # GitHub Pages environment only allows deployments from the default branch.
+  # Triggering on push (after merge) puts the job in refs/heads/main context.
+  push:
+    branches: [main]
 
 permissions:
   contents: write
   pages: write
   id-token: write
   pull-requests: read
+
+# Opt into Node.js 24 early — Node 20 actions are deprecated (removed Sep 2026)
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 concurrency:
   group: deploy
@@ -116,10 +124,10 @@ jobs:
           echo "::error::Backend health check failed after 60 s"
           exit 1
 
-# ── Stage 2: frontend → GitHub Pages (parallel with backend deploy) ───────────
+# ── Stage 2: frontend → GitHub Pages (triggers on push to main after merge) ───
+# Pages environment protection only allows refs/heads/main, not refs/pull/N/merge.
   build:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
-    needs: [security, data-safety]
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -146,7 +154,7 @@ jobs:
           path: frontend/dist
 
   deploy:
-    if: github.event.pull_request.merged == true && startsWith(github.event.pull_request.head.ref, 'release/')
+    if: github.event_name == 'push'
     needs: build
     runs-on: ubuntu-latest
     environment:
