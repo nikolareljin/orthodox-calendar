@@ -53,5 +53,14 @@ else
   docker_compose up -d
 fi
 
-log_info "Backend: http://localhost:8000"
-log_info "Frontend: http://localhost:4173"
+# Prefer shell PORT env var; fall back to .env file; fall back to 80
+# Strip inline comments (e.g. PORT=8080 # dev) and surrounding quotes/spaces.
+FRONTEND_PORT="${PORT:-}"
+if [[ -z "$FRONTEND_PORT" ]]; then
+  FRONTEND_PORT="$(grep -E '^PORT=' "${ROOT_DIR}/.env" 2>/dev/null | head -1 | cut -d= -f2 | sed "s/[[:space:]]*#.*//; s/[[:space:]'\"]*//g" || true)"
+fi
+FRONTEND_PORT="${FRONTEND_PORT:-80}"
+
+log_info "Frontend: http://localhost:${FRONTEND_PORT}"
+log_info "API docs: http://localhost:${FRONTEND_PORT}/api/v1/docs"
+log_info "Backend is internal-only (proxied via nginx, not exposed to host)"

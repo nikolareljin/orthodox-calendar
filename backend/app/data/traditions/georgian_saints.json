@@ -1,0 +1,56 @@
+[
+  {
+    "month_day": "01-14",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Nino, Equal-to-Apostles",
+        "title": "Saint Nino, Equal-to-the-Apostles and Enlightener of Georgia",
+        "feast_type": "Equal-to-Apostles",
+        "notes": "Saint Nino brought Christianity to Georgia (Iberia) around 327 AD. Born in Cappadocia, she carried a cross of vine branches bound with her own hair. She healed Queen Nana and converted King Mirian III, making Georgia one of the first Christian kingdoms. She is depicted with a distinctive vine-wood cross with drooping arms, still the symbol of the Georgian Church.",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=414",
+        "canonized_by": null,
+        "canonization_scope": "pan-orthodox",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Julian January 14 corresponds to Gregorian January 27."
+  },
+  {
+    "month_day": "05-09",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Shio Mgvime",
+        "title": "Saint Shio of Mgvime, One of the Thirteen Syrian Fathers",
+        "feast_type": "Venerable",
+        "notes": "One of the Thirteen Syrian Fathers who came to Georgia from Antioch in the 6th century. Shio founded the Shio-Mgvime cave monastery near Mtskheta, which became a major center of Georgian monasticism. His asceticism was so severe he lived as a hermit in a cave, sustained by miraculous provision. One of the most revered founders of the Georgian Church.",
+        "hagiography_url": null,
+        "canonized_by": "Georgian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Julian May 9 corresponds to Gregorian May 22."
+  },
+  {
+    "month_day": "05-01",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Blessed Queen Tamara",
+        "title": "Blessed Queen Tamara of Georgia, The Great",
+        "feast_type": "Righteous Queen",
+        "notes": "Queen Tamara (1160–1213) led Georgia to its Golden Age as the dominant power in the Caucasus. A pious ruler, she commissioned churches, supported monasteries on Athos, and her court fostered the golden age of Georgian literature, including Shota Rustaveli's The Knight in the Panther's Skin. Venerated as a saint by the Georgian Orthodox Church.",
+        "hagiography_url": null,
+        "canonized_by": "Georgian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Julian May 1 corresponds to Gregorian May 14."
+  }
+]

@@ -1,234 +1,1330 @@
+/* ── CSS custom properties ── */
 :root {
-  font-family: "Manrope", system-ui, -apple-system, sans-serif;
-  color: #0f172a;
-  background: radial-gradient(circle at 10% 20%, #f7f9ff 0, #eef2ff 25%, #ffffff 60%);
+  --bg: #ffffff;
+  --surface: #f8f5f0;
+  --card: #fdfaf6;
+  --border: #e0d8cc;
+  --text: #1a1a1a;
+  --text-muted: #6b5e4e;
+  --accent: #8b1515;
+  --accent-hover: #a01c1c;
+  --accent-text: #ffffff;
+  --link: #2b4899;
+  --link-hover: #1a317a;
+  --gold: #8a6e00;
+  --feast-great-bg: #fff4e6;
+  --feast-great-color: #8a4000;
+  --chip-bg: #f0e8e0;
+  --chip-active-bg: #8b1515;
+  --chip-active-color: #ffffff;
+  --pill-bg: #ffe8e8;
+  --pill-color: #8b1515;
+  --code-bg: #1a1a1a;
+  --code-color: #e0f2fe;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --today-ring: #8b1515;
+  --selected-bg: #8b1515;
+  --selected-color: #ffffff;
+  --hover-bg: rgba(139,21,21,0.07);
+  --cal-empty: #f8f5f0;
+  --fast-color: #7a4200;
+  --fast-bg: #fff4e6;
+  --reading-border: #e0d8cc;
+  --sophia-color: rgba(139, 21, 21, 0.12);
+  --sophia-color-strong: rgba(139, 21, 21, 0.22);
+
+  font-family: "Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
+  color: var(--text);
+  background-color: var(--bg);
 }
 
-* {
-  box-sizing: border-box;
+[data-theme="dark"] {
+  --bg: #0d1220;
+  --surface: #141b2d;
+  --card: #1a2340;
+  --border: #2a3a5c;
+  --text: #e8eaf0;
+  --text-muted: #8899bb;
+  --accent: #cfb53b;
+  --accent-hover: #e0c84a;
+  --accent-text: #0d1220;
+  --link: #6699ff;
+  --link-hover: #88aaff;
+  --gold: #cfb53b;
+  --feast-great-bg: #1e1a00;
+  --feast-great-color: #e0c84a;
+  --chip-bg: #1e2c4a;
+  --chip-active-bg: #cfb53b;
+  --chip-active-color: #0d1220;
+  --pill-bg: #1a2a50;
+  --pill-color: #6699ff;
+  --code-bg: #0d1220;
+  --code-color: #e0f2fe;
+  --shadow: 0 2px 16px rgba(0,0,0,0.35);
+  --today-ring: #cfb53b;
+  --selected-bg: #3366cc;
+  --selected-color: #ffffff;
+  --hover-bg: rgba(207,181,59,0.1);
+  --cal-empty: #0f1626;
+  --fast-color: #cfb53b;
+  --fast-bg: #1e1a00;
+  --reading-border: #2a3a5c;
+  --sophia-color: rgba(207, 181, 59, 0.13);
+  --sophia-color-strong: rgba(207, 181, 59, 0.25);
 }
+
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--text);
+  transition: background-color 0.2s, color 0.2s;
 }
 
-.page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px 64px;
-}
-
-.hero {
-  display: grid;
-  grid-template-columns: 2fr 1.2fr;
-  gap: 24px;
-  align-items: center;
-  margin-bottom: 32px;
-}
-
-.hero h1 {
-  margin: 8px 0;
-  font-size: 34px;
-  letter-spacing: -0.01em;
-}
-
-.lede {
-  color: #475569;
-  margin: 0 0 16px;
-}
-
-.eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 12px;
-  color: #7c3aed;
-  margin: 0;
-}
-
-.hero-actions {
+/* ── Layout ── */
+.app {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-button,
-input,
-select,
-textarea {
-  font-family: inherit;
-}
-
-button {
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-.primary {
-  background: linear-gradient(120deg, #7c3aed, #4f46e5);
-  color: white;
-  padding: 12px 16px;
-  font-weight: 700;
-}
-
-.secondary {
-  background: #e2e8f0;
-  color: #0f172a;
-  padding: 10px 14px;
-  font-weight: 600;
-}
-
-.ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #cbd5e1;
-  color: #0f172a;
-  text-decoration: none;
-  background: white;
-}
-
-.card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.08);
-}
-
-.card-title {
-  margin: 0 0 8px;
-  font-weight: 700;
-}
-
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.chip {
-  padding: 8px 12px;
-  border-radius: 20px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
-}
-
-.chip.active {
-  background: #ede9fe;
-  border-color: #c084fc;
-  color: #4c1d95;
-}
-
-.panel {
-  margin-top: 32px;
-}
-
-.panel-head {
+.app-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 12px;
+  padding: 0 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  overflow: hidden;
+  min-height: 64px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-}
-
-.grid.two {
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-
-.saint-list,
-.match-list {
-  list-style: none;
-  padding: 0;
+.app-header h1 {
   margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 22px;
+  font-weight: normal;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  position: relative;
+  z-index: 1;
 }
 
-.saint-title {
+/* Hagia Sophia silhouette */
+.header-sophia {
+  position: absolute;
+  right: 120px;
+  top: -10px;
+  width: 340px;
+  height: 100px;
+  color: var(--sophia-color-strong);
+  pointer-events: none;
+  user-select: none;
+}
+
+[data-theme="dark"] .header-sophia {
+  color: var(--sophia-color-strong);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  padding: 20px 0;
+  overflow-y: auto;
+}
+
+.sidebar-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 16px 10px;
+  margin: 0;
+}
+
+.tradition-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 9px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  border-left: 3px solid transparent;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+
+.tradition-item:hover {
+  background: var(--hover-bg);
+}
+
+.tradition-item.active {
+  border-left-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
+  background: var(--hover-bg);
+}
+
+.tradition-calendar-badge {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: block;
+  font-weight: 400;
+}
+
+.tradition-note {
+  font-size: 9px;
+  color: var(--accent);
+  display: block;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+/* ── Main ── */
+.main {
+  flex: 1;
+  padding: 24px;
+  max-width: 1200px;
+  overflow-y: auto;
+}
+
+/* ── Two-column layout: calendar left, detail right ── */
+.cal-detail-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.cal-detail-row.has-detail {
+  grid-template-columns: minmax(0, 460px) minmax(0, 1fr);
+}
+
+.cal-col {
+  min-width: 0;
+}
+
+.day-detail--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* ── Month navigation ── */
+.month-nav {
   display: flex;
   align-items: center;
   gap: 8px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.month-label {
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 20px;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex: 1;
+  margin: 0;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.year-display {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  border-bottom: 1px dashed var(--text-muted);
+  padding-bottom: 1px;
+  transition: color 0.12s, border-color 0.12s;
+}
+
+.year-display:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.year-input {
+  width: 5ch;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--accent);
+  color: var(--text);
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  -moz-appearance: textfield;
+}
+
+.year-input::-webkit-outer-spin-button,
+.year-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.year-btn {
+  font-size: 14px;
+  padding: 6px 10px;
+  opacity: 0.75;
+}
+
+.nav-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--text-muted);
+  font-family: inherit;
+  transition: border-color 0.12s, color 0.12s;
+}
+
+.nav-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.today-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-family: inherit;
+  transition: border-color 0.12s, color 0.12s;
+}
+
+.today-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Calendar grid ── */
+.cal {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.cal-weekday {
+  text-align: center;
+  padding: 10px 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cal-weekday:first-child,
+.cal-weekday:last-child {
+  color: var(--accent);
+}
+
+.cal-cells {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.cal-cell {
+  position: relative;
+  background: none;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--text);
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+}
+
+.cal-cell:hover:not(:disabled) {
+  background: var(--hover-bg);
+}
+
+.cal-cell:nth-child(7n) {
+  border-right: none;
+}
+
+.cal-cell.empty {
+  cursor: default;
+  background: var(--cal-empty);
+}
+
+.cal-cell.today {
+  font-weight: 800;
+  color: var(--today-ring);
+}
+
+.cal-cell.today::after {
+  content: "";
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--today-ring);
+}
+
+.cal-cell.selected {
+  background: var(--selected-bg);
+  color: var(--selected-color);
+}
+
+.cal-cell.selected::after {
+  background: var(--selected-color);
+}
+
+/* Sunday column highlight */
+.cal-cells .cal-cell:nth-child(7n+1):not(.empty) {
+  color: var(--accent);
+}
+
+.cal-cell.selected:nth-child(7n+1) {
+  color: var(--selected-color);
+}
+
+.cal-day-num {
+  line-height: 1;
+}
+
+.cal-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.cal-dot.great-feast {
+  background: var(--gold);
+  width: 7px;
+  height: 7px;
+}
+
+.cal-dot.has-feast {
+  background: var(--link);
+}
+
+.cal-dot.has-saints {
+  background: var(--text-muted);
+}
+
+.cal-cell.selected .cal-dot {
+  background: var(--selected-color);
+  opacity: 0.7;
+}
+
+/* ── Day detail ── */
+.day-detail {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.day-detail-header {
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.day-detail-header h2 {
+  margin: 0 0 4px;
+  font-size: 22px;
   font-weight: 700;
 }
 
-.pill {
-  background: #eef2ff;
-  color: #4338ca;
-  padding: 2px 8px;
-  border-radius: 999px;
-  font-size: 12px;
-  text-transform: uppercase;
+.cal-date-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
 }
 
-.note {
-  color: #475569;
-  margin: 6px 0;
+/* ── Fast/Feast badge ── */
+.day-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.fast-info {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--fast-bg);
+  color: var(--fast-color);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.moon-info {
+  background: rgba(100,120,200,0.1);
+  color: var(--text-muted);
+  border-color: rgba(100,120,200,0.25);
+}
+
+/* ── Tone badge & popup ── */
+.tone-badge-wrap {
+  position: relative;
+}
+
+.tone-badge {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  letter-spacing: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.tone-badge:hover,
+.tone-badge--open {
+  background: var(--hover-bg);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.tone-info-icon {
+  font-size: 11px;
+  opacity: 0.55;
+  margin-left: 2px;
+}
+
+.tone-popup {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 200;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-width: 230px;
+  max-width: 290px;
+  box-shadow: var(--shadow);
+}
+
+.tone-popup-name {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--accent);
+  margin: 0 0 5px;
+}
+
+.tone-popup-char {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0 0 7px;
+  font-style: italic;
+}
+
+.tone-popup-note {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+  line-height: 1.5;
+}
+
+.tone-popup-listen {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 4px 10px;
+}
+
+.tone-popup-listen:hover {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+/* ── Feast items ── */
+.feasts-section {
+  margin-bottom: 16px;
+}
+
+.feast-label {
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.feast-item {
+  background: var(--feast-great-bg);
+  color: var(--feast-great-color);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* ── Saints ── */
+.saints-section {
+  margin-bottom: 20px;
+}
+
+.section-label {
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 12px;
+  font-weight: normal;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.saint-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.saint-header {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: inherit;
+  padding: 12px 14px;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.saint-header:hover:not(:disabled) {
+  background: var(--hover-bg);
+}
+
+.saint-header:disabled {
+  cursor: default;
+}
+
+.saint-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.saint-pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.saint-name {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.feast-pill {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-color);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.feast-pill.great-feast {
+  background: var(--feast-great-bg);
+  color: var(--feast-great-color);
+}
+
+/* canonization badge */
+.canonized-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  letter-spacing: 0.04em;
+}
+.canonized-pill.scope-universal  { background: rgba(255,215,0,0.15); color: #c8a800; border: 1px solid rgba(255,215,0,0.3); }
+.canonized-pill.scope-pan-orthodox { background: rgba(100,160,255,0.15); color: #5090e0; border: 1px solid rgba(100,160,255,0.3); }
+.canonized-pill.scope-local      { background: rgba(120,200,120,0.15); color: #5a9e5a; border: 1px solid rgba(120,200,120,0.3); }
+.canonized-pill.scope-oriental   { background: rgba(200,130,50,0.15);  color: #b07030; border: 1px solid rgba(200,130,50,0.3); }
+
+.expand-icon {
+  font-size: 12px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.saint-body {
+  padding: 0 14px 14px;
+  border-top: 1px solid var(--border);
+}
+
+.saint-hagio {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 12px 0 8px;
+}
+
+.saint-link {
+  font-size: 13px;
+  color: var(--link);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.saint-link:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
+
+/* ── Readings ── */
+.readings-section {
+  border-top: 1px solid var(--reading-border);
+  padding-top: 16px;
+}
+
+.reading-item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
   font-size: 14px;
 }
 
-.alert {
-  background: #fff7ed;
-  border: 1px solid #fdba74;
-  color: #c2410c;
-  padding: 12px;
+.reading-item:last-child {
+  border-bottom: none;
+}
+
+.reading-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.reading-card:last-child {
+  margin-bottom: 0;
+}
+
+.reading-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--card);
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 12px;
+  transition: background 0.15s;
+}
+
+.reading-header:hover:not(:disabled) {
+  background: var(--hover-bg);
+}
+
+.reading-header:disabled {
+  cursor: default;
+}
+
+.reading-header-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  flex: 1;
+}
+
+.reading-source {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.reading-ref {
+  font-weight: 700;
+  color: var(--link);
+  font-size: 14px;
+}
+
+.reading-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.reading-body {
+  padding: 12px 16px 14px;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+}
+
+sup.verse-num {
+  font-size: 10px;
+  color: var(--text-muted);
+  vertical-align: super;
+  margin-right: 2px;
+  margin-left: 4px;
+  font-weight: 600;
+  user-select: none;
+}
+
+/* ── Loading / error ── */
+.loading-msg {
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 16px 0;
+}
+
+.error-msg {
+  background: #fff0f0;
+  color: #8b1515;
+  border: 1px solid #f0c0c0;
   border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  margin-bottom: 16px;
 }
 
-textarea {
-  width: 100%;
+[data-theme="dark"] .error-msg {
+  background: #1a0808;
+  color: #ff9999;
+  border-color: #4a1818;
+}
+
+.no-data {
+  color: var(--text-muted);
+  font-size: 14px;
+  font-style: italic;
+  padding: 8px 0;
+}
+
+/* ── ICS section ── */
+.ics-section {
+  margin-top: 24px;
+  background: var(--card);
+  border: 1px solid var(--border);
   border-radius: 12px;
-  border: 1px solid #cbd5e1;
-  padding: 12px;
-  background: #f8fafc;
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
 }
 
-input,
-select {
-  width: 100%;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid #cbd5e1;
-  background: #f8fafc;
+.ics-section h3 {
+  margin: 0 0 14px;
+  font-size: 15px;
+  font-weight: 700;
 }
 
-.ics-form {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.ics-row {
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   align-items: center;
 }
 
-.ics-link {
-  grid-column: span 2;
+.ics-code {
+  background: var(--code-bg);
+  color: var(--code-color);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: monospace;
+  word-break: break-all;
+  flex: 1;
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  background: var(--surface);
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.12s, color 0.12s;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── About section ── */
+.about-section {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+.about-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.12s;
+}
+
+.about-toggle:hover {
+  background: var(--hover-bg);
+}
+
+.about-body {
+  border-top: 1px solid var(--border);
+  padding: 20px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.about-card-full {
+  grid-column: 1 / -1;
+}
+
+.about-heading {
+  font-family: 'NB-Byzantine', Georgia, serif;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 14px;
+}
+
+.about-text {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+.about-text:last-child {
+  margin-bottom: 0;
+}
+
+.about-list {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  padding-left: 20px;
+  margin: 0 0 10px;
+}
+
+.about-list li {
+  margin-bottom: 6px;
+}
+
+.about-list strong,
+.about-text strong {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.about-card-support {
+  border-color: var(--accent);
+  background: var(--feast-great-bg);
+}
+
+.support-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.support-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  transition: opacity 0.15s, transform 0.1s;
+}
+
+.support-btn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.support-kofi {
+  background: #ff5e5b;
+  color: #ffffff;
+}
+
+
+/* ── Churches grid ── */
+.churches-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.church-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.church-logo {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: center;
+  padding-top: 2px;
+  opacity: 0.8;
+}
+
+.church-info {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
 }
 
-code {
-  background: #0f172a;
-  color: #e0f2fe;
+.church-name {
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.church-name:hover {
+  text-decoration: underline;
+}
+
+.church-founded {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.church-patron {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.church-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
+
+/* ── Tradition type symbol (sidebar) ── */
+.trad-type-sym {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-right: 5px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+/* ── World Orthodox Directory ── */
+.world-dir {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.world-dir-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
   padding: 8px 12px;
-  border-radius: 10px;
-  word-break: break-all;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
 }
 
-@media (max-width: 900px) {
-  .hero {
+.world-dir-legend b {
+  color: var(--accent);
+}
+
+.world-dir-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.world-dir-group-head {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border);
+}
+
+.world-dir-sym {
+  font-size: 16px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.world-dir-subtitle {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.world-dir-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.world-dir-item {
+  font-size: 13px;
+}
+
+.world-dir-link {
+  color: var(--text-secondary, var(--text-muted));
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.world-dir-link:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .cal-detail-row,
+  .cal-detail-row.has-detail {
     grid-template-columns: 1fr;
   }
-  .ics-link {
-    grid-column: span 1;
+}
+
+@media (max-width: 700px) {
+  .app-body {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+  }
+
+  .sidebar-title {
+    display: none;
+  }
+
+  .tradition-item {
+    white-space: nowrap;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    padding: 8px 14px;
+  }
+
+  .tradition-item.active {
+    border-bottom-color: var(--accent);
+    border-left-color: transparent;
+  }
+
+  .main {
+    padding: 16px;
+  }
+
+  /* Reading cards — more breathing room on small screens */
+  .reading-header {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+
+  .reading-header-left {
+    gap: 6px;
+  }
+
+  .reading-ref {
+    font-size: 15px;
+  }
+
+  .reading-body {
+    padding: 14px 16px 16px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .reading-source {
+    font-size: 11px;
+  }
+
+  /* Tone popup — prevent overflow on narrow screens */
+  .tone-popup {
+    max-width: calc(100vw - 32px);
+    left: 0;
+    right: auto;
+  }
+
+  /* Day detail — tighter padding on phone */
+  .day-detail {
+    padding: 16px;
+  }
+
+  .day-detail-header h2 {
+    font-size: 18px;
+  }
+
+  /* Badges wrap nicely */
+  .day-badges {
+    flex-wrap: wrap;
+    gap: 6px;
   }
 }

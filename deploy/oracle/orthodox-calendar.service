@@ -1,0 +1,19 @@
+[Unit]
+Description=Orthodox Calendar — FastAPI backend
+After=network.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+User=__APP_USER__
+WorkingDirectory=__APP_DIR__/backend
+Environment="ORTHODOX_CALENDAR_DATA_PATH=__APP_DIR__/backend/app/data"
+ExecStart=__APP_DIR__/.venv/bin/uvicorn app.main:app \
+          --host 127.0.0.1 --port 8000 \
+          --workers 2 \
+          --log-level info
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

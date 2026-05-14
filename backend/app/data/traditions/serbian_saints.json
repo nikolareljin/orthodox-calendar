@@ -1,0 +1,68 @@
+[
+  {
+    "month_day": "05-05",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Hieromartyr Platon (Jovanović)",
+        "title": "Hieromartyr Platon (Jovanović), Bishop of Banja Luka",
+        "feast_type": "Hieromartyr",
+        "notes": "Bishop Platon of Banja Luka was arrested by Croatian Ustasha forces in May 1941 and martyred for his faith and his people. He refused to abandon his flock despite threats and was tortured and killed near Banja Luka. Canonized among the New Martyrs of Serbia by the Serbian Orthodox Church.",
+        "hagiography_url": null,
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Hieromartyr Sava (Trlajić)",
+        "title": "Hieromartyr Sava (Trlajić), Bishop of Gornji Karlovac",
+        "feast_type": "Hieromartyr",
+        "notes": "Bishop Sava of Gornji Karlovac was seized by Ustasha forces in 1941 and martyred during the WWII persecution of Orthodox Serbs in Croatia. He steadfastly refused to convert or flee, choosing to remain with his flock. Canonized as a New Martyr by the Serbian Orthodox Church.",
+        "hagiography_url": null,
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Hieromartyr Peter (Zimonjić)",
+        "title": "Hieromartyr Peter (Zimonjić), Bishop of Dabar-Bosnia",
+        "feast_type": "Hieromartyr",
+        "notes": "Bishop Peter of Dabar-Bosnia was arrested by Ustasha authorities in 1942 and martyred in the Nazi-allied Croatian state. A gentle and learned hierarch, he bore witness to Christ amid the systematic persecution of Orthodox Serbs in Bosnia. Canonized as a New Martyr by the Serbian Orthodox Church.",
+        "hagiography_url": null,
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Hieromartyr Emilijan (Marković)",
+        "title": "Hieromartyr Emilijan (Marković), Bishop of Prizren",
+        "feast_type": "Hieromartyr",
+        "notes": "Bishop Emilijan of Prizren was taken captive and martyred by fascist Axis forces in 1941. He served faithfully in Kosovo and was killed for refusing to apostatize or cooperate with the occupiers. Glorified as a New Martyr and Confessor by the Serbian Orthodox Church.",
+        "hagiography_url": null,
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Shared feast of the four WWII Hieromartyr bishops of the Serbian Orthodox Church. Julian May 5 corresponds to Gregorian May 18."
+  },
+  {
+    "month_day": "05-19",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Venerable Justin Popović",
+        "title": "Venerable Justin Popović of Ćelije, Confessor and Theologian",
+        "feast_type": "Venerable",
+        "notes": "Father Justin Popović (1894–1979) was the foremost Serbian Orthodox theologian of the 20th century, monk at Ćelije monastery near Valjevo. Confessor under Communist Yugoslavia, philosopher, and author of a monumental Lives of the Saints. Canonized in 2010 by the Holy Assembly of Bishops of the Serbian Orthodox Church.",
+        "hagiography_url": "https://www.spc.rs/eng/saint_justin_popovich",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": 2010
+      }
+    ],
+    "notes": "Julian May 19 corresponds to Gregorian June 1."
+  }
+]

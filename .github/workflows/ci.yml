@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches:
+      - "release/**"
+      - "feature/**"
+
+jobs:
+  gitleaks:
+    uses: nikolareljin/ci-helpers/.github/workflows/gitleaks-scan.yml@production
+    with:
+      fail_on_findings: true
+
+  frontend-scan:
+    uses: nikolareljin/ci-helpers/.github/workflows/react-scan.yml@production
+    with:
+      working_directory: frontend
+      node_version: "22"
+      install_command: "npm ci"
+      lint_command: ""
+      test_command: ""
+      build_command: "npm run build"
+      audit_command: "npm audit --audit-level=high"
+
+  backend-scan:
+    uses: nikolareljin/ci-helpers/.github/workflows/python-scan.yml@production
+    with:
+      working_directory: backend
+      python_version: "3.12"
+
+  data-safety:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Reject sensitive keys in data files
+        shell: bash
+        run: |
+          set -euo pipefail
+          found=0
+          while IFS= read -r -d '' f; do
+            if grep -qiE '"(api_key|api_secret|password|passwd|token|secret|auth|cookie|session|credential|private_key)"\s*:' "$f"; then
+              echo "::error::Potentially sensitive key found in $f"
+              found=1
+            fi
+          done < <(find backend/app/data -type f -name '*.json' -print0)
+          [[ $found -eq 0 ]] || exit 1
+          echo "Data safety check passed."

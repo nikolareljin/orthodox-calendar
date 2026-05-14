@@ -1,26 +1,63 @@
-version: "3.9"
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     container_name: orthodox-calendar-backend
-    ports:
-      - "8000:8000"
+    restart: unless-stopped
+    # No host port — reachable only via nginx proxy on the internal network.
+    # Expose 8000 to the host only for local debugging:
+    #   ports: ["8000:8000"]
     environment:
       - ORTHODOX_CALENDAR_DATA_PATH=/data
+      - WEB_CONCURRENCY=${WEB_CONCURRENCY:-2}
+      - ORTHODOX_CALENDAR_CORS_ORIGINS=${ORTHODOX_CALENDAR_CORS_ORIGINS:-}
     volumes:
       - ./backend/app/data:/data:ro
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=2)"]
+      interval: 30s
+      timeout: 5s
+      start_period: 15s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        # Empty → relative /api/ URLs → nginx proxies to backend internally.
+        # Override for an external API: VITE_API_BASE=https://api.example.com
+        - VITE_API_BASE=${VITE_API_BASE:-}
     container_name: orthodox-calendar-frontend
+    restart: unless-stopped
     ports:
-      - "4173:4173"
-    environment:
-      - VITE_API_BASE=http://backend:8000
+      - "${PORT:-80}:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    networks:
+      - internal
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/health-check"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  internal:
+    driver: bridge
