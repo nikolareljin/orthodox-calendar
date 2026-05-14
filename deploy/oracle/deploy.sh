@@ -65,13 +65,11 @@ if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
   PUBLIC_IP=""
 fi
 NIP_DOMAIN=""
-SERVER_NAME="_"
 if [[ -n "${PUBLIC_IP}" ]]; then
   NIP_DOMAIN="${PUBLIC_IP//./-}.nip.io"
-  SERVER_NAME="${NIP_DOMAIN}"
   echo "    Public IP: ${PUBLIC_IP} → ${NIP_DOMAIN}"
 else
-  echo "    Could not detect public IP — nginx will use catch-all server_name"
+  echo "    Could not detect public IP — skipping TLS step"
 fi
 
 # Systemd unit and nginx site config are created by setup.sh (root-only).
