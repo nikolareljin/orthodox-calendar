@@ -113,7 +113,7 @@ fi
 NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
 if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${NIP_DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
   echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
-  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/" "${NGINX_SITE}"
+  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
   nginx -t
   systemctl reload nginx
 fi

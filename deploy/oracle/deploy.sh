@@ -110,8 +110,14 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
-    sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"
-    echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
+    # Non-fatal: a transient Let's Encrypt/DNS/port-80 failure must not block the
+    # backend release from being installed and restarted.
+    if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then
+      echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
+    else
+      echo "    WARNING: TLS provisioning failed — backend will continue on HTTP." >&2
+      echo "             Redeploy once the certbot issue is resolved." >&2
+    fi
   fi
 fi
 

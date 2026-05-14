@@ -103,7 +103,7 @@ fi
 NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
 # Update server_name before certbot so --nginx can match this vhost by name.
 if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
-  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/" "${NGINX_SITE}"
+  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
   nginx -t
   systemctl reload nginx
 fi
