@@ -44,6 +44,7 @@ cd "${APP_DIR}"
 
 echo "==> Ensuring Python virtualenv"
 if [[ ! -f ".venv/bin/pip" ]] || ! .venv/bin/python -c 'import sys' > /dev/null 2>&1; then
+  rm -rf .venv
   if python3.12 -m venv .venv; then
     echo "    Created virtualenv with python3.12"
   else
