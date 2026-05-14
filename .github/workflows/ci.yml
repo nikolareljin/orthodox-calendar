@@ -18,7 +18,7 @@ jobs:
     uses: nikolareljin/ci-helpers/.github/workflows/react-scan.yml@production
     with:
       working_directory: frontend
-      node_version: "20"
+      node_version: "22"
       install_command: "npm ci"
       lint_command: ""
       test_command: ""
@@ -29,7 +29,7 @@ jobs:
     uses: nikolareljin/ci-helpers/.github/workflows/python-scan.yml@production
     with:
       working_directory: backend
-      python_version: "3.11"
+      python_version: "3.12"
 
   data-safety:
     runs-on: ubuntu-latest

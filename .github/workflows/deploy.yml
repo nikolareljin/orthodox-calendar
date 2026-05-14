@@ -67,6 +67,16 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           echo "${{ secrets.OCI_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
 
+      - name: Build minimal backend deployment archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          tar -czf /tmp/orthodox-calendar-backend.tar.gz \
+              --exclude='*/__pycache__' \
+              --exclude='*.py[co]' \
+              backend/app \
+              backend/requirements.txt
+
       - name: Deploy backend to Oracle Cloud
         shell: bash
         env:
@@ -74,11 +84,16 @@ jobs:
           OCI_HOST: ${{ secrets.OCI_HOST }}
         run: |
           set -euo pipefail
+          scp -i ~/.ssh/deploy_key \
+              -o BatchMode=yes \
+              -o ConnectTimeout=15 \
+              /tmp/orthodox-calendar-backend.tar.gz \
+              "${OCI_USER}@${OCI_HOST}:/tmp/orthodox-calendar-backend.tar.gz"
           ssh -i ~/.ssh/deploy_key \
               -o BatchMode=yes \
               -o ConnectTimeout=15 \
               "${OCI_USER}@${OCI_HOST}" \
-              'APP_DIR=/home/'"${OCI_USER}"'/orthodox-calendar bash -s' \
+              'APP_DIR=/home/'"${OCI_USER}"'/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
               < deploy/oracle/deploy.sh
 
       - name: Verify backend health
@@ -111,7 +126,7 @@ jobs:
 
       - uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "22"
 
       - name: Install dependencies
         working-directory: frontend

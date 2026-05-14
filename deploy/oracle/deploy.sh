@@ -4,12 +4,43 @@
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/home/ubuntu/orthodox-calendar}"
+RELEASE_ARCHIVE="${RELEASE_ARCHIVE:-}"
 SERVICE="orthodox-calendar"
 
-echo "==> Pulling latest code"
+echo "==> Installing scoped backend release"
+mkdir -p "${APP_DIR}/backend"
+if [[ -n "${RELEASE_ARCHIVE}" ]]; then
+  if [[ ! -f "${RELEASE_ARCHIVE}" ]]; then
+    echo "ERROR: release archive not found: ${RELEASE_ARCHIVE}" >&2
+    exit 1
+  fi
+  tmpdir="$(mktemp -d)"
+  cleanup() {
+    rm -rf "${tmpdir}"
+    rm -f "${RELEASE_ARCHIVE}"
+  }
+  trap cleanup EXIT
+  tar -xzf "${RELEASE_ARCHIVE}" -C "${tmpdir}"
+  find "${tmpdir}" \( -type d -name "__pycache__" -o -type f -name "*.py[co]" \) -exec rm -rf {} +
+  test -d "${tmpdir}/backend/app"
+  test -f "${tmpdir}/backend/requirements.txt"
+  find "${APP_DIR}" -mindepth 1 -maxdepth 1 \
+    ! -name ".venv" \
+    ! -name "backend" \
+    -exec rm -rf {} +
+  find "${APP_DIR}/backend" -mindepth 1 -maxdepth 1 \
+    ! -name "app" \
+    ! -name "requirements.txt" \
+    -exec rm -rf {} +
+  rm -rf "${APP_DIR}/backend/app"
+  cp -a "${tmpdir}/backend/app" "${APP_DIR}/backend/app"
+  cp "${tmpdir}/backend/requirements.txt" "${APP_DIR}/backend/requirements.txt"
+else
+  test -d "${APP_DIR}/backend/app"
+  test -f "${APP_DIR}/backend/requirements.txt"
+fi
+
 cd "${APP_DIR}"
-git fetch origin main
-git reset --hard origin/main
 
 echo "==> Installing/updating Python dependencies"
 .venv/bin/pip install --quiet --upgrade pip

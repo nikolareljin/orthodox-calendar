@@ -111,7 +111,7 @@ On every merge of a `release/x.y.z` branch into `main`:
 2. **Auto-tag** — creates the version tag from the branch name.
 3. In parallel:
    - **Frontend** — built with `VITE_BASE=/orthodox-calendar/` and `VITE_API_BASE` from secrets, published to GitHub Pages.
-   - **Backend** — SSH into the Oracle VM, runs `deploy/oracle/deploy.sh` (git pull + pip install + systemctl restart), then health-checks the service.
+   - **Backend** — uploads a minimal archive containing only `backend/app` and `backend/requirements.txt`, prunes older non-runtime files from the app directory, runs `deploy/oracle/deploy.sh` (pip install + systemctl restart), then health-checks the service.
 
 ---
 
@@ -120,7 +120,15 @@ On every merge of a `release/x.y.z` branch into `main`:
 If you need to deploy without a CI run:
 
 ```bash
-ssh ubuntu@<YOUR_VM_IP> 'APP_DIR=/home/ubuntu/orthodox-calendar bash -s' < deploy/oracle/deploy.sh
+tar -czf /tmp/orthodox-calendar-backend.tar.gz \
+  --exclude='*/__pycache__' \
+  --exclude='*.py[co]' \
+  backend/app \
+  backend/requirements.txt
+scp /tmp/orthodox-calendar-backend.tar.gz ubuntu@<YOUR_VM_IP>:/tmp/orthodox-calendar-backend.tar.gz
+ssh ubuntu@<YOUR_VM_IP> \
+  'APP_DIR=/home/ubuntu/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
+  < deploy/oracle/deploy.sh
 ```
 
 ---
