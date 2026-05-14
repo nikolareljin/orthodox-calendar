@@ -77,7 +77,8 @@ if [[ -z "${PUBLIC_IP}" ]]; then
 fi
 # Reject non-IPv4 values to prevent nginx config injection from a malformed
 # IMDS/ifconfig.me response or an invalid --ip argument.
-if ! [[ "${PUBLIC_IP}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+if ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
   echo "ERROR: '${PUBLIC_IP}' is not a valid IPv4 address." >&2
   exit 1
 fi

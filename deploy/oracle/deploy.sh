@@ -59,7 +59,8 @@ fi
 unset _raw
 # Validate before use — reject anything that is not a plain IPv4 address to
 # prevent nginx config injection from a malformed or intercepted HTTP response.
-if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
   echo "    WARNING: detected value '${PUBLIC_IP}' is not a valid IPv4 address — ignoring"
   PUBLIC_IP=""
 fi
