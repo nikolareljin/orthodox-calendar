@@ -85,6 +85,10 @@ pip install -r requirements.txt
 ORTHODOX_CALENDAR_DATA_PATH=app/data uvicorn app.main:app --reload
 ```
 
+The API restricts browser CORS requests to local development and this project's
+GitHub Pages origin by default. For forks or custom domains, set
+`ORTHODOX_CALENDAR_CORS_ORIGINS` to a comma-separated list of allowed origins.
+
 **Frontend:**
 ```bash
 cd frontend

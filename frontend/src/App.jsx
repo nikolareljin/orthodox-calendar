@@ -354,15 +354,17 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
 
 // ── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
-  const now = useMemo(() => new Date(), []);
+  const getToday = () => new Date();
+  const initialToday = useMemo(getToday, []);
   const [theme, setTheme] = useState(() => localStorage.getItem("oc-theme") || "dark");
   const [tradition, setTradition] = useState("serbian");
-  const [year, setYear] = useState(now.getFullYear());
-  const [month, setMonth] = useState(now.getMonth() + 1);
-  const [selectedDay, setSelectedDay] = useState(now.getDate());
+  const [year, setYear] = useState(initialToday.getFullYear());
+  const [month, setMonth] = useState(initialToday.getMonth() + 1);
+  const [selectedDay, setSelectedDay] = useState(initialToday.getDate());
   const [yearEditing, setYearEditing] = useState(false);
-  const [yearDraft, setYearDraft] = useState(String(now.getFullYear()));
+  const [yearDraft, setYearDraft] = useState(String(initialToday.getFullYear()));
   const yearInputRef = useRef(null);
+  const today = getToday();
 
   const [monthData, setMonthData] = useState({});
   const [saints, setSaints] = useState([]);
@@ -492,10 +494,11 @@ export default function App() {
   }
 
   function goToToday() {
+    const currentToday = getToday();
     cancelYearEdit();
-    setYear(now.getFullYear());
-    setMonth(now.getMonth() + 1);
-    setSelectedDay(now.getDate());
+    setYear(currentToday.getFullYear());
+    setMonth(currentToday.getMonth() + 1);
+    setSelectedDay(currentToday.getDate());
   }
 
   const icsUrl = buildIcsUrl(tradition, selectedDate, 365);
@@ -586,9 +589,9 @@ export default function App() {
                 month={month}
                 selectedDay={selectedDay}
                 onDaySelect={setSelectedDay}
-                todayYear={now.getFullYear()}
-                todayMonth={now.getMonth() + 1}
-                todayDay={now.getDate()}
+                todayYear={today.getFullYear()}
+                todayMonth={today.getMonth() + 1}
+                todayDay={today.getDate()}
                 monthData={monthData}
               />
             </div>
