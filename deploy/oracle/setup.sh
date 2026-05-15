@@ -8,7 +8,7 @@
 #   sudo bash deploy/oracle/setup.sh
 #
 # After this script, the backend is live on port 80.
-# Add TLS with:  sudo bash /home/ubuntu/orthodox-calendar/deploy/oracle/setup-tls.sh
+# Add TLS with:  sudo bash /home/ubuntu/orthodox-calendar/deploy/oracle/setup-tls.sh --email you@example.com
 # deploy.sh (CI) calls /usr/local/bin/oc-certbot-provision (installed below).
 
 set -euo pipefail
@@ -102,8 +102,10 @@ if ! [[ "${DOMAIN}" =~ ${_nip_re} ]]; then
   exit 1
 fi
 NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
-# Update server_name before certbot so --nginx can match this vhost by name.
-if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
+# Update every server_name directive unconditionally so that after an IP change
+# all server blocks (HTTP and certbot-added HTTPS redirect) are updated, not just
+# the first one the grep finds.
+if [[ -f "${NGINX_SITE}" ]]; then
   sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
   nginx -t
   systemctl reload nginx

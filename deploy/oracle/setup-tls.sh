@@ -134,12 +134,12 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
   systemctl enable nginx
   systemctl start nginx
 fi
-if ! grep -q "server_name ${NIP_DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
-  echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
-  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
-  nginx -t
-  systemctl reload nginx
-fi
+# Update every server_name unconditionally so all server blocks (HTTP + certbot
+# HTTPS-redirect block) are updated after an IP change, not just the first match.
+echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
+sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
+nginx -t
+systemctl reload nginx
 
 # ---------------------------------------------------------------------------
 # 3 — Obtain certificate (skip if already present for this domain)
@@ -175,7 +175,7 @@ else
   if crontab -l 2>/dev/null | grep -qF "certbot renew"; then
     echo "==> certbot renewal cron already present"
   else
-    ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
+    ( crontab -l 2>/dev/null || true; echo "${CRON_JOB}" ) | crontab -
     echo "==> Daily certbot renewal cron installed (03:00)"
   fi
 fi

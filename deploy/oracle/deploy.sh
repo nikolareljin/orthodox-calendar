@@ -171,7 +171,7 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     fi
     CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
     if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
-      ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
+      ( crontab -l 2>/dev/null || true; echo "${CRON_JOB}" ) | crontab -
       echo "==> Daily certbot renewal cron installed (03:00)"
     fi
   fi
