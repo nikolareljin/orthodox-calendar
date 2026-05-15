@@ -156,6 +156,8 @@ _prune_missing_ssl_refs() {
     sed -i \
       -e '/^[[:space:]]*ssl_certificate[[:space:]]/d' \
       -e '/^[[:space:]]*ssl_certificate_key[[:space:]]/d' \
+      -e '/^[[:space:]]*include[[:space:]]*\/etc\/letsencrypt\/options-ssl-nginx\.conf/d' \
+      -e '/^[[:space:]]*ssl_dhparam[[:space:]]*\/etc\/letsencrypt\/ssl-dhparams\.pem/d' \
       -e 's/listen \([^;]*\) ssl/listen \1/g' \
       "${NGINX_SITE}"
   fi
