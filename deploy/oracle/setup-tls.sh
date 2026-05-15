@@ -72,6 +72,7 @@ fi
 # ---------------------------------------------------------------------------
 # 1 — Resolve public IP → nip.io domain
 # ---------------------------------------------------------------------------
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 if [[ -n "${FORCED_IP}" ]]; then
   PUBLIC_IP="${FORCED_IP}"
 else
@@ -81,11 +82,17 @@ else
   PUBLIC_IP="$(echo "${_raw}" | python3 -c \
     'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' \
     2>/dev/null || true)"
+  if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
+    PUBLIC_IP=""
+  fi
   if [[ -z "${PUBLIC_IP}" ]]; then
     _raw="$(curl -sf --max-time 5 'http://169.254.169.254/opc/v1/vnics/' 2>/dev/null || true)"
     PUBLIC_IP="$(echo "${_raw}" | python3 -c \
       'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' \
       2>/dev/null || true)"
+    if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
+      PUBLIC_IP=""
+    fi
   fi
   if [[ -z "${PUBLIC_IP}" ]]; then
     PUBLIC_IP="$(curl -sf --max-time 10 https://ifconfig.me 2>/dev/null || true)"
@@ -99,7 +106,6 @@ if [[ -z "${PUBLIC_IP}" ]]; then
 fi
 # Reject non-IPv4 values to prevent nginx config injection from a malformed
 # IMDS/ifconfig.me response or an invalid --ip argument.
-_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 if ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
   echo "ERROR: '${PUBLIC_IP}' is not a valid IPv4 address." >&2
   exit 1

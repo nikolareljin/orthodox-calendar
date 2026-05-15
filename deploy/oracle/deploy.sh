@@ -74,11 +74,18 @@ if ! command -v nginx > /dev/null 2>&1; then
 fi
 
 echo "==> Detecting public IP"
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 _raw="$(curl -sf --max-time 5 -H 'Authorization: Bearer Oracle' 'http://169.254.169.254/opc/v2/vnics/' 2>/dev/null || true)"
 PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
+if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
+  PUBLIC_IP=""
+fi
 if [[ -z "${PUBLIC_IP}" ]]; then
   _raw="$(curl -sf --max-time 5 'http://169.254.169.254/opc/v1/vnics/' 2>/dev/null || true)"
   PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
+  if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
+    PUBLIC_IP=""
+  fi
 fi
 if [[ -z "${PUBLIC_IP}" ]]; then
   PUBLIC_IP="$(curl -sf --max-time 10 https://ifconfig.me 2>/dev/null || true)"
@@ -86,7 +93,6 @@ fi
 unset _raw
 # Validate before use — reject anything that is not a plain IPv4 address to
 # prevent nginx config injection from a malformed or intercepted HTTP response.
-_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
   echo "    WARNING: detected value '${PUBLIC_IP}' is not a valid IPv4 address — ignoring"
   PUBLIC_IP=""
@@ -125,7 +131,8 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     fi
     echo "==> TLS already active for ${NIP_DOMAIN}"
     MANAGED_NIP_TLS=true
-  elif grep -q 'ssl_certificate' "${NGINX_SITE}" 2>/dev/null; then
+  elif grep -q 'ssl_certificate' "${NGINX_SITE}" 2>/dev/null \
+      && ! grep -Eq '/etc/letsencrypt/live/[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io/' "${NGINX_SITE}" 2>/dev/null; then
     echo "==> Existing custom TLS config detected; leaving nginx server_name/certificate unchanged"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
