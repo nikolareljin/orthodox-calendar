@@ -92,6 +92,7 @@ if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
   PUBLIC_IP=""
 fi
 NIP_DOMAIN=""
+MANAGED_NIP_TLS=false
 if [[ -n "${PUBLIC_IP}" ]]; then
   NIP_DOMAIN="${PUBLIC_IP//./-}.nip.io"
   echo "    Public IP: ${PUBLIC_IP} → ${NIP_DOMAIN}"
@@ -123,6 +124,9 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       echo "             Re-run setup.sh when convenient to install the scoped renewal wrapper."
     fi
     echo "==> TLS already active for ${NIP_DOMAIN}"
+    MANAGED_NIP_TLS=true
+  elif grep -q 'ssl_certificate' "${NGINX_SITE}" 2>/dev/null; then
+    echo "==> Existing custom TLS config detected; leaving nginx server_name/certificate unchanged"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
     # CERTBOT_EMAIL and the oc-certbot-provision wrapper are only required when
@@ -143,6 +147,7 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
     if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then
       echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
+      MANAGED_NIP_TLS=true
     else
       echo "ERROR: TLS provisioning failed for https://${NIP_DOMAIN}." >&2
       echo "       Fix the certbot/nginx issue and redeploy before publishing the frontend." >&2
@@ -153,7 +158,7 @@ fi
 
 # Enable automatic cert renewal only when TLS is active on this VM.
 # Skipped when NIP_DOMAIN is empty (no public IP detected, TLS not used).
-if [[ -n "${NIP_DOMAIN}" ]]; then
+if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
   # certbot renew is a no-op until 30 days before expiry, so a daily check is
   # fine. Prefer the systemd timer when present; fall back to a deploy-user cron
   # only when the timer unit is absent from the system.
@@ -170,7 +175,19 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       exit 1
     fi
   else
-    echo "==> certbot.timer absent; setup-tls.sh/setup.sh manage cron fallback as root"
+    if ! command -v crontab > /dev/null 2>&1; then
+      echo "ERROR: certbot.timer is absent and crontab is not installed." >&2
+      echo "       Re-run setup.sh to install cron, then redeploy." >&2
+      exit 1
+    fi
+    CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
+    existing_cron="$(crontab -l 2>/dev/null || true)"
+    if echo "${existing_cron}" | grep -qFx "${CRON_JOB}"; then
+      echo "==> Daily certbot renewal cron already present"
+    else
+      ( echo "${existing_cron}" | grep -vF "certbot renew" || true; echo "${CRON_JOB}" ) | crontab -
+      echo "==> Daily certbot renewal cron installed/updated (03:00)"
+    fi
   fi
 fi
 
