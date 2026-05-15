@@ -107,6 +107,11 @@ if [[ ! -f "${NGINX_SITE}" ]]; then
   echo "ERROR: nginx site ${NGINX_SITE} not found — run setup.sh first." >&2
   exit 1
 fi
+NGINX_SITE_ENABLED="/etc/nginx/sites-enabled/orthodox-calendar"
+if [[ ! -L "${NGINX_SITE_ENABLED}" ]]; then
+  echo "ERROR: nginx sites-enabled symlink ${NGINX_SITE_ENABLED} not found — run setup.sh first." >&2
+  exit 1
+fi
 
 # ---------------------------------------------------------------------------
 # 2 — Install certbot if absent

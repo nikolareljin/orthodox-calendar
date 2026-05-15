@@ -96,7 +96,7 @@ DOMAIN="$1"
 EMAIL="$2"
 # Validate domain is a well-formed nip.io hostname derived from an IPv4 address.
 # Rejects anything with spaces, shell metacharacters, or nginx config syntax.
-_nip_re='^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io$'
+_nip_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)-){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.nip\.io$'
 if ! [[ "${DOMAIN}" =~ ${_nip_re} ]]; then
   echo "ERROR: oc-certbot-provision: '${DOMAIN}' is not a valid nip.io hostname" >&2
   exit 1

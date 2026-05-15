@@ -41,6 +41,12 @@ if [[ ! -f "${NGINX_SITE}" ]]; then
   echo "       Run deploy/oracle/setup.sh on the server first." >&2
   exit 1
 fi
+NGINX_SITE_ENABLED="/etc/nginx/sites-enabled/${SERVICE}"
+if [[ ! -L "${NGINX_SITE_ENABLED}" ]]; then
+  echo "ERROR: nginx sites-enabled symlink ${NGINX_SITE_ENABLED} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
+fi
 
 if ! command -v curl > /dev/null 2>&1; then
   _apt_install curl
