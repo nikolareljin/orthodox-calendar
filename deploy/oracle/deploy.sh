@@ -147,6 +147,10 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       exit 1
     fi
     _ensure_certbot_packages
+    if ! systemctl is-active --quiet nginx 2>/dev/null; then
+      sudo systemctl enable nginx
+      sudo systemctl start nginx
+    fi
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
     if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then

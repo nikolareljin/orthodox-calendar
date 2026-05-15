@@ -147,9 +147,10 @@ On every merge of a `release/x.y.z` branch into `main`:
 
 1. **Security gate** — gitleaks + data-safety check (must pass before anything deploys).
 2. **Auto-tag** — creates the version tag from the branch name.
-3. In parallel:
-   - **Frontend** — built with `VITE_BASE=/orthodox-calendar/` and `VITE_API_BASE` from secrets, published to GitHub Pages.
-   - **Backend** — uploads a minimal archive containing only `backend/app` and `backend/requirements.txt`, prunes older non-runtime files from the app directory, runs `deploy/oracle/deploy.sh` (pip install + systemctl restart), then health-checks the service.
+3. **Build + backend deploy** run after the gates:
+   - **Frontend build** — builds the static site with `VITE_BASE=/orthodox-calendar/` and `VITE_API_BASE` from secrets, then uploads the Pages artifact.
+   - **Backend deploy** — uploads a minimal archive containing only `backend/app` and `backend/requirements.txt`, prunes older non-runtime files from the app directory, runs `deploy/oracle/deploy.sh` (pip install + systemctl restart), then health-checks the service.
+4. **Pages publish** runs only after the frontend build and backend deploy both succeed, so GitHub Pages is not updated when the backend deploy or public health check fails.
 
 ---
 
