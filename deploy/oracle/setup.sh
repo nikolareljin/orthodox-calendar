@@ -70,9 +70,12 @@ if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" || ! -f "${DEPLOY_DIR}/ngin
   DEPLOY_DIR="${APP_DIR}/deploy/oracle"
 fi
 if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" || ! -f "${DEPLOY_DIR}/nginx-backend.conf" ]]; then
-  echo "ERROR: deploy/oracle companion files not found." >&2
-  echo "       Run setup.sh from a full checkout or allow it to clone ${REPO} into ${APP_DIR}." >&2
-  exit 1
+  echo "    deploy/oracle companion files missing — downloading fresh copies"
+  DEPLOY_DIR="$(mktemp -d)"
+  curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/orthodox-calendar.service" \
+    -o "${DEPLOY_DIR}/orthodox-calendar.service"
+  curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/nginx-backend.conf" \
+    -o "${DEPLOY_DIR}/nginx-backend.conf"
 fi
 
 echo "==> Creating Python virtualenv and installing backend dependencies"
@@ -116,11 +119,13 @@ if ! [[ "${DOMAIN}" =~ ${_nip_re} ]] || ! [[ "${DOMAIN_IP}" =~ ${_valid_ipv4_re}
 fi
 NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
 # Update server_name before certbot so --nginx can match this vhost by name.
-if [[ -f "${NGINX_SITE}" ]]; then
-  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
-  nginx -t
-  systemctl reload nginx
+if [[ ! -f "${NGINX_SITE}" ]]; then
+  echo "ERROR: oc-certbot-provision: nginx site ${NGINX_SITE} not found" >&2
+  exit 1
 fi
+sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
+nginx -t
+systemctl reload nginx
 certbot --nginx \
   -d "${DOMAIN}" \
   --non-interactive \
@@ -130,6 +135,25 @@ certbot --nginx \
 WRAPPER
 chown root:root /usr/local/bin/oc-certbot-provision
 chmod 755 /usr/local/bin/oc-certbot-provision
+
+cat > /usr/local/bin/oc-certbot-renew <<'WRAPPER'
+#!/usr/bin/env bash
+# Usage: oc-certbot-renew <nip-domain>
+# Installed by setup.sh; run only via sudo from the deploy user.
+set -euo pipefail
+DOMAIN="$1"
+_nip_re='^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io$'
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+DOMAIN_IP="${DOMAIN%.nip.io}"
+DOMAIN_IP="${DOMAIN_IP//-/.}"
+if ! [[ "${DOMAIN}" =~ ${_nip_re} ]] || ! [[ "${DOMAIN_IP}" =~ ${_valid_ipv4_re} ]]; then
+  echo "ERROR: oc-certbot-renew: '${DOMAIN}' is not a valid nip.io hostname" >&2
+  exit 1
+fi
+certbot renew --quiet --cert-name "${DOMAIN}"
+WRAPPER
+chown root:root /usr/local/bin/oc-certbot-renew
+chmod 755 /usr/local/bin/oc-certbot-renew
 
 echo "==> Adding sudoers rules for the deploy user"
 cat > /etc/sudoers.d/orthodox-calendar <<SUDOERS
@@ -151,6 +175,7 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet
 # Wrapper for TLS provisioning — hardcoded flags, no wildcard injection surface
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-provision
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-renew
 SUDOERS
 chown root:root /etc/sudoers.d/orthodox-calendar
 chmod 440 /etc/sudoers.d/orthodox-calendar
