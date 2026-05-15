@@ -151,6 +151,8 @@ _prune_missing_ssl_refs() {
   done < <(
     sed -n 's/^[[:space:]]*ssl_certificate[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
     sed -n 's/^[[:space:]]*ssl_certificate_key[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
+    sed -n 's/^[[:space:]]*include[[:space:]]\+\(\/etc\/letsencrypt\/options-ssl-nginx\.conf\);.*/\1/p' "${NGINX_SITE}"
+    sed -n 's/^[[:space:]]*ssl_dhparam[[:space:]]\+\(\/etc\/letsencrypt\/ssl-dhparams\.pem\);.*/\1/p' "${NGINX_SITE}"
   )
   if [[ "${missing}" == "true" ]]; then
     sed -i \
@@ -169,7 +171,10 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
   systemctl start nginx
 fi
 echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
-sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
+sed -i \
+  -e "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" \
+  -e "s/if ([\$]host = [0-9]\+-[0-9]\+-[0-9]\+-[0-9]\+\.nip\.io)/if (\$host = ${NIP_DOMAIN})/g" \
+  "${NGINX_SITE}"
 _prune_missing_ssl_refs
 nginx -t
 systemctl reload nginx

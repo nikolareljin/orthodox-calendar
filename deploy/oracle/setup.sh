@@ -46,7 +46,15 @@ _open_port() {
   # dest) so targeted deny rules (fail2ban, source-specific) are unaffected.
   # Match both IPv4 (0.0.0.0/0) and IPv6 (::/0) catch-all addresses.
   local pos
-  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && ($2=="REJECT"||$2=="DROP") && ($5=="0.0.0.0/0"||$5=="::/0") && ($6=="0.0.0.0/0"||$6=="::/0") {if (!pos) pos=$1} END {if (pos) print pos}')"
+  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '
+    /^[0-9]/ && ($2=="REJECT" || $2=="DROP") && $3=="all" &&
+      ($5=="0.0.0.0/0" || $5=="::/0") &&
+      ($6=="0.0.0.0/0" || $6=="::/0") &&
+      ($2=="DROP" || $7=="reject-with") {
+        if (!pos) pos=$1
+      }
+    END {if (pos) print pos}
+  ')"
   if [[ -n "${pos}" ]]; then
     "${ipt}" -I INPUT "${pos}" -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
   else
@@ -135,6 +143,8 @@ _prune_missing_ssl_refs() {
   done < <(
     sed -n 's/^[[:space:]]*ssl_certificate[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
     sed -n 's/^[[:space:]]*ssl_certificate_key[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
+    sed -n 's/^[[:space:]]*include[[:space:]]\+\(\/etc\/letsencrypt\/options-ssl-nginx\.conf\);.*/\1/p' "${NGINX_SITE}"
+    sed -n 's/^[[:space:]]*ssl_dhparam[[:space:]]\+\(\/etc\/letsencrypt\/ssl-dhparams\.pem\);.*/\1/p' "${NGINX_SITE}"
   )
   if [[ "${missing}" == "true" ]]; then
     sed -i \
@@ -146,7 +156,13 @@ _prune_missing_ssl_refs() {
       "${NGINX_SITE}"
   fi
 }
-sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
+_set_nip_domain() {
+  sed -i \
+    -e "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" \
+    -e "s/if ([\$]host = [0-9]\+-[0-9]\+-[0-9]\+-[0-9]\+\.nip\.io)/if (\$host = ${DOMAIN})/g" \
+    "${NGINX_SITE}"
+}
+_set_nip_domain
 _prune_missing_ssl_refs
 nginx -t
 if systemctl is-active --quiet nginx 2>/dev/null; then
