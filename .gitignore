@@ -2,6 +2,7 @@
 .env
 .env.local
 .env.*.local
+deploy/oracle/.env.deploy
 
 # Python
 __pycache__/

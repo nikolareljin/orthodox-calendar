@@ -8,7 +8,8 @@
 #   sudo bash deploy/oracle/setup.sh
 #
 # After this script, the backend is live on port 80.
-# Add a domain + TLS with:  sudo certbot --nginx -d your.domain.com
+# Add TLS with:  sudo bash deploy/oracle/setup-tls.sh
+# deploy.sh (CI) calls /usr/local/bin/oc-certbot-provision (installed below).
 
 set -euo pipefail
 
@@ -20,20 +21,40 @@ PYTHON="python3.12"
 
 echo "==> Installing system packages"
 apt-get update -qq
-DEBIAN_FRONTEND=noninteractive apt-get install -y software-properties-common
+# software-properties-common provides add-apt-repository (missing on minimal images)
+DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  software-properties-common ca-certificates gnupg2 lsb-release
 add-apt-repository -y ppa:deadsnakes/ppa
 apt-get update -qq
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
   "${PYTHON}" "${PYTHON}-venv" \
-  nginx git curl \
+  nginx nginx-common \
+  git curl \
   certbot python3-certbot-nginx \
+  cron \
   iptables iptables-persistent
 
 echo "==> Opening ports 80 and 443 in OS firewall (Oracle Cloud blocks these by default)"
-iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 80  -j ACCEPT
-iptables  -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
-ip6tables -I INPUT  6 -m state --state NEW -p tcp --dport 443 -j ACCEPT
+# Idempotent: delete all existing copies, then insert before the first REJECT/DROP
+# so the ACCEPT is reachable even on chains with a terminal deny rule.
+_open_port() {
+  local ipt="$1" dport="$2"
+  # Delete all existing copies of this rule — a stale appended rule may sit
+  # after a terminal REJECT/DROP and be unreachable; -C cannot detect that.
+  while "${ipt}" -D INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null; do :; done
+  # Re-insert before the first REJECT/DROP so the ACCEPT is reachable
+  local pos
+  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && /REJECT|DROP/ {print $1; exit}')"
+  if [[ -n "${pos}" ]]; then
+    "${ipt}" -I INPUT "${pos}" -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
+  else
+    "${ipt}" -A INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
+  fi
+}
+_open_port iptables  80
+_open_port ip6tables 80
+_open_port iptables  443
+_open_port ip6tables 443
 # Persist so rules survive reboot
 netfilter-persistent save
 
@@ -63,9 +84,62 @@ systemctl start "${SERVICE}"
 echo "    Service status:"
 systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — check: journalctl -u ${SERVICE}"
 
-echo "==> Adding sudoers rule so the deploy user can restart the service without a password"
-echo "${APP_USER} ALL=(ALL) NOPASSWD: /bin/systemctl restart ${SERVICE}" \
-  > /etc/sudoers.d/orthodox-calendar
+echo "==> Installing certbot provision wrapper"
+# Root-owned wrapper with hardcoded certbot flags — eliminates hook-injection risk
+# from a wildcard sudoers entry. deploy.sh calls this via sudo with two args only.
+cat > /usr/local/bin/oc-certbot-provision <<'WRAPPER'
+#!/usr/bin/env bash
+# Usage: oc-certbot-provision <nip-domain> <email>
+# Installed by setup.sh; run only via sudo from the deploy user.
+set -euo pipefail
+DOMAIN="$1"
+EMAIL="$2"
+# Validate domain is a well-formed nip.io hostname derived from an IPv4 address.
+# Rejects anything with spaces, shell metacharacters, or nginx config syntax.
+_nip_re='^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io$'
+if ! [[ "${DOMAIN}" =~ ${_nip_re} ]]; then
+  echo "ERROR: oc-certbot-provision: '${DOMAIN}' is not a valid nip.io hostname" >&2
+  exit 1
+fi
+NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
+# Update server_name before certbot so --nginx can match this vhost by name.
+if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
+  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
+  nginx -t
+  systemctl reload nginx
+fi
+certbot --nginx \
+  -d "${DOMAIN}" \
+  --non-interactive \
+  --agree-tos \
+  -m "${EMAIL}" \
+  --redirect
+WRAPPER
+chmod 755 /usr/local/bin/oc-certbot-provision
+
+echo "==> Adding sudoers rules for the deploy user"
+cat > /etc/sudoers.d/orthodox-calendar <<SUDOERS
+# apt — update cache and exact packages that deploy.sh may install as pre-flight
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get update
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get update -qq
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y curl
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3.12-venv
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y certbot
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3-certbot-nginx
+# systemctl — only service restart and nginx lifecycle; no unit-file writes or
+# daemon-reload (writing the unit and reloading systemd is root-only via setup.sh)
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart ${SERVICE}
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl start nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
+# certbot — renewal only (no flags, no injection surface)
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet
+# Wrapper for TLS provisioning — hardcoded flags, no wildcard injection surface
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-provision
+SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 
 echo "==> Installing nginx config"
@@ -78,8 +152,15 @@ systemctl reload nginx
 echo ""
 echo "==> Setup complete."
 echo ""
-public_ip="$(curl -fsS ifconfig.me 2>/dev/null || true)"
+public_ip="$(curl -fsS https://ifconfig.me 2>/dev/null || true)"
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+if [[ -n "${public_ip}" ]] && ! [[ "${public_ip}" =~ ${_valid_ipv4_re} ]]; then
+  echo "    WARNING: ifconfig.me returned '${public_ip}' (not a valid IPv4) — skipping nip.io hint"
+  public_ip=""
+fi
+nip_domain=""
 if [[ -n "${public_ip}" ]]; then
+  nip_domain="${public_ip//./-}.nip.io"
   echo "    Backend API:  http://${public_ip}/api/v1/docs"
 else
   echo "    Backend API:  http://<VM_PUBLIC_IP>/api/v1/docs"
@@ -88,6 +169,15 @@ echo ""
 echo "    Next steps:"
 echo "    1. In Oracle Cloud console → Networking → VCN → Security Lists:"
 echo "       Add Ingress rules for TCP 80 and TCP 443 (from 0.0.0.0/0)."
-echo "    2. Point a domain at this IP, then run:"
-echo "       sudo certbot --nginx -d your.domain.com"
-echo "    3. Set GitHub secrets (see deploy/oracle/README.md)."
+echo "    2. Set GitHub secrets BEFORE running the first deploy:"
+echo "       OCI_HOST, OCI_USER, OCI_SSH_KEY, OCI_KNOWN_HOSTS"
+if [[ -n "${nip_domain}" ]]; then
+  echo "       VITE_API_BASE   = https://${nip_domain}"
+  echo "       CERTBOT_EMAIL   = <your-email>"
+else
+  echo "       VITE_API_BASE   = https://<ip-with-hyphens>.nip.io"
+  echo "       CERTBOT_EMAIL   = <your-email>"
+fi
+echo "       (see deploy/oracle/README.md for details)"
+echo "    3. Run the first CI deploy — TLS is auto-provisioned via nip.io +"
+echo "       Let's Encrypt using CERTBOT_EMAIL and the public IP above."

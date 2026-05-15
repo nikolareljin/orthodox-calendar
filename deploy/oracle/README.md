@@ -63,16 +63,51 @@ curl http://localhost:8000/health        # should return {"status":"ok"}
 curl http://<YOUR_VM_IP>/api/v1/docs     # FastAPI Swagger UI
 ```
 
-### Optional — TLS with Let's Encrypt
+### TLS with Let's Encrypt (nip.io)
 
-Point a domain (e.g. `api.orthodox-calendar.org`) at the VM IP, then:
+No domain registration needed. The `setup-tls.sh` script uses **nip.io** — a
+wildcard DNS service that maps `<dashed-ip>.nip.io` to the same IP automatically
+(e.g. `1-2-3-4.nip.io` → `1.2.3.4`). Run it once on the VM:
 
 ```bash
-sudo certbot --nginx -d api.orthodox-calendar.org
+sudo bash ~/orthodox-calendar/deploy/oracle/setup-tls.sh --email you@example.com
 ```
 
-Certbot auto-renews via its own systemd timer. Once HTTPS is live, set
-`VITE_API_BASE=https://api.orthodox-calendar.org` in GitHub secrets.
+What the script does:
+
+1. Auto-detects the public IP from the Oracle IMDS (or `ifconfig.me` fallback).
+2. Installs `certbot` + `python3-certbot-nginx` if absent.
+3. Issues a certificate for `<dashed-ip>.nip.io` via `certbot --nginx` (skips if
+   already present).
+4. Enables automatic renewal — prefers the `certbot.timer` systemd unit that
+   `apt` installs; falls back to a single daily cron entry at 03:00. Certbot
+   contacts Let's Encrypt **only when the cert is within 30 days of expiry**, so
+   the check is cheap.
+
+**Options:**
+
+| Flag | Default | Purpose |
+|------|---------|---------|
+| `--ip <address>` | auto-detected | Override the public IP |
+| `--email <address>` | **required** | Let's Encrypt expiry notifications |
+
+Once HTTPS is live the script prints the `VITE_API_BASE` value to set in
+GitHub Actions secrets:
+
+```
+Done. TLS is active for https://1-2-3-4.nip.io
+Set VITE_API_BASE=https://1-2-3-4.nip.io in GitHub Actions secrets.
+```
+
+> **Note:** if the Oracle VM is ever reprovisioned with a new public IP, re-run
+> `setup-tls.sh` from the raw GitHub URL (the cloned repo is pruned to just
+> `backend/` after each deploy):
+> ```bash
+> curl -fsSL https://raw.githubusercontent.com/nikolareljin/orthodox-calendar/main/deploy/oracle/setup-tls.sh \
+>   | sudo bash -s -- --email you@example.com
+> ```
+> It will detect the new IP, update the nginx `server_name` to the new nip.io
+> hostname, and obtain a fresh certificate automatically.
 
 ---
 
@@ -87,7 +122,8 @@ and add:
 | `OCI_USER` | `ubuntu` (Ubuntu images) or `opc` (Oracle Linux) |
 | `OCI_SSH_KEY` | Contents of the **private** SSH key that matches the public key on the VM |
 | `OCI_KNOWN_HOSTS` | Output of: `ssh-keyscan -H <YOUR_VM_IP>` run from your laptop |
-| `VITE_API_BASE` | `http://<YOUR_VM_IP>` (or `https://your.domain.com` after TLS) |
+| `VITE_API_BASE` | `https://<ip-with-hyphens>.nip.io` (set this **before** first deploy; deploy.sh provisions TLS and nginx will redirect HTTP → HTTPS) |
+| `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications (**required** for the HTTPS deploy path; deploy.sh fails if it can detect the VM public IP and this is unset) |
 
 Generate `OCI_KNOWN_HOSTS` on your machine (not the VM):
 
@@ -104,6 +140,8 @@ Settings → Pages → Source: **GitHub Actions** (not a branch).
 ---
 
 ## 4 — How deployment works
+
+**Prerequisite:** `deploy/oracle/setup.sh` must have been run once on the VM before any CI deploy. `deploy.sh` fails fast if the systemd unit or nginx site config are absent.
 
 On every merge of a `release/x.y.z` branch into `main`:
 

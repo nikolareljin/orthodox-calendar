@@ -166,6 +166,7 @@ jobs:
   backend-deploy:
     if: needs.release-check.outputs.is_release == 'true'
     needs: [release-check, security, data-safety]
+    timeout-minutes: 15
     concurrency:
       group: backend-deploy
       cancel-in-progress: false
@@ -196,6 +197,7 @@ jobs:
         env:
           OCI_USER: ${{ secrets.OCI_USER }}
           OCI_HOST: ${{ secrets.OCI_HOST }}
+          CERTBOT_EMAIL: ${{ secrets.CERTBOT_EMAIL }}
         run: |
           set -euo pipefail
           scp -i ~/.ssh/deploy_key \
@@ -203,11 +205,16 @@ jobs:
               -o ConnectTimeout=15 \
               /tmp/orthodox-calendar-backend.tar.gz \
               "${OCI_USER}@${OCI_HOST}:/tmp/orthodox-calendar-backend.tar.gz"
+          _deploy_env="APP_DIR=/home/${OCI_USER}/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz"
+          if [[ -n "${CERTBOT_EMAIL:-}" ]]; then
+            printf -v _email_q '%q' "${CERTBOT_EMAIL}"
+            _deploy_env="${_deploy_env} CERTBOT_EMAIL=${_email_q}"
+          fi
           ssh -i ~/.ssh/deploy_key \
               -o BatchMode=yes \
               -o ConnectTimeout=15 \
               "${OCI_USER}@${OCI_HOST}" \
-              'APP_DIR=/home/'"${OCI_USER}"'/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
+              "${_deploy_env} bash -s" \
               < deploy/oracle/deploy.sh
 
       - name: Verify backend health
@@ -263,7 +270,7 @@ jobs:
 # ── Stage 3: Pages publish (after build) ──────────────────────────────────────
   deploy:
     if: needs.release-check.outputs.is_release == 'true'
-    needs: [release-check, build]
+    needs: [release-check, build, backend-deploy]
     concurrency:
       group: pages-deploy
       cancel-in-progress: false

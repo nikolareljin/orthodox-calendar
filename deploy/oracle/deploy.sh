@@ -1,11 +1,163 @@
 #!/usr/bin/env bash
 # Called by GitHub Actions over SSH to deploy a new backend version.
+# Prerequisite: deploy/oracle/setup.sh must have been run on the server first.
 # Must be idempotent — safe to run multiple times.
 set -euo pipefail
 
 APP_DIR="${APP_DIR:-/home/ubuntu/orthodox-calendar}"
 RELEASE_ARCHIVE="${RELEASE_ARCHIVE:-}"
 SERVICE="orthodox-calendar"
+CERTBOT_EMAIL="${CERTBOT_EMAIL:-}"
+
+# ---------------------------------------------------------------------------
+# Pre-flight: ensure runtime tools are present (minimal Oracle Ubuntu may
+# lack these even after initial setup.sh if packages were purged/upgraded).
+# setup.sh must have granted the deploy user the matching sudoers entries.
+# ---------------------------------------------------------------------------
+_apt_updated=false
+_apt_install() {
+  if [[ "${_apt_updated}" == "false" ]]; then
+    echo "    Updating apt cache"
+    sudo apt-get update -qq
+    _apt_updated=true
+  fi
+  echo "    Installing missing package: $1"
+  sudo apt-get install -y "$1"
+}
+
+echo "==> Pre-flight checks"
+# Check setup.sh artifacts first — fail fast before any apt operations on an
+# unprepared VM (avoids misleading sudo/apt errors masking the real cause).
+UNIT_FILE="/etc/systemd/system/${SERVICE}.service"
+if [[ ! -f "${UNIT_FILE}" ]]; then
+  echo "ERROR: systemd unit ${UNIT_FILE} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
+fi
+
+NGINX_SITE="/etc/nginx/sites-available/${SERVICE}"
+if [[ ! -f "${NGINX_SITE}" ]]; then
+  echo "ERROR: nginx site config ${NGINX_SITE} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
+fi
+
+if ! command -v curl > /dev/null 2>&1; then
+  _apt_install curl
+fi
+if ! command -v python3.12 > /dev/null 2>&1; then
+  echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
+  exit 1
+fi
+if ! dpkg -s python3.12-venv > /dev/null 2>&1; then
+  _apt_install python3.12-venv
+fi
+if ! command -v nginx > /dev/null 2>&1; then
+  _apt_install nginx
+fi
+
+echo "==> Detecting public IP"
+_raw="$(curl -sf --max-time 5 -H 'Authorization: Bearer Oracle' 'http://169.254.169.254/opc/v2/vnics/' 2>/dev/null || true)"
+PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
+if [[ -z "${PUBLIC_IP}" ]]; then
+  _raw="$(curl -sf --max-time 5 'http://169.254.169.254/opc/v1/vnics/' 2>/dev/null || true)"
+  PUBLIC_IP="$(echo "${_raw}" | python3.12 -c 'import sys,json; d=json.load(sys.stdin); print(d[0].get("publicIp",""))' 2>/dev/null || true)"
+fi
+if [[ -z "${PUBLIC_IP}" ]]; then
+  PUBLIC_IP="$(curl -sf --max-time 10 https://ifconfig.me 2>/dev/null || true)"
+fi
+unset _raw
+# Validate before use — reject anything that is not a plain IPv4 address to
+# prevent nginx config injection from a malformed or intercepted HTTP response.
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+if [[ -n "${PUBLIC_IP}" ]] && ! [[ "${PUBLIC_IP}" =~ ${_valid_ipv4_re} ]]; then
+  echo "    WARNING: detected value '${PUBLIC_IP}' is not a valid IPv4 address — ignoring"
+  PUBLIC_IP=""
+fi
+NIP_DOMAIN=""
+if [[ -n "${PUBLIC_IP}" ]]; then
+  NIP_DOMAIN="${PUBLIC_IP//./-}.nip.io"
+  echo "    Public IP: ${PUBLIC_IP} → ${NIP_DOMAIN}"
+else
+  echo "    Could not detect public IP — skipping TLS step"
+fi
+
+if ! systemctl is-active --quiet nginx 2>/dev/null; then
+  sudo systemctl enable nginx
+  sudo systemctl start nginx
+fi
+
+if [[ -n "${NIP_DOMAIN}" ]]; then
+  # Cert file existing is not enough — nginx may have been reset (e.g. by
+  # re-running setup.sh) and lost the SSL server block. Also verify nginx
+  # references the cert for THIS domain, not a stale cert from an old IP.
+  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
+      && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+    echo "==> TLS already active for ${NIP_DOMAIN}"
+  else
+    echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
+    # CERTBOT_EMAIL and the oc-certbot-provision wrapper are only required when
+    # actually provisioning a new certificate, not on routine redeploys where TLS
+    # is already active. Checking them here avoids breaking existing-cert deploys.
+    if [[ -z "${CERTBOT_EMAIL}" ]]; then
+      echo "ERROR: CERTBOT_EMAIL is not set." >&2
+      echo "       Set the CERTBOT_EMAIL GitHub secret before deploying the HTTPS API endpoint." >&2
+      exit 1
+    fi
+    if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
+      echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
+      echo "       Re-run deploy/oracle/setup.sh to install the TLS wrapper, then redeploy." >&2
+      exit 1
+    fi
+    if ! command -v certbot > /dev/null 2>&1; then
+      _apt_install certbot
+    fi
+    if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
+      _apt_install python3-certbot-nginx
+    fi
+    # oc-certbot-provision updates server_name then calls certbot with fixed flags.
+    # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
+    if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then
+      echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
+    else
+      echo "ERROR: TLS provisioning failed for https://${NIP_DOMAIN}." >&2
+      echo "       Fix the certbot/nginx issue and redeploy before publishing the frontend." >&2
+      exit 1
+    fi
+  fi
+fi
+
+# Enable automatic cert renewal only when TLS is active on this VM.
+# Skipped when NIP_DOMAIN is empty (no public IP detected, TLS not used).
+if [[ -n "${NIP_DOMAIN}" ]]; then
+  # certbot renew is a no-op until 30 days before expiry, so a daily check is
+  # fine. Prefer the systemd timer when present; fall back to a deploy-user cron
+  # only when the timer unit is absent from the system.
+  # A sudoers failure enabling the timer means the server needs setup.sh rerun —
+  # do not install cron in that case, as the cron sudo entry is also absent.
+  if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
+    if sudo systemctl enable --now certbot.timer 2>/dev/null; then
+      echo "==> certbot.timer enabled for automatic renewal"
+    else
+      echo "ERROR: certbot.timer exists but could not be enabled." >&2
+      echo "       Re-run deploy/oracle/setup.sh to update sudoers/systemd, then redeploy." >&2
+      exit 1
+    fi
+  else
+    # certbot.timer unit absent (not installed by this certbot package).
+    # The deploy user has NOPASSWD for certbot renew --quiet via setup.sh sudoers.
+    if ! command -v crontab > /dev/null 2>&1; then
+      echo "ERROR: certbot.timer is absent and crontab is not installed." >&2
+      echo "       Re-run deploy/oracle/setup.sh to install cron, then redeploy." >&2
+      exit 1
+    fi
+    CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
+    if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
+      ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
+      echo "==> Daily certbot renewal cron installed (03:00)"
+    fi
+  fi
+fi
 
 echo "==> Installing scoped backend release"
 mkdir -p "${APP_DIR}/backend"
@@ -53,14 +205,10 @@ if [[ -f ".venv/bin/pip" ]] && .venv/bin/python -c 'import sys' > /dev/null 2>&1
   fi
 fi
 if [[ "${_venv_ok}" == "false" ]]; then
-  if ! command -v python3.12 > /dev/null 2>&1; then
-    echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
-    exit 1
-  fi
   rm -rf .venv
-  if ! python3.12 -m venv .venv; then
-    echo "ERROR: python3.12 -m venv failed — ensure python3.12-venv is installed (run setup.sh)" >&2
-    exit 1
+  if ! python3.12 -m venv .venv 2>/dev/null; then
+    _apt_install python3.12-venv
+    python3.12 -m venv .venv
   fi
   echo "    Created virtualenv with python3.12"
   # Note: a broken interpreter symlink is already caught by the import-sys
