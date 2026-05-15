@@ -51,7 +51,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 - **GitHub Pages deploy trigger** — deploy workflow now fires correctly on pushes to `main`; previously required a manual re-run after release branch merge.
 - **Oracle Cloud venv bootstrap** — `deploy.sh` auto-installs `python3.12-venv` if missing, with `apt-get update` pre-flight; eliminates `ensurepip` failures on minimal Ubuntu images.
-- **Node.js upgraded to 22** — all CI and deploy workflow jobs updated from Node 20 → 22 (current LTS).
+- **Node.js upgraded to 22** — all CI and deploy workflow jobs updated from Node 20 → 22 (LTS at time of release).
 - **Deploy hardening** — iptables rule ordering fixed; nip.io TLS certificate provisioned via certbot after the one-time Oracle setup; deploy pre-flight checks fail fast when required setup artifacts are missing; backend-deploy job timeout added.
 - **`setup-tls.sh`** — standalone script to obtain a Let's Encrypt certificate for the nip.io hostname derived from the Oracle VM's public IP, and enable auto-renewal; `certbot.timer` (systemd) is preferred, daily 03:00 cron as fallback. Certbot contacts Let's Encrypt only when cert is within 30 days of expiry. Accepts optional `--ip` and requires `--email`. Documented in `deploy/oracle/README.md`.
 

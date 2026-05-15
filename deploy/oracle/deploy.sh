@@ -52,6 +52,12 @@ if [[ ! -f "${NGINX_SITE}" ]]; then
   echo "       Run deploy/oracle/setup.sh on the server first." >&2
   exit 1
 fi
+NGINX_SITE_ENABLED="/etc/nginx/sites-enabled/${SERVICE}"
+if [[ ! -L "${NGINX_SITE_ENABLED}" ]]; then
+  echo "ERROR: nginx sites-enabled symlink ${NGINX_SITE_ENABLED} not found." >&2
+  echo "       Run deploy/oracle/setup.sh on the server first." >&2
+  exit 1
+fi
 
 if ! command -v curl > /dev/null 2>&1; then
   _apt_install curl
@@ -124,7 +130,8 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     fi
     if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
       echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
-      echo "       Re-run deploy/oracle/setup.sh to install the TLS wrapper, then redeploy." >&2
+      echo "       deploy.sh prunes the repo checkout, so restore the full clone before" >&2
+      echo "       rerunning setup.sh, or run the documented initial setup flow again." >&2
       exit 1
     fi
     _ensure_certbot_packages
@@ -150,7 +157,9 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   # A sudoers failure enabling the timer means the server needs setup.sh rerun —
   # do not install cron in that case, as the cron sudo entry is also absent.
   if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
-    if sudo systemctl enable --now certbot.timer 2>/dev/null; then
+    if systemctl is-active --quiet certbot.timer 2>/dev/null; then
+      echo "==> certbot.timer already active"
+    elif sudo systemctl enable --now certbot.timer 2>/dev/null; then
       echo "==> certbot.timer enabled for automatic renewal"
     else
       echo "ERROR: certbot.timer exists but could not be enabled." >&2

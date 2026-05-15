@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # Runs the same archive upload and remote deploy script as the GitHub Actions
-# backend-deploy job. CI also performs a public VITE_API_BASE/health check.
+# backend-deploy job. Set VITE_API_BASE to also run CI's public health check.
 # Reads secrets from .env.deploy (not committed — see .env.deploy.example).
 #
 # Usage:
 #   cp deploy/oracle/.env.deploy.example deploy/oracle/.env.deploy
 #   # fill in OCI_USER, OCI_HOST, OCI_SSH_KEY_FILE, OCI_KNOWN_HOSTS
 #   # set CERTBOT_EMAIL too when the remote deploy must provision TLS
+#   # set VITE_API_BASE to verify the public /health endpoint after deploy
 #   bash deploy/oracle/manual-deploy.sh
 
 set -euo pipefail
@@ -69,3 +70,20 @@ ssh -i "${OCI_SSH_KEY_FILE}" \
 
 echo ""
 echo "==> Done. Backend deployed to ${OCI_HOST}."
+
+if [[ -n "${VITE_API_BASE:-}" ]]; then
+  echo "==> Checking public health endpoint (${VITE_API_BASE}/health)"
+  _url="${VITE_API_BASE}/health"
+  _status="000"
+  for _i in 1 2 3 4 5 6; do
+    _status="$(curl -sf --max-time 10 -o /dev/null -w '%{http_code}' "${_url}" 2>/dev/null || echo 000)"
+    [[ "${_status}" == "200" ]] && break
+    [[ "${_i}" -lt 6 ]] && sleep 10
+  done
+  if [[ "${_status}" == "200" ]]; then
+    echo "    Backend healthy (HTTP 200)"
+  else
+    echo "ERROR: ${_url} returned ${_status} after retries" >&2
+    exit 1
+  fi
+fi
