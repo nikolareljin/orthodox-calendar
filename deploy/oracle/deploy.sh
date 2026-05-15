@@ -136,6 +136,16 @@ fi
 # Enable automatic cert renewal only when TLS is active on this VM.
 # Skipped when NIP_DOMAIN is empty (no public IP detected, TLS not used).
 if [[ -n "${NIP_DOMAIN}" ]]; then
+  # Ensure certbot is present before configuring the renewal mechanism.
+  # The provisioning block above may have been skipped when the cert already
+  # existed; a subsequent package purge/upgrade can remove certbot without
+  # touching /etc/letsencrypt, leaving renewal scheduled but broken.
+  if ! command -v certbot > /dev/null 2>&1; then
+    _apt_install certbot
+  fi
+  if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
+    _apt_install python3-certbot-nginx
+  fi
   # certbot renew is a no-op until 30 days before expiry, so a daily check is
   # fine. Prefer the systemd timer when present; fall back to a deploy-user cron
   # only when the timer unit is absent from the system.

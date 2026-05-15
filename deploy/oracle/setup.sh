@@ -8,7 +8,7 @@
 #   sudo bash deploy/oracle/setup.sh
 #
 # After this script, the backend is live on port 80.
-# Add TLS with:  sudo bash deploy/oracle/setup-tls.sh
+# Add TLS with:  sudo bash /home/ubuntu/orthodox-calendar/deploy/oracle/setup-tls.sh
 # deploy.sh (CI) calls /usr/local/bin/oc-certbot-provision (installed below).
 
 set -euo pipefail
@@ -71,7 +71,7 @@ sudo -u "${APP_USER}" "${APP_DIR}/.venv/bin/pip" install --quiet --upgrade pip
 sudo -u "${APP_USER}" "${APP_DIR}/.venv/bin/pip" install --quiet -r "${APP_DIR}/backend/requirements.txt"
 
 echo "==> Installing systemd service"
-cp "$(dirname "$0")/orthodox-calendar.service" /etc/systemd/system/
+cp "${APP_DIR}/deploy/oracle/orthodox-calendar.service" /etc/systemd/system/
 unit_file="/etc/systemd/system/${SERVICE}.service"
 escaped_app_dir="${APP_DIR//\//\\/}"
 sed -i \
@@ -143,7 +143,7 @@ SUDOERS
 chmod 440 /etc/sudoers.d/orthodox-calendar
 
 echo "==> Installing nginx config"
-cp "$(dirname "$0")/nginx-backend.conf" /etc/nginx/sites-available/"${SERVICE}"
+cp "${APP_DIR}/deploy/oracle/nginx-backend.conf" /etc/nginx/sites-available/"${SERVICE}"
 ln -sf /etc/nginx/sites-available/"${SERVICE}" /etc/nginx/sites-enabled/"${SERVICE}"
 rm -f /etc/nginx/sites-enabled/default
 nginx -t

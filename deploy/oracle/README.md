@@ -123,7 +123,7 @@ and add:
 | `OCI_SSH_KEY` | Contents of the **private** SSH key that matches the public key on the VM |
 | `OCI_KNOWN_HOSTS` | Output of: `ssh-keyscan -H <YOUR_VM_IP>` run from your laptop |
 | `VITE_API_BASE` | `https://<ip-with-hyphens>.nip.io` (set this **before** first deploy; deploy.sh provisions TLS and nginx will redirect HTTP → HTTPS) |
-| `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications (**required** only when provisioning a new TLS certificate; deploy.sh skips the cert step with a warning if unset, so routine redeploys on VMs with an existing cert continue normally) |
+| `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications. Only checked when a new certificate must be provisioned (public IP detected, no valid existing cert for the current domain). Routine redeploys on VMs with an already-active cert never require it. |
 
 Generate `OCI_KNOWN_HOSTS` on your machine (not the VM):
 
