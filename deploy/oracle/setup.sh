@@ -75,8 +75,15 @@ else
   sudo -u "${APP_USER}" git clone "${REPO}" "${APP_DIR}"
 fi
 
-DEPLOY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || true)"
-if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" || ! -f "${DEPLOY_DIR}/nginx-backend.conf" ]]; then
+DEPLOY_DIR=""
+SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
+if [[ "${SCRIPT_PATH}" == */* ]]; then
+  CANDIDATE_DEPLOY_DIR="$(cd "$(dirname "${SCRIPT_PATH}")" 2>/dev/null && pwd || true)"
+  if [[ -f "${CANDIDATE_DEPLOY_DIR}/orthodox-calendar.service" && -f "${CANDIDATE_DEPLOY_DIR}/nginx-backend.conf" ]]; then
+    DEPLOY_DIR="${CANDIDATE_DEPLOY_DIR}"
+  fi
+fi
+if [[ -z "${DEPLOY_DIR}" ]]; then
   DEPLOY_DIR="${APP_DIR}/deploy/oracle"
 fi
 if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" || ! -f "${DEPLOY_DIR}/nginx-backend.conf" ]]; then
