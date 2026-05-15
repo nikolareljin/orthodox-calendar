@@ -65,9 +65,14 @@ curl http://<YOUR_VM_IP>/api/v1/docs     # FastAPI Swagger UI
 
 ### TLS with Let's Encrypt (nip.io)
 
-No domain registration needed. The `setup-tls.sh` script uses **nip.io** — a
-wildcard DNS service that maps `<dashed-ip>.nip.io` to the same IP automatically
-(e.g. `1-2-3-4.nip.io` → `1.2.3.4`). Run it once on the VM:
+> **Note:** The first CI deploy automatically provisions a TLS certificate via
+> `deploy.sh` when `CERTBOT_EMAIL` is set — you do not need to run `setup-tls.sh`
+> unless you want to pre-provision TLS before the first CI run or reconfigure TLS
+> after a VM IP change.
+
+No domain registration needed. Both scripts use **nip.io** — a wildcard DNS
+service that maps `<dashed-ip>.nip.io` to the same IP automatically
+(e.g. `1-2-3-4.nip.io` → `1.2.3.4`). To provision TLS manually, run once on the VM:
 
 ```bash
 sudo bash ~/orthodox-calendar/deploy/oracle/setup-tls.sh --email you@example.com

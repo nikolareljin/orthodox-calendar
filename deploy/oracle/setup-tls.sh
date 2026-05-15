@@ -206,18 +206,14 @@ else
     echo "==> Installing cron for renewal fallback"
     _apt_install cron
   fi
-  CRON_JOB="0 3 * * * certbot renew --quiet"
-  ABS_CRON_JOB="0 3 * * * /usr/bin/certbot renew --quiet"
+  # Use the same deploy-user crontab and entry format as deploy.sh so both
+  # scripts share a single renewal job and duplicate detection works correctly.
   DEPLOY_CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
   if crontab -l -u "${APP_USER}" 2>/dev/null | grep -qFx "${DEPLOY_CRON_JOB}"; then
     echo "==> certbot renewal cron already present for deploy user"
-  elif crontab -l 2>/dev/null | grep -qFx "${CRON_JOB}"; then
-    echo "==> certbot renewal cron already present"
-  elif crontab -l 2>/dev/null | grep -qFx "${ABS_CRON_JOB}"; then
-    echo "==> certbot renewal cron already present (absolute path)"
   else
-    ( crontab -l 2>/dev/null || true; echo "${CRON_JOB}" ) | crontab -
-    echo "==> Daily certbot renewal cron installed (03:00)"
+    ( crontab -l -u "${APP_USER}" 2>/dev/null || true; echo "${DEPLOY_CRON_JOB}" ) | crontab -u "${APP_USER}" -
+    echo "==> Daily certbot renewal cron installed for ${APP_USER} (03:00)"
   fi
 fi
 

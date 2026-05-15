@@ -47,7 +47,7 @@ _open_port() {
   # so Oracle/Ubuntu REJECT rows with reject-with extra fields (NF>6) are found.
   # Match both IPv4 (0.0.0.0/0) and IPv6 (::/0) catch-all addresses.
   local pos
-  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && ($2=="REJECT"||$2=="DROP") && ($5=="0.0.0.0/0"||$5=="::/0") && ($6=="0.0.0.0/0"||$6=="::/0") {pos=$1} END {if (pos) print pos}')"
+  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && ($2=="REJECT"||$2=="DROP") && ($5=="0.0.0.0/0"||$5=="::/0") && ($6=="0.0.0.0/0"||$6=="::/0") {if (!pos) pos=$1} END {if (pos) print pos}')"
   if [[ -n "${pos}" ]]; then
     "${ipt}" -I INPUT "${pos}" -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
   else

@@ -177,8 +177,9 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
   # A sudoers failure enabling the timer means the server needs setup.sh rerun —
   # do not install cron in that case, as the cron sudo entry is also absent.
   if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
-    if systemctl is-active --quiet certbot.timer 2>/dev/null; then
-      echo "==> certbot.timer already active"
+    if systemctl is-active --quiet certbot.timer 2>/dev/null \
+        && systemctl is-enabled --quiet certbot.timer 2>/dev/null; then
+      echo "==> certbot.timer already active and enabled"
     elif sudo systemctl enable --now certbot.timer 2>/dev/null; then
       echo "==> certbot.timer enabled for automatic renewal"
     else
