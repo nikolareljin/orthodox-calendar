@@ -132,8 +132,6 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3-certbot-ngin
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart ${SERVICE}
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl start nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
 # certbot — renewal only (no flags, no injection surface)
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet

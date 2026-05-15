@@ -97,8 +97,10 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
-  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
-      && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+  # Use the nginx site config as the cert-existence indicator: /etc/letsencrypt/live
+  # is root-only (mode 0700), so a deploy-user -f test always returns false even
+  # when the cert exists, forcing unnecessary re-provisioning.
+  if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
