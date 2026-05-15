@@ -127,31 +127,35 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   fi
 fi
 
-# Enable automatic cert renewal — certbot renew is a no-op until 30 days before
-# expiry, so a daily check is fine. Prefer the systemd timer when present; fall
-# back to a deploy-user cron only when the timer unit is absent from the system.
-# A sudoers failure enabling the timer means the server needs setup.sh rerun —
-# do not install cron in that case, as the cron sudo entry is also absent.
-if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
-  if sudo systemctl enable --now certbot.timer 2>/dev/null; then
-    echo "==> certbot.timer enabled for automatic renewal"
+# Enable automatic cert renewal only when TLS is active on this VM.
+# Skipped when NIP_DOMAIN is empty (no public IP detected, TLS not used).
+if [[ -n "${NIP_DOMAIN}" ]]; then
+  # certbot renew is a no-op until 30 days before expiry, so a daily check is
+  # fine. Prefer the systemd timer when present; fall back to a deploy-user cron
+  # only when the timer unit is absent from the system.
+  # A sudoers failure enabling the timer means the server needs setup.sh rerun —
+  # do not install cron in that case, as the cron sudo entry is also absent.
+  if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
+    if sudo systemctl enable --now certbot.timer 2>/dev/null; then
+      echo "==> certbot.timer enabled for automatic renewal"
+    else
+      echo "ERROR: certbot.timer exists but could not be enabled." >&2
+      echo "       Re-run deploy/oracle/setup.sh to update sudoers/systemd, then redeploy." >&2
+      exit 1
+    fi
   else
-    echo "ERROR: certbot.timer exists but could not be enabled." >&2
-    echo "       Re-run deploy/oracle/setup.sh to update sudoers/systemd, then redeploy." >&2
-    exit 1
-  fi
-else
-  # certbot.timer unit absent (not installed by this certbot package).
-  # The deploy user has NOPASSWD for certbot renew --quiet via setup.sh sudoers.
-  if ! command -v crontab > /dev/null 2>&1; then
-    echo "ERROR: certbot.timer is absent and crontab is not installed." >&2
-    echo "       Re-run deploy/oracle/setup.sh to install cron, then redeploy." >&2
-    exit 1
-  fi
-  CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
-  if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
-    ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
-    echo "==> Daily certbot renewal cron installed (03:00)"
+    # certbot.timer unit absent (not installed by this certbot package).
+    # The deploy user has NOPASSWD for certbot renew --quiet via setup.sh sudoers.
+    if ! command -v crontab > /dev/null 2>&1; then
+      echo "ERROR: certbot.timer is absent and crontab is not installed." >&2
+      echo "       Re-run deploy/oracle/setup.sh to install cron, then redeploy." >&2
+      exit 1
+    fi
+    CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
+    if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
+      ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
+      echo "==> Daily certbot renewal cron installed (03:00)"
+    fi
   fi
 fi
 
