@@ -35,6 +35,27 @@ _ensure_certbot_packages() {
     _apt_install python3-certbot-nginx
   fi
 }
+_ensure_nginx_running() {
+  if systemctl is-active --quiet nginx 2>/dev/null; then
+    return 0
+  fi
+  sudo systemctl enable nginx
+  sudo systemctl start nginx
+}
+_repair_tls_with_provisioner() {
+  local domain="$1"
+  if [[ -z "${CERTBOT_EMAIL}" ]]; then
+    echo "ERROR: CERTBOT_EMAIL is not set." >&2
+    echo "       Set it so deploy.sh can repair/re-provision the broken HTTPS endpoint." >&2
+    return 1
+  fi
+  if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
+    echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
+    echo "       deploy.sh cannot repair stale nginx TLS references without the setup.sh wrapper." >&2
+    return 1
+  fi
+  sudo /usr/local/bin/oc-certbot-provision "${domain}" "${CERTBOT_EMAIL}"
+}
 
 echo "==> Pre-flight checks"
 # Check setup.sh artifacts first — fail fast before any apt operations on an
@@ -116,11 +137,14 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     if [[ -x "/usr/local/bin/oc-certbot-renew" ]]; then
       _ensure_certbot_packages
-      if ! systemctl is-active --quiet nginx 2>/dev/null; then
-        sudo systemctl enable nginx
-        sudo systemctl start nginx
-      fi
-      if ! sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
+      if ! _ensure_nginx_running; then
+        echo "    nginx failed to start with existing TLS config; attempting repair via certbot wrapper"
+        if ! _repair_tls_with_provisioner "${NIP_DOMAIN}"; then
+          echo "ERROR: TLS repair failed for existing config." >&2
+          echo "       Fix certbot/nginx and redeploy before publishing the frontend." >&2
+          exit 1
+        fi
+      elif ! sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
         echo "ERROR: certbot renewal check failed for existing TLS config." >&2
         echo "       Fix certbot/nginx renewal and redeploy before publishing the frontend." >&2
         exit 1
@@ -151,10 +175,6 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       exit 1
     fi
     _ensure_certbot_packages
-    if ! systemctl is-active --quiet nginx 2>/dev/null; then
-      sudo systemctl enable nginx
-      sudo systemctl start nginx
-    fi
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
     if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then

@@ -42,9 +42,8 @@ _open_port() {
   # Delete all existing copies of this rule — a stale appended rule may sit
   # after a terminal REJECT/DROP and be unreachable; -C cannot detect that.
   while "${ipt}" -D INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null; do :; done
-  # Re-insert before the terminal catch-all REJECT/DROP (any source, any dest) so
-  # targeted deny rules (fail2ban, source-specific) are unaffected. Use last-match
-  # so Oracle/Ubuntu REJECT rows with reject-with extra fields (NF>6) are found.
+  # Re-insert before the first terminal catch-all REJECT/DROP (any source, any
+  # dest) so targeted deny rules (fail2ban, source-specific) are unaffected.
   # Match both IPv4 (0.0.0.0/0) and IPv6 (::/0) catch-all addresses.
   local pos
   pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && ($2=="REJECT"||$2=="DROP") && ($5=="0.0.0.0/0"||$5=="::/0") && ($6=="0.0.0.0/0"||$6=="::/0") {if (!pos) pos=$1} END {if (pos) print pos}')"
@@ -150,7 +149,12 @@ _prune_missing_ssl_refs() {
 sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
 _prune_missing_ssl_refs
 nginx -t
-systemctl reload nginx
+if systemctl is-active --quiet nginx 2>/dev/null; then
+  systemctl reload nginx
+else
+  systemctl enable nginx
+  systemctl start nginx
+fi
 certbot --nginx \
   -d "${DOMAIN}" \
   --non-interactive \
@@ -196,7 +200,7 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart ${SERVICE}
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl start nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
-# certbot — renewal only (no flags, no injection surface)
+# certbot — renewal only with fixed arguments, no wildcard injection surface
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet
 # Wrapper for TLS provisioning — hardcoded flags, no wildcard injection surface
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-provision
