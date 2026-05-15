@@ -164,12 +164,6 @@ _prune_missing_ssl_refs() {
       "${NGINX_SITE}"
   fi
 }
-_prune_missing_ssl_refs
-if ! systemctl is-active --quiet nginx 2>/dev/null; then
-  echo "==> Starting nginx"
-  systemctl enable nginx
-  systemctl start nginx
-fi
 NGINX_SITE_BACKUP="$(mktemp)"
 cp "${NGINX_SITE}" "${NGINX_SITE_BACKUP}"
 restore_nginx_site() {
@@ -184,14 +178,28 @@ restore_nginx_site() {
 cleanup_nginx_backup() {
   rm -f "${NGINX_SITE_BACKUP}"
 }
+rollback_nginx_site() {
+  local reason="$1"
+  restore_nginx_site
+  trap - EXIT
+  echo "ERROR: ${reason}; restored previous nginx site config" >&2
+  exit 1
+}
 trap cleanup_nginx_backup EXIT
+_prune_missing_ssl_refs
+nginx -t || rollback_nginx_site "nginx validation failed after SSL cleanup"
+if ! systemctl is-active --quiet nginx 2>/dev/null; then
+  echo "==> Starting nginx"
+  systemctl enable nginx || rollback_nginx_site "nginx enable failed"
+  systemctl start nginx || rollback_nginx_site "nginx start failed"
+fi
 echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
 sed -i \
   -e "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" \
   -e "s/if ([\$]host = [0-9]\+-[0-9]\+-[0-9]\+-[0-9]\+\.nip\.io)/if (\$host = ${NIP_DOMAIN})/g" \
   "${NGINX_SITE}"
 _prune_missing_ssl_refs
-nginx -t
+nginx -t || rollback_nginx_site "nginx validation failed after server_name update"
 
 # ---------------------------------------------------------------------------
 # 3 — Obtain certificate (skip if already present for this domain)
@@ -202,10 +210,7 @@ CERT_PATH="/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem"
 if [[ -f "${CERT_PATH}" ]] && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
   echo "==> Checking existing TLS certificate for ${NIP_DOMAIN}"
   if ! certbot renew --quiet --cert-name "${NIP_DOMAIN}"; then
-    restore_nginx_site
-    trap - EXIT
-    echo "ERROR: certbot renew failed; restored previous nginx site config" >&2
-    exit 1
+    rollback_nginx_site "certbot renew failed"
   fi
   echo "==> TLS active for ${NIP_DOMAIN}: ${CERT_PATH}"
 else
@@ -216,15 +221,12 @@ else
     --agree-tos \
     -m "${CERTBOT_EMAIL}" \
     --redirect; then
-    restore_nginx_site
-    trap - EXIT
-    echo "ERROR: certbot failed; restored previous nginx site config" >&2
-    exit 1
+    rollback_nginx_site "certbot failed"
   fi
   echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
 fi
-nginx -t
-systemctl reload nginx
+nginx -t || rollback_nginx_site "nginx validation failed after certbot"
+systemctl reload nginx || rollback_nginx_site "nginx reload failed"
 trap - EXIT
 cleanup_nginx_backup
 

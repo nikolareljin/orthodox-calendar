@@ -147,6 +147,13 @@ restore_nginx_site() {
 cleanup_nginx_backup() {
   rm -f "${NGINX_SITE_BACKUP}"
 }
+rollback_nginx_site() {
+  local reason="$1"
+  restore_nginx_site
+  trap - EXIT
+  echo "ERROR: oc-certbot-provision: ${reason}; restored previous nginx site config" >&2
+  exit 1
+}
 trap cleanup_nginx_backup EXIT
 _prune_missing_ssl_refs() {
   local missing=false path
@@ -179,10 +186,10 @@ _set_nip_domain() {
 }
 _set_nip_domain
 _prune_missing_ssl_refs
-nginx -t
+nginx -t || rollback_nginx_site "nginx validation failed"
 if ! systemctl is-active --quiet nginx 2>/dev/null; then
-  systemctl enable nginx
-  systemctl start nginx
+  systemctl enable nginx || rollback_nginx_site "nginx enable failed"
+  systemctl start nginx || rollback_nginx_site "nginx start failed"
 fi
 if ! certbot --nginx \
   -d "${DOMAIN}" \
@@ -190,10 +197,7 @@ if ! certbot --nginx \
   --agree-tos \
   -m "${EMAIL}" \
   --redirect; then
-  restore_nginx_site
-  trap - EXIT
-  echo "ERROR: oc-certbot-provision: certbot failed; restored previous nginx site config" >&2
-  exit 1
+  rollback_nginx_site "certbot failed"
 fi
 trap - EXIT
 cleanup_nginx_backup
