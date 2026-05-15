@@ -170,6 +170,21 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
   systemctl enable nginx
   systemctl start nginx
 fi
+NGINX_SITE_BACKUP="$(mktemp)"
+cp "${NGINX_SITE}" "${NGINX_SITE_BACKUP}"
+restore_nginx_site() {
+  cp "${NGINX_SITE_BACKUP}" "${NGINX_SITE}"
+  if nginx -t >/dev/null 2>&1; then
+    if systemctl is-active --quiet nginx 2>/dev/null; then
+      systemctl reload nginx || true
+    fi
+  fi
+  rm -f "${NGINX_SITE_BACKUP}"
+}
+cleanup_nginx_backup() {
+  rm -f "${NGINX_SITE_BACKUP}"
+}
+trap cleanup_nginx_backup EXIT
 echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
 sed -i \
   -e "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" \
@@ -177,7 +192,6 @@ sed -i \
   "${NGINX_SITE}"
 _prune_missing_ssl_refs
 nginx -t
-systemctl reload nginx
 
 # ---------------------------------------------------------------------------
 # 3 — Obtain certificate (skip if already present for this domain)
@@ -187,18 +201,32 @@ CERT_PATH="/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem"
 # a generic ssl_certificate check would match a stale cert from a previous IP.
 if [[ -f "${CERT_PATH}" ]] && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
   echo "==> Checking existing TLS certificate for ${NIP_DOMAIN}"
-  certbot renew --quiet --cert-name "${NIP_DOMAIN}"
+  if ! certbot renew --quiet --cert-name "${NIP_DOMAIN}"; then
+    restore_nginx_site
+    trap - EXIT
+    echo "ERROR: certbot renew failed; restored previous nginx site config" >&2
+    exit 1
+  fi
   echo "==> TLS active for ${NIP_DOMAIN}: ${CERT_PATH}"
 else
   echo "==> Requesting certificate for ${NIP_DOMAIN}"
-  certbot --nginx \
+  if ! certbot --nginx \
     -d "${NIP_DOMAIN}" \
     --non-interactive \
     --agree-tos \
     -m "${CERTBOT_EMAIL}" \
-    --redirect
+    --redirect; then
+    restore_nginx_site
+    trap - EXIT
+    echo "ERROR: certbot failed; restored previous nginx site config" >&2
+    exit 1
+  fi
   echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
 fi
+nginx -t
+systemctl reload nginx
+trap - EXIT
+cleanup_nginx_backup
 
 # ---------------------------------------------------------------------------
 # 4 — Enable automatic renewal (once daily, no-op until 30 days before expiry)
@@ -214,10 +242,18 @@ else
   # Use the same deploy-user crontab and entry format as deploy.sh so both
   # scripts share a single renewal job and duplicate detection works correctly.
   DEPLOY_CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
-  if crontab -l -u "${APP_USER}" 2>/dev/null | grep -qFx "${DEPLOY_CRON_JOB}"; then
+  existing_cron="$(crontab -l -u "${APP_USER}" 2>/dev/null || true)"
+  if echo "${existing_cron}" | grep -qFx "${DEPLOY_CRON_JOB}"; then
     echo "==> certbot renewal cron already present for deploy user"
   else
-    ( crontab -l -u "${APP_USER}" 2>/dev/null || true; echo "${DEPLOY_CRON_JOB}" ) | crontab -u "${APP_USER}" -
+    (
+      echo "${existing_cron}" \
+        | grep -vFx "0 3 * * * certbot renew --quiet" \
+        | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
+        | grep -vFx "${DEPLOY_CRON_JOB}" \
+        || true
+      echo "${DEPLOY_CRON_JOB}"
+    ) | crontab -u "${APP_USER}" -
     echo "==> Daily certbot renewal cron installed for ${APP_USER} (03:00)"
   fi
 fi

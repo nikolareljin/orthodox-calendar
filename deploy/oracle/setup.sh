@@ -133,6 +133,21 @@ if [[ ! -f "${NGINX_SITE}" ]]; then
   echo "ERROR: oc-certbot-provision: nginx site ${NGINX_SITE} not found" >&2
   exit 1
 fi
+NGINX_SITE_BACKUP="$(mktemp)"
+cp "${NGINX_SITE}" "${NGINX_SITE_BACKUP}"
+restore_nginx_site() {
+  cp "${NGINX_SITE_BACKUP}" "${NGINX_SITE}"
+  if nginx -t >/dev/null 2>&1; then
+    if systemctl is-active --quiet nginx 2>/dev/null; then
+      systemctl reload nginx || true
+    fi
+  fi
+  rm -f "${NGINX_SITE_BACKUP}"
+}
+cleanup_nginx_backup() {
+  rm -f "${NGINX_SITE_BACKUP}"
+}
+trap cleanup_nginx_backup EXIT
 _prune_missing_ssl_refs() {
   local missing=false path
   while IFS= read -r path; do
@@ -165,18 +180,23 @@ _set_nip_domain() {
 _set_nip_domain
 _prune_missing_ssl_refs
 nginx -t
-if systemctl is-active --quiet nginx 2>/dev/null; then
-  systemctl reload nginx
-else
+if ! systemctl is-active --quiet nginx 2>/dev/null; then
   systemctl enable nginx
   systemctl start nginx
 fi
-certbot --nginx \
+if ! certbot --nginx \
   -d "${DOMAIN}" \
   --non-interactive \
   --agree-tos \
   -m "${EMAIL}" \
-  --redirect
+  --redirect; then
+  restore_nginx_site
+  trap - EXIT
+  echo "ERROR: oc-certbot-provision: certbot failed; restored previous nginx site config" >&2
+  exit 1
+fi
+trap - EXIT
+cleanup_nginx_backup
 WRAPPER
 chown root:root /usr/local/bin/oc-certbot-provision
 chmod 755 /usr/local/bin/oc-certbot-provision
