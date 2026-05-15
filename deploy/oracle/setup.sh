@@ -42,10 +42,11 @@ _open_port() {
   # Delete all existing copies of this rule — a stale appended rule may sit
   # after a terminal REJECT/DROP and be unreachable; -C cannot detect that.
   while "${ipt}" -D INPUT -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT 2>/dev/null; do :; done
-  # Re-insert before the terminal catch-all REJECT/DROP (protocol=all, no extra
-  # conditions) so targeted deny rules (fail2ban, source-specific) are unaffected.
+  # Re-insert before the terminal catch-all REJECT/DROP (any source, any dest) so
+  # targeted deny rules (fail2ban, source-specific) are unaffected. Use last-match
+  # so Oracle/Ubuntu REJECT rows with reject-with extra fields (NF>6) are found.
   local pos
-  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && ($2=="REJECT"||$2=="DROP") && $3=="all" && NF==6 {print $1; exit}')"
+  pos="$("${ipt}" -L INPUT --line-numbers -n 2>/dev/null | awk '/^[0-9]/ && ($2=="REJECT"||$2=="DROP") && $5=="0.0.0.0/0" && $6=="0.0.0.0/0" {pos=$1} END {if (pos) print pos}')"
   if [[ -n "${pos}" ]]; then
     "${ipt}" -I INPUT "${pos}" -m state --state NEW -p tcp --dport "${dport}" -j ACCEPT
   else

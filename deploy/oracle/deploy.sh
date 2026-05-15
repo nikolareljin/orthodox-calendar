@@ -107,15 +107,19 @@ else
 fi
 
 if [[ -n "${NIP_DOMAIN}" ]]; then
-  # Cert file existing is not enough — nginx may have been reset (e.g. by
-  # re-running setup.sh) and lost the SSL server block. Also verify nginx
-  # references the cert for THIS domain, not a stale cert from an old IP.
-  # Before trusting an existing TLS config, ensure certbot is still present and
-  # run its due-only renewal path so expired/near-expiry certs are repaired now.
-  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
-      && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+  # Nginx config referencing the domain cert is the reliable TLS-active signal.
+  # The cert file lives under root-only /etc/letsencrypt/live — the deploy user
+  # cannot stat it, so we rely on nginx having the path configured instead.
+  # Also verify nginx references the cert for THIS domain, not a stale old IP.
+  # Before trusting an existing TLS config, run the due-only renewal path so
+  # expired/near-expiry certs are repaired before the backend goes live.
+  if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     if [[ -x "/usr/local/bin/oc-certbot-renew" ]]; then
       _ensure_certbot_packages
+      if ! systemctl is-active --quiet nginx 2>/dev/null; then
+        sudo systemctl enable nginx
+        sudo systemctl start nginx
+      fi
       if ! sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
         echo "ERROR: certbot renewal check failed for existing TLS config." >&2
         echo "       Fix certbot/nginx renewal and redeploy before publishing the frontend." >&2
