@@ -11,7 +11,9 @@
 #
 # nip.io maps <dashed-ip>.nip.io → the same IP automatically, so no domain
 # registration is needed. Certificates are valid for 90 days; this script also
-# installs a once-daily renewal check (no-op until 30 days before expiry).
+# installs automatic renewal via certbot.timer if present (schedule is
+# distro-defined), or a daily 03:00 cron as fallback. No-op until 30 days
+# before expiry.
 set -euo pipefail
 
 # ---------------------------------------------------------------------------
