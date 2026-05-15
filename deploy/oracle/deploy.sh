@@ -111,9 +111,17 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   # references the cert for THIS domain, not a stale cert from an old IP.
   # Before trusting an existing TLS config, ensure certbot is still present and
   # run its due-only renewal path so expired/near-expiry certs are repaired now.
-  if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null \
-      && [[ -x "/usr/local/bin/oc-certbot-renew" ]] \
-      && sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
+  if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+    if [[ -x "/usr/local/bin/oc-certbot-renew" ]]; then
+      if ! sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
+        echo "ERROR: certbot renewal check failed for existing TLS config." >&2
+        echo "       Fix certbot/nginx renewal and redeploy before publishing the frontend." >&2
+        exit 1
+      fi
+    else
+      echo "    WARNING: oc-certbot-renew wrapper missing; skipping deploy-time renewal check."
+      echo "             Re-run setup.sh when convenient to install the scoped renewal wrapper."
+    fi
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"

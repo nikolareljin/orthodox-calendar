@@ -181,7 +181,7 @@ else
   DEPLOY_CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
   if crontab -l -u "${APP_USER}" 2>/dev/null | grep -qFx "${DEPLOY_CRON_JOB}"; then
     echo "==> certbot renewal cron already present for deploy user"
-  elif crontab -l 2>/dev/null | grep -qF "certbot renew"; then
+  elif crontab -l 2>/dev/null | grep -qFx "${CRON_JOB}"; then
     echo "==> certbot renewal cron already present"
   else
     ( crontab -l 2>/dev/null || true; echo "${CRON_JOB}" ) | crontab -

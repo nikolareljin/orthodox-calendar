@@ -76,7 +76,7 @@ if [[ -n "${VITE_API_BASE:-}" ]]; then
   _url="${VITE_API_BASE}/health"
   _status="000"
   for _i in 1 2 3 4 5 6; do
-    _status="$(curl -sf --max-time 10 -o /dev/null -w '%{http_code}' "${_url}" 2>/dev/null || echo 000)"
+    _status="$(curl -s --max-time 10 -o /dev/null -w '%{http_code}' "${_url}" 2>/dev/null || echo 000)"
     [[ "${_status}" == "200" ]] && break
     [[ "${_i}" -lt 6 ]] && sleep 10
   done
