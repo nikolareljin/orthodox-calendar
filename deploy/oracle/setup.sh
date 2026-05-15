@@ -8,7 +8,7 @@
 #   sudo bash deploy/oracle/setup.sh
 #
 # After this script, the backend is live on port 80.
-# Add TLS with:  sudo bash deploy/oracle/setup-tls.sh
+# Add TLS with:  sudo bash ~/orthodox-calendar/deploy/oracle/setup-tls.sh --email you@example.com
 # deploy.sh (CI) calls /usr/local/bin/oc-certbot-provision (installed below).
 
 set -euo pipefail
@@ -65,13 +65,23 @@ else
   sudo -u "${APP_USER}" git clone "${REPO}" "${APP_DIR}"
 fi
 
+DEPLOY_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || true)"
+if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" || ! -f "${DEPLOY_DIR}/nginx-backend.conf" ]]; then
+  DEPLOY_DIR="${APP_DIR}/deploy/oracle"
+fi
+if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" || ! -f "${DEPLOY_DIR}/nginx-backend.conf" ]]; then
+  echo "ERROR: deploy/oracle companion files not found." >&2
+  echo "       Run setup.sh from a full checkout or allow it to clone ${REPO} into ${APP_DIR}." >&2
+  exit 1
+fi
+
 echo "==> Creating Python virtualenv and installing backend dependencies"
 sudo -u "${APP_USER}" "${PYTHON}" -m venv "${APP_DIR}/.venv"
 sudo -u "${APP_USER}" "${APP_DIR}/.venv/bin/pip" install --quiet --upgrade pip
 sudo -u "${APP_USER}" "${APP_DIR}/.venv/bin/pip" install --quiet -r "${APP_DIR}/backend/requirements.txt"
 
 echo "==> Installing systemd service"
-cp "$(dirname "$0")/orthodox-calendar.service" /etc/systemd/system/
+cp "${DEPLOY_DIR}/orthodox-calendar.service" /etc/systemd/system/
 unit_file="/etc/systemd/system/${SERVICE}.service"
 escaped_app_dir="${APP_DIR//\//\\/}"
 sed -i \
@@ -97,13 +107,16 @@ EMAIL="$2"
 # Validate domain is a well-formed nip.io hostname derived from an IPv4 address.
 # Rejects anything with spaces, shell metacharacters, or nginx config syntax.
 _nip_re='^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io$'
-if ! [[ "${DOMAIN}" =~ ${_nip_re} ]]; then
+_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+DOMAIN_IP="${DOMAIN%.nip.io}"
+DOMAIN_IP="${DOMAIN_IP//-/.}"
+if ! [[ "${DOMAIN}" =~ ${_nip_re} ]] || ! [[ "${DOMAIN_IP}" =~ ${_valid_ipv4_re} ]]; then
   echo "ERROR: oc-certbot-provision: '${DOMAIN}' is not a valid nip.io hostname" >&2
   exit 1
 fi
 NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
 # Update server_name before certbot so --nginx can match this vhost by name.
-if [[ -f "${NGINX_SITE}" ]] && ! grep -q "server_name ${DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
+if [[ -f "${NGINX_SITE}" ]]; then
   sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
   nginx -t
   systemctl reload nginx
@@ -115,6 +128,7 @@ certbot --nginx \
   -m "${EMAIL}" \
   --redirect
 WRAPPER
+chown root:root /usr/local/bin/oc-certbot-provision
 chmod 755 /usr/local/bin/oc-certbot-provision
 
 echo "==> Adding sudoers rules for the deploy user"
@@ -132,18 +146,17 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/apt-get install -y python3-certbot-ngin
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart ${SERVICE}
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl start nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl reload nginx
-${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl restart nginx
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/systemctl enable --now certbot.timer
 # certbot — renewal only (no flags, no injection surface)
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet
 # Wrapper for TLS provisioning — hardcoded flags, no wildcard injection surface
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-provision
 SUDOERS
+chown root:root /etc/sudoers.d/orthodox-calendar
 chmod 440 /etc/sudoers.d/orthodox-calendar
 
 echo "==> Installing nginx config"
-cp "$(dirname "$0")/nginx-backend.conf" /etc/nginx/sites-available/"${SERVICE}"
+cp "${DEPLOY_DIR}/nginx-backend.conf" /etc/nginx/sites-available/"${SERVICE}"
 ln -sf /etc/nginx/sites-available/"${SERVICE}" /etc/nginx/sites-enabled/"${SERVICE}"
 rm -f /etc/nginx/sites-enabled/default
 nginx -t
@@ -152,7 +165,7 @@ systemctl reload nginx
 echo ""
 echo "==> Setup complete."
 echo ""
-public_ip="$(curl -fsS https://ifconfig.me 2>/dev/null || true)"
+public_ip="$(curl -fsS --max-time 10 https://ifconfig.me 2>/dev/null || true)"
 _valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 if [[ -n "${public_ip}" ]] && ! [[ "${public_ip}" =~ ${_valid_ipv4_re} ]]; then
   echo "    WARNING: ifconfig.me returned '${public_ip}' (not a valid IPv4) — skipping nip.io hint"

@@ -24,6 +24,17 @@ _apt_install() {
   echo "    Installing missing package: $1"
   sudo apt-get install -y "$1"
 }
+_pkg_installed() {
+  dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -qx 'install ok installed'
+}
+_ensure_certbot_packages() {
+  if ! command -v certbot > /dev/null 2>&1; then
+    _apt_install certbot
+  fi
+  if ! _pkg_installed python3-certbot-nginx; then
+    _apt_install python3-certbot-nginx
+  fi
+}
 
 echo "==> Pre-flight checks"
 # Check setup.sh artifacts first — fail fast before any apt operations on an
@@ -49,7 +60,7 @@ if ! command -v python3.12 > /dev/null 2>&1; then
   echo "ERROR: python3.12 is required but not found — run deploy/oracle/setup.sh on the server first" >&2
   exit 1
 fi
-if ! dpkg -s python3.12-venv > /dev/null 2>&1; then
+if ! _pkg_installed python3.12-venv; then
   _apt_install python3.12-venv
 fi
 if ! command -v nginx > /dev/null 2>&1; then
@@ -91,8 +102,15 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
-  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
-      && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+  # Before trusting an existing TLS config, ensure certbot is still present and
+  # run its due-only renewal path so expired/near-expiry certs are repaired now.
+  if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+    _ensure_certbot_packages
+    if ! sudo /usr/bin/certbot renew --quiet; then
+      echo "ERROR: certbot renewal check failed for existing TLS config." >&2
+      echo "       Fix certbot/nginx renewal and redeploy before publishing the frontend." >&2
+      exit 1
+    fi
     echo "==> TLS already active for ${NIP_DOMAIN}"
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
@@ -109,12 +127,7 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       echo "       Re-run deploy/oracle/setup.sh to install the TLS wrapper, then redeploy." >&2
       exit 1
     fi
-    if ! command -v certbot > /dev/null 2>&1; then
-      _apt_install certbot
-    fi
-    if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
-      _apt_install python3-certbot-nginx
-    fi
+    _ensure_certbot_packages
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
     if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then
@@ -130,6 +143,7 @@ fi
 # Enable automatic cert renewal only when TLS is active on this VM.
 # Skipped when NIP_DOMAIN is empty (no public IP detected, TLS not used).
 if [[ -n "${NIP_DOMAIN}" ]]; then
+  _ensure_certbot_packages
   # certbot renew is a no-op until 30 days before expiry, so a daily check is
   # fine. Prefer the systemd timer when present; fall back to a deploy-user cron
   # only when the timer unit is absent from the system.
@@ -152,8 +166,11 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       exit 1
     fi
     CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
-    if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
-      ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
+    existing_cron="$(crontab -l 2>/dev/null || true)"
+    if echo "${existing_cron}" | grep -qFx "${CRON_JOB}"; then
+      echo "==> Daily certbot renewal cron already present"
+    else
+      ( echo "${existing_cron}" | grep -vF "certbot renew" || true; echo "${CRON_JOB}" ) | crontab -
       echo "==> Daily certbot renewal cron installed (03:00)"
     fi
   fi

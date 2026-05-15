@@ -99,15 +99,15 @@ Done. TLS is active for https://1-2-3-4.nip.io
 Set VITE_API_BASE=https://1-2-3-4.nip.io in GitHub Actions secrets.
 ```
 
-> **Note:** if the Oracle VM is ever reprovisioned with a new public IP, re-run
-> `setup-tls.sh` from the raw GitHub URL (the cloned repo is pruned to just
-> `backend/` after each deploy):
+> **Note:** if an existing Oracle VM gets a new public IP, re-run
+> `setup-tls.sh` from the raw GitHub URL:
 > ```bash
 > curl -fsSL https://raw.githubusercontent.com/nikolareljin/orthodox-calendar/main/deploy/oracle/setup-tls.sh \
 >   | sudo bash -s -- --email you@example.com
 > ```
 > It will detect the new IP, update the nginx `server_name` to the new nip.io
-> hostname, and obtain a fresh certificate automatically.
+> hostname, and obtain a fresh certificate automatically. On a freshly rebuilt
+> VM, run the initial setup step first so the nginx site exists.
 
 ---
 
@@ -121,14 +121,14 @@ and add:
 | `OCI_HOST` | Public IP (or domain) of the Oracle VM |
 | `OCI_USER` | `ubuntu` (Ubuntu images) or `opc` (Oracle Linux) |
 | `OCI_SSH_KEY` | Contents of the **private** SSH key that matches the public key on the VM |
-| `OCI_KNOWN_HOSTS` | Output of: `ssh-keyscan -H <YOUR_VM_IP>` run from your laptop |
+| `OCI_KNOWN_HOSTS` | Output of `ssh-keyscan -H <OCI_HOST>` run from your laptop, using the exact host value configured in `OCI_HOST` |
 | `VITE_API_BASE` | `https://<ip-with-hyphens>.nip.io` (set this **before** first deploy; deploy.sh provisions TLS and nginx will redirect HTTP → HTTPS) |
-| `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications (**required** for the HTTPS deploy path; deploy.sh fails if it can detect the VM public IP and this is unset) |
+| `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications; required when deploy.sh must provision or repair the nip.io certificate, optional for routine redeploys with an existing matching certificate |
 
 Generate `OCI_KNOWN_HOSTS` on your machine (not the VM):
 
 ```bash
-ssh-keyscan -H <YOUR_VM_IP>
+ssh-keyscan -H <OCI_HOST>
 ```
 
 Copy the full output (one or more lines) as the secret value.
@@ -141,7 +141,7 @@ Settings → Pages → Source: **GitHub Actions** (not a branch).
 
 ## 4 — How deployment works
 
-**Prerequisite:** `deploy/oracle/setup.sh` must have been run once on the VM before any CI deploy. `deploy.sh` fails fast if the systemd unit or nginx site config are absent.
+**Prerequisite:** the initial setup step must have completed once on the VM before any CI deploy. `deploy.sh` fails fast if the systemd unit or nginx site config are absent.
 
 On every merge of a `release/x.y.z` branch into `main`:
 
@@ -165,9 +165,11 @@ tar -czf /tmp/orthodox-calendar-backend.tar.gz \
   backend/requirements.txt
 scp /tmp/orthodox-calendar-backend.tar.gz ubuntu@<YOUR_VM_IP>:/tmp/orthodox-calendar-backend.tar.gz
 ssh ubuntu@<YOUR_VM_IP> \
-  'APP_DIR=/home/ubuntu/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
+  'APP_DIR=/home/ubuntu/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz CERTBOT_EMAIL=you@example.com bash -s' \
   < deploy/oracle/deploy.sh
 ```
+
+Omit `CERTBOT_EMAIL` only for routine redeploys where the matching nip.io certificate is already installed and referenced by nginx.
 
 ---
 

@@ -19,6 +19,7 @@ set -euo pipefail
 # ---------------------------------------------------------------------------
 CERTBOT_EMAIL="${CERTBOT_EMAIL:-}"
 FORCED_IP=""
+APP_USER="${APP_USER:-ubuntu}"
 
 # ---------------------------------------------------------------------------
 # Argument parsing
@@ -53,6 +54,9 @@ _apt_install() {
   fi
   echo "    Installing: $1"
   DEBIAN_FRONTEND=noninteractive apt-get install -y "$1"
+}
+_pkg_installed() {
+  dpkg-query -W -f='${Status}' "$1" 2>/dev/null | grep -qx 'install ok installed'
 }
 
 # ---------------------------------------------------------------------------
@@ -115,7 +119,7 @@ if ! command -v certbot > /dev/null 2>&1; then
   echo "==> Installing certbot"
   _apt_install certbot
 fi
-if ! dpkg -s python3-certbot-nginx > /dev/null 2>&1; then
+if ! _pkg_installed python3-certbot-nginx; then
   _apt_install python3-certbot-nginx
 fi
 
@@ -129,12 +133,10 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
   systemctl enable nginx
   systemctl start nginx
 fi
-if ! grep -q "server_name ${NIP_DOMAIN}" "${NGINX_SITE}" 2>/dev/null; then
-  echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
-  sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
-  nginx -t
-  systemctl reload nginx
-fi
+echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
+sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
+nginx -t
+systemctl reload nginx
 
 # ---------------------------------------------------------------------------
 # 3 — Obtain certificate (skip if already present for this domain)
@@ -143,7 +145,9 @@ CERT_PATH="/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem"
 # Check both the cert file and that nginx references THIS domain's cert path —
 # a generic ssl_certificate check would match a stale cert from a previous IP.
 if [[ -f "${CERT_PATH}" ]] && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
-  echo "==> TLS already active for ${NIP_DOMAIN}: ${CERT_PATH}"
+  echo "==> Checking existing TLS certificate for ${NIP_DOMAIN}"
+  certbot renew --quiet --cert-name "${NIP_DOMAIN}"
+  echo "==> TLS active for ${NIP_DOMAIN}: ${CERT_PATH}"
 else
   echo "==> Requesting certificate for ${NIP_DOMAIN}"
   certbot --nginx \
@@ -167,10 +171,13 @@ else
     _apt_install cron
   fi
   CRON_JOB="0 3 * * * certbot renew --quiet"
-  if crontab -l 2>/dev/null | grep -qF "certbot renew"; then
+  DEPLOY_CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
+  if crontab -l -u "${APP_USER}" 2>/dev/null | grep -qFx "${DEPLOY_CRON_JOB}"; then
+    echo "==> certbot renewal cron already present for deploy user"
+  elif crontab -l 2>/dev/null | grep -qF "certbot renew"; then
     echo "==> certbot renewal cron already present"
   else
-    ( crontab -l 2>/dev/null; echo "${CRON_JOB}" ) | crontab -
+    ( crontab -l 2>/dev/null || true; echo "${CRON_JOB}" ) | crontab -
     echo "==> Daily certbot renewal cron installed (03:00)"
   fi
 fi

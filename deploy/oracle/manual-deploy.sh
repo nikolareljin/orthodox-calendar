@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-# Mirrors the GitHub Actions backend-deploy job for local testing.
+# Runs the same archive upload and remote deploy script as the GitHub Actions
+# backend-deploy job. CI also performs a public VITE_API_BASE/health check.
 # Reads secrets from .env.deploy (not committed — see .env.deploy.example).
 #
 # Usage:
 #   cp deploy/oracle/.env.deploy.example deploy/oracle/.env.deploy
 #   # fill in OCI_USER, OCI_HOST, OCI_SSH_KEY_FILE, OCI_KNOWN_HOSTS
+#   # set CERTBOT_EMAIL too when the remote deploy must provision TLS
 #   bash deploy/oracle/manual-deploy.sh
 
 set -euo pipefail
