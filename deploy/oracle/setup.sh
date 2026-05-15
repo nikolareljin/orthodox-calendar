@@ -152,7 +152,7 @@ systemctl reload nginx
 echo ""
 echo "==> Setup complete."
 echo ""
-public_ip="$(curl -fsS https://ifconfig.me 2>/dev/null || true)"
+public_ip="$(curl -fsS --max-time 10 https://ifconfig.me 2>/dev/null || true)"
 _valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
 if [[ -n "${public_ip}" ]] && ! [[ "${public_ip}" =~ ${_valid_ipv4_re} ]]; then
   echo "    WARNING: ifconfig.me returned '${public_ip}' (not a valid IPv4) — skipping nip.io hint"

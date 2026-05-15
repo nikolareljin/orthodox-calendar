@@ -115,8 +115,10 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     fi
     if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
       echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
-      echo "       Re-run setup.sh as root (deploy prunes the local copy), then redeploy:" >&2
-      echo "       curl -fsSL https://raw.githubusercontent.com/nikolareljin/orthodox-calendar/main/deploy/oracle/setup.sh | sudo bash" >&2
+      echo "       deploy.sh prunes the repo checkout, so the full clone must be" >&2
+      echo "       restored before setup.sh can reinstall the wrapper. Run as root:" >&2
+      echo "         sudo rm -rf ${APP_DIR}" >&2
+      echo "         curl -fsSL https://raw.githubusercontent.com/nikolareljin/orthodox-calendar/main/deploy/oracle/setup.sh | sudo bash" >&2
       exit 1
     fi
     if ! command -v certbot > /dev/null 2>&1; then
@@ -156,7 +158,9 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   # A sudoers failure enabling the timer means the server needs setup.sh rerun —
   # do not install cron in that case, as the cron sudo entry is also absent.
   if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
-    if sudo systemctl enable --now certbot.timer 2>/dev/null; then
+    if systemctl is-active --quiet certbot.timer 2>/dev/null; then
+      echo "==> certbot.timer already active"
+    elif sudo systemctl enable --now certbot.timer 2>/dev/null; then
       echo "==> certbot.timer enabled for automatic renewal"
     else
       echo "ERROR: certbot.timer exists but could not be enabled." >&2
