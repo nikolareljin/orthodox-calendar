@@ -123,7 +123,27 @@ if [[ ! -f "${NGINX_SITE}" ]]; then
   echo "ERROR: oc-certbot-provision: nginx site ${NGINX_SITE} not found" >&2
   exit 1
 fi
+_prune_missing_ssl_refs() {
+  local missing=false path
+  while IFS= read -r path; do
+    if [[ -n "${path}" && ! -e "${path}" ]]; then
+      missing=true
+      break
+    fi
+  done < <(
+    sed -n 's/^[[:space:]]*ssl_certificate[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
+    sed -n 's/^[[:space:]]*ssl_certificate_key[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
+  )
+  if [[ "${missing}" == "true" ]]; then
+    sed -i \
+      -e '/^[[:space:]]*ssl_certificate[[:space:]]/d' \
+      -e '/^[[:space:]]*ssl_certificate_key[[:space:]]/d' \
+      -e 's/listen \([^;]*\) ssl/listen \1/g' \
+      "${NGINX_SITE}"
+  fi
+}
 sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" "${NGINX_SITE}"
+_prune_missing_ssl_refs
 nginx -t
 systemctl reload nginx
 certbot --nginx \

@@ -147,7 +147,27 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
   systemctl start nginx
 fi
 echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
+_prune_missing_ssl_refs() {
+  local missing=false path
+  while IFS= read -r path; do
+    if [[ -n "${path}" && ! -e "${path}" ]]; then
+      missing=true
+      break
+    fi
+  done < <(
+    sed -n 's/^[[:space:]]*ssl_certificate[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
+    sed -n 's/^[[:space:]]*ssl_certificate_key[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
+  )
+  if [[ "${missing}" == "true" ]]; then
+    sed -i \
+      -e '/^[[:space:]]*ssl_certificate[[:space:]]/d' \
+      -e '/^[[:space:]]*ssl_certificate_key[[:space:]]/d' \
+      -e 's/listen \([^;]*\) ssl/listen \1/g' \
+      "${NGINX_SITE}"
+  fi
+}
 sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
+_prune_missing_ssl_refs
 nginx -t
 systemctl reload nginx
 

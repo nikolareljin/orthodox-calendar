@@ -112,7 +112,6 @@ if ! systemctl is-active --quiet nginx 2>/dev/null; then
 fi
 
 if [[ -n "${NIP_DOMAIN}" ]]; then
-  _ensure_certbot_packages
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
@@ -120,6 +119,7 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   # run its due-only renewal path so expired/near-expiry certs are repaired now.
   if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     if [[ -x "/usr/local/bin/oc-certbot-renew" ]]; then
+      _ensure_certbot_packages
       if ! sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
         echo "ERROR: certbot renewal check failed for existing TLS config." >&2
         echo "       Fix certbot/nginx renewal and redeploy before publishing the frontend." >&2
@@ -150,6 +150,7 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       echo "       rerunning setup.sh, or run the documented initial setup flow again." >&2
       exit 1
     fi
+    _ensure_certbot_packages
     # oc-certbot-provision updates server_name then calls certbot with fixed flags.
     # Root-owned wrapper installed by setup.sh — no wildcard injection surface.
     if sudo /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"; then
