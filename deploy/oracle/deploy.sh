@@ -106,18 +106,14 @@ else
   echo "    Could not detect public IP — skipping TLS step"
 fi
 
-if ! systemctl is-active --quiet nginx 2>/dev/null; then
-  sudo systemctl enable nginx
-  sudo systemctl start nginx
-fi
-
 if [[ -n "${NIP_DOMAIN}" ]]; then
   # Cert file existing is not enough — nginx may have been reset (e.g. by
   # re-running setup.sh) and lost the SSL server block. Also verify nginx
   # references the cert for THIS domain, not a stale cert from an old IP.
   # Before trusting an existing TLS config, ensure certbot is still present and
   # run its due-only renewal path so expired/near-expiry certs are repaired now.
-  if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+  if [[ -f "/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem" ]] \
+      && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
     if [[ -x "/usr/local/bin/oc-certbot-renew" ]]; then
       _ensure_certbot_packages
       if ! sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
@@ -193,10 +189,22 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
     if echo "${existing_cron}" | grep -qFx "${CRON_JOB}"; then
       echo "==> Daily certbot renewal cron already present"
     else
-      ( echo "${existing_cron}" | grep -vF "certbot renew" || true; echo "${CRON_JOB}" ) | crontab -
+      (
+        echo "${existing_cron}" \
+          | grep -vFx "0 3 * * * certbot renew --quiet" \
+          | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
+          | grep -vFx "${CRON_JOB}" \
+          || true
+        echo "${CRON_JOB}"
+      ) | crontab -
       echo "==> Daily certbot renewal cron installed/updated (03:00)"
     fi
   fi
+fi
+
+if ! systemctl is-active --quiet nginx 2>/dev/null; then
+  sudo systemctl enable nginx
+  sudo systemctl start nginx
 fi
 
 echo "==> Installing scoped backend release"

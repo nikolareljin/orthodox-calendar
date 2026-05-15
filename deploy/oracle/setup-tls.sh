@@ -141,12 +141,6 @@ fi
 # The default config from setup.sh uses server_name _ (catch-all); certbot
 # --nginx matches vhosts by domain name, so it cannot select that block.
 # ---------------------------------------------------------------------------
-if ! systemctl is-active --quiet nginx 2>/dev/null; then
-  echo "==> Starting nginx"
-  systemctl enable nginx
-  systemctl start nginx
-fi
-echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
 _prune_missing_ssl_refs() {
   local missing=false path
   while IFS= read -r path; do
@@ -166,6 +160,13 @@ _prune_missing_ssl_refs() {
       "${NGINX_SITE}"
   fi
 }
+_prune_missing_ssl_refs
+if ! systemctl is-active --quiet nginx 2>/dev/null; then
+  echo "==> Starting nginx"
+  systemctl enable nginx
+  systemctl start nginx
+fi
+echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
 sed -i "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" "${NGINX_SITE}"
 _prune_missing_ssl_refs
 nginx -t
