@@ -145,9 +145,11 @@ systemctl reload nginx
 # 3 — Obtain certificate (skip if already present for this domain)
 # ---------------------------------------------------------------------------
 CERT_PATH="/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem"
-# Check both the cert file and that nginx references THIS domain's cert path —
-# a generic ssl_certificate check would match a stale cert from a previous IP.
-if [[ -f "${CERT_PATH}" ]] && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
+# Check that the cert file exists, nginx references it (not a stale cert from an old IP),
+# and the cert is currently valid (not expired). An expired cert falls through to certbot
+# for reissuance rather than being silently accepted.
+if [[ -f "${CERT_PATH}" ]] && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null \
+    && openssl x509 -noout -checkend 0 -in "${CERT_PATH}" 2>/dev/null; then
   echo "==> TLS already active for ${NIP_DOMAIN}: ${CERT_PATH}"
 else
   echo "==> Requesting certificate for ${NIP_DOMAIN}"

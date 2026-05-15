@@ -101,7 +101,8 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
   # is root-only (mode 0700), so a deploy-user -f test always returns false even
   # when the cert exists, forcing unnecessary re-provisioning.
   if grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
-    echo "==> TLS already active for ${NIP_DOMAIN}"
+    echo "==> TLS already active for ${NIP_DOMAIN} — checking cert renewal"
+    command -v certbot > /dev/null 2>&1 && sudo /usr/bin/certbot renew --quiet 2>/dev/null || true
   else
     echo "==> Obtaining TLS certificate for ${NIP_DOMAIN}"
     # CERTBOT_EMAIL and the oc-certbot-provision wrapper are only required when
@@ -114,7 +115,8 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
     fi
     if [[ ! -x "/usr/local/bin/oc-certbot-provision" ]]; then
       echo "ERROR: /usr/local/bin/oc-certbot-provision not found." >&2
-      echo "       Re-run deploy/oracle/setup.sh to install the TLS wrapper, then redeploy." >&2
+      echo "       Re-run setup.sh as root (deploy prunes the local copy), then redeploy:" >&2
+      echo "       curl -fsSL https://raw.githubusercontent.com/nikolareljin/orthodox-calendar/main/deploy/oracle/setup.sh | sudo bash" >&2
       exit 1
     fi
     if ! command -v certbot > /dev/null 2>&1; then
@@ -170,10 +172,10 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
       exit 1
     fi
     CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
-    if ! crontab -l 2>/dev/null | grep -qF "certbot renew"; then
-      ( crontab -l 2>/dev/null || true; echo "${CRON_JOB}" ) | crontab -
-      echo "==> Daily certbot renewal cron installed (03:00)"
-    fi
+    # Replace any existing certbot-renew entry (it may lack sudo or have wrong flags)
+    # then add the correct one. Idempotent: filters all "certbot renew" lines then appends.
+    ( crontab -l 2>/dev/null | grep -v "certbot renew" || true; echo "${CRON_JOB}" ) | crontab -
+    echo "==> Daily certbot renewal cron installed/updated (03:00)"
   fi
 fi
 
