@@ -79,20 +79,26 @@ DEPLOY_DIR=""
 SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
 if [[ "${SCRIPT_PATH}" == */* ]]; then
   CANDIDATE_DEPLOY_DIR="$(cd "$(dirname "${SCRIPT_PATH}")" 2>/dev/null && pwd || true)"
-  if [[ -f "${CANDIDATE_DEPLOY_DIR}/orthodox-calendar.service" && -f "${CANDIDATE_DEPLOY_DIR}/nginx-backend.conf" ]]; then
+  if [[ -f "${CANDIDATE_DEPLOY_DIR}/orthodox-calendar.service" \
+      && -f "${CANDIDATE_DEPLOY_DIR}/nginx-backend.conf" \
+      && -f "${CANDIDATE_DEPLOY_DIR}/oc-certbot-provision.sh" ]]; then
     DEPLOY_DIR="${CANDIDATE_DEPLOY_DIR}"
   fi
 fi
 if [[ -z "${DEPLOY_DIR}" ]]; then
   DEPLOY_DIR="${APP_DIR}/deploy/oracle"
 fi
-if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" || ! -f "${DEPLOY_DIR}/nginx-backend.conf" ]]; then
+if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" \
+    || ! -f "${DEPLOY_DIR}/nginx-backend.conf" \
+    || ! -f "${DEPLOY_DIR}/oc-certbot-provision.sh" ]]; then
   echo "    deploy/oracle companion files missing — downloading fresh copies"
   DEPLOY_DIR="$(mktemp -d)"
   curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/orthodox-calendar.service" \
     -o "${DEPLOY_DIR}/orthodox-calendar.service"
   curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/nginx-backend.conf" \
     -o "${DEPLOY_DIR}/nginx-backend.conf"
+  curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
+    -o "${DEPLOY_DIR}/oc-certbot-provision.sh"
 fi
 
 echo "==> Creating Python virtualenv and installing backend dependencies"
@@ -117,100 +123,7 @@ systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — c
 echo "==> Installing certbot provision wrapper"
 # Root-owned wrapper with hardcoded certbot flags — eliminates hook-injection risk
 # from a wildcard sudoers entry. deploy.sh calls this via sudo with two args only.
-cat > /usr/local/bin/oc-certbot-provision <<'WRAPPER'
-#!/usr/bin/env bash
-# Usage: oc-certbot-provision <nip-domain> <email>
-# Installed by setup.sh; run only via sudo from the deploy user.
-set -euo pipefail
-DOMAIN="$1"
-EMAIL="$2"
-# Validate domain is a well-formed nip.io hostname derived from an IPv4 address.
-# Rejects anything with spaces, shell metacharacters, or nginx config syntax.
-_nip_re='^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io$'
-_valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-DOMAIN_IP="${DOMAIN%.nip.io}"
-DOMAIN_IP="${DOMAIN_IP//-/.}"
-if ! [[ "${DOMAIN}" =~ ${_nip_re} ]] || ! [[ "${DOMAIN_IP}" =~ ${_valid_ipv4_re} ]]; then
-  echo "ERROR: oc-certbot-provision: '${DOMAIN}' is not a valid nip.io hostname" >&2
-  exit 1
-fi
-NGINX_SITE="/etc/nginx/sites-available/orthodox-calendar"
-# Update server_name before certbot so --nginx can match this vhost by name.
-if [[ ! -f "${NGINX_SITE}" ]]; then
-  echo "ERROR: oc-certbot-provision: nginx site ${NGINX_SITE} not found" >&2
-  exit 1
-fi
-NGINX_SITE_BACKUP="$(mktemp)"
-cp "${NGINX_SITE}" "${NGINX_SITE_BACKUP}"
-restore_nginx_site() {
-  cp "${NGINX_SITE_BACKUP}" "${NGINX_SITE}"
-  if nginx -t >/dev/null 2>&1; then
-    if systemctl is-active --quiet nginx 2>/dev/null; then
-      systemctl reload nginx || true
-    fi
-  fi
-  rm -f "${NGINX_SITE_BACKUP}"
-}
-cleanup_nginx_backup() {
-  rm -f "${NGINX_SITE_BACKUP}"
-}
-rollback_nginx_site() {
-  local reason="$1"
-  restore_nginx_site
-  trap - EXIT
-  echo "ERROR: oc-certbot-provision: ${reason}; restored previous nginx site config" >&2
-  exit 1
-}
-trap cleanup_nginx_backup EXIT
-_prune_missing_ssl_refs() {
-  local missing=false path
-  while IFS= read -r path; do
-    if [[ -n "${path}" && ! -e "${path}" ]]; then
-      missing=true
-      break
-    fi
-  done < <(
-    sed -n 's/^[[:space:]]*ssl_certificate[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
-    sed -n 's/^[[:space:]]*ssl_certificate_key[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
-    sed -n 's/^[[:space:]]*include[[:space:]]\+\(\/etc\/letsencrypt\/options-ssl-nginx\.conf\);.*/\1/p' "${NGINX_SITE}"
-    sed -n 's/^[[:space:]]*ssl_dhparam[[:space:]]\+\(\/etc\/letsencrypt\/ssl-dhparams\.pem\);.*/\1/p' "${NGINX_SITE}"
-  )
-  if [[ "${missing}" == "true" ]]; then
-    sed -i \
-      -e '/^[[:space:]]*ssl_certificate[[:space:]]/d' \
-      -e '/^[[:space:]]*ssl_certificate_key[[:space:]]/d' \
-      -e '/^[[:space:]]*include[[:space:]]*\/etc\/letsencrypt\/options-ssl-nginx\.conf/d' \
-      -e '/^[[:space:]]*ssl_dhparam[[:space:]]*\/etc\/letsencrypt\/ssl-dhparams\.pem/d' \
-      -e 's/listen \([^;]*\) ssl/listen \1/g' \
-      "${NGINX_SITE}"
-  fi
-}
-_set_nip_domain() {
-  sed -i \
-    -e "s/server_name[[:space:]]\+[^;]*;/server_name ${DOMAIN};/g" \
-    -e "s/if ([\$]host = [0-9]\+-[0-9]\+-[0-9]\+-[0-9]\+\.nip\.io)/if (\$host = ${DOMAIN})/g" \
-    "${NGINX_SITE}"
-}
-_set_nip_domain
-_prune_missing_ssl_refs
-nginx -t || rollback_nginx_site "nginx validation failed"
-if ! systemctl is-active --quiet nginx 2>/dev/null; then
-  systemctl enable nginx || rollback_nginx_site "nginx enable failed"
-  systemctl start nginx || rollback_nginx_site "nginx start failed"
-fi
-if ! certbot --nginx \
-  -d "${DOMAIN}" \
-  --non-interactive \
-  --agree-tos \
-  -m "${EMAIL}" \
-  --redirect; then
-  rollback_nginx_site "certbot failed"
-fi
-trap - EXIT
-cleanup_nginx_backup
-WRAPPER
-chown root:root /usr/local/bin/oc-certbot-provision
-chmod 755 /usr/local/bin/oc-certbot-provision
+install -o root -g root -m 755 "${DEPLOY_DIR}/oc-certbot-provision.sh" /usr/local/bin/oc-certbot-provision
 
 cat > /usr/local/bin/oc-certbot-renew <<'WRAPPER'
 #!/usr/bin/env bash

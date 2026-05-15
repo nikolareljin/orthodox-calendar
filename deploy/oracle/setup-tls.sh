@@ -22,6 +22,8 @@ set -euo pipefail
 CERTBOT_EMAIL="${CERTBOT_EMAIL:-}"
 FORCED_IP=""
 APP_USER="${APP_USER:-ubuntu}"
+APP_DIR="/home/${APP_USER}/orthodox-calendar"
+REPO="https://github.com/nikolareljin/orthodox-calendar.git"
 
 # ---------------------------------------------------------------------------
 # Argument parsing
@@ -137,98 +139,35 @@ if ! _pkg_installed python3-certbot-nginx; then
 fi
 
 # ---------------------------------------------------------------------------
-# 2.5 — Ensure nginx vhost has the correct server_name before certbot runs.
-# The default config from setup.sh uses server_name _ (catch-all); certbot
-# --nginx matches vhosts by domain name, so it cannot select that block.
+# 3 — Provision or renew the certificate using the shared root-owned wrapper.
+# setup.sh installs the same helper for deploy.sh, so nginx/TLS recovery logic
+# stays in one place.
 # ---------------------------------------------------------------------------
-_prune_missing_ssl_refs() {
-  local missing=false path
-  while IFS= read -r path; do
-    if [[ -n "${path}" && ! -e "${path}" ]]; then
-      missing=true
-      break
-    fi
-  done < <(
-    sed -n 's/^[[:space:]]*ssl_certificate[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
-    sed -n 's/^[[:space:]]*ssl_certificate_key[[:space:]]\+\([^;]*\);.*/\1/p' "${NGINX_SITE}"
-    sed -n 's/^[[:space:]]*include[[:space:]]\+\(\/etc\/letsencrypt\/options-ssl-nginx\.conf\);.*/\1/p' "${NGINX_SITE}"
-    sed -n 's/^[[:space:]]*ssl_dhparam[[:space:]]\+\(\/etc\/letsencrypt\/ssl-dhparams\.pem\);.*/\1/p' "${NGINX_SITE}"
-  )
-  if [[ "${missing}" == "true" ]]; then
-    sed -i \
-      -e '/^[[:space:]]*ssl_certificate[[:space:]]/d' \
-      -e '/^[[:space:]]*ssl_certificate_key[[:space:]]/d' \
-      -e '/^[[:space:]]*include[[:space:]]*\/etc\/letsencrypt\/options-ssl-nginx\.conf/d' \
-      -e '/^[[:space:]]*ssl_dhparam[[:space:]]*\/etc\/letsencrypt\/ssl-dhparams\.pem/d' \
-      -e 's/listen \([^;]*\) ssl/listen \1/g' \
-      "${NGINX_SITE}"
+PROVISION_HELPER=""
+SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
+if [[ "${SCRIPT_PATH}" == */* ]]; then
+  CANDIDATE_DEPLOY_DIR="$(cd "$(dirname "${SCRIPT_PATH}")" 2>/dev/null && pwd || true)"
+  CANDIDATE_HELPER="${CANDIDATE_DEPLOY_DIR}/oc-certbot-provision.sh"
+  if [[ -f "${CANDIDATE_HELPER}" ]]; then
+    PROVISION_HELPER="${CANDIDATE_HELPER}"
   fi
-}
-NGINX_SITE_BACKUP="$(mktemp)"
-cp "${NGINX_SITE}" "${NGINX_SITE_BACKUP}"
-restore_nginx_site() {
-  cp "${NGINX_SITE_BACKUP}" "${NGINX_SITE}"
-  if nginx -t >/dev/null 2>&1; then
-    if systemctl is-active --quiet nginx 2>/dev/null; then
-      systemctl reload nginx || true
-    fi
-  fi
-  rm -f "${NGINX_SITE_BACKUP}"
-}
-cleanup_nginx_backup() {
-  rm -f "${NGINX_SITE_BACKUP}"
-}
-rollback_nginx_site() {
-  local reason="$1"
-  restore_nginx_site
-  trap - EXIT
-  echo "ERROR: ${reason}; restored previous nginx site config" >&2
-  exit 1
-}
-trap cleanup_nginx_backup EXIT
-_prune_missing_ssl_refs
-nginx -t || rollback_nginx_site "nginx validation failed after SSL cleanup"
-if ! systemctl is-active --quiet nginx 2>/dev/null; then
-  echo "==> Starting nginx"
-  systemctl enable nginx || rollback_nginx_site "nginx enable failed"
-  systemctl start nginx || rollback_nginx_site "nginx start failed"
 fi
-echo "==> Updating nginx server_name → ${NIP_DOMAIN}"
-sed -i \
-  -e "s/server_name[[:space:]]\+[^;]*;/server_name ${NIP_DOMAIN};/g" \
-  -e "s/if ([\$]host = [0-9]\+-[0-9]\+-[0-9]\+-[0-9]\+\.nip\.io)/if (\$host = ${NIP_DOMAIN})/g" \
-  "${NGINX_SITE}"
-_prune_missing_ssl_refs
-nginx -t || rollback_nginx_site "nginx validation failed after server_name update"
-
-# ---------------------------------------------------------------------------
-# 3 — Obtain certificate (skip if already present for this domain)
-# ---------------------------------------------------------------------------
-CERT_PATH="/etc/letsencrypt/live/${NIP_DOMAIN}/fullchain.pem"
-# Check both the cert file and that nginx references THIS domain's cert path —
-# a generic ssl_certificate check would match a stale cert from a previous IP.
-if [[ -f "${CERT_PATH}" ]] && grep -qF "/etc/letsencrypt/live/${NIP_DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
-  echo "==> Checking existing TLS certificate for ${NIP_DOMAIN}"
-  if ! certbot renew --quiet --cert-name "${NIP_DOMAIN}"; then
-    rollback_nginx_site "certbot renew failed"
-  fi
-  echo "==> TLS active for ${NIP_DOMAIN}: ${CERT_PATH}"
+if [[ -z "${PROVISION_HELPER}" && -f "${APP_DIR}/deploy/oracle/oc-certbot-provision.sh" ]]; then
+  PROVISION_HELPER="${APP_DIR}/deploy/oracle/oc-certbot-provision.sh"
+fi
+if [[ -n "${PROVISION_HELPER}" ]]; then
+  install -o root -g root -m 755 "${PROVISION_HELPER}" /usr/local/bin/oc-certbot-provision
 else
-  echo "==> Requesting certificate for ${NIP_DOMAIN}"
-  if ! certbot --nginx \
-    -d "${NIP_DOMAIN}" \
-    --non-interactive \
-    --agree-tos \
-    -m "${CERTBOT_EMAIL}" \
-    --redirect; then
-    rollback_nginx_site "certbot failed"
-  fi
-  echo "    Certificate obtained. Backend available at https://${NIP_DOMAIN}"
+  echo "==> Downloading shared certbot provision helper"
+  curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
+    -o /usr/local/bin/oc-certbot-provision
+  chown root:root /usr/local/bin/oc-certbot-provision
+  chmod 755 /usr/local/bin/oc-certbot-provision
 fi
-nginx -t || rollback_nginx_site "nginx validation failed after certbot"
-systemctl reload nginx || rollback_nginx_site "nginx reload failed"
-trap - EXIT
-cleanup_nginx_backup
+
+echo "==> Provisioning TLS for ${NIP_DOMAIN}"
+/usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"
+echo "==> TLS active for ${NIP_DOMAIN}"
 
 # ---------------------------------------------------------------------------
 # 4 — Enable automatic renewal (once daily, no-op until 30 days before expiry)
