@@ -6,6 +6,9 @@ on:
   # unlocks the security gate and deploy stages.
   push:
     branches: [main]
+  # Manual trigger for cases where release-check mis-fires (e.g. API 404 at
+  # merge time or squash-fallback failure). Treats every manual run as a release.
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -43,10 +46,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           HEAD_COMMIT_MSG: ${{ github.event.head_commit.message }}
           GITHUB_EVENT_FORCED: ${{ github.event.forced }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
         shell: bash
         run: |
           set -euo pipefail
           is_release="false"
+
+          # Manual dispatch always triggers a full release deploy.
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            echo "::notice::Manual workflow_dispatch — treating as release deploy."
+            echo "is_release=true" >> "$GITHUB_OUTPUT"
+            echo "Release deploy: true"
+            exit 0
+          fi
 
           # Guard: only deploy from refs/heads/main (defense in depth should
           # a second trigger such as workflow_dispatch or tags be added later).
@@ -87,9 +99,12 @@ jobs:
             # fork-based PRs (fork-owner/release/x) are also matched.
             is_release="true"
           else
-            # Squash-merge fallback: subjects end with (#NNN) — extract the PR
-            # number and verify its head branch via the API.
-            _squash_pr=$(echo "${HEAD_COMMIT_MSG}" | grep -oE '\(#[0-9]+\)$' | tr -d '(#)' || true)
+            # Squash-merge fallback: first line of subject ends with (#NNN).
+            # head -n1 ensures only the commit subject is checked; the full
+            # squash body may contain (#NNN) on other lines (e.g. PR refs in
+            # bullet points) that would produce a multi-line _squash_pr and
+            # break the subsequent API URL.
+            _squash_pr=$(echo "${HEAD_COMMIT_MSG}" | head -n1 | grep -oE '\(#[0-9]+\)$' | tr -d '(#)' || true)
             if [[ -n "${_squash_pr}" ]]; then
               _squash_ref=$(gh api "repos/${{ github.repository }}/pulls/${_squash_pr}" \
                 --jq '.head.ref' 2>/dev/null || echo "")

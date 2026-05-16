@@ -9,6 +9,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.3.1] - 2026-05-16
+
+### Fixed
+- **Release-check squash-fallback bug** — `grep -oE '\(#[0-9]+\)$'` was applied to the full squash-merge commit body; bullet lines referencing other PRs (e.g. `* fix: ... (#21)`) also matched, making `_squash_pr` multi-line and the subsequent PR API URL invalid. Now only the commit subject (first line) is searched via `head -n1`, so the correct PR number is always extracted.
+- **Deploy workflow `workflow_dispatch` trigger** — added manual trigger so a release deploy can be re-run via the GitHub Actions UI without requiring a new commit when the automatic release-check fails (e.g. due to a transient GitHub API 404 at merge time).
+
+---
+
 ## [0.3.0] - 2026-05-14
 
 ### Added
