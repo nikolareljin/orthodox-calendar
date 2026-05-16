@@ -52,19 +52,20 @@ jobs:
           set -euo pipefail
           is_release="false"
 
-          # Manual dispatch always triggers a full release deploy.
-          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
-            echo "::notice::Manual workflow_dispatch — treating as release deploy."
-            echo "is_release=true" >> "$GITHUB_OUTPUT"
-            echo "Release deploy: true"
+          # Guard: only deploy from refs/heads/main. Applies to both push and
+          # workflow_dispatch (the UI/CLI let callers choose any ref for manual
+          # runs, so this guard must come before the dispatch short-circuit).
+          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            echo "::notice::Ref is not refs/heads/main — release deploy skipped."
+            echo "is_release=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Guard: only deploy from refs/heads/main (defense in depth should
-          # a second trigger such as workflow_dispatch or tags be added later).
-          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
-            echo "::notice::Push is not to refs/heads/main — release deploy skipped."
-            echo "is_release=false" >> "$GITHUB_OUTPUT"
+          # Manual dispatch on main always triggers a full release deploy.
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            echo "::notice::Manual workflow_dispatch on main — treating as release deploy."
+            echo "is_release=true" >> "$GITHUB_OUTPUT"
+            echo "Release deploy: true"
             exit 0
           fi
 
