@@ -17,6 +17,23 @@
     ]
   },
   {
+    "month_day": "01-04",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Jevstatije I",
+        "title": "Jevstatije I",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Jevstatije_I",
+        "notes": "Jevstatije I () was the sixth Serbian Archbishop, holding the office from 1279 to 1286.<ref name=\"Bataković2005\"></ref> He was born in the Budimlje parish, near Berane in Zeta.<ref name=\"SirotkovićCecić1990\"></ref> He took his monastics vows in Zeta,",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
     "month_day": "01-08",
     "tradition": "serbian",
     "calendar": "julian",
@@ -95,6 +112,23 @@
         "feast_type": "Venerable",
         "hagiography_url": "https://en.wikipedia.org/wiki/Maximus_of_Ungro-Wallachia",
         "notes": "Metropolitan of Belgrade , Metropolitan of Ungro-Wallachia , Venerable, titular Despot of Serbia ( r. &#8201;1486–1497 ); who founded Krušedol Monastery ; birth name Đorđe Branković &#91; 59 &#93; &#91; 60 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-11",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "George of Kratovo",
+        "title": "George of Kratovo",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/George_of_Kratovo",
+        "notes": "Saint George of Kratovo (, , ) was an Orthodox South Slavic writer and silversmith from Kratovo.<ref name=\"Deretić2004\"></ref>",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -217,6 +251,16 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Simeon Popović",
+        "title": "Simeon Popović",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Simeon_Popovi%C4%87",
+        "notes": "}}|image=Sv.SimeonDajbabski.jpg|caption=Saint Symeon in 1898|titles=Venerable father|birth_date=19 December 1854|birth_place=Cetinje, Montenegro|death_date=1 April 1941 (aged 86)|death_place=Dajbabe Monastery, Yugoslavia|feast_day=1 April (O.S",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -248,6 +292,16 @@
         "feast_type": "Venerable",
         "hagiography_url": "https://en.wikipedia.org/wiki/Joasaph_of_Meteora_Ј",
         "notes": "Venerable, titular Emperor of Serbs and Greeks ( r. &#8201;1370–1373 ); native name Jovan Uroš Nemanjić; a.k.a. John Ouresis Doukas Palaiologos &#91; 50 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Nikolaj Velimirović",
+        "title": "Nikolaj Velimirović",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nikolaj_Velimirovi%C4%87",
+        "notes": "Nikolaj Velimirović (Serbian Cyrillic: Николај Велимировић; &nbsp;– ) was a Serbian Orthodox prelate who served as Bishop of Ohrid and Žiča from 1920 to 1956",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -285,6 +339,16 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Branko Dobrosavljević",
+        "title": "Branko Dobrosavljević",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Branko_Dobrosavljevi%C4%87",
+        "notes": "Branko Dobrosavljević (Serbian Cyrillic: Бранко Добросављевић; 4 January 1886 — 7 May 1941) was a Serbian Orthodox priest who was killed by the Ustaše<ref></ref> during the Genocide of Serbs in the Independent State of Croatia in World War II.<ref na",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -299,6 +363,16 @@
         "feast_type": "Venerable",
         "hagiography_url": "https://en.wikipedia.org/wiki/Isaiah_of_Onogošt",
         "notes": "Venerable hermit , who built a cave church in what is now Ostrog Monastery ; a.k.a. Isaiah of Ostrog &#91; 42 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Nicodemus I of Peć",
+        "title": "Nicodemus I of Peć",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nicodemus_I_of_Pe%C4%87",
+        "notes": "Nikodim I of Peć and Nikodim of Hilandar () was a monk-scribe at Hilandar before becoming the 10th Serbian Archbishop from 1316 to 1324, he died in the year 1325",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -340,6 +414,23 @@
     ]
   },
   {
+    "month_day": "05-25",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Vićentije Krdžić",
+        "title": "Vićentije Krdžić",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Vi%C4%87entije_Krd%C5%BEi%C4%87",
+        "notes": "Vićentije Krdžić (secular name Vasilije Krdžić; 30 January 1853 - Belgrade, Kingdom of Serbia, 1915)<ref name = \"JER\">Sava, Bishop of Šumadija, Srpski jerarsi od devetog do dvadesetog veka, Evro Beograd (1996), str 76</ref> he was the third Serbian m",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
     "month_day": "05-29",
     "tradition": "serbian",
     "calendar": "julian",
@@ -360,6 +451,23 @@
         "feast_type": "New Martyr",
         "hagiography_url": "https://en.wikipedia.org/wiki/Vukašin_of_Klepci",
         "notes": "New Martyr ; a.k.a. Vukašin of Jasenovac, surnamed Mandrapa &#91; 118 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-30",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Stephen of Piperi",
+        "title": "Stephen of Piperi",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stephen_of_Piperi",
+        "notes": "Stephen of Piperi () (died May 20, 1697) is a saint of the Serbian Orthodox Church.",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -482,6 +590,33 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Justin Popović",
+        "title": "Justin Popović",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Justin_Popovi%C4%87",
+        "notes": "Justin Popović (, , secular name Blagoje Popović, ; 6 April 1894 – 7 April 1979) was a Serbian Orthodox theologian, archimandrite of the Ćelije Monastery, Dostoyevsky scholar, writer, anti-communist advocate and critic of the pragmatic church ecclesi",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-15",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ephraim of Serbia",
+        "title": "Ephraim of Serbia",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ephraim_of_Serbia",
+        "notes": "Born into a priestly family, of Bulgarian origin, he became a monk around 1335 at the age of 23",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -499,6 +634,16 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Đorđe Bogić",
+        "title": "Đorđe Bogić",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/%C4%90or%C4%91e_Bogi%C4%87",
+        "notes": "Georgije Bogić (,  Đorđe Bogić,  and anglicized as George Bogic; 6 February 1911 – 17 June 1941) was a Serbian Orthodox protopresbyter and the parish priest of the Orthodox church in Našice; who was martyred by the Ustaše during the Second World War,",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -513,6 +658,23 @@
         "feast_type": "Venerable",
         "hagiography_url": "https://en.wikipedia.org/wiki/Peter_of_Koriša",
         "notes": "Venerable Wonderworker; the first Serbian hermit, who practiced asceticism in the Hermitage of St. Peter of Koriša &#91; 84 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-20",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Stanislav Nasadil",
+        "title": "Stanislav Nasadil",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stanislav_Nasadil",
+        "notes": "Stanislav Nasadil (, , ; 20 October 1907 – 28 June 1941) was a Czech priest of the Serbian Orthodox Church and saint who was martyred in World War II.<ref></ref><ref></ref>",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -671,6 +833,16 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Sava Trlajić",
+        "title": "Sava Trlajić",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sava_Trlaji%C4%87",
+        "notes": "Sava Trlajić (Serbian Cyrillic: Сава Трлајић; 19 July 1884 – August 1941) was a bishop of the Serbian Orthodox Church serving as Bishop of the Eparchy of Gornji Karlovac in the Kingdom of Yugoslavia from 1938 until the beginning of World War II.<ref ",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -743,6 +915,60 @@
     ]
   },
   {
+    "month_day": "08-11",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Spyridon of Serbia",
+        "title": "Spyridon of Serbia",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Spyridon_of_Serbia",
+        "notes": "Spiridon was chosen to succeed Patriarch Jefrem, who abdicated, in 1379, and was enthroned after 3 May 1380",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-16",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Jevstatije II",
+        "title": "Jevstatije II",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Jevstatije_II",
+        "notes": "*Pakitibija.com, Житије срба светитеља (Lives of the Serbian saints): Свети Јевстатије Други, светитељ - архиепископ (Saint Eustathius Second, saint - archbishop)]",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Joachim of Osogovo",
+        "title": "Joachim of Osogovo",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joachim_of_Osogovo",
+        "notes": "Joachim of Osogovo () or Joachim Osogovski <ref></ref> was a Bulgarian hermit,<ref>Ines Angeli Murzaku, Monasticism in Eastern Europe and the Former Soviet Republics; Routledge, 2015, , p",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Sava III",
+        "title": "Sava III",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sava_III",
+        "notes": "Saint Sava III ( / Sveti Sava III; died July 16, 1316) was the Archbishop of Serbs from 1309 to 1316",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
     "month_day": "08-21",
     "tradition": "serbian",
     "calendar": "julian",
@@ -793,6 +1019,33 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Roman of Đunis",
+        "title": "Roman of Đunis",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Roman_of_%C4%90unis",
+        "notes": "Saint Roman of Đunis (Serbian: Свети Роман Ђунишки; Sveti Roman Đuniški), or Roman The Wonderworker (c",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-30",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Makarije Sokolović",
+        "title": "Makarije Sokolović",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Makarije_Sokolovi%C4%87",
+        "notes": "Makarije Sokolović (; died 1574) was the Archbishop of Peć and Serbian Patriarch from 1557 to 1571",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -807,6 +1060,16 @@
         "feast_type": "Hieromartyr",
         "hagiography_url": "https://en.wikipedia.org/wiki/Raphael_of_Šišatovac",
         "notes": "Prior of Šišatovac Monastery , New Venerable Hieromartyr; surnamed Momčilović &#91; 87 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Rafailo Momčilović",
+        "title": "Rafailo Momčilović",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Rafailo_Mom%C4%8Dilovi%C4%87",
+        "notes": "Rafailo Momčilović (Serbian Cyrillic: Рафаило Момчиловић; 23 April 1875 – 3 September 1941) was a Serbian Orthodox cleric, abbot of the Šišatovac Monastery, and painter",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -901,6 +1164,16 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Ludmila of Bohemia",
+        "title": "Ludmila of Bohemia",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ludmila_of_Bohemia",
+        "notes": "Ludmila of Bohemia ( 860 &ndash; 15 September 921) is a Czech saint and martyr venerated by Catholic and Orthodox Christians",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -915,6 +1188,33 @@
         "feast_type": "Hieromartyr",
         "hagiography_url": "https://en.wikipedia.org/wiki/Peter_of_Dabar_and_Bosnia",
         "notes": "Metropolitan of Dabar and Bosnia , New Hieromartyr; surnamed Zimonjić &#91; 83 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Petar Zimonjić",
+        "title": "Petar Zimonjić",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Petar_Zimonji%C4%87",
+        "notes": "Petar Zimonjić (; 24 June 1866 – June 1941) was a bishop of the Serbian Orthodox Church serving as the metropolitan of Dabar and Bosnia in the Kingdom of Yugoslavia from 1920 until the beginning of World War II.",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-21",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nikodim Milaš",
+        "title": "Nikodim Milaš",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nikodim_Mila%C5%A1",
+        "notes": "(; born , ; 16 April 1845 – 2 April 1915), also known as Nicodemus of Dalmatia () was a Serbian Orthodox bishop, theologian, university professor and academic",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -976,6 +1276,23 @@
     ]
   },
   {
+    "month_day": "10-11",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Hariton Lukić",
+        "title": "Hariton Lukić",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Hariton_Luki%C4%87",
+        "notes": "Monk Hariton, venerable neomartyr of Kosovo (born Radoslav Lukić) (Seoce, 21 November 1960 — Prizren, 15 June 1999) was a monk of the Serbian Orthodox Church that was murdered and beheaded by Albanian KLA in the Kosovo War.<ref></ref><ref></ref><ref>",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
     "month_day": "10-15",
     "tradition": "serbian",
     "calendar": "julian",
@@ -1016,6 +1333,16 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Stefan Štiljanović",
+        "title": "Stefan Štiljanović",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stefan_%C5%A0tiljanovi%C4%87",
+        "notes": "Štiljanović was born in Paštrovići (modern Montenegro)",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -1030,6 +1357,23 @@
         "feast_type": "Righteous",
         "hagiography_url": "https://en.wikipedia.org/wiki/Stephen_the_Blind",
         "notes": "Right-Believing, Despot of Serbia ( r. &#8201;1458–1459 ); surnamed Branković &#91; 103 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-30",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Varnava Nastić",
+        "title": "Varnava Nastić",
+        "feast_type": "Confessor",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Varnava_Nasti%C4%87",
+        "notes": "Varnava the New Confessor (; 31 January 1914 – 12 November 1964) was the titular bishop of Hvosno and a saint of the Serbian Orthodox Church",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -1198,6 +1542,33 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Euthymius of Dečani",
+        "title": "Euthymius of Dečani",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Euthymius_of_De%C4%8Dani",
+        "notes": "Venerable Jeftimije of Dečani also Jeftimije Dečanski (Serbian: преподобни Јефтимије Дечански; 16th century) was a Serbian monk who became a martyr after the Ottomans invaded Medieval Serbia in the 16th century and he died a martyr's death.<ref></ref",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-29",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Momčilo Grgurević",
+        "title": "Momčilo Grgurević",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Mom%C4%8Dilo_Grgurevi%C4%87",
+        "notes": "Momčilo Grgurević (; 1906 - 1945) was a Serbian orthodox priest of the Metropolitanate of Dabar-Bosnia who was canonized as a martyr.<ref name=\"mitropolija\"></ref><ref name=\"spc\"></ref>",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -1215,6 +1586,33 @@
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Sevastijan Dabović",
+        "title": "Sevastijan Dabović",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sevastijan_Dabovi%C4%87",
+        "notes": "Archimandrite Sevastijan (Sebastian, , secular name John Dabovich or Jovan Dabović; June 9, 1863 – November 30, 1940) was a Serbian-American monk and missionary who became the first Serbian Orthodox monk naturalized in North America",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-07",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Gregory of Gornjak",
+        "title": "Gregory of Gornjak",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Gregory_of_Gornjak",
+        "notes": "Grigorije of Gornjak (;  1375–1379), also known as Grigorije the Younger () and Grigorije the Silent (), was Serbian Orthodox monk who was canonized as saint",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   },
@@ -1229,6 +1627,16 @@
         "feast_type": "Venerable",
         "hagiography_url": "https://en.wikipedia.org/wiki/Mardarius_of_Lješanska,_Libertyville_and_All_America",
         "notes": "First Bishop of America and Canada , Venerable; native name Mardarije Uskoković &#91; 58 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Mardarije Uskoković",
+        "title": "Mardarije Uskoković",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Mardarije_Uskokovi%C4%87",
+        "notes": "Bishop Mardarije (, secular name Ivan Uskoković, ; 22 December 1889 – 12 December 1935) was bishop of the Serbian Orthodox Church, the first Serbian Orthodox Bishop in the Diocese of America and Canada",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
@@ -1334,6 +1742,16 @@
         "feast_type": "Martyr",
         "hagiography_url": "https://en.wikipedia.org/wiki/Paisius_the_Hegumen",
         "notes": "Hegumen of Moštanica Monastery , New Venerable Martyr, who was martyred with St. Habakkuk ; surnamed Ristović &#91; 31 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Avakum the Deacon",
+        "title": "Avakum the Deacon",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Avakum_the_Deacon",
+        "notes": "Deacon Avakum (; 1794–30 December 1814) was a Serbian Orthodox monk of the Moštanica Monastery who joined Hadži-Prodan's rebellion",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
