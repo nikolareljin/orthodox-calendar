@@ -22,7 +22,6 @@ set -euo pipefail
 CERTBOT_EMAIL="${CERTBOT_EMAIL:-}"
 FORCED_IP=""
 APP_USER="${APP_USER:-ubuntu}"
-APP_DIR="/home/${APP_USER}/orthodox-calendar"
 REPO="https://github.com/nikolareljin/orthodox-calendar.git"
 
 # ---------------------------------------------------------------------------

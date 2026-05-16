@@ -133,6 +133,10 @@ cat > /usr/local/bin/oc-certbot-renew <<'WRAPPER'
 # Usage: oc-certbot-renew <nip-domain>
 # Installed by setup.sh; run only via sudo from the deploy user.
 set -euo pipefail
+if [[ $# -lt 1 ]]; then
+  echo "Usage: oc-certbot-renew <nip-domain>" >&2
+  exit 1
+fi
 DOMAIN="$1"
 _nip_re='^[0-9]+-[0-9]+-[0-9]+-[0-9]+\.nip\.io$'
 _valid_ipv4_re='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
@@ -168,6 +172,8 @@ ${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/certbot renew --quiet
 # Wrapper for TLS provisioning — hardcoded flags, no wildcard injection surface
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-provision
 ${APP_USER} ALL=(ALL) NOPASSWD: /usr/local/bin/oc-certbot-renew
+# Migrate /etc/cron.d renewal job when certbot.timer becomes available
+${APP_USER} ALL=(ALL) NOPASSWD: /usr/bin/rm -f /etc/cron.d/orthodox-calendar-certbot
 SUDOERS
 chown root:root /etc/sudoers.d/orthodox-calendar
 chmod 440 /etc/sudoers.d/orthodox-calendar

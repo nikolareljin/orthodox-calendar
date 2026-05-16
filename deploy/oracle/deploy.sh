@@ -222,6 +222,12 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
       ) | crontab -
       echo "==> Removed stale certbot cron from deploy user crontab"
     fi
+    # Also remove the root-owned /etc/cron.d fallback installed by setup-tls.sh.
+    if [[ -f "/etc/cron.d/orthodox-calendar-certbot" ]]; then
+      sudo rm -f /etc/cron.d/orthodox-calendar-certbot 2>/dev/null \
+        && echo "==> Removed stale /etc/cron.d certbot cron" \
+        || echo "    WARNING: could not remove /etc/cron.d/orthodox-calendar-certbot; re-run setup.sh."
+    fi
   else
     if ! command -v crontab > /dev/null 2>&1; then
       echo "ERROR: certbot.timer is absent and crontab is not installed." >&2
@@ -231,6 +237,8 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
     if [[ ! -x "/usr/local/bin/oc-certbot-renew" ]]; then
       echo "    WARNING: oc-certbot-renew wrapper missing; skipping renewal cron installation."
       echo "             Re-run deploy/oracle/setup.sh to install the wrapper and renewal job."
+    elif [[ -f "/etc/cron.d/orthodox-calendar-certbot" ]]; then
+      echo "==> certbot renewal already managed via /etc/cron.d/orthodox-calendar-certbot"
     else
       CRON_JOB="0 3 * * * sudo /usr/local/bin/oc-certbot-renew ${NIP_DOMAIN}"
       existing_cron="$(crontab -l 2>/dev/null || true)"

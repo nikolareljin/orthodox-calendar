@@ -3,6 +3,10 @@
 # Installed by setup.sh/setup-tls.sh; run as root or through sudo.
 set -euo pipefail
 
+if [[ $# -lt 2 ]]; then
+  echo "Usage: oc-certbot-provision <nip-domain> <email>" >&2
+  exit 1
+fi
 DOMAIN="$1"
 EMAIL="$2"
 
