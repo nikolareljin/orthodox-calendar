@@ -194,7 +194,7 @@ else
   fi
   # Remove stale deploy-user certbot cron entries written by older script versions.
   _old_cron="$(crontab -l -u "${APP_USER}" 2>/dev/null || true)"
-  if echo "${_old_cron}" | grep -qE 'certbot renew'; then
+  if echo "${_old_cron}" | grep -qE 'certbot renew|oc-certbot-renew'; then
     (
       echo "${_old_cron}" \
         | grep -vFx "0 3 * * * certbot renew --quiet" \
