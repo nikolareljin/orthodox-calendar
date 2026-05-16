@@ -180,22 +180,30 @@ else
     echo "==> Installing cron for renewal fallback"
     _apt_install cron
   fi
-  # Use the same deploy-user crontab and entry format as deploy.sh so both
-  # scripts share a single renewal job and duplicate detection works correctly.
-  DEPLOY_CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
-  existing_cron="$(crontab -l -u "${APP_USER}" 2>/dev/null || true)"
-  if echo "${existing_cron}" | grep -qFx "${DEPLOY_CRON_JOB}"; then
-    echo "==> certbot renewal cron already present for deploy user"
+  # Write a root-owned /etc/cron.d/ file so certbot renew runs as root with
+  # no sudoers dependency — avoids silent renewal failure on hosts provisioned
+  # before the deploy-user certbot-renew sudoers grant was added.
+  CRON_D_FILE="/etc/cron.d/orthodox-calendar-certbot"
+  CRON_D_LINE="0 3 * * * root /usr/bin/certbot renew --quiet"
+  if [[ -f "${CRON_D_FILE}" ]] && grep -qFx "${CRON_D_LINE}" "${CRON_D_FILE}"; then
+    echo "==> certbot renewal cron already present (${CRON_D_FILE})"
   else
+    printf '%s\n' "${CRON_D_LINE}" > "${CRON_D_FILE}"
+    chmod 644 "${CRON_D_FILE}"
+    echo "==> Daily certbot renewal cron installed (${CRON_D_FILE}, 03:00)"
+  fi
+  # Remove stale deploy-user certbot cron entries written by older script versions.
+  _old_cron="$(crontab -l -u "${APP_USER}" 2>/dev/null || true)"
+  if echo "${_old_cron}" | grep -qE 'certbot renew'; then
     (
-      echo "${existing_cron}" \
+      echo "${_old_cron}" \
         | grep -vFx "0 3 * * * certbot renew --quiet" \
         | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
-        | grep -vFx "${DEPLOY_CRON_JOB}" \
+        | grep -vFx "0 3 * * * sudo /usr/bin/certbot renew --quiet" \
+        | grep -vE "^0 3 \* \* \* sudo /usr/local/bin/oc-certbot-renew " \
         || true
-      echo "${DEPLOY_CRON_JOB}"
     ) | crontab -u "${APP_USER}" -
-    echo "==> Daily certbot renewal cron installed for ${APP_USER} (03:00)"
+    echo "==> Removed stale certbot cron from ${APP_USER} crontab"
   fi
 fi
 

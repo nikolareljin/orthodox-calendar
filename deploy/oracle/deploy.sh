@@ -145,9 +145,12 @@ if [[ -n "${NIP_DOMAIN}" ]]; then
           exit 1
         fi
       elif ! sudo /usr/local/bin/oc-certbot-renew "${NIP_DOMAIN}"; then
-        echo "ERROR: certbot renewal check failed for existing TLS config." >&2
-        echo "       Fix certbot/nginx renewal and redeploy before publishing the frontend." >&2
-        exit 1
+        echo "    certbot renewal failed (certs may be corrupted/deleted); attempting repair via provisioner"
+        if ! _repair_tls_with_provisioner "${NIP_DOMAIN}"; then
+          echo "ERROR: TLS repair failed after failed renewal." >&2
+          echo "       Fix certbot/nginx and redeploy before publishing the frontend." >&2
+          exit 1
+        fi
       fi
     else
       echo "    WARNING: oc-certbot-renew wrapper missing; skipping deploy-time renewal check."
@@ -213,7 +216,7 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
       echo "       Re-run setup.sh to install cron, then redeploy." >&2
       exit 1
     fi
-    CRON_JOB="0 3 * * * sudo /usr/bin/certbot renew --quiet"
+    CRON_JOB="0 3 * * * sudo /usr/local/bin/oc-certbot-renew ${NIP_DOMAIN}"
     existing_cron="$(crontab -l 2>/dev/null || true)"
     if echo "${existing_cron}" | grep -qFx "${CRON_JOB}"; then
       echo "==> Daily certbot renewal cron already present"
@@ -222,6 +225,7 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
         echo "${existing_cron}" \
           | grep -vFx "0 3 * * * certbot renew --quiet" \
           | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
+          | grep -vFx "0 3 * * * sudo /usr/bin/certbot renew --quiet" \
           | grep -vFx "${CRON_JOB}" \
           || true
         echo "${CRON_JOB}"
