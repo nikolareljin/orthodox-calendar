@@ -234,8 +234,23 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
       echo "       Re-run setup.sh to install cron, then redeploy." >&2
       exit 1
     fi
-    if [[ -f "/etc/cron.d/orthodox-calendar-certbot" ]]; then
-      echo "==> certbot renewal already managed via /etc/cron.d/orthodox-calendar-certbot"
+    _CRON_D_FILE="/etc/cron.d/orthodox-calendar-certbot"
+    _CRON_D_LINE="0 3 * * * root /usr/bin/certbot renew --quiet"
+    if [[ -f "${_CRON_D_FILE}" ]] && grep -qFx "${_CRON_D_LINE}" "${_CRON_D_FILE}" 2>/dev/null; then
+      echo "==> certbot renewal already managed via ${_CRON_D_FILE}"
+      # Remove stale deploy-user certbot cron entries that may coexist.
+      _existing_user_cron="$(crontab -l 2>/dev/null || true)"
+      if echo "${_existing_user_cron}" | grep -qE 'certbot renew|oc-certbot-renew'; then
+        (
+          echo "${_existing_user_cron}" \
+            | grep -vFx "0 3 * * * certbot renew --quiet" \
+            | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
+            | grep -vFx "0 3 * * * sudo /usr/bin/certbot renew --quiet" \
+            | grep -vE "^0 3 \* \* \* sudo /usr/local/bin/oc-certbot-renew " \
+            || true
+        ) | crontab -
+        echo "==> Removed stale certbot cron from deploy user crontab"
+      fi
     elif [[ ! -x "/usr/local/bin/oc-certbot-renew" ]]; then
       echo "    WARNING: oc-certbot-renew wrapper missing; skipping renewal cron installation."
       echo "             Re-run deploy/oracle/setup.sh to install the wrapper and renewal job."

@@ -79,7 +79,8 @@ DEPLOY_DIR=""
 SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
 if [[ "${SCRIPT_PATH}" == */* ]]; then
   CANDIDATE_DEPLOY_DIR="$(cd "$(dirname "${SCRIPT_PATH}")" 2>/dev/null && pwd || true)"
-  if [[ -f "${CANDIDATE_DEPLOY_DIR}/orthodox-calendar.service" \
+  if [[ "${CANDIDATE_DEPLOY_DIR}" != "${APP_DIR}/deploy/oracle" \
+      && -f "${CANDIDATE_DEPLOY_DIR}/orthodox-calendar.service" \
       && -f "${CANDIDATE_DEPLOY_DIR}/nginx-backend.conf" \
       && -f "${CANDIDATE_DEPLOY_DIR}/oc-certbot-provision.sh" ]]; then
     DEPLOY_DIR="${CANDIDATE_DEPLOY_DIR}"
