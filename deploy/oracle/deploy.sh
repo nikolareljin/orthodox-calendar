@@ -234,11 +234,11 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
       echo "       Re-run setup.sh to install cron, then redeploy." >&2
       exit 1
     fi
-    if [[ ! -x "/usr/local/bin/oc-certbot-renew" ]]; then
+    if [[ -f "/etc/cron.d/orthodox-calendar-certbot" ]]; then
+      echo "==> certbot renewal already managed via /etc/cron.d/orthodox-calendar-certbot"
+    elif [[ ! -x "/usr/local/bin/oc-certbot-renew" ]]; then
       echo "    WARNING: oc-certbot-renew wrapper missing; skipping renewal cron installation."
       echo "             Re-run deploy/oracle/setup.sh to install the wrapper and renewal job."
-    elif [[ -f "/etc/cron.d/orthodox-calendar-certbot" ]]; then
-      echo "==> certbot renewal already managed via /etc/cron.d/orthodox-calendar-certbot"
     else
       CRON_JOB="0 3 * * * sudo /usr/local/bin/oc-certbot-renew ${NIP_DOMAIN}"
       existing_cron="$(crontab -l 2>/dev/null || true)"

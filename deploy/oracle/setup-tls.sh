@@ -142,13 +142,20 @@ fi
 # setup.sh installs the same helper for deploy.sh, so nginx/TLS recovery logic
 # stays in one place.
 # ---------------------------------------------------------------------------
-# Always download from the canonical source — never install a file from the deploy
-# user's writable checkout as a privileged command (tamper risk on re-runs as root).
-echo "==> Downloading certbot provision wrapper"
-curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
-  -o /usr/local/bin/oc-certbot-provision
-chown root:root /usr/local/bin/oc-certbot-provision
-chmod 755 /usr/local/bin/oc-certbot-provision
+# Prefer the sibling from the script's own directory so branch/PR versions are
+# used when testing before merge. Fall back to downloading from main only when
+# no sibling exists (e.g. run via curl | sudo bash).
+_script_dir="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || true)"
+if [[ -n "${_script_dir}" && -f "${_script_dir}/oc-certbot-provision.sh" ]]; then
+  echo "==> Installing certbot provision wrapper (local)"
+  install -o root -g root -m 755 "${_script_dir}/oc-certbot-provision.sh" /usr/local/bin/oc-certbot-provision
+else
+  echo "==> Downloading certbot provision wrapper"
+  curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
+    -o /usr/local/bin/oc-certbot-provision
+  chown root:root /usr/local/bin/oc-certbot-provision
+  chmod 755 /usr/local/bin/oc-certbot-provision
+fi
 
 echo "==> Provisioning TLS for ${NIP_DOMAIN}"
 /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"

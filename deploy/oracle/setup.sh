@@ -121,12 +121,22 @@ echo "    Service status:"
 systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — check: journalctl -u ${SERVICE}"
 
 echo "==> Installing certbot provision wrapper"
-# Always download from the canonical source — never install a file from the deploy
-# user's writable checkout as a privileged command (tamper risk on re-runs).
-curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
-  -o /usr/local/bin/oc-certbot-provision
-chown root:root /usr/local/bin/oc-certbot-provision
-chmod 755 /usr/local/bin/oc-certbot-provision
+# Prefer the sibling from DEPLOY_DIR (reproducible when running from a branch)
+# but never use APP_DIR/deploy/oracle — that path is the deploy user's writable
+# checkout and is a tamper risk for a binary installed as a privileged command.
+_provision_src=""
+if [[ -n "${DEPLOY_DIR}" && "${DEPLOY_DIR}" != "${APP_DIR}/deploy/oracle" \
+    && -f "${DEPLOY_DIR}/oc-certbot-provision.sh" ]]; then
+  _provision_src="${DEPLOY_DIR}/oc-certbot-provision.sh"
+fi
+if [[ -n "${_provision_src}" ]]; then
+  install -o root -g root -m 755 "${_provision_src}" /usr/local/bin/oc-certbot-provision
+else
+  curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
+    -o /usr/local/bin/oc-certbot-provision
+  chown root:root /usr/local/bin/oc-certbot-provision
+  chmod 755 /usr/local/bin/oc-certbot-provision
+fi
 
 cat > /usr/local/bin/oc-certbot-renew <<'WRAPPER'
 #!/usr/bin/env bash
