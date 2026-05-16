@@ -1,68 +1,1343 @@
 [
   {
+    "month_day": "01-02",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Daniel II",
+        "title": "Daniel II",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Daniel_II",
+        "notes": "11th Archbishop of Serbia ( r. &#8201;1324–1337 ), Venerable; who wrote many hagiographies of Serbian saints &#91; 13 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-08",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nicodemus of Tismana",
+        "title": "Nicodemus of Tismana",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nicodemus_of_Tismana",
+        "notes": "Venerable; Hesychast ; who founded three monasteries, one in Serbia and two in Romania; a.k.a. Nicodemus the Sanctified, surnamed Grčić &#91; 76 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-13",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Dositheus of Zagreb",
+        "title": "Dositheus of Zagreb",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Dositheus_of_Zagreb",
+        "notes": "Metropolitan of Zagreb , New Venerable Hieroconfessor ; surnamed Vasić &#91; 15 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-17",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Eustathius I Ј",
+        "title": "Eustathius I Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Eustathius_I_Ј",
+        "notes": "6th Archbishop of Serbia ( r. &#8201;1279–1286 ), Venerable &#91; 18 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-27",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Sava I",
+        "title": "Sava I",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sava_I",
+        "notes": "Equal-to-the-Apostles , Enlightener of the Serbs, first Archbishop of Serbia ( r. &#8201;1219–1233 ), Venerable Hieroconfessor, son of Simeon the Myrrh-Streaming , patron saint of Serbia , Serbs and Serbian education and medicine; birth name Rastko Nemanjić &#91; 88 &#93; &#91; 89 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-31",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Maximus of Ungro-Wallachia",
+        "title": "Maximus of Ungro-Wallachia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Maximus_of_Ungro-Wallachia",
+        "notes": "Metropolitan of Belgrade , Metropolitan of Ungro-Wallachia , Venerable, titular Despot of Serbia ( r. &#8201;1486–1497 ); who founded Krušedol Monastery ; birth name Đorđe Branković &#91; 59 &#93; &#91; 60 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-16",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Jacob of Serbia Ј",
+        "title": "Jacob of Serbia Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Jacob_of_Serbia_Ј",
+        "notes": "7th Archbishop of Serbia ( r. &#8201;1286–1292 ), Venerable &#91; 44 &#93; &#91; 45 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-21",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Sava II",
+        "title": "Sava II",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sava_II",
+        "notes": "3rd Archbishop of Serbia ( r. &#8201;1263–1271 ), Venerable, nephew of St. Sava I ; birth name Predislav Nemanjić &#91; 90 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-26",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Simeon the Myroblyte",
+        "title": "Simeon the Myroblyte",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Simeon_the_Myroblyte",
+        "notes": "Right-Believing, Venerable, Myroblyte, Grand Prince of Serbia ( r. &#8201;1166–1196 ), father of St. Sava I ; and Simeon the Monk ; birth name Stefan Nemanja &#91; 98 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-04",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nicanor of Hilandar &#160;&#91; sr ; bg &#93;",
+        "title": "Nicanor of Hilandar &#160;&#91; sr ; bg &#93;",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nicanor_of_Hilandar_&#160;&#91;_sr_;_bg_&#93;",
+        "notes": "Hegumen of Hilandar Monastery , Venerable; a.k.a. Nicanor the New; surnamed Savić &#91; 69 &#93; &#91; 70 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-22",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy 42 Martyrs of Momišići &#160;&#91; sr &#93; 42",
+        "title": "Holy 42 Martyrs of Momišići &#160;&#91; sr &#93; 42",
+        "feast_type": "New Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Holy_42_Martyrs_of_Momišići_&#160;&#91;_sr_&#93;_42",
+        "notes": "New Martyrs , who consisted of 2 priest-teachers and their 40 students and were martyred by the Ottomans in Momišići &#91; 39 &#93; &#91; 40 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-31",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nicholas of Ohrid and Žiča",
+        "title": "Nicholas of Ohrid and Žiča",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nicholas_of_Ohrid_and_Žiča",
+        "notes": "Bishop of Ohrid and Žiča , Venerable, the New Chrysostom ; who wrote the Prologue of Ohrid ; surnamed Velimirović &#91; 71 &#93; &#91; 72 &#93; &#91; 73 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-01",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Simeon of Dajbabe",
+        "title": "Simeon of Dajbabe",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Simeon_of_Dajbabe",
+        "notes": "Hegumen of Dajbabe Monastery , Venerable, Hieromonk; surnamed Popović &#91; 95 &#93; &#91; 96 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-01",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Uroš the Great",
+        "title": "Uroš the Great",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Uroš_the_Great",
+        "notes": "Right-Believing, King of Serbia ( r. &#8201;1243–1276 ), Ktetor; regnal name Stefan Uroš I &#91; 114 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-03",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Joasaph of Meteora Ј",
+        "title": "Joasaph of Meteora Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joasaph_of_Meteora_Ј",
+        "notes": "Venerable, titular Emperor of Serbs and Greeks ( r. &#8201;1370–1373 ); native name Jovan Uroš Nemanjić; a.k.a. John Ouresis Doukas Palaiologos &#91; 50 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
     "month_day": "05-05",
     "tradition": "serbian",
     "calendar": "julian",
     "saints": [
       {
-        "name": "Hieromartyr Platon (Jovanović)",
-        "title": "Hieromartyr Platon (Jovanović), Bishop of Banja Luka",
+        "name": "Platon of Banja Luka",
+        "title": "Platon of Banja Luka",
         "feast_type": "Hieromartyr",
-        "notes": "Bishop Platon of Banja Luka was arrested by Croatian Ustasha forces in May 1941 and martyred for his faith and his people. He refused to abandon his flock despite threats and was tortured and killed near Banja Luka. Canonized among the New Martyrs of Serbia by the Serbian Orthodox Church.",
-        "hagiography_url": null,
-        "canonized_by": "Serbian Orthodox Church",
-        "canonization_scope": "local",
-        "year_canonized": null
-      },
-      {
-        "name": "Hieromartyr Sava (Trlajić)",
-        "title": "Hieromartyr Sava (Trlajić), Bishop of Gornji Karlovac",
-        "feast_type": "Hieromartyr",
-        "notes": "Bishop Sava of Gornji Karlovac was seized by Ustasha forces in 1941 and martyred during the WWII persecution of Orthodox Serbs in Croatia. He steadfastly refused to convert or flee, choosing to remain with his flock. Canonized as a New Martyr by the Serbian Orthodox Church.",
-        "hagiography_url": null,
-        "canonized_by": "Serbian Orthodox Church",
-        "canonization_scope": "local",
-        "year_canonized": null
-      },
-      {
-        "name": "Hieromartyr Peter (Zimonjić)",
-        "title": "Hieromartyr Peter (Zimonjić), Bishop of Dabar-Bosnia",
-        "feast_type": "Hieromartyr",
-        "notes": "Bishop Peter of Dabar-Bosnia was arrested by Ustasha authorities in 1942 and martyred in the Nazi-allied Croatian state. A gentle and learned hierarch, he bore witness to Christ amid the systematic persecution of Orthodox Serbs in Bosnia. Canonized as a New Martyr by the Serbian Orthodox Church.",
-        "hagiography_url": null,
-        "canonized_by": "Serbian Orthodox Church",
-        "canonization_scope": "local",
-        "year_canonized": null
-      },
-      {
-        "name": "Hieromartyr Emilijan (Marković)",
-        "title": "Hieromartyr Emilijan (Marković), Bishop of Prizren",
-        "feast_type": "Hieromartyr",
-        "notes": "Bishop Emilijan of Prizren was taken captive and martyred by fascist Axis forces in 1941. He served faithfully in Kosovo and was killed for refusing to apostatize or cooperate with the occupiers. Glorified as a New Martyr and Confessor by the Serbian Orthodox Church.",
-        "hagiography_url": null,
+        "hagiography_url": "https://en.wikipedia.org/wiki/Platon_of_Banja_Luka",
+        "notes": "Bishop of Banja Luka , New Venerable Hieromartyr; surnamed Jovanović &#91; 85 &#93;",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null
       }
-    ],
-    "notes": "Shared feast of the four WWII Hieromartyr bishops of the Serbian Orthodox Church. Julian May 5 corresponds to Gregorian May 18."
+    ]
   },
   {
-    "month_day": "05-19",
+    "month_day": "05-07",
     "tradition": "serbian",
     "calendar": "julian",
     "saints": [
       {
-        "name": "Venerable Justin Popović",
-        "title": "Venerable Justin Popović of Ćelije, Confessor and Theologian",
-        "feast_type": "Venerable",
-        "notes": "Father Justin Popović (1894–1979) was the foremost Serbian Orthodox theologian of the 20th century, monk at Ćelije monastery near Valjevo. Confessor under Communist Yugoslavia, philosopher, and author of a monumental Lives of the Saints. Canonized in 2010 by the Holy Assembly of Bishops of the Serbian Orthodox Church.",
-        "hagiography_url": "https://www.spc.rs/eng/saint_justin_popovich",
+        "name": "Branko of Veljun",
+        "title": "Branko of Veljun",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Branko_of_Veljun",
+        "notes": "New Hieromartyr , parish priest of Veljun ; surnamed Dobrosavljević &#91; 7 &#93;",
         "canonized_by": "Serbian Orthodox Church",
         "canonization_scope": "local",
-        "year_canonized": 2010
+        "year_canonized": null
       }
-    ],
-    "notes": "Julian May 19 corresponds to Gregorian June 1."
+    ]
+  },
+  {
+    "month_day": "05-11",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Isaiah of Onogošt",
+        "title": "Isaiah of Onogošt",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Isaiah_of_Onogošt",
+        "notes": "Venerable hermit , who built a cave church in what is now Ostrog Monastery ; a.k.a. Isaiah of Ostrog &#91; 42 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-12",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Basil of Ostrog",
+        "title": "Basil of Ostrog",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Basil_of_Ostrog",
+        "notes": "Bishop of Zachlumia , Venerable Wonderworker ; who founded Ostrog Monastery &#91; 5 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-24",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nicodemus I of Peć",
+        "title": "Nicodemus I of Peć",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nicodemus_I_of_Peć",
+        "notes": "10th Archbishop of Serbia ( r. &#8201;1316–1324 ), Venerable, who co-founded Vratna Monastery with St. Milutin ; a.k.a. Nicodemus of Hilandar &#91; 74 &#93; &#91; 75 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-29",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Theodore of Vršac",
+        "title": "Theodore of Vršac",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Theodore_of_Vršac",
+        "notes": "Bishop of Vršac , Venerable Hieromartyr, patron saint of Vršac ; surnamed Nestorović &#91; 112 &#93; &#91; 113 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Vukašin of Klepci",
+        "title": "Vukašin of Klepci",
+        "feast_type": "New Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Vukašin_of_Klepci",
+        "notes": "New Martyr ; a.k.a. Vukašin of Jasenovac, surnamed Mandrapa &#91; 118 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-02",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Stephen of Piperi",
+        "title": "Stephen of Piperi",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stephen_of_Piperi",
+        "notes": "Hegumen of Morača Monastery , Venerable &#91; 105 &#93; &#91; 106 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-03",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Helen of Dečani Ј",
+        "title": "Helen of Dečani Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Helen_of_Dečani_Ј",
+        "notes": "Right-Believing, Empress consort of Bulgaria , Venerable, daughter of St. Milutin ; regnal name Ana-Neda &#91; 32 &#93; &#91; 33 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-04",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "John Vladimir Ј",
+        "title": "John Vladimir Ј",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/John_Vladimir_Ј",
+        "notes": "Wonderworker, Myroblyte , Great Martyr , King of Duklja ( r. &#8201;c. 1000&#160;–&#160;1016 ) &#91; 52 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-07",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Sava II Branković",
+        "title": "Sava II Branković",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sava_II_Branković",
+        "notes": "Metropolitan of Transylvania, Venerable Hieroconfessor; a.k.a. Sabbas Brancovici in Romanian &#91; 91 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-11",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Hypomone",
+        "title": "Hypomone",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Hypomone",
+        "notes": "Venerable, Empress consort of the Byzantine Empire, wife of St. Manuel II Palaiologos ; birth name Jelena Dragaš &#91; 41 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-13",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Damian of Grahovo",
+        "title": "Damian of Grahovo",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Damian_of_Grahovo",
+        "notes": "New Hieromartyr; surnamed Štrbac &#91; 11 &#93; &#91; 12 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-14",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Justin of Ćelije Ј",
+        "title": "Justin of Ćelije Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Justin_of_Ćelije_Ј",
+        "notes": "Hegumen of Ćelije Monastery , Venerable, who wrote against communism and ecumenism ; surnamed Popović &#91; 54 &#93; &#91; 55 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-17",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Joannicius I of Montenegro Ј",
+        "title": "Joannicius I of Montenegro Ј",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joannicius_I_of_Montenegro_Ј",
+        "notes": "Metropolitan of Montenegro and the Littoral , New Venerable Hieromartyr; surnamed Lipovac &#91; 48 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-18",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Peter of Koriša",
+        "title": "Peter of Koriša",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Peter_of_Koriša",
+        "notes": "Venerable Wonderworker; the first Serbian hermit, who practiced asceticism in the Hermitage of St. Peter of Koriša &#91; 84 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-28",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ephraim of Serbia Ј",
+        "title": "Ephraim of Serbia Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ephraim_of_Serbia_Ј",
+        "notes": "3rd Patriarch of Serbia ( r. &#8201;1375–1379,&#160;1389–1392 ), Venerable &#91; 16 &#93; &#91; 17 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Lazarus of Serbia",
+        "title": "Lazarus of Serbia",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Lazarus_of_Serbia",
+        "notes": "Right-Believing, Great Martyr , Prince of Serbia ( r. &#8201;1371–1389 ), who was martyred at the Battle of Kosovo &#91; 56 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Spyridon of Serbia",
+        "title": "Spyridon of Serbia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Spyridon_of_Serbia",
+        "notes": "4th Patriarch of Serbia ( r. &#8201;1380–1389 ), Venerable &#91; 100 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-04",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Anastasia of Serbia",
+        "title": "Anastasia of Serbia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Anastasia_of_Serbia",
+        "notes": "Right-Believing , Grand Princess consort of Serbia, Venerable , wife of St. Simeon the Myroblyte ; native name Ana Vukanović &#91; 1 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-11",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Budimir of Dobrun &#160;&#91; sr &#93;",
+        "title": "Budimir of Dobrun &#160;&#91; sr &#93;",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Budimir_of_Dobrun_&#160;&#91;_sr_&#93;",
+        "notes": "New Hieromartyr, one of the New Martyrs of Dabar-Bosnia and Mileševa &#160;&#91; sr &#93; ; surnamed Sokolović &#91; 8 &#93; &#91; 9 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Nestor of Mileševa &#160;&#91; sr &#93;",
+        "title": "Nestor of Mileševa &#160;&#91; sr &#93;",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nestor_of_Mileševa_&#160;&#91;_sr_&#93;",
+        "notes": "Hegumen of Mileševa Monastery , New Venerable Hieromartyr, one of the New Martyrs of Dabar-Bosnia and Mileševa &#160;&#91; sr &#93; ; surnamed Trkulja &#91; 65 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "New Martyrs of Dabar-Bosnia and Mileševa &#160;&#91; sr &#93;",
+        "title": "New Martyrs of Dabar-Bosnia and Mileševa &#160;&#91; sr &#93;",
+        "feast_type": "New Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/New_Martyrs_of_Dabar-Bosnia_and_Mileševa_&#160;&#91;_sr_&#93;",
+        "notes": "New Martyrs; who consisted of many clergymen and monastics and were martyred by the Ustaše (1941) and later by the Yugoslav Partisans (1945–1946) &#91; 66 &#93; &#91; 67 &#93; &#91; 68 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Seraphim of the Trinity &#160;&#91; sr &#93;",
+        "title": "Seraphim of the Trinity &#160;&#91; sr &#93;",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Seraphim_of_the_Trinity_&#160;&#91;_sr_&#93;",
+        "notes": "Hegumen of the Monastery of the Holy Trinity of Pljevlja , New Venerable Hieromartyr, one of the New Martyrs of Dabar-Bosnia and Mileševa &#160;&#91; sr &#93; ; surnamed Džarić",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-14",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Angelina of Serbia",
+        "title": "Angelina of Serbia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Angelina_of_Serbia",
+        "notes": "Right-Believing, Despotess consort of Serbia, Venerable, wife of John Branković ; surnamed Branković &#91; 2 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-17",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "George of Slavonia",
+        "title": "George of Slavonia",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/George_of_Slavonia",
+        "notes": "New Hieromartyr; native name Đorđe Bogić &#91; 25 &#93; &#91; 26 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Sava of Gornji Karlovac",
+        "title": "Sava of Gornji Karlovac",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sava_of_Gornji_Karlovac",
+        "notes": "Bishop of Gornji Karlovac , New Venerable Hieromartyr; surnamed Trlajić &#91; 93 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Stanislav of Lička Jesenica",
+        "title": "Stanislav of Lička Jesenica",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stanislav_of_Lička_Jesenica",
+        "notes": "New Hieromartyr, a Czech by birth who became parish priest of Lička Jesenica ; surnamed Nasadil &#91; 101 &#93; &#91; 102 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-27",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Slobodan of Donja Kamenica &#160;&#91; sr &#93;",
+        "title": "Slobodan of Donja Kamenica &#160;&#91; sr &#93;",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Slobodan_of_Donja_Kamenica_&#160;&#91;_sr_&#93;",
+        "notes": "New Child Martyr , who was martyred by a Kosovar Albanian woman named Elfeta Veseli &#160;&#91; sr &#93; after searching for his dog during the Bosnian War ; surnamed Stojanović &#91; 99 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-28",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Jaglika of Piva Ј",
+        "title": "Jaglika of Piva Ј",
+        "feast_type": "New Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Jaglika_of_Piva_Ј",
+        "notes": "New Martyr, one of the 46 New Martyrs of Plužine in the Doli Pivski massacre &#91; 46 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-01",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Stephen the Tall",
+        "title": "Stephen the Tall",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stephen_the_Tall",
+        "notes": "Right-Believing, Righteous , Prince ( r. &#8201;1389–1402 ) and Despot of Serbia ( r. &#8201;1402–1427 ), Ktetor, patron saint of the Serbian Armed Forces ; surnamed Lazarević &#91; 107 &#93; &#91; 108 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-08",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Sava III",
+        "title": "Sava III",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sava_III",
+        "notes": "9th Archbishop of Serbia ( r. &#8201;1309–1316 ), Venerable &#91; 92 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-21",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Jacob the New of Tuman Ј",
+        "title": "Jacob the New of Tuman Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Jacob_the_New_of_Tuman_Ј",
+        "notes": "New Venerable Confessor; tortured by the Communists for distributing 8,000 copies of the Lord's Prayer at a train station in Požarevac ; birth name Radoje Arsović &#91; 43 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Zosimus of Tuman",
+        "title": "Zosimus of Tuman",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Zosimus_of_Tuman",
+        "notes": "Venerable Wonderworker, who lived in a cave near what is now Tuman Monastery &#91; 119 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-29",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Eustathius II Ј",
+        "title": "Eustathius II Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Eustathius_II_Ј",
+        "notes": "8th Archbishop of Serbia ( r. &#8201;1292–1309 ), Venerable; who established seven new eparchies &#91; 19 &#93; &#91; 20 &#93; &#91; 21 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Raphael of Banat &#160;&#91; sr ; el &#93;",
+        "title": "Raphael of Banat &#160;&#91; sr ; el &#93;",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Raphael_of_Banat_&#160;&#91;_sr_;_el_&#93;",
+        "notes": "Venerable &#91; 86 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-03",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Raphael of Šišatovac",
+        "title": "Raphael of Šišatovac",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Raphael_of_Šišatovac",
+        "notes": "Prior of Šišatovac Monastery , New Venerable Hieromartyr; surnamed Momčilović &#91; 87 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-12",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Cyril I",
+        "title": "Cyril I",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Cyril_I",
+        "notes": "8th Patriarch of Serbia ( r. &#8201;1407–1419 ), Venerable &#91; 10 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Gregory II of Ras",
+        "title": "Gregory II of Ras",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Gregory_II_of_Ras",
+        "notes": "Bishop of Raška , Venerable; &#91; citation needed &#93; a monk-scribe who transcribed the nomocanon Raška krmčija &#91; 30 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Macarius of Serbia",
+        "title": "Macarius of Serbia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Macarius_of_Serbia",
+        "notes": "13th Patriarch of Serbia ( r. &#8201;1557–1571 ), Venerable; surnamed Sokolović &#91; 57 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Milica of Serbia",
+        "title": "Milica of Serbia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Milica_of_Serbia",
+        "notes": "Right-Believing, Hegumenia of Ljubostinja Monastery , which she founded, Venerable, Tsaritsa of Serbia; first tonsured as Jevgenija and later Jefrosina &#91; 61 &#93; &#91; 62 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Nikon I",
+        "title": "Nikon I",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nikon_I",
+        "notes": "9th Patriarch of Serbia ( r. &#8201;1420–1435 ), Venerable &#91; 77 &#93; &#91; 78 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-13",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy Martyrs of Jasenovac Ј",
+        "title": "Holy Martyrs of Jasenovac Ј",
+        "feast_type": "New Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Holy_Martyrs_of_Jasenovac_Ј",
+        "notes": "New Martyrs, who were martyred by the Ustaše in and around Jasenovac concentration camp &#91; 37 &#93; &#91; 38 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-16",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Joannicius II of Serbia Ј",
+        "title": "Joannicius II of Serbia Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joannicius_II_of_Serbia_Ј",
+        "notes": "1st Patriarch of Serbia, previously 12th Archbishop of Serbia,( r. &#8201;1338–1346,&#160;1346–1354 ), Venerable; the Serbian Church was made autocephalous and declared a Patriarchate during his reign in 1346 &#91; 49 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-17",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Peter of Dabar and Bosnia",
+        "title": "Peter of Dabar and Bosnia",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Peter_of_Dabar_and_Bosnia",
+        "notes": "Metropolitan of Dabar and Bosnia , New Hieromartyr; surnamed Zimonjić &#91; 83 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-28",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Joseph of Timișoara &#160;&#91; sr ; ro &#93; Ј",
+        "title": "Joseph of Timișoara &#160;&#91; sr ; ro &#93; Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joseph_of_Timișoara_&#160;&#91;_sr_;_ro_&#93;_Ј",
+        "notes": "Metropolitan of Timișoara , Venerable; a.k.a. Joseph the New &#91; 53 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-07",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "David of Serbia",
+        "title": "David of Serbia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/David_of_Serbia",
+        "notes": "Venerable , who founded the Davidovica Monastery &#160;&#91; sr ; fr &#93; ; birth name Dmitar Nemanjić &#91; 14 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Simeon the Monk",
+        "title": "Simeon the Monk",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Simeon_the_Monk",
+        "notes": "Right-Believing, Venerable, Grand Prince of Serbia ( r. &#8201;1196–1228 ), son of St. Simeon the Myroblyte ; regnal name Stefan the First-Crowned and surnamed Nemanjić &#91; 97 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Vladislav",
+        "title": "Vladislav",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Vladislav",
+        "notes": "Right-Believing, King of Serbia ( r. &#8201;1234–1243 ), Ktetor; regnal name Stefan Vladislav &#91; 117 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-15",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Paisius of Janjevo",
+        "title": "Paisius of Janjevo",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Paisius_of_Janjevo",
+        "notes": "21st Patriarch of Serbia ( r. &#8201;1614–1647 ), Venerable &#91; 79 &#93; &#91; 80 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-17",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Helena Štiljanović Ј",
+        "title": "Helena Štiljanović Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Helena_Štiljanović_Ј",
+        "notes": "Venerable, Princess consort of Serbia, wife of St. Stefan Štiljanović ; tonsured as Jelisaveta &#91; 36 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Stephen Štiljanović",
+        "title": "Stephen Štiljanović",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stephen_Štiljanović",
+        "notes": "Right-Believing, Righteous , last Despot of Serbia ( r. &#8201;1537–1543 ), husband of Helena Štiljanović &#91; 36 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-22",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Stephen the Blind",
+        "title": "Stephen the Blind",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stephen_the_Blind",
+        "notes": "Right-Believing, Despot of Serbia ( r. &#8201;1458–1459 ); surnamed Branković &#91; 103 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-31",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Peter of Cetinje",
+        "title": "Peter of Cetinje",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Peter_of_Cetinje",
+        "notes": "Prince-Bishop of Montenegro , Venerable Wonderworker, Myroblyte ; regnal name Petar I Petrović-Njegoš &#91; 81 &#93; &#91; 82 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-03",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Bessarion Sarai",
+        "title": "Bessarion Sarai",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Bessarion_Sarai",
+        "notes": "New Venerable Hieroconfessor, Hieromonk &#91; 6 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-10",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Arsenius I the Syrmian",
+        "title": "Arsenius I the Syrmian",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Arsenius_I_the_Syrmian",
+        "notes": "2nd Archbishop of Serbia ( r. &#8201;1233–1263 ), Venerable, disciple of St. Sava I &#91; 3 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-12",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Barnabas the New Confessor",
+        "title": "Barnabas the New Confessor",
+        "feast_type": "Confessor",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Barnabas_the_New_Confessor",
+        "notes": "Titular Bishop of Hvosno , New Hieroconfessor ; surnamed Nastić &#91; 4 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Helen of Serbia Ј",
+        "title": "Helen of Serbia Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Helen_of_Serbia_Ј",
+        "notes": "Right-Believing, Venerable, Queen consort of Serbia , wife of St. Uroš the Great , Ktetor , who founded Gradac Monastery ; a.k.a. Helena of Anjou &#91; 34 &#93; &#91; 35 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Milutin",
+        "title": "Milutin",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Milutin",
+        "notes": "Right-Believing, King of Serbia ( r. &#8201;1282–1321 ), Ktetor; regnal name Stefan Uroš II &#91; 63 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Momčilo Grgurević",
+        "title": "Momčilo Grgurević",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Momčilo_Grgurević",
+        "notes": "Right-Believing",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Theoctistus of Serbia",
+        "title": "Theoctistus of Serbia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Theoctistus_of_Serbia",
+        "notes": "King of Serbia ( r. &#8201;1276–1282 ) and King of Syrmia ( r. &#8201;1282–1316 ), Venerable; regnal name Stefan Dragutin &#91; 63 &#93; &#91; 109 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Zlata of Meglen",
+        "title": "Zlata of Meglen",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Zlata_of_Meglen",
+        "notes": "Right-Believing",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-24",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Euthymius of Dečani Ј",
+        "title": "Euthymius of Dečani Ј",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Euthymius_of_Dečani_Ј",
+        "notes": "Venerable Martyr &#91; 22 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Nestor of Dečani &#160;&#91; sr &#93;",
+        "title": "Nestor of Dečani &#160;&#91; sr &#93;",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nestor_of_Dečani_&#160;&#91;_sr_&#93;",
+        "notes": "Venerable &#91; 22 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Stephen of Dečani",
+        "title": "Stephen of Dečani",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stephen_of_Dečani",
+        "notes": "Martyr, King of Serbia ( r. &#8201;1322–1331 ), Ktetor, who founded Visoki Dečani ; regnal name Stefan Uroš III &#91; 104 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Urošica",
+        "title": "Urošica",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Urošica",
+        "notes": "Venerable, Myroblyte; birth name Stefan Urošic Nemanjić &#91; 116 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-30",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Sebastian of Jackson",
+        "title": "Sebastian of Jackson",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sebastian_of_Jackson",
+        "notes": "Missionary, Archimandrite , Venerable; surnamed Dabović &#91; 94 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-12",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Mardarius of Lješanska, Libertyville and All America",
+        "title": "Mardarius of Lješanska, Libertyville and All America",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Mardarius_of_Lješanska,_Libertyville_and_All_America",
+        "notes": "First Bishop of America and Canada , Venerable; native name Mardarije Uskoković &#91; 58 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-15",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Joannicius of Devič Ј",
+        "title": "Joannicius of Devič Ј",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joannicius_of_Devič_Ј",
+        "notes": "Venerable Wonderworker; a.k.a. Janićije &#91; 47 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Uroš the Weak",
+        "title": "Uroš the Weak",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Uroš_the_Weak",
+        "notes": "Right-Believing, Emperor of the Serbs ( r. &#8201;1355–1371 ), Ktetor; regnal name Stefan Uroš V &#91; 115 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-20",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Gregory of Gornjak",
+        "title": "Gregory of Gornjak",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Gregory_of_Gornjak",
+        "notes": "Venerable, Hesychast ; a.k.a. Gregory the Younger, Gregory the Hesychast and Gregory the Silent &#91; 27 &#93; &#91; 28 &#93; &#91; 29 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-23",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "John the New Ј",
+        "title": "John the New Ј",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/John_the_New_Ј",
+        "notes": "Right-Believing, Despot of Serbia ( r. &#8201;1493–1502 ), husband of St. Angelina ; surnamed Branković &#91; 51 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-26",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Gabriel I",
+        "title": "Gabriel I",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Gabriel_I",
+        "notes": "22nd Patriarch of Serbia ( r. &#8201;1648–1655 ), Venerable Hieromartyr; surnamed Rajić &#91; 23 &#93; &#91; 24 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-30",
+    "tradition": "serbian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Habakkuk the Deacon",
+        "title": "Habakkuk the Deacon",
+        "feast_type": "Hieromartyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Habakkuk_the_Deacon",
+        "notes": "Hierodeacon , New Venerable Hieromartyr, who was martyred with St. Paisius; birth name Lepoje Prodanović &#91; 31 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Paisius the Hegumen",
+        "title": "Paisius the Hegumen",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Paisius_the_Hegumen",
+        "notes": "Hegumen of Moštanica Monastery , New Venerable Martyr, who was martyred with St. Habakkuk ; surnamed Ristović &#91; 31 &#93;",
+        "canonized_by": "Serbian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
   }
 ]
