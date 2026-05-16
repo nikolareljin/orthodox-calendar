@@ -1,0 +1,444 @@
+[
+  {
+    "month_day": "01-05",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Simeon the Stylite",
+        "title": "Saint Simeon the Stylite, the Pillar-Dweller",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Simeon_Stylites",
+        "notes": "Simeon the Stylite (c. 390–459) was the first stylite (pillar-dwelling ascetic). He spent 37 years atop a pillar near Aleppo, Syria, drawing pilgrims from across the ancient world. He is venerated by the Syriac Orthodox as a great ascetic.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-06",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Epiphany",
+        "title": "The Epiphany / Theophany of Our Lord",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "The Feast of the Epiphany (Denho), commemorating the Baptism of Christ in the Jordan and the visit of the Magi. One of the most important feasts in the Syriac rite.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-17",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Anthony the Great",
+        "title": "Saint Anthony the Great, Father of Monks",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Anthony_the_Great",
+        "notes": "Anthony the Great (c. 251–356) is venerated as the Father of Christian monasticism. His ascetic life in the Egyptian desert inspired the Syriac monastic tradition.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-27",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Ephrem the Syrian",
+        "title": "Saint Ephrem the Syrian, Deacon and Hymnographer",
+        "feast_type": "Church Father",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ephrem_the_Syrian",
+        "notes": "Ephrem the Syrian (c. 306–373) is the greatest poet-theologian of the Syriac tradition. He composed thousands of hymns (madrashê) and homilies. Known as the 'Harp of the Holy Spirit', his hymns against heresy were central to early Syriac Christianity. Doctor of the Universal Church.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-04",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Marutha",
+        "title": "Saint Marutha of Tikrit, Maphrian of the East",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Marutha_of_Tikrit",
+        "notes": "Marutha of Tikrit (d. c. 649) was the first Maphrian (Catholicos of the East) of the Syriac Orthodox Church. He organized the church in Mesopotamia after the Islamic conquest and is venerated as a great church father.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-08",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Severus of Antioch",
+        "title": "Saint Severus of Antioch, Patriarch and Theologian",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Severus_of_Antioch",
+        "notes": "Severus of Antioch (c. 465–538) was Patriarch of Antioch (512–518) and the foremost theologian of the Miaphysite/Oriental Orthodox tradition. His writings define the Christological position of the Syriac, Coptic, and Armenian churches.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-01",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Forty Martyrs of Sebaste",
+        "title": "The Forty Martyrs of Sebaste",
+        "feast_type": "Martyrs",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Forty_Martyrs_of_Sebaste",
+        "notes": "Forty Roman soldiers who were martyred at Sebaste (modern Sivas, Turkey) in 320 AD for refusing to sacrifice to pagan gods. They were left naked on a frozen lake. Venerated by the Syriac Orthodox Church on March 1 Julian.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-07",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Aphrahat",
+        "title": "Saint Aphrahat the Persian Sage",
+        "feast_type": "Church Father",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Aphrahat",
+        "notes": "Aphrahat (c. 270–345), the 'Persian Sage', was the earliest known Syriac Christian writer whose works survive intact. His 23 Demonstrations cover theology, asceticism, and church life in early Syriac Christianity under Sassanid Persian rule.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-17",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Bl. Ignatius Maloyan",
+        "title": "Blessed Ignatius Maloyan, Armenian Martyr of the Syriac Rite",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ignatius_Maloyan",
+        "notes": "Ignatius Maloyan (1869–1915), Archbishop of Mardin, was martyred during the Armenian and Syriac Genocide. He refused to apostatize under threat of death. Beatified by Pope Francis in 2013. Venerated by Syriac Orthodox as a martyr.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-17",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Simeon bar Sabba'e",
+        "title": "Saint Simeon bar Sabba'e, Catholicos and Martyr of Persia",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Simeon_bar_Sabba%27e",
+        "notes": "Simeon bar Sabba'e (d. 341) was Catholicos of Seleucia-Ctesiphon who was martyred under Shapur II of Persia for refusing to impose double taxes on Christians. He is venerated as a martyr by all Syriac Christian churches.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-25",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Mark",
+        "title": "Saint Mark the Evangelist, Founder of the Church of Alexandria",
+        "feast_type": "Evangelist",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Mark_the_Evangelist",
+        "notes": "St. Mark the Evangelist wrote the earliest Gospel and founded the Church of Alexandria. Venerated by the Syriac Orthodox as a founding father of Oriental Christianity.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-25",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Peter III",
+        "title": "Saint Peter III of Callinicum, Patriarch of Antioch",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Peter_III_of_Callinicum",
+        "notes": "Peter III of Callinicum (patriarch 581–591) was Patriarch of the Syriac Orthodox Church of Antioch. He engaged in theological correspondence with Damian of Alexandria on Christological questions.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-30",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Bar-Hebraeus",
+        "title": "Saint Bar-Hebraeus (Gregorius Barhebraeus), the Universal Scholar",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Bar-Hebraeus",
+        "notes": "Gregory Barhebraeus (1226–1286) was Maphrian (Catholicos) of the East and the last great encyclopedist of the Syriac tradition. He wrote on theology, philosophy, history, medicine, and grammar. Described as 'the most learned man of his age'.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-06",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Transfiguration",
+        "title": "The Holy Transfiguration of Our Lord",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "The Transfiguration of Christ on Mount Tabor. August 6 Julian.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-15",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Dormition",
+        "title": "The Dormition of the Most Holy Theotokos",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "The Dormition (Shunoyo) of the Virgin Mary, August 15 Julian.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-14",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Exaltation of the Cross",
+        "title": "The Exaltation of the Holy Cross",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "The universal feast commemorating the finding and elevation of the True Cross by Empress Helena in 326 AD.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-02",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Geevarghese",
+        "title": "Saint Geevarghese Mar Gregorios of Parumala",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Geevarghese_Mar_Gregorios",
+        "notes": "Geevarghese Mar Gregorios (1848–1902) was Bishop of Niranam in the Malankara Syriac Orthodox Church. The first person from Kerala to be canonized as a saint. Known for healing the sick and teaching. Canonized in 1987 by Patriarch Ignatius Zakka I Iwas.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-10",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Moses bar Simeon",
+        "title": "Saint Moses bar Simeon of Nisibis, Keeper of the Scrolls",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Moses_bar_Simeon",
+        "notes": "Moses bar Simeon of Nisibis (d. c. 943) was Syriac Orthodox metropolitan of Nisibis and a notable manuscript collector. He brought hundreds of manuscripts from Egypt and Syria to Nisibis, preserving invaluable Syriac texts.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-17",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Ignatius of Antioch",
+        "title": "Saint Ignatius of Antioch, Bishop and Martyr",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ignatius_of_Antioch",
+        "notes": "Ignatius of Antioch (c. 35–107) was the third Bishop of Antioch and one of the Apostolic Fathers. His seven letters to various churches are fundamental early Christian texts. He was martyred in Rome under Emperor Trajan.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-25",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Abdisho bar Brikha",
+        "title": "Saint Abdisho bar Brikha, Metropolitan of Nisibis",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Abdisho_bar_Brikha",
+        "notes": "Abdisho bar Brikha (d. 1318) was Metropolitan of Nisibis and Armenia. He wrote the famous Catalogue of Syriac authors ('Bibliotheca Orientalis') and composed the 'Paradise of Eden', a theological encyclopedia in verse.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-27",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Dionysius Bar Salibi",
+        "title": "Saint Dionysius Bar Salibi, Polymath Bishop of Amida",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Dionysius_bar_Salibi",
+        "notes": "Dionysius bar Salibi (d. 1171) was bishop of Amida (Diyarbakir) and a prolific Syriac writer. He wrote biblical commentaries, liturgical works, and polemical treatises against Islam, Judaism, and rival Christian groups.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-29",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Jacob of Serugh",
+        "title": "Saint Jacob of Serugh, the Flute of the Holy Spirit",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Jacob_of_Serugh",
+        "notes": "Jacob of Serugh (c. 451–521) was bishop of Serugh (Batnae) and one of the greatest Syriac poets. His verse homilies (memrê) are foundational texts of Syriac literature. He was a student of Ephrem's tradition and is called 'Flute of the Holy Spirit'.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-10",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Philoxenus",
+        "title": "Saint Philoxenus of Mabbug, Theologian of the Incarnation",
+        "feast_type": "Bishop",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Philoxenus_of_Mabbug",
+        "notes": "Philoxenus of Mabbug (c. 440–523) was bishop of Mabbug (Hierapolis) and a leading Miaphysite theologian. He commissioned the Philoxenian Version of the New Testament and wrote extensively against Nestorianism and Chalcedonianism.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-21",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Thomas",
+        "title": "Saint Thomas the Apostle, Apostle to Syria and India",
+        "feast_type": "Apostle",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Thomas_the_Apostle",
+        "notes": "St. Thomas the Apostle brought Christianity to Syria and India. The Syriac Orthodox tradition holds that he established the church in Edessa (Urfa) and preached to the Parthians, Medes, and Indians.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-25",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nativity",
+        "title": "The Nativity of Our Lord Jesus Christ",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "Christmas celebrated by the Syriac Orthodox Church on December 25 Julian.",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-27",
+    "tradition": "syriac",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St. Stephen",
+        "title": "Saint Stephen the First Martyr, Protodeacon",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Saint_Stephen",
+        "notes": "St. Stephen, the first Christian martyr (Protomartyr), was stoned to death in Jerusalem c. 36 AD. His feast is celebrated in the Syriac tradition on December 27 Julian (the day after Christmas).",
+        "canonized_by": "Syriac Orthodox Church of Antioch",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  }
+]

@@ -1,74 +1,665 @@
 [
   {
-    "month_day": "05-22",
+    "month_day": "01-07",
     "tradition": "ethiopian",
-    "calendar": "julian",
+    "calendar": "gregorian",
     "saints": [
       {
-        "name": "Saint Yared the Hymnographer",
-        "title": "Saint Yared, Father of Ethiopian Sacred Music",
-        "feast_type": "Saint",
-        "notes": "Saint Yared (505–571 AD) is the father of Ethiopian sacred music (Zema). Tradition holds he was inspired by three birds sent from Paradise who taught him divine melodies. He composed the three sacred modes of Ethiopian liturgical chant — Ge'ez, Ezel, and Araray — still used in Tewahedo worship today. Feast: Ethiopian Ginbot 11 ≈ Julian May 22.",
+        "name": "Nativity",
+        "title": "The Nativity of Our Lord Jesus Christ (Lidat)",
+        "feast_type": "Great Feast",
         "hagiography_url": null,
+        "notes": "Christmas in the Ethiopian Orthodox Church, celebrated on Tahsas 29 (January 7 Gregorian).",
         "canonized_by": "Ethiopian Orthodox Tewahedo Church",
         "canonization_scope": "oriental",
         "year_canonized": null
       }
-    ],
-    "notes": "Ethiopian Ginbot 11 ≈ Julian May 22."
+    ]
+  },
+  {
+    "month_day": "01-12",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Frumentius",
+        "title": "Saint Frumentius (Abba Salama), Apostle to Ethiopia",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Frumentius (c. 300–360 AD) was the first bishop of Axum and the Apostle of Ethiopia. A Syrian Christian from Tyre, he converted King Ezana and established Christianity in Ethiopia. He was consecrated by St. Athanasius of Alexandria.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-19",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Timket",
+        "title": "Feast of the Epiphany / Theophany (Timket)",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "Ethiopian Epiphany (Timket), the most spectacular Ethiopian feast. Celebrates the Baptism of Christ in the Jordan.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-20",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Michael",
+        "title": "Monthly Feast of St. Michael the Archangel",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "St. Michael is commemorated on the 12th of every Ethiopian month. The Tir (January) feast is the principal annual commemoration.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-30",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Cyril of Alexandria",
+        "title": "Saint Cyril of Alexandria, Pillar of the Faith",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "St. Cyril of Alexandria (376–444) defended the title Theotokos (God-bearer) for the Virgin Mary at the Council of Ephesus (431). Venerated by the Ethiopian church as Pillar of the Faith.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-14",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Martyrs of Debre Damo",
+        "title": "Holy Martyrs of Debre Damo Monastery",
+        "feast_type": "Martyrs",
+        "hagiography_url": null,
+        "notes": "The monks of Debre Damo monastery who were martyred during the invasion of Ahmad ibn Ibrahim al-Ghazi (Gragn) in the 16th century.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-23",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Presentation",
+        "title": "Feast of the Presentation of Our Lord (Timkat Mariam)",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "The Presentation of the Child Jesus in the Temple.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-18",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Gebre Menfes Qiddus",
+        "title": "Saint Gebre Menfes Qiddus (Abbo), the Hermit Saint of Ethiopia",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Known as Abbo, Gebre Menfes Qiddus (14th century) is one of the most beloved Ethiopian saints. He lived as an ascetic in the wilderness, sharing food with wild animals. He is depicted surrounded by lions and leopards.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-24",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Abba Betre Mariam",
+        "title": "Saint Abba Betre Mariam of Lake Tana",
+        "feast_type": "Venerable",
+        "hagiography_url": null,
+        "notes": "Abba Betre Mariam is a venerated Ethiopian monastic saint associated with the monasteries of Lake Tana.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-30",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Annunciation",
+        "title": "Feast of the Annunciation (Lidata le-Mariam)",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "The Annunciation of the Archangel Gabriel to the Virgin Mary.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-22",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Apostles Philip and James",
+        "title": "Feast of the Holy Apostles Philip and James the Less",
+        "feast_type": "Apostle",
+        "hagiography_url": null,
+        "notes": "Ethiopian commemoration of the Holy Apostles Philip and James (the Less).",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-05",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Abba Guba",
+        "title": "Saint Abba Guba, Desert Father of the Scetis (Ethiopia)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "One of the Desert Fathers venerated in the Ethiopian church.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-19",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Yared",
+        "title": "Saint Yared the Hymnographer, Father of Ethiopian Sacred Music",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Saint Yared (505–571 AD) composed the three modes of Ethiopian liturgical chant: Ge'ez (joyful), Ezel (mourning), and Araray (ordinary time). Tradition says three birds from Paradise taught him the divine melodies. His work is still used unchanged today.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-29",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Mary",
+        "title": "Monthly Feast of St. Mary (Ginbot)",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Monthly commemoration of the Blessed Virgin Mary (21st of Ginbot = June 1 Gregorian).",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
   },
   {
     "month_day": "06-12",
     "tradition": "ethiopian",
-    "calendar": "julian",
+    "calendar": "gregorian",
     "saints": [
       {
-        "name": "Lalibela",
-        "title": "Saint Lalibela, Righteous King and Builder of the Rock-Hewn Churches",
-        "feast_type": "Righteous King",
-        "notes": "King Lalibela (c. 1181–1221) commissioned eleven rock-hewn monolithic churches in Roha (now Lalibela), Ethiopia, a UNESCO World Heritage Site. He intended the site as a 'New Jerusalem' for Ethiopian Christians who could not travel to the Holy Land. Venerated as a saint by the Ethiopian Orthodox Tewahedo Church. Feast: Ethiopian Sene 5 ≈ Julian June 12.",
+        "name": "St. Samuel of Waldebba",
+        "title": "Saint Samuel of Waldebba, Founder of Waldebba Monastery",
+        "feast_type": "Saint",
         "hagiography_url": null,
+        "notes": "Samuel of Waldebba (14th century) founded the famous Waldebba Monastery in northern Ethiopia. Known for his strict ascetic life and miraculous healings.",
         "canonized_by": "Ethiopian Orthodox Tewahedo Church",
         "canonization_scope": "oriental",
         "year_canonized": null
       }
-    ],
-    "notes": "Ethiopian Sene 5 ≈ Julian June 12."
+    ]
   },
   {
-    "month_day": "06-30",
+    "month_day": "06-19",
     "tradition": "ethiopian",
-    "calendar": "julian",
+    "calendar": "gregorian",
     "saints": [
       {
-        "name": "Saint Tekle Haymanot",
-        "title": "Saint Tekle Haymanot of Debre Libanos, Pillar of Ethiopian Monasticism",
-        "feast_type": "Venerable",
-        "notes": "The greatest Ethiopian saint, Abba Tekle Haymanot (14th century) founded Ethiopian monasticism at Debre Asbo (later Debre Libanos). Ethiopian tradition records he stood in prayer for 7 years until one leg fell off, then stood on one leg for 7 more years. He is depicted with one leg and six wings, symbolizing angelic holiness. Feast: Ethiopian Sene 24 ≈ Julian June 30.",
+        "name": "St. Lalibela",
+        "title": "Saint Lalibela, Righteous King and Builder of the Rock-Hewn Churches",
+        "feast_type": "Righteous",
         "hagiography_url": null,
+        "notes": "King Lalibela (c. 1181–1221) commissioned eleven rock-hewn monolithic churches in Roha (now Lalibela), a UNESCO World Heritage Site. He intended the site as a New Jerusalem for Ethiopian Christians who could not travel to the Holy Land.",
         "canonized_by": "Ethiopian Orthodox Tewahedo Church",
         "canonization_scope": "oriental",
         "year_canonized": null
       }
-    ],
-    "notes": "Ethiopian Sene 24 ≈ Julian June 30."
+    ]
+  },
+  {
+    "month_day": "07-01",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Abba Yohannes",
+        "title": "Saint Abba Yohannes of Debre Bizen Monastery",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Abba Yohannes founded Debre Bizen monastery in Eritrea in the 14th century. It remains one of the most important monasteries of the Ethiopian Orthodox Church.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-06",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Apostles Peter and Paul",
+        "title": "Feast of the Holy Apostles Peter and Paul",
+        "feast_type": "Apostles",
+        "hagiography_url": null,
+        "notes": "Ethiopian commemoration of the Holy Apostles Peter and Paul, martyred in Rome.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-08",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Abba Libanos",
+        "title": "Saint Abba Libanos, One of the Nine Saints",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Abba Libanos is one of the Nine Saints who came from Rome to Ethiopia in the 5th century. He founded Debre Libanos in Tigray (distinct from Debre Libanos of Tekle Haymanot).",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-19",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Apostle Thomas",
+        "title": "Feast of the Apostle Thomas",
+        "feast_type": "Apostle",
+        "hagiography_url": null,
+        "notes": "Ethiopian commemoration of St. Thomas the Apostle who brought Christianity to India.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-20",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Transfiguration",
+        "title": "Feast of the Transfiguration (Buhe)",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "The Transfiguration of Our Lord, celebrated as Buhe in Ethiopia. Children sing songs and carry torches the eve before.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
   },
   {
     "month_day": "07-24",
     "tradition": "ethiopian",
-    "calendar": "julian",
+    "calendar": "gregorian",
     "saints": [
       {
         "name": "The Nine Saints",
-        "title": "The Nine Saints (Tsatew Qiddusan), Missionaries and Monastic Founders of Ethiopia",
+        "title": "The Nine Saints (Tsatew Qiddusan), Missionaries to Ethiopia",
         "feast_type": "Saints",
-        "notes": "The Nine Saints (5th century) were missionaries from Syria, Rome, and Constantinople who came to Ethiopia after the Council of Chalcedon. Rejecting the Chalcedonian definition, they joined the Ethiopian church, spreading Christianity through the highlands and founding monasteries that translated the Bible into Ge'ez. Feast: Ethiopian Hamle 17 ≈ Julian July 24.",
         "hagiography_url": null,
+        "notes": "The Nine Saints (5th century) were missionaries from Syria, Constantinople, and Rome who came to Ethiopia after the Council of Chalcedon. They founded monasteries and translated the Bible into Ge'ez.",
         "canonized_by": "Ethiopian Orthodox Tewahedo Church",
         "canonization_scope": "oriental",
         "year_canonized": null
       }
-    ],
-    "notes": "Ethiopian Hamle 17 ≈ Julian July 24."
+    ]
+  },
+  {
+    "month_day": "08-01",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Seven Sleepers",
+        "title": "Holy Seven Sleepers of Ephesus",
+        "feast_type": "Martyrs",
+        "hagiography_url": null,
+        "notes": "The Seven Sleepers (Seba Wedikat) are commemorated in the Ethiopian synaxarium. Seven young men who fled Decius's persecution and miraculously slept 300 years in a cave near Ephesus.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-07",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Abba Libanos (Younger)",
+        "title": "Saint Abba Libanos the Younger of Debre Libanos",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "A later saint of Debre Libanos monastery, venerated for his holiness.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-15",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Athanasius",
+        "title": "Saint Athanasius of Alexandria, Defender of Orthodoxy",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "St. Athanasius the Great (296–373), Archbishop of Alexandria, defended the Nicene Creed against Arianism. As Patriarch of Alexandria he consecrated Frumentius as the first Bishop of Ethiopia.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-22",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Assumption",
+        "title": "Feast of the Assumption of the Blessed Virgin Mary",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "Ethiopian celebration of the Dormition and Assumption of the Virgin Mary.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-30",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Tekle Haymanot",
+        "title": "Saint Tekle Haymanot of Debre Libanos, Pillar of Ethiopian Monasticism",
+        "feast_type": "Venerable",
+        "hagiography_url": null,
+        "notes": "The greatest Ethiopian saint, Abba Tekle Haymanot (c. 1215–1313) founded Ethiopian monasticism at Debre Asbo (Debre Libanos). He is depicted with one leg and six wings, symbolizing that he stood in prayer for 22 years, one leg falling off after 7 years.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-10",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. John the Baptist",
+        "title": "Feast of John the Baptist (Ye-Yohannes Lidat)",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Ethiopian celebration of the birth of St. John the Baptist in Pagume (the 13th short month).",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-27",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Meskel",
+        "title": "Finding of the True Cross (Meskel)",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "Meskel celebrates the finding of the True Cross by Empress Helena. Enormous bonfires (Demera) are lit throughout Ethiopia the eve of Meskel.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-10",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Ewostatewos",
+        "title": "Saint Ewostatewos (Eustathius) of Ethiopia, Monastic Reformer",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Ewostatewos (c. 1273–1352) was an Ethiopian monk who insisted on Sabbath observance and reformed Ethiopian monasticism. He spent his last years in exile in Egypt and Armenia. The Ewostathian monastic movement shaped Ethiopian Christianity.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-13",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Abba Gerima",
+        "title": "Saint Abba Gerima (Isaac), One of the Nine Saints",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Abba Gerima (Isaac) was one of the Nine Saints from Rome. He founded Debre Gerima monastery in Tigray, one of the oldest monasteries in Ethiopia.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-23",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Dioscorus",
+        "title": "Saint Dioscorus of Alexandria, Fifth Pope of Alexandria",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Dioscorus I was the fifth Pope of Alexandria (444–451) who upheld Cyril's theology at the Council of Chalcedon but was deposed and exiled by the Chalcedonian majority. Venerated as a saint by the Oriental Orthodox churches.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-05",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Emperor Zara Yaqob",
+        "title": "Saint Zara Yaqob (Emperor Zara Yaqob), Defender of the Faith",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Emperor Zara Yaqob (r. 1434–1468) defended Ethiopian Christianity, commissioned theological writings, and standardized the Ethiopian church calendar. He enforced strict observance of Marian feasts and church reforms.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-10",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Kidana Mehret",
+        "title": "Feast of the Holy Covenant (Kidana Mehret) of Our Lady",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "The Covenant of Mercy — Our Lady's promise to intercede for Ethiopia. One of the most celebrated Marian feasts in the Ethiopian church.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-21",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Michael (Hidar)",
+        "title": "Feast of the Consecration of St. Michael's Church",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Annual feast of St. Michael celebrated in Hidar (November).",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-30",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Lady of Zion",
+        "title": "Feast of Our Lady of Zion (Hidar Tsion)",
+        "feast_type": "Great Feast",
+        "hagiography_url": null,
+        "notes": "The most important Marian feast in Ethiopia, celebrating Our Lady of Zion at Axum. A tabot (ark) replica is paraded through the streets.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-05",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Gabriel",
+        "title": "Feast of St. Gabriel the Archangel (Hidar)",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "St. Gabriel is commemorated on the 22nd of each Ethiopian month. The Hidar feast marks his primary annual celebration.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-14",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Martyrs of Nagran",
+        "title": "The Holy Martyrs of Nagran (Arabia Felix)",
+        "feast_type": "Martyrs",
+        "hagiography_url": null,
+        "notes": "Christians of Nagran (Yemen) martyred by the Jewish-Yemenite king Dhu Nuwas in 523 AD for refusing to apostatize. Ethiopia's Emperor Kaleb later invaded Yemen to avenge them. Commemorated in the Ethiopian synaxarium.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-17",
+    "tradition": "ethiopian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Lideta",
+        "title": "Feast of the Conception of Our Lady (Lideta le-Mariam)",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Feast of the Conception of the Blessed Virgin Mary.",
+        "canonized_by": "Ethiopian Orthodox Tewahedo Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
   }
 ]

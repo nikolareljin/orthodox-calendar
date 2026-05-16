@@ -1,63 +1,357 @@
 [
   {
-    "month_day": "09-30",
+    "month_day": "01-13",
     "tradition": "armenian",
-    "calendar": "julian",
+    "calendar": "gregorian",
     "saints": [
       {
-        "name": "Saint Gregory the Illuminator",
-        "title": "Saint Gregory the Illuminator, First Catholicos of Armenia",
-        "feast_type": "Equal-to-Apostles",
-        "notes": "Apostle to the Armenians and first Catholicos. After 13 years imprisoned in the Khor Virap pit, Gregory was freed by King Tiridates III, whom he baptized in 301 AD. Armenia thereby became the first nation to adopt Christianity as state religion. Gregory established the Armenian Apostolic Church and baptized the entire nation.",
-        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
-        "canonized_by": "Armenian Apostolic Church",
-        "canonization_scope": "oriental",
-        "year_canonized": null
-      },
-      {
-        "name": "Saints Hripsime, Gaiane and 35 companions",
-        "title": "The Holy Virgin Martyrs Hripsime, Gaiane, and Their 35 Companions",
-        "feast_type": "Virgin Martyrs",
-        "notes": "Hripsime and Gaiane fled Rome with 35 companions to escape persecution, arriving in Armenia in 301 AD. When King Tiridates ordered them martyred after Hripsime refused his advances, their deaths moved Saint Gregory's prayers and led directly to the king's conversion and Armenia's adoption of Christianity.",
-        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
+        "name": "Naming of Jesus Christ",
+        "title": "Feast of the Naming of Jesus Christ",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/17",
+        "notes": "And when eight days were accomplished for the circumcising of the child, his name was called , which was so named of the angel before he was conceived in the womb.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
       }
-    ],
-    "notes": "Julian September 30 corresponds to Gregorian October 13. Shared feast of the Enlighteners of Armenia."
+    ]
   },
   {
-    "month_day": "04-24",
+    "month_day": "01-15",
     "tradition": "armenian",
-    "calendar": "julian",
+    "calendar": "gregorian",
     "saints": [
       {
-        "name": "Holy Martyrs of the Armenian Genocide",
-        "title": "The 1.5 Million Holy Martyrs of the Armenian Genocide (1915–1923)",
-        "feast_type": "New Martyrs",
-        "notes": "On April 24, 1915, Ottoman authorities arrested Armenian leaders in Constantinople, beginning the Genocide. An estimated 1.5 million Armenians perished through mass executions, death marches, and starvation. Canonized collectively by the Armenian Apostolic Church in 2015 by Catholicos Karekin II during the centennial commemoration in Yerevan.",
-        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
+        "name": "The Birth of John the Baptist",
+        "title": "The Birth of John the Baptist",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/18",
+        "notes": "Now Elisabeth's full time came that she should be delivered; and she brought forth a son.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
-        "year_canonized": 2015
+        "year_canonized": null
       }
-    ],
-    "notes": "Julian April 24 corresponds to Gregorian May 7. Armenian Genocide Remembrance Day."
+    ]
   },
   {
-    "month_day": "06-19",
+    "month_day": "01-31",
     "tradition": "armenian",
-    "calendar": "julian",
+    "calendar": "gregorian",
     "saints": [
       {
-        "name": "Saints Thaddaeus and Bartholomew",
-        "title": "The Holy Apostles Thaddaeus (Jude) and Bartholomew, Founders of the Armenian Church",
-        "feast_type": "Apostles",
-        "notes": "The Apostles Thaddaeus and Bartholomew brought Christianity to Armenia in the 1st century AD, making it one of the first nations to receive the Christian faith. Thaddaeus preached in Armenia from 43–66 AD and was martyred there. Bartholomew followed and was also martyred in Armenia. The Armenian Apostolic Church traces its foundation to these two apostles.",
-        "hagiography_url": "https://www.armenianchurch.us/about/saints-and-feasts/",
-        "canonized_by": null,
-        "canonization_scope": "universal",
+        "name": "St. Sarkis the Warrior, His Son St. Martiros, and His Fourteen Soldiers",
+        "title": "Feast of St. Sarkis the Warrior, His Son St. Martiros, and His Fourteen Soldiers",
+        "feast_type": "Saint",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/21",
+        "notes": "(Sargis) was a Roman military commander whom Emperor Constantine the Great (306–337 AD) appointed governor and stratelates of Cappadocia, a region bordering Armenia. He actively preached the Gospel and destroyed pagan sanctuaries.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-10",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Ghevontian Martyrs",
+        "title": "St. Ghevontian Martyrs",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/38",
+        "notes": "The St. Ghevontian Martyrs (The Leontine Martyrs, Ghevondyank) were a group of clergymen persecuted after the Battle of Vardanants in 451 AD. By order of the Persian King Yazdegerd II (439–457 AD), they were arrested and taken first to Hyrcania and later to the Apar region, where they were imprisone",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-12",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Vardanants Commanders and the 1,036 Martyrs",
+        "title": "Feast of St. Vardanants Commanders and the 1,036 Martyrs",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/22",
+        "notes": "refers to all martyrs who shed their blood in 451 AD during the Battle of Avarayr to defend the Christian faith and the homeland. The Armenian people revolted against the pressures of Persian King Yazdegerd II, particularly his decree demanding that the Christian peoples under his rule abandon their",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-14",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Presentation of Our Lord to the Temple, Candlemas",
+        "title": "Feast of the Presentation of Our Lord to the Temple, Candlemas",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/20",
+        "notes": "“Now there was a man in Jerusalem, whose name was Simeon, and this man was righteous and devout, looking for the consolation of Israel, and the Holy Spirit was upon him. And it had been revealed to him by the Holy Spirit that he should not see death before he had seen the Lord’s Christ. And inspired",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-21",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Gregory the Illuminator’s Descent into the Pit",
+        "title": "Feast of St. Gregory the Illuminator’s Descent into the Pit",
+        "feast_type": "Saint",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/24",
+        "notes": "Under the leadership of Saint Gregory the Illuminator and King Tiridates III of Greater Armenia (287–330 AD), Armenia adopted Christianity as a state religion. Saint Gregory the Illuminator, the first Catholicos of all Armenians, is venerated as a saint by the Orthodox, Roman Catholic, and Anglican ",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-31",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Great Week,  March 30 - April 04",
+        "title": "Great Week,  March 30 - April 04",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/63",
+        "notes": "Great Week is the week following Palm Sunday, culminating in the Glorious Resurrection of our Lord Jesus Christ on Easter Sunday.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-07",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "The Annunciation of the Lord",
+        "title": "The Annunciation of the Lord",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/25",
+        "notes": "In the sixth month, the Angel Gabriel was sent by God to a city of Galilee called Nazareth, to a virgin espoused to a man named Joseph, of the house of David; and the virgin’s name was Mary. And the angel, coming to her, said:",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Apparition of the Holy Cross",
+        "title": "Feast of the Apparition of the Holy Cross",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/30",
+        "notes": "The Feast of the Apparition of the Holy Cross commemorates a miraculous event that graced the skies of Jerusalem. On May 19, 351, a magnificent radiant cross, shining with celestial light, appeared over the city, spanning from the Mount of Olives to Golgotha and visible to all who looked toward the ",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-31",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Eve of the Fast of Elijah",
+        "title": "Eve of the Fast of Elijah",
+        "feast_type": "Fast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/33",
+        "notes": "Few saints can be found whose lives intertwine the destinies of the Old and New Testaments as closely as that of the Prophet Elijah. Born nine centuries before the coming of Christ the Savior into the world, the Prophet Elijah beheld the glory of His Transfiguration on Mount Tabor (cf. Matt. 17:3; M",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-01",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Hripsime and Her Companions, Sts. Hripsimiank",
+        "title": "Saint Hripsime and Her Companions, Sts. Hripsimiank",
+        "feast_type": "Saint",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/34",
+        "notes": "Sts. Hripsime and her companions are venerated as the earliest martyrs in Armenian history. In the Monastery of Saint Paul in Rome, a community of Roman virgins lived under the leadership of Abbess Gayane. Fleeing the persecutions of Emperor Diocletian (284–305 AD), they journeyed eastward, visiting",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-06",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "St. Gregory the Illuminator’s Emergence from the Pit",
+        "title": "St. Gregory the Illuminator’s Emergence from the Pit",
+        "feast_type": "Saint",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/36",
+        "notes": "The Feast of St. Gregory the Illuminator’s Emergence from the Pit is one of the major celebrations of the Armenian Church, observed on the Saturday following the Feasts of the Hripsimean and Gayanean Martyrs. In the year 301, St. Gregory’s release from imprisonment in the deep pit of Khor Virap mark",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-16",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Assumption of the Holy Mother of God",
+        "title": "Feast of Assumption of the Holy Mother of God",
+        "feast_type": "Great Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/44",
+        "notes": "The Feast of Assumption of the Holy Mother of God is one of the major feasts of the Armenian Church, which is celebrated on the Sunday closest to August 15, between August 12-18.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-08",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Nativity of the Holy Virgin Mary, Born of Anna",
+        "title": "Feast of the Nativity of the Holy Virgin Mary, Born of Anna",
+        "feast_type": "Great Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/45",
+        "notes": "The parents of the Holy Mother of God, Saints Joachim and Anna, had no children for many years and continually prayed, beseeching God to grant them a child. Their supplications were heard, and God granted them a daughter, whom they named Mariam, meaning “enlightened.” On the site of the home of Sain",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-13",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Exaltation of the Holy Cross",
+        "title": "Feast of the Exaltation of the Holy Cross",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/46",
+        "notes": "The Feast of the Exaltation of the Holy Cross is one of the 5 major feasts of the Armenian Church. The Holy cross, as defined by Gregory of Tatev, has become the bridge that unites heaven and earth, \"the one who opens the doors of heaven and giver of the heavenly kingdom as an inheritance.\"",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-21",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Presentation of the Most Holy Mother of God in the Temple",
+        "title": "Presentation of the Most Holy Mother of God in the Temple",
+        "feast_type": "Feast",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/52",
+        "notes": "According to the tradition recorded in the Protoevangelium of James, when Mary reached the age of three, her parents brought her to the Temple, where she remained until her betrothal to Joseph.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-28",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Holy Apostles Thaddeus and Bartholomew",
+        "title": "Holy Apostles Thaddeus and Bartholomew",
+        "feast_type": "Apostle",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/53",
+        "notes": "Before His Ascension, Christ commanded the Apostles to preach the divine doctrine throughout the whole world and to baptize all nations in the name of the Father, and of the Son, and of the Holy Spirit (Matt. 28:19-20).",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-12",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Jacob of Nisibis, Venerable Maruge the Hermit, and Saint Meletius, Bishop of Antioch",
+        "title": "Saint Jacob of Nisibis, Venerable Maruge the Hermit, and Saint Meletius, Bishop of Antioch",
+        "feast_type": "Saint",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/55",
+        "notes": "Saint Jacob of Nisibis (Jacob the Nisibian) was a cousin of Saint Gregory the Illuminator and came from a Parthian lineage. From his youth, he lived a life of asceticism. For his unceasing prayers and spiritual labors, the Lord endowed him with the gifts of prophecy and wonderworking. By his God-ple",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-28",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Peter and Saint Paul the Apostles",
+        "title": "Saint Peter and Saint Paul the Apostles",
+        "feast_type": "Apostle",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/58",
+        "notes": "Saint Peter the Apostle († 67 AD) was the chief among the Apostles. He had been a fisherman. When Jesus first met Peter, He said to him: “Thou art Simon the son of Jona: thou shalt be called Cephas” (John 1:42). means “rock” in Greek ( ). By a divine vision, Saint Peter was instructed by God to bapt",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-29",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Sons of Thunder: St. James and St. John the Apostles",
+        "title": "Sons of Thunder: St. James and St. John the Apostles",
+        "feast_type": "Apostle",
+        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/59",
+        "notes": "Saint James the Apostle was one of the twelve Apostles of Christ. He was the son of Zebedee, a Galilean fisherman, and the elder brother of the Evangelist John. Together with the holy Apostles Peter and John, Saint James belonged to the inner circle of Christ’s disciples.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
         "year_canonized": null
       }
     ]

@@ -93,14 +93,15 @@ TRADITIONS: Dict[str, Tradition] = {
     ),
     "ethiopian": Tradition(
         name="Ethiopian Orthodox Tewahedo",
-        calendar=CalendarSystem.JULIAN,
+        # Gregorian-keyed: import_ethiopian.py converts Ge'ez calendar dates to Gregorian MM-DD
+        calendar=CalendarSystem.GREGORIAN,
         aliases=["tewahedo"],
     ),
     "syriac": Tradition(
         name="Syriac Orthodox Church of Antioch",
         calendar=CalendarSystem.JULIAN,
         aliases=["jacobite", "syriac-orthodox", "suryoyo"],
-        data_key="oriental",   # shares Oriental Orthodox sanctoral data until Syriac-specific set is built
+        # Julian-keyed dataset built by import_syriac.py
     ),
     # "oriental" is the legacy key shared by Syriac/Malankara fallback data.
     # The Coptic church now has its own "coptic" entry with a dedicated dataset.
@@ -130,9 +131,10 @@ TRADITIONS: Dict[str, Tradition] = {
         # Gregorian-keyed dataset scraped from calendar.assyrianchurch.org
     ),
     # Armenian Apostolic is Oriental/Non-Chalcedonian, included alongside the Orthodox churches.
+    # Gregorian-keyed: armenianchurch.org publishes feast dates in Gregorian (DD.MM.YYYY).
     "armenian": Tradition(
         name="Armenian Apostolic",
-        calendar=CalendarSystem.JULIAN,
+        calendar=CalendarSystem.GREGORIAN,
         aliases=["aac", "armenian-orthodox", "apostolic-armenian"],
     ),
 }
