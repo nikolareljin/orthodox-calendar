@@ -170,6 +170,12 @@ echo "==> TLS active for ${NIP_DOMAIN}"
 if systemctl list-unit-files --no-legend certbot.timer 2>/dev/null | grep -q '^certbot\.timer'; then
   systemctl enable --now certbot.timer
   echo "==> certbot.timer enabled (systemd)"
+  # Remove the /etc/cron.d fallback this script may have installed on an earlier
+  # run when the timer was absent — prevents duplicate renewal schedules.
+  if [[ -f "/etc/cron.d/orthodox-calendar-certbot" ]]; then
+    rm -f /etc/cron.d/orthodox-calendar-certbot
+    echo "==> Removed stale /etc/cron.d certbot cron (timer now manages renewal)"
+  fi
 else
   if ! command -v crontab > /dev/null 2>&1; then
     echo "==> Installing cron for renewal fallback"
