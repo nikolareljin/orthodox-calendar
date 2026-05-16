@@ -125,9 +125,9 @@ TRADITIONS: Dict[str, Tradition] = {
     ),
     "assyrian": Tradition(
         name="Assyrian Church of the East",
-        calendar=CalendarSystem.JULIAN,
+        calendar=CalendarSystem.GREGORIAN,
         aliases=["church-of-the-east", "coe", "nestorian"],
-        # No data_key: distinct sanctoral calendar — returns empty saints list until dedicated dataset is added
+        # Gregorian-keyed dataset scraped from calendar.assyrianchurch.org
     ),
     # Armenian Apostolic is Oriental/Non-Chalcedonian, included alongside the Orthodox churches.
     "armenian": Tradition(
