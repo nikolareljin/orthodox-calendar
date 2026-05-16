@@ -86,12 +86,10 @@ if [[ "${SCRIPT_PATH}" == */* ]]; then
   fi
 fi
 if [[ -z "${DEPLOY_DIR}" ]]; then
-  DEPLOY_DIR="${APP_DIR}/deploy/oracle"
-fi
-if [[ ! -f "${DEPLOY_DIR}/orthodox-calendar.service" \
-    || ! -f "${DEPLOY_DIR}/nginx-backend.conf" \
-    || ! -f "${DEPLOY_DIR}/oc-certbot-provision.sh" ]]; then
-  echo "    deploy/oracle companion files missing — downloading fresh copies"
+  # No trusted sibling dir found. Never fall back to APP_DIR/deploy/oracle —
+  # that path is writable by the deploy user and can influence root-installed
+  # service/nginx/certbot config on a subsequent setup run. Download instead.
+  echo "    Companion files not found alongside setup.sh — downloading fresh copies"
   DEPLOY_DIR="$(mktemp -d)"
   curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/orthodox-calendar.service" \
     -o "${DEPLOY_DIR}/orthodox-calendar.service"

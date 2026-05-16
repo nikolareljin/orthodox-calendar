@@ -145,7 +145,10 @@ fi
 # Prefer the sibling from the script's own directory so branch/PR versions are
 # used when testing before merge. Fall back to downloading from main only when
 # no sibling exists (e.g. run via curl | sudo bash).
-_script_dir="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" 2>/dev/null && pwd || true)"
+_script_dir=""
+if [[ "${BASH_SOURCE[0]:-}" == */* ]]; then
+  _script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd || true)"
+fi
 if [[ -n "${_script_dir}" && -f "${_script_dir}/oc-certbot-provision.sh" ]]; then
   echo "==> Installing certbot provision wrapper (local)"
   install -o root -g root -m 755 "${_script_dir}/oc-certbot-provision.sh" /usr/local/bin/oc-certbot-provision
