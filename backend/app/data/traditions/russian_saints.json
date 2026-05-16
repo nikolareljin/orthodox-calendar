@@ -1,69 +1,1366 @@
 [
   {
-    "month_day": "03-25",
-    "tradition": "russian",
-    "calendar": "julian",
-    "saints": [
-      {
-        "name": "Saint Tikhon, Patriarch of Moscow",
-        "title": "Saint Tikhon, Patriarch of Moscow and all Russia, Confessor",
-        "feast_type": "Hierarch",
-        "notes": "Patriarch Tikhon Bellavin (1865–1925) was elected the first Patriarch of the Russian Orthodox Church in 1917 after the Sobor restored the patriarchate. He led the Church through the Bolshevik revolution, enduring imprisonment and persecution, anathematizing Soviet anti-religious terror. Canonized in 1989 and glorified as a saint in 2000 by the Russian Orthodox Church.",
-        "hagiography_url": "https://www.oca.org/saints/lives/2024/04/07/101060",
-        "canonized_by": "Russian Orthodox Church",
-        "canonization_scope": "pan-orthodox",
-        "year_canonized": 2000
-      }
-    ]
-  },
-  {
-    "month_day": "07-05",
-    "tradition": "russian",
-    "calendar": "julian",
-    "saints": [
-      {
-        "name": "Holy New Martyr Elizabeth Feodorovna",
-        "title": "Holy New Martyr Elizabeth Feodorovna, Grand Duchess and Abbess",
-        "feast_type": "Martyr",
-        "notes": "Grand Duchess Elizabeth Feodorovna (1864–1918), sister of Empress Alexandra, founded the Martha and Mary Convent of Mercy in Moscow after her husband's assassination. She embraced monasticism fully, dedicating herself to the poor and sick. Martyred by the Bolsheviks at Alapayevsk in 1918. Canonized in 1992 by the Russian Orthodox Church.",
-        "hagiography_url": "https://www.oca.org/saints/lives/2024/07/05/102029",
-        "canonized_by": "Russian Orthodox Church",
-        "canonization_scope": "pan-orthodox",
-        "year_canonized": 1992
-      }
-    ]
-  },
-  {
-    "month_day": "04-19",
-    "tradition": "russian",
-    "calendar": "julian",
-    "saints": [
-      {
-        "name": "Blessed Matrona of Moscow",
-        "title": "Blessed Matrona of Moscow, Wonderworker",
-        "feast_type": "Saint",
-        "notes": "Matrona Nikonova (1881–1952) was born blind in the village of Sebino and from childhood displayed gifts of healing and clairvoyance. She lived her adult life in Moscow, secretly sheltering thousands seeking counsel and healing during the Soviet era. One of the most venerated saints of 20th-century Russia. Canonized in 1998 by the Russian Orthodox Church.",
-        "hagiography_url": "https://www.oca.org/saints/lives/2024/05/02/101394",
-        "canonized_by": "Russian Orthodox Church",
-        "canonization_scope": "local",
-        "year_canonized": 1998
-      }
-    ]
-  },
-  {
     "month_day": "01-02",
     "tradition": "russian",
     "calendar": "julian",
     "saints": [
       {
-        "name": "Saint Seraphim of Sarov",
-        "title": "Saint Seraphim of Sarov, Wonderworker and Great Ascetic",
-        "feast_type": "Venerable",
-        "notes": "Seraphim of Sarov (1754–1833) is the most beloved Russian saint of modern times. He spent decades in intense asceticism at Sarov monastery, including a thousand-day vigil on a rock in prayer. His greeting — 'My joy, Christ is Risen!' — and teachings on acquiring the Holy Spirit have inspired generations. Canonized in 1903 by the Russian Orthodox Church.",
-        "hagiography_url": "https://www.oca.org/saints/lives/2024/01/02/100008-repose-of-venerable-seraphim-wonderworker-of-sarov",
+        "name": "Repose of Our Holy Father John of Kronstadt (1908)",
+        "title": "Repose of Our Holy Father John of Kronstadt (1908)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>His main commemoration is on October 19.</p>",
         "canonized_by": "Russian Orthodox Church",
-        "canonization_scope": "pan-orthodox",
-        "year_canonized": 1903
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-03",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father Peter",
+        "title": "Our Holy Father Peter, Metropolitan of Moscow (1326)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“Saint Peter was born in Volhynia in 1260 and entered a monastery there at the age of thirteen. Making the Ladder of Saint John Climacus his guide in the monastic life, his obedience, meekness and willingness to undertake tasks that were repugnant to his brethren made him beloved of them all. He also painted icons and was the originator of the Muscovite style of Russian iconography. After some years, he left for the small Monastery of the Transfiguration in order to find the quiet favourable",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-12",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father Macarius",
+        "title": "Our Holy Father Macarius, Metropolitan of Moscow and All Russia (1563)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was born in Moscow in 1492. When his father died, his mother became a nun and he a monk, receiving the monastic name Macarius. He became an iconographer of rare talent. In 1523 he was ordained to the priesthood and made Abbot of the Monastery of Luchski; three years later he was consecrated Archbishop of Novgorod and Pskov, a see which had been vacant for many years. As Archbishop, he sent missionaries to the native peoples of the far north of Russia and, within his own diocese strove agai",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-15",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Repose of St Seraphim of Sarov",
+        "title": "Repose of St Seraphim of Sarov",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Holy New Martyr George the Georgian (1770)",
+        "title": "Holy New Martyr George the Georgian (1770)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>A native of Georgia, he was sold as a slave to a Turk and made a Muslim in his youth. He lived a long life as a Muslim, seemingly having no memory of the faith or language of his parents. Without warning, however, when he had reached the age of seventy, his conscience awakened, he presented himself to the judge and stated that he had been born a Christian and wished to die a Christian. The old man remained immovable under questioning, exhortation, threats and, finally, torture; he would only",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-20",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "New Martyr Athanasius of Attalia (1700)",
+        "title": "New Martyr Athanasius of Attalia (1700)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>A native of Attalia, he lived in Smyrna. Once he unguardedly spoke the opening words of the Muslim confession of faith, “There is no god but God.” Hearing this, some Turks immediately surrounded him and took him to the court, claiming that he had embraced Islam. This he vehemently denied, assuring them that he was a Christian and that the words he had spoken would be unremarkable to any Christian. He was thrown into prison as an apostate and, after a sham trial, beheaded. His body was thrown",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-22",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Hieromartyr Philip",
+        "title": "Hieromartyr Philip, Metropolitan of Moscow",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Saint Philip",
+        "title": "Saint Philip, Metropolitan of Moscow (1569)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was born in 1507 to a noble family, and served briefly in the royal court. At the age of thirteen he entered the Solovki Monastery on the White Sea, within the Arctic circle. Here he lived in great austerity and eventually became Abbot. Through his labors and prayers the monastery soon became a center of spirituality and culture throughout the region. His fame reached the attention of Tsar Ivan IV (“the Terrible”), who in 1566 made him Metropolitan of Moscow, much against the Abbot’s desir",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-06",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Bl. Xenia of St Petersburg",
+        "title": "Bl. Xenia of St Petersburg",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Our Holy Mother Xenia of Petersburg",
+        "title": "Our Holy Mother Xenia of Petersburg, fool for Christ (ca. 1800)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>She was born about 1730, and as a young woman married an army colonel named Andrei, a handsome and dashing man fond of worldly living. When she was twenty-six years old, her husband died suddenly after drinking with his friends, leaving Xenia a childless widow. Soon afterward, she gave away all her possessions and disappeared from St Petersburg for eight years; it is believed that she spent the time in a hermitage, or even a monastery, learning the ways of the spiritual life. When she returne",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-13",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Venerable Nicetas",
+        "title": "Venerable Nicetas, hermit of the Kiev Caves and Bishop of Novgorod (1108)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>His is a remarkable story of spiritual delusion (<i>prelest</i> in Russian) and repentance of delusion. Nicetas was a young and zealous monk of the Lavra of the Kiev Caves who, against the advice of his abbot St Nikon (March 25), retired alone to a cave and walled himself in. Some time later, the young monk experienced a delightful scent filling his cave. Believing himself to be receiving a divine revelation, he cried out ‘Lord, show Thyself to me, that I might worship Thee face to face!’ A v",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-18",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Antony of Athens (1774)",
+        "title": "Holy New Martyr Antony of Athens (1774)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>‘Saint Antony was the son of poor Christians from Athens. In order to help his parents, he entered the service of an Albanian Muslim at the age of twelve. In 1770, during the repression which followed the Greek rising in the Peloponnese, his masters sold him to some Turks, who tried in vain to convert him. He was then sold to a succession of five harsh, fanatical masters, but he remained unshaken in the Faith, and was bought at last by a Christian coppersmith in Constantinople. Having been wa",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-23",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Venerable Father Prochorus of the Kiev Caves (1107)",
+        "title": "Our Venerable Father Prochorus of the Kiev Caves (1107)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“A wonder-worker of the Monastery of the Caves in Kiev, he was named the Orach-eater because the whole time he lived in the monastery, he never tasted bread but fed himself on orach [a kind of wild spinach] prepared according to his own particular method as a sort of bread. When he gave someone some of this bread with his blessing, it was as sweet as honey, but if someone stole some, it was as bitter as wormwood.</p>\n<p>“At one time, when there was a dearth of salt in Russia, Prochorus distri",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-25",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St Aleksy",
+        "title": "St Aleksy, Metr. of All Russia",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-01",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Hieromartyr Germogen",
+        "title": "Hieromartyr Germogen, Patriarch of Moscow",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-04",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Thirty-four Holy Martyrs of the Monastery of Valaam (1578)",
+        "title": "Thirty-four Holy Martyrs of the Monastery of Valaam (1578)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>These thirty-four venerable fathers of the Monastery of the Transfiguration at Valaam on Lake Ladoga were massacred by a party of converts to Lutheranism who besieged the monastery and attempted to make the brethren renounce the Orthodox Faith.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-11",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Venerable Father Titus of the Lavra of the Kiev Caves (1190)",
+        "title": "Our Venerable Father Titus of the Lavra of the Kiev Caves (1190)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>Titus and Evagrius, two monks in the famed Kiev Caves Lavra, were dear friends who, through the instigation of the demons, allowed a disagreement to descend into mutual enmity. Despite the efforts of their brother monks to reconcile them, their mutual hatred grew, to the extreme that when one of them censed the church, the other would turn and walk out.</p>\n<p>Titus fell gravely ill and, feeling that his end was near, at last repented and asked that Evagrius come and be reconciled with him. E",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-12",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Blessed Nicholas of Pskov",
+        "title": "Blessed Nicholas of Pskov, fool for Christ (1576)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“A rare fearlessness is a characteristic of fools for Christ. Blessed Nicholas ran through the streets of Pskov, pretending madness, rebuking people for their secret sins and foretelling what would happen to them. When Tsar Ivan the Terrible entered Pskov, the whole town was in fear and dread of the terrible Tsar… The Tsar, learning about this blessed man, who and what he was, visited him in his tiny room. [Ivan was a great lover of external piety.] It was the first week of the Great Fast. He",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-17",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Rt. Blv. Prince Daniel of Moscow",
+        "title": "Rt. Blv. Prince Daniel of Moscow",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-24",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St Euthymius",
+        "title": "St Euthymius, Bishop of Novgorod",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-27",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St Theognostus",
+        "title": "St Theognostus, Metropolitan of Kiev (1353)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was born in Greece and succeeded St Peter of Kiev as Metropolitan of that city. Some of his enemies among his own flock denounced him to the Mongol ruler, saying that he had collected no tribute from his churches to pay to the Mongols. Summoned before the Mongol prince and asked about this, he answered ‘Christ our God bought His Church from the unbelievers with His precious Blood. For what do we pay tribute to unbelievers?’ Returning home, he governed the Church for twenty-five more years",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-06",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Commemoration of the Miracle at the Monastery of the Caves in Kiev (?)",
+        "title": "Commemoration of the Miracle at the Monastery of the Caves in Kiev (?)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“Two friends, John and Sergius, swore brotherhood before the icon of the holy Mother of God in this monastery. John was a rich man, with a five-year-old son, Zachariah. John fell ill, and at his death commended his son to the care of Sergius, and left in Sergius’ keeping a large sum of silver and gold for him to hand over to Zachariah when he had grown up. When Zachariah came of age, however, Sergius denied receiving anything from the deceased John. Then Zachariah said: ‘Let him swear before",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-07",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "New Confessor/Hieromartyr Tikhon",
+        "title": "New Confessor/Hieromartyr Tikhon, patriarch of Moscow (1925)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>Born in 1865, he was tonsured a monk in 1891, and consecrated a Bishop in 1891. From 1900, he was Bishop of Alaska, with oversight of the Church throughout North America. In America, he consecrated the first Orthodox monastery on the continent and worked tirelessly to unite all ethnic groups as one flock. In 1907 he was made Bishop of Yaroslavl and returned to Russia.</p>\n<p>In 1917, he was elected to be the first Patriarch of Moscow since the abolition of the Patriarchate by Tsar Peter the G",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-09",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Martyr Matrona of Thessalonica",
+        "title": "Martyr Matrona of Thessalonica",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-13",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St Jonah",
+        "title": "St Jonah, Metropolitan of Moscow (1461)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He became a monk at the age of twelve and lived in the Simonov Monastery near Moscow. He later became Bishop of Ryazan, then was chosen as Metropolitan of Moscow (at this time the Russian Church was still under the Patriarchate of Constantinople, and the Metropolitanate of Moscow was its highest office). But through some political intrigue, a man named Isidore became Metropolitan instead. It was this Isidore who attended the Council of Florence and voted for the infamous Union with Rome perpe",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-30",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ven. Zosima of Solovetsk",
+        "title": "Ven. Zosima of Solovetsk",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-10",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father Stephen",
+        "title": "Our Holy Father Stephen, Abbot of the Kiev Caves and Bishop of Vladimir (1094)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was a disciple of St Theodosius of the Kiev Caves (commemorated May 3), and became abbot of the Monastery of the Caves. After many years of faithful service he fell victim to the intrigues of a monk against him, lost his abbacy and was even driven from the monastery. In God’s time the holy monk was vindicated and made Bishop of Vladimir. There he guided the Church for many years, reposing peacefully in old age in 1094.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-15",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Matrona (the Blind) of Moscow (1952)",
+        "title": "Saint Matrona (the Blind) of Moscow (1952)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>She was born in 1881 to a poor family in the village of Sebino-Epifaniskaya (now Kimovski). Though she was born blind — her eyes were without pupils — she showed a gift of spiritual insight from an early age, and by her prayers healed many who came to her.</p>\n<p>At about the age of fourteen she made a pilgrimage to several Russian holy sites. When she came to Kronstadt to receive the blessing of St John (20 Dec.), the holy priest, who had never met her, cried out “Matrona, come here!” and pr",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Translation of the Relics (1072 and 1115) of the Holy Passion-bearers Boris and Gleb",
+        "title": "Translation of the Relics (1072 and 1115) of the Holy Passion-bearers Boris and Gleb, princes of Russia (1015)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>For their lives, see July 24.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-28",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Slain Crown Prince Dimitry of Moscow",
+        "title": "Slain Crown Prince Dimitry of Moscow",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-02",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Unc. Rel. St Aleksy",
+        "title": "Unc. Rel. St Aleksy, Metropolitan of Kiev",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-03",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Pachomius (1730)",
+        "title": "Holy New Martyr Pachomius (1730)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>Born in a village of Little Russia (now Belarus), he was kidnapped as a boy and sold to a Turkish tanner as a slave. He spent the next twenty-seven years in Usaki in Asia Minor, where he was forced to embrace Islam. After long years of servitude he escaped and, reclaiming his Christianity, went to the Holy Mountain, became a monk and lived for twelve years. Tormented by his former apostasy, he determined to suffer martyrdom for Christ. With the permission of his elder, Joseph, he returned to",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-08",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Alexander of Thessalonica (1794)",
+        "title": "Holy New Martyr Alexander of Thessalonica (1794)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was born in Thessalonica and, though baptised a Christian, he accepted Islam as a young man, eventually becoming a Sufi (one of a mystical sect among the Muslims). But in time he began to repent, and concluded that martyrdom was the only way for him to cleanse himself from the stain of his denial of Christ. Having repented, he presented himself to the Turks dressed as a Christian. He was thrown into prison and tortured, but in response to every enticement, threat or torment, he would only",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-09",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Confessor John the Russian (1730)",
+        "title": "Holy New Confessor John the Russian (1730)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was captured during a Russian campaign against the Turks in 1711, and sold into slavery in Asia Minor. As a slave he strove to serve God faithfully, while serving his earthly master in everything honorable. Despite many enticements offered by the Muslims to renounce his faith, he remained steadfast, and was permitted to work miracles through his prayers. He reposed in peace in 1730. His relics remained incorrupt.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-14",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father Agapitus of the Kiev Caves (1095)",
+        "title": "Our Holy Father Agapitus of the Kiev Caves (1095)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“A natural doctor, he was a disciple of St Antony of Kiev. He healed people by prayer and the prescribing of cabbage, which they made into a sort of bread. Prince Vladimir Monomachus was healed in this way, and this made Agapitus famed on all sides. The Prince’s doctor, an Armenian, hearing of this, began to spread slander about him. When Agapitus became ill, the Armenian came and, looking at him, said that he would die in three days and that, if he did not do so, then he, the Armenian, would",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-15",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Constantine (1819)",
+        "title": "Holy New Martyr Constantine (1819)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was born a Muslim on the island of Lesbos (Mitylene), but became convinced of the truth of Christ after he was healed of a serious illness by the aid of holy water in a church. He traveled to the Holy Mountain and was baptised at the monastery of Kapsokalyvia. Later, he was seized by the Turks, who first tortured him viciously and, when he would not deny the Faith, hanged him in Constantinople.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-16",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy Martyr Dimitri",
+        "title": "Holy Martyr Dimitri, Tsarevich of Russia (1591)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was murdered at the age of eight by the evil designs of Boris Godunov, in the town of Uglich. After his death he appeared to a monk and accurately foretold Boris Godunov’s death. Countless miracles were worked at the grave of the Tsarevich. When his tomb was opened fifteen years after his death, his relics were found whole and incorrupt, and were solemnly buried in the Church of the Archangel Michael in Moscow.</p>\n<p>The circumstances of Boris Godunov’s death are worth telling. He first t",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-18",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Blessed Igor-George",
+        "title": "Blessed Igor-George, tonsured Gabriel, great prince of Chernigov and Kiev (1147)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“Persecuted by his kinsfolk, he left the world and became a monk. The citizens of Kiev, disgusted with the Olgovitch dynasty [of which he had been prince], determined to exterminate it. They hurried to the monastery, seized the young and innocent schema-monk and killed him. For this evil-doing, much misfortune fell on the inhabitants of Kiev, but candles were several times seen to light of themselves on the grave of this blessed monk, and a fiery column appeared over the church where he was b",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Blessed Constantine",
+        "title": "Blessed Constantine, Metropolitan of Kiev (1159)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>In his day there was great disorder among the princes of Russia and in the Russian Church. One of the rival princes appointed a monk named Kim as Metropolitan of Kiev without seeking the blessing of the Patriarch of Constantinople, as was still done at that time. The Patriarch sent Metropolitan Constantine to investigate, and he deposed Kim and banished the priests whom Kim had ordained. This led to strife among the people, some of whom supported Constantine, some Kim. Finally, at the request",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-28",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St Jonah",
+        "title": "St Jonah, Metr. of Moscow",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-11",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Sts Sergius and Herman (1353)",
+        "title": "Sts Sergius and Herman (1353), abbots of Valaam",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>After helping to establish Orthodoxy among the Karelian Finns, they founded the famous Valaam Monastery on Lake Ladoga in northern Russia. Both reposed in the same year.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-16",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Trans. Rel. Philip",
+        "title": "Trans. Rel. Philip, Metr. Moscow",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-17",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy Royal Martyrs of Russia: Tsar Nicholas II",
+        "title": "Holy Royal Martyrs of Russia: Tsar Nicholas II, Tsaritsa Alexandra, Crown Prince Alexei, and Grand duchesses Olga, Tatiana, Maria, and Anastasia, and those martyred with them (1918).",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“Tsar Nicholas II was the son of Alexander III, who had reposed in the arms of St John of Kronstadt. Having been raised in piety, Tsar Nicholas ever sought to rule in a spirit consonant with the precepts of Orthodoxy and the best traditions of his nation. Tsaritsa Alexandra, a grand-daughter of Queen Victoria of England, and a convert from Lutheranism, was noted for her piety and compassion for the poor and suffering. Their five children were beloved of all for their kindness, modesty, and gu",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-18",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father the New Martyr Cyprian (1679)",
+        "title": "Our Holy Father the New Martyr Cyprian (1679)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>“Born in the village of Klitzos in Epirus, Cyprian went off to the Holy Mountain after the death of his devout parents. He became a monk there and gave himself to asceticism in a cell near the monastery of Koutloumousiou. He heaped labour upon labour on himself, asceticism upon asceticism, until he came to be known and respected all over the Holy Mountain. But he was not satisfied. He was tormented by the thought that he could not be saved but by martyrdom for Christ. He therefore left the Ho",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-23",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "The Placing of the Precious Robe of the Lord in Moscow (1625)",
+        "title": "The Placing of the Precious Robe of the Lord in Moscow (1625)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>Elias, a soldier in the Roman army in Jerusalem, was a Georgian by birth, from the town of Mtskhet. When the Lord was crucified, his garments were divided by lot among the soldiers, and his robe fell to Elias, who took it home to Georgia and gave it as a gift to his sister Sidonia. The robe was buried with her, then miraculously found many years later by St Nina (January 14). King Mirian, who had accepted Christ in response to St Nina’s teaching, built a church to the Holy Apostles on the spo",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-02",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Martyrs Maria (Skobtsova)",
+        "title": "Martyrs Maria (Skobtsova), Dimitri (Klepenin) and those with them, who perished in the Nazi concentration camps (1944-1945)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>Mother Maria was born in Latvia in 1891. Like many of the pre-Revolutionary Russian intelligenstia, she was an atheist and a political radical in her youth, but gradually came to accept the truths of the Faith. After the Revolution, she became part of the large Russian emigre population of Paris. There she was tonsured as a nun by Metropolitan Evlogy, and devoted herself to a life of service to the poor. With a small community of fellow-believers, she established ‘houses of hospitality’ for t",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-09",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Commemoration of the canonization (1970) of St Herman of Alaska (1837)",
+        "title": "Commemoration of the canonization (1970) of St Herman of Alaska (1837)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>His feast day is December 12. Due to the severity of the Alaskan climate, the annual pilgrimage to his relics in Kodiak, Alaska, is in the Summer, around this date.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-16",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ven. Anthony the Roman of Novgorod",
+        "title": "Ven. Anthony the Roman of Novgorod",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-27",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Translation of the Relics of St Theodosius of the Kiev Caves",
+        "title": "Translation of the Relics of St Theodosius of the Kiev Caves",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p></p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-06",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Trans. Rel. Peter",
+        "title": "Trans. Rel. Peter, Metr. Kiev",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-14",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Angelis (1680)",
+        "title": "Holy New Martyr Angelis (1680)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was a goldsmith living in Constantinople. While he was celebrating the Dormition of the Theotokos with some friends in a nearby village, the party was joined by some Turkish neighbors. The Christians and Turks drank a great amount together, and at one point entertained themselves by exchanging headgear. The next day, when everyone had sobered up, a Turk asked Angelis why he was not wearing a Muslim turban, for wearing it once was a sign of conversion. (To our knowledge this is not Islamic",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-15",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ven. Anthony and Theodosius of Kiev Caves",
+        "title": "Ven. Anthony and Theodosius of Kiev Caves",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-17",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Gorazd",
+        "title": "Holy New Martyr Gorazd, Bishop of Slovakia and the Czech Lands (1942) (August 22 OC)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was born in 1879 in Moravia and given the name Matthew Pavlik. He became a Roman Catholic priest, active in a movement for reform within the Roman Catholic Church. When Czechoslovakia became an independent state in 1919, about 800,000 Christians, including Fr Matthew, approached Bishop Dositheus of the Orthodox Patriarchate of Serbia, asking to be received into the Orthodox faith. Father Matthew was received into the Church in 1920; a year later was made Bishop of the Orthodox of Moravia a",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-20",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St John",
+        "title": "St John, Archbishop of Novgorod",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-21",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "New Martyr Athanasius of Thessalonika (1774)",
+        "title": "New Martyr Athanasius of Thessalonika (1774)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was born to a distinguished and pious Christian family in Thessalonika. After acquiring an unusually good education he spent a few years in Constantinople, then returned to his native city. He spoke both Turkish and Arabic well, and often conversed with Muslims. Once, while speaking with an <i>emir</i>, Athanasius pronounced the Muslim confession of faith to illustrate a point. The emir, seeing an opportunity, immediately reported Athanasius to the Islamic judge, claiming that he had conve",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Our Venerable Father Serapion of Pskov (1481)",
+        "title": "Our Venerable Father Serapion of Pskov (1481)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He wss born in (what is now) Lithuania, but entered monastic life in the Pskov district. His spiritual father was St Euphrosynus (May 15), under whose care he lived for more than fifty-five years. He became known for his exceptional humility and asceticism. He tried never to be idle, giving any free moment to prayer and reading of Scripture. He emphasized the importance of the common prayer of the Church, saying that reciting the entire Twelve Psalm rule in one’s cell was not worth one <i>Kyr",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-24",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Canonization of St Xenia of St Petersburg (1978)",
+        "title": "Canonization of St Xenia of St Petersburg (1978)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>She is commemorated on January 24.</p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-27",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Macarius of Thessalonica (1527)",
+        "title": "Holy New Martyr Macarius of Thessalonica (1527)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>“A disciple of Patriarch Niphon at the time that the latter was labouring in the asceticism of silence at Vatopedi, Macarius longed for martyrdom for the sake of Christ, and begged St Niphon’s blessing to seek it. The discerning Patriarch, perceiving that this was God’s will, blessed him for the way of martyrdom. Macarius went to Salonica and, in the midst of a crowd of Turks, began to speak of Christ as the one, true God. The Turks seized him and threw him into prison. When he was brought to",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-06",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "New Martyr John of Epirus (1814)",
+        "title": "New Martyr John of Epirus (1814)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was born to Muslim parents in Konitsa of Albania — the ancient region of Epirus. His father was a prominent ruler among the Muslims and a member of the Sufi order, sometimes called dervishes, a mystical Islamic sect. John himself became a prominent Sufi and settled in Joannina. Though not a Christian, he attended to his conscience and lived a sober and prayerful life.</p>\n<p>Over time, he became increasingly attracted to the Christian faith and, in time, asked for holy Baptism. No Christia",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-07",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St Silouan",
+        "title": "St Silouan, elder of Mt Athos (1938) (September 11 OC)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was a Russian peasant who traveled to Mt Athos and became a monk in the Russian Monastery of St Panteleimon. He lived so simply, humbly and quietly that he might be forgotten had not Fr Sophrony (Sakharov) become his spiritual child and, after the Saint’s repose, written a book describing his life and teaching: <i>St Silouan of Mt Athos,</i> one of the great spiritual books of our time. It was through Fr Sophrony’s efforts that St Silouan was glorified as a Saint.</p>\n<p>Following a vision",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-08",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father Sergius of Radonezh (1392)",
+        "title": "Our Holy Father Sergius of Radonezh (1392)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>‘Our righteous Father Sergius was born in Rostov, north of Moscow, about the year 1314. Named Bartholomew in baptism, he was brought up in Radonezh, and at the death of his parents he withdrew to the wilderness to become a monk. It is notable that without having been trained in a monastery, he was of such a spiritual stature as to be able to take up the perilous eremitical life from the beginning, without falling into delusion or despondency. When he had endured with courage the deprivations",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Venerable Dosithea",
+        "title": "Venerable Dosithea, recluse of the Kiev Caves (1776)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>She was born to landed gentry of Riazan province in 1721. Her name in secular life is not recorded. For much of her childhood she was cared for by her grandmother the nun Porphyria, from whom she acquired a love for the ascetical struggle. When Porphyria took the Great Schema, the child returned home, but continued to live as much like a nun as she could. Her parents were eager to marry her as soon as possible, but she foiled their plans by leaving home at the age of fifteen, dressed as a pea",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-10",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ven. Sabbatius of Solovetsk",
+        "title": "Ven. Sabbatius of Solovetsk",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "Holy New Martyr Aquilina (1764)",
+        "title": "Holy New Martyr Aquilina (1764)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>She lived in the village of Zangliverion near Thessalonika. When she was still an infant, her father killed a Turkish neighbor in an argument and, to save his life, denied his Christian faith. To compound his apostasy he promised that when his daughter came of age she too would convert. Aquilina’s mother, however, held fast to her faith in Christ, and brought up her daughter to love her Savior fervently. When Aquilina reached the age of eighteen, her father told her that the time had come to",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-13",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Father among the Saints Michael",
+        "title": "Our Father among the Saints Michael, Metropolitan of Kiev (992)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>When Prince Vladimir, Equal to the Apostles (July 15), received holy Baptism, he sent an embassy to Constantinople asking that clergy be sent to enlighten the Russian land and to establish Christ’s Church there. Patriarch Nicolas II Chrysoberges (December 16) appointed Michael, a wise and blameless bishop, to be Metropolitan of Russia. Saint Michael traveled to Kiev with six bishops and a large number of clergy to aid him in his daunting work. He began by baptising the Prince’s family and the",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-18",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ss Peter",
+        "title": "Ss Peter, Aleksy, Jonah, Philip, Germogen, Metrs. Moscow",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-24",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Synaxis of the Holy Startsi of Optina Monastery",
+        "title": "Synaxis of the Holy Startsi of Optina Monastery",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>Commemorated today are our holy fathers Moses, Antony, Leonid(Lev), Macarius, Hilarion, Ambrose, Anatolius I, Isaac I, Joseph, Barsanuphius, Anatolius the Younger, Nectarius, Nikon the Confessor, and Hieromartyr Isaac the Younger. Hieromartyr Isaac was shot by the Bolsheviks on December 26 1937.</p>\n<p>This feast commemorates a few of the holy Fathers who made the Optina Hermitage (<i>Pustyn</i>) a focus for the powerful renewal movement that spread through the Church in Russia beginning earl",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-01",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Righteous John",
+        "title": "Righteous John, Wonderworker of Kronstadt (1908).",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>“Saint John of Kronstadt was a married priest, who lived with his wife in virginity. Through his untiring labours in his priestly duties and love for the poor and sinners, he was granted by our Lord great gifts of clairvoyance and miracle-working, to such a degree that in the last years of his life miracles of healings — both of body and of soul — were performed countless times each day through his prayers, often for people who had only written to him asking his help. During his lifetime he w",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-03",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr John of Monembasia (1773)",
+        "title": "Holy New Martyr John of Monembasia (1773)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>“Saint John was from Monembasia in the Peloponnese. At that time the region was under the Turkish yoke and subject to frequent raids from Albanians who captured Christians to sell them as slaves. In the course of one such attack, John’s father was killed and the young boy and his mother were taken as captives to Larissa, where they were sold to a Turk from Thessalonica. This man, who had no son, wanted to adopt John and make him a Muslim. But nothing was able to persuade the fifteen-year-old",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-12",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy Hieromartyr John Kochurov",
+        "title": "Holy Hieromartyr John Kochurov, First Hieromartyr of the Russian Revolution (1917)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was born in Russia in 1871, and as a young priest was sent to America as a missionary. There he worked zealously (he was instrumental in the building of the Orthodox cathedral in Chicago) until he was called back to Russia just before the October Revolution in 1917. Only six days after the Bolsheviks seized power, he was beaten to death in the street by a gang of Bolshevik sailors in Tsarskoye Selo near St Petersburg. Thus he became the first of countless Priest-Martyrs of Russia’s atheist",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-13",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "New Martyr Nicholas of Chios (1754)",
+        "title": "New Martyr Nicholas of Chios (1754)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>Raised in piety, he worked as a stone-mason until an accident deprived him of his reason and of the power of speech. The local Turkish rulers took advantage of his condition to declare him a Muslim. For years thereafter he was employed as a shepherd until he met a monk named Cyril, who prayed fervently that he be restored to his senses. He was miraculously restored, and almost immediately was filled with the desire to repent and to live only for Christ, devoting himself to prayer, fasting and",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-14",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Helen of Sinope (18th c.)",
+        "title": "Holy New Martyr Helen of Sinope (18th c.)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>She was a maiden of fifteen who lived with her parents in the Christian enclave of Sinope in Pontus during the 1700s. One day, as she went to the marketplace, she passed by the house of the local Pasha (governor), who, seeing her beauty, was seized by lust for her. He ordered his servants to bring her to him, and made two attempts to defile her; each time, however, he was prevented by a mysterious power that kept him from her like an invisible wall. Determined to have his way for her, he kept",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-18",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Repose St Jonah of Novgorod",
+        "title": "Repose St Jonah of Novgorod",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-22",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Mother Matrona (492)",
+        "title": "Our Holy Mother Matrona (492)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>She was from Perga in Pamphylia, and married very young, to a youth named Domitian, to whom she bore a daughter. The couple settled in Constantinople. Matrona became so constant in attending all-night vigils in the city’s many churches that her husband suspected her of infidelity and forbade her to go out. This was unbearable to Matrona, who fled the house with her daughter. Determined to embrace monastic life, she gave her daughter into the care of a nun named Susanna, disguised herself as a",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-30",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ven. Nikon of Radonezh",
+        "title": "Ven. Nikon of Radonezh",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": null,
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-01",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr Anastasius of Epirus (1750)",
+        "title": "Holy New Martyr Anastasius of Epirus (1750), and Daniel, whom he converted",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>Anastasius and his sister were Greek peasants living in Epirus under Ottoman rule. One day a band of Turks came through their village, led by Musa, the son of the local Pasha (Governor). Musa was struck by the beauty of Anastasius’ sister and tried to seize her, but Anastasius threw himself at the Turks and fought them off long enough for his sister to escape. Musa’s father had Anastasius arrested and brought before him and, impressed by his courage, attempted to convert him to Islam by many",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-02",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father Philaret",
+        "title": "Our Holy Father Philaret, Metropolitan of Moscow (1867)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>Born of a priestly family near Moscow in 1782, he entered seminary at a young age and soon distinguished himself for his piety and his scholarship of ancient languages. He was tonsured a monk, but was made a professor at the seminary in Moscow, where his expositions of the Faith, spoken and written, caused him to be regarded as a Father of the Church in his own time; many called him “the new Chrysostom.”</p>\n<p>In 1817, at the age of thirty-five, he was consecrated bishop, and in only a few y",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-09",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Holy New Martyr George of Chios (1897)",
+        "title": "Holy New Martyr George of Chios (1897)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was born of Christian parents on Chios. As a boy he was caught stealing melons from a garden with some companions. Brought before the Turkish judge, in fear of punishment he agreed to become a Muslim with the name Ahmed. (This was common practice under the Turkokratia: a Christian brought before the courts would be offered his freedom in return for conversion to Islam. Many gave in.) He returned home, weeping and lamenting his apostasy, and his parents put him (now aged ten) in the care of",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-15",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Our Holy Father Athanasius \"the Resurrected",
+        "title": "Our Holy Father Athanasius \"the Resurrected,\" Recluse of the Kiev Caves (1176)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>After many years of ascetic struggle, Athanasius died and was prepared for burial. After lying dead for two full days, he inexplicably came back to life: the monks who came to bury him were astonished to find him sitting up and weeping. The brethren gathered around him and asked him many questions about what he had seen of the next world, but he would only answer ‘Save yourselves!’ When they pressed him further, he said ‘If I told you, you would not believe me or want to listen to me.’ His fi",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-17",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Gennadius",
+        "title": "Saint Gennadius, Archbishop of Novgorod (1505)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was of noble birth, but entered monastic life at Valaam. He lived as a hermit on the island of Solovki from 1430 until 1447, when he was appointed abbot of the Chudov Monastery in Moscow. In 1484 he became Bishop of Novgorod. He found that the Tatar invasions had so disrupted the Church that a complete text of the Holy Scriptures could hardly be found in all of Russia. He ordered and oversaw the publication of the first printed Slavonic edition of the Holy Scriptures, set up schools for th",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-19",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "New Martyr Nicolas Karamos of Smyrna (1657)",
+        "title": "New Martyr Nicolas Karamos of Smyrna (1657)",
+        "feast_type": "New Martyr",
+        "hagiography_url": null,
+        "notes": "<p>He was a Christian living in Smyrna under Ottoman rule. One day he lost his temper in an argument and exclaimed that he would “turn Turk” before he would give way in the dispute. Immediately, some Turks watching the argument seized Nicolas and brought him before the judge to honor his promise. Nicolas, who had come to his senses, declared ‘If it please God, I will never deny my Lord Jesus Christ, the true God who will come to judge the living and the dead.’ The judge had the humble confessor",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "St Maximus",
+        "title": "St Maximus, Metropolitan of Kiev & Vladimir (1305)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was one of the bold Confessors who opposed the false Union of Lyons perpetrated by the Emperor Michael VIII in 1274. In 1283 he became Metropolitan of Kiev (and thus of the whole Russian Church). At that time the Principality of Kiev had been reduced to ruins by the Tatar invaders. Saint Maximus received a revelation from God that he should transfer the metropolitanate from Kiev to Vladimir. On the night following the move to Vladimir, the Most Holy Theotokos appeared to the Saint, saying",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-24",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Nikon the Dry of the Kiev Caves (1101)",
+        "title": "Saint Nikon the Dry of the Kiev Caves (1101)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p>He was a monk in Kiev, taken into slavery by a band of Polovtsi (Turkic raiders who were troubling the country at that time) along with the holy Martyr Eustratius (March 28). He humbly refused to be ransomed by his family and therefore suffered a harsh captivity for three years. Despite this, he prayed constantly for his captors, worked miracles for their sake, and once healed their leader from a deadly illness. One day St Eustratius appeared to him in a vision and told him that he would be s",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-25",
+    "tradition": "russian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "St Herman",
+        "title": "St Herman, Wonderworker of Alaska (1836)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "<p><i>He is also commemorated tomorrow, December 13. See his life there.</i></p>",
+        "canonized_by": "Russian Orthodox Church",
+        "canonization_scope": "local",
+        "year_canonized": null
       }
     ]
   }

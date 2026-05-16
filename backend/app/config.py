@@ -36,7 +36,7 @@ TRADITIONS: Dict[str, Tradition] = {
         name="Russian Orthodox",
         calendar=CalendarSystem.JULIAN,
         aliases=["roc", "moscow"],
-        data_key="oca",
+        data_key="oca",  # base: shared Byzantine Julian dataset; overlay: russian_saints.json
     ),
     "serbian": Tradition(
         name="Serbian Orthodox",
@@ -102,10 +102,20 @@ TRADITIONS: Dict[str, Tradition] = {
         aliases=["jacobite", "syriac-orthodox", "suryoyo"],
         data_key="oriental",   # shares Oriental Orthodox sanctoral data until Syriac-specific set is built
     ),
+    # "oriental" is the legacy key shared by Syriac/Malankara fallback data.
+    # The Coptic church now has its own "coptic" entry with a dedicated dataset.
     "oriental": Tradition(
-        name="Coptic Orthodox Church of Alexandria",
+        name="Oriental Orthodox (shared)",
         calendar=CalendarSystem.JULIAN,
-        aliases=["coptic", "oriental orthodox", "oriental-orthodox"],
+        aliases=["oriental orthodox", "oriental-orthodox"],
+    ),
+    # Coptic Orthodox has its own Gregorian-keyed dataset populated by import_coptic.py.
+    # CalendarSystem.GREGORIAN: coptic.io returns saints by Gregorian date, so month_day
+    # keys in coptic_saints.json are Gregorian MM-DD — no Julian conversion needed.
+    "coptic": Tradition(
+        name="Coptic Orthodox Church of Alexandria",
+        calendar=CalendarSystem.GREGORIAN,
+        aliases=["coptic-orthodox", "alexandria-coptic"],
     ),
     "malankara": Tradition(
         name="Malankara Orthodox Syrian Church",
