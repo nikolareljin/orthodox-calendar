@@ -89,7 +89,15 @@ fi
 CERT_PATH="/etc/letsencrypt/live/${DOMAIN}/fullchain.pem"
 if [[ -f "${CERT_PATH}" ]] && grep -qF "/etc/letsencrypt/live/${DOMAIN}/" "${NGINX_SITE}" 2>/dev/null; then
   if ! certbot renew --quiet --cert-name "${DOMAIN}"; then
-    rollback_nginx_site "certbot renew failed"
+    echo "    certbot renew failed (renewal config may be broken); attempting fresh provisioning"
+    if ! certbot --nginx \
+      -d "${DOMAIN}" \
+      --non-interactive \
+      --agree-tos \
+      -m "${EMAIL}" \
+      --redirect; then
+      rollback_nginx_site "certbot failed"
+    fi
   fi
 else
   if ! certbot --nginx \

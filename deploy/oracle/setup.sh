@@ -121,9 +121,12 @@ echo "    Service status:"
 systemctl is-active "${SERVICE}" && echo "    RUNNING" || echo "    FAILED — check: journalctl -u ${SERVICE}"
 
 echo "==> Installing certbot provision wrapper"
-# Root-owned wrapper with hardcoded certbot flags — eliminates hook-injection risk
-# from a wildcard sudoers entry. deploy.sh calls this via sudo with two args only.
-install -o root -g root -m 755 "${DEPLOY_DIR}/oc-certbot-provision.sh" /usr/local/bin/oc-certbot-provision
+# Always download from the canonical source — never install a file from the deploy
+# user's writable checkout as a privileged command (tamper risk on re-runs).
+curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
+  -o /usr/local/bin/oc-certbot-provision
+chown root:root /usr/local/bin/oc-certbot-provision
+chmod 755 /usr/local/bin/oc-certbot-provision
 
 cat > /usr/local/bin/oc-certbot-renew <<'WRAPPER'
 #!/usr/bin/env bash

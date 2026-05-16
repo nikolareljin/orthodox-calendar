@@ -39,8 +39,7 @@ _ensure_nginx_running() {
   if systemctl is-active --quiet nginx 2>/dev/null; then
     return 0
   fi
-  sudo systemctl enable nginx
-  sudo systemctl start nginx
+  sudo systemctl enable nginx && sudo systemctl start nginx
 }
 _repair_tls_with_provisioner() {
   local domain="$1"
@@ -209,6 +208,19 @@ if [[ "${MANAGED_NIP_TLS}" == "true" ]]; then
       echo "ERROR: certbot.timer exists but could not be enabled." >&2
       echo "       Re-run deploy/oracle/setup.sh to update sudoers/systemd, then redeploy." >&2
       exit 1
+    fi
+    # Remove stale deploy-user certbot cron entries now that the timer manages renewal.
+    _stale_cron="$(crontab -l 2>/dev/null || true)"
+    if echo "${_stale_cron}" | grep -qE 'certbot renew|oc-certbot-renew'; then
+      (
+        echo "${_stale_cron}" \
+          | grep -vFx "0 3 * * * certbot renew --quiet" \
+          | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
+          | grep -vFx "0 3 * * * sudo /usr/bin/certbot renew --quiet" \
+          | grep -vE "^0 3 \* \* \* sudo /usr/local/bin/oc-certbot-renew " \
+          || true
+      ) | crontab -
+      echo "==> Removed stale certbot cron from deploy user crontab"
     fi
   else
     if ! command -v crontab > /dev/null 2>&1; then

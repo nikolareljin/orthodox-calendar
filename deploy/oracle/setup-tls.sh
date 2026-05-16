@@ -143,27 +143,13 @@ fi
 # setup.sh installs the same helper for deploy.sh, so nginx/TLS recovery logic
 # stays in one place.
 # ---------------------------------------------------------------------------
-PROVISION_HELPER=""
-SCRIPT_PATH="${BASH_SOURCE[0]:-$0}"
-if [[ "${SCRIPT_PATH}" == */* ]]; then
-  CANDIDATE_DEPLOY_DIR="$(cd "$(dirname "${SCRIPT_PATH}")" 2>/dev/null && pwd || true)"
-  CANDIDATE_HELPER="${CANDIDATE_DEPLOY_DIR}/oc-certbot-provision.sh"
-  if [[ -f "${CANDIDATE_HELPER}" ]]; then
-    PROVISION_HELPER="${CANDIDATE_HELPER}"
-  fi
-fi
-if [[ -z "${PROVISION_HELPER}" && -f "${APP_DIR}/deploy/oracle/oc-certbot-provision.sh" ]]; then
-  PROVISION_HELPER="${APP_DIR}/deploy/oracle/oc-certbot-provision.sh"
-fi
-if [[ -n "${PROVISION_HELPER}" ]]; then
-  install -o root -g root -m 755 "${PROVISION_HELPER}" /usr/local/bin/oc-certbot-provision
-else
-  echo "==> Downloading shared certbot provision helper"
-  curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
-    -o /usr/local/bin/oc-certbot-provision
-  chown root:root /usr/local/bin/oc-certbot-provision
-  chmod 755 /usr/local/bin/oc-certbot-provision
-fi
+# Always download from the canonical source — never install a file from the deploy
+# user's writable checkout as a privileged command (tamper risk on re-runs as root).
+echo "==> Downloading certbot provision wrapper"
+curl -fsSL "${REPO%.git}/raw/main/deploy/oracle/oc-certbot-provision.sh" \
+  -o /usr/local/bin/oc-certbot-provision
+chown root:root /usr/local/bin/oc-certbot-provision
+chmod 755 /usr/local/bin/oc-certbot-provision
 
 echo "==> Provisioning TLS for ${NIP_DOMAIN}"
 /usr/local/bin/oc-certbot-provision "${NIP_DOMAIN}" "${CERTBOT_EMAIL}"
@@ -192,19 +178,20 @@ else
     chmod 644 "${CRON_D_FILE}"
     echo "==> Daily certbot renewal cron installed (${CRON_D_FILE}, 03:00)"
   fi
-  # Remove stale deploy-user certbot cron entries written by older script versions.
-  _old_cron="$(crontab -l -u "${APP_USER}" 2>/dev/null || true)"
-  if echo "${_old_cron}" | grep -qE 'certbot renew|oc-certbot-renew'; then
-    (
-      echo "${_old_cron}" \
-        | grep -vFx "0 3 * * * certbot renew --quiet" \
-        | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
-        | grep -vFx "0 3 * * * sudo /usr/bin/certbot renew --quiet" \
-        | grep -vE "^0 3 \* \* \* sudo /usr/local/bin/oc-certbot-renew " \
-        || true
-    ) | crontab -u "${APP_USER}" -
-    echo "==> Removed stale certbot cron from ${APP_USER} crontab"
-  fi
+fi
+# Always remove stale deploy-user certbot cron entries regardless of which renewal
+# scheduler is active — prevents duplicate schedules when timer appears after cron.
+_old_cron="$(crontab -l -u "${APP_USER}" 2>/dev/null || true)"
+if echo "${_old_cron}" | grep -qE 'certbot renew|oc-certbot-renew'; then
+  (
+    echo "${_old_cron}" \
+      | grep -vFx "0 3 * * * certbot renew --quiet" \
+      | grep -vFx "0 3 * * * /usr/bin/certbot renew --quiet" \
+      | grep -vFx "0 3 * * * sudo /usr/bin/certbot renew --quiet" \
+      | grep -vE "^0 3 \* \* \* sudo /usr/local/bin/oc-certbot-renew " \
+      || true
+  ) | crontab -u "${APP_USER}" -
+  echo "==> Removed stale certbot cron from ${APP_USER} crontab"
 fi
 
 echo ""
