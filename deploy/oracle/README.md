@@ -63,16 +63,56 @@ curl http://localhost:8000/health        # should return {"status":"ok"}
 curl http://<YOUR_VM_IP>/api/v1/docs     # FastAPI Swagger UI
 ```
 
-### Optional — TLS with Let's Encrypt
+### TLS with Let's Encrypt (nip.io)
 
-Point a domain (e.g. `api.orthodox-calendar.org`) at the VM IP, then:
+> **Note:** The first CI deploy automatically provisions a TLS certificate via
+> `deploy.sh` when `CERTBOT_EMAIL` is set — you do not need to run `setup-tls.sh`
+> unless you want to pre-provision TLS before the first CI run or reconfigure TLS
+> after a VM IP change.
+
+No domain registration needed. Both scripts use **nip.io** — a wildcard DNS
+service that maps `<dashed-ip>.nip.io` to the same IP automatically
+(e.g. `1-2-3-4.nip.io` → `1.2.3.4`). To provision TLS manually, run once on the VM:
 
 ```bash
-sudo certbot --nginx -d api.orthodox-calendar.org
+sudo bash ~/orthodox-calendar/deploy/oracle/setup-tls.sh --email you@example.com
 ```
 
-Certbot auto-renews via its own systemd timer. Once HTTPS is live, set
-`VITE_API_BASE=https://api.orthodox-calendar.org` in GitHub secrets.
+What the script does:
+
+1. Auto-detects the public IP from the Oracle IMDS (or `ifconfig.me` fallback).
+2. Installs `certbot` + `python3-certbot-nginx` if absent.
+3. Issues a certificate for `<dashed-ip>.nip.io` via `certbot --nginx` (skips if
+   already present).
+4. Enables automatic renewal — prefers the `certbot.timer` systemd unit that
+   `apt` installs; falls back to a single daily cron entry at 03:00. Certbot
+   contacts Let's Encrypt **only when the cert is within 30 days of expiry**, so
+   the check is cheap.
+
+**Options:**
+
+| Flag | Default | Purpose |
+|------|---------|---------|
+| `--ip <address>` | auto-detected | Override the public IP |
+| `--email <address>` | **required** | Let's Encrypt expiry notifications |
+
+Once HTTPS is live the script prints the `VITE_API_BASE` value to set in
+GitHub Actions secrets:
+
+```
+Done. TLS is active for https://1-2-3-4.nip.io
+Set VITE_API_BASE=https://1-2-3-4.nip.io in GitHub Actions secrets.
+```
+
+> **Note:** if an existing Oracle VM gets a new public IP, re-run
+> `setup-tls.sh` from the raw GitHub URL:
+> ```bash
+> curl -fsSL https://raw.githubusercontent.com/nikolareljin/orthodox-calendar/main/deploy/oracle/setup-tls.sh \
+>   | sudo bash -s -- --email you@example.com
+> ```
+> It will detect the new IP, update the nginx `server_name` to the new nip.io
+> hostname, and obtain a fresh certificate automatically. On a freshly rebuilt
+> VM, run the initial setup step first so the nginx site exists.
 
 ---
 
@@ -86,13 +126,14 @@ and add:
 | `OCI_HOST` | Public IP (or domain) of the Oracle VM |
 | `OCI_USER` | `ubuntu` (Ubuntu images) or `opc` (Oracle Linux) |
 | `OCI_SSH_KEY` | Contents of the **private** SSH key that matches the public key on the VM |
-| `OCI_KNOWN_HOSTS` | Output of: `ssh-keyscan -H <YOUR_VM_IP>` run from your laptop |
-| `VITE_API_BASE` | `http://<YOUR_VM_IP>` (or `https://your.domain.com` after TLS) |
+| `OCI_KNOWN_HOSTS` | Output of `ssh-keyscan -H <OCI_HOST>` run from your laptop, using the exact host value configured in `OCI_HOST` |
+| `VITE_API_BASE` | `https://<ip-with-hyphens>.nip.io` (set this **before** first deploy; deploy.sh provisions TLS and nginx will redirect HTTP → HTTPS) |
+| `CERTBOT_EMAIL` | Email for Let's Encrypt expiry notifications; required when deploy.sh must provision or repair the nip.io certificate, optional for routine redeploys with an existing matching certificate |
 
 Generate `OCI_KNOWN_HOSTS` on your machine (not the VM):
 
 ```bash
-ssh-keyscan -H <YOUR_VM_IP>
+ssh-keyscan -H <OCI_HOST>
 ```
 
 Copy the full output (one or more lines) as the secret value.
@@ -105,13 +146,16 @@ Settings → Pages → Source: **GitHub Actions** (not a branch).
 
 ## 4 — How deployment works
 
+**Prerequisite:** the initial setup step must have completed once on the VM before any CI deploy. `deploy.sh` fails fast if the systemd unit or nginx site config are absent.
+
 On every merge of a `release/x.y.z` branch into `main`:
 
 1. **Security gate** — gitleaks + data-safety check (must pass before anything deploys).
 2. **Auto-tag** — creates the version tag from the branch name.
-3. In parallel:
-   - **Frontend** — built with `VITE_BASE=/orthodox-calendar/` and `VITE_API_BASE` from secrets, published to GitHub Pages.
-   - **Backend** — uploads a minimal archive containing only `backend/app` and `backend/requirements.txt`, prunes older non-runtime files from the app directory, runs `deploy/oracle/deploy.sh` (pip install + systemctl restart), then health-checks the service.
+3. **Build + backend deploy** run after the gates:
+   - **Frontend build** — builds the static site with `VITE_BASE=/orthodox-calendar/` and `VITE_API_BASE` from secrets, then uploads the Pages artifact.
+   - **Backend deploy** — uploads a minimal archive containing only `backend/app` and `backend/requirements.txt`, prunes older non-runtime files from the app directory, runs `deploy/oracle/deploy.sh` (pip install + systemctl restart), then health-checks the service.
+4. **Pages publish** runs only after the frontend build and backend deploy both succeed, so GitHub Pages is not updated when the backend deploy or public health check fails.
 
 ---
 
@@ -127,9 +171,11 @@ tar -czf /tmp/orthodox-calendar-backend.tar.gz \
   backend/requirements.txt
 scp /tmp/orthodox-calendar-backend.tar.gz ubuntu@<YOUR_VM_IP>:/tmp/orthodox-calendar-backend.tar.gz
 ssh ubuntu@<YOUR_VM_IP> \
-  'APP_DIR=/home/ubuntu/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz bash -s' \
+  'APP_DIR=/home/ubuntu/orthodox-calendar RELEASE_ARCHIVE=/tmp/orthodox-calendar-backend.tar.gz CERTBOT_EMAIL=you@example.com bash -s' \
   < deploy/oracle/deploy.sh
 ```
+
+Omit `CERTBOT_EMAIL` only for routine redeploys where the matching nip.io certificate is already installed and referenced by nginx.
 
 ---
 

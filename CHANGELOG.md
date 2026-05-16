@@ -7,7 +7,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+---
+
+## [0.3.0] - 2026-05-14
+
 ### Added
+- **Tradition persistence** — selected tradition is now saved to `localStorage` (`oc-tradition` key) and restored on next visit; falls back to Serbian if no preference is stored.
 - **Full liturgical reading texts** — Epistle and Gospel verses are now displayed inline with superscript verse numbers and paragraph breaks. Each reading is a collapsible card (source label + reference + expand toggle). Text is sourced from the `passage[]` array already embedded in orthocal.info responses — no additional API calls required.
 - **Church directory** — "Orthodox Churches" grid in the About section with history, founding date, patron saint, website link, and cross glyph for all 16 supported traditions.
 - **Moon phase indicator** — lunar phase emoji, name, and illumination percentage displayed in the day-detail badge row (`GET /api/v1/moon-phase`).
@@ -38,6 +43,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **JDN-based Julian↔Gregorian conversion** — replaced hardcoded 13-day offset with full Julian Day Number algorithm; supported range is years 1–9999 (Python `datetime.date` constraint).
 - **.dockerignore expanded** — excludes `.git`, `docs/`, `scripts/`, `deploy/`, `*.md`, `.github/` from build contexts.
 - **`.env.example` added** — documents `PORT`, `WEB_CONCURRENCY`, and `VITE_API_BASE` variables.
+
+---
+
+## [0.2.1] - 2026-05-14
+
+### Fixed
+- **GitHub Pages deploy trigger** — deploy workflow now fires correctly on pushes to `main`; previously required a manual re-run after release branch merge.
+- **Oracle Cloud venv bootstrap** — `deploy.sh` auto-installs `python3.12-venv` if missing, with `apt-get update` pre-flight; eliminates `ensurepip` failures on minimal Ubuntu images.
+- **Node.js upgraded to 22** — all CI and deploy workflow jobs updated from Node 20 → 22 (LTS at time of release).
+- **Deploy hardening** — iptables rule ordering fixed; nip.io TLS certificate provisioned via certbot after the one-time Oracle setup; deploy pre-flight checks fail fast when required setup artifacts are missing; backend-deploy job timeout added.
+- **`setup-tls.sh`** — standalone script to obtain a Let's Encrypt certificate for the nip.io hostname derived from the Oracle VM's public IP, and enable auto-renewal; `certbot.timer` (systemd) is preferred, daily 03:00 cron as fallback. Certbot contacts Let's Encrypt only when cert is within 30 days of expiry. Accepts optional `--ip` and requires `--email`. Documented in `deploy/oracle/README.md`.
 
 ---
 
