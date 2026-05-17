@@ -237,3 +237,90 @@ def write_output(entries: list[dict], path: Path) -> None:
         f"Wrote {len(entries)} entries ({total} saints, {enriched} enriched) → {path}",
         file=sys.stderr,
     )
+
+
+# ── HTTP fetch ─────────────────────────────────────────────────────────────────
+
+def _fetch(url: str) -> str:
+    req = urllib.request.Request(url, headers=_HEADERS)
+    with urllib.request.urlopen(req, timeout=30) as r:
+        return r.read().decode("utf-8", errors="replace")
+
+
+def _fetch_bytes(url: str) -> bytes:
+    req = urllib.request.Request(url, headers=_HEADERS)
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return r.read()
+
+
+# ── Phase 1: Malankara Google Calendar ICS ────────────────────────────────────
+
+def phase_malankara_ics() -> list[dict]:
+    """Fetch Malankara public Google Calendar ICS — Gregorian dates, use as-is."""
+    print("Phase 1: Malankara ICS...", file=sys.stderr)
+    try:
+        content = _fetch(_MALANKARA_ICS_URL)
+    except Exception as exc:
+        print(f"  WARN: fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    events = parse_ics(content)
+    print(f"  {len(events)} raw events", file=sys.stderr)
+
+    entries: list[dict] = []
+    for md, summary in sorted(events.items()):
+        if not is_substantive(summary):
+            continue
+        entries.append(make_entry(md, [make_saint(summary)]))
+
+    print(f"  {len(entries)} substantive entries", file=sys.stderr)
+    return entries
+
+
+# ── CLI ────────────────────────────────────────────────────────────────────────
+
+def _build_parser() -> argparse.ArgumentParser:
+    p = argparse.ArgumentParser(
+        description="Import Malankara Orthodox Syrian Church calendar"
+    )
+    p.add_argument(
+        "--out",
+        default="backend/app/data/traditions/malankara_saints.json",
+    )
+    p.add_argument("--no-ics",        action="store_true", help="Skip Malankara ICS")
+    p.add_argument("--no-syriac-ics", action="store_true", help="Skip Syriac ICS")
+    p.add_argument("--no-pdf",        action="store_true", help="Skip Panjangom PDF")
+    p.add_argument("--no-syriac-web", action="store_true", help="Skip syriacorthodoxresources.org")
+    p.add_argument("--no-mosc-web",   action="store_true", help="Skip mosc-temp.com")
+    p.add_argument("--no-enrich",     action="store_true", help="Skip Wikipedia enrichment")
+    p.add_argument("--dry-run",       action="store_true", help="Print summary, write nothing")
+    return p
+
+
+def main() -> None:
+    args = _build_parser().parse_args()
+    out_path = Path(args.out)
+
+    entries: list[dict] = []
+
+    if not args.no_ics:
+        entries = merge_into(entries, phase_malankara_ics())
+
+    # Remaining phases added in later tasks:
+    # syriac_ics, pdf, syriac_web, mosc_web, enrich
+
+    print(f"\nTotal: {len(entries)} entries, "
+          f"{sum(len(e['saints']) for e in entries)} saints", file=sys.stderr)
+
+    if args.dry_run:
+        print("\nSample (first 5):", file=sys.stderr)
+        for e in entries[:5]:
+            print(f"  {e['month_day']}: {e['saints'][0]['name'][:60]}", file=sys.stderr)
+        print("(dry-run — nothing written)", file=sys.stderr)
+        return
+
+    write_output(entries, out_path)
+
+
+if __name__ == "__main__":
+    main()
