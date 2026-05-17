@@ -22,6 +22,7 @@ import argparse
 import json
 import re
 import sys
+import tempfile
 import time
 import urllib.parse
 import urllib.request
@@ -311,6 +312,94 @@ def phase_syriac_ics() -> list[dict]:
     return entries
 
 
+# ── Phase 3: Panjangom PDF ────────────────────────────────────────────────────
+
+_MONTH_NAMES = {
+    "january": 1, "february": 2, "march": 3, "april": 4,
+    "may": 5, "june": 6, "july": 7, "august": 8,
+    "september": 9, "october": 10, "november": 11, "december": 12,
+}
+
+# Matches: "January 7 - Feast of the Nativity" or "January 7: ..." or "January 7 ..."
+_PDF_DATE_LINE_RE = re.compile(
+    r"(?:^|\n)\s*"
+    r"(?P<month>January|February|March|April|May|June|July|August|"
+    r"September|October|November|December)\s+"
+    r"(?P<day>\d{1,2})"
+    r"(?:[:\s\-–]+)(?P<rest>[^\n]+)",
+    re.IGNORECASE | re.MULTILINE,
+)
+
+
+def _extract_pdf_text(path: Path) -> str:
+    try:
+        import pdfplumber
+    except ImportError:
+        print(
+            "  WARN: pdfplumber not installed. Run: pip install pdfplumber",
+            file=sys.stderr,
+        )
+        return ""
+
+    pages = []
+    with pdfplumber.open(path) as pdf:
+        for page in pdf.pages:
+            t = page.extract_text()
+            if t:
+                pages.append(t)
+    return "\n".join(pages)
+
+
+def phase_pdf(tmp_dir: Path) -> list[dict]:
+    """Download and parse the official Panjangom (MOSC almanac) PDF."""
+    print("Phase 3: Panjangom PDF...", file=sys.stderr)
+    pdf_path = tmp_dir / "panjangom.pdf"
+
+    if not pdf_path.exists():
+        try:
+            print(f"  Downloading PDF...", file=sys.stderr)
+            pdf_path.write_bytes(_fetch_bytes(_PANJANGOM_PDF_URL))
+            print(f"  Downloaded {pdf_path.stat().st_size // 1024} KB", file=sys.stderr)
+        except Exception as exc:
+            print(f"  WARN: PDF download failed: {exc}", file=sys.stderr)
+            return []
+
+    text = _extract_pdf_text(pdf_path)
+    if not text:
+        print("  WARN: no text extracted from PDF", file=sys.stderr)
+        return []
+
+    print(f"  Extracted {len(text)} chars of text", file=sys.stderr)
+
+    entries: list[dict] = []
+    seen: set[str] = set()
+    for m in _PDF_DATE_LINE_RE.finditer(text):
+        month_num = _MONTH_NAMES[m.group("month").lower()]
+        day = int(m.group("day"))
+        if day > 31:
+            continue
+        rest = m.group("rest").strip()
+        if not is_substantive(rest):
+            continue
+        md = f"{month_num:02d}-{day:02d}"
+        key = f"{md}:{normalize_key(rest)}"
+        if key in seen:
+            continue
+        seen.add(key)
+        entries.append(make_entry(md, [make_saint(rest)]))
+
+    print(f"  {len(entries)} substantive entries from PDF", file=sys.stderr)
+
+    if not entries:
+        print(
+            "  WARN: 0 entries parsed. The PDF layout may differ from expected.\n"
+            "  Inspect the PDF structure and adjust _PDF_DATE_LINE_RE if needed.",
+            file=sys.stderr,
+        )
+
+    return entries
+
+
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -343,8 +432,13 @@ def main() -> None:
     if not args.no_syriac_ics:
         entries = merge_into(entries, phase_syriac_ics())
 
+    if not args.no_pdf:
+        tmp = Path(tempfile.gettempdir()) / "malankara_import"
+        tmp.mkdir(exist_ok=True)
+        entries = merge_into(entries, phase_pdf(tmp))
+
     # Remaining phases added in later tasks:
-    # pdf, syriac_web, mosc_web, enrich
+    # syriac_web, mosc_web, enrich
 
     print(f"\nTotal: {len(entries)} entries, "
           f"{sum(len(e['saints']) for e in entries)} saints", file=sys.stderr)
