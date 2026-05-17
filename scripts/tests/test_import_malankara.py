@@ -41,6 +41,7 @@ def test_parse_ics_multiline_summary():
     )
     result = parse_ics(ics)
     assert "03-01" in result
+    assert result["03-01"] == "Feast of Saint Thomas the Apostle"
 
 
 def test_julian_civil_to_malankara_christmas():

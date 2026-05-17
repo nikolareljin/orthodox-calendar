@@ -67,8 +67,8 @@ def parse_ics(content: str) -> dict[str, str]:
             continue
         raw = dm.group(1)  # YYYYMMDD
         md = f"{raw[4:6]}-{raw[6:8]}"
-        # Unfold RFC 5545 line folding (CRLF + space/tab)
-        summary = re.sub(r"\r?\n[ \t]", "", sm.group(1))
+        # Unfold RFC 5545 line folding (CRLF + space/tab) — replace with single space
+        summary = re.sub(r"\r?\n[ \t]", " ", sm.group(1))
         summary = re.sub(r"\s+", " ", summary).strip()
         if md not in result:
             result[md] = summary
