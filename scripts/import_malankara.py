@@ -300,7 +300,11 @@ def phase_syriac_ics() -> list[dict]:
     for syriac_md, summary in sorted(events.items()):
         if not is_substantive(summary):
             continue
-        malankara_md = julian_civil_to_malankara(syriac_md)
+        try:
+            malankara_md = julian_civil_to_malankara(syriac_md)
+        except (ValueError, IndexError):
+            print(f"  WARN: skipping malformed date key {syriac_md!r}", file=sys.stderr)
+            continue
         entries.append(make_entry(malankara_md, [make_saint(summary)]))
 
     print(f"  {len(entries)} substantive entries (after date conversion)", file=sys.stderr)
