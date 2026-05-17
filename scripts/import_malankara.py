@@ -277,6 +277,36 @@ def phase_malankara_ics() -> list[dict]:
     return entries
 
 
+# ── Phase 2: Syriac Patriarchate ICS ─────────────────────────────────────────
+
+def phase_syriac_ics() -> list[dict]:
+    """Fetch Syriac Patriarchate ICS — Julian feast dates shown as Gregorian civil dates.
+
+    The Syriac Orthodox Church follows the Julian calendar, so their ICS dates are
+    Gregorian civil equivalents of Julian feasts (e.g. Christmas = Jan 7, not Dec 25).
+    Malankara uses the true Gregorian calendar (since 1953), so we subtract 13 days.
+    """
+    print("Phase 2: Syriac Patriarchate ICS...", file=sys.stderr)
+    try:
+        content = _fetch(_SYRIAC_ICS_URL)
+    except Exception as exc:
+        print(f"  WARN: fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    events = parse_ics(content)
+    print(f"  {len(events)} raw events", file=sys.stderr)
+
+    entries: list[dict] = []
+    for syriac_md, summary in sorted(events.items()):
+        if not is_substantive(summary):
+            continue
+        malankara_md = julian_civil_to_malankara(syriac_md)
+        entries.append(make_entry(malankara_md, [make_saint(summary)]))
+
+    print(f"  {len(entries)} substantive entries (after date conversion)", file=sys.stderr)
+    return entries
+
+
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -306,8 +336,11 @@ def main() -> None:
     if not args.no_ics:
         entries = merge_into(entries, phase_malankara_ics())
 
+    if not args.no_syriac_ics:
+        entries = merge_into(entries, phase_syriac_ics())
+
     # Remaining phases added in later tasks:
-    # syriac_ics, pdf, syriac_web, mosc_web, enrich
+    # pdf, syriac_web, mosc_web, enrich
 
     print(f"\nTotal: {len(entries)} entries, "
           f"{sum(len(e['saints']) for e in entries)} saints", file=sys.stderr)
