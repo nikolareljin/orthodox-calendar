@@ -163,3 +163,77 @@ _DROP_TOKENS = frozenset({
 def normalize_key(name: str) -> str:
     tokens = _NORMALIZE_STRIP_RE.sub(" ", name.lower()).split()
     return " ".join(t for t in tokens if t not in _DROP_TOKENS)
+
+
+# ── Entry and saint builders ───────────────────────────────────────────────────
+
+def make_saint(
+    name: str,
+    notes: str | None = None,
+    hagiography_url: str | None = None,
+) -> dict:
+    return {
+        "name": clean_name(name),
+        "title": name,
+        "feast_type": feast_type(name),
+        "hagiography_url": hagiography_url,
+        "notes": notes,
+        "canonized_by": "Malankara Orthodox Syrian Church",
+        "canonization_scope": "oriental",
+        "year_canonized": None,
+    }
+
+
+def make_entry(md: str, saints: list[dict]) -> dict:
+    return {
+        "month_day": md,
+        "tradition": "malankara",
+        "calendar": "gregorian",
+        "saints": saints,
+    }
+
+
+# ── Merge ──────────────────────────────────────────────────────────────────────
+
+def _merge_saint(base: dict, overlay: dict) -> None:
+    """Overlay non-empty fields into base without overwriting existing data."""
+    for field in ("title", "feast_type", "hagiography_url", "notes",
+                  "canonized_by", "canonization_scope", "year_canonized"):
+        if overlay.get(field) and not base.get(field):
+            base[field] = overlay[field]
+
+
+def merge_into(base: list[dict], new: list[dict]) -> list[dict]:
+    """Merge new entries into base. Adds new dates/saints; enriches existing."""
+    by_md: dict[str, dict] = {e["month_day"]: e for e in base}
+    for entry in new:
+        md = entry["month_day"]
+        if md not in by_md:
+            by_md[md] = entry
+        else:
+            existing_keys = {normalize_key(s["name"]) for s in by_md[md]["saints"]}
+            for saint in entry["saints"]:
+                key = normalize_key(saint["name"])
+                if key not in existing_keys:
+                    by_md[md]["saints"].append(saint)
+                    existing_keys.add(key)
+                else:
+                    for s in by_md[md]["saints"]:
+                        if normalize_key(s["name"]) == key:
+                            _merge_saint(s, saint)
+                            break
+    return sorted(by_md.values(), key=lambda e: e["month_day"])
+
+
+# ── Output writer ──────────────────────────────────────────────────────────────
+
+def write_output(entries: list[dict], path: Path) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(entries, f, ensure_ascii=False, indent=2)
+    total = sum(len(e["saints"]) for e in entries)
+    enriched = sum(1 for e in entries for s in e["saints"] if s.get("hagiography_url"))
+    print(
+        f"Wrote {len(entries)} entries ({total} saints, {enriched} enriched) → {path}",
+        file=sys.stderr,
+    )

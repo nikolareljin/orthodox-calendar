@@ -104,3 +104,60 @@ def test_feast_type_detection():
 def test_normalize_key_deduplicates_same_saint():
     assert normalize_key("Saint Thomas") == normalize_key("Thomas")
     assert normalize_key("St. Mary") == normalize_key("Mary")
+
+
+from import_malankara import make_saint, make_entry, merge_into
+
+
+def _s(name, url=None, notes=None):
+    return {
+        "name": name, "title": name, "feast_type": "Saint",
+        "hagiography_url": url, "notes": notes,
+        "canonized_by": "Malankara Orthodox Syrian Church",
+        "canonization_scope": "oriental", "year_canonized": None,
+    }
+
+
+def test_merge_into_adds_new_date():
+    base = [make_entry("01-07", [_s("Nativity")])]
+    new  = [make_entry("01-14", [_s("New Year")])]
+    result = merge_into(base, new)
+    assert len(result) == 2
+    assert result[0]["month_day"] == "01-07"
+    assert result[1]["month_day"] == "01-14"
+
+
+def test_merge_into_deduplicates_same_saint():
+    base = [make_entry("07-03", [_s("Thomas")])]
+    dupe = [make_entry("07-03", [_s("Saint Thomas")])]
+    result = merge_into(base, dupe)
+    assert len(result[0]["saints"]) == 1
+
+
+def test_merge_into_enriches_existing():
+    base = [make_entry("07-03", [_s("Thomas", url=None, notes=None)])]
+    rich = [make_entry("07-03", [_s("Thomas", url="https://en.wikipedia.org/wiki/Thomas")])]
+    result = merge_into(base, rich)
+    assert result[0]["saints"][0]["hagiography_url"] == "https://en.wikipedia.org/wiki/Thomas"
+
+
+def test_merge_into_adds_new_saint_same_date():
+    base = [make_entry("07-03", [_s("Thomas")])]
+    new  = [make_entry("07-03", [_s("Mary Magdalene")])]
+    result = merge_into(base, new)
+    assert len(result[0]["saints"]) == 2
+
+
+def test_make_saint_sets_required_fields():
+    s = make_saint("Nativity of Our Lord")
+    assert s["name"] == "Nativity of Our Lord"
+    assert s["feast_type"] == "Feast"
+    assert s["canonized_by"] == "Malankara Orthodox Syrian Church"
+    assert s["canonization_scope"] == "oriental"
+
+
+def test_make_entry_structure():
+    e = make_entry("12-25", [make_saint("Nativity")])
+    assert e["tradition"] == "malankara"
+    assert e["calendar"] == "gregorian"
+    assert e["month_day"] == "12-25"
