@@ -606,9 +606,12 @@ def _fetch_wiki_extracts(titles: list[str]) -> dict[str, dict]:
             }
 
         for orig in batch:
-            resolved = norm.get(orig, orig)
-            if resolved in result and orig not in result:
-                result[orig] = result[resolved]
+            key, seen = orig, set()
+            while key in norm and key not in seen:
+                seen.add(key)
+                key = norm[key]
+            if key in result and orig not in result:
+                result[orig] = result[key]
 
         if i + 50 < len(titles):
             time.sleep(0.3)
@@ -616,8 +619,8 @@ def _fetch_wiki_extracts(titles: list[str]) -> dict[str, dict]:
     return result
 
 
-def phase_enrich(entries: list[dict]) -> list[dict]:
-    """Fetch Wikipedia extracts for saints without hagiography_url."""
+def phase_enrich(entries: list[dict]) -> None:
+    """Enrich saints in-place with Wikipedia hagiography_url and notes."""
     all_names: list[str] = []
     for entry in entries:
         for saint in entry["saints"]:
@@ -639,8 +642,6 @@ def phase_enrich(entries: list[dict]) -> list[dict]:
                     if not saint.get("notes"):
                         saint["notes"] = wiki[cand]["description"]
                     break
-
-    return entries
 
 
 # ── CLI ────────────────────────────────────────────────────────────────────────
@@ -687,7 +688,7 @@ def main() -> None:
         entries = merge_into(entries, phase_mosc_web())
 
     if not args.no_enrich:
-        entries = phase_enrich(entries)
+        phase_enrich(entries)
 
     print(f"\nTotal: {len(entries)} entries, "
           f"{sum(len(e['saints']) for e in entries)} saints", file=sys.stderr)
