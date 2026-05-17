@@ -1,15 +1,70 @@
 [
   {
+    "month_day": "01-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+        "name_hy": "Սրբոցն՝ Բարսղի հայրապետին, եւ եղբօր նորին Գրիգորի Նիւսացւոյն, Սեղբեստրոսի Հռովմայ հայրապետին, եւ աբբայ Եփրեմի Խուրին ասորւոյ",
+        "title": "Saints Basil the Great and his brother St. Gregory of Nyssa, Sylvester the Patriarch of Rome, and Ephrem the Syrian",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Basil_of_Caesarea",
+        "notes": "Basil of Caesarea, also called Saint Basil the Great (330 – 1 or 2 January 379), was an early Christian prelate. He served as Bishop of Caesarea Mazaca in Cappadocia from 370 until his death in 379. He was an influential theologian who supported the Nicene Creed and opposed heresies within the early Christian church such as Arianism and Apollinarianism.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Eve of the Nativity and Theophany of our Lord Jesus Christ",
+        "name_hy": "ՃՐԱԳԱԼՈՅՑ Ս. ԾՆՆԴԵԱՆ ԵՒ ԱՍՏՈՒԱԾԱՅԱՅՏՆՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ",
+        "title": "Eve of the Nativity and Theophany of our Lord Jesus Christ",
+        "feast_type": "Feast",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/january/feast-of-the-holy-nativity-and-theophany-of-our-lord-jesus-christ",
+        "notes": "Each year, on January 6, the Armenian Apostolic Church celebrates the Feast of the Holy Nativity and Theophany of Our Lord Jesus Christ, which is the commemoration of the Birth and Baptism of Jesus Christ. God was incarnated and appeared to the people. During the Baptism of Jesus God the Father said, “This is my Son, whom I love; with him I am well pleased” (Mt 3:17) and the Holy Spirit descended",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-06",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST",
+        "name_hy": "ՏՕՆ ԱՍՏՈՒԱԾԱՅԱՅՏՆՈՒԹԵԱՆ ԵՒ ԾՆՆԴԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ",
+        "title": "NATIVITY AND THEOPHANY OF OUR LORD JESUS CHRIST",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
     "month_day": "01-13",
     "tradition": "armenian",
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Naming of Jesus Christ",
-        "title": "Feast of the Naming of Jesus Christ",
+        "name": "Еighth day of Nativity - Feast of Naming of Our Lord Jesus Christ",
+        "name_hy": "ՏՕՆ ԱՆՈՒԱՆԱԿՈՉՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ",
+        "title": "Еighth day of Nativity - Feast of Naming of Our Lord Jesus Christ",
         "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/17",
-        "notes": "And when eight days were accomplished for the circumcising of the child, his name was called , which was so named of the angel before he was conceived in the womb.",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/january/feast-of-naming",
+        "notes": "Each year, on January 13, the Armenian Apostolic Church celebrates the Feast of Naming of Our Lord Jesus Christ. As Evangelist St. Luke writes in his Gospel, according to the Jewish tradition “On the eighth day, when it was time to circumcise him, he was named Jesus, the name the angel had given him before he had been conceived.” (Lk 2:21).",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -22,11 +77,120 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "The Birth of John the Baptist",
-        "title": "The Birth of John the Baptist",
-        "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/18",
-        "notes": "Now Elisabeth's full time came that she should be delivered; and she brought forth a son.",
+        "name": "Feast of the Birth of St. John the Forerunner (Baptist)",
+        "name_hy": "Տօն ծննդեան սրբոյն Յովհաննու Կարապետին",
+        "title": "Feast of the Birth of St. John the Forerunner (Baptist)",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/january/feastofthebirth",
+        "notes": "The birth of St. John the Baptist is described in details in the Gospel according to Like (Lk 1:5-25). One day Zechariah, father of St John the Baptist, was doing his work as a priest in the Temple and was burning incense on the altar.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-17",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+        "name_hy": "Սրբոցն՝ Պետրոսի հայրապետին, Վլասայ եպիսկոպոսին եւ Աբիսողոմայ սարկաւագին",
+        "title": "Saints Peter the Patriarch, Blaise the Bishop and Absalom the Deacon",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/january/commemoration",
+        "notes": "Peter of Alexandria and Deacon Abisolom are important saints of the Universal Church. At the beginning of the 4th century being the Patriarch of Alexandria, St.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-19",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+        "name_hy": "Սրբոցն՝ Անտոնի ճգնաւորին, Տրիփոնի, Պարսամայ եւ Ոնոփրիոսի ճգնաւորացն",
+        "title": "The Hermits Saints Anton, Triphon, Barsauma and Onouphrius",
+        "feast_type": "Venerable",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-20",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Theodosius and the Children of Ephesus",
+        "name_hy": "Սրբոցն՝ Թէոդոսի Թագաւորին եւ Մանկանցն Եփեսոսի",
+        "title": "Saints Theodosius and the Children of Ephesus",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Theodosius",
+        "notes": "Theodosius (Latinized from the Greek \"Θεοδόσιος\", Theodosios, \"given by god\") is a given name. It may take the form Teodósio, Teodosie, Teodosije etc. Theodosia is a feminine version of the name.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-22",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+        "name_hy": "Սրբոցն՝ Կիրակոսի եւ մօրն Յուղիտայի եւ Վահանայ Գողթնացւոյն եւ վկայիցն՝ Գորդիոսի, Պօղիքտոսի եւ Գրիգորիսի",
+        "title": "Saints Cyricus and His Mother Julitta, and Saints Vahan of Goghtn, Gordius, Polyeuctus and Grigoris",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Cyricus_and_Julitta",
+        "notes": "Cyricus and his mother Julitta are venerated as early Christian martyrs. According to traditional stories, they were put to death at Tarsus in AD 304.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-24",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
+        "name_hy": "Կոստանդնուպոլսոյ Ս. Ժողովոյն հարիւր եւ յիսուն հայրապետացն",
+        "title": "Commemoration of 150 Fathers participating in the Ecumenical Council of Constantinople (AD 381)",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/january/commemoration-of-150-pontiffs-participating-in-the-ecumenical-council-of-constantinople",
+        "notes": "As the result of Arian disputes a new heresy had appeared, the head and supporter of which was Bishop Makedon of Constantinople, who denied the deity of the Holy Spirit. The Ecumenical Council convened in Constantinople on that special occasion, re-endorsed the definition of the Ecumenical Council of Nicaea and stack for the formulation “One deity, three persons”. Accepting the Ecumenical Council,",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "01-30",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Remembrance of the Prophet Jonah",
+        "name_hy": "(Յիշատակ Յովնանու Մարգարէին)",
+        "title": "Remembrance of the Prophet Jonah",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/january/commemoration-of-the-prophet-jonah",
+        "notes": "Later Christ brings the example of the Prophet Jonah to the Pharisees asking for a divine sign. The Armenian Apostolic Church commemorates the memory of the Prophet Jonah always during the period of the fast of Catechumens symbolizing that thanks to sincere repentance one may deserve God’s mercy.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -39,11 +203,102 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "St. Sarkis the Warrior, His Son St. Martiros, and His Fourteen Soldiers",
-        "title": "Feast of St. Sarkis the Warrior, His Son St. Martiros, and His Fourteen Soldiers",
+        "name": "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
+        "name_hy": "Սրբոցն՝ Սարգսի զօրավարին եւ որդւոյ նորա Մարտիրոսին եւ չորեքտասան զինուորացն",
+        "title": "Saint Sargis the Warrior and his son Martiros and his Fourteen Soldiers",
         "feast_type": "Saint",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/21",
-        "notes": "(Sargis) was a Roman military commander whom Emperor Constantine the Great (306–337 AD) appointed governor and stratelates of Cappadocia, a region bordering Armenia. He actively preached the Gospel and destroyed pagan sanctuaries.",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-02",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Atom and his soldiers",
+        "name_hy": "Սրբոց Ատովմեանց զօրավարացն",
+        "title": "Saints Atom and his soldiers",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Atom",
+        "notes": "Atoms are the basic particles of the chemical elements and the fundamental building blocks of matter. An atom consists of a nucleus of protons and generally neutrons, surrounded by an electromagnetically bound swarm of electrons. The chemical elements are distinguished from each other by the number of protons that are in their atoms.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Sukiasians the Martyrs",
+        "name_hy": "Սրբոց Սուքիասանց վկայիցն",
+        "title": "Saints Sukiasians the Martyrs",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Voskians the Priests",
+        "name_hy": "Սրբոց Ոսկեանց քահանայիցն",
+        "title": "Saints Voskians the Priests",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/february/commemoration-of-sts-voskian-priests",
+        "notes": "After the martyrdom of the Apostle St. Bartholomew they were isolated in the mountains Tsaghkavet of Tsaghkotn province and led an ascetic life for about 40 years. Being led by the divine message they came to the Armenian royal court to preach Christianity the Armenian king Artashes and the queen Satenik.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-07",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Sahak I the Parthian, Patriarch of Armenia",
+        "name_hy": "Սրբոյն Իսահակայ Պարթեւի հայրապետին մերոյ",
+        "title": "Saint Sahak I the Parthian, Patriarch of Armenia",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Catholicos_of_All_Armenians",
+        "notes": "The Catholicos of All Armenians (Armenian: Ամենայն Հայոց Կաթողիկոս) is the chief bishop and spiritual leader of Armenia's national church, the Armenian Apostolic Church, and the worldwide Armenian diaspora. The Armenian Catholicos (plural Catholicoi) is also known as the Armenian Pontiff (Վեհափառ, Vehapar or Վեհափառ Հայրապետ, Vehapar Hayrapet) and by other titles. According to tradition, the apost",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-09",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+        "name_hy": "Սրբոցն՝ Մարկոսի եպիսկոպոսին, Պիոնի քահանային, Կիւրղի եւ Բենիամինի սարկաւագացն, եւ վկայիցն Աբդլմսեհի, Որմզդանայ եւ Սայենի",
+        "title": "Saints Mark the Bishop, Pionius the Priest, Cyril and Benjamin the Deacons, and Martyrs Abdelmseh, Ormistan and Sayen",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Cyril",
+        "notes": "Cyril (also Cyrillus or Cyryl) is a masculine given name. It is derived from the Greek name Κύριλλος (Kýrillos), meaning 'lordly, masterful', which in turn derives from Greek κυριος (kýrios) 'lord'. There are various variant forms of the name Cyril such as Cyrill, Cyrille, Ciril, Kirill, Kiryl, Kirillos, Kyrylo, Kiril, Kiro, Kyril, Kyrill and Quirrel.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -56,11 +311,12 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "St. Ghevontian Martyrs",
-        "title": "St. Ghevontian Martyrs",
-        "feast_type": "Martyr",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/38",
-        "notes": "The St. Ghevontian Martyrs (The Leontine Martyrs, Ghevondyank) were a group of clergymen persecuted after the Battle of Vardanants in 451 AD. By order of the Persian King Yazdegerd II (439–457 AD), they were arrested and taken first to Hyrcania and later to the Apar region, where they were imprisone",
+        "name": "Saints Ghevond the Priest and His Companions",
+        "name_hy": "Սրբոց Ղեւոնդեանց քահանայիցն",
+        "title": "Saints Ghevond the Priest and His Companions",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/february/feast-of-st-ghevond-the-priest-and-his-companions",
+        "notes": "The eldest among them was Priest St. Ghevond, and among his companions were Catholics Hovsep, Bishop Sahak of Syunik, Bishop Tatik of Basen, Priest Mushe or Mushegh, Priest Arshen, Priest Samuel, Deacons Abraham and Kajajn. After the Battle of Avarayr the Persian King Hazkert took revenge on Armenians and ordered to kill the brave priests.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -73,11 +329,12 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "St. Vardanants Commanders and the 1,036 Martyrs",
-        "title": "Feast of St. Vardanants Commanders and the 1,036 Martyrs",
-        "feast_type": "Martyr",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/22",
-        "notes": "refers to all martyrs who shed their blood in 451 AD during the Battle of Avarayr to defend the Christian faith and the homeland. The Armenian people revolted against the pressures of Persian King Yazdegerd II, particularly his decree demanding that the Christian peoples under his rule abandon their",
+        "name": "Saints Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle",
+        "name_hy": "ՍՐԲՈՑ ՎԱՐԴԱՆԱՆՑ ԶՕՐԱՎԱՐԱՑՆ ՄԵՐՈՑ, հազար երեսուն եւ վեց վկայիցն, որք կատարեցան ’ի մեծի պատերազմին",
+        "title": "Saints Vardan the General and His Companions - the 1036 Martyrs who died in the Great Battle",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -90,11 +347,84 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Presentation of Our Lord to the Temple, Candlemas",
-        "title": "Feast of the Presentation of Our Lord to the Temple, Candlemas",
+        "name": "PRESENTATION OF OUR LORD TO THE TEMPLE",
+        "name_hy": "ՏԵԱՌՆԸՆԴԱՌԱՋ։ Տօն քառասնօրեայ գալստեանն Քրիստոսի ’ի տաճարն",
+        "title": "PRESENTATION OF OUR LORD TO THE TEMPLE",
         "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/20",
-        "notes": "“Now there was a man in Jerusalem, whose name was Simeon, and this man was righteous and devout, looking for the consolation of Israel, and the Holy Spirit was upon him. And it had been revealed to him by the Holy Spirit that he should not see death before he had seen the Lord’s Christ. And inspired",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-21",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Theodore the Tyron",
+        "name_hy": "Սրբոյն Թէոդորոսի զօրավարին",
+        "title": "Saint Theodore the Tyron",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-28",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Cyril of Jerusalem, Cyril the Bishop and Anna",
+        "name_hy": "Սրբոցն՝ Կիւրղի Երուսաղեմայ հայրապետին, եւ միւս Կիւրղի եպիսկոպոսին եւ մօրն նորա Աննայի",
+        "title": "Saints Cyril of Jerusalem, Cyril the Bishop and Anna",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Cyril_of_Jerusalem",
+        "notes": "Cyril of Jerusalem (Greek: Κύριλλος Α΄ Ἱεροσολύμων, Kýrillos A΄ Hierosolýmōn; Latin: Cyrillus Hierosolymitanus; c. 313 – 386) was a theologian of the Early Church. About the end of AD 350, he succeeded Maximus as Bishop of Jerusalem, but was exiled on more than one occasion due to the enmity of Acacius of Caesarea, and the policies of various emperors.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-07",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev",
+        "name_hy": "Սրբոյն Յովհաննու Երուսաղեմայ հայրապետին, եւ սրբոց հայրապետացն մերոց՝ Յովհաննու Օձնեցւոյն, Յովհաննու Որոտնեցւոյն, եւ Գրիգորի Տաթեւացւոյն",
+        "title": "Saints John the Patriarch of Jerusalem, John of Otzun the Patriarch of Armenia, John of Vorotan and Gregory of Tatev",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-14",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Forty Martyrs of Sebastia",
+        "name_hy": "Սրբոց Մանկանցն Քառասնից որք ‘ի Սեբաստիա կատարեցան։ Սրբոց Մանկանցն Քառասնից որք ‘ի Սեբաստիա կատարեցան",
+        "title": "Saints Forty Martyrs of Sebastia",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/march/commemoration-of-the-forty-holy-martyrs",
+        "notes": "The Forty Holy Martyrs martyred in approximately 320 AD were Christians from various towns and cities of Lesser Armenia. They served as soldiers in the royal regiment of Sebastia. Upon the decree of Roman Emperor Likianos, interrogations were organized by Lucias, Duke of Caesarea, to reveal the Christian soldiers.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -107,11 +437,12 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "St. Gregory the Illuminator’s Descent into the Pit",
-        "title": "Feast of St. Gregory the Illuminator’s Descent into the Pit",
+        "name": "Saint Gregory the Illuminator’s Commitment to the Pit",
+        "name_hy": "ՏՕՆ Է ՍՐԲՈՅՆ ԳՐԻԳՈՐԻ ԼՈՒՍԱՒՈՐՉԻՆ ՄԵՐՈՅ ՍՈՍԿԱԼԻ ՉԱՐՉԱՐԱՆԱՑՆ ԵՒ ՄՏԱՆԵԼՈՅՆ ’Ի ՎԻՐԱՊՆ",
+        "title": "Saint Gregory the Illuminator’s Commitment to the Pit",
         "feast_type": "Saint",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/24",
-        "notes": "Under the leadership of Saint Gregory the Illuminator and King Tiridates III of Greater Armenia (287–330 AD), Armenia adopted Christianity as a state religion. Saint Gregory the Illuminator, the first Catholicos of all Armenians, is venerated as a saint by the Orthodox, Roman Catholic, and Anglican ",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/march/commemoration-of-st-gregory-the-illuminator-s-torments-and-commitment-to-the-pit",
+        "notes": "This feast is the first one among the three commemoration days dedicated to the memory of St. Gregory the Illuminator, the first Catholicos of All Armenians. According to the Armenian Church Calendar, it is celebrated on the eve of the Fifth Sunday during the period of Great Lent.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -119,16 +450,17 @@
     ]
   },
   {
-    "month_day": "03-31",
+    "month_day": "03-28",
     "tradition": "armenian",
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Great Week,  March 30 - April 04",
-        "title": "Great Week,  March 30 - April 04",
-        "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/63",
-        "notes": "Great Week is the week following Palm Sunday, culminating in the Glorious Resurrection of our Lord Jesus Christ on Easter Sunday.",
+        "name": "Forty First day of Great Lent - Remembrance of the Raising of Lazarus",
+        "name_hy": "Յիշատակ է Յարութեանն Ղազարու",
+        "title": "Forty First day of Great Lent - Remembrance of the Raising of Lazarus",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -136,16 +468,89 @@
     ]
   },
   {
-    "month_day": "04-07",
+    "month_day": "04-02",
     "tradition": "armenian",
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "The Annunciation of the Lord",
-        "title": "The Annunciation of the Lord",
+        "name": "Great Thursday - Fast day - Remembrance of the Last Supper",
+        "name_hy": "ԱՒԱԳ ՀԻՆԳՇԱԲԹԻ։ Պահք։ (Յիշատակ Ընթրեաց Տեառն մերոյ Յիսուսի Քրիստոսի եւ Ոտնլուայն)",
+        "title": "Great Thursday - Fast day - Remembrance of the Last Supper",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Great Friday - Fast day - Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ",
+        "name_hy": "ԱՒԱԳ ՈՒՐԲԱԹ։ Պահք։ (Յիշատակ Չարչարանաց, Խաչելութեան եւ Թաղման Տեառն մերոյ Յիսուսի Քրիստոսի)",
+        "title": "Great Friday - Fast day - Remembrance of the Passion, Crucifixion, and Burial of our Lord Jesus Christ",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Crucifixion",
+        "notes": "Crucifixion is a method of capital punishment and torture in which the condemned is tied or nailed to a large wooden cross, beam or stake and usually left to hang until eventual death, which could take minutes to days. It was first used as a punishment by the Achaemenids, Carthaginians, and Romans, among others. Crucifixion has been used in some countries as recently as the 21st century.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-04",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Great Saturday - Fast day - Eve of the Resurrection of our Lord Jesus Christ",
+        "name_hy": "ԱՒԱԳ ՇԱԲԱԹ. ՃՐԱԳԱԼՈՅՑ Ս. ՅԱՐՈՒԹԵԱՆ",
+        "title": "Great Saturday - Fast day - Eve of the Resurrection of our Lord Jesus Christ",
         "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/25",
-        "notes": "In the sixth month, the Angel Gabriel was sent by God to a city of Galilee called Nazareth, to a virgin espoused to a man named Joseph, of the house of David; and the virgin’s name was Mary. And the angel, coming to her, said:",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)",
+        "name_hy": "ՏՕՆ ՅԱՐՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ",
+        "title": "RESURRECTION OF OUR LORD JESUS CHRIST (Easter Sunday)",
+        "feast_type": "Feast",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/april/feast-of-the-glorious-resurrection-of-jesus-christ",
+        "notes": "The Feast of the Glorious Resurrection of Our Lord Jesus Christ or the Easter Feast is one of the five major feasts of the Armenian Church. The main origin of the feast is the following. The king of Egypt didn’t agree to allow the Hebrews to travel into the desert to offer sacrifices to Lord the God, and the last punishment of God on the king of Egypt that should force the king to let the Hebrews",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "04-11",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Beheading of St. John the Forerunner (the Baptist)",
+        "name_hy": "Յիշատակ գլխատման սրբոյն Յովհաննու Մկրտչին",
+        "title": "Beheading of St. John the Forerunner (the Baptist)",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/april/commemoration-of-beheading-of-st-john-the-baptist",
+        "notes": "The Saturday following the Holy Feast of the Glorious Resurrection of Our Lord Jesus Christ, the Armenian Church commemorates the beheading of St. John the Baptist (also known as The Forerunner). The writers of the Gospels, St.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -158,11 +563,48 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Apparition of the Holy Cross",
-        "title": "Feast of the Apparition of the Holy Cross",
+        "name": "Fifth Sunday - Appearance of the Holy Cross",
+        "name_hy": "ՏՕՆ ԵՐԵՒՄԱՆ Ս. ԽԱՉԻՆ",
+        "title": "Fifth Sunday - Appearance of the Holy Cross",
         "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/30",
-        "notes": "The Feast of the Apparition of the Holy Cross commemorates a miraculous event that graced the skies of Jerusalem. On May 19, 351, a magnificent radiant cross, shining with celestial light, appeared over the city, spanning from the Mount of Olives to Golgotha and visible to all who looked toward the ",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-14",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Fortieth day of Eastertide - ASCENSION OF OUR LORD JESUS CHRIST",
+        "name_hy": "ՏՕՆ ՀԱՄԲԱՐՁՄԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ",
+        "title": "Fortieth day of Eastertide - ASCENSION OF OUR LORD JESUS CHRIST",
+        "feast_type": "Feast",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/may/feast-of-ascension-of-our-lord-jesus-christ",
+        "notes": "The Armenian Church celebrates the Feast of the Ascension of Our Lord on the fortieth day following the Feast of the Glorious Resurrection of Our Savior Jesus Christ. Following His Resurrection and defeat of death, Christ remained on earth for forty days, and continued to appear to His disciples. On the fortieth day, Christ is seen by His disciples for the last time.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-24",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "PENTECOST (Fiftieth day of Eastertide) - Eve of Fast of Prophet Elijah",
+        "name_hy": "ՏՕՆ ԳԱԼՍՏԵԱՆ ՀՈԳՒՈՅՆ ՍՐԲՈՅ։ (ՊԵՆՏԵԿՈՍՏԷ՝ յիսներոդ օր ’ի Զատիկէն)",
+        "title": "PENTECOST (Fiftieth day of Eastertide) - Eve of Fast of Prophet Elijah",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/may/commemoration-of-the-prophet-elijah",
+        "notes": "Prophet Elijah is one of the major prophets of the Old Testament, distinguished for his loyalty to the Lord, for his zealous struggle against idolatry spread in Israel by the apostate king Ahab and his idolatrous wife, Queen Jezebel. Prophet Elijah lived in the IX century B.C. In the First Book of Kings (17-18) and the Second Book of Kings (1-2) is told about the activity of the Prophet Elijah.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -175,11 +617,12 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Eve of the Fast of Elijah",
-        "title": "Eve of the Fast of Elijah",
-        "feast_type": "Fast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/33",
-        "notes": "Few saints can be found whose lives intertwine the destinies of the Old and New Testaments as closely as that of the Prophet Elijah. Born nine centuries before the coming of Christ the Savior into the world, the Prophet Elijah beheld the glory of His Transfiguration on Mount Tabor (cf. Matt. 17:3; M",
+        "name": "Second Sunday after Pentecost - Remembrance of Prophet Elijah",
+        "name_hy": "Սկիզբն յարութեան կիւրակէից։ Նաեւ կոչի՝ Տօնն Սրբոյ Երրորդութեանն։ (Եղիայի մարգարէին)",
+        "title": "Second Sunday after Pentecost - Remembrance of Prophet Elijah",
+        "feast_type": "Prophet",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -192,11 +635,48 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Saint Hripsime and Her Companions, Sts. Hripsimiank",
-        "title": "Saint Hripsime and Her Companions, Sts. Hripsimiank",
+        "name": "Saints Hripsime and her companions",
+        "name_hy": "Սրբոց կուսանացն Հռիփսիմեանց",
+        "title": "Saints Hripsime and her companions",
         "feast_type": "Saint",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/34",
-        "notes": "Sts. Hripsime and her companions are venerated as the earliest martyrs in Armenian history. In the Monastery of Saint Paul in Rome, a community of Roman virgins lived under the leadership of Abbess Gayane. Fleeing the persecutions of Emperor Diocletian (284–305 AD), they journeyed eastward, visiting",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Hripsime",
+        "notes": "Hripsime (Armenian: Հռիփսիմէ; died c. 290) was a martyr of Roman origin. The story of her martyrdom is connected with the traditional account of the Christianization of Armenia.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-02",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Gayiane and her companions",
+        "name_hy": "Սրբոց կուսանացն Գայիանեանց",
+        "title": "Saints Gayiane and her companions",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-04",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints John the Forerunner (Baptist) and Bishop Atanagine",
+        "name_hy": "Սրբոցն՝ Յովհաննու Կարապետին, եւ Աթանագինեայ եպիսկոպոսին",
+        "title": "Saints John the Forerunner (Baptist) and Bishop Atanagine",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/june/commemoration-of-st-john-the-forerunner-the-baptist-and-bishop-atanagine",
+        "notes": "The Armenian Church commemorates the day when the relics of St. John the Forerunner (the Baptist) and Bishop Atanagine were transferred to Armenia. Mariam, the wife of St.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -209,11 +689,678 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "St. Gregory the Illuminator’s Emergence from the Pit",
-        "title": "St. Gregory the Illuminator’s Emergence from the Pit",
+        "name": "Saint Gregory the Illuminator's coming out of Pit",
+        "name_hy": "ՏՕՆ Է ՍՐԲՈՅՆ ԳՐԻԳՈՐԻ ԼՈՒՍԱՒՈՐՉԻՆ ՄԵՐՈՅ ԵԼԱՆԵԼՈՅՆ ’Ի ՎԻՐԱՊԷՆ",
+        "title": "Saint Gregory the Illuminator's coming out of Pit",
         "feast_type": "Saint",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/36",
-        "notes": "The Feast of St. Gregory the Illuminator’s Emergence from the Pit is one of the major celebrations of the Armenian Church, observed on the Saturday following the Feasts of the Hripsimean and Gayanean Martyrs. In the year 301, St. Gregory’s release from imprisonment in the deep pit of Khor Virap mark",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/june/feast-of-st-gregory-the-illuminator-s-deliverance-from-the-pit",
+        "notes": "In the year 301 AD, the deliverance of St. Gregory the Illuminator from the pit, was the catalyst that began the “Great Conversion” of Armenia from the darkness of paganism to the Light of Christianity. Following the martyrdom of the Christian nuns, led by St.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-07",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Second Sunday after Pentecost - Feast of Holy Etchmiadzin",
+        "name_hy": "ՏՕՆ Է ԿԱԹՈՒՂԻԿԷ ԵԿԵՂԵՑՒՈՅ ՍՐԲՈՅ ԷՋՄԻԱԾՆԻ",
+        "title": "Second Sunday after Pentecost - Feast of Holy Etchmiadzin",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-08",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "The Children of Bethlehem. Saints Acacius the Martyr, Mocius the Priest and Codratus the Soldier",
+        "name_hy": "Սրբոցն՝ Մանկանցն Բեթղեհէմի, եւ Ակակիոսի վկային, եւ Մովկիմայ քահանային, եւ Կոդրատիոսի զինաւորին",
+        "title": "The Children of Bethlehem. Saints Acacius the Martyr, Mocius the Priest and Codratus the Soldier",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/june/commemoration-of-the-children-of-bethlehem-acacius-the-witness-movkima-the-priest-and-kotriatos-the-soldier",
+        "notes": "In the Gospel according to St. Matthew, we read about the slaying of the innocent children prior to the birth of Jesus Christ (Matthew 2:16-18). Men, who had come from the East to Jerusalem, spread the news of the birth of a “baby born to be the king of the Jews”.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-09",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Virgins Nune and Mane",
+        "name_hy": "Սրբոց կուսանացն Նունեայ եւ Մանեայ",
+        "title": "Saints Virgins Nune and Mane",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-11",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Princes Sahak and Joseph and the Martyrs Sargius and Bacchus",
+        "name_hy": "Սրբոց իշխանացն՝ Սահակայ եւ Յովսիփայ եւ վկայիցն՝ Սարգսի եւ Բագոսի",
+        "title": "Saints Princes Sahak and Joseph and the Martyrs Sargius and Bacchus",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joseph",
+        "notes": "Joseph is a common male name, derived from the Hebrew Yosef (יוֹסֵף‎). \"Joseph\" is used, along with \"Josef\", mostly in English, French and partially German languages. This spelling is also found as a variant in the languages of the modern-day Nordic countries.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-13",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Nerses the Great Patriarch and Bishop Khad",
+        "name_hy": "Սրբոցն՝ Ներսիսի մեծին հայրապետին մերոյ եւ Խադայ եպիսկոպոսին",
+        "title": "Saints Nerses the Great Patriarch and Bishop Khad",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/june/commemoration-of-st-nersess-the-great-and-st-bishop-khad",
+        "notes": "Nersess the Great, Catholicos of All Armenians (353-373) is one of the most prominent Armenian Pontiffs. According to historical sources he is from the family and lineage of St.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-14",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Third Sunday after Pentecost - Eve of Fast of Saint Gregory the Illuminator",
+        "name_hy": null,
+        "title": "Third Sunday after Pentecost - Eve of Fast of Saint Gregory the Illuminator",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-15",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+        "name_hy": "Սրբոցն՝ Եպիփանու Կիպրացւոյն, Բաբելայ հայրապետին, եւ երից աշակերտաց նորին",
+        "title": "Saints Epiphanius Bishop of Cyprus, Babylas the Patriarch, and his three disciples",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/june/commemoration-of-sts-epiphanius-the-cypriot-bishop-of-cyprus-babylas-the-patriarch-and-his-three-disciples",
+        "notes": "Epiphanius the Cypriot (315-403 A.D.) is one of the famous Archimandrites of the Universal Church and in the Armenian Apostolic Church his memory is celebrated as one of the twelve archimandrites.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-16",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Constantine the Emperor and his mother Helen",
+        "name_hy": "Սրբոցն՝ Կոստանդիանոսի թագաւորին եւ մօրն նորա Հեղինեայ",
+        "title": "Saints Constantine the Emperor and his mother Helen",
+        "feast_type": "Righteous",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-18",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+        "name_hy": "Սրբոցն՝ Թէոդիտոսի Գաղատացւոյն, եւ Թալիլեայ բժշկին, եւ եօթն կուսանացն որք յԱնկիւրիա կատարեցան",
+        "title": "Saints Theodotus of Galatia, and Thalelaus the Physician, and the Seven Martyred Virgins of Ancyra",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-20",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of Discovery of Saint Gregory's Relics",
+        "name_hy": "ԳԻՒՏ ՆՇԽԱՐԱՑ ՍՐԲՈՅՆ ՀՕՐՆ ՄԵՐՈՅ ԳՐԻԳՈՐԻ ԼՈՒՍԱՒՈՐՉԻՆ",
+        "title": "Feast of Discovery of Saint Gregory's Relics",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-22",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints martyrs Antoninus, Theophilus, Anicetus and Potinus",
+        "name_hy": "Սրբոց վկայիցն՝ Անտոնինոսի, Թէոփիլոսի, Անիքտոսի եւ Փոտինոսի",
+        "title": "Saints martyrs Antoninus, Theophilus, Anicetus and Potinus",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Theophilus",
+        "notes": "Theophilus is a male given name with a range of alternative spellings. Its origin is the Greek word Θεόφιλος from θεός (theós, \"God\") and φιλία (philía, \"love or affection\") can be translated as \"Love of God\" or \"Friend of God\", i.e., it is a theophoric name, synonymous with the name Amadeus which originates from Latin, Gottlieb in German and Bogomil or Bogumił in Slavic.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-23",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Prophet Daniel and his Companions Shadrach, Meshach and Abednego",
+        "name_hy": "Սրբոցն՝ Դանիէլի մարգարէին եւ երից մանկանցն՝ Սեդրաքայ, Միսաքայ, եւ Աբեդնագովի",
+        "title": "Saints Prophet Daniel and his Companions Shadrach, Meshach and Abednego",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Daniel_%28biblical_figure%29",
+        "notes": "Daniel (Aramaic and Hebrew: דָּנִיֵּאל, romanized: Dānīyyēʾl, lit. 'God is my Judge'; Greek: Δανιήλ, romanized: Daniḗl; Arabic: دانيال, romanized: Dāniyāl) is the main character of the Book of Daniel. According to the Hebrew Bible, Daniel was a noble Jewish youth of Jerusalem taken into captivity by Nebuchadnezzar II of Babylon, serving the king and his successors with loyalty and ability until th",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-25",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Holy Translators Saints Sahak and Mesrop",
+        "name_hy": "ՍՐԲՈՑ ԹԱՐԳՄԱՆՉԱՑ ՎԱՐԴԱՊԵՏԱՑՆ ՄԵՐՈՅ՝ ՍԱՀԱԿԱՅ ԵՒ ՄԵՍՐՈՊԱՅ",
+        "title": "Holy Translators Saints Sahak and Mesrop",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-27",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht",
+        "name_hy": "Սրբոցն՝ Տրդատայ թագաւորին մերոյ եւ Աշխինի տիկնոջն եւ Խոսրովիդխտոյն",
+        "title": "Saints Tiridates (Trdat) the King of Armenia, Queen Ashkhen and Princess Khosrovidoukht",
+        "feast_type": "Righteous",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-29",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Callistratus and his companions, and Lukianos the Priest",
+        "name_hy": "Սրբոցն՝ Կալիստրատոսի, եւ քառասուն եւ ինն վկայիցն, եւ Ղունկիանոսի քահանային",
+        "title": "Saints Callistratus and his companions, and Lukianos the Priest",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-30",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Zechariah the Prophet",
+        "name_hy": "Սրբոյն Զաքարիայ մարգարէին",
+        "title": "Saint Zechariah the Prophet",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Zechariah_%28Hebrew_prophet%29",
+        "notes": "Zechariah (; Hebrew: זְכַרְיָה, romanized: Zəḵaryā; Arabic: زكريّا, romanized: Zakaryā; Biblical Greek: Ζαχαρίας Latin: Zacharias) was a person in the Hebrew Bible traditionally considered the author of the Book of Zechariah, the eleventh of the Twelve Minor Prophets. Zechariah 1:1 depicts the eponymous character as the son of Berechiah, the son of Iddo. The Book of Ezra instead names Zechariah as",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-02",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Elisha the Prophet",
+        "name_hy": "Սրբոյն Եղիսէի մարգարէին",
+        "title": "Saint Elisha the Prophet",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/july/commemoration-of-the-prophet-zechariah",
+        "notes": "Zechariah is one of the twelve prophets of the Old Testament, and his book consisting of 12 chapters, is the largest among the books of the prophets. It is also called the “Book of Hope” and through it we learn of God’s Kingdom in Israel by means of the rebuilding of Solomon’s Temple. Prophecies from Zechariah date back to approximately 518 B.C., when Zerubbabel and Joshua were rebuilding the Lord",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-04",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Twelve Holy Apostles of Christ and Saint Paul, the Thirteenth Apostle",
+        "name_hy": "Սրբոց երկոտասան առաքելոցն Քրիստոսի. եւ սրբոյն Պօղոսի երեքտասաներորդ առաքելոյն",
+        "title": "Twelve Holy Apostles of Christ and Saint Paul, the Thirteenth Apostle",
+        "feast_type": "Apostle",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Paul_the_Apostle",
+        "notes": "Paul (born Saul of Tarsus; c. 5 – c. 64/65 AD), commonly known as Paul the Apostle or Saint Paul, was a Christian apostle who spread the teachings of Jesus in the first-century AD.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Sixth Sunday after Pentecost - Eve of Fast of Transfiguration",
+        "name_hy": null,
+        "title": "Sixth Sunday after Pentecost - Eve of Fast of Transfiguration",
+        "feast_type": "Feast",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/july/eve-of-the-fast-of-transfiguration",
+        "notes": "This is the Sunday preceding the week prior to the fasting period preceding the Feast of Our Lord Jesus Christ’s Transfiguration called in the Armenian Apostolic Church Fast of Transfiguration lasting from Monday to Friday. Saturday, the last day of the fasting period, is the eve of the feast, which means that that day people can eat fish and dairy products.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-11",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church",
+        "name_hy": "Յիշատակ Տապանակին հնոյ եւ տօն նորոյս սրբոյ Եկեղեցւոյ",
+        "title": "Remembrance of the Old Ark (Tabernacle) and the Feast of the New Holy Church",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/july/commemoration-of-the-tabernacle-of-old-testament-or-the-old-ark-and-the-feast-of-the-new-holy-church",
+        "notes": "Tabernacle of the Old Testament is the most sacred sanctity of the Old Testament, where the board of the Ten Commandments, Aaron’s ornament crosier and the golden urn full of manna were kept. Christian Church is considered to be the prototype of the New Testament - that is - the Church of Christ. So, this feast has been included in the calendar to symbolize the mystery of eternity of the Church.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-12",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "TRANSFIGURATION OF OUR LORD (Vardavar)",
+        "name_hy": "ՏՕՆ ՊԱՅԾԱՌԱԿԵՐՊՈՒԹԵԱՆ ՏԵԱՌՆ ՄԵՐՈՅ ՅԻՍՈՒՍԻ ՔՐԻՍՏՈՍԻ։ (Նաեւ կոչի՝ ԱՅԼԱԿԵՐՊՈՒԹԻՒՆ կամ ՎԱՐԴԱՎԱՌ)",
+        "title": "TRANSFIGURATION OF OUR LORD (Vardavar)",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-16",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Isaiah the Prophet",
+        "name_hy": "Սրբոյն Եսայեայ մարգարէին",
+        "title": "Saint Isaiah the Prophet",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Isaiah",
+        "notes": "Isaiah (UK:  or US: ; Hebrew: יְשַׁעְיָהוּ‎, Yəšaʿyāhū, \"Yahweh is salvation\"; also known as Isaias or Esaias from Greek: Ἠσαΐας) was the 8th-century BC Israelite  prophet after whom the Book of Isaiah is named. The text of the Book of Isaiah refers to Isaiah as \"the prophet\", but the exact relationship between the Book of Isaiah and the actual prophet Isaiah is complicated. The traditional view i",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-18",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin",
+        "name_hy": "Սրբոցն՝ Թադէոսի առաքելոյն մերոյ, եւ Սանդխտոյ կուսին",
+        "title": "Saints Thaddeus Apostle of Armenia and Sandoukht the Virgin",
+        "feast_type": "Apostle",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-20",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
+        "name_hy": "Սրբոցն՝ Կիպրիանոսի եպիսկոպոսին, եւ քառասուն եւ հինգ հայ վկայիցն որք նահատակեցան ’ի Նիկոպոլիս քաղաք Փոքուն Հայոց եւ կուսանացն՝ Յուստիանեայ, Եւփիմեայ, եւ Քրիստինեայ",
+        "title": "Saints Cyprian the Bishop, the Forty-five Martyrs and the Virgins Justina, Euphemia and Christina",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-21",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
+        "name_hy": "Սրբոցն՝ Աթանագինեայ եպիսկոպոսին, եւ տասն աշակերտացն, եւ հինգ վկայիցն",
+        "title": "Saints Athenogenes the Bishop and the Ten Disciples and Five Martyrs",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-23",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
+        "name_hy": "Սրբոց նախահարցն՝ Ադամայ, Հաբիլի, Սեթայ, Ենովսայ, Ենովքայ, Նոյի, Մելքիսեդեկի, Աբրահամու, Իսահակայ, Յակոբայ, Յովսեփայ, Մովսիսի, Ահարոնի, Եղիազարու, Յեսուայ, Սամուէլի, Սամփսոնի, Յեփթայեայ, Բարակայ, Գէդէոնի, եւ այլոց սրբոց նախահարցն",
+        "title": "Saints Forefathers: Adam, Abel, Seth, Enos, Enoch, Noah, Melchizedech, Abraham, Isaac, Jacob, Joseph, Moses, Aaron, Eleazar, Joshua, Samuel, Samson, Jephthah, Barak, Gideon and other Holy Patriarchs",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Abel",
+        "notes": "Abel (Hebrew: הֶבֶל Hébel, in pausa הָבֶל‎ Hā́ḇel; Biblical Greek: Ἅβελ Hábel; Arabic: هابيل, Hābēl) is a biblical figure in the Book of Genesis within the Abrahamic religions. Born as the second son of Adam and Eve, the first two humans created by God, he was a shepherd who offered his firstborn flock to God as a religious offering (Genesis 4:1–8). God accepted Abel's offering but not that of his",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-25",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel",
+        "name_hy": "Սրբոցն որդւոց եւ թոռանց Սրբոյն Գրիգորի Լուսաւորչին մերոյ՝ Արիստակիսի, Վրթանիսի, Յուսկանն, Գրիգորիսի եւ Դանիէլի",
+        "title": "Saint Gregory the Illuminator's Sons and Grandsons: Saints Aristakes, Vrtanes, Housik, Grogoris and Daniel",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/july/commemoration-of-st-gregory-the-illuminator-s-sons-and-grandsons-sts-aristakes-vrtanes-housik-grigoris-and-daniel",
+        "notes": "Aristakes was St. Gregory the Illuminator’s youngest son. He led a monastic life from a very early age.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-27",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
+        "name_hy": "Սրբոց Մակաբայեցւոցն՝ Եղիազարու քահանային, եւ Շամունեայ, եւ եօթն որդւոց նորին",
+        "title": "Saints Maccabees: Eleazar the Priest, Shamuna and Her Seven Sons",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Woman_with_seven_sons",
+        "notes": "The woman with seven sons was a Jewish martyr described in the deuterocanonical 2 Maccabees 7 and elaborated in 4 Maccabees She and her seven sons were arrested during the persecution of Judaism initiated by King Antiochus IV Epiphanes. They were ordered to consume pork and thus violate Jewish law as part of the campaign. They repeatedly refused, and Antiochus tortured and killed the sons one by o",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-28",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
+        "name_hy": "Սրբոց երկոտասան մարգարէիցն՝ Ովսեայ, Ամովսայ, Միքիայ, Յովելեայ, Աբդիու, Նաւումայ, Ամբակումայ, Յովնանու, Սոփոնեայ, Անգեայ, Զաքարիայ, եւ Մաղաքիայ",
+        "title": "Saints Twelve Prophets: Hosea, Amos, Micah, Joel, Obadiah, Nahum, Habakkuk, Jonah, Zephaniah, Haggai, Zechariah and Malachi",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Micah",
+        "notes": "Micah (; Hebrew: מִיכָה, Modern: Mikha, Tiberian: Mîḵā) is a given name. Micah is the  name of several people in the Tanakh, and means \"Who is like God?”. The name is sometimes found with theophoric extensions.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-30",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
+        "name_hy": "Սրբոցն՝ Սոփիայ, եւ երից դստերացն՝ Պիստիսի, Ելպիսի եւ Ագապի",
+        "title": "Saints Sophia and Her Three Daughters: Pistis, Elpis, and Agape",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Sophia",
+        "notes": "Sophia most commonly refers to:",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-01",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory the Theologian",
+        "name_hy": "Սրբոց հայրապետացն՝ Աթանասի եւ Կիւրղի, եւ սրբոյն Գրիգորի Աստուածաբանին",
+        "title": "Holy Fathers Saints Athanasius and Cyril of Alexandria and Gregory the Theologian",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Cyril_of_Alexandria",
+        "notes": "Cyril of Alexandria (Ancient Greek: Κύριλλος Ἀλεξανδρείας; Coptic: Ⲡⲁⲡⲁ Ⲕⲩⲣⲓⲗⲗⲟⲩ ⲁ̅ or Coptic: Ⲡⲓⲁⲅⲓⲟⲥ Ⲁⲃⲃⲁ Ⲕⲩⲣⲓⲗⲗⲟⲥ ⲡⲓⲥⲧⲩⲗⲗⲟⲥ ⲛ̀ⲧⲉ ⲡⲓⲛⲁϩϯ or ⲡⲓ̀ⲁⲅⲓⲟⲥ Ⲕⲓⲣⲓⲗⲗⲟⲥ; c. 376–444) was the Patriarch of Alexandria from 412 to 444. He was enthroned when the city was at the height of its influence and power within the Roman Empire.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila",
+        "name_hy": "Սրբոյն Եւգինեայ կուսին եւ հօրն նորա Փիլիպպոսի եւ մօրն Կղօդեայ եւ երկուց եղբարցն՝ Սերգեայ եւ Ապիտոնի եւ երկուց ներքինեացն։ Եւ սրբոց վկայիցն՝ Եւգինէոսի, Մակարիոսի, Վաղերիոսի, Կանդիտոսի եւ Ակիւղասայ",
+        "title": "Saints Eugenia the Virgin, Her Father Phillip and her mother Claudia, Her Brothers Sergius and Apitonius, and the Two Eunuchs, and Saints Eugenius, Marcarius, Alerius, Canditus and Aquila",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-04",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+        "name_hy": "Սրբոցն՝ Անդրէի զօրավարին եւ բանակի նորին, եւ վկայիցն՝ Կալինիկոսի եւ Դոմետեայ",
+        "title": "Saints Andrew the General and his army, and Callinicus and Diomedes the Martyrs",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-06",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+        "name_hy": "Սրբոցն՝ Անդրիանոսի եւ կնոջ նորա Անատոլեայ, եւ վկայիցն՝ Թէոդորոսի եւ Ելեւթիւրոսի",
+        "title": "Saints Adrian and his wife Natalia, and Theordore Stratelates and Eleutherius the Martyrs",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Adrian",
+        "notes": "Adrian is a form of the Latin given name Adrianus or Hadrianus. Its ultimate origin is most likely via the former river Adria from the Venetic and Illyrian word adur, meaning \"sea\" or \"water\". The Adria was until the 8th century BC the main channel of the Po River into the Adriatic Sea but ceased to exist before the 1st century BC.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-08",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)",
+        "name_hy": "Եփեսոսի Ս. Ժողովոյն երկերիւր հայրապետացն",
+        "title": "Commemoration of 200 Fathers of the Holy Council of Ephesus (AD 341)",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/august/commemoration-day-of-200-pontiffs-participating-in-the-ecumenical-council-of-ephesus",
+        "notes": "The Ecumenical Council of Ephesus was convened in 431 A. D., during the reign of the King Theodosius Small. 200 Pontiffs participated in the Council with the goal to criticize the false teaching of Nestorius, Patriarch of Constantinople.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-09",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Fifth Sunday after Transfiguration - Eve of Fast of Assumption of the Holy Mother of God",
+        "name_hy": null,
+        "title": "Fifth Sunday after Transfiguration - Eve of Fast of Assumption of the Holy Mother of God",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-15",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
+        "name_hy": "Տօն Շողակաթի սրբոյ Էջմիածնի, ըստ տեսլեան սրբոյն Գրիգորի Լուսաւորչին մերոյ",
+        "title": "Feast of Dedication of Holy Etchmiadzin, According to the Vision of St. Gregory the Illuminator",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -226,11 +1373,120 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Assumption of the Holy Mother of God",
-        "title": "Feast of Assumption of the Holy Mother of God",
-        "feast_type": "Great Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/44",
-        "notes": "The Feast of Assumption of the Holy Mother of God is one of the major feasts of the Armenian Church, which is celebrated on the Sunday closest to August 15, between August 12-18.",
+        "name": "ASSUMPTION OF THE HOLY MOTHER OF GOD",
+        "name_hy": "ՏՕՆ ՎԵՐԱՓՈԽՈՒՄՆ Ս. ԱՍՏՈՒԱԾԱԾՆԻՆ",
+        "title": "ASSUMPTION OF THE HOLY MOTHER OF GOD",
+        "feast_type": "Feast",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/august/feast-of-the-assumption-of-the-holy-mother-of-god",
+        "notes": "Each year on the Sunday closest to the date of August 15, the Armenian Church celebrates the Feast of the Assumption of St. Mary, the Holy Mother of God. In the Calendar of the Armenian Church, this feast is the fourth of five major feasts that are commemorated, and is the oldest one dedicated to St.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-25",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
+        "name_hy": "Սրբոցն Յովակիմայ եւ Աննայի՝ ծնողաց սուրբ Աստուածածնին եւ կանանցն իւղաբերից",
+        "title": "Saints Joachim and Anna, parents of the Holy Mother of God, and of Myrophores",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Joachim",
+        "notes": "Joachim was, according to Christian Sacred tradition, the husband of Saint Anne, the father of Mary and grandfather of Jesus. The story of Joachim and Anne first appears in the Gospel of James, part of the New Testament apocrypha. His feast day is 26 July, a date shared with Saint Anne.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-27",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Jeremiah the Prophet",
+        "name_hy": "Սրբոյն Երեմիայի մարգարէին",
+        "title": "Saint Jeremiah the Prophet",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/august/commemoration-of-the-prophet-jeremiah",
+        "notes": "Prophet Jeremiah is one of the four Major Prophets of the Old Testament. In comparison with other persons and saints of the Holy Bible, there is much more and rather trustworthy information about the Prophet Jeremiah. The Prophet Jeremiah lived during the latter part of the seventh century and the first part of the sixth century B.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-31",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
+        "name_hy": "Սրբոցն՝ Ստեփանոսի Ուլնեցւոյն, եւ վկայիցն՝ Գոհարինեայ, Ծամիդոսի, Տուքիկոսի եւ Ռատիկոսի",
+        "title": "Saints Stephen of Oulnia and the Martyrs Goharinus, Zamidus, Tuchicus and Raticus",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints John the Forerunner (Baptist) and Job the Righteous",
+        "name_hy": "Սրբոցն՝ Յովհաննու Կարապետին եւ Յոբայ արդարոյն",
+        "title": "Saints John the Forerunner (Baptist) and Job the Righteous",
+        "feast_type": "Prophet",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/september/commemoration-of-sts-john-the-baptist-and-job-the-righteous",
+        "notes": "John the Baptist (the Forerunner) is the most prominent person in the Gospels after Jesus Christ and it is he who opens the era of God’s Kingdom, that is - the era of Christ’s Church. Being a promised son and born in excellent conditions, John spends his youth in isolation and in the presence and virtues of God.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
+        "name_hy": "Նիկիոյ Ս. Ժողովոյն երեք հարիւր ութեւտասն հայրապետացն",
+        "title": "Commemoration of 318 Fathers of the Holy Council of Nicea (AD 325)",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-06",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Fourth Sunday after Assumption - Eve of Fast of Exaltation of Holy Cross",
+        "name_hy": null,
+        "title": "Fourth Sunday after Assumption - Eve of Fast of Exaltation of Holy Cross",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -243,11 +1499,30 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Nativity of the Holy Virgin Mary, Born of Anna",
-        "title": "Feast of the Nativity of the Holy Virgin Mary, Born of Anna",
-        "feast_type": "Great Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/45",
-        "notes": "The parents of the Holy Mother of God, Saints Joachim and Anna, had no children for many years and continually prayed, beseeching God to grant them a child. Their supplications were heard, and God granted them a daughter, whom they named Mariam, meaning “enlightened.” On the site of the home of Sain",
+        "name": "Feast of the Birth of Holy Virgin Mary from Anna",
+        "name_hy": "Տօն Ծննդեան սուրբ Կուսին Մարիամու Աստուածածնին ՚ի յԱննայէ",
+        "title": "Feast of the Birth of Holy Virgin Mary from Anna",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/september/birth-of-st-mary-from-anna",
+        "notes": "The birth of the Holy Mother of God in not described in the Holy Bible. We learn about from the Holy Tradition of the Church. Parents of the Holy Virgin, Jehoiakim and Anna did not have children for many years.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-12",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of Holy Church in Dedication of Holy Cross",
+        "name_hy": "Տօն է սրբոյ Եկեղեցւոյ ՚ի նաւակատիս սրբոյ Խաչին",
+        "title": "Feast of Holy Church in Dedication of Holy Cross",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -260,11 +1535,624 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Exaltation of the Holy Cross",
-        "title": "Feast of the Exaltation of the Holy Cross",
+        "name": "EXALTATION OF THE HOLY CROSS",
+        "name_hy": "ՏՕՆ ՎԵՐԱՑՄԱՆ ՍՐԲՈՅ ԽԱՉԻՆ",
+        "title": "EXALTATION OF THE HOLY CROSS",
         "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/46",
-        "notes": "The Feast of the Exaltation of the Holy Cross is one of the 5 major feasts of the Armenian Church. The Holy cross, as defined by Gregory of Tatev, has become the bridge that unites heaven and earth, \"the one who opens the doors of heaven and giver of the heavenly kingdom as an inheritance.\"",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/september/feast-of-exaltation-of-the-holy-cross",
+        "notes": "Feast of the Exaltation of the Holy Cross is the last one of the five major feasts of the Armenian Apostolic Church. It is the most important feast among the feasts dedicated to the Holy Cross, as it is dedicated to the history of the return of the Holy Cross from imprisonment, its elevation and glorification. In the Armenian Apostolic Church the Feast of the Exaltation of the Holy Cross is celebr",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-14",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of the Holy Cross - Remembrance of the Dead",
+        "name_hy": "Տօն Ս. Խաչի։ ՅԻՇԱՏԱԿ ՄԵՌԵԼՈՑ",
+        "title": "Feast of the Holy Cross - Remembrance of the Dead",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-15",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of the Holy Church",
+        "name_hy": "Տօն Եկեղեցւոյ",
+        "title": "Feast of the Holy Church",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-16",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of the Holy Church",
+        "name_hy": "Տօն Եկեղեցւոյ",
+        "title": "Feast of the Holy Church",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-17",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of the Holy Church",
+        "name_hy": "Տօն Եկեղեցւոյ",
+        "title": "Feast of the Holy Church",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-18",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of the Holy Cross",
+        "name_hy": "Տօն Ս. Խաչի",
+        "title": "Feast of the Holy Cross",
+        "feast_type": "Feast",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/september/feast-of-the-holy-cross-of-varague",
+        "notes": "All Christian Churches each year solemnly celebrate all feasts dedicated to the Holy Cross. The Armenian Apostolic Church, in difference to the other Christian Churches, celebrates another purely national feast dedicated to the Holy Cross, which is famous as the Holy Cross of Varague. The Armenian Church celebrates this feast two weeks after the Feast of Exaltation of the Holy Cross, that is - the",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-19",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of the Holy Cross",
+        "name_hy": "Տօն Ս. Խաչի",
+        "title": "Feast of the Holy Cross",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-20",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Second Sunday after the Holy Cross - Eve of Fast of the Holy Cross of Varag",
+        "name_hy": null,
+        "title": "Second Sunday after the Holy Cross - Eve of Fast of the Holy Cross of Varag",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-21",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Mamas, Philomenos and Simeon the Stylite",
+        "name_hy": "Սրբոցն՝ Մամասայ եւ Փիլիկտիմոնի եւ Սիմէոնի Սիւնակեցւոյն",
+        "title": "Saints Mamas, Philomenos and Simeon the Stylite",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Simeon_Stylites",
+        "notes": "Simeon Stylites or Symeon the Stylite (Greek: Συμεών ό Στυλίτης; Syriac: ܫܡܥܘܢ ܕܐܣܛܘܢܐ, romanized: Šimʕun dʼAstˁonā; Arabic: سمعان العمودي, romanized: Simʿān al-ʿAmūdī c. 390 – 2 September 459) was a Syrian Christian ascetic who achieved notability by living 36 years on top of a pillar near Aleppo (in modern Syria). Several other stylites later followed his model (the Greek word style means \"pilla",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-22",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
+        "name_hy": "Սրբոց կուսանացն՝ Փեբրոնեայ, Մարիանեայ, եւ Շուշանայ՝ դստեր մեծին Վարդանայ",
+        "title": "Saints Virgins Febronia, Marina and Shoushan the Daughter of Great Vardan",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Marina",
+        "notes": "A marina (from Spanish [maˈɾina], Portuguese [mɐˈɾinɐ] and Italian [maˈriːna]: \"related to the sea\") is a dock or basin with moorings and supplies for yachts and small boats. A marina differs from a port in that a marina does not handle large passenger ships or cargo from freighters. The word marina may also refer to an inland wharf on a river or canal that is used exclusively by non-industrial pl",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-24",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Patriarchs Barlaam, Anthimus and Irenaeus",
+        "name_hy": "Սրբոց հայրապետացն՝ Բարաղամու, Անթիմոսի եւ Երանոսի",
+        "title": "Saint Patriarchs Barlaam, Anthimus and Irenaeus",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Anthimus",
+        "notes": "Anthimus, also spelled Anthimos, Anthinos or Anthinus, is a Greek name for males. In Italian and Spanish, the name is rendered as Antimo.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-26",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints George the Warrior, Adauctus and Romanus the Melodist",
+        "name_hy": "Սրբոցն Գէորգայ զօրավարին եւ Ադոկտոսի եւ Ռոմանոսի երգեցողին",
+        "title": "Saints George the Warrior, Adauctus and Romanus the Melodist",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Felix_and_Adauctus",
+        "notes": "Felix and Adauctus (d. 303) were, according to tradition, Christian martyrs who were said to have suffered during the Great Persecution during the reign of the Roman emperor Diocletian. The Acts, first published in Ado's Martyrology, relate as follows: Felix, a Roman priest, and brother of another priest, also named Felix, being ordered to offer sacrifice to the gods, was brought by the prefect Dr",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-27",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Third Sunday after the Holy Cross - Feast of the Holy Cross of Varag",
+        "name_hy": "ՏՕՆ ՎԱՐԱԳԱՅ ՍՐԲՈՅ ԽԱՉԻՆ",
+        "title": "Third Sunday after the Holy Cross - Feast of the Holy Cross of Varag",
+        "feast_type": "Feast",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-28",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints David of Dvin and the Martyrs Eulampius and Eulampia",
+        "name_hy": "Սրբոցն՝ Դաւթի Դւնեցւոյն, եւ սրբոց վկայիցն՝ Ղամբէոսի եւ Ղամբէուհւոյն",
+        "title": "Saints David of Dvin and the Martyrs Eulampius and Eulampia",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-29",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
+        "name_hy": "Սրբոցն՝ Եւստաքէոսի, եւ կնոջ նորա Թէոփիստեայ, եւ երկուց որդւոցն, եւ սրբոց կուսանացն՝ Երմոնեայ եւ Նեկտարինեայ",
+        "title": "Saints Eustachius, his wife Theopista and their two sons, and the Holy Virgins Hermione and Catherine",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
+        "name_hy": "Սրբոցն՝ Փոկասու հայրապետին, եւ Երանոսի հետեւողին առաքելոց",
+        "title": "Saints Phocas the Patriarch and Irenaeus of Lyons, follower of the Apostles",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Irenaeus",
+        "notes": "Irenaeus ( or ; Koine Greek: Εἰρηναῖος, romanized: Eirēnaîos, IPA: [i.re̝ˈnɛ.os]; c. 125 – c. 202 AD) was a Greek bishop noted for his role in guiding and expanding Christian communities in the southern regions of present-day France and, more widely, for the development of Christian theology by opposing Gnostic interpretations of Christian Scripture and defending orthodoxy.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-06",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Virgins Thecla, Barbara and Pelagia",
+        "name_hy": "Սրբոց կուսանացն՝ Թեկղի, Վարվառեայ, եւ Պեղագեայ",
+        "title": "Saints Virgins Thecla, Barbara and Pelagia",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Pelagia",
+        "notes": "Pelagia (Ancient Greek: Πελαγία, d. 457), distinguished as Pelagia of Antioch, Pelagia the Penitent, and Pelagia the Harlot, was a Christian saint and hermit in the 4th or 5th century. Her feast day was celebrated on 8 October, originally in common with Saints Pelagia the Virgin and Pelagia of Tarsus.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-08",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
+        "name_hy": "Սրբոցն՝ Պանդալէոնի բժշկին, Երմողեայ քահանային, եւ Եւպրաքսեայ կուսին",
+        "title": "Saints Pantaleimon the Physician, Hermolaus the Priest and Eupraxia the Virgin",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/october/commemoration-of-sts-pandaleon-the-physician-yermoghayos-the-priest-and-the-virgin-eupraxia",
+        "notes": "Pandaleon (Pantaleon) the Physician and St. Yermoghayos (Hermolaus) the Priest are from Nikomedia.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-10",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
+        "name_hy": "ՍՐԲՈՑ ԹԱՐԳՄԱՆՉԱՑ ՎԱՐԴԱՊԵՏԱՑՆ ՄԵՐՈՑ՝ Մեսրոպայ, Եղիշէի, Մովսիսի քերթողահօրն, Դաւթի անյաղթ փիլիսոփային, Գրիգորի Նարեկացւոյն եւ Ներսիսի Կլայեցւոյն",
+        "title": "Holy Translators Mesrop, Yeghishe, Moses the Poet, David the Philosopher, Gregory of Narek and Nerses the Graceful",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Elishe",
+        "notes": "Elishe (Old Armenian: Եղիշէ, romanized: Ełišē, Modern Armenian pronunciation [jɛʁiˈʃɛ], 410 – 475) was an Armenian historian from the time of late antiquity, best known as the author of History of Vardan and the Armenian War, a history of the fifth-century Armenian revolt led by Vardan Mamikonian against the suppression of Christianity under Sassanid Iranian rule.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-12",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+        "name_hy": "Գիւտ նշխարաց սրբոյն Գրիգորիսի Աղուանից Կաթուղիկոսին, եւ սրբոց հարցն՝ Անտոնի, եւ Կրօնիդեայ, Թաթլոյ, Վարոսի, Թումասու, եւ եօթն Խոտաճարակացն, որք յԻննակնեան վանսն կատարեցան",
+        "title": "Discovery of Relics of St. Gregoris the Catholicos of Aghvank, and the Holy Fathers Tatоul, Varus and Thomas, Anton and Cronides, and the Seven Herbivorous Hermits",
+        "feast_type": "Venerable",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-15",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Dionysius the Areopagite and the Apostles Timothy and Titus",
+        "name_hy": "Սրբոցն՝ Դիոնեսիոսի Արիսպագացւոյն, եւ առաքելոցն՝ Տիմոթէոսի, եւ Տիտոսի",
+        "title": "Saints Dionysius the Areopagite and the Apostles Timothy and Titus",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Dionysius_the_Areopagite",
+        "notes": "Dionysius the Areopagite (; Ancient Greek: Διονύσιος ὁ Ἀρεοπαγίτης Dionysios ho Areopagitēs) was an Athenian judge at the Areopagus Court in Athens, who lived in the first century. A convert to Christianity, he is venerated as a saint by multiple denominations.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-19",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
+        "name_hy": "Սրբոցն՝ Ղունկիանոսի հարիւրապետին որ հաւատաց ‘ի խաչելութիւնն Քրիստոսի, եւ Յովսեփայ Աստուածահօրն եւ Յովսեփայ Արիմաթացւոյն, եւ բարեկամին Քրիստոսի Ղազարու, եւ քերցն նորա՝ Մարթայի եւ Մարիամու",
+        "title": "Saints Longinus the Centurion, Joseph the Father of God, Joseph of Arimathea and Lazarus and his sisters Martha and Mary",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Longinus",
+        "notes": "Longinus (Greek: Λογγίνος) is the name given to the unknown Roman soldier who pierced the side of Jesus with a lance, who in mediaeval and some modern Christian traditions is described as a convert to Christianity. His name first appeared in the apocryphal Gospel of Nicodemus. The lance is called in Catholic Christianity the \"Holy Lance\" (lancea) and the story is related in the Gospel of John duri",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-20",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus",
+        "name_hy": "Սրբոցն՝ Թէոդիտոնի քահանային, եւ Զենոնի զինաւորին, եւ Մակարայ, Եւդոքսեայ, եւ Ռոմելայ",
+        "title": "Saints Theodoret the Priest of Antioch, Zenon the soldier, Marcarius, Eudoxius and Romulus",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-22",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints St. Arethas and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
+        "name_hy": "Սրբոց Խարիթեանցն, եւ սրբոց վկայիցն՝ Արտեմեայ, եւ Քրիստափորի, եւ երկուց կանանցն՝ Կալինիկեայ եւ Ակիւլինեայ",
+        "title": "Saints St. Arethas and His Companions, the martyrs Artemius and Christopher and the Women Callinice and Aquilina",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-25",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Seventh Sunday after the Holy Cross - Discovery of the Holy Cross.",
+        "name_hy": "ՏՕՆ ԳԻՒՏՈՅ ԽԱՉԻՆ",
+        "title": "Seventh Sunday after the Holy Cross - Discovery of the Holy Cross.",
+        "feast_type": "Feast",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/october/feast-of-the-discovery-of-the-holy-cross",
+        "notes": "The Feast of the Discovery of the Holy Cross is one of the four feasts dedicated to Christ’s Holy Christ. In 327 AD Heghineh, the Mother of the Byzantine King Kostandianos, visits Jerusalem with the aim to search the holy Cross of the lord. A Jew, named Judas, helps the King’s mother to search the site where Christ was crucified – Golgotha.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-26",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
+        "name_hy": "Սրբոցն՝ Անաստասայ քահանային, եւ Վարոսի, եւ Թէոդիտեայ եւ Որդւոց նորա, եւ որոց ընդ նմա կատարեցան",
+        "title": "Saints Anastasius the Priest, Varus the Soldier, Theodota and her sons, and those who were martyred with her",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-27",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples",
+        "name_hy": "Սրբոց Հիպերիքեանցն, որք ՚ի Սամուսատ կատարեցան։ Եւ սրբոցն՝ Սեւերիանոսի Սեբաստացւոյն, Բաբելայ ծերոյն, եւ ութսուն եւ չորս աշակերտաց նորին",
+        "title": "Saints Hipparchus and his Companions Who were Martyred in Samosata, and Saints Severianus of Sebastia and Babylas and his 84 Disciples",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Hipparchus",
+        "notes": "Hipparchus (; Greek: Ἵππαρχος, Hípparkhos; c. 190 – c. 120 BC) was a Greek astronomer, geographer, and mathematician.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-29",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint John Chrysostom",
+        "name_hy": "Սրբոյն Յովհաննու Ոսկեբերանի հայրապետին",
+        "title": "Saint John Chrysostom",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/John_Chrysostom",
+        "notes": "John Chrysostom (; Koine Greek: Ἰωάννης ὁ Χρυσόστομος, romanized: Iōánnēs ho Chrysóstomos, IPA: [i.oˈannis o xryˈsostomos]; Latin: Ioannes Chrysostomus, Ecclesiastical Latin: [joˈannes kriˈzɔstomus]; c. 347 – 14 September 407) was a Church Father who served as Archbishop of Constantinople. He is known for his preaching and public speaking, his Divine Liturgy of Saint John Chrysostom, and his ascet",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-31",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast of All Saints, the old and the new, the known and the unknown",
+        "name_hy": "ԱՄԵՆԱՅՆ ՍՐԲՈՑ, ՀՆՈՑ ԵՒ ՆՈՐՈՑ, ՅԱՅՏԻՑ ԵՒ ԱՆՅԱՅՏԻՑ",
+        "title": "Feast of All Saints, the old and the new, the known and the unknown",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-02",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls",
+        "name_hy": "Սրբոցն՝ Ստեփանոսի Հռովմայ հայրապետին, եւ քահանայիցն, եւ սարկաւագացն, եւ ժողովրդոցն",
+        "title": "Saints Stephen, Bishop of Rome and the priests, deacons and many faithfuls",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Stephen",
+        "notes": "Stephen or Steven is an English male first name. It is particularly significant to Christians, as it belonged to Saint Stephen (Ancient Greek: Στέφανος, romanized: Stéphanos, lit. 'wreath, crown'), an early disciple and deacon who, according to the Book of Acts, was stoned to death; he is widely regarded as the first martyr (or \"protomartyr\") of the Christian Church.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
+        "name_hy": "Սրբոցն՝ Ակիփսիմեայ եպիսկոպոսին, եւ Յովսեփայ քահանային, Այիթալայ սարկաւագին, եւ Պղատոնի վկային",
+        "title": "Saints Akepsimas the Bishop, Joseph the Priest, Ayethalas the Deacon and Plato the Martyr",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/november/commemoration-of-sts-bishop-akipsimos-priest-hovsep-joseph-deacon-ayitala-and-martyr-platon",
+        "notes": "Bishop Akipsimos (Aquiphsimeus), Priest Hovsep (Joseph) and Deacon Ayitala (Ayethalus) have been martyred in the fourth century. Akipsimos was Persian. Together with the Priest Hovsep (Joseph) and the Deacon Ayitala he has been imprisoned during the persecutions against Christians realized by the King Shapouh II.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
+        "name_hy": "Սրբոց հայրապետացն՝ Մետրոփանոսի, Աղէքսանդրոսի, եւ Պօղոսի խոստովանողին, եւ նօտարացն՝ Մարկիանոսի, եւ Մարտիրոնի",
+        "title": "Saints Metrophanes, Alexander and Paul the Confessor, Patriarchs of Constantinople, and Notaries Marcian and Martyrius the Martyrs",
+        "feast_type": "Confessor",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Metrophanes",
+        "notes": "Metrophanes (Ancient Greek: Μητροφάνης) is a Greek masculine given name derived from μήτηρ 'mother' + φαίνω, 'appear, shine'.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-09",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
+        "name_hy": "Սրբոցն՝ Մելիտոսի Անտիոքայ հայրապետին, եւ Մինասայ Եգիպտացւոյն, եւ միւս Մելիտոսի եպիսկոպոսին, Բուրայ քահանային, եւ Շինու սարկաւագին",
+        "title": "Saints Meletius Bishop of Antioch, Menas of Egypt, and the other Meletius, Bishop of Persia, Buras the Priest and Sennen the Deacon",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Menas_of_Egypt",
+        "notes": "Menas of Egypt (also Mina, Minas, Mena, Meena; Greek: Ἅγιος Μηνᾶς; Coptic: ⲁⲃⲃⲁ ⲙⲏⲛⲁ ⲛ̀ⲧⲉ ⲛⲓⲫⲁⲓⲁⲧ; 285 – c. 309), a martyr and wonder-worker, is one of the most well-known Coptic saints in the East and the West, due to the many miracles that are attributed to his intercession and prayers. Menas was a Coptic soldier in the Roman army martyred because he refused to recant his Christian faith.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-10",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Demetrios the Martyr and Basil the Priest",
+        "name_hy": "Սրբոցն՝ Դեմետրեայ վկային, եւ Բասիլիսկոսի քահանային",
+        "title": "Saints Demetrios the Martyr and Basil the Priest",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/november/commemoration-of-st-martyr-demetrios-and-the-priest-st-basilikos",
+        "notes": "Demetrios (Demetrius) was born in Persia. He has lived during the period of reign of the King Kostandianos the Great.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-12",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
+        "name_hy": "Սրբոցն՝ Գուրիասայ, Սամոնասայ, եւ Աբիբայ սարկաւագին, Ռոմանոսի միայնակեցին, Մանկանն խոստովանողին, եւ Հիւսիքոսի զինաւորին",
+        "title": "Saints Gurias, Samonas and Habibus (Abibas) the Deacon, Martyrs of Edessa, and Romanus the Monk, Barula the Confessing Child and Hesychius the Soldier",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Samonas",
+        "notes": "Samonas (Greek: Σαμῶνας, c. 875 – after 908) was an Arab eunuch, who was captured by the Byzantines and became one of the most influential officials of the Byzantine Empire during the first decade of the 10th century.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -277,11 +2165,12 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Presentation of the Most Holy Mother of God in the Temple",
-        "title": "Presentation of the Most Holy Mother of God in the Temple",
+        "name": "Presentation of the Holy Mother of God to the Temple",
+        "name_hy": "Տօն Ընծայման սուրբ Աստուածածնի երից ամաց ՚ի տաճարն",
+        "title": "Presentation of the Holy Mother of God to the Temple",
         "feast_type": "Feast",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/52",
-        "notes": "According to the tradition recorded in the Protoevangelium of James, when Mary reached the age of three, her parents brought her to the Temple, where she remained until her betrothal to Joseph.",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -289,16 +2178,215 @@
     ]
   },
   {
-    "month_day": "11-28",
+    "month_day": "11-23",
     "tradition": "armenian",
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Holy Apostles Thaddeus and Bartholomew",
-        "title": "Holy Apostles Thaddeus and Bartholomew",
+        "name": "Saint Virgins Juliana and Basilla",
+        "name_hy": "Սրբոց կուսանացն՝ Յուլիանեայ եւ Վասիլուհւոյն",
+        "title": "Saint Virgins Juliana and Basilla",
+        "feast_type": "Saint",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-24",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
+        "name_hy": "Սրբոցն՝ Ղունկիանոսի քահանային, Տարագոսի, Պրոբոսի, Անդրոնիկոսի, Ոնեսիմեայ, եւ այլոց աշակերտացն սրբոյն Պօղոսի",
+        "title": "Saints Lucian the Priest, Tarachus, Probus, Andronicus, Onesimus and other Disciples of Apostle Paul",
         "feast_type": "Apostle",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/53",
-        "notes": "Before His Ascension, Christ commanded the Apostles to preach the divine doctrine throughout the whole world and to baptize all nations in the name of the Father, and of the Son, and of the Holy Spirit (Matt. 28:19-20).",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-26",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+        "name_hy": "Սրբոցն՝ Կղեմայ հայրապետին, եւ Բագարատայ Տոռոմենոյ եպիսկոպոսին",
+        "title": "Saints Clement the Bishop Rome and Pancratius the Bishop of Taormina",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-30",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Gennaro the Bishop and Mercurius the Warrior",
+        "name_hy": "Սրբոցն՝ Գենարիոսի եպիսկոպոսին, եւ Մերկիւռիոսի զինաւորին",
+        "title": "Saints Gennaro the Bishop and Mercurius the Warrior",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-01",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Jacoc and Themistocles",
+        "name_hy": "Սրբոցն՝ Յակովկայ եւ Իրաւափառայ",
+        "title": "Saints Jacoc and Themistocles",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Themistocles",
+        "notes": "Themistocles (; Ancient Greek: Θεμιστοκλῆς, Themistoklēs; c. 524 – c. 459 BC) was an Athenian politician and general.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-03",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+        "name_hy": "Սրբոց հարցն Եգիպտացւոց՝ Պօղոսի, Պօղայ, Մակարայ, Եւագրի,Յովհաննու Գբեցւոյն, Յովհաննու Կարճահասակին, Նեղոսի, Արսենի, Սիսիանու, Դանիէլի, Սրապիոնի, Մակարիոսի, Պիմէնի, եւ այլոց սրբոց հարցն",
+        "title": "The Holy Fathers of Egypt: Paul the Hermit, Paul the Simple, Macarius the Great, Evagrius Ponticus, John of the Well, John the Dwarf, Nilus of Sinai, Arsenios the Great, Sisoes the Great, Daniel of Scetis, Serapion, Macarius of Alexandria, Poimen and others",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Paul_the_Simple",
+        "notes": "Paul the Simple of Egypt (225 – 339) was a hermit and disciple of Anthony the Great. John, the Abbot of Sinai wrote \"Paul the Simple was a clear example for us, for he was the rule and type of blessed simplicity.\" Though contemporaries, he is not to be confused with Paul of Thebes, regarded as the First Hermit. The account of his life is found in Palladius of Helenopolis De Vitis Patrum 8,28 and T",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-05",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop",
+        "name_hy": "Սրբոյն Նիկողայոսի զմիւռնացւոյ սքանչելագործ հայրապետին։ Եւ միւս Նիկողայոսի հայրապետացն, եւ Միւռոնայ եպիսկոպոսին",
+        "title": "Saints Gregory and Nicholas the Wonderworkers, and other Nicholas the Bishop and Myron the Bishop",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-06",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Third Sunday of Advent - Eve of Fast of Saint James the bishop of Nisibis",
+        "name_hy": null,
+        "title": "Third Sunday of Advent - Eve of Fast of Saint James the bishop of Nisibis",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-07",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+        "name_hy": "Սրբոցն՝ Մինասայ, Երմոգինեայ, Եւգրափոսի, եւ կամաւոր աղքատացն՝ Յովհաննու եւ Ալեքսիանոսի",
+        "title": "Saints Menas, Hermogenes, Eugraphus and the poor mans John and Alexis",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Menas",
+        "notes": "Menas, a male personal name, could refer to:",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-08",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+        "name_hy": "Սրբոցն՝ Կուռնելիոսի հարիւրապետին, Շմաւոնի՝ ազգականին Քրիստոսի որ խաչեցաւ յԵրուսաղէմ, Պողիկարպոսի հայրապետին Զմիւռնիոյ եւ սրբոց վկայիցն, որք յԱրեւելս կատարեցան",
+        "title": "Saints Cornelius the Centurion, Simeon, martyred in Jerusalem, Polycarp the Bishop of Smyrna, and the Martyrs that perished in the East",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Cornelius_the_Centurion",
+        "notes": "Cornelius (Greek: Κορνήλιος, romanized: Kornḗlios; Latin: Cornēlius [kɔrˈneː.li.ʊs]; fl. 1st century AD) was a Roman centurion who is considered by some Christians to be the first Gentile to convert to the faith, as related in Acts of the Apostles (see Ethiopian eunuch for the competing tradition). The baptism of Cornelius is an important event in the history of the early Christian church.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-09",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Feast day - Feast of the Conception of the Holy Virgin Mary by Anna",
+        "name_hy": "Տօն Յղութեան սրբոյ Կուսին Մարիամու ՚ի յԱննայէ",
+        "title": "Feast day - Feast of the Conception of the Holy Virgin Mary by Anna",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/conception-of-st-mary-by-anna",
+        "notes": "Աննայի՝ Սուրբ Աստվածածնով հղիությունը նկարագրված չէ Աստվածաշունչ մատյանում: Այն մեզ է փոխանցվել Եկեղեցու Սրբազան ավանդության շնորհիվ: Սուրբ Կույսի ծնողները` Ս.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-10",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+        "name_hy": "Սրբոցն՝ Եւստռատիոսի, Օքսենտիոսի, Եւգինէոսի, Ովրեստեսի եւ Մարդարիոսի",
+        "title": "Saints Eustratius, Auxentius, Eugenius, Orestes and Mardarius, the Martyrs of Sebastia",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Eustratius",
+        "notes": "Eustratius or Eustratios, in modern transliteration Efstratios (Greek: Εὐστράτιος/Greek: Ευστράτιος) is a Greek given name. Its diminutive form is Stratos (Greek: Στράτος) or Stratis (Greek: Στρατής or Greek: Στράτης).",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -311,11 +2399,156 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Saint Jacob of Nisibis, Venerable Maruge the Hermit, and Saint Meletius, Bishop of Antioch",
-        "title": "Saint Jacob of Nisibis, Venerable Maruge the Hermit, and Saint Meletius, Bishop of Antioch",
+        "name": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+        "name_hy": "Սրբոցն՝ Յակոբայ Մծբնայ հայրապետին, Մարուգէի ճգնաւորին, եւ Մելիտոսի եպիսկոպոսին",
+        "title": "Saints James of Nisibis, Marouke the Hermit and Mellitus the Bishop",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Jacob_of_Nisibis",
+        "notes": "Jacob of Nisibis (Syriac: ܝܥܩܘܒ ܢܨܝܒܢܝܐ, Yaʿqôḇ Nṣîḇnāyâ; Greek: Ἅγιος Ἰάκωβος Ἐπίσκοπος Μυγδονίας; Armenian: Յակոբ Մծբնայ Yakob Mtsbnay), also known as Jacob of Mygdonia, Jacob the Great, and James of Nisibis, was a hermit, a grazer and the Bishop of Nisibis until his death. He was lauded as the \"Moses of Mesopotamia\", and was the spiritual father of the renowned writer and theologian Ephrem the",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-14",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+        "name_hy": "Սրբոց հայրապետացն՝ Իգնատիոսի, Ադդէի, եւ Մարութայի",
+        "title": "Saint Patriarchs Ignatius the Bishop of Antiosh, Addai the Bishop of Edessa and Maruthas the Bishop of Marv",
+        "feast_type": "Hierarch",
+        "hagiography_url": null,
+        "notes": "Armenian Apostolic Church commemoration.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-15",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+        "name_hy": "Սրբոցն՝ Թէոպոմպայ եպիսկոպոսին, եւ Թէովնայ վկային, եւ չորից զինաւորացն՝ Բասոսի, Եւսեբի, Եւտիքի, եւ Բասիլիդեայ",
+        "title": "Saints Theopemptus the Bishop of Nicomedia and Theonas the Martyr, and the Four Soldiers Bassus, Eusebius, Eutychius and Basilides",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/commemoration-of-bishop-st-theopompus-martyr-st-theovna-and-soldiers-sts-basos-eusebius-eutikus-and-basilides",
+        "notes": "Theopompus and martyr St. Theovna have been martyred in the city of Nicomidia in 303, during the period of reign of the king Dioclethianus.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-17",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
+        "name_hy": "Սրբոց կուսանացն՝ Ինդոսի եւ Դոմնայի, եւ Գղերիկոսի քահանային, եւ երկուց բիւրուցն՝ որք այրեցան յեկեղեցին Նիկոմիդացւոց",
+        "title": "Saints virgins Indes and Domna, and Clericus the Priest along with the 20,000 Martyrs of Nicomedia",
         "feast_type": "Saint",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/55",
-        "notes": "Saint Jacob of Nisibis (Jacob the Nisibian) was a cousin of Saint Gregory the Illuminator and came from a Parthian lineage. From his youth, he lived a life of asceticism. For his unceasing prayers and spiritual labors, the Lord endowed him with the gifts of prophecy and wonderworking. By his God-ple",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Domna",
+        "notes": "Domna (Russian: Домна) can refer to:",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-19",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Abgar the Witness and the First Christian King",
+        "name_hy": "Սրբոյն Աբգարու նախավկայ եւ ՚ի Քրիստոստ անդրանիկ հաւատացեալ թագաւորին մերոյ",
+        "title": "Saint Abgar the Witness and the First Christian King",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/commemoration-of-st-abgar-first-martyr-of-the-church-and-our-first-king-believing-in-christ",
+        "notes": "According to the tradition St. Abgar was the first Christian king of the 1st century, the son of the Parthian king Arshakunie Arsham. He was also called “senior man” as he was the wisest of all and of genius.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-21",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian",
+        "name_hy": "Սրբոցն՝ Աբրահամու եւ Խորէնայ, եւ անարծաթ բժշկացն՝ Կոզմայի եւ Դամիանոսի",
+        "title": "Saints Abraham and Khoren, Moneyless Physicians Cosmas and Damian",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Abraham",
+        "notes": "Abraham (originally Abram) is a patriarch revered in the Abrahamic religions, including Judaism, Christianity, and Islam. In Judaism, he is the founding father and first Hebrew patriarch who began the covenantal relationship between the Jewish people and God; in Christianity, he is regarded as the forebear of Jesus and the spiritual ancestor of all Christians; and in Islam, he is a link in the cha",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-22",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Theodoron the Martyr",
+        "name_hy": "Սրբոյն Աստուածատրոյ վկային",
+        "title": "Saint Theodoron the Martyr",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/commemoration-of-the-martyr-st-astvatsatoor",
+        "notes": "Astvatsatoor was martyred during the reign of the Persian King Khosrov. He was a Persian magus, who comes to Armenia together with Denshapouh and, witnessing there the martyrdom of St.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-24",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saints David the Prophet-King and James the Apostle",
+        "name_hy": "Սրբոցն՝ Դաւթի մարգարէին եւ Յակոբայ Տեառնեղբօր առաքելոյն",
+        "title": "Saints David the Prophet-King and James the Apostle",
+        "feast_type": "Apostle",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/commemoration-of-the-prophet-st-david-and-apostle-st-james-brother-of-jesus",
+        "notes": "James, brother of Jesus, is the combining link between the Evangelical saints and the saints mentioned in the Acts of the Apostles. He is one of the important figures of the Initial Church and the first Bishop of Jerusalem.",
+        "canonized_by": "Armenian Apostolic Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-26",
+    "tradition": "armenian",
+    "calendar": "gregorian",
+    "saints": [
+      {
+        "name": "Saint Stephen the Proto-Deacon and the First Martyr",
+        "name_hy": "Սրբոյն Ստեփանոսի նախասարկաւագին եւ առաջին մարտիրոսին",
+        "title": "Saint Stephen the Proto-Deacon and the First Martyr",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/commemoration-of-st-stephen-the-protomartyr-and-the-first-martyr",
+        "notes": "According to the hagiographical sources he was from the royal dynasty of Judas and was the son of law-abiding parents. aStill a young man he was the servant of the chief priest Kayipaya. According to the same sources when the Lord was taken to home, Stephen took off the cloth from his head and spread it under the Lord’s feet thus expressing his true and sincere love.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -328,11 +2561,12 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Saint Peter and Saint Paul the Apostles",
-        "title": "Saint Peter and Saint Paul the Apostles",
-        "feast_type": "Apostle",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/58",
-        "notes": "Saint Peter the Apostle († 67 AD) was the chief among the Apostles. He had been a fisherman. When Jesus first met Peter, He said to him: “Thou art Simon the son of Jona: thou shalt be called Cephas” (John 1:42). means “rock” in Greek ( ). By a divine vision, Saint Peter was instructed by God to bapt",
+        "name": "Saints Peter and Paul the Apostles",
+        "name_hy": "Սրբոց առաքելոցն Պետրոսի եւ Պօղոսի",
+        "title": "Saints Peter and Paul the Apostles",
+        "feast_type": "Saint",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/commemoration-of-the-apostles-st-peter-and-st-paul",
+        "notes": "During the night when Jesus was arrested Peter denied Jesus thrice and later deeply regretted for his deed. After the Pentecost it was Peter that explained to the people assembled what had happened and spoke about Incarnated Jesus. One of the important deeds of Peter was bringing the heathens to the church.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null
@@ -345,11 +2579,12 @@
     "calendar": "gregorian",
     "saints": [
       {
-        "name": "Sons of Thunder: St. James and St. John the Apostles",
-        "title": "Sons of Thunder: St. James and St. John the Apostles",
+        "name": "Saint James the Apostle and His Brother John the Evangelist - Eve of Fast of Nativity",
+        "name_hy": "Սրբոց Որդւոցն որոտման՝ Յակոբայ առաքելոյն եւ Յովհաննու աւետարանչին",
+        "title": "Saint James the Apostle and His Brother John the Evangelist - Eve of Fast of Nativity",
         "feast_type": "Apostle",
-        "hagiography_url": "https://www.armenianchurch.org/en/Liturgical-Calendar/59",
-        "notes": "Saint James the Apostle was one of the twelve Apostles of Christ. He was the son of Zebedee, a Galilean fisherman, and the elder brother of the Evangelist John. Together with the holy Apostles Peter and John, Saint James belonged to the inner circle of Christ’s disciples.",
+        "hagiography_url": "https://armenianchurch.ge/en/kalendar-prazdnikov/description-2/december/commemoration-of-the-apostle-st-james-and-evangelist-st-john",
+        "notes": "Armenian Apostolic Church commemoration.",
         "canonized_by": "Armenian Apostolic Church",
         "canonization_scope": "oriental",
         "year_canonized": null

@@ -26,6 +26,7 @@ class Tradition(BaseModel):
 
 class Saint(BaseModel):
     name: str
+    name_hy: Optional[str] = None          # Armenian script name (Հայ)
     title: Optional[str] = None
     feast_type: Optional[str] = None
     hagiography_url: Optional[str] = None
