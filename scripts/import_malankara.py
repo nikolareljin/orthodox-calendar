@@ -86,3 +86,80 @@ def julian_civil_to_malankara(md: str) -> str:
     # Year 2000 is a leap year — handles Julian Feb 29 edge case safely
     ref = date(2000, month, day) - timedelta(days=_JULIAN_OFFSET)
     return f"{ref.month:02d}-{ref.day:02d}"
+
+
+# ── Name cleaning ──────────────────────────────────────────────────────────────
+
+_HONORIFIC_RE = re.compile(
+    r"^(?:(?:saint|saints?|sts?\.?|st\.?|blessed|venerable|"
+    r"our venerable|righteous|new martyr|new-martyr|great)\s+)+",
+    re.IGNORECASE,
+)
+_EVENT_PREFIX_RE = re.compile(
+    r"^(?:feast of(?: the)?|commemoration of(?: the)?|"
+    r"repose of(?: the)?|translation of(?: the)?)\s+",
+    re.IGNORECASE,
+)
+
+
+def clean_name(raw: str) -> str:
+    s = raw.strip()
+    s = _EVENT_PREFIX_RE.sub("", s)
+    s = _HONORIFIC_RE.sub("", s)
+    return s.strip()
+
+
+# ── Noise filter ───────────────────────────────────────────────────────────────
+
+_SUBSTANTIVE_RE = re.compile(
+    r"\b(?:saint|saints|sts?\.?|feast|commemoration|nativity|resurrection|"
+    r"ascension|pentecost|transfiguration|dormition|presentation|epiphany|"
+    r"annunciation|holy cross|apostle|martyr|prophet|hierarch|venerable|"
+    r"blessed|baptism|assumption|theophany|perunnal|thirunal)\b",
+    re.IGNORECASE,
+)
+_ALLCAPS_RE = re.compile(r"\b[A-Z]{4,}\b")
+
+
+def is_substantive(text: str) -> bool:
+    return bool(_SUBSTANTIVE_RE.search(text) or _ALLCAPS_RE.search(text))
+
+
+# ── Feast type detection ───────────────────────────────────────────────────────
+
+_FEAST_RULES: list[tuple[re.Pattern, str]] = [
+    (re.compile(r"\b(?:hieromartyr|new martyr|new-martyr)\b", re.I), "Hieromartyr"),
+    (re.compile(r"\bmartyr\b", re.I), "Martyr"),
+    (re.compile(r"\bvenerable|hermit|abbot|abbess\b", re.I), "Venerable"),
+    (re.compile(r"\bconfessor\b", re.I), "Confessor"),
+    (re.compile(r"\bapostle\b", re.I), "Apostle"),
+    (re.compile(r"\bforerunner|baptist\b", re.I), "Prophet"),
+    (re.compile(r"\bprophet\b", re.I), "Prophet"),
+    (re.compile(r"\bbishop|patriarch|metropolitan|archbishop|catholicos\b", re.I), "Hierarch"),
+    (re.compile(r"\bking|queen|prince|emperor\b", re.I), "Righteous"),
+    (re.compile(
+        r"\bnativity|theophany|presentation|dormition|ascension|pentecost|"
+        r"transfiguration|resurrection|annunciation|holy cross|epiphany|"
+        r"perunnal|thirunal\b", re.I), "Feast"),
+]
+
+
+def feast_type(name: str) -> str:
+    for pattern, ft in _FEAST_RULES:
+        if pattern.search(name):
+            return ft
+    return "Saint"
+
+
+# ── Normalization for deduplication ───────────────────────────────────────────
+
+_NORMALIZE_STRIP_RE = re.compile(r"[^a-z0-9]+")
+_DROP_TOKENS = frozenset({
+    "saint", "saints", "st", "sts", "venerable", "blessed", "holy",
+    "martyr", "new", "the", "of", "and", "our", "lord",
+})
+
+
+def normalize_key(name: str) -> str:
+    tokens = _NORMALIZE_STRIP_RE.sub(" ", name.lower()).split()
+    return " ".join(t for t in tokens if t not in _DROP_TOKENS)

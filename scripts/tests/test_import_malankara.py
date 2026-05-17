@@ -58,3 +58,49 @@ def test_julian_civil_to_malankara_offset():
     # Verify consistent 13-day offset across months
     assert julian_civil_to_malankara("03-14") == "03-01"
     assert julian_civil_to_malankara("04-14") == "04-01"
+
+
+from import_malankara import clean_name, is_substantive, feast_type, normalize_key
+
+
+def test_clean_name_strips_saint_prefix():
+    assert clean_name("Saint Thomas the Apostle") == "Thomas the Apostle"
+    assert clean_name("Saints Peter and Paul") == "Peter and Paul"
+    assert clean_name("St. Mary the Virgin") == "Mary the Virgin"
+
+
+def test_clean_name_strips_event_prefix():
+    assert clean_name("Feast of the Nativity") == "Nativity"
+    assert clean_name("Commemoration of the Holy Martyrs") == "Holy Martyrs"
+
+
+def test_is_substantive_keeps_saints_and_feasts():
+    assert is_substantive("Feast of Saint Thomas the Apostle")
+    assert is_substantive("Commemoration of the Holy Martyrs")
+    assert is_substantive("NATIVITY OF OUR LORD")
+    assert is_substantive("Perunnal of Saint Mary")
+    assert is_substantive("Thirunal of the Apostle")
+
+
+def test_is_substantive_drops_noise():
+    assert not is_substantive("Fast day")
+    assert not is_substantive("Lenten weekday")
+    assert not is_substantive("")
+    assert not is_substantive("Sunday of the Great Lent")
+
+
+def test_feast_type_detection():
+    assert feast_type("Saint Thomas the Martyr") == "Martyr"
+    assert feast_type("Hieromartyr Ignatius") == "Hieromartyr"
+    assert feast_type("Venerable Ephrem the Syrian") == "Venerable"
+    assert feast_type("Feast of the Nativity") == "Feast"
+    assert feast_type("Perunnal of Our Lady") == "Feast"
+    assert feast_type("Thirunal of the church") == "Feast"
+    assert feast_type("Apostle Thomas") == "Apostle"
+    assert feast_type("Prophet Elijah") == "Prophet"
+    assert feast_type("Some unknown celebration") == "Saint"
+
+
+def test_normalize_key_deduplicates_same_saint():
+    assert normalize_key("Saint Thomas") == normalize_key("Thomas")
+    assert normalize_key("St. Mary") == normalize_key("Mary")
