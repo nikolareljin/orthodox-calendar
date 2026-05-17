@@ -315,7 +315,8 @@ def main() -> None:
     if args.dry_run:
         print("\nSample (first 5):", file=sys.stderr)
         for e in entries[:5]:
-            print(f"  {e['month_day']}: {e['saints'][0]['name'][:60]}", file=sys.stderr)
+            saint_name = e["saints"][0]["name"][:60] if e["saints"] else "(no saints)"
+            print(f"  {e['month_day']}: {saint_name}", file=sys.stderr)
         print("(dry-run — nothing written)", file=sys.stderr)
         return
 
