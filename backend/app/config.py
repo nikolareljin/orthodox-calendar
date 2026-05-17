@@ -120,9 +120,8 @@ TRADITIONS: Dict[str, Tradition] = {
     ),
     "malankara": Tradition(
         name="Malankara Orthodox Syrian Church",
-        calendar=CalendarSystem.JULIAN,
+        calendar=CalendarSystem.GREGORIAN,
         aliases=["mosc", "indian-orthodox", "thomas-christians"],
-        data_key="oriental",   # shares Oriental Orthodox sanctoral data until Malankara-specific set is built
     ),
     "assyrian": Tradition(
         name="Assyrian Church of the East",
