@@ -326,7 +326,7 @@ _PDF_DATE_LINE_RE = re.compile(
     r"(?P<month>January|February|March|April|May|June|July|August|"
     r"September|October|November|December)\s+"
     r"(?P<day>\d{1,2})"
-    r"(?:[:\s\-–]+)(?P<rest>[^\n]+)",
+    r"(?:[:\t \-–]+)(?P<rest>[^\n]+)",
     re.IGNORECASE | re.MULTILINE,
 )
 
@@ -342,11 +342,15 @@ def _extract_pdf_text(path: Path) -> str:
         return ""
 
     pages = []
-    with pdfplumber.open(path) as pdf:
-        for page in pdf.pages:
-            t = page.extract_text()
-            if t:
-                pages.append(t)
+    try:
+        with pdfplumber.open(path) as pdf:
+            for page in pdf.pages:
+                t = page.extract_text()
+                if t:
+                    pages.append(t)
+    except Exception as exc:
+        print(f"  WARN: pdfplumber failed to read PDF: {exc}", file=sys.stderr)
+        return ""
     return "\n".join(pages)
 
 
@@ -356,11 +360,14 @@ def phase_pdf(tmp_dir: Path) -> list[dict]:
     pdf_path = tmp_dir / "panjangom.pdf"
 
     if not pdf_path.exists():
+        tmp_path = pdf_path.with_suffix(".pdf.tmp")
         try:
-            print(f"  Downloading PDF...", file=sys.stderr)
-            pdf_path.write_bytes(_fetch_bytes(_PANJANGOM_PDF_URL))
+            print("  Downloading PDF...", file=sys.stderr)
+            tmp_path.write_bytes(_fetch_bytes(_PANJANGOM_PDF_URL))
+            tmp_path.rename(pdf_path)
             print(f"  Downloaded {pdf_path.stat().st_size // 1024} KB", file=sys.stderr)
         except Exception as exc:
+            tmp_path.unlink(missing_ok=True)
             print(f"  WARN: PDF download failed: {exc}", file=sys.stderr)
             return []
 
@@ -382,7 +389,7 @@ def phase_pdf(tmp_dir: Path) -> list[dict]:
         if not is_substantive(rest):
             continue
         md = f"{month_num:02d}-{day:02d}"
-        key = f"{md}:{normalize_key(rest)}"
+        key = f"{md}:{normalize_key(clean_name(rest))}"
         if key in seen:
             continue
         seen.add(key)
