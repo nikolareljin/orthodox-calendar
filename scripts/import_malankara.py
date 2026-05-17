@@ -416,7 +416,10 @@ _SYRIAC_WEB_DATE_RE = re.compile(
 )
 
 
-def _parse_bs4(html: str, base_url: str) -> list[tuple[str, str]]:
+def _parse_bs4(
+    html: str,
+    date_re: re.Pattern,
+) -> list[tuple[str, str]]:
     """Parse date-saint pairs from an HTML calendar page.
 
     Tries two strategies:
@@ -444,7 +447,7 @@ def _parse_bs4(html: str, base_url: str) -> list[tuple[str, str]]:
         if len(cells) >= 2:
             date_text = cells[0].get_text(" ", strip=True)
             saint_text = cells[1].get_text(" ", strip=True)
-            dm = _SYRIAC_WEB_DATE_RE.search(date_text)
+            dm = date_re.search(date_text)
             if dm and is_substantive(saint_text):
                 month = _MONTH_NAMES[dm.group("month").lower()]
                 day = int(dm.group("day"))
@@ -453,14 +456,14 @@ def _parse_bs4(html: str, base_url: str) -> list[tuple[str, str]]:
     # Strategy 2: heading + following siblings (list items / paragraphs)
     if not pairs:
         for heading in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
-            dm = _SYRIAC_WEB_DATE_RE.search(heading.get_text())
+            dm = date_re.search(heading.get_text())
             if not dm:
                 continue
             month = _MONTH_NAMES[dm.group("month").lower()]
             day = int(dm.group("day"))
             md = f"{month:02d}-{day:02d}"
             for sib in heading.next_siblings:
-                if hasattr(sib, "name") and sib.name in ("h2", "h3", "h4"):
+                if hasattr(sib, "name") and sib.name in ("h2", "h3", "h4", "strong", "b"):
                     break
                 text = (sib.get_text(" ", strip=True)
                         if hasattr(sib, "get_text") else str(sib).strip())
@@ -483,7 +486,7 @@ def phase_syriac_web() -> list[dict]:
         print(f"  WARN: fetch failed: {exc}", file=sys.stderr)
         return []
 
-    pairs = _parse_bs4(html, _SYRIAC_WEB_URL)
+    pairs = _parse_bs4(html, _SYRIAC_WEB_DATE_RE)
     print(f"  {len(pairs)} raw pairs found", file=sys.stderr)
 
     entries: list[dict] = []
@@ -524,7 +527,7 @@ def phase_mosc_web() -> list[dict]:
         print(f"  WARN: fetch failed: {exc}", file=sys.stderr)
         return []
 
-    pairs = _parse_bs4(html, _MOSC_WEB_URL)
+    pairs = _parse_bs4(html, _MOSC_DATE_RE)
     print(f"  {len(pairs)} raw pairs found", file=sys.stderr)
 
     entries: list[dict] = []
