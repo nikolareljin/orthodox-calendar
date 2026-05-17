@@ -93,8 +93,8 @@ export const TRADITIONS = {
     description: "The Syriac Orthodox Church of Antioch traces its roots to the Apostolic See of Antioch (c. 37 AD). Separated from the Chalcedonian church in 451 AD, it preserves Syriac — a dialect of Aramaic, the language of Christ — as its liturgical language. The Patriarch of Antioch and All the East is headquartered in Damascus.",
     logo: "✠",
   },
-  oriental: {
-    label: "Coptic", calendar: "Julian", note: "Non-Chalcedonian",
+  coptic: {
+    label: "Coptic", calendar: "Gregorian", note: "Non-Chalcedonian",
     website: "https://www.copticchurch.net",
     founded: "42 AD",
     patron: "Saint Mark the Evangelist",
@@ -110,7 +110,7 @@ export const TRADITIONS = {
     logo: "✙",
   },
   armenian: {
-    label: "Armenian Apostolic", calendar: "Julian", note: "Non-Chalcedonian",
+    label: "Armenian Apostolic", calendar: "Gregorian", note: "Non-Chalcedonian",
     website: "https://www.armenianchurch.us",
     founded: "301 AD",
     patron: "Saint Gregory the Illuminator",
@@ -118,7 +118,7 @@ export const TRADITIONS = {
     logo: "✙",
   },
   ethiopian: {
-    label: "Ethiopian", calendar: "Julian", note: "Non-Chalcedonian",
+    label: "Ethiopian", calendar: "Gregorian", note: "Non-Chalcedonian",
     website: "https://www.ethiopianorthodox.org",
     founded: "340 AD",
     patron: "Saint Frumentius (Abba Selama)",
@@ -127,7 +127,7 @@ export const TRADITIONS = {
   },
   // ── Church of the East ──────────────────────────────────────────────────────
   assyrian: {
-    label: "Assyrian", calendar: "Julian", note: "Church of the East",
+    label: "Assyrian", calendar: "Gregorian", note: "Church of the East",
     website: "https://www.assyrianchurch.org",
     founded: "1st century AD (Apostolic)",
     patron: "Saints Thomas, Addai, and Mari",
