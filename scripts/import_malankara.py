@@ -538,6 +538,111 @@ def phase_mosc_web() -> list[dict]:
     return entries
 
 
+# ── Wikipedia enrichment ───────────────────────────────────────────────────────
+
+_WEAK_WORDS = frozenset({
+    "the", "of", "and", "his", "her", "our", "lord", "holy", "blessed",
+    "saint", "saints", "feast", "commemoration", "day", "fast", "great",
+    "church", "first", "second", "third",
+})
+
+
+def _candidate_titles(name: str) -> list[str]:
+    cleaned = re.sub(
+        r"^(?:saints?|sts?\.?|feast of\s+(?:the\s+)?|commemoration of\s+(?:the\s+)?|"
+        r"holy\s+|the\s+)",
+        "", name, flags=re.IGNORECASE,
+    ).strip()
+    parts = re.split(r"\s*(?:,\s*|\s+and\s+|\s*&\s*)\s*", cleaned)
+    titles = []
+    for p in parts:
+        p = p.strip().strip(".")
+        if not p or len(p) < 4:
+            continue
+        words = p.split()
+        if [w for w in words if w.lower() not in _WEAK_WORDS]:
+            titles.append(p)
+    return titles[:3]
+
+
+def _fetch_wiki_extracts(titles: list[str]) -> dict[str, dict]:
+    result: dict[str, dict] = {}
+    for i in range(0, len(titles), 50):
+        batch = titles[i: i + 50]
+        try:
+            params = urllib.parse.urlencode({
+                "action": "query",
+                "titles": "|".join(batch),
+                "prop": "extracts",
+                "exintro": "1",
+                "exsentences": "3",
+                "explaintext": "1",
+                "redirects": "1",
+                "format": "json",
+            })
+            url = f"{_WIKI_API}?{params}"
+            req = urllib.request.Request(url, headers=_HEADERS)
+            with urllib.request.urlopen(req, timeout=30) as r:
+                data = json.loads(r.read())
+        except Exception as exc:
+            print(f"  WARN: Wikipedia batch {i//50+1} failed: {exc}", file=sys.stderr)
+            continue
+
+        norm: dict[str, str] = {}
+        for redir in (data.get("query", {}).get("redirects", [])
+                      + data.get("query", {}).get("normalized", [])):
+            norm[redir["from"]] = redir["to"]
+
+        for page in data.get("query", {}).get("pages", {}).values():
+            raw = (page.get("extract") or "").strip()
+            if len(raw) < 30 or "may refer to:" in raw or "disambiguation" in raw.lower():
+                continue
+            title = page.get("title", "")
+            wiki_url = ("https://en.wikipedia.org/wiki/"
+                        + urllib.parse.quote(title.replace(" ", "_")))
+            result[title] = {
+                "description": " ".join(re.split(r"(?<=[.!?])\s+", raw)[:3])[:400],
+                "url": wiki_url,
+            }
+
+        for orig in batch:
+            resolved = norm.get(orig, orig)
+            if resolved in result and orig not in result:
+                result[orig] = result[resolved]
+
+        if i + 50 < len(titles):
+            time.sleep(0.3)
+
+    return result
+
+
+def phase_enrich(entries: list[dict]) -> list[dict]:
+    """Fetch Wikipedia extracts for saints without hagiography_url."""
+    all_names: list[str] = []
+    for entry in entries:
+        for saint in entry["saints"]:
+            if not saint.get("hagiography_url"):
+                all_names.extend(_candidate_titles(saint["name"]))
+    all_names = list(dict.fromkeys(all_names))  # dedup, preserve order
+
+    print(f"Phase 6: Wikipedia enrichment ({len(all_names)} candidates)...", file=sys.stderr)
+    wiki = _fetch_wiki_extracts(all_names)
+    print(f"  Got {len(wiki)} descriptions", file=sys.stderr)
+
+    for entry in entries:
+        for saint in entry["saints"]:
+            if saint.get("hagiography_url"):
+                continue
+            for cand in _candidate_titles(saint["name"]):
+                if cand in wiki:
+                    saint["hagiography_url"] = wiki[cand]["url"]
+                    if not saint.get("notes"):
+                        saint["notes"] = wiki[cand]["description"]
+                    break
+
+    return entries
+
+
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -581,8 +686,8 @@ def main() -> None:
     if not args.no_mosc_web:
         entries = merge_into(entries, phase_mosc_web())
 
-    # Remaining phases added in later tasks:
-    # enrich
+    if not args.no_enrich:
+        entries = phase_enrich(entries)
 
     print(f"\nTotal: {len(entries)} entries, "
           f"{sum(len(e['saints']) for e in entries)} saints", file=sys.stderr)
