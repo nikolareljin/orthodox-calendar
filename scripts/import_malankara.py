@@ -199,7 +199,7 @@ def _merge_saint(base: dict, overlay: dict) -> None:
     """Overlay non-empty fields into base without overwriting existing data."""
     for field in ("title", "feast_type", "hagiography_url", "notes",
                   "canonized_by", "canonization_scope", "year_canonized"):
-        if overlay.get(field) and not base.get(field):
+        if overlay.get(field) is not None and base.get(field) is None:
             base[field] = overlay[field]
 
 

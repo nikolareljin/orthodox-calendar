@@ -2,7 +2,17 @@ import sys
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from import_malankara import parse_ics, julian_civil_to_malankara
+from import_malankara import (
+    parse_ics,
+    julian_civil_to_malankara,
+    clean_name,
+    is_substantive,
+    feast_type,
+    normalize_key,
+    make_saint,
+    make_entry,
+    merge_into,
+)
 
 
 def test_parse_ics_basic():
@@ -60,9 +70,6 @@ def test_julian_civil_to_malankara_offset():
     assert julian_civil_to_malankara("04-14") == "04-01"
 
 
-from import_malankara import clean_name, is_substantive, feast_type, normalize_key
-
-
 def test_clean_name_strips_saint_prefix():
     assert clean_name("Saint Thomas the Apostle") == "Thomas the Apostle"
     assert clean_name("Saints Peter and Paul") == "Peter and Paul"
@@ -106,21 +113,9 @@ def test_normalize_key_deduplicates_same_saint():
     assert normalize_key("St. Mary") == normalize_key("Mary")
 
 
-from import_malankara import make_saint, make_entry, merge_into
-
-
-def _s(name, url=None, notes=None):
-    return {
-        "name": name, "title": name, "feast_type": "Saint",
-        "hagiography_url": url, "notes": notes,
-        "canonized_by": "Malankara Orthodox Syrian Church",
-        "canonization_scope": "oriental", "year_canonized": None,
-    }
-
-
 def test_merge_into_adds_new_date():
-    base = [make_entry("01-07", [_s("Nativity")])]
-    new  = [make_entry("01-14", [_s("New Year")])]
+    base = [make_entry("01-07", [make_saint("Nativity")])]
+    new  = [make_entry("01-14", [make_saint("New Year")])]
     result = merge_into(base, new)
     assert len(result) == 2
     assert result[0]["month_day"] == "01-07"
@@ -128,22 +123,22 @@ def test_merge_into_adds_new_date():
 
 
 def test_merge_into_deduplicates_same_saint():
-    base = [make_entry("07-03", [_s("Thomas")])]
-    dupe = [make_entry("07-03", [_s("Saint Thomas")])]
+    base = [make_entry("07-03", [make_saint("Thomas")])]
+    dupe = [make_entry("07-03", [make_saint("Saint Thomas")])]
     result = merge_into(base, dupe)
     assert len(result[0]["saints"]) == 1
 
 
 def test_merge_into_enriches_existing():
-    base = [make_entry("07-03", [_s("Thomas", url=None, notes=None)])]
-    rich = [make_entry("07-03", [_s("Thomas", url="https://en.wikipedia.org/wiki/Thomas")])]
+    base = [make_entry("07-03", [make_saint("Thomas")])]
+    rich = [make_entry("07-03", [make_saint("Thomas", hagiography_url="https://en.wikipedia.org/wiki/Thomas")])]
     result = merge_into(base, rich)
     assert result[0]["saints"][0]["hagiography_url"] == "https://en.wikipedia.org/wiki/Thomas"
 
 
 def test_merge_into_adds_new_saint_same_date():
-    base = [make_entry("07-03", [_s("Thomas")])]
-    new  = [make_entry("07-03", [_s("Mary Magdalene")])]
+    base = [make_entry("07-03", [make_saint("Thomas")])]
+    new  = [make_entry("07-03", [make_saint("Mary Magdalene")])]
     result = merge_into(base, new)
     assert len(result[0]["saints"]) == 2
 
@@ -154,6 +149,12 @@ def test_make_saint_sets_required_fields():
     assert s["feast_type"] == "Feast"
     assert s["canonized_by"] == "Malankara Orthodox Syrian Church"
     assert s["canonization_scope"] == "oriental"
+
+
+def test_make_saint_clean_name_applied():
+    s = make_saint("Saint Thomas the Apostle")
+    assert s["name"] == "Thomas the Apostle"    # clean_name stripped "Saint "
+    assert s["title"] == "Saint Thomas the Apostle"  # title preserved raw
 
 
 def test_make_entry_structure():
