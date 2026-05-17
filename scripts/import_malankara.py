@@ -407,6 +407,134 @@ def phase_pdf(tmp_dir: Path) -> list[dict]:
     return entries
 
 
+# ── Phase 4: syriacorthodoxresources.org ──────────────────────────────────────
+
+_SYRIAC_WEB_DATE_RE = re.compile(
+    r"(?P<month>January|February|March|April|May|June|July|August|"
+    r"September|October|November|December)\s+(?P<day>\d{1,2})",
+    re.IGNORECASE,
+)
+
+
+def _parse_bs4(html: str, base_url: str) -> list[tuple[str, str]]:
+    """Parse date-saint pairs from an HTML calendar page.
+
+    Tries two strategies:
+    1. Table rows with 2+ cells (date | saint)
+    2. Heading elements followed by sibling list items / paragraphs
+    Returns list of (MM-DD, saint_name) tuples.
+    """
+    try:
+        from bs4 import BeautifulSoup
+    except ImportError:
+        print("  WARN: beautifulsoup4 not installed. Run: pip install beautifulsoup4 lxml",
+              file=sys.stderr)
+        return []
+
+    soup = BeautifulSoup(html, "lxml")
+
+    for tag in soup(["script", "style", "nav", "footer", "header"]):
+        tag.decompose()
+
+    pairs: list[tuple[str, str]] = []
+
+    # Strategy 1: table rows with 2+ cells
+    for row in soup.find_all("tr"):
+        cells = row.find_all(["td", "th"])
+        if len(cells) >= 2:
+            date_text = cells[0].get_text(" ", strip=True)
+            saint_text = cells[1].get_text(" ", strip=True)
+            dm = _SYRIAC_WEB_DATE_RE.search(date_text)
+            if dm and is_substantive(saint_text):
+                month = _MONTH_NAMES[dm.group("month").lower()]
+                day = int(dm.group("day"))
+                pairs.append((f"{month:02d}-{day:02d}", saint_text))
+
+    # Strategy 2: heading + following siblings (list items / paragraphs)
+    if not pairs:
+        for heading in soup.find_all(["h2", "h3", "h4", "strong", "b"]):
+            dm = _SYRIAC_WEB_DATE_RE.search(heading.get_text())
+            if not dm:
+                continue
+            month = _MONTH_NAMES[dm.group("month").lower()]
+            day = int(dm.group("day"))
+            md = f"{month:02d}-{day:02d}"
+            for sib in heading.next_siblings:
+                if hasattr(sib, "name") and sib.name in ("h2", "h3", "h4"):
+                    break
+                text = (sib.get_text(" ", strip=True)
+                        if hasattr(sib, "get_text") else str(sib).strip())
+                if text and is_substantive(text):
+                    pairs.append((md, text))
+
+    return pairs
+
+
+def phase_syriac_web() -> list[dict]:
+    """Scrape syriacorthodoxresources.org — shared Syriac/Malankara saints.
+
+    Dates on this site are Julian (Syriac Orthodox follows Julian calendar).
+    Apply the same 13-day conversion as the Syriac ICS phase.
+    """
+    print("Phase 4: syriacorthodoxresources.org...", file=sys.stderr)
+    try:
+        html = _fetch(_SYRIAC_WEB_URL)
+    except Exception as exc:
+        print(f"  WARN: fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    pairs = _parse_bs4(html, _SYRIAC_WEB_URL)
+    print(f"  {len(pairs)} raw pairs found", file=sys.stderr)
+
+    entries: list[dict] = []
+    for julian_md, name in pairs:
+        try:
+            malankara_md = julian_civil_to_malankara(julian_md)
+        except (ValueError, IndexError):
+            print(f"  WARN: skipping malformed date {julian_md!r}", file=sys.stderr)
+            continue
+        entries.append(make_entry(malankara_md, [make_saint(name)]))
+
+    print(f"  {len(entries)} entries after date conversion", file=sys.stderr)
+
+    if not entries:
+        print(
+            "  WARN: 0 entries. The page layout may differ from expected strategies.",
+            file=sys.stderr,
+        )
+
+    return entries
+
+
+# ── Phase 5: mosc-temp.com ────────────────────────────────────────────────────
+
+_MOSC_DATE_RE = re.compile(
+    r"(?P<month>January|February|March|April|May|June|July|August|"
+    r"September|October|November|December)\s+(?P<day>\d{1,2})",
+    re.IGNORECASE,
+)
+
+
+def phase_mosc_web() -> list[dict]:
+    """Scrape mosc-temp.com church calendar — Gregorian dates, use as-is."""
+    print("Phase 5: mosc-temp.com...", file=sys.stderr)
+    try:
+        html = _fetch(_MOSC_WEB_URL)
+    except Exception as exc:
+        print(f"  WARN: fetch failed: {exc}", file=sys.stderr)
+        return []
+
+    pairs = _parse_bs4(html, _MOSC_WEB_URL)
+    print(f"  {len(pairs)} raw pairs found", file=sys.stderr)
+
+    entries: list[dict] = []
+    for md, name in pairs:
+        entries.append(make_entry(md, [make_saint(name)]))
+
+    print(f"  {len(entries)} entries", file=sys.stderr)
+    return entries
+
+
 # ── CLI ────────────────────────────────────────────────────────────────────────
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -444,8 +572,14 @@ def main() -> None:
         tmp.mkdir(exist_ok=True)
         entries = merge_into(entries, phase_pdf(tmp))
 
+    if not args.no_syriac_web:
+        entries = merge_into(entries, phase_syriac_web())
+
+    if not args.no_mosc_web:
+        entries = merge_into(entries, phase_mosc_web())
+
     # Remaining phases added in later tasks:
-    # syriac_web, mosc_web, enrich
+    # enrich
 
     print(f"\nTotal: {len(entries)} entries, "
           f"{sum(len(e['saints']) for e in entries)} saints", file=sys.stderr)
