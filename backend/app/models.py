@@ -31,7 +31,7 @@ class Saint(BaseModel):
     name_hy: Optional[str] = None          # Armenian script name (Հայ)
     title: Optional[str] = None
     feast_type: Optional[str] = None
-    hagiography_url: Optional[str] = None  # OCA URL (primary source; date-keyed)
+    hagiography_url: Optional[str] = None  # primary hagiography URL (OCA for Byzantine; GOARCH when configured)
     goarch_url: Optional[str] = None       # GOARCH chapel URL (contentid-keyed; date-independent)
     icon_url: Optional[str] = None
     notes: Optional[str] = None

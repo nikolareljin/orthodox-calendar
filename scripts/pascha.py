@@ -5,6 +5,11 @@ Usage:
     python3 scripts/pascha.py          # current year
     python3 scripts/pascha.py 2026     # specific year
     python3 scripts/pascha.py 2025 2030  # year range
+
+Note: the Julian→Gregorian conversion and Pascha computus here duplicate
+backend/app/calendar_logic.py intentionally.  This script is a standalone CLI
+tool used outside the Python package (e.g. during data import or from a bare
+checkout with no venv), so it avoids importing from the backend package.
 """
 
 import sys

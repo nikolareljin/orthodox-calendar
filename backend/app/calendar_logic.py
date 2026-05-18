@@ -287,7 +287,7 @@ PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
     28:  ("samaritan_sunday",       "Sunday of the Samaritan Woman",                              "Great Feast"),
     35:  ("blind_sunday",           "Sunday of the Blind Man",                                    "Great Feast"),
     38:  ("leavetaking_pascha",     "Leavetaking of Pascha",                                       "Great Feast"),
-    39:  ("ascension",              "The Ascension of our Lord, God and Savior Jesus Christ",     "Great Feast"),
+    39:  ("ascension",              "The Ascension of Our Lord, God and Savior Jesus Christ",     "Great Feast"),
     48:  ("soul_saturday_pentecost","Soul Saturday before Pentecost",                             "Great Feast"),
     49:  ("pentecost",              "Holy Pentecost (Trinity Sunday)",                            "Great Feast"),
     50:  ("day_of_holy_spirit",     "Postfeast of Pentecost — Day of the Holy Spirit",            "Great Feast"),
