@@ -290,6 +290,8 @@ _PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
     39:  ("ascension",              "The Ascension of our Lord, God and Savior Jesus Christ",     "Great Feast"),
     48:  ("soul_saturday_pentecost","Soul Saturday before Pentecost",                             "Great Feast"),
     49:  ("pentecost",              "Holy Pentecost (Trinity Sunday)",                            "Great Feast"),
+    50:  ("day_of_holy_spirit",     "Postfeast of Pentecost — Day of the Holy Spirit",            "Great Feast"),
+    51:  ("day_of_trinity",         "Postfeast of Pentecost — Third Day of the Trinity",          "Great Feast"),
     56:  ("all_saints",             "Synaxis of All Saints",                                      "Great Feast"),
     57:  ("apostles_fast",          "Beginning of the Apostles' Fast",                            "Minor Feast"),
 }
@@ -334,24 +336,37 @@ _MOVABLE_FEAST_KEYWORDS: frozenset[str] = frozenset({
     "antipascha",
     "myrrhbearing",
     "sunday of the paralytic",
-    "samaritan woman",
+    # "samaritan woman" is intentionally absent: it would also match the fixed feast
+    # "Martyr Photini the Samaritan Woman" (Julian March 20).  The movable feast
+    # "Sunday of the Samaritan Woman" is caught via _MOVABLE_FEAST_EXACT_TITLES instead.
+    "sunday of the samaritan",
     "sunday of the blind",
     "midfeast of pentecost",
     "leavetaking of pascha",
     "ascension of our lord",
-    "memorial saturday",
+    # "memorial saturday" and "synaxis of all saints" are absent from keywords for the
+    # same reason — they collide with fixed feasts.  Both are in _MOVABLE_FEAST_EXACT_TITLES.
     # Pentecost season.  OCA stores bare "Pentecost" so match on the noun itself.
     "pentecost",
     "day of the holy spirit",
-    "synaxis of all saints",
     "beginning of the apostles",
+})
+
+# Titles that must match EXACTLY (case-insensitive) to avoid false positives.
+# These phrases appear verbatim as movable feast titles in the OCA dataset but
+# are also substrings of unrelated fixed-feast names:
+#   "memorial saturday"    ⊂ "Memorial Saturday of Saint Demetrius" (fixed)
+#   "synaxis of all saints" ⊂ "Synaxis of All Saints of Alaska" (fixed)
+_MOVABLE_FEAST_EXACT_TITLES: frozenset[str] = frozenset({
+    "memorial saturday",
+    "synaxis of all saints",
 })
 
 
 def is_movable_feast_title(title: str) -> bool:
     """Return True when *title* belongs to a Pascha-relative movable feast."""
     tl = (title or "").lower()
-    return any(kw in tl for kw in _MOVABLE_FEAST_KEYWORDS)
+    return tl in _MOVABLE_FEAST_EXACT_TITLES or any(kw in tl for kw in _MOVABLE_FEAST_KEYWORDS)
 
 
 def movable_feast_for_date(day: _date) -> Optional[tuple[str, str, str]]:

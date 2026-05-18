@@ -10,6 +10,7 @@ from ..calendar_logic import (
     convert_to_tradition_month_day,
     effective_calendar,
     is_movable_feast_title,
+    julian_pascha_as_gregorian,
     movable_feast_for_date,
     resolve_tradition,
 )
@@ -17,6 +18,54 @@ from ..data_loader import build_index
 from ..models import CalendarEntry, CalendarSystem, Saint, SaintsResponse
 
 _INDEX = build_index()
+
+
+_OCA_URL_DATE_RE = _re.compile(
+    r"(https://www\.oca\.org/saints/lives/)\d{4}/\d{2}/\d{2}/(.*)"
+)
+
+
+def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
+    """Pre-index Pascha-relative delta → (url_id_slug, notes) from 2024 OCA data.
+
+    The OCA dataset was scraped in 2024, so each movable feast entry lives at
+    its 2024 Gregorian key.  Notes are liturgically timeless and are preserved
+    as-is.  URLs have the date portion stripped (only the stable id-slug tail
+    is kept) so they can be reconstructed with the correct date at injection.
+    """
+    from datetime import date as _d
+    pascha_2024 = _d(2024, 5, 5)
+    meta: dict[int, tuple[str | None, str | None]] = {}
+    for entry in _INDEX.get("oca", []):
+        mm, dd = entry.month_day.split("-")
+        try:
+            key_date = _d(2024, int(mm), int(dd))
+        except ValueError:
+            continue
+        delta = (key_date - pascha_2024).days
+        for s in entry.saints:
+            if is_movable_feast_title(s.title or ""):
+                url = s.hagiography_url
+                id_slug: str | None = None
+                if url:
+                    m = _OCA_URL_DATE_RE.match(url)
+                    id_slug = m.group(2) if m else None
+                meta[delta] = (id_slug, s.notes)
+                break
+    return meta
+
+
+_MOVABLE_META: dict[int, tuple[str | None, str | None]] = _build_movable_meta()
+
+
+def _oca_feast_url(id_slug: str | None, feast_date: date) -> str | None:
+    """Reconstruct a year-correct OCA URL for a dynamically computed movable feast."""
+    if not id_slug:
+        return None
+    return (
+        f"https://www.oca.org/saints/lives/"
+        f"{feast_date.year}/{feast_date.month:02d}/{feast_date.day:02d}/{id_slug}"
+    )
 
 # Common honorific prefixes that vary across sources for the same saint
 # (e.g. base has "Seraphim of Sarov", overlay has "Saint Seraphim of Sarov").
@@ -176,11 +225,17 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
             feast = movable_feast_for_date(day)
             if feast:
                 feast_key, feast_title, feast_type = feast
+                delta = (day - julian_pascha_as_gregorian(day.year)).days
+                id_slug, notes = _MOVABLE_META.get(delta, (None, None))
                 movable_entry = CalendarEntry(
                     month_day=month_day,
                     tradition=base_key,
                     calendar=cal,
-                    saints=[Saint(name=feast_key, title=feast_title, feast_type=feast_type)],
+                    saints=[Saint(
+                        name=feast_key, title=feast_title, feast_type=feast_type,
+                        hagiography_url=_oca_feast_url(id_slug, day),
+                        notes=notes,
+                    )],
                 )
                 base_entries = [movable_entry] + base_entries
 
@@ -205,6 +260,7 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
 
     base_by_md = _build_month_day_index(_INDEX.get(base_key, []))
     overlay_by_md = _build_month_day_index(_INDEX.get(canonical, [])) if tradition.data_key else {}
+    pascha_of_year = julian_pascha_as_gregorian(year)
 
     result: Dict[str, Any] = {}
     for day_num in range(1, _cal.monthrange(year, month)[1] + 1):
@@ -226,12 +282,18 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
             feast = movable_feast_for_date(d)
             if feast:
                 feast_key, feast_title, feast_type = feast
+                delta = (d - pascha_of_year).days
+                id_slug, notes = _MOVABLE_META.get(delta, (None, None))
                 base_day = [
                     CalendarEntry(
                         month_day=month_day,
                         tradition=base_key,
                         calendar=cal,
-                        saints=[Saint(name=feast_key, title=feast_title, feast_type=feast_type)],
+                        saints=[Saint(
+                            name=feast_key, title=feast_title, feast_type=feast_type,
+                            hagiography_url=_oca_feast_url(id_slug, d),
+                            notes=notes,
+                        )],
                     )
                 ] + base_day
 
