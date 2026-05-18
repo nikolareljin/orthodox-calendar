@@ -3,7 +3,7 @@ from __future__ import annotations
 import math as _math
 from datetime import date, timedelta
 from datetime import date as _date
-from typing import Tuple
+from typing import Optional, Tuple
 
 from .config import TRADITIONS
 from .models import CalendarSystem, Tradition
@@ -231,6 +231,84 @@ def _julian_to_gregorian(year: int, month: int, day: int) -> _date:
     gmonth = m4 + 3 - 12 * (m4 // 10)
     gyear = 100 * b4 + d4 - 4800 + m4 // 10
     return _date(gyear, gmonth, gday)
+
+
+# ---------------------------------------------------------------------------
+# Movable feast support
+# ---------------------------------------------------------------------------
+
+# Pascha-relative day offsets → (canonical key, display title, feast_type).
+# These cover the major Byzantine movable feasts computed from the Julian computus.
+_PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
+    -48: ("clean_monday",       "Beginning of Great Lent (Clean Monday)",                     "Great Feast"),
+    -8:  ("lazarus_saturday",   "The Raising of Lazarus (Lazarus Saturday)",                   "Great Feast"),
+    -7:  ("palm_sunday",        "Entry of Our Lord into Jerusalem (Palm Sunday)",              "Great Feast"),
+    -3:  ("holy_thursday",      "Great and Holy Thursday",                                     "Great Feast"),
+    -2:  ("holy_friday",        "Great and Holy Friday",                                       "Great Feast"),
+    -1:  ("holy_saturday",      "Great and Holy Saturday",                                     "Great Feast"),
+     0:  ("pascha",             "HOLY PASCHA: The Resurrection of Our Lord",                   "Great Feast"),
+     1:  ("bright_monday",      "Bright Monday",                                               "Great Feast"),
+     7:  ("thomas_sunday",      "Antipascha: Saint Thomas Sunday",                             "Great Feast"),
+    24:  ("mid_pentecost",      "Midfeast of Pentecost",                                       "Great Feast"),
+    39:  ("ascension",          "The Ascension of our Lord, God and Savior Jesus Christ",      "Great Feast"),
+    49:  ("pentecost",          "Holy Pentecost (Trinity Sunday)",                             "Great Feast"),
+    56:  ("all_saints",         "Synaxis of All Saints",                                       "Great Feast"),
+    57:  ("apostles_fast",      "Beginning of the Apostles' Fast",                             "Minor Feast"),
+}
+
+# Title substrings (lower-cased) that identify a movable feast saint in the
+# static OCA dataset.  Those entries were scraped at 2024 Gregorian dates and
+# are wrong for every other year; they are filtered out and re-injected by
+# movable_feast_for_date() instead.
+_MOVABLE_FEAST_KEYWORDS: frozenset[str] = frozenset({
+    # Pascha and Holy Week
+    "holy pascha",
+    "great and holy thursday",
+    "great and holy friday",
+    "great and holy saturday",
+    "lazarus saturday",
+    "entry of our lord into jerusalem",
+    # Bright Week (week after Pascha)
+    "bright monday",
+    "bright tuesday",
+    "bright wednesday",
+    "bright friday",
+    "bright saturday",
+    # Post-Paschal feasts
+    "antipascha",
+    "midfeast of pentecost",
+    "ascension of our lord",
+    "holy pentecost",
+    "postfeast of pentecost",
+    "day of the holy spirit",
+    "synaxis of all saints",
+    "beginning of the apostles",
+    # Pre-Lent and Great Lent
+    "beginning of great lent",
+    "sunday of the publican",
+    "saturday of great lent",
+    "sunday of great lent",
+    "sunday of orthodoxy",
+    "meatfare",
+    "cheesefare",
+})
+
+
+def is_movable_feast_title(title: str) -> bool:
+    """Return True when *title* belongs to a Pascha-relative movable feast."""
+    tl = (title or "").lower()
+    return any(kw in tl for kw in _MOVABLE_FEAST_KEYWORDS)
+
+
+def movable_feast_for_date(day: _date) -> Optional[tuple[str, str, str]]:
+    """Return (key, title, feast_type) if *day* (Gregorian) is a movable feast, else None.
+
+    Uses the Julian computus; applies to all Eastern Orthodox traditions
+    (Julian and Revised Julian alike) since both use the same Pascha calculation.
+    """
+    pascha = julian_pascha_as_gregorian(day.year)
+    delta = (day - pascha).days
+    return _PASCHA_OFFSETS.get(delta)
 
 
 def movable_feasts(year: int, pascha: "_date | None" = None) -> dict:

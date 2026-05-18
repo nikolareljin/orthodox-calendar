@@ -5,9 +5,16 @@ import re as _re
 from datetime import date
 from typing import Any, Dict, List, Optional
 
-from ..calendar_logic import canonical_tradition_key, convert_to_tradition_month_day, effective_calendar, resolve_tradition
+from ..calendar_logic import (
+    canonical_tradition_key,
+    convert_to_tradition_month_day,
+    effective_calendar,
+    is_movable_feast_title,
+    movable_feast_for_date,
+    resolve_tradition,
+)
 from ..data_loader import build_index
-from ..models import CalendarEntry, Saint, SaintsResponse
+from ..models import CalendarEntry, CalendarSystem, Saint, SaintsResponse
 
 _INDEX = build_index()
 
@@ -141,6 +148,7 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         tradition = resolve_tradition(tradition_name)
         canonical = canonical_tradition_key(tradition_name)
         month_day, calendar_date = convert_to_tradition_month_day(day, tradition)
+        cal = effective_calendar(day, tradition)
 
         base_key = tradition.data_key or canonical
         day_entries = [e for e in _INDEX.get(base_key, []) if e.month_day == month_day]
@@ -150,6 +158,31 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
             day_entries.extend(
                 e for e in _INDEX.get(canonical, []) if e.month_day == month_day
             )
+
+        # Julian and Revised-Julian traditions share the Byzantine computus.
+        # The OCA dataset stores movable feasts (Pascha, Palm Sunday, …) at
+        # their 2024 Gregorian dates, which creates wrong matches in every
+        # other year.  Strip those static saints and inject the dynamically
+        # computed feast for the actual requested year instead.
+        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED):
+            day_entries = [
+                e.model_copy(
+                    update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
+                )
+                for e in day_entries
+            ]
+            day_entries = [e for e in day_entries if e.saints]
+
+            feast = movable_feast_for_date(day)
+            if feast:
+                feast_key, feast_title, feast_type = feast
+                movable_entry = CalendarEntry(
+                    month_day=month_day,
+                    tradition=base_key,
+                    calendar=cal,
+                    saints=[Saint(name=feast_key, title=feast_title, feast_type=feast_type)],
+                )
+                day_entries = [movable_entry] + day_entries
 
         if not day_entries:
             continue

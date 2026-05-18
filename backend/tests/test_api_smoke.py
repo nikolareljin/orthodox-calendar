@@ -71,6 +71,35 @@ def test_movable_feasts_includes_pascha_for_known_year() -> None:
     assert payload["feasts"]["pascha"] == "2026-04-12"
 
 
+def test_pascha_shown_on_correct_gregorian_date_not_today() -> None:
+    """Regression: Pascha must appear on its computed Gregorian date for Julian traditions.
+
+    In 2026 Pascha = April 12. The old OCA dataset stored Pascha at month_day
+    "05-05" (2024 Gregorian scrape date). For Julian traditions this matched
+    Gregorian May 18 (Julian May 5 → key "05-05"), showing Pascha on the wrong day.
+    """
+    # Pascha must appear on April 12 (Julian + Revised Julian + Gregorian same result)
+    for tradition in ("serbian", "georgian", "greek"):
+        resp = client.get(f"/api/v1/saints?day=2026-04-12&traditions={tradition}")
+        assert resp.status_code == 200
+        saints = resp.json()
+        assert saints, f"{tradition}: no saints on Pascha 2026"
+        titles = [s["title"] for entry in saints for s in entry["saints"]]
+        assert any("HOLY PASCHA" in (t or "") for t in titles), (
+            f"{tradition}: Pascha missing on 2026-04-12; got {titles[:5]}"
+        )
+
+    # Pascha must NOT appear on May 18 (Julian May 5 — old wrong match)
+    for tradition in ("serbian", "georgian"):
+        resp = client.get(f"/api/v1/saints?day=2026-05-18&traditions={tradition}")
+        assert resp.status_code == 200
+        saints = resp.json()
+        titles = [s["title"] for entry in saints for s in entry["saints"]]
+        assert not any("HOLY PASCHA" in (t or "") for t in titles), (
+            f"{tradition}: Pascha wrongly shown on 2026-05-18; got {titles[:5]}"
+        )
+
+
 def test_moon_phase_returns_expected_shape() -> None:
     response = client.get("/api/v1/moon-phase?day=2026-05-13")
 
