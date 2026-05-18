@@ -394,11 +394,12 @@ def merge_outputs(existing: list[dict], new: list[dict]) -> list[dict]:
                                 existing_saint["name_hy"] = saint["name_hy"]
                             if not existing_saint.get("hagiography_url") and saint.get("hagiography_url"):
                                 existing_saint["hagiography_url"] = saint["hagiography_url"]
-                            if saint.get("notes") and not existing_saint.get("notes", "").startswith(
-                                ("Armenian Apostolic Church commemoration",)
+                            # Upgrade notes when existing is absent or is a default placeholder.
+                            existing_note = existing_saint.get("notes") or ""
+                            if saint.get("notes") and (
+                                not existing_note
+                                or existing_note.startswith("Armenian Apostolic Church commemoration")
                             ):
-                                pass  # keep existing notes if already enriched
-                            elif saint.get("notes") and not existing_saint.get("notes"):
                                 existing_saint["notes"] = saint["notes"]
     return [by_md[md] for md in sorted(by_md)]
 
