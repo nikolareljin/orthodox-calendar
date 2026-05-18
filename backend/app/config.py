@@ -93,8 +93,10 @@ TRADITIONS: Dict[str, Tradition] = {
     ),
     "ethiopian": Tradition(
         name="Ethiopian Orthodox Tewahedo",
-        # Gregorian-keyed: import_ethiopian.py converts Ge'ez calendar dates to Gregorian MM-DD
-        calendar=CalendarSystem.GREGORIAN,
+        # Ethiopian Orthodox uses the Ethiopian (Ge'ez) calendar liturgically. Import scripts
+        # convert Ge'ez days to civil (Gregorian) MM-DD for storage; ETHIOPIAN falls through
+        # to the Gregorian lookup path so no date conversion is applied.
+        calendar=CalendarSystem.ETHIOPIAN,
         aliases=["tewahedo"],
     ),
     "syriac": Tradition(
@@ -111,12 +113,12 @@ TRADITIONS: Dict[str, Tradition] = {
         calendar=CalendarSystem.JULIAN,
         aliases=["oriental orthodox", "oriental-orthodox"],
     ),
-    # Coptic Orthodox has its own Gregorian-keyed dataset populated by import_coptic.py.
-    # CalendarSystem.GREGORIAN: coptic.io returns saints by Gregorian date, so month_day
-    # keys in coptic_saints.json are Gregorian MM-DD — no Julian conversion needed.
+    # Coptic Orthodox uses the Coptic (Alexandrian) calendar liturgically. Data from coptic.io
+    # is keyed by civil (Gregorian) MM-DD dates; COPTIC falls through to the Gregorian lookup
+    # path so no date conversion is applied.
     "coptic": Tradition(
         name="Coptic Orthodox Church of Alexandria",
-        calendar=CalendarSystem.GREGORIAN,
+        calendar=CalendarSystem.COPTIC,
         aliases=["coptic-orthodox", "alexandria-coptic"],
     ),
     "malankara": Tradition(

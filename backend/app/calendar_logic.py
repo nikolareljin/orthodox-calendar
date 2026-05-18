@@ -63,7 +63,7 @@ def convert_to_tradition_month_day(day: date, tradition: Tradition) -> Tuple[str
     if calendar == CalendarSystem.REVISED:
         ryear, rmonth, rday = _gregorian_to_revised_julian(day)
         return f"{rmonth:02d}-{rday:02d}", f"{ryear:04d}-{rmonth:02d}-{rday:02d}"
-    return day.strftime("%m-%d"), day.isoformat()
+    return day.strftime("%m-%d"), day.isoformat()  # Gregorian-keyed path (also Coptic, Ethiopian)
 
 
 def _gregorian_to_julian(d: date) -> Tuple[int, int, int]:

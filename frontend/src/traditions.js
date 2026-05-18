@@ -94,7 +94,7 @@ export const TRADITIONS = {
     logo: "✠",
   },
   coptic: {
-    label: "Coptic", calendar: "Gregorian", note: "Non-Chalcedonian",
+    label: "Coptic", calendar: "Coptic", note: "Non-Chalcedonian",
     website: "https://www.copticchurch.net",
     founded: "42 AD",
     patron: "Saint Mark the Evangelist",
@@ -118,7 +118,7 @@ export const TRADITIONS = {
     logo: "✙",
   },
   ethiopian: {
-    label: "Ethiopian", calendar: "Gregorian", note: "Non-Chalcedonian",
+    label: "Ethiopian", calendar: "Ethiopian", note: "Non-Chalcedonian",
     website: "https://www.ethiopianorthodox.org",
     founded: "340 AD",
     patron: "Saint Frumentius (Abba Selama)",

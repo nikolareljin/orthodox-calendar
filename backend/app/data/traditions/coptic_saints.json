@@ -2,7 +2,7 @@
   {
     "month_day": "01-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Gabriel",
@@ -30,7 +30,7 @@
   {
     "month_day": "01-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "David, the Prophet and King",
@@ -58,7 +58,7 @@
   {
     "month_day": "01-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Ignatius, Patriarch of Antioch",
@@ -96,7 +96,7 @@
   {
     "month_day": "01-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John Kama (Khame)",
@@ -114,7 +114,7 @@
   {
     "month_day": "01-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Anastasia",
@@ -142,7 +142,7 @@
   {
     "month_day": "01-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Anba \"Bisadi\" (Psote), the Bishop",
@@ -160,7 +160,7 @@
   {
     "month_day": "01-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of 150 Men and 24 Women from Ansena",
@@ -178,7 +178,7 @@
   {
     "month_day": "01-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Nativity of Our Lord Jesus Christ (Christmas)",
@@ -216,7 +216,7 @@
   {
     "month_day": "01-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John, Archpriest of Scetis",
@@ -234,7 +234,7 @@
   {
     "month_day": "01-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Stephen the Archdeacon",
@@ -262,7 +262,7 @@
   {
     "month_day": "01-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Theonas, 16th Pope of Alexandria",
@@ -290,7 +290,7 @@
   {
     "month_day": "01-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Slain Children of Bethlehem by the Order of King Herod",
@@ -308,7 +308,7 @@
   {
     "month_day": "01-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John the Evangelist and Theologian",
@@ -326,7 +326,7 @@
   {
     "month_day": "01-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St.Eusegnius (Eugenius) the Soldier",
@@ -344,7 +344,7 @@
   {
     "month_day": "01-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Circumcision of the Lord Christ",
@@ -402,7 +402,7 @@
   {
     "month_day": "01-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Sylvester, Pope of Rome",
@@ -420,7 +420,7 @@
   {
     "month_day": "01-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Saint Macarius the Great",
@@ -458,7 +458,7 @@
   {
     "month_day": "01-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Abba Abraam, Companion of Abba Gawarga",
@@ -476,7 +476,7 @@
   {
     "month_day": "01-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Paramouni of Holy Theophany (Epiphany)",
@@ -494,7 +494,7 @@
   {
     "month_day": "01-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Holy Theophany of Our Lord, God and Savior, Jesus Christ (Baptism of the Lord christ)",
@@ -522,7 +522,7 @@
   {
     "month_day": "01-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Michael",
@@ -560,7 +560,7 @@
   {
     "month_day": "01-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Miracle at Cana of Galilee",
@@ -608,7 +608,7 @@
   {
     "month_day": "01-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Archiledis (Arselidas)",
@@ -636,7 +636,7 @@
   {
     "month_day": "01-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Obadiah, the Prophet",
@@ -654,7 +654,7 @@
   {
     "month_day": "01-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Philotheus",
@@ -682,7 +682,7 @@
   {
     "month_day": "01-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Maximus and St. Domatius (Domadius)",
@@ -710,7 +710,7 @@
   {
     "month_day": "01-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. James, Bishop of Nisibis",
@@ -728,7 +728,7 @@
   {
     "month_day": "01-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Relics of St. Abahor (Pihour) St. Bisoura (Pisoura) and their Mother Ampira (Asra)",
@@ -746,7 +746,7 @@
   {
     "month_day": "01-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Prochorus, One of the Seventy Disciples",
@@ -774,7 +774,7 @@
   {
     "month_day": "01-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Dormition of Our Lady, the Virgin Mary, the Theotokos",
@@ -812,7 +812,7 @@
   {
     "month_day": "01-31",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Anthony the Great (Antonius)",
@@ -830,7 +830,7 @@
   {
     "month_day": "02-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Timothy, the Apostle",
@@ -858,7 +858,7 @@
   {
     "month_day": "02-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Mary the Ascetic (The Shut-In)",
@@ -886,7 +886,7 @@
   {
     "month_day": "02-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Peter, the Worshipper",
@@ -914,7 +914,7 @@
   {
     "month_day": "02-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Forty-Nine Saints, the Elders of Sheheat (Scetis)",
@@ -942,7 +942,7 @@
   {
     "month_day": "02-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Sarapion",
@@ -990,7 +990,7 @@
   {
     "month_day": "02-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Clement",
@@ -1018,7 +1018,7 @@
   {
     "month_day": "02-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Eksani (St. Xene)",
@@ -1046,7 +1046,7 @@
   {
     "month_day": "02-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saints Pistis, Helpis, Agape, and Their Mother, Sophia",
@@ -1064,7 +1064,7 @@
   {
     "month_day": "02-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Ecumenical Council in Constantinople",
@@ -1092,7 +1092,7 @@
   {
     "month_day": "02-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Great Saint Anba Paul, the First Hermit",
@@ -1120,7 +1120,7 @@
   {
     "month_day": "02-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. James, the Ascetic",
@@ -1138,7 +1138,7 @@
   {
     "month_day": "02-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Agabus, One of the Seventy Disciples",
@@ -1156,7 +1156,7 @@
   {
     "month_day": "02-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Agrippinus, 10th Pope of Alexandria",
@@ -1204,7 +1204,7 @@
   {
     "month_day": "02-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Appearance of the Body of St. Apolidus (Hippolytus), Pope of Rome",
@@ -1232,7 +1232,7 @@
   {
     "month_day": "02-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Fabianus (Fabrianus), Pope of Rome",
@@ -1250,7 +1250,7 @@
   {
     "month_day": "02-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Presenting the Lord Christ in the Temple",
@@ -1278,7 +1278,7 @@
   {
     "month_day": "02-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Severus, Patriarch of Antioch",
@@ -1306,7 +1306,7 @@
   {
     "month_day": "02-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. James the Apostle, Son of Alphaeus",
@@ -1354,7 +1354,7 @@
   {
     "month_day": "02-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Fabianus (Fabrianus), Pope of Rome",
@@ -1372,7 +1372,7 @@
   {
     "month_day": "02-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Michael",
@@ -1400,7 +1400,7 @@
   {
     "month_day": "02-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Sergius of Atripe, His Father, Mother, Sister, and Many Others with Them",
@@ -1428,7 +1428,7 @@
   {
     "month_day": "02-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Severus, Patriarch of Antioch",
@@ -1456,7 +1456,7 @@
   {
     "month_day": "02-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Zechariah, the Prophet",
@@ -1494,7 +1494,7 @@
   {
     "month_day": "02-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Elizabeth",
@@ -1512,7 +1512,7 @@
   {
     "month_day": "02-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Mina (Menas), the Monk",
@@ -1530,7 +1530,7 @@
   {
     "month_day": "02-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Malatius the Confessor, Patriarch of Antioch",
@@ -1548,7 +1548,7 @@
   {
     "month_day": "02-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Relocation of the Relics of St. Martianus, the Monk",
@@ -1566,7 +1566,7 @@
   {
     "month_day": "02-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Peter, 21st Pope of Alexandria",
@@ -1594,7 +1594,7 @@
   {
     "month_day": "02-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Virgin St. Mary",
@@ -1642,7 +1642,7 @@
   {
     "month_day": "03-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Maruta (Maruthas) the Bishop",
@@ -1660,7 +1660,7 @@
   {
     "month_day": "03-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Eusebius, Son of Basilides, the Minister",
@@ -1678,7 +1678,7 @@
   {
     "month_day": "03-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Agapetus (Agapius), the Bishop",
@@ -1706,7 +1706,7 @@
   {
     "month_day": "03-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Archippus, Philemon and Lycia the Virgin",
@@ -1734,7 +1734,7 @@
   {
     "month_day": "03-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Hosea, the Prophet",
@@ -1762,7 +1762,7 @@
   {
     "month_day": "03-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Eustathius, Patriarch of Antioch",
@@ -1780,7 +1780,7 @@
   {
     "month_day": "03-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Theodore, the Roman",
@@ -1798,7 +1798,7 @@
   {
     "month_day": "03-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Polycarp, Bishop of Smyrna",
@@ -1816,7 +1816,7 @@
   {
     "month_day": "03-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Appearance of the Head of St. John the Baptist",
@@ -1844,7 +1844,7 @@
   {
     "month_day": "03-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Narcissus",
@@ -1882,7 +1882,7 @@
   {
     "month_day": "03-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Macrobius (Makrawy) the Bishop",
@@ -1900,7 +1900,7 @@
   {
     "month_day": "03-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Cosmas, the Fifty-Eighth Pope of Alexandria",
@@ -1938,7 +1938,7 @@
   {
     "month_day": "03-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Assembly of the Holy Council on the island of Bani-Omar",
@@ -1966,7 +1966,7 @@
   {
     "month_day": "03-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Anba Serapamon, Archpriest of Abba Yehnis (John) monastery",
@@ -2004,7 +2004,7 @@
   {
     "month_day": "03-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Dioscorus",
@@ -2032,7 +2032,7 @@
   {
     "month_day": "03-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Philemon and Apollonius",
@@ -2060,7 +2060,7 @@
   {
     "month_day": "03-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Matthias, the apostle",
@@ -2098,7 +2098,7 @@
   {
     "month_day": "03-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Konan",
@@ -2126,7 +2126,7 @@
   {
     "month_day": "03-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Appearance Of The Glorious Cross",
@@ -2154,7 +2154,7 @@
   {
     "month_day": "03-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom Of St. Basil (Basilaos) The Bishop",
@@ -2172,7 +2172,7 @@
   {
     "month_day": "03-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Honorable Angel Michael",
@@ -2220,7 +2220,7 @@
   {
     "month_day": "03-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Abba Dionysius, the Fourteenth Pope of Alexandria",
@@ -2258,7 +2258,7 @@
   {
     "month_day": "03-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Anba Kyrellos (Cyril) the Seventy Fifth Pope of Alexandria",
@@ -2296,7 +2296,7 @@
   {
     "month_day": "03-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Sarah the nun",
@@ -2324,7 +2324,7 @@
   {
     "month_day": "03-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Saint Anba Khail (Mikhail) The Forty Six Pope Of The See Of St. Mark",
@@ -2342,7 +2342,7 @@
   {
     "month_day": "03-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Lazarus, the beloved of the Lord",
@@ -2390,7 +2390,7 @@
   {
     "month_day": "03-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Isidore, Friend of Sina the Soldier",
@@ -2408,7 +2408,7 @@
   {
     "month_day": "03-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Aristobulus, the apostle",
@@ -2436,7 +2436,7 @@
   {
     "month_day": "03-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Anba Khail (Mikhail) the Fifty Six Pope of the See of St. Mark",
@@ -2464,7 +2464,7 @@
   {
     "month_day": "03-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Theotokos and Ever-Virgin St. Mary",
@@ -2502,7 +2502,7 @@
   {
     "month_day": "03-31",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Kyrellos (Cyril), Bishop of Jerusalem",
@@ -2530,7 +2530,7 @@
   {
     "month_day": "04-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Great Prophet Daniel",
@@ -2548,7 +2548,7 @@
   {
     "month_day": "04-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Apparition of the Pure Lady the Virgin in the church of Zeiton",
@@ -2576,7 +2576,7 @@
   {
     "month_day": "04-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Crucifixion of Our Lord Jesus Christ",
@@ -2604,7 +2604,7 @@
   {
     "month_day": "04-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Euphrasia (Eupraxia), the virgin",
@@ -2632,7 +2632,7 @@
   {
     "month_day": "04-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Crucifixion of Our Lord Jesus Christ",
@@ -2670,7 +2670,7 @@
   {
     "month_day": "04-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Righteous Emperor Constantine the Great",
@@ -2708,7 +2708,7 @@
   {
     "month_day": "04-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Life giving Annunciation",
@@ -2746,7 +2746,7 @@
   {
     "month_day": "04-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Gabriel the Announcer",
@@ -2784,7 +2784,7 @@
   {
     "month_day": "04-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Holy Virgins: Agape, Eirene, and Shiona",
@@ -2812,7 +2812,7 @@
   {
     "month_day": "04-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. James the Apostle Brother of St. John the Apostle",
@@ -2830,7 +2830,7 @@
   {
     "month_day": "04-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John, Bishop of Jerusalem",
@@ -2858,7 +2858,7 @@
   {
     "month_day": "04-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Anba Isaac, the Disciple of Anba Apollo",
@@ -2886,7 +2886,7 @@
   {
     "month_day": "04-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Great Prophet Ezekiel, the son of Buzi",
@@ -2914,7 +2914,7 @@
   {
     "month_day": "04-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Appearance of the Lord to Thomas the Apostle after His Resurrection",
@@ -2942,7 +2942,7 @@
   {
     "month_day": "04-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Righteous Joachim, The Lord Christ Grandfather",
@@ -2980,7 +2980,7 @@
   {
     "month_day": "04-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Holy Virgins: Agape, Eirene, and Shiona",
@@ -3008,7 +3008,7 @@
   {
     "month_day": "04-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Zosimus (Zocima)",
@@ -3036,7 +3036,7 @@
   {
     "month_day": "04-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Anba Isaac, the Disciple of Anba Apollo",
@@ -3064,7 +3064,7 @@
   {
     "month_day": "04-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Theodora",
@@ -3092,7 +3092,7 @@
   {
     "month_day": "04-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Alexander, Bishop of Jerusalem",
@@ -3120,7 +3120,7 @@
   {
     "month_day": "04-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Sts. Joshua and Joseph",
@@ -3158,7 +3158,7 @@
   {
     "month_day": "04-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Holy Father Anba Maximus The Fifteenth Pope of Alexandria",
@@ -3176,7 +3176,7 @@
   {
     "month_day": "04-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Consecration of the first altar for St. Nicholas, Bishop of Mora for the Jacobite Christians",
@@ -3224,7 +3224,7 @@
   {
     "month_day": "04-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Antipas, Bishop of Pergamos",
@@ -3242,7 +3242,7 @@
   {
     "month_day": "04-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. James the Apostle Brother of St. John the Apostle",
@@ -3260,7 +3260,7 @@
   {
     "month_day": "04-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Arsenius, Slave of St. Sousnyous",
@@ -3278,7 +3278,7 @@
   {
     "month_day": "04-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Simeon the Armenian, Bishop of the country of Persia and 150 with him",
@@ -3326,7 +3326,7 @@
   {
     "month_day": "04-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Babnuda (Paphnute)",
@@ -3344,7 +3344,7 @@
   {
     "month_day": "04-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Lady the Theotokos",
@@ -3372,7 +3372,7 @@
   {
     "month_day": "04-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Isaac (Ishaq), of Hourin",
@@ -3420,7 +3420,7 @@
   {
     "month_day": "05-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. George Prince of the Martyrs",
@@ -3438,7 +3438,7 @@
   {
     "month_day": "05-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Sinuthius (Shenouda I), 55th Pope of Alexandria",
@@ -3466,7 +3466,7 @@
   {
     "month_day": "05-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Sarah, and her two sons",
@@ -3494,7 +3494,7 @@
   {
     "month_day": "05-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Sousenyos",
@@ -3522,7 +3522,7 @@
   {
     "month_day": "05-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Boctor Ebn Romanus",
@@ -3540,7 +3540,7 @@
   {
     "month_day": "05-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Helena, The Empress",
@@ -3578,7 +3578,7 @@
   {
     "month_day": "05-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Erastus, the Apostle",
@@ -3616,7 +3616,7 @@
   {
     "month_day": "05-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Great Saint Mark, the Apostle The Evangelist of the Land of Egypt",
@@ -3634,7 +3634,7 @@
   {
     "month_day": "05-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Nativity of the Blessed Virgin Mary The Mother of God",
@@ -3652,7 +3652,7 @@
   {
     "month_day": "05-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Righteous Job",
@@ -3690,7 +3690,7 @@
   {
     "month_day": "05-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Jason, one of the Seventy disciples",
@@ -3728,7 +3728,7 @@
   {
     "month_day": "05-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Helena, The Empress",
@@ -3766,7 +3766,7 @@
   {
     "month_day": "05-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Jeremiah the Prophet",
@@ -3784,7 +3784,7 @@
   {
     "month_day": "05-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Isaac El-Defrawi",
@@ -3822,7 +3822,7 @@
   {
     "month_day": "05-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Athanasius the Apostolic the 20th. Pope of Alexandria",
@@ -3840,7 +3840,7 @@
   {
     "month_day": "05-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. John of Senhout",
@@ -3868,7 +3868,7 @@
   {
     "month_day": "05-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Helena, The Empress",
@@ -3906,7 +3906,7 @@
   {
     "month_day": "05-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Three Hebrew Young Men Hananiah, Azariah and Mishael",
@@ -3924,7 +3924,7 @@
   {
     "month_day": "05-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Simon the Stylite",
@@ -3942,7 +3942,7 @@
   {
     "month_day": "05-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Consecration of the church of St. Demiana",
@@ -4000,7 +4000,7 @@
   {
     "month_day": "05-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Junia, One of the Seventy Disciples",
@@ -4028,7 +4028,7 @@
   {
     "month_day": "05-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Pachomius (Pakhom), the Father of the Spiritual Communal Monastic life (Cenobitic life)",
@@ -4056,7 +4056,7 @@
   {
     "month_day": "05-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Simon the Stylite",
@@ -4074,7 +4074,7 @@
   {
     "month_day": "05-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John The Evangelist",
@@ -4092,7 +4092,7 @@
   {
     "month_day": "05-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Epiphanius, Bishop of Cyprus",
@@ -4110,7 +4110,7 @@
   {
     "month_day": "05-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. George (Ga'orgi), the Friend of St. Abraam",
@@ -4138,7 +4138,7 @@
   {
     "month_day": "05-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Departure of Abba Isaac, the Priest of El-Qalali (Cells)",
@@ -4166,7 +4166,7 @@
   {
     "month_day": "05-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Ammonius The Hermit",
@@ -4184,7 +4184,7 @@
   {
     "month_day": "05-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Holy and Pure Virgin Mary",
@@ -4202,7 +4202,7 @@
   {
     "month_day": "05-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Andronicus One of the Seventy Disciples",
@@ -4220,7 +4220,7 @@
   {
     "month_day": "05-31",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Colluthus of Antinoe (Known as Abu Colta)",
@@ -4248,7 +4248,7 @@
   {
     "month_day": "06-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Simon the Stylite",
@@ -4276,7 +4276,7 @@
   {
     "month_day": "06-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Colluthus of Antinoe (Known as Abu Colta)",
@@ -4304,7 +4304,7 @@
   {
     "month_day": "06-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom Of St. Thomas, the Apostle",
@@ -4322,7 +4322,7 @@
   {
     "month_day": "06-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Youannis the Second, the 30th. Patriarch of the See of St. Mark",
@@ -4350,7 +4350,7 @@
   {
     "month_day": "06-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Relocation of the Body of St. Epiphanius",
@@ -4368,7 +4368,7 @@
   {
     "month_day": "06-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Simon the Stylite",
@@ -4396,7 +4396,7 @@
   {
     "month_day": "06-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Mikhail the First, the 68th. Patriarch of Alexandria",
@@ -4424,7 +4424,7 @@
   {
     "month_day": "06-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Leontius of Tripoli",
@@ -4462,7 +4462,7 @@
   {
     "month_day": "06-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Appearance of the Bodies of St. John the Baptist and Elisha the Prophet",
@@ -4490,7 +4490,7 @@
   {
     "month_day": "06-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Construction of the first church of St. George in the cities of Birma and Beer Maa (Water Well) in the Oases",
@@ -4548,7 +4548,7 @@
   {
     "month_day": "06-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Shenousi (Sanusi)",
@@ -4606,7 +4606,7 @@
   {
     "month_day": "06-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. James of the East",
@@ -4644,7 +4644,7 @@
   {
     "month_day": "06-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Yoannis the Nineteenth, 113th Patriarch of Alexandria",
@@ -4672,7 +4672,7 @@
   {
     "month_day": "06-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Abaskhiroun the Soldier",
@@ -4690,7 +4690,7 @@
   {
     "month_day": "06-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Consecration of the Church of the Virgin Lady known as El-Mahammah",
@@ -4728,7 +4728,7 @@
   {
     "month_day": "06-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Claudius",
@@ -4756,7 +4756,7 @@
   {
     "month_day": "06-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Dabamon",
@@ -4804,7 +4804,7 @@
   {
     "month_day": "06-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Claudius",
@@ -4832,7 +4832,7 @@
   {
     "month_day": "06-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Michael",
@@ -4880,7 +4880,7 @@
   {
     "month_day": "06-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John, Bishop of Jerusalem",
@@ -4908,7 +4908,7 @@
   {
     "month_day": "06-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Yoannis the Nineteenth, 113th Patriarch of Alexandria",
@@ -4936,7 +4936,7 @@
   {
     "month_day": "06-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Turning Over of the Relics of the Great St. Mark the Apostle by the hand of Pope Paul the Sixth, Pope of Rome",
@@ -4964,7 +4964,7 @@
   {
     "month_day": "06-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Abba Nofer the Anchorite",
@@ -4982,7 +4982,7 @@
   {
     "month_day": "06-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Return of the Relics of the Great St. Mark to the New St. Mark Cathedral",
@@ -5010,7 +5010,7 @@
   {
     "month_day": "06-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Inauguration of the New St. Mark Cathedral in the Monastery of Anba Rowais",
@@ -5038,7 +5038,7 @@
   {
     "month_day": "06-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "First Pontifical Liturgy in the New St. Mark Cathedral in the Monastery of Anba Rowais",
@@ -5086,7 +5086,7 @@
   {
     "month_day": "06-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Elisha, the Prophet",
@@ -5104,7 +5104,7 @@
   {
     "month_day": "06-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "First Church for The Virgin Mary in the city of Philippi",
@@ -5142,7 +5142,7 @@
   {
     "month_day": "06-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Sts. Cosmas, Damian, Their Mother, and Brothers",
@@ -5160,7 +5160,7 @@
   {
     "month_day": "06-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Abba Noub the Confessor",
@@ -5178,7 +5178,7 @@
   {
     "month_day": "07-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Great Saint Anba Moses the Black",
@@ -5196,7 +5196,7 @@
   {
     "month_day": "07-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Jude, one of the Seventy Disciples",
@@ -5224,7 +5224,7 @@
   {
     "month_day": "07-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Great Prophet Joshua Son of Nun",
@@ -5252,7 +5252,7 @@
   {
     "month_day": "07-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Ananias, the Apostle",
@@ -5280,7 +5280,7 @@
   {
     "month_day": "07-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Theodosius, 33rd Pope of Alexandria",
@@ -5308,7 +5308,7 @@
   {
     "month_day": "07-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Seven Ascetic Saints in Tounar Mount",
@@ -5346,7 +5346,7 @@
   {
     "month_day": "07-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Nativity of St. John, the Baptist",
@@ -5364,7 +5364,7 @@
   {
     "month_day": "07-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Febronia the Ascetic",
@@ -5392,7 +5392,7 @@
   {
     "month_day": "07-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Thaddaeus, the Apostle",
@@ -5410,7 +5410,7 @@
   {
     "month_day": "07-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Kyrillos (Cyril) the First, the Twenty- Fourth Pope of Alexandria",
@@ -5438,7 +5438,7 @@
   {
     "month_day": "07-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Relocation of the Relics of Sts. Apakir and John",
@@ -5456,7 +5456,7 @@
   {
     "month_day": "07-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Peter and Paul, the Apostles",
@@ -5484,7 +5484,7 @@
   {
     "month_day": "07-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Aoulimpas, the Apostle",
@@ -5512,7 +5512,7 @@
   {
     "month_day": "07-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Shenouda (Shenoute), the Archimandrite",
@@ -5540,7 +5540,7 @@
   {
     "month_day": "07-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Anba Bishoy",
@@ -5598,7 +5598,7 @@
   {
     "month_day": "07-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Simon Cleophas, the Apostle",
@@ -5626,7 +5626,7 @@
   {
     "month_day": "07-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Theodore, Bishop of Pentapolis",
@@ -5664,7 +5664,7 @@
   {
     "month_day": "07-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. John and Simon, his cousin",
@@ -5692,7 +5692,7 @@
   {
     "month_day": "07-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Michael",
@@ -5720,7 +5720,7 @@
   {
     "month_day": "07-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Pisentius, Bishop of Qift",
@@ -5758,7 +5758,7 @@
   {
     "month_day": "07-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Procopius (Proconius) of Jerusalem",
@@ -5786,7 +5786,7 @@
   {
     "month_day": "07-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Ephraem El-Soriani (The Syrian)",
@@ -5824,7 +5824,7 @@
   {
     "month_day": "07-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John, of the Golden Gospel",
@@ -5852,7 +5852,7 @@
   {
     "month_day": "07-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Euphemia",
@@ -5870,7 +5870,7 @@
   {
     "month_day": "07-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. James the Apostle, Bishop of Jerusalem",
@@ -5888,7 +5888,7 @@
   {
     "month_day": "07-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Bidaba, Bishop of Qift, Anba Andrew, and Anba Christodoulas",
@@ -5926,7 +5926,7 @@
   {
     "month_day": "07-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Theodore of Shotep",
@@ -5944,7 +5944,7 @@
   {
     "month_day": "07-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Lady, the Virgin Mary",
@@ -5972,7 +5972,7 @@
   {
     "month_day": "07-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Macarius, the Son of Basilides (Wasilides) the Minister",
@@ -6000,7 +6000,7 @@
   {
     "month_day": "07-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Longinus the Soldier",
@@ -6028,7 +6028,7 @@
   {
     "month_day": "07-31",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Apanoub",
@@ -6056,7 +6056,7 @@
   {
     "month_day": "08-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Thecla",
@@ -6154,7 +6154,7 @@
   {
     "month_day": "08-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Joseph the Carpentar",
@@ -6182,7 +6182,7 @@
   {
     "month_day": "08-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Abba Fam",
@@ -6210,7 +6210,7 @@
   {
     "month_day": "08-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Mary Magdalene",
@@ -6228,7 +6228,7 @@
   {
     "month_day": "08-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Translocation of the Relics of St. Andrew, the Apostle",
@@ -6266,7 +6266,7 @@
   {
     "month_day": "08-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Mercurius and Ephraem",
@@ -6284,7 +6284,7 @@
   {
     "month_day": "08-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Apoli, Son of Justus",
@@ -6322,7 +6322,7 @@
   {
     "month_day": "08-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Pa'esa (Athanasia)",
@@ -6350,7 +6350,7 @@
   {
     "month_day": "08-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Relocation of the Body of St. Simon (Simeon) the Stylite to the city of Antioch",
@@ -6388,7 +6388,7 @@
   {
     "month_day": "08-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Hezekiah the King",
@@ -6426,7 +6426,7 @@
   {
     "month_day": "08-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John the Soldier",
@@ -6454,7 +6454,7 @@
   {
     "month_day": "08-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Julietta",
@@ -6482,7 +6482,7 @@
   {
     "month_day": "08-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Annunciation of St. Joachim with the Birth of the Virgin Mary",
@@ -6520,7 +6520,7 @@
   {
     "month_day": "08-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Sts. Lazarus, Salomi, His Wife, and Their Children",
@@ -6558,7 +6558,7 @@
   {
     "month_day": "08-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St.Ari, the Priest of Shatanouf",
@@ -6586,7 +6586,7 @@
   {
     "month_day": "08-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Matra",
@@ -6624,7 +6624,7 @@
   {
     "month_day": "08-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Moisis, Bishop of Ouseem",
@@ -6652,7 +6652,7 @@
   {
     "month_day": "08-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Honorable Archangel Michael",
@@ -6690,7 +6690,7 @@
   {
     "month_day": "08-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Transfiguration of Our Lord on Mount Tabor",
@@ -6728,7 +6728,7 @@
   {
     "month_day": "08-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Great Sign, the Lord had Manifested During the Papacy of St. Theophilus",
@@ -6756,7 +6756,7 @@
   {
     "month_day": "08-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Departure of St. Mary Known as Marina, the Ascetic",
@@ -6784,7 +6784,7 @@
   {
     "month_day": "08-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Assumption of the Body of the Pure Virgin St. Mary",
@@ -6822,7 +6822,7 @@
   {
     "month_day": "08-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. James the Soldier",
@@ -6840,7 +6840,7 @@
   {
     "month_day": "08-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Alexander, Patriarch of Constantinople",
@@ -6868,7 +6868,7 @@
   {
     "month_day": "08-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Translocation of the Body of St. Macarius to His Monastery in Scetis",
@@ -6886,7 +6886,7 @@
   {
     "month_day": "08-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Seven Young Men of Ephesus",
@@ -6904,7 +6904,7 @@
   {
     "month_day": "08-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Virgin, the Mother of God",
@@ -6932,7 +6932,7 @@
   {
     "month_day": "08-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Micah, the Prophet",
@@ -6960,7 +6960,7 @@
   {
     "month_day": "08-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Thirty Thousand Christians in Alexandria",
@@ -6988,7 +6988,7 @@
   {
     "month_day": "08-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Takla Haymanot, the Ethiopian",
@@ -7016,7 +7016,7 @@
   {
     "month_day": "08-31",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Bessarion, the Great",
@@ -7044,7 +7044,7 @@
   {
     "month_day": "09-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Moses (Moisees) and his Sister Sarah",
@@ -7072,7 +7072,7 @@
   {
     "month_day": "09-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Benjamin and his Sister Eudexia",
@@ -7100,7 +7100,7 @@
   {
     "month_day": "09-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Our father Abraham",
@@ -7138,7 +7138,7 @@
   {
     "month_day": "09-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Athanasius, the Bishop, Gerasimus (Jarasimus), and Theodotus",
@@ -7176,7 +7176,7 @@
   {
     "month_day": "09-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Malachi, the Prophet",
@@ -7194,7 +7194,7 @@
   {
     "month_day": "09-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Eutychus",
@@ -7222,7 +7222,7 @@
   {
     "month_day": "09-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Titus, the Apostle",
@@ -7240,7 +7240,7 @@
   {
     "month_day": "09-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Raphael",
@@ -7278,7 +7278,7 @@
   {
     "month_day": "09-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Leparius, Bishop of Rome",
@@ -7306,7 +7306,7 @@
   {
     "month_day": "09-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. James, Bishop of Misre",
@@ -7354,7 +7354,7 @@
   {
     "month_day": "09-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "El-Nayrouz (Beginning of the Blessed Coptic Year)",
@@ -7402,7 +7402,7 @@
   {
     "month_day": "09-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. John the Baptist",
@@ -7440,7 +7440,7 @@
   {
     "month_day": "09-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "A Council held in the city of Alexandria",
@@ -7478,7 +7478,7 @@
   {
     "month_day": "09-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Macarius, 69th Pope of Alexandria",
@@ -7506,7 +7506,7 @@
   {
     "month_day": "09-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Sophia",
@@ -7534,7 +7534,7 @@
   {
     "month_day": "09-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Isaiah the Prophet",
@@ -7572,7 +7572,7 @@
   {
     "month_day": "09-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Dioscorus, 25th Pope of Alexandria",
@@ -7620,7 +7620,7 @@
   {
     "month_day": "09-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Zacharias the Prophet",
@@ -7668,7 +7668,7 @@
   {
     "month_day": "09-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Pisora the Bishop",
@@ -7696,7 +7696,7 @@
   {
     "month_day": "09-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Matruna",
@@ -7734,7 +7734,7 @@
   {
     "month_day": "09-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Basilides (Wasilides)",
@@ -7762,7 +7762,7 @@
   {
     "month_day": "09-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Assembly of the Third Ecumenical Council at Ephesus to Judge Nestorius, Archbishop of Constantinople",
@@ -7800,7 +7800,7 @@
   {
     "month_day": "09-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Mattheos II, 90th Patriarch of the See of St. Mark",
@@ -7838,7 +7838,7 @@
   {
     "month_day": "09-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Agathon the Stylite",
@@ -7866,7 +7866,7 @@
   {
     "month_day": "09-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Translocation of the Body of St. Stephen the Archdeacon",
@@ -7894,7 +7894,7 @@
   {
     "month_day": "09-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Consecration of the Sanctuaries of the church of Resurrection in Jerusalem",
@@ -7932,7 +7932,7 @@
   {
     "month_day": "09-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Consecration of the Church of the Honorable Cross",
@@ -7970,7 +7970,7 @@
   {
     "month_day": "09-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Prophorius (Porphyrius)",
@@ -8008,7 +8008,7 @@
   {
     "month_day": "09-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Gregory, Patriarch of the Armenians",
@@ -8026,7 +8026,7 @@
   {
     "month_day": "09-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Athanasius the Second, the Twenty-Eighth Patriarch of the See of St. Mark",
@@ -8064,7 +8064,7 @@
   {
     "month_day": "10-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Virgin St. Mary, the Theotokos",
@@ -8092,7 +8092,7 @@
   {
     "month_day": "10-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saints Cotylas (Kobtlas) and Axoua, his Sister, and Tatas, his Friend",
@@ -8120,7 +8120,7 @@
   {
     "month_day": "10-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Sts. Eunapios (Onanius) and Andrew",
@@ -8158,7 +8158,7 @@
   {
     "month_day": "10-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Gregory the Ascetic",
@@ -8186,7 +8186,7 @@
   {
     "month_day": "10-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Jonah, the Great Prophet",
@@ -8204,7 +8204,7 @@
   {
     "month_day": "10-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Angels' Annunciation of John the Baptist to Zacharias",
@@ -8222,7 +8222,7 @@
   {
     "month_day": "10-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Eustathius and His Two Sons",
@@ -8240,7 +8240,7 @@
   {
     "month_day": "10-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saints Abadir (Apater) and Eraee (Herai), His Sister",
@@ -8258,7 +8258,7 @@
   {
     "month_day": "10-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Arbsima (Repsima) the Virgin and Her Sisters the Virgins",
@@ -8286,7 +8286,7 @@
   {
     "month_day": "10-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Miracle that God Performed for St. Athanasius the Apostolic",
@@ -8304,7 +8304,7 @@
   {
     "month_day": "10-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Anastasia",
@@ -8322,7 +8322,7 @@
   {
     "month_day": "10-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Coming of Saint Severus, Patriarch of Antioch, to Egypt",
@@ -8340,7 +8340,7 @@
   {
     "month_day": "10-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Simon II, 51st Pope of the See of St. Mark",
@@ -8368,7 +8368,7 @@
   {
     "month_day": "10-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Bacchus, the Friend of St. Sergius",
@@ -8386,7 +8386,7 @@
   {
     "month_day": "10-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Paul, Patriarch of Constantinople",
@@ -8404,7 +8404,7 @@
   {
     "month_day": "10-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Righteous Hannah, the Prophetess Mother of Samuel, the Prophet",
@@ -8422,7 +8422,7 @@
   {
     "month_day": "10-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Paul of Tamouh",
@@ -8440,7 +8440,7 @@
   {
     "month_day": "10-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Matra",
@@ -8468,7 +8468,7 @@
   {
     "month_day": "10-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Eumenius, the Seventh Pope of the See of St. Mark",
@@ -8506,7 +8506,7 @@
   {
     "month_day": "10-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Sergius, the Friend of St. Bacchus",
@@ -8524,7 +8524,7 @@
   {
     "month_day": "10-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. James, Patriarch of Antioch",
@@ -8552,7 +8552,7 @@
   {
     "month_day": "10-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Abba Demetrius I, 12th Pope of Alexandria",
@@ -8590,7 +8590,7 @@
   {
     "month_day": "10-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Saint Zacharias, the Monk",
@@ -8608,7 +8608,7 @@
   {
     "month_day": "10-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Philip, One of the Seven Deacons",
@@ -8626,7 +8626,7 @@
   {
     "month_day": "10-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Panteleimon, the Physician",
@@ -8644,7 +8644,7 @@
   {
     "month_day": "10-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Agathon, 39th Pope of Alexandria",
@@ -8672,7 +8672,7 @@
   {
     "month_day": "10-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Dioscorus II 31st Pope of Alexandria",
@@ -8690,7 +8690,7 @@
   {
     "month_day": "10-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Honorable Father Saint Theophilus 23rd Pope of Alexandria",
@@ -8708,7 +8708,7 @@
   {
     "month_day": "10-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Assembly of the Council of Antioch against Paul of Samosata",
@@ -8736,7 +8736,7 @@
   {
     "month_day": "10-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Great St. John Colobos (the Short)",
@@ -8754,7 +8754,7 @@
   {
     "month_day": "10-31",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Theotokos",
@@ -8802,7 +8802,7 @@
   {
     "month_day": "11-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Luke the Evangelist",
@@ -8820,7 +8820,7 @@
   {
     "month_day": "11-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Yousab, 52nd Pope of Alexandria",
@@ -8848,7 +8848,7 @@
   {
     "month_day": "11-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Righteous Father Abba Hilarion",
@@ -8876,7 +8876,7 @@
   {
     "month_day": "11-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Saints Apollo and Abib",
@@ -8904,7 +8904,7 @@
   {
     "month_day": "11-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Timon the Apostle",
@@ -8932,7 +8932,7 @@
   {
     "month_day": "11-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Righteous Father Saint Macarius Bishop of Edkow (Tkoou)",
@@ -8950,7 +8950,7 @@
   {
     "month_day": "11-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Sts. Marcian (Marcianus) and Mercurius",
@@ -8968,7 +8968,7 @@
   {
     "month_day": "11-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Demetrius of Thessalonica",
@@ -8996,7 +8996,7 @@
   {
     "month_day": "11-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Consecration of the Church of St. Mark the Evangelist and the Appearance of His Holy Head",
@@ -9024,7 +9024,7 @@
   {
     "month_day": "11-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Saints Maximus, Numitius, Victor (Boctor), and Philip (Philopus)",
@@ -9052,7 +9052,7 @@
   {
     "month_day": "11-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Peter the Third 27th Pope of Alexandria",
@@ -9070,7 +9070,7 @@
   {
     "month_day": "11-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Cyriacus",
@@ -9098,7 +9098,7 @@
   {
     "month_day": "11-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saints John and James, Bishops of Persia",
@@ -9126,7 +9126,7 @@
   {
     "month_day": "11-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Appearance of the Head of St. Longinus, the Soldier",
@@ -9154,7 +9154,7 @@
   {
     "month_day": "11-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Felix, Pope of Rome",
@@ -9182,7 +9182,7 @@
   {
     "month_day": "11-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. George of Alexandria",
@@ -9230,7 +9230,7 @@
   {
     "month_day": "11-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Four Incorporeal Beasts",
@@ -9248,7 +9248,7 @@
   {
     "month_day": "11-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Holy Father Anba Isaac, 41st Pope of Alexandria",
@@ -9276,7 +9276,7 @@
   {
     "month_day": "11-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Sophia and the Fifty Virgins with her",
@@ -9304,7 +9304,7 @@
   {
     "month_day": "11-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Anna (Hannah), the mother of the Theotokos",
@@ -9332,7 +9332,7 @@
   {
     "month_day": "11-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Honored Archangel Michael",
@@ -9350,7 +9350,7 @@
   {
     "month_day": "11-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Timothy, Bishop of Ansena (Antinoe)",
@@ -9378,7 +9378,7 @@
   {
     "month_day": "11-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Martinus (Martin) Bishop of Tours (Thrace)",
@@ -9396,7 +9396,7 @@
   {
     "month_day": "11-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saint Mari-Mina, the Wonder Worker",
@@ -9414,7 +9414,7 @@
   {
     "month_day": "11-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Beginning of the Fast of the Nativity (Advent) in the Coptic Church",
@@ -9452,7 +9452,7 @@
   {
     "month_day": "11-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Saint John Chrysostom",
@@ -9470,7 +9470,7 @@
   {
     "month_day": "11-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Two Saints: Atrasis and Yoana (Junia)",
@@ -9498,7 +9498,7 @@
   {
     "month_day": "11-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Sergius and St. Bacchus",
@@ -9526,7 +9526,7 @@
   {
     "month_day": "11-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Anianus, 2nd Pope of Alexandria",
@@ -9554,7 +9554,7 @@
   {
     "month_day": "11-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Virgin St. Mary, the Theotokos",
@@ -9602,7 +9602,7 @@
   {
     "month_day": "12-01",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saints Cosmas, Damian, Their Brothers and Their Mother",
@@ -9620,7 +9620,7 @@
   {
     "month_day": "12-02",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Cornelius the Centurion",
@@ -9648,7 +9648,7 @@
   {
     "month_day": "12-03",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Twenty-Four Priests",
@@ -9666,7 +9666,7 @@
   {
     "month_day": "12-04",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Mercurius Known as the Saint with the Two Swords",
@@ -9684,7 +9684,7 @@
   {
     "month_day": "12-05",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of the Sts. Valerian (Balaryanos) and Tiburcius (Thiborinos), His Brother",
@@ -9712,7 +9712,7 @@
   {
     "month_day": "12-06",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. James the Mangled (Sawn)",
@@ -9730,7 +9730,7 @@
   {
     "month_day": "12-07",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Sarapamon, Bishop of Niku",
@@ -9748,7 +9748,7 @@
   {
     "month_day": "12-08",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Peter, the Seal of the Martyrs, 17th Pope of Alexandria",
@@ -9786,7 +9786,7 @@
   {
     "month_day": "12-09",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Acacius, Patriarch of Constantinople",
@@ -9824,7 +9824,7 @@
   {
     "month_day": "12-10",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Peter Elrahawy, Bishop of Gaza",
@@ -9852,7 +9852,7 @@
   {
     "month_day": "12-11",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Saint Abba Hor, the Monk",
@@ -9870,7 +9870,7 @@
   {
     "month_day": "12-12",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Entrance of Saint Mary into the Temple at Jerusalem",
@@ -9888,7 +9888,7 @@
   {
     "month_day": "12-13",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Andrew the Apostle, the Brother of St. Peter",
@@ -9906,7 +9906,7 @@
   {
     "month_day": "12-14",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Nahum, the Prophet",
@@ -9944,7 +9944,7 @@
   {
     "month_day": "12-15",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Pope Abraam (Abraham), the 62nd Patriarch of Alexandria",
@@ -9972,7 +9972,7 @@
   {
     "month_day": "12-16",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Matthew the Poor",
@@ -9990,7 +9990,7 @@
   {
     "month_day": "12-17",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Heraclas (Theoclas), 13th Pope of Alexandria",
@@ -10048,7 +10048,7 @@
   {
     "month_day": "12-18",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Poemin, the Confessor",
@@ -10066,7 +10066,7 @@
   {
     "month_day": "12-19",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Relocation of the Body of St. Severus, Patriarch of Antioch",
@@ -10094,7 +10094,7 @@
   {
     "month_day": "12-20",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Saint Abba Pijimi",
@@ -10112,7 +10112,7 @@
   {
     "month_day": "12-21",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Honorable Michael, the Archangel",
@@ -10160,7 +10160,7 @@
   {
     "month_day": "12-22",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of St. Barsanuphius",
@@ -10198,7 +10198,7 @@
   {
     "month_day": "12-23",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Martyrdom of Saints Behnam and Sarah, His Sister",
@@ -10246,7 +10246,7 @@
   {
     "month_day": "12-24",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. Gregory, Patriarch of the Armenians",
@@ -10264,7 +10264,7 @@
   {
     "month_day": "12-25",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Righteous Gideon, One of the Judges of Israel",
@@ -10302,7 +10302,7 @@
   {
     "month_day": "12-26",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Departure of St. Luke the Stylite and the Relocation of His Holy Relics",
@@ -10320,7 +10320,7 @@
   {
     "month_day": "12-27",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Relocation of the Relics of St. Titus to Constantinople",
@@ -10348,7 +10348,7 @@
   {
     "month_day": "12-28",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "St. John, Bishop of El-Borollos Who Gathered the Biographies of the Saints (The Synaxarion)",
@@ -10366,7 +10366,7 @@
   {
     "month_day": "12-29",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Upright Haggai the Prophet",
@@ -10384,7 +10384,7 @@
   {
     "month_day": "12-30",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Virgin Mary, the Theotokos",
@@ -10412,7 +10412,7 @@
   {
     "month_day": "12-31",
     "tradition": "coptic",
-    "calendar": "gregorian",
+    "calendar": "coptic",
     "saints": [
       {
         "name": "Archangel Gabriel",

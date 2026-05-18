@@ -2,7 +2,7 @@
   {
     "month_day": "01-07",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Nativity",
@@ -19,7 +19,7 @@
   {
     "month_day": "01-12",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Frumentius",
@@ -36,7 +36,7 @@
   {
     "month_day": "01-15",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abeluzius",
@@ -53,7 +53,7 @@
   {
     "month_day": "01-17",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Theodosius I",
@@ -70,7 +70,7 @@
   {
     "month_day": "01-19",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Timket",
@@ -87,7 +87,7 @@
   {
     "month_day": "01-20",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Michael",
@@ -104,7 +104,7 @@
   {
     "month_day": "01-24",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abba Tsahma",
@@ -121,7 +121,7 @@
   {
     "month_day": "01-30",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Cyril of Alexandria",
@@ -138,7 +138,7 @@
   {
     "month_day": "02-14",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Martyrs of Debre Damo",
@@ -155,7 +155,7 @@
   {
     "month_day": "02-23",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Presentation",
@@ -172,7 +172,7 @@
   {
     "month_day": "03-13",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Gebre Menfes Kidus",
@@ -189,7 +189,7 @@
   {
     "month_day": "03-18",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Gebre Menfes Qiddus",
@@ -206,7 +206,7 @@
   {
     "month_day": "03-20",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abba Alef",
@@ -223,7 +223,7 @@
   {
     "month_day": "03-24",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Abba Betre Mariam",
@@ -240,7 +240,7 @@
   {
     "month_day": "03-30",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Annunciation",
@@ -257,7 +257,7 @@
   {
     "month_day": "04-22",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Apostles Philip and James",
@@ -274,7 +274,7 @@
   {
     "month_day": "05-05",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Abba Guba",
@@ -301,7 +301,7 @@
   {
     "month_day": "05-09",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Lideta Maryam",
@@ -318,7 +318,7 @@
   {
     "month_day": "05-19",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Yared",
@@ -345,7 +345,7 @@
   {
     "month_day": "05-29",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Mary",
@@ -362,7 +362,7 @@
   {
     "month_day": "05-30",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Ablak (saint)",
@@ -379,7 +379,7 @@
   {
     "month_day": "06-05",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abba Aftse",
@@ -406,7 +406,7 @@
   {
     "month_day": "06-12",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Samuel of Waldebba",
@@ -423,7 +423,7 @@
   {
     "month_day": "06-19",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Lalibela",
@@ -440,7 +440,7 @@
   {
     "month_day": "06-24",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abba Garima",
@@ -457,7 +457,7 @@
   {
     "month_day": "07-01",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Abba Yohannes",
@@ -474,7 +474,7 @@
   {
     "month_day": "07-06",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Apostles Peter and Paul",
@@ -491,7 +491,7 @@
   {
     "month_day": "07-08",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Abba Libanos",
@@ -508,7 +508,7 @@
   {
     "month_day": "07-14",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Giyorgis of Segla",
@@ -525,7 +525,7 @@
   {
     "month_day": "07-19",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Apostle Thomas",
@@ -542,7 +542,7 @@
   {
     "month_day": "07-20",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Transfiguration",
@@ -559,7 +559,7 @@
   {
     "month_day": "07-24",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "The Nine Saints",
@@ -576,7 +576,7 @@
   {
     "month_day": "08-01",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Seven Sleepers",
@@ -593,7 +593,7 @@
   {
     "month_day": "08-07",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Abba Libanos (Younger)",
@@ -620,7 +620,7 @@
   {
     "month_day": "08-15",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Athanasius",
@@ -637,7 +637,7 @@
   {
     "month_day": "08-22",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Assumption",
@@ -654,7 +654,7 @@
   {
     "month_day": "08-28",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Moses the Black",
@@ -671,7 +671,7 @@
   {
     "month_day": "08-30",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Tekle Haymanot",
@@ -708,7 +708,7 @@
   {
     "month_day": "09-03",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abnodius",
@@ -725,7 +725,7 @@
   {
     "month_day": "09-10",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. John the Baptist",
@@ -742,7 +742,7 @@
   {
     "month_day": "09-11",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Lideta Mariam",
@@ -779,7 +779,7 @@
   {
     "month_day": "09-12",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Thaddeus",
@@ -806,7 +806,7 @@
   {
     "month_day": "09-13",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Ba'eta Mariam",
@@ -833,7 +833,7 @@
   {
     "month_day": "09-14",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Yohannis Wolde Negedguad",
@@ -860,7 +860,7 @@
   {
     "month_day": "09-15",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abune Gebre Menfes Kidus and Petros we Paulos",
@@ -887,7 +887,7 @@
   {
     "month_day": "09-16",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidist Arsema",
@@ -914,7 +914,7 @@
   {
     "month_day": "09-17",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidist Selassie",
@@ -941,7 +941,7 @@
   {
     "month_day": "09-18",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Kiros and Abba Banuda",
@@ -968,7 +968,7 @@
   {
     "month_day": "09-19",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Thomas",
@@ -995,7 +995,7 @@
   {
     "month_day": "09-20",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Meskel",
@@ -1022,7 +1022,7 @@
   {
     "month_day": "09-21",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Hannah we Iyachem (Kidist Dingle Mariams parents)",
@@ -1049,7 +1049,7 @@
   {
     "month_day": "09-22",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Michael",
@@ -1076,7 +1076,7 @@
   {
     "month_day": "09-23",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Ruphael",
@@ -1103,7 +1103,7 @@
   {
     "month_day": "09-24",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abune Aregawi and Gebre Chistos",
@@ -1130,7 +1130,7 @@
   {
     "month_day": "09-25",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Kirkos and Iyalota",
@@ -1157,7 +1157,7 @@
   {
     "month_day": "09-26",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidist Kidanemihret",
@@ -1184,7 +1184,7 @@
   {
     "month_day": "09-27",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Meskel",
@@ -1221,7 +1221,7 @@
   {
     "month_day": "09-28",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Ewastateos",
@@ -1258,7 +1258,7 @@
   {
     "month_day": "09-29",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Gebriel",
@@ -1285,7 +1285,7 @@
   {
     "month_day": "09-30",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidist Hnstata and Kidus Dawit",
@@ -1312,7 +1312,7 @@
   {
     "month_day": "10-01",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidist Dingle Mariam",
@@ -1339,7 +1339,7 @@
   {
     "month_day": "10-02",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Urael",
@@ -1366,7 +1366,7 @@
   {
     "month_day": "10-03",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Giorgis",
@@ -1393,7 +1393,7 @@
   {
     "month_day": "10-04",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abune Teklehaimanot & Christos Samra",
@@ -1420,7 +1420,7 @@
   {
     "month_day": "10-05",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Merkorios",
@@ -1447,7 +1447,7 @@
   {
     "month_day": "10-06",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abune HabteMariam and Kidus Yosef",
@@ -1474,7 +1474,7 @@
   {
     "month_day": "10-07",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Medhanialem",
@@ -1501,7 +1501,7 @@
   {
     "month_day": "10-08",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidus Emmanuel",
@@ -1528,7 +1528,7 @@
   {
     "month_day": "10-09",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Bale Wolde",
@@ -1555,7 +1555,7 @@
   {
     "month_day": "10-10",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Ewostatewos",
@@ -1592,7 +1592,7 @@
   {
     "month_day": "10-13",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Abba Gerima",
@@ -1609,7 +1609,7 @@
   {
     "month_day": "10-23",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Dioscorus",
@@ -1626,7 +1626,7 @@
   {
     "month_day": "10-25",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abuna Aregawi",
@@ -1643,7 +1643,7 @@
   {
     "month_day": "11-02",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abba Yem'ata",
@@ -1660,7 +1660,7 @@
   {
     "month_day": "11-05",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Emperor Zara Yaqob",
@@ -1677,7 +1677,7 @@
   {
     "month_day": "11-10",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Kidana Mehret",
@@ -1694,7 +1694,7 @@
   {
     "month_day": "11-21",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Michael (Hidar)",
@@ -1721,7 +1721,7 @@
   {
     "month_day": "11-26",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Walatta Petros",
@@ -1738,7 +1738,7 @@
   {
     "month_day": "11-30",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Lady of Zion",
@@ -1765,7 +1765,7 @@
   {
     "month_day": "12-05",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "St. Gabriel",
@@ -1792,7 +1792,7 @@
   {
     "month_day": "12-07",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Abba Liqanos",
@@ -1809,7 +1809,7 @@
   {
     "month_day": "12-14",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Martyrs of Nagran",
@@ -1826,7 +1826,7 @@
   {
     "month_day": "12-17",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Lideta",
@@ -1843,7 +1843,7 @@
   {
     "month_day": "12-21",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Samuel of Waldebba",
@@ -1860,7 +1860,7 @@
   {
     "month_day": "12-27",
     "tradition": "ethiopian",
-    "calendar": "gregorian",
+    "calendar": "ethiopian",
     "saints": [
       {
         "name": "Frumentius",

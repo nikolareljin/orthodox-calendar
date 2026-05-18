@@ -11,6 +11,8 @@ class CalendarSystem(str, Enum):
     GREGORIAN = "gregorian"
     REVISED = "revised"  # Milankovich / New Calendar
     JULIAN = "julian"
+    COPTIC = "coptic"        # Alexandrian/ancient-Egyptian-derived, 13-month solar calendar
+    ETHIOPIAN = "ethiopian"  # Ge'ez calendar; same structure as Coptic, distinct name
 
 
 class Tradition(BaseModel):
