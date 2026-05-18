@@ -14,6 +14,7 @@ from ..calendar_logic import (
     movable_feast_for_date,
     resolve_tradition,
 )
+from ..config import HAGIOGRAPHY_SOURCE
 from ..data_loader import build_index
 from ..models import CalendarEntry, CalendarSystem, Saint, SaintsResponse
 
@@ -66,6 +67,22 @@ def _oca_feast_url(id_slug: str | None, feast_date: date) -> str | None:
         f"https://www.oca.org/saints/lives/"
         f"{feast_date.year}/{feast_date.month:02d}/{feast_date.day:02d}/{id_slug}"
     )
+
+
+def _resolve_hagiography_url(saint: Saint) -> str | None:
+    """Return the hagiography URL for the configured HAGIOGRAPHY_SOURCE.
+
+    "oca"   → saint.hagiography_url (OCA; for movable feasts this is already
+               year-correct via _oca_feast_url; for fixed feasts the 2024 date
+               in the URL is cosmetically stale but OCA serves by ID slug).
+    "goarch" → saint.goarch_url when set; falls back to OCA URL so saints
+               without a GOARCH content ID are still reachable.
+               Enrich the dataset with goarch_url fields to get full GOARCH coverage.
+    """
+    if HAGIOGRAPHY_SOURCE == "goarch":
+        return saint.goarch_url or saint.hagiography_url
+    return saint.hagiography_url
+
 
 # Common honorific prefixes that vary across sources for the same saint
 # (e.g. base has "Seraphim of Sarov", overlay has "Saint Seraphim of Sarov").
@@ -181,11 +198,17 @@ def _merge_entries(
                     key_index[key] = primary_key
         if entry.notes and not merged_notes:
             merged_notes = entry.notes
+    saints_out = []
+    for s in merged.values():
+        resolved_url = _resolve_hagiography_url(s)
+        if resolved_url != s.hagiography_url:
+            s = s.model_copy(update={"hagiography_url": resolved_url})
+        saints_out.append(s)
     return SaintsResponse(
         date=day,
         tradition=tradition.name,
         calendar_date=calendar_date,
-        saints=list(merged.values()),
+        saints=saints_out,
         calendar_system=effective_calendar(day, tradition),
         notes=merged_notes,
     )

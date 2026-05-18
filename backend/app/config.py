@@ -1,9 +1,16 @@
 from __future__ import annotations
 
+import os
 from datetime import date
 from typing import Dict
 
 from .models import CalendarSystem, Tradition
+
+# Hagiography source: "oca" (default) or "goarch".
+# When "goarch", saints with a goarch_url field use the GOARCH chapel URL;
+# saints without one fall back to the OCA URL.
+# Switch to "goarch" once the dataset is enriched with GOARCH content IDs.
+HAGIOGRAPHY_SOURCE: str = os.environ.get("HAGIOGRAPHY_SOURCE", "oca")
 
 # Canonical tradition metadata. These can be adjusted per deployment if a parish
 # follows a different reckoning.

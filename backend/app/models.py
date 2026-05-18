@@ -31,7 +31,8 @@ class Saint(BaseModel):
     name_hy: Optional[str] = None          # Armenian script name (Հայ)
     title: Optional[str] = None
     feast_type: Optional[str] = None
-    hagiography_url: Optional[str] = None
+    hagiography_url: Optional[str] = None  # OCA URL (primary source; date-keyed)
+    goarch_url: Optional[str] = None       # GOARCH chapel URL (contentid-keyed; date-independent)
     icon_url: Optional[str] = None
     notes: Optional[str] = None
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
