@@ -22,7 +22,7 @@ _INDEX = build_index()
 
 
 _OCA_URL_DATE_RE = _re.compile(
-    r"(https://www\.oca\.org/saints/lives/)\d{4}/\d{2}/\d{2}/(.*)"
+    r"(https://www\.oca\.org/saints/lives/)\d{4}/(\d{2}/\d{2})/(.*)"
 )
 
 
@@ -50,7 +50,7 @@ def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
                 id_slug: str | None = None
                 if url:
                     m = _OCA_URL_DATE_RE.match(url)
-                    id_slug = m.group(2) if m else None
+                    id_slug = m.group(3) if m else None
                 meta[delta] = (id_slug, s.notes)
                 break
     return meta
@@ -69,19 +69,37 @@ def _oca_feast_url(id_slug: str | None, feast_date: date) -> str | None:
     )
 
 
-def _resolve_hagiography_url(saint: Saint) -> str | None:
+def _fix_oca_url_year(url: str | None, calendar_date: str | None) -> str | None:
+    """Replace the year in an OCA URL with the tradition's calendar year.
+
+    OCA organises saints pages by Julian calendar date.  The dataset was scraped
+    in 2024 so every URL contains the literal year 2024.  This function swaps
+    that year for the year derived from *calendar_date* (the tradition's own
+    calendar representation of the requested Gregorian date), which is:
+      - the Julian year for Julian traditions (e.g. Serbian Christmas on
+        Gregorian Jan 7 2026 → calendar_date "2025-12-25" → year 2025)
+      - the Gregorian/Revised-Julian year for all other traditions
+    Non-OCA URLs (no regex match) are returned unchanged.
+    """
+    if not url or not calendar_date:
+        return url
+    m = _OCA_URL_DATE_RE.match(url)
+    if not m:
+        return url
+    calendar_year = calendar_date.split("-")[0]
+    return f"{m.group(1)}{calendar_year}/{m.group(2)}/{m.group(3)}"
+
+
+def _resolve_hagiography_url(saint: Saint, calendar_date: str | None = None) -> str | None:
     """Return the hagiography URL for the configured HAGIOGRAPHY_SOURCE.
 
-    "oca"   → saint.hagiography_url (OCA; for movable feasts this is already
-               year-correct via _oca_feast_url; for fixed feasts the 2024 date
-               in the URL is cosmetically stale but OCA serves by ID slug).
-    "goarch" → saint.goarch_url when set; falls back to OCA URL so saints
-               without a GOARCH content ID are still reachable.
-               Enrich the dataset with goarch_url fields to get full GOARCH coverage.
+    Always fixes the year in OCA URLs to match the tradition's calendar date
+    (Julian year for Julian traditions, Gregorian year for all others).
+    "goarch" → uses saint.goarch_url when set, then falls back to year-fixed OCA URL.
     """
     if HAGIOGRAPHY_SOURCE == "goarch":
-        return saint.goarch_url or saint.hagiography_url
-    return saint.hagiography_url
+        return saint.goarch_url or _fix_oca_url_year(saint.hagiography_url, calendar_date)
+    return _fix_oca_url_year(saint.hagiography_url, calendar_date)
 
 
 # Common honorific prefixes that vary across sources for the same saint
@@ -202,7 +220,7 @@ def _merge_entries(
             merged_notes = entry.notes
     saints_out = []
     for s in merged.values():
-        resolved_url = _resolve_hagiography_url(s)
+        resolved_url = _resolve_hagiography_url(s, calendar_date)
         if resolved_url != s.hagiography_url:
             s = s.model_copy(update={"hagiography_url": resolved_url})
         saints_out.append(s)

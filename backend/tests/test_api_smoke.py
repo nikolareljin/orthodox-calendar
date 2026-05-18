@@ -112,6 +112,33 @@ def test_pascha_shown_on_correct_gregorian_date_not_today() -> None:
     )
 
 
+def test_oca_urls_use_tradition_calendar_year_not_2024() -> None:
+    """OCA hagiography URLs must reflect the tradition's calendar year, not the 2024 scrape year.
+
+    Serbian (Julian) on Gregorian 2026-01-14 = Julian 2026-01-01.
+    Every OCA URL for that day's saints should contain /2026/, not /2024/.
+    Greek (Revised-Julian) on Gregorian 2026-01-01 = Rev-Julian 2026-01-01.
+    """
+    for tradition, day, expected_year in [
+        ("serbian", "2026-01-14", "2026"),   # Julian Jan 1, 2026
+        ("greek",   "2026-01-01", "2026"),   # Revised-Julian Jan 1, 2026
+    ]:
+        resp = client.get(f"/api/v1/saints?day={day}&traditions={tradition}")
+        assert resp.status_code == 200
+        saints_data = resp.json()
+        assert saints_data, f"{tradition}: no response for {day}"
+        for entry in saints_data:
+            for s in entry["saints"]:
+                url = s.get("hagiography_url") or ""
+                if "oca.org" in url:
+                    assert "/2024/" not in url, (
+                        f"{tradition}: stale 2024 URL: {url}"
+                    )
+                    assert f"/{expected_year}/" in url, (
+                        f"{tradition}: expected year {expected_year} in URL: {url}"
+                    )
+
+
 def test_moon_phase_returns_expected_shape() -> None:
     response = client.get("/api/v1/moon-phase?day=2026-05-13")
 
