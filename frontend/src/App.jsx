@@ -93,6 +93,20 @@ function getCopticDate(gYear, gMonth, gDay) {
   return _alexandrianDate(gYear, gMonth, gDay, 283, COPTIC_MONTH_NAMES, 3);
 }
 
+// Assyrian national calendar (epoch ~4750 BC). Months mirror Gregorian months
+// shifted 3 forward: Nisan=April … Adar=March. New Year (Kha b-Nisan) = April 1.
+const ASSYRIAN_MONTH_NAMES = [
+  "ܢܝܣܢ", "ܐܝܪ", "ܚܙܝܪܢ", "ܬܡܘܙ",
+  "ܐܒ", "ܐܝܠܘܠ", "ܬܫܪܢ ܩܕܡܝܐ", "ܬܫܪܢ ܬܪܝܢܐ",
+  "ܟܢܘܢ ܩܕܡܝܐ", "ܟܢܘܢ ܬܪܝܢܐ", "ܫܒܛ", "ܐܕܪ",
+];
+
+function getAssyrianDate(gYear, gMonth, gDay) {
+  const assyrianYear = gMonth >= 4 ? gYear + 4750 : gYear + 4749;
+  const monthIdx = (gMonth - 4 + 12) % 12;
+  return { year: assyrianYear, monthName: ASSYRIAN_MONTH_NAMES[monthIdx], day: gDay };
+}
+
 function clampYear(y) { return Math.max(MIN_YEAR, Math.min(MAX_YEAR, y)); }
 
 function getStoredTheme() {
@@ -375,6 +389,14 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
           return (
             <p className="cal-date-note eth-date-note">
               {copt.monthName} {copt.day}, {copt.year} Ⲁ.Ⲙ. — Coptic Calendar
+            </p>
+          );
+        })()}
+        {tradition === "assyrian" && (() => {
+          const ass = getAssyrianDate(year, month, day);
+          return (
+            <p className="cal-date-note eth-date-note">
+              {ass.monthName} {ass.day}, {ass.year} — Assyrian Calendar
             </p>
           );
         })()}

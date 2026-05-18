@@ -126,11 +126,14 @@ TRADITIONS: Dict[str, Tradition] = {
         calendar=CalendarSystem.GREGORIAN,
         aliases=["mosc", "indian-orthodox", "thomas-christians"],
     ),
+    # Assyrian Church of the East adopted the Gregorian calendar in 1964–1968
+    # (Patriarch Mar Shimun XXIII Eshai). The 1968 schism that created the Ancient
+    # Church of the East was triggered by this reform. Fixed feasts are keyed by
+    # Gregorian MM-DD, scraped from calendar.assyrianchurch.org.
     "assyrian": Tradition(
         name="Assyrian Church of the East",
         calendar=CalendarSystem.GREGORIAN,
         aliases=["church-of-the-east", "coe", "nestorian"],
-        # Gregorian-keyed dataset scraped from calendar.assyrianchurch.org
     ),
     # Armenian Apostolic is Oriental/Non-Chalcedonian, included alongside the Orthodox churches.
     # Gregorian-keyed: armenianchurch.org publishes feast dates in Gregorian (DD.MM.YYYY).

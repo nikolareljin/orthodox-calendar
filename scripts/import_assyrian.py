@@ -12,15 +12,23 @@ grid. This script:
      are automatically filtered out by the cross-year intersection)
   4. Writes per-month_day entries with tradition="assyrian", calendar="gregorian"
 
+The Assyrian Church of the East adopted the Gregorian calendar in 1964–1968
+(Patriarch Mar Shimun XXIII Eshai); fixed feast dates are Gregorian MM-DD.
+Easter (Qyamta) is moveable and filtered out by the cross-year intersection.
+
 Usage:
     python3 scripts/import_assyrian.py --out backend/app/data/traditions/assyrian_saints.json
     python3 scripts/import_assyrian.py --min-years 1 --out /path/to/output.json
+    python3 scripts/import_assyrian.py --enrich --out /path/to/output.json
 """
 
 import argparse
 import json
 import re
 import sys
+import time
+import urllib.parse
+import urllib.request
 from collections import defaultdict
 from pathlib import Path
 
@@ -31,6 +39,8 @@ except ImportError:
     sys.exit(1)
 
 CALENDAR_URL = "https://calendar.assyrianchurch.org/english-liturgical-calendar/"
+_WIKI_API = "https://en.wikipedia.org/w/api.php"
+_WIKI_HEADERS = {"User-Agent": "orthodox-calendar-importer/1.0 (https://github.com/nikolareljin/orthodox-calendar)"}
 
 _SKIP_TEXTS = frozenset({
     "sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday",
@@ -67,6 +77,65 @@ def _feast_type(title: str) -> str:
     if "commemoration" in lower or "st." in lower or "ss." in lower or "mar " in lower:
         return "Saint"
     return "Feast"
+
+
+def _api_get(params: dict) -> dict:
+    url = _WIKI_API + "?" + urllib.parse.urlencode({**params, "format": "json"})
+    req = urllib.request.Request(url, headers=_WIKI_HEADERS)
+    with urllib.request.urlopen(req, timeout=20) as resp:
+        return json.loads(resp.read())
+
+
+# Strip "Feast of", "Commemoration of", "St./Mar " prefixes to get a searchable name.
+_STRIP_PREFIX_RE = re.compile(
+    r"^(?:feast\s+of\s+(?:the\s+)?|commemoration\s+of\s+(?:the\s+)?|"
+    r"ss?\.\s*|mar\s+)",
+    re.IGNORECASE,
+)
+
+
+def _search_name(title: str) -> str:
+    name = _STRIP_PREFIX_RE.sub("", title).strip()
+    return name[:1].upper() + name[1:] if name else title
+
+
+def _wiki_enrich(title: str) -> dict | None:
+    """Search Wikipedia for a saint title; return {hagiography_url, notes} or None."""
+    query = _search_name(title)
+    if not query or len(query) < 4:
+        return None
+    try:
+        data = _api_get({
+            "action": "opensearch",
+            "search": query,
+            "limit": "1",
+            "namespace": "0",
+        })
+        if len(data) < 4 or not data[1] or not data[3]:
+            return None
+        page_title = data[1][0]
+        page_url = data[3][0]
+
+        extract_data = _api_get({
+            "action": "query",
+            "prop": "extracts",
+            "exintro": True,
+            "exsentences": 2,
+            "titles": page_title,
+            "redirects": True,
+        })
+        pages = extract_data.get("query", {}).get("pages", {})
+        notes = None
+        for page in pages.values():
+            raw = page.get("extract", "")
+            if raw:
+                clean = re.sub(r"<[^>]+>", "", raw).strip()
+                notes = clean[:300] if clean else None
+                break
+
+        return {"hagiography_url": page_url, "notes": notes}
+    except Exception:
+        return None
 
 
 def scrape_all(page) -> dict[str, dict[str, list[str]]]:
@@ -126,6 +195,17 @@ def main() -> None:
         default="backend/app/data/traditions/assyrian_saints.json",
         help="Output JSON file path",
     )
+    parser.add_argument(
+        "--enrich",
+        action="store_true",
+        help="Enrich saints with Wikipedia hagiography URLs and descriptions",
+    )
+    parser.add_argument(
+        "--delay",
+        type=float,
+        default=0.5,
+        help="Delay in seconds between Wikipedia requests when --enrich is used (default: 0.5)",
+    )
     args = parser.parse_args()
 
     out_path = Path(args.out)
@@ -178,12 +258,18 @@ def main() -> None:
             if norm in seen or norm in _SKIP_TEXTS:
                 continue
             seen.add(norm)
+            enrichment = {}
+            if args.enrich and _feast_type(title) not in ("Great Feast", "Feast", "Fast", "Sunday"):
+                time.sleep(args.delay)
+                enrichment = _wiki_enrich(title) or {}
+                if enrichment.get("hagiography_url"):
+                    print(f"    enriched: {title} -> {enrichment['hagiography_url']}", file=sys.stderr)
             saints.append({
                 "name": _short_name(title),
                 "title": title,
                 "feast_type": _feast_type(title),
-                "hagiography_url": None,
-                "notes": None,
+                "hagiography_url": enrichment.get("hagiography_url"),
+                "notes": enrichment.get("notes"),
                 "canonized_by": None,
                 "canonization_scope": "church-of-the-east",
                 "year_canonized": None,
