@@ -43,6 +43,70 @@ function formatGregorianDate(year, month, day) {
   return `${dow}, ${MONTH_NAMES[month - 1]} ${day}, ${yearStr}`;
 }
 
+// Ge'ez (Amharic) script month names for the Ethiopian calendar
+const ETH_MONTH_NAMES = [
+  "መስከረም", "ጥቅምት", "ኅዳር", "ታኅሣሥ",
+  "ጥር", "የካቲት", "መጋቢት", "ሚያዝያ",
+  "ግንቦት", "ሰኔ", "ሐምሌ", "ነሐሴ", "ጳጉሜ",
+];
+
+// Coptic (Bohairic) script month names for the Coptic calendar
+const COPTIC_MONTH_NAMES = [
+  "ⲑⲱⲟⲩⲧ", "ⲡⲁⲱⲡⲉ", "Ϩⲁⲑⲱⲣ", "ⲕⲓⲁϩⲕ",
+  "ⲧⲱⲃⲉ", "ⲁⲙϣⲓⲣ", "ⲡⲁⲣⲉⲙϩⲁⲧ", "ⲡⲁⲣⲙⲟⲩⲧⲉ",
+  "ⲡⲁϣⲟⲛⲥ", "ⲡⲁⲱⲛⲉ", "ⲉⲡⲏⲡ", "ⲙⲉⲥⲱⲣⲏ", "ⲛⲁⲥⲓⲉ",
+];
+
+function isGregorianLeap(y) {
+  return y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
+}
+
+// Both Coptic and Ethiopian share the same new year date (Sep 11 or 12).
+function alexandrianNewYearDay(gYear) {
+  return isGregorianLeap(gYear + 1) ? 12 : 11;
+}
+
+// Shared algorithm for Coptic/Ethiopian (identical 13-month solar structure).
+function _alexandrianDate(gYear, gMonth, gDay, yearOffset, monthNames, shortMonthLeapMod) {
+  const nyDay = alexandrianNewYearDay(gYear);
+  const isAfterNewYear = gMonth > 9 || (gMonth === 9 && gDay >= nyDay);
+  const tradYear = isAfterNewYear ? gYear - yearOffset : gYear - yearOffset - 1;
+  const nyGYear = isAfterNewYear ? gYear : gYear - 1;
+  const nyDate = Date.UTC(nyGYear, 8, alexandrianNewYearDay(nyGYear));
+  const currDate = Date.UTC(gYear, gMonth - 1, gDay);
+  const daysSinceNY = Math.round((currDate - nyDate) / 86400000);
+  const monthIdx = Math.min(12, Math.floor(daysSinceNY / 30));
+  const dayRaw = (daysSinceNY % 30) + 1;
+  // 13th month has 5 days normally, 6 in leap years (year % 4 === shortMonthLeapMod)
+  const maxShortDay = tradYear % 4 === shortMonthLeapMod ? 6 : 5;
+  const tradDay = monthIdx === 12 ? Math.min(dayRaw, maxShortDay) : dayRaw;
+  return { year: tradYear, monthName: monthNames[monthIdx], day: tradDay };
+}
+
+function getEthiopianDate(gYear, gMonth, gDay) {
+  // Ethiopian era offset: year is Gregorian − 8 (before new year) or − 7 (after)
+  return _alexandrianDate(gYear, gMonth, gDay, 7, ETH_MONTH_NAMES, 3);
+}
+
+function getCopticDate(gYear, gMonth, gDay) {
+  // Coptic Anno Martyrum: year is Gregorian − 284 (before Nayrouz) or − 283 (after)
+  return _alexandrianDate(gYear, gMonth, gDay, 283, COPTIC_MONTH_NAMES, 3);
+}
+
+// Assyrian national calendar (epoch ~4750 BC). Months mirror Gregorian months
+// shifted 3 forward: Nisan=April … Adar=March. New Year (Kha b-Nisan) = April 1.
+const ASSYRIAN_MONTH_NAMES = [
+  "ܢܝܣܢ", "ܐܝܪ", "ܚܙܝܪܢ", "ܬܡܘܙ",
+  "ܐܒ", "ܐܝܠܘܠ", "ܬܫܪܢ ܩܕܡܝܐ", "ܬܫܪܢ ܬܪܝܢܐ",
+  "ܟܢܘܢ ܩܕܡܝܐ", "ܟܢܘܢ ܬܪܝܢܐ", "ܫܒܛ", "ܐܕܪ",
+];
+
+function getAssyrianDate(gYear, gMonth, gDay) {
+  const assyrianYear = gMonth >= 4 ? gYear + 4750 : gYear + 4749;
+  const monthIdx = (gMonth - 4 + 12) % 12;
+  return { year: assyrianYear, monthName: ASSYRIAN_MONTH_NAMES[monthIdx], day: gDay };
+}
+
 function clampYear(y) { return Math.max(MIN_YEAR, Math.min(MAX_YEAR, y)); }
 
 function getStoredTheme() {
@@ -56,7 +120,10 @@ function getStoredTheme() {
 function getStoredTradition() {
   try {
     const stored = localStorage.getItem("oc-tradition");
-    if (stored && Object.hasOwn(TRADITIONS, stored)) return stored;
+    if (!stored) return "serbian";
+    // Migrate renamed key: "oriental" → "coptic"
+    const migrated = stored === "oriental" ? "coptic" : stored;
+    if (Object.hasOwn(TRADITIONS, migrated)) return migrated;
   } catch {
     // ignore storage errors
   }
@@ -118,6 +185,7 @@ const SCOPE_LABEL = {
   "pan-orthodox": "Pan-Orthodox",
   local: "Local",
   oriental: "Oriental",
+  "church-of-the-east": "Church of the East",
 };
 
 // ── SaintCard ───────────────────────────────────────────────────────────────
@@ -137,6 +205,7 @@ function SaintCard({ saint }) {
       >
         <span className="saint-header-left">
           <span className="saint-name">{saint.title || saint.name}</span>
+          {saint.name_hy && <span className="saint-name-alt">{saint.name_hy}</span>}
           <span className="saint-pills">
             {saint.feast_type && <span className={pillClass}>{saint.feast_type}</span>}
             {saint.canonized_by && (
@@ -281,7 +350,7 @@ function ToneBadge({ toneNum }) {
 }
 
 // ── DayDetail ───────────────────────────────────────────────────────────────
-function DayDetail({ saints, readings, moonPhase, loading, error, year, month, day }) {
+function DayDetail({ saints, readings, moonPhase, loading, error, year, month, day, tradition }) {
   if (!day) return (
     <div className="day-detail day-detail--empty">
       <p>Select a day to see saints, fasting rule, and readings.</p>
@@ -302,11 +371,35 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
     <div className="day-detail">
       <div className="day-detail-header">
         <h2>{formatGregorianDate(year, month, day)}</h2>
-        {entry && entry.calendar_date && (
+        {entry && entry.calendar_date && (entry.calendar_system === "julian" || entry.calendar_system === "revised") && (
           <p className="cal-date-note">
-            {entry.calendar_date} ({entry.calendar_system === "julian" ? "Old Style / Julian" : "Revised / Gregorian"})
+            {entry.calendar_date} ({entry.calendar_system === "julian" ? "Old Style / Julian" : "Revised / New Calendar"})
           </p>
         )}
+        {tradition === "ethiopian" && (() => {
+          const eth = getEthiopianDate(year, month, day);
+          return (
+            <p className="cal-date-note trad-date-note">
+              {eth.monthName} {eth.day}, {eth.year} ዓ.ም. — Ethiopian Calendar
+            </p>
+          );
+        })()}
+        {tradition === "coptic" && (() => {
+          const copt = getCopticDate(year, month, day);
+          return (
+            <p className="cal-date-note trad-date-note">
+              {copt.monthName} {copt.day}, {copt.year} Ⲁ.Ⲙ. — Coptic Calendar
+            </p>
+          );
+        })()}
+        {tradition === "assyrian" && (() => {
+          const ass = getAssyrianDate(year, month, day);
+          return (
+            <p className="cal-date-note trad-date-note">
+              {ass.monthName} {ass.day}, {ass.year} — Assyrian Calendar
+            </p>
+          );
+        })()}
       </div>
 
       {error && <div className="error-msg">{error}</div>}
@@ -503,36 +596,56 @@ export default function App() {
     if (e.key === "Escape") cancelYearEdit();
   }
 
+  function clampDay(day, toYear, toMonth) {
+    if (!day) return day;
+    const maxDay = makeDate(toYear, toMonth, 0).getDate();
+    return Math.min(day, maxDay);
+  }
+
   function prevYear() {
     cancelYearEdit();
-    setYear((y) => clampYear(y - 1));
-    setSelectedDay(null);
+    const newYear = clampYear(year - 1);
+    setYear(newYear);
+    setSelectedDay((d) => clampDay(d, newYear, month));
   }
 
   function nextYear() {
     cancelYearEdit();
-    setYear((y) => clampYear(y + 1));
-    setSelectedDay(null);
+    const newYear = clampYear(year + 1);
+    setYear(newYear);
+    setSelectedDay((d) => clampDay(d, newYear, month));
   }
 
   function prevMonth() {
     cancelYearEdit();
     if (month === 1) {
-      if (year > MIN_YEAR) { setYear((y) => y - 1); setMonth(12); }
+      if (year > MIN_YEAR) {
+        const newYear = year - 1;
+        setYear(newYear);
+        setMonth(12);
+        setSelectedDay((d) => clampDay(d, newYear, 12));
+      }
     } else {
-      setMonth((m) => m - 1);
+      const newMonth = month - 1;
+      setMonth(newMonth);
+      setSelectedDay((d) => clampDay(d, year, newMonth));
     }
-    setSelectedDay(null);
   }
 
   function nextMonth() {
     cancelYearEdit();
     if (month === 12) {
-      if (year < MAX_YEAR) { setYear((y) => y + 1); setMonth(1); }
+      if (year < MAX_YEAR) {
+        const newYear = year + 1;
+        setYear(newYear);
+        setMonth(1);
+        setSelectedDay((d) => clampDay(d, newYear, 1));
+      }
     } else {
-      setMonth((m) => m + 1);
+      const newMonth = month + 1;
+      setMonth(newMonth);
+      setSelectedDay((d) => clampDay(d, year, newMonth));
     }
-    setSelectedDay(null);
   }
 
   function goToToday() {
@@ -647,6 +760,7 @@ export default function App() {
               year={year}
               month={month}
               day={selectedDay}
+              tradition={tradition}
             />
           </div>
 
@@ -662,6 +776,7 @@ export default function App() {
 
           <OrthodoxWorldSection />
           <AboutSection />
+          <SupportSection />
         </main>
       </div>
     </div>
@@ -710,6 +825,32 @@ function OrthodoxWorldSection() {
       </button>
       {open && (
         <div className="about-body">
+          <p className="about-text" style={{ marginBottom: "16px" }}>
+            Each tradition in this calendar corresponds to an autocephalous or autonomous church.
+            Below is a brief overview of each, with links to their official websites.
+          </p>
+          <div className="churches-grid" style={{ marginBottom: "32px" }}>
+            {Object.entries(TRADITIONS).map(([key, info]) => (
+              <div key={key} className="church-card">
+                <div className="church-logo">{info.logo}</div>
+                <div className="church-info">
+                  <a
+                    href={info.website}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="church-name"
+                  >
+                    {info.label}
+                  </a>
+                  <span className="church-founded">Est. {info.founded}</span>
+                  {info.patron && (
+                    <span className="church-patron">Patron: {info.patron}</span>
+                  )}
+                  <p className="church-desc">{info.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
           <p className="about-text" style={{ marginBottom: "16px" }}>
             All recognized canonical churches worldwide. Links only — no commentary on questions of jurisdiction or recognition.
           </p>
@@ -808,69 +949,72 @@ function AboutSection() {
                 </a>
                 , or contact us through the repository. All are welcome.
               </p>
-            </div>
-
-            <div className="about-card about-card-full">
-              <h3 className="about-heading">Orthodox Churches</h3>
-              <p className="about-text" style={{ marginBottom: "16px" }}>
-                Each tradition in this calendar corresponds to an autocephalous or autonomous church.
-                Below is a brief overview of each, with links to their official websites.
-              </p>
-              <div className="churches-grid">
-                {Object.entries(TRADITIONS).map(([key, info]) => (
-                  <div key={key} className="church-card">
-                    <div className="church-logo">{info.logo}</div>
-                    <div className="church-info">
-                      <a
-                        href={info.website}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="church-name"
-                      >
-                        {info.label}
-                      </a>
-                      <span className="church-founded">Est. {info.founded}</span>
-                      {info.patron && (
-                        <span className="church-patron">Patron: {info.patron}</span>
-                      )}
-                      <p className="church-desc">{info.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="about-card about-card-full about-card-support">
-              <h3 className="about-heading">Support this project</h3>
-              <p className="about-text">
-                This calendar has been built and maintained by volunteers since 1993. Running a public
-                API and iCal feed costs real money — server hosting, bandwidth, and the many hours spent
-                curating and verifying liturgical data. If this calendar is useful to you, your parish,
-                or your community, please consider a donation.
-              </p>
-              <p className="about-text">
-                Every contribution — large or small — goes directly toward keeping the service free,
-                expanding the data set to more traditions, and improving the application for everyone.
-              </p>
-              <div className="support-links">
+              <div className="contribute-cta">
+                <h4 className="contribute-cta-heading">Help complete the calendar</h4>
+                <p className="about-text">
+                  Many traditions still have incomplete feast data — missing saints, missing hagiographies,
+                  missing feast links, or calendar events that have not been set up at all. You can help by
+                  providing context, correcting errors, adding saints' days for your church, or linking to
+                  authoritative sources. No coding required.
+                </p>
+                <p className="about-text">
+                  The easiest way to contribute is to{" "}
+                  <strong>open a GitHub Issue</strong> — describe what is missing or wrong, paste any
+                  source you have (a church website, a typikon scan, a synaxarion page), and we will
+                  integrate it. Every correction and addition goes live for every user.
+                </p>
                 <a
-                  href="https://ko-fi.com/nikolareljin"
+                  href="https://github.com/nikolareljin/orthodox-calendar/issues/new"
                   target="_blank"
                   rel="noreferrer"
-                  className="support-btn support-kofi"
+                  className="contribute-btn"
                 >
-                  ☕ Support on Ko-fi
+                  Open an Issue on GitHub →
                 </a>
               </div>
-              <p className="about-text" style={{ marginTop: "12px", fontSize: "13px" }}>
-                You can also contribute by improving the code, adding hagiography data, translating the
-                interface, or simply spreading the word. All forms of support are deeply appreciated.
-              </p>
             </div>
 
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ── Support Section ───────────────────────────────────────────────────────────
+function SupportSection() {
+  return (
+    <div className="about-section support-section-standalone">
+      <div className="support-standalone-inner">
+        <div className="support-standalone-text">
+          <h3 className="support-standalone-heading">☕ Support this Project</h3>
+          <p className="about-text">
+            This calendar has been a volunteer labour of faith since <strong>1993</strong>. Running a public
+            API and iCal feed has real costs — server hosting, bandwidth, and the many hours spent
+            curating and verifying liturgical data for every tradition.
+          </p>
+          <p className="about-text">
+            If this calendar serves you, your parish, or your community, please consider a donation.
+            Every contribution — large or small — goes directly toward keeping the service free,
+            expanding the data set to more traditions, and improving the application for everyone.
+          </p>
+          <p className="about-text" style={{ fontSize: "13px", opacity: 0.8 }}>
+            You can also contribute by improving the code, adding hagiography data, or simply spreading
+            the word. All forms of support are deeply appreciated.
+          </p>
+        </div>
+        <div className="support-standalone-action">
+          <a
+            href="https://ko-fi.com/nikolareljin"
+            target="_blank"
+            rel="noreferrer"
+            className="support-btn support-kofi support-kofi-large"
+          >
+            ☕ Support on Ko-fi
+          </a>
+          <p className="support-tagline">Keep the calendar free for everyone</p>
+        </div>
+      </div>
     </div>
   );
 }

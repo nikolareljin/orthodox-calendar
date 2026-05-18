@@ -36,7 +36,7 @@ TRADITIONS: Dict[str, Tradition] = {
         name="Russian Orthodox",
         calendar=CalendarSystem.JULIAN,
         aliases=["roc", "moscow"],
-        data_key="oca",
+        data_key="oca",  # base: shared Byzantine Julian dataset; overlay: russian_saints.json
     ),
     "serbian": Tradition(
         name="Serbian Orthodox",
@@ -93,36 +93,53 @@ TRADITIONS: Dict[str, Tradition] = {
     ),
     "ethiopian": Tradition(
         name="Ethiopian Orthodox Tewahedo",
-        calendar=CalendarSystem.JULIAN,
+        # Ethiopian Orthodox uses the Ethiopian (Ge'ez) calendar liturgically. Import scripts
+        # convert Ge'ez days to civil (Gregorian) MM-DD for storage; ETHIOPIAN falls through
+        # to the Gregorian lookup path so no date conversion is applied.
+        calendar=CalendarSystem.ETHIOPIAN,
         aliases=["tewahedo"],
     ),
     "syriac": Tradition(
         name="Syriac Orthodox Church of Antioch",
         calendar=CalendarSystem.JULIAN,
         aliases=["jacobite", "syriac-orthodox", "suryoyo"],
-        data_key="oriental",   # shares Oriental Orthodox sanctoral data until Syriac-specific set is built
+        # Julian-keyed dataset built by import_syriac.py
     ),
+    # "oriental" is a legacy key retained for API compatibility. It serves the small
+    # oriental_saints.json dataset (6 entries). Syriac and Malankara each now have
+    # dedicated datasets/config entries; Coptic moved to the "coptic" key below.
     "oriental": Tradition(
-        name="Coptic Orthodox Church of Alexandria",
+        name="Oriental Orthodox (shared)",
         calendar=CalendarSystem.JULIAN,
-        aliases=["coptic", "oriental orthodox", "oriental-orthodox"],
+        aliases=["oriental orthodox", "oriental-orthodox"],
+    ),
+    # Coptic Orthodox uses the Coptic (Alexandrian) calendar liturgically. Data from coptic.io
+    # is keyed by civil (Gregorian) MM-DD dates; COPTIC falls through to the Gregorian lookup
+    # path so no date conversion is applied.
+    "coptic": Tradition(
+        name="Coptic Orthodox Church of Alexandria",
+        calendar=CalendarSystem.COPTIC,
+        aliases=["coptic-orthodox", "alexandria-coptic"],
     ),
     "malankara": Tradition(
         name="Malankara Orthodox Syrian Church",
-        calendar=CalendarSystem.JULIAN,
+        calendar=CalendarSystem.GREGORIAN,
         aliases=["mosc", "indian-orthodox", "thomas-christians"],
-        data_key="oriental",   # shares Oriental Orthodox sanctoral data until Malankara-specific set is built
     ),
+    # Assyrian Church of the East adopted the Gregorian calendar in 1964–1968
+    # (Patriarch Mar Shimun XXIII Eshai). The 1968 schism that created the Ancient
+    # Church of the East was triggered by this reform. Fixed feasts are keyed by
+    # Gregorian MM-DD, scraped from calendar.assyrianchurch.org.
     "assyrian": Tradition(
         name="Assyrian Church of the East",
-        calendar=CalendarSystem.JULIAN,
+        calendar=CalendarSystem.GREGORIAN,
         aliases=["church-of-the-east", "coe", "nestorian"],
-        # No data_key: distinct sanctoral calendar — returns empty saints list until dedicated dataset is added
     ),
     # Armenian Apostolic is Oriental/Non-Chalcedonian, included alongside the Orthodox churches.
+    # Gregorian-keyed: armenianchurch.org publishes feast dates in Gregorian (DD.MM.YYYY).
     "armenian": Tradition(
         name="Armenian Apostolic",
-        calendar=CalendarSystem.JULIAN,
+        calendar=CalendarSystem.GREGORIAN,
         aliases=["aac", "armenian-orthodox", "apostolic-armenian"],
     ),
 }

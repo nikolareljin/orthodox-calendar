@@ -63,7 +63,43 @@ def convert_to_tradition_month_day(day: date, tradition: Tradition) -> Tuple[str
     if calendar == CalendarSystem.REVISED:
         ryear, rmonth, rday = _gregorian_to_revised_julian(day)
         return f"{rmonth:02d}-{rday:02d}", f"{ryear:04d}-{rmonth:02d}-{rday:02d}"
-    return day.strftime("%m-%d"), day.isoformat()
+    if calendar == CalendarSystem.COPTIC:
+        cy, cm, cd = _gregorian_to_alexandrian(day, 283)
+        return day.strftime("%m-%d"), f"{cy:04d}-{cm:02d}-{cd:02d}"
+    if calendar == CalendarSystem.ETHIOPIAN:
+        ey, em, ed = _gregorian_to_alexandrian(day, 7)
+        return day.strftime("%m-%d"), f"{ey:04d}-{em:02d}-{ed:02d}"
+    return day.strftime("%m-%d"), day.isoformat()  # Gregorian pass-through
+
+
+def _is_gregorian_leap(y: int) -> bool:
+    return y % 4 == 0 and (y % 100 != 0 or y % 400 == 0)
+
+
+def _gregorian_to_alexandrian(d: date, year_offset: int) -> Tuple[int, int, int]:
+    """Convert a Gregorian date to an Alexandrian-family calendar (Coptic or Ethiopian).
+
+    year_offset: years to subtract from Gregorian year — 283 for Coptic (AM), 7 for Ethiopian (AM).
+    Both calendars share 12×30-day months + a short 13th month (5 or 6 days in leap year).
+    New Year (1 Thout / 1 Meskerem) = September 11 normally, September 12 if next year is a leap year.
+    """
+    # New Year day for the Gregorian year in which this date falls
+    ny_day = 12 if _is_gregorian_leap(d.year + 1) else 11
+    is_after_ny = d.month > 9 or (d.month == 9 and d.day >= ny_day)
+    trad_year = (d.year - year_offset) if is_after_ny else (d.year - year_offset - 1)
+
+    # New Year date for the traditional year in question
+    ny_g_year = d.year if is_after_ny else d.year - 1
+    ny_day_for_year = 12 if _is_gregorian_leap(ny_g_year + 1) else 11
+    ny_date = date(ny_g_year, 9, ny_day_for_year)
+
+    days_since_ny = (d - ny_date).days
+    month = min(12, days_since_ny // 30) + 1  # months 1-12 are 30 days; 13th is remainder
+    day_in_month = (days_since_ny % 30) + 1
+    if month == 13:
+        max_day = 6 if trad_year % 4 == 3 else 5  # 13th month: 6 days in leap year
+        day_in_month = min(day_in_month, max_day)
+    return trad_year, month, day_in_month
 
 
 def _gregorian_to_julian(d: date) -> Tuple[int, int, int]:

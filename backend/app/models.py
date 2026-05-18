@@ -11,6 +11,8 @@ class CalendarSystem(str, Enum):
     GREGORIAN = "gregorian"
     REVISED = "revised"  # Milankovich / New Calendar
     JULIAN = "julian"
+    COPTIC = "coptic"        # Alexandrian/ancient-Egyptian-derived, 13-month solar calendar
+    ETHIOPIAN = "ethiopian"  # Ge'ez calendar; same structure as Coptic, distinct name
 
 
 class Tradition(BaseModel):
@@ -26,13 +28,14 @@ class Tradition(BaseModel):
 
 class Saint(BaseModel):
     name: str
+    name_hy: Optional[str] = None          # Armenian script name (Հայ)
     title: Optional[str] = None
     feast_type: Optional[str] = None
     hagiography_url: Optional[str] = None
     icon_url: Optional[str] = None
     notes: Optional[str] = None
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
-    canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental"
+    canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental" | "church-of-the-east"
     year_canonized: Optional[int] = None    # e.g. 2010
 
 
