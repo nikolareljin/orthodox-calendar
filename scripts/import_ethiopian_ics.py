@@ -55,7 +55,8 @@ def _meskerem_1_for(anchor_year: int) -> date:
     is_next_leap = next_year % 4 == 0 and (next_year % 100 != 0 or next_year % 400 == 0)
     return date(anchor_year, 9, 12 if is_next_leap else 11)
 
-_MESKEREM_1 = _meskerem_1_for(date.today().year)
+# Canonical anchor year for the dataset. Override with --anchor-year for a different cycle.
+_MESKEREM_1 = _meskerem_1_for(2024)
 
 # Ge'ez title prefixes → feast_type
 _TITLE_TYPE: list[tuple[re.Pattern, str]] = [
@@ -319,7 +320,12 @@ def main() -> None:
                         help="Merge into existing file instead of replacing")
     parser.add_argument("--no-enrich", action="store_true",
                         help="Skip Wikipedia enrichment")
+    parser.add_argument("--anchor-year", type=int, default=2024,
+                        help="Gregorian year used as Meskerem 1 anchor (default: 2024)")
     args = parser.parse_args()
+
+    global _MESKEREM_1
+    _MESKEREM_1 = _meskerem_1_for(args.anchor_year)
 
     out_path = Path(args.out)
     out_path.parent.mkdir(parents=True, exist_ok=True)

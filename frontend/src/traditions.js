@@ -102,7 +102,7 @@ export const TRADITIONS = {
     logo: "☩",
   },
   malankara: {
-    label: "Malankara", calendar: "Julian", note: "Non-Chalcedonian",
+    label: "Malankara", calendar: "Gregorian", note: "Non-Chalcedonian",
     website: "https://www.mosc.in",
     founded: "52 AD (traditional, Saint Thomas)",
     patron: "Saint Thomas the Apostle",

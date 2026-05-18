@@ -164,6 +164,24 @@ def main() -> None:
                 time.sleep(args.delay)
         d += timedelta(days=1)
 
+    # Julian calendar has Feb 29 in every year divisible by 4, including century years
+    # not covered by Gregorian (e.g. 1900, 2100). Python's date() is Gregorian, so those
+    # Julian Feb 29s are never reached by the loop above — fetch them explicitly.
+    julian_only_leap = args.year % 4 == 0 and args.year % 100 == 0 and args.year % 400 != 0
+    if julian_only_leap and "02-29" not in seen_julian:
+        seen_julian.add("02-29")
+        try:
+            data = fetch_day(args.year, 2, 29)
+            entry = parse_entry(data, "02-29", args.full)
+            if entry:
+                entries.append(entry)
+                print(f"  02-29 (Julian leap day): {len(entry['saints'])} saints", file=sys.stderr)
+            else:
+                print(f"  02-29: no Russian-specific saints", file=sys.stderr)
+        except Exception as exc:
+            print(f"  02-29: ERROR — {exc}", file=sys.stderr)
+            errors += 1
+
     with out_path.open("w", encoding="utf-8") as f:
         json.dump(entries, f, ensure_ascii=False, indent=2)
 
