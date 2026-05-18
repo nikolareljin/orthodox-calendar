@@ -1,39 +1,88 @@
 [
   {
+    "month_day": "01-08",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Abo of Tiflis",
+        "title": "Abo of Tiflis",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Abo_of_Tiflis",
+        "notes": "Arab Christian martyr, patron saint of Tbilisi (786)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
     "month_day": "01-14",
     "tradition": "georgian",
     "calendar": "julian",
     "saints": [
       {
-        "name": "Saint Nino, Equal-to-Apostles",
-        "title": "Saint Nino, Equal-to-the-Apostles and Enlightener of Georgia",
+        "name": "Saint Nino, Enlightener of Georgia",
+        "title": "Saint Nino, Enlightener of Georgia",
         "feast_type": "Equal-to-Apostles",
-        "notes": "Saint Nino brought Christianity to Georgia (Iberia) around 327 AD. Born in Cappadocia, she carried a cross of vine branches bound with her own hair. She healed Queen Nana and converted King Mirian III, making Georgia one of the first Christian kingdoms. She is depicted with a distinctive vine-wood cross with drooping arms, still the symbol of the Georgian Church.",
-        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=414",
-        "canonized_by": null,
-        "canonization_scope": "pan-orthodox",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nino",
+        "notes": "Apostle to Georgia (4th c.), converted King Mirian III and Queen Nana",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
         "year_canonized": null
       }
-    ],
-    "notes": "Julian January 14 corresponds to Gregorian January 27."
+    ]
   },
   {
-    "month_day": "05-09",
+    "month_day": "01-20",
     "tradition": "georgian",
     "calendar": "julian",
     "saints": [
       {
-        "name": "Saint Shio Mgvime",
-        "title": "Saint Shio of Mgvime, One of the Thirteen Syrian Fathers",
-        "feast_type": "Venerable",
-        "notes": "One of the Thirteen Syrian Fathers who came to Georgia from Antioch in the 6th century. Shio founded the Shio-Mgvime cave monastery near Mtskheta, which became a major center of Georgian monasticism. His asceticism was so severe he lived as a hermit in a cave, sustained by miraculous provision. One of the most revered founders of the Georgian Church.",
-        "hagiography_url": null,
-        "canonized_by": "Georgian Orthodox Church",
+        "name": "Catholicos-Patriarch Kirion II",
+        "title": "Catholicos-Patriarch Kirion II",
+        "feast_type": "Hierarch",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Kirion_II",
+        "notes": "Georgian Catholicos-Patriarch, martyred 1918",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
         "canonization_scope": "local",
         "year_canonized": null
       }
-    ],
-    "notes": "Julian May 9 corresponds to Gregorian May 22."
+    ]
+  },
+  {
+    "month_day": "01-26",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "David the Builder, King of Georgia",
+        "title": "David the Builder, King of Georgia",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/David_IV_of_Georgia",
+        "notes": "King of Georgia (1073–1125), rebuilder of the Georgian church and state",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "03-20",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ilarion the Georgian",
+        "title": "Ilarion the Georgian",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Hilarion_the_Georgian",
+        "notes": "Georgian monk on Mount Olympus and Mount Athos (9th–10th c.)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
   },
   {
     "month_day": "05-01",
@@ -41,16 +90,382 @@
     "calendar": "julian",
     "saints": [
       {
-        "name": "Blessed Queen Tamara",
-        "title": "Blessed Queen Tamara of Georgia, The Great",
-        "feast_type": "Righteous Queen",
-        "notes": "Queen Tamara (1160–1213) led Georgia to its Golden Age as the dominant power in the Caucasus. A pious ruler, she commissioned churches, supported monasteries on Athos, and her court fostered the golden age of Georgian literature, including Shota Rustaveli's The Knight in the Panther's Skin. Venerated as a saint by the Georgian Orthodox Church.",
-        "hagiography_url": null,
-        "canonized_by": "Georgian Orthodox Church",
+        "name": "Queen Tamar of Georgia",
+        "title": "Queen Tamar of Georgia",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Tamar_of_Georgia",
+        "notes": "Queen of Georgia (1160–1213), canonized Equal-to-Apostles in some traditions",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
         "canonization_scope": "local",
         "year_canonized": null
       }
-    ],
-    "notes": "Julian May 1 corresponds to Gregorian May 14."
+    ]
+  },
+  {
+    "month_day": "05-07",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ioane of Zedazeni",
+        "title": "Ioane of Zedazeni",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/John_of_Zedazeni",
+        "notes": "Leader of the Thirteen Assyrian Fathers who Christianized Georgia (6th c.)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      },
+      {
+        "name": "The Thirteen Assyrian Fathers",
+        "title": "The Thirteen Assyrian Fathers",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Thirteen_Syrian_Fathers",
+        "notes": "Thirteen monks from Syria/Mesopotamia who evangelized Georgia (6th c.)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-09",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Shio of Mgvime",
+        "title": "Shio of Mgvime",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Shio_of_Mgvime",
+        "notes": "One of the Thirteen Assyrian Fathers, hermit monk (6th c.)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-14",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Tamar I",
+        "title": "Tamar I",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Tamar_I",
+        "notes": null,
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-23",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Demetrius I of Georgia",
+        "title": "Demetrius I of Georgia",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Demetrius_I_of_Georgia",
+        "notes": null,
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "05-27",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Basil of Khakhuli",
+        "title": "Basil of Khakhuli",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Basil_of_Khakhuli",
+        "notes": null,
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-07",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "David Garejeli",
+        "title": "David Garejeli",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/David_of_Gareji",
+        "notes": "One of the Thirteen Assyrian Fathers, founded the Gareji monastery complex (6th c.)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-14",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Ekvtime the Enlightener",
+        "title": "Ekvtime the Enlightener",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Euthymius_the_Hagiorite",
+        "notes": "Georgian monk of Mount Athos, translated Georgian Gospels (955–1028)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-24",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Giorgi Mtacmideli (of the Holy Mountain)",
+        "title": "Giorgi Mtacmideli (of the Holy Mountain)",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/George_the_Hagiorite",
+        "notes": "Georgian monk on Mount Athos, translated Georgian liturgical texts (1009–1065)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-28",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Gabriel Urgebadze",
+        "title": "Gabriel Urgebadze",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Gabriel_Urgebadze",
+        "notes": "Georgian hieromonk, fool-for-Christ, canonized 2012",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-17",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Nino of Cappadocia",
+        "title": "Nino of Cappadocia",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nino",
+        "notes": "Patron saint of Georgia — second feast day",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-02",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Razhden the Protomartyr",
+        "title": "Razhden the Protomartyr",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Razhden_the_Protomartyr",
+        "notes": "First martyr of Georgia, a Persian prince converted to Christianity (457)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-07",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Queen Ketevan the Martyr",
+        "title": "Queen Ketevan the Martyr",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ketevan_the_Martyr",
+        "notes": "Georgian queen martyred in Persia under Shah Abbas I (1624)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "08-16",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Feast of the Svetitskhoveli (Life-Giving Pillar)",
+        "title": "Feast of the Svetitskhoveli (Life-Giving Pillar)",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Mtskheta",
+        "notes": "Commemoration of the robe of Christ kept in Mtskheta cathedral",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "09-02",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Arsen Ikaltoeli",
+        "title": "Arsen Ikaltoeli",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Arsen_Ikaltoeli",
+        "notes": "Georgian scholar-monk, founder of Ikalto Academy (12th c.)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-05",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Grigol Khandzteli",
+        "title": "Grigol Khandzteli",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Gregory_of_Khandzta",
+        "notes": "Georgian monastic reformer, founded Khandzta monastery in Tao (759–861)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-14",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Feast of the Nikozi Icon of the Mother of God",
+        "title": "Feast of the Nikozi Icon of the Mother of God",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Nikozi",
+        "notes": "Georgian diocesan feast of the miraculous Nikozi icon",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "10-28",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Dimitri Tavdadebuli (Self-Sacrificer)",
+        "title": "Dimitri Tavdadebuli (Self-Sacrificer)",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Demetre_I_of_Georgia",
+        "notes": "King Demetrius I of Georgia, sacrificed himself to save the people (1130–1156)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-07",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "New Martyrs of Georgia (Soviet Era)",
+        "title": "New Martyrs of Georgia (Soviet Era)",
+        "feast_type": "New Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Georgian_New_Martyrs",
+        "notes": "Georgian clergy and faithful martyred under Soviet persecution (1921–1953)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-13",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "The 6000 Martyrs of Tbilisi",
+        "title": "The 6000 Martyrs of Tbilisi",
+        "feast_type": "Martyr",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Six_thousand_martyrs_of_Tbilisi",
+        "notes": "Christians martyred by Shah Abbas I (1624)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-05",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saba Asveli",
+        "title": "Saba Asveli",
+        "feast_type": "Venerable",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Saba_Asveli",
+        "notes": "Georgian holy bishop, one of the Thirteen Assyrian Fathers (6th c.)",
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "12-21",
+    "tradition": "georgian",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Anton II of Georgia",
+        "title": "Anton II of Georgia",
+        "feast_type": "Righteous",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Anton_II_of_Georgia",
+        "notes": null,
+        "canonized_by": "Georgian Orthodox and Apostolic Church",
+        "canonization_scope": "local",
+        "year_canonized": null
+      }
+    ]
   }
 ]

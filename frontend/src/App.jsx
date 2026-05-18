@@ -43,6 +43,36 @@ function formatGregorianDate(year, month, day) {
   return `${dow}, ${MONTH_NAMES[month - 1]} ${day}, ${yearStr}`;
 }
 
+const ETH_MONTH_NAMES = [
+  "Meskerem", "Tikemt", "Hidar", "Tahsas",
+  "Ter", "Yekatit", "Megabit", "Miazia",
+  "Ginbot", "Sene", "Hamle", "Nehase", "Pagume",
+];
+
+function ethNewYearDay(gYear) {
+  // Ethiopian New Year (Meskerem 1) falls on Sep 12 when the preceding Ethiopian
+  // year was a leap year. Ethiopian year Y is a leap year when Y % 4 === 3.
+  // The Ethiopian year starting in Gregorian year G is approximately G - 8,
+  // so Sep 12 occurs when (G - 8) % 4 === 3, i.e. G % 4 === 3.
+  return gYear % 4 === 3 ? 12 : 11;
+}
+
+function getEthiopianDate(gYear, gMonth, gDay) {
+  const nyDay = ethNewYearDay(gYear);
+  const isAfterNewYear = gMonth > 9 || (gMonth === 9 && gDay >= nyDay);
+  const ethYear = isAfterNewYear ? gYear - 7 : gYear - 8;
+  const nyGYear = isAfterNewYear ? gYear : gYear - 1;
+  const nyDate = makeDate(nyGYear, 8, ethNewYearDay(nyGYear));
+  const currDate = makeDate(gYear, gMonth - 1, gDay);
+  const daysSinceNY = Math.round((currDate - nyDate) / 86400000);
+  const ethMonthIdx = Math.min(12, Math.floor(daysSinceNY / 30));
+  const ethDayRaw = (daysSinceNY % 30) + 1;
+  // Pagume (month 13) has only 5 days normally, 6 in an Ethiopian leap year (ethYear % 4 === 3)
+  const maxPagumeDay = ethYear % 4 === 3 ? 6 : 5;
+  const ethDay = ethMonthIdx === 12 ? Math.min(ethDayRaw, maxPagumeDay) : ethDayRaw;
+  return { year: ethYear, monthName: ETH_MONTH_NAMES[ethMonthIdx], day: ethDay };
+}
+
 function clampYear(y) { return Math.max(MIN_YEAR, Math.min(MAX_YEAR, y)); }
 
 function getStoredTheme() {
@@ -56,7 +86,10 @@ function getStoredTheme() {
 function getStoredTradition() {
   try {
     const stored = localStorage.getItem("oc-tradition");
-    if (stored && Object.hasOwn(TRADITIONS, stored)) return stored;
+    if (!stored) return "serbian";
+    // Migrate renamed key: "oriental" → "coptic"
+    const migrated = stored === "oriental" ? "coptic" : stored;
+    if (Object.hasOwn(TRADITIONS, migrated)) return migrated;
   } catch {
     // ignore storage errors
   }
@@ -118,6 +151,7 @@ const SCOPE_LABEL = {
   "pan-orthodox": "Pan-Orthodox",
   local: "Local",
   oriental: "Oriental",
+  "church-of-the-east": "Church of the East",
 };
 
 // ── SaintCard ───────────────────────────────────────────────────────────────
@@ -137,6 +171,7 @@ function SaintCard({ saint }) {
       >
         <span className="saint-header-left">
           <span className="saint-name">{saint.title || saint.name}</span>
+          {saint.name_hy && <span className="saint-name-alt">{saint.name_hy}</span>}
           <span className="saint-pills">
             {saint.feast_type && <span className={pillClass}>{saint.feast_type}</span>}
             {saint.canonized_by && (
@@ -281,7 +316,7 @@ function ToneBadge({ toneNum }) {
 }
 
 // ── DayDetail ───────────────────────────────────────────────────────────────
-function DayDetail({ saints, readings, moonPhase, loading, error, year, month, day }) {
+function DayDetail({ saints, readings, moonPhase, loading, error, year, month, day, tradition }) {
   if (!day) return (
     <div className="day-detail day-detail--empty">
       <p>Select a day to see saints, fasting rule, and readings.</p>
@@ -307,6 +342,14 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
             {entry.calendar_date} ({entry.calendar_system === "julian" ? "Old Style / Julian" : "Revised / Gregorian"})
           </p>
         )}
+        {tradition === "ethiopian" && (() => {
+          const eth = getEthiopianDate(year, month, day);
+          return (
+            <p className="cal-date-note eth-date-note">
+              {eth.monthName} {eth.day}, {eth.year} E.C. — Ethiopian Calendar
+            </p>
+          );
+        })()}
       </div>
 
       {error && <div className="error-msg">{error}</div>}
@@ -503,36 +546,56 @@ export default function App() {
     if (e.key === "Escape") cancelYearEdit();
   }
 
+  function clampDay(day, toYear, toMonth) {
+    if (!day) return day;
+    const maxDay = makeDate(toYear, toMonth, 0).getDate();
+    return Math.min(day, maxDay);
+  }
+
   function prevYear() {
     cancelYearEdit();
-    setYear((y) => clampYear(y - 1));
-    setSelectedDay(null);
+    const newYear = clampYear(year - 1);
+    setYear(newYear);
+    setSelectedDay((d) => clampDay(d, newYear, month));
   }
 
   function nextYear() {
     cancelYearEdit();
-    setYear((y) => clampYear(y + 1));
-    setSelectedDay(null);
+    const newYear = clampYear(year + 1);
+    setYear(newYear);
+    setSelectedDay((d) => clampDay(d, newYear, month));
   }
 
   function prevMonth() {
     cancelYearEdit();
     if (month === 1) {
-      if (year > MIN_YEAR) { setYear((y) => y - 1); setMonth(12); }
+      if (year > MIN_YEAR) {
+        const newYear = year - 1;
+        setYear(newYear);
+        setMonth(12);
+        setSelectedDay((d) => clampDay(d, newYear, 12));
+      }
     } else {
-      setMonth((m) => m - 1);
+      const newMonth = month - 1;
+      setMonth(newMonth);
+      setSelectedDay((d) => clampDay(d, year, newMonth));
     }
-    setSelectedDay(null);
   }
 
   function nextMonth() {
     cancelYearEdit();
     if (month === 12) {
-      if (year < MAX_YEAR) { setYear((y) => y + 1); setMonth(1); }
+      if (year < MAX_YEAR) {
+        const newYear = year + 1;
+        setYear(newYear);
+        setMonth(1);
+        setSelectedDay((d) => clampDay(d, newYear, 1));
+      }
     } else {
-      setMonth((m) => m + 1);
+      const newMonth = month + 1;
+      setMonth(newMonth);
+      setSelectedDay((d) => clampDay(d, year, newMonth));
     }
-    setSelectedDay(null);
   }
 
   function goToToday() {
@@ -647,6 +710,7 @@ export default function App() {
               year={year}
               month={month}
               day={selectedDay}
+              tradition={tradition}
             />
           </div>
 

@@ -1,0 +1,110 @@
+[
+  {
+    "month_day": "01-17",
+    "tradition": "oriental",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Anthony the Great",
+        "title": "Saint Anthony the Great, Father of Monasticism",
+        "feast_type": "Venerable",
+        "notes": "Father of monasticism, born in Egypt circa 251 AD. At age 20 he sold all his possessions and withdrew into the desert, establishing the hermit tradition that spread throughout Christianity. Lived to approximately 105 years old. His biography by Athanasius the Great shaped Christian monasticism globally. Feast: Toba 22 = Julian January 17.",
+        "hagiography_url": "https://www.copticchurch.net/synaxarium/",
+        "canonized_by": null,
+        "canonization_scope": "universal",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Coptic Toba 22 = Julian January 17."
+  },
+  {
+    "month_day": "03-28",
+    "tradition": "oriental",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Athanasius the Great",
+        "title": "Saint Athanasius the Great, Archbishop of Alexandria, Pillar of Orthodoxy",
+        "feast_type": "Hierarch",
+        "notes": "Archbishop of Alexandria, 'Pillar of Orthodoxy' and 'Champion of Christ.' Defended Christ's divinity against Arianism, suffering five exiles for the faith. Author of the Nicene Creed's theological formulation and the Life of Anthony. His motto: 'Athanasius contra mundum' (Athanasius against the world). Feast: Baramouda 2 = Julian March 28.",
+        "hagiography_url": "https://www.copticchurch.net/synaxarium/",
+        "canonized_by": null,
+        "canonization_scope": "universal",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Coptic Baramouda 2 = Julian March 28."
+  },
+  {
+    "month_day": "05-25",
+    "tradition": "oriental",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Mark the Evangelist",
+        "title": "Saint Mark the Apostle and Evangelist, Founder of the Church of Alexandria",
+        "feast_type": "Apostle",
+        "notes": "The Apostle and Evangelist Mark founded the Church of Alexandria circa 42 AD, establishing one of the oldest Christian communities in the world. He authored the earliest written Gospel. Martyred in Alexandria in 68 AD by being dragged through the streets. His relics are venerated in Saint Mark's Cathedral, Cairo. Feast: Bashons 30 = Julian May 25.",
+        "hagiography_url": "https://www.copticchurch.net/synaxarium/",
+        "canonized_by": null,
+        "canonization_scope": "universal",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Coptic Bashons 30 = Julian May 25. Patronal feast of the Coptic Orthodox Church."
+  },
+  {
+    "month_day": "06-27",
+    "tradition": "oriental",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Cyril I of Alexandria",
+        "title": "Saint Cyril I, Pope of Alexandria, Defender of the Theotokos",
+        "feast_type": "Hierarch",
+        "notes": "Patriarch of Alexandria 412–444 AD. Championed the title 'Theotokos' (God-bearer) for the Virgin Mary at the Third Ecumenical Council of Ephesus (431 AD). His Christological writings define much of Eastern theology. Doctor of the Church in both Eastern and Western traditions. Feast: Epep 3 = Julian June 27.",
+        "hagiography_url": "https://www.copticchurch.net/synaxarium/",
+        "canonized_by": null,
+        "canonization_scope": "universal",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Coptic Epep 3 = Julian June 27."
+  },
+  {
+    "month_day": "11-07",
+    "tradition": "oriental",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Bishoi of Scetis",
+        "title": "Saint Bishoi the Great, Abba of Scetis",
+        "feast_type": "Venerable",
+        "notes": "One of the greatest desert fathers, Bishoi founded monasticism at the monastery bearing his name (Deir Anba Bishoi) in Wadi El-Natrun, Egypt, circa 320 AD. According to Coptic tradition, he was granted a vision of Christ washing his feet. His monastery is one of the oldest continuously inhabited monasteries in the world. Feast: Hator 10 = Julian November 7.",
+        "hagiography_url": "https://www.copticchurch.net/synaxarium/",
+        "canonized_by": "Coptic Orthodox Church",
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Coptic Hator 10 = Julian November 7."
+  },
+  {
+    "month_day": "11-12",
+    "tradition": "oriental",
+    "calendar": "julian",
+    "saints": [
+      {
+        "name": "Saint Menas the Great Martyr",
+        "title": "Saint Menas the Great Martyr of Egypt",
+        "feast_type": "Great Martyr",
+        "notes": "Egyptian soldier who declared his faith before the Roman army and was martyred under Emperor Diocletian circa 296 AD. One of the most venerated saints in Coptic Christianity, with a major pilgrimage site at Abu Mena near Alexandria (UNESCO World Heritage Site). Celebrated throughout the Coptic world as a patron of travelers. Feast: Hator 15 = Julian November 12.",
+        "hagiography_url": "https://www.copticchurch.net/synaxarium/",
+        "canonized_by": null,
+        "canonization_scope": "oriental",
+        "year_canonized": null
+      }
+    ],
+    "notes": "Coptic Hator 15 = Julian November 12."
+  }
+]
