@@ -21,7 +21,6 @@ import sys
 import time
 import urllib.request
 import urllib.parse
-from datetime import datetime
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -85,7 +84,7 @@ class _LinkExtractor(HTMLParser):
                     self.links.append(full)
 
 
-class _H1Extractor(HTMLParser):
+class _FeastHeaderExtractor(HTMLParser):
     """Extract feast name + date from armenianchurch.org feast pages.
 
     Structure:
@@ -97,7 +96,7 @@ class _H1Extractor(HTMLParser):
         super().__init__()
         self._in_feast_h2 = False
         self._in_title_tag = False
-        self.h1_text = ""     # reused as main heading text
+        self.header_text = ""
         self.title_text = ""
         self.description = ""
         self._in_p = False
@@ -115,7 +114,7 @@ class _H1Extractor(HTMLParser):
             self._in_p = True
         elif tag == "br" and self._in_feast_h2:
             # <br> separates feast name from date — use newline as separator
-            self.h1_text += "\n"
+            self.header_text += "\n"
 
     def handle_endtag(self, tag):
         if tag == "h2" and self._in_feast_h2:
@@ -129,7 +128,7 @@ class _H1Extractor(HTMLParser):
 
     def handle_data(self, data):
         if self._in_feast_h2:
-            self.h1_text += data
+            self.header_text += data
         elif self._in_title_tag:
             self.title_text += data
         elif self._in_p and self._para_count < 1:
@@ -184,10 +183,10 @@ def get_feast_links() -> list[str]:
 
 def parse_feast_page(url: str) -> dict | None:
     html = _fetch(url)
-    parser = _H1Extractor()
+    parser = _FeastHeaderExtractor()
     parser.feed(html)
 
-    h1 = parser.h1_text.strip()
+    h1 = parser.header_text.strip()
     title_tag = parser.title_text.strip()
     description = parser.description.strip()
 

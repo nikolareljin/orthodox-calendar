@@ -48,7 +48,7 @@ _MONTH_MAP = {
 }
 
 _FEAST_PARAMS = re.compile(
-    r"\|\s*(?:feast_day|feast_date|feast|venerated_date|death_date_and_age|death_date)\s*=\s*([^\n|}{]+)",
+    r"\|\s*(?:feast_day|feast_date|feast|venerated_date)\s*=\s*([^\n|}{]+)",
     re.IGNORECASE,
 )
 _DATE_RE = re.compile(
@@ -132,27 +132,57 @@ def _parse_feast_date(wikitext: str) -> str | None:
     return None
 
 
+def _infobox_text(wikitext: str) -> str:
+    """Extract text from the first {{Infobox ...}} block by counting brace depth."""
+    start = wikitext.find("{{Infobox")
+    if start == -1:
+        start = wikitext.find("{{infobox")
+    if start == -1:
+        return wikitext[:3000]
+    depth = 0
+    i = start
+    while i < len(wikitext):
+        if wikitext[i:i+2] == "{{":
+            depth += 1
+            i += 2
+        elif wikitext[i:i+2] == "}}":
+            depth -= 1
+            i += 2
+            if depth == 0:
+                return wikitext[start:i]
+        else:
+            i += 1
+    return wikitext[start:start + 3000]
+
+
 def _feast_type_from_wikitext(wikitext: str) -> str:
-    # Check infobox type and categories
+    infobox = _infobox_text(wikitext)
     for pattern, ft in _FEAST_TYPE_RE:
-        if pattern.search(wikitext[:3000]):
+        if pattern.search(infobox):
             return ft
     return "Saint"
 
 
 def _short_description(wikitext: str) -> str | None:
-    """Extract first sentence of article as a short description."""
-    # Remove templates and wikilinks for cleaner text
-    text = re.sub(r"\{\{[^}]+\}\}", "", wikitext)
+    """Extract first sentence of article lede as a short description."""
+    # Strip <ref>...</ref> blocks (including self-closing <ref ... />)
+    text = re.sub(r"<ref[^>]*/\s*>", "", wikitext)
+    text = re.sub(r"<ref[^>]*>.*?</ref>", "", text, flags=re.DOTALL)
+    # Strip remaining HTML tags
+    text = re.sub(r"<[^>]+>", "", text)
+    # Strip external links [http://... text] → text
+    text = re.sub(r"\[https?://[^\s\]]+\s+([^\]]+)\]", r"\1", text)
+    text = re.sub(r"\[https?://[^\s\]]+\]", "", text)
+    # Strip templates and wikilinks
+    text = re.sub(r"\{\{[^}]+\}\}", "", text)
     text = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]|]+)\]\]", r"\1", text)
     text = re.sub(r"'{2,}", "", text)
     text = re.sub(r"==+[^=]+=+", "", text)
-    # Find first substantive paragraph (not infobox)
+    # Find first substantive lede paragraph (skip infobox lines)
     for line in text.split("\n"):
         line = line.strip()
         if line and not line.startswith("|") and not line.startswith("!") and \
                 not line.startswith("{") and not line.startswith("=") and len(line) > 60:
-            # Get first sentence
             sentence = re.split(r"\.\s", line)[0].strip()
             if len(sentence) > 30:
                 return sentence[:250]

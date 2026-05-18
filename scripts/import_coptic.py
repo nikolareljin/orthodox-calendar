@@ -76,7 +76,7 @@ def _feast_type_from_name(name: str) -> str:
         return "Hierarch"
     if re.search(r"\bmonk\b|\bhermit\b|\bascet\b|\bvenerable\b", lower):
         return "Venerable"
-    if re.search(r"\bapostle\b|\bevangellist\b", lower):
+    if re.search(r"\bapostle\b|\bevangelist\b", lower):
         return "Apostle"
     return "Coptic Saint"
 

@@ -151,7 +151,9 @@ def main() -> None:
             titles = [m["title"] for m in data.get("query", {}).get("categorymembers", [])]
             print(f"  Found {len(titles)} pages", file=sys.stderr)
 
-            # Check which are already in curated list
+            # Dedup against curated list by wiki slug (5th tuple element) to avoid
+            # title/display-name mismatches (e.g. "Tamar I" vs "Queen Tamar of Georgia")
+            curated_slugs = {slug.lower() for _, _, _, _, slug, _ in _CURATED if slug}
             curated_names = {name.lower() for _, _, _, name, _, _ in _CURATED}
 
             _MONTH_MAP = {
@@ -170,7 +172,8 @@ def main() -> None:
             )
 
             for title in titles:
-                if title.lower() in curated_names:
+                slug = title.replace(" ", "_")
+                if title.lower() in curated_names or slug.lower() in curated_slugs:
                     continue
                 time.sleep(0.5)
                 wikitext = _fetch_wiki_feast(title, delay=0) or ""
@@ -191,7 +194,6 @@ def main() -> None:
                             md = f"{mo:02d}-{d:02d}"
                             break
                 if md:
-                    slug = title.replace(" ", "_")
                     saint = {
                         "name": title,
                         "title": title,

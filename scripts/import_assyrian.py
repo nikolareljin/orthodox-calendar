@@ -196,7 +196,7 @@ def main() -> None:
                 "hagiography_url": None,
                 "notes": None,
                 "canonized_by": None,
-                "canonization_scope": "oriental",
+                "canonization_scope": "church-of-the-east",
                 "year_canonized": None,
             })
         if saints:

@@ -49,12 +49,20 @@ const ETH_MONTH_NAMES = [
   "Ginbot", "Sene", "Hamle", "Nehase", "Pagume",
 ];
 
+function ethNewYearDay(gYear) {
+  // Ethiopian New Year (Meskerem 1) falls on Sep 12 when the preceding Ethiopian
+  // year was a leap year. Ethiopian year Y is a leap year when Y % 4 === 3.
+  // The Ethiopian year starting in Gregorian year G is approximately G - 8,
+  // so Sep 12 occurs when (G - 8) % 4 === 3, i.e. G % 4 === 3.
+  return gYear % 4 === 3 ? 12 : 11;
+}
+
 function getEthiopianDate(gYear, gMonth, gDay) {
-  // Ethiopian New Year = Meskerem 1 = Sep 11 (Gregorian, simplified)
-  const isAfterNewYear = gMonth > 9 || (gMonth === 9 && gDay >= 11);
+  const nyDay = ethNewYearDay(gYear);
+  const isAfterNewYear = gMonth > 9 || (gMonth === 9 && gDay >= nyDay);
   const ethYear = isAfterNewYear ? gYear - 7 : gYear - 8;
   const nyGYear = isAfterNewYear ? gYear : gYear - 1;
-  const nyDate = makeDate(nyGYear, 8, 11); // Sep 11
+  const nyDate = makeDate(nyGYear, 8, ethNewYearDay(nyGYear));
   const currDate = makeDate(gYear, gMonth - 1, gDay);
   const daysSinceNY = Math.round((currDate - nyDate) / 86400000);
   const ethMonthIdx = Math.min(12, Math.floor(daysSinceNY / 30));
@@ -75,7 +83,10 @@ function getStoredTheme() {
 function getStoredTradition() {
   try {
     const stored = localStorage.getItem("oc-tradition");
-    if (stored && Object.hasOwn(TRADITIONS, stored)) return stored;
+    if (!stored) return "serbian";
+    // Migrate renamed key: "oriental" → "coptic"
+    const migrated = stored === "oriental" ? "coptic" : stored;
+    if (Object.hasOwn(TRADITIONS, migrated)) return migrated;
   } catch {
     // ignore storage errors
   }
@@ -137,6 +148,7 @@ const SCOPE_LABEL = {
   "pan-orthodox": "Pan-Orthodox",
   local: "Local",
   oriental: "Oriental",
+  "church-of-the-east": "Church of the East",
 };
 
 // ── SaintCard ───────────────────────────────────────────────────────────────

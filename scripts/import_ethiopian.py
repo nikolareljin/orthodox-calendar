@@ -63,7 +63,6 @@ _ETH_DATE_RE = re.compile(
 
 def eth_to_gregorian_md(month_name: str, day: int) -> str:
     """Convert Ethiopian calendar month + day to Gregorian MM-DD."""
-    key = month_name.capitalize()
     for k, (m, d) in _ETH_MONTHS.items():
         if k.lower() == month_name.lower():
             # Use a non-leap reference year for month arithmetic
@@ -177,9 +176,9 @@ _CURATED: list[tuple] = [
      "Annual feast of St. Michael celebrated in Hidar (November)."),
 
     # ── St. Gabriel the Archangel ─────────────────────────────────────────────
-    ("Hidar", 26, "Feast", "Feast of St. Gabriel the Archangel (Hidar)", "St. Gabriel",
+    ("Hidar", 22, "Feast", "Feast of St. Gabriel the Archangel (Hidar)", "St. Gabriel",
      "St. Gabriel is commemorated on the 22nd of each Ethiopian month. "
-     "The Hidar feast marks his primary annual celebration."),
+     "The Hidar 22 feast is his principal annual celebration."),
 
     # ── The Nine Saints (Tsatew Qiddusan) ────────────────────────────────────
     ("Hamle", 17, "Saints", "The Nine Saints (Tsatew Qiddusan), Missionaries to Ethiopia", "The Nine Saints",

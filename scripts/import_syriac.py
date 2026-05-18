@@ -150,7 +150,7 @@ _CURATED: list[tuple] = [
      "St. Stephen, the first Christian martyr (Protomartyr), was stoned to death in Jerusalem "
      "c. 36 AD. His feast is celebrated in the Syriac tradition on December 27 Julian "
      "(the day after Christmas)."),
-    (1, 17, "Martyr", "Saint Anthony the Great, Father of Monks",
+    (1, 17, "Venerable", "Saint Anthony the Great, Father of Monks",
      "St. Anthony the Great", "Anthony_the_Great",
      "Anthony the Great (c. 251–356) is venerated as the Father of Christian monasticism. "
      "His ascetic life in the Egyptian desert inspired the Syriac monastic tradition."),

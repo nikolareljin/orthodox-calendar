@@ -20,8 +20,8 @@ import argparse
 import json
 import re
 import sys
+import urllib.parse
 import urllib.request
-from html.parser import HTMLParser
 from pathlib import Path
 
 WIKI_URL = "https://en.wikipedia.org/wiki/List_of_saints_of_the_Serbian_Orthodox_Church"
@@ -172,7 +172,7 @@ def scrape_wikipedia() -> list[dict]:
             "notes": notes_text[:300] if notes_text else None,
             "year_died": int(died_year.group()) if died_year else None,
             "year_canonized": _year_canonized(notes_text),
-            "wiki_url": f"https://en.wikipedia.org/wiki/{name.replace(' ', '_')}",
+            "wiki_url": f"https://en.wikipedia.org/wiki/{urllib.parse.quote(name.replace(' ', '_'))}",
         })
         print(f"  {month_day}: {name[:60]}", file=sys.stderr)
 
