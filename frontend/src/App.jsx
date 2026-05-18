@@ -43,35 +43,54 @@ function formatGregorianDate(year, month, day) {
   return `${dow}, ${MONTH_NAMES[month - 1]} ${day}, ${yearStr}`;
 }
 
+// Ge'ez (Amharic) script month names for the Ethiopian calendar
 const ETH_MONTH_NAMES = [
-  "Meskerem", "Tikemt", "Hidar", "Tahsas",
-  "Ter", "Yekatit", "Megabit", "Miazia",
-  "Ginbot", "Sene", "Hamle", "Nehase", "Pagume",
+  "መስከረም", "ጥቅምት", "ኅዳር", "ታኅሣሥ",
+  "ጥር", "የካቲት", "መጋቢት", "ሚያዝያ",
+  "ግንቦት", "ሰኔ", "ሐምሌ", "ነሐሴ", "ጳጉሜ",
+];
+
+// Coptic (Bohairic) script month names for the Coptic calendar
+const COPTIC_MONTH_NAMES = [
+  "ⲑⲱⲟⲩⲧ", "ⲡⲁⲱⲡⲉ", "Ϩⲁⲑⲱⲣ", "ⲕⲓⲁϩⲕ",
+  "ⲧⲱⲃⲉ", "ⲁⲙϣⲓⲣ", "ⲡⲁⲣⲉⲙϩⲁⲧ", "ⲡⲁⲣⲙⲟⲩⲧⲉ",
+  "ⲡⲁϣⲟⲛⲥ", "ⲡⲁⲱⲛⲉ", "ⲉⲡⲏⲡ", "ⲙⲉⲥⲱⲣⲏ", "ⲛⲁⲥⲓⲉ",
 ];
 
 function isGregorianLeap(y) {
   return y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
 }
 
-function ethNewYearDay(gYear) {
-  // Meskerem 1 falls on Sep 12 when gYear+1 is a Gregorian leap year, Sep 11 otherwise.
+// Both Coptic and Ethiopian share the same new year date (Sep 11 or 12).
+function alexandrianNewYearDay(gYear) {
   return isGregorianLeap(gYear + 1) ? 12 : 11;
 }
 
-function getEthiopianDate(gYear, gMonth, gDay) {
-  const nyDay = ethNewYearDay(gYear);
+// Shared algorithm for Coptic/Ethiopian (identical 13-month solar structure).
+function _alexandrianDate(gYear, gMonth, gDay, yearOffset, monthNames, shortMonthLeapMod) {
+  const nyDay = alexandrianNewYearDay(gYear);
   const isAfterNewYear = gMonth > 9 || (gMonth === 9 && gDay >= nyDay);
-  const ethYear = isAfterNewYear ? gYear - 7 : gYear - 8;
+  const tradYear = isAfterNewYear ? gYear - yearOffset : gYear - yearOffset - 1;
   const nyGYear = isAfterNewYear ? gYear : gYear - 1;
-  const nyDate = Date.UTC(nyGYear, 8, ethNewYearDay(nyGYear));
+  const nyDate = Date.UTC(nyGYear, 8, alexandrianNewYearDay(nyGYear));
   const currDate = Date.UTC(gYear, gMonth - 1, gDay);
   const daysSinceNY = Math.round((currDate - nyDate) / 86400000);
-  const ethMonthIdx = Math.min(12, Math.floor(daysSinceNY / 30));
-  const ethDayRaw = (daysSinceNY % 30) + 1;
-  // Pagume (month 13) has only 5 days normally, 6 in an Ethiopian leap year (ethYear % 4 === 3)
-  const maxPagumeDay = ethYear % 4 === 3 ? 6 : 5;
-  const ethDay = ethMonthIdx === 12 ? Math.min(ethDayRaw, maxPagumeDay) : ethDayRaw;
-  return { year: ethYear, monthName: ETH_MONTH_NAMES[ethMonthIdx], day: ethDay };
+  const monthIdx = Math.min(12, Math.floor(daysSinceNY / 30));
+  const dayRaw = (daysSinceNY % 30) + 1;
+  // 13th month has 5 days normally, 6 in leap years (year % 4 === shortMonthLeapMod)
+  const maxShortDay = tradYear % 4 === shortMonthLeapMod ? 6 : 5;
+  const tradDay = monthIdx === 12 ? Math.min(dayRaw, maxShortDay) : dayRaw;
+  return { year: tradYear, monthName: monthNames[monthIdx], day: tradDay };
+}
+
+function getEthiopianDate(gYear, gMonth, gDay) {
+  // Ethiopian era offset: year is Gregorian − 8 (before new year) or − 7 (after)
+  return _alexandrianDate(gYear, gMonth, gDay, 7, ETH_MONTH_NAMES, 3);
+}
+
+function getCopticDate(gYear, gMonth, gDay) {
+  // Coptic Anno Martyrum: year is Gregorian − 284 (before Nayrouz) or − 283 (after)
+  return _alexandrianDate(gYear, gMonth, gDay, 283, COPTIC_MONTH_NAMES, 3);
 }
 
 function clampYear(y) { return Math.max(MIN_YEAR, Math.min(MAX_YEAR, y)); }
@@ -347,7 +366,15 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
           const eth = getEthiopianDate(year, month, day);
           return (
             <p className="cal-date-note eth-date-note">
-              {eth.monthName} {eth.day}, {eth.year} E.C. — Ethiopian Calendar
+              {eth.monthName} {eth.day}, {eth.year} ዓ.ም. — Ethiopian Calendar
+            </p>
+          );
+        })()}
+        {tradition === "coptic" && (() => {
+          const copt = getCopticDate(year, month, day);
+          return (
+            <p className="cal-date-note eth-date-note">
+              {copt.monthName} {copt.day}, {copt.year} Ⲁ.Ⲙ. — Coptic Calendar
             </p>
           );
         })()}
