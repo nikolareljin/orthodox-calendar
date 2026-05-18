@@ -196,7 +196,8 @@ def _is_substantive(en_raw: str) -> bool:
 # ──────────────────────────────────────────────────────────
 
 _FEAST_TYPE_RULES: list[tuple[re.Pattern, str]] = [
-    (re.compile(r"\b(?:new martyr|hieromartyr)\b", re.I), "Hieromartyr"),
+    (re.compile(r"\bnew martyr\b", re.I), "New Martyr"),
+    (re.compile(r"\bhieromartyr\b", re.I), "Hieromartyr"),
     (re.compile(r"\bmartyr\b", re.I), "Martyr"),
     (re.compile(r"\bvenerable|hermit|abbot|abbess\b", re.I), "Venerable"),
     (re.compile(r"\bconfessor\b", re.I), "Confessor"),
