@@ -338,7 +338,7 @@ _MOVABLE_FEAST_KEYWORDS: frozenset[str] = frozenset({
     "sunday of the paralytic",
     # "samaritan woman" is intentionally absent: it would also match the fixed feast
     # "Martyr Photini the Samaritan Woman" (Julian March 20).  The movable feast
-    # "Sunday of the Samaritan Woman" is caught via _MOVABLE_FEAST_EXACT_TITLES instead.
+    # "Sunday of the Samaritan Woman" is matched by this narrower keyword instead.
     "sunday of the samaritan",
     "sunday of the blind",
     "midfeast of pentecost",
