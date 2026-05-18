@@ -11,7 +11,7 @@ from ..calendar_logic import (
     effective_calendar,
     is_movable_feast_title,
     julian_pascha_as_gregorian,
-    PASCHA_OFFSETS,
+    movable_feast_for_date,
     resolve_tradition,
 )
 from ..config import HAGIOGRAPHY_SOURCE
@@ -27,23 +27,49 @@ _OCA_URL_DATE_RE = _re.compile(
 
 
 def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
-    """Pre-index Pascha-relative delta → (url_id_slug, notes) from 2024 OCA data.
+    """Pre-index Pascha-relative delta → (url_id_slug, notes) from OCA scraped data.
 
-    The OCA dataset was scraped in 2024, so each movable feast entry lives at
-    its 2024 Gregorian key.  Notes are liturgically timeless and are preserved
-    as-is.  URLs have the date portion stripped (only the stable id-slug tail
-    is kept) so they can be reconstructed with the correct date at injection.
+    Detects the dataset's scrape year automatically by finding the Pascha entry
+    and matching its month_day against Julian Pascha dates for years 2020–2040.
+    This avoids hardcoding a year that would break if the dataset is re-scraped.
+    Notes are liturgically timeless and preserved as-is.  URL date portions are
+    stripped (only the stable id-slug tail is kept) and reconstructed at serve time.
     """
     from datetime import date as _d
-    pascha_2024 = _d(2024, 5, 5)
+
+    # Locate the Pascha entry to determine the scrape year
+    pascha_month_day: str | None = None
+    for entry in _INDEX.get("oca", []):
+        for s in entry.saints:
+            tl = (s.title or "").lower()
+            if ("pascha" in tl) and is_movable_feast_title(s.title or ""):
+                pascha_month_day = entry.month_day
+                break
+        if pascha_month_day:
+            break
+
+    if not pascha_month_day:
+        return {}
+
+    mm, dd = int(pascha_month_day.split("-")[0]), int(pascha_month_day.split("-")[1])
+    scrape_pascha: _d | None = None
+    for year in range(2020, 2041):
+        candidate = julian_pascha_as_gregorian(year)
+        if candidate.month == mm and candidate.day == dd:
+            scrape_pascha = candidate
+            break
+
+    if not scrape_pascha:
+        return {}
+
     meta: dict[int, tuple[str | None, str | None]] = {}
     for entry in _INDEX.get("oca", []):
-        mm, dd = entry.month_day.split("-")
+        em, ed = entry.month_day.split("-")
         try:
-            key_date = _d(2024, int(mm), int(dd))
+            key_date = _d(scrape_pascha.year, int(em), int(ed))
         except ValueError:
             continue
-        delta = (key_date - pascha_2024).days
+        delta = (key_date - scrape_pascha).days
         for s in entry.saints:
             if is_movable_feast_title(s.title or ""):
                 url = s.hagiography_url
@@ -268,11 +294,10 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
             base_entries = [e for e in base_entries if e.saints]
 
             pascha = julian_pascha_as_gregorian(day.year)
-            delta = (day - pascha).days
-            feast = PASCHA_OFFSETS.get(delta)
+            feast = movable_feast_for_date(day, pascha)
             if feast:
                 feast_key, feast_title, feast_type = feast
-                id_slug, notes = _MOVABLE_META.get(delta, (None, None))
+                id_slug, notes = _MOVABLE_META.get((day - pascha).days, (None, None))
                 movable_entry = CalendarEntry(
                     month_day=month_day,
                     tradition=base_key,
@@ -325,11 +350,10 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
                 for e in base_day
             ]
             base_day = [e for e in base_day if e.saints]
-            delta = (d - pascha_of_year).days
-            feast = PASCHA_OFFSETS.get(delta)
+            feast = movable_feast_for_date(d, pascha_of_year)
             if feast:
                 feast_key, feast_title, feast_type = feast
-                id_slug, notes = _MOVABLE_META.get(delta, (None, None))
+                id_slug, notes = _MOVABLE_META.get((d - pascha_of_year).days, (None, None))
                 base_day = [
                     CalendarEntry(
                         month_day=month_day,

@@ -297,9 +297,9 @@ PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
 }
 
 # Title substrings (lower-cased) that identify a movable feast saint in the
-# static OCA dataset.  Those entries were scraped at 2024 Gregorian dates and
-# are wrong for every other year; they are filtered out and re-injected by
-# movable_feast_for_date() instead.
+# static OCA dataset.  Those entries were scraped at the Gregorian dates of
+# the scrape year and are wrong for every other year; they are filtered out
+# and re-injected via movable_feast_for_date() in services/saints.py.
 _MOVABLE_FEAST_KEYWORDS: frozenset[str] = frozenset({
     # Pre-Triodion
     "sunday of zacchaeus",
@@ -369,13 +369,17 @@ def is_movable_feast_title(title: str) -> bool:
     return tl in _MOVABLE_FEAST_EXACT_TITLES or any(kw in tl for kw in _MOVABLE_FEAST_KEYWORDS)
 
 
-def movable_feast_for_date(day: _date) -> Optional[tuple[str, str, str]]:
+def movable_feast_for_date(
+    day: _date, pascha: "_date | None" = None
+) -> Optional[tuple[str, str, str]]:
     """Return (key, title, feast_type) if *day* (Gregorian) is a movable feast, else None.
 
     Uses the Julian computus; applies to all Eastern Orthodox traditions
     (Julian and Revised Julian alike) since both use the same Pascha calculation.
+    Pass a precomputed *pascha* date to avoid recomputing it.
     """
-    pascha = julian_pascha_as_gregorian(day.year)
+    if pascha is None:
+        pascha = julian_pascha_as_gregorian(day.year)
     delta = (day - pascha).days
     return PASCHA_OFFSETS.get(delta)
 
