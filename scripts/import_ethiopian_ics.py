@@ -131,6 +131,8 @@ def parse_ics(content: str) -> list[dict]:
     Extract unique saint entries from ICS VEVENTs.
     Returns list of {geez_day, name, raw_summary} dicts, deduped by geez_day.
     """
+    # Unfold RFC 5545 line continuations (CRLF + space/tab) before parsing.
+    content = re.sub(r"\r\n[ \t]", "", content)
     vevent_re = re.compile(r"BEGIN:VEVENT(.*?)END:VEVENT", re.DOTALL)
     summary_re = re.compile(r"SUMMARY:(.+)", re.MULTILINE)
     day_re = re.compile(r"^(\d+)(?:st|nd|rd|th)?[\.\:]")
