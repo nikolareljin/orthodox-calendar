@@ -22,41 +22,34 @@ _INDEX = build_index()
 
 
 _OCA_URL_DATE_RE = _re.compile(
-    r"(https://www\.oca\.org/saints/lives/)\d{4}/(\d{2}/\d{2})/(.*)"
+    r"(https://www\.oca\.org/saints/lives/)(\d{4})/(\d{2}/\d{2})/(.*)"
 )
 
 
 def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
     """Pre-index Pascha-relative delta → (url_id_slug, notes) from OCA scraped data.
 
-    Detects the dataset's scrape year automatically by finding the Pascha entry
-    and matching its month_day against Julian Pascha dates for years 2020–2040.
-    This avoids hardcoding a year that would break if the dataset is re-scraped.
+    Detects the dataset's scrape year by parsing the year directly from the OCA
+    URL of the Pascha entry (group 2 of _OCA_URL_DATE_RE).  This is simpler and
+    more reliable than matching month_day against a range of computed years.
     Notes are liturgically timeless and preserved as-is.  URL date portions are
     stripped (only the stable id-slug tail is kept) and reconstructed at serve time.
     """
     from datetime import date as _d
 
-    # Locate the Pascha entry to determine the scrape year
-    pascha_month_day: str | None = None
+    # Find the Pascha entry and extract the scrape year from its OCA URL
+    scrape_pascha: _d | None = None
     for entry in _INDEX.get("oca", []):
         for s in entry.saints:
             tl = (s.title or "").lower()
-            if ("pascha" in tl) and is_movable_feast_title(s.title or ""):
-                pascha_month_day = entry.month_day
+            if "pascha" in tl and is_movable_feast_title(s.title or ""):
+                url = s.hagiography_url or ""
+                m = _OCA_URL_DATE_RE.match(url)
+                if m:
+                    scrape_year = int(m.group(2))
+                    scrape_pascha = julian_pascha_as_gregorian(scrape_year)
                 break
-        if pascha_month_day:
-            break
-
-    if not pascha_month_day:
-        return {}
-
-    mm, dd = int(pascha_month_day.split("-")[0]), int(pascha_month_day.split("-")[1])
-    scrape_pascha: _d | None = None
-    for year in range(2020, 2041):
-        candidate = julian_pascha_as_gregorian(year)
-        if candidate.month == mm and candidate.day == dd:
-            scrape_pascha = candidate
+        if scrape_pascha:
             break
 
     if not scrape_pascha:
@@ -76,7 +69,7 @@ def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
                 id_slug: str | None = None
                 if url:
                     m = _OCA_URL_DATE_RE.match(url)
-                    id_slug = m.group(3) if m else None
+                    id_slug = m.group(4) if m else None
                 meta[delta] = (id_slug, s.notes)
                 break
     return meta
@@ -120,7 +113,7 @@ def _build_oca_url(url: str | None, calendar_date: str | None) -> str | None:
         cal_year, cal_month, cal_day = calendar_date.split("-")
         return (
             f"https://www.oca.org/saints/lives/"
-            f"{cal_year}/{int(cal_month):02d}/{int(cal_day):02d}/{m.group(3)}"
+            f"{cal_year}/{int(cal_month):02d}/{int(cal_day):02d}/{m.group(4)}"
         )
     except (ValueError, AttributeError):
         return url

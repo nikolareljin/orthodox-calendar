@@ -11,6 +11,12 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [0.4.1] - 2026-05-18
 
+### Added
+- **`GET /api/v1/config`** — returns active runtime configuration (currently `hagiography_source`).
+- **`HAGIOGRAPHY_SOURCE` env var** — controls which hagiography URLs are served: `"oca"` (default,
+  OCA date-keyed URLs rebuilt dynamically from the tradition's calendar date) or `"goarch"` (GOARCH
+  chapel URLs when available, falling back to OCA).  An invalid value raises a `ValueError` at startup.
+
 ### Fixed
 - **Cardinal bug: Pascha and all Julian-computus movable feasts now computed dynamically per year.**
   The OCA dataset (scraped in 2024) stored Pascha and related feasts at their 2024 Gregorian dates

@@ -280,6 +280,7 @@ PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
      5:  ("bright_friday",          "Bright Friday — Life-Giving Spring of the Theotokos",        "Great Feast"),
      6:  ("bright_saturday",        "Bright Saturday",                                            "Great Feast"),
      7:  ("thomas_sunday",          "Antipascha: Saint Thomas Sunday",                            "Great Feast"),
+     9:  ("day_of_rejoicing",       "Day of Rejoicing (Radonitsa)",                               "Minor Feast"),
     # Post-Paschal Sundays
     14:  ("myrrhbearers_sunday",    "Sunday of the Holy Myrrhbearing Women",                      "Great Feast"),
     21:  ("paralytic_sunday",       "Sunday of the Paralytic",                                     "Great Feast"),
@@ -325,7 +326,8 @@ _MOVABLE_FEAST_KEYWORDS: frozenset[str] = frozenset({
     # so both forms are listed to catch either phrasing.
     "pascha: the resurrection",
     "holy pascha",
-    # Bright Week
+    # Bright Week and Radonitsa
+    "day of rejoicing",
     "bright monday",
     "bright tuesday",
     "bright wednesday",
