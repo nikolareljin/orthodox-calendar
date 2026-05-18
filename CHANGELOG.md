@@ -15,7 +15,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Armenian bilingual calendar** — `import_armenian_ics.py` ingests both the English and Armenian-script (Հայ) ICS files from armenianorthodoxtheology.com; 144 feast entries with `name_hy` field storing the Armenian name alongside the English title. 87 entries enriched with Wikipedia descriptions and/or hagiography URLs from armenianchurch.ge.
 - **`enrich_armenian_from_ge.py`** — enrichment script matching Armenian ICS feasts against armenianchurch.ge feast pages (Jaccard similarity, month-scoped) to add hagiography URLs and article descriptions.
 - **`import_armenian_wiki.py`** — importer from Wikipedia's Calendar of saints (Armenian Apostolic Church) with two-pass Wikipedia enrichment (wikilink batch + search fallback).
-- **`import_ethiopian_ics.py`** — imports EOTC saints from the public Google Calendar ICS feed (30 monthly Ge'ez saints mapped to Gregorian via Meskerem anchor Sep 11).
+- **`import_ethiopian_ics.py`** — imports EOTC saints from the public Google Calendar ICS feed (30 monthly Ge'ez saints mapped to Gregorian via a Meskerem anchor on Sep 11 or Sep 12, depending on the next Gregorian leap year).
 - **`import_ethiopian_wiki.py`** — comprehensive Ethiopian saints from Wikipedia: Calendar of saints (Orthodox Tewahedo) monthly tables + Category:Ethiopian saints infobox feast dates; 85 entries, 127 saints, 79 enriched.
 - **Ethiopian calendar display** — when the Ethiopian tradition is selected, the day-detail header shows the Ge'ez calendar date (e.g. "Ginbot 9, 2018 E.C. — Ethiopian Calendar") computed via `getEthiopianDate()`.
 - **Armenian script in saint cards** — `name_hy` field rendered as an italic secondary line below the English name in every saint card.
