@@ -151,27 +151,27 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         cal = effective_calendar(day, tradition)
 
         base_key = tradition.data_key or canonical
-        day_entries = [e for e in _INDEX.get(base_key, []) if e.month_day == month_day]
-
-        # Also include tradition-specific overlay entries
-        if tradition.data_key:
-            day_entries.extend(
-                e for e in _INDEX.get(canonical, []) if e.month_day == month_day
-            )
+        base_entries = [e for e in _INDEX.get(base_key, []) if e.month_day == month_day]
+        # Tradition-specific overlays are intentional and must never be filtered.
+        overlay_entries = (
+            [e for e in _INDEX.get(canonical, []) if e.month_day == month_day]
+            if tradition.data_key
+            else []
+        )
 
         # Julian and Revised-Julian traditions share the Byzantine computus.
-        # The OCA dataset stores movable feasts (Pascha, Palm Sunday, …) at
-        # their 2024 Gregorian dates, which creates wrong matches in every
-        # other year.  Strip those static saints and inject the dynamically
-        # computed feast for the actual requested year instead.
+        # The OCA base dataset stores movable feasts at their 2024 Gregorian
+        # dates — wrong for every other year.  Strip those entries from the
+        # base data only, then inject the correctly computed feast for the
+        # requested year.  Tradition overlays are left untouched.
         if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED):
-            day_entries = [
+            base_entries = [
                 e.model_copy(
                     update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
                 )
-                for e in day_entries
+                for e in base_entries
             ]
-            day_entries = [e for e in day_entries if e.saints]
+            base_entries = [e for e in base_entries if e.saints]
 
             feast = movable_feast_for_date(day)
             if feast:
@@ -182,7 +182,9 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
                     calendar=cal,
                     saints=[Saint(name=feast_key, title=feast_title, feast_type=feast_type)],
                 )
-                day_entries = [movable_entry] + day_entries
+                base_entries = [movable_entry] + base_entries
+
+        day_entries = base_entries + overlay_entries
 
         if not day_entries:
             continue
@@ -208,10 +210,32 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
     for day_num in range(1, _cal.monthrange(year, month)[1] + 1):
         d = date(year, month, day_num)
         month_day, calendar_date = convert_to_tradition_month_day(d, tradition)
+        cal = effective_calendar(d, tradition)
 
-        day_entries = base_by_md.get(month_day, [])
-        if overlay_by_md:
-            day_entries = day_entries + overlay_by_md.get(month_day, [])
+        base_day = list(base_by_md.get(month_day, []))
+        overlay_day = list(overlay_by_md.get(month_day, [])) if overlay_by_md else []
+
+        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED):
+            base_day = [
+                e.model_copy(
+                    update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
+                )
+                for e in base_day
+            ]
+            base_day = [e for e in base_day if e.saints]
+            feast = movable_feast_for_date(d)
+            if feast:
+                feast_key, feast_title, feast_type = feast
+                base_day = [
+                    CalendarEntry(
+                        month_day=month_day,
+                        tradition=base_key,
+                        calendar=cal,
+                        saints=[Saint(name=feast_key, title=feast_title, feast_type=feast_type)],
+                    )
+                ] + base_day
+
+        day_entries = base_day + overlay_day
         if not day_entries:
             continue
 

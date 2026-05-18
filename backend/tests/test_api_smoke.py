@@ -78,7 +78,7 @@ def test_pascha_shown_on_correct_gregorian_date_not_today() -> None:
     "05-05" (2024 Gregorian scrape date). For Julian traditions this matched
     Gregorian May 18 (Julian May 5 → key "05-05"), showing Pascha on the wrong day.
     """
-    # Pascha must appear on April 12 (Julian + Revised Julian + Gregorian same result)
+    # Pascha must appear on April 12 for both Julian and Revised-Julian traditions
     for tradition in ("serbian", "georgian", "greek"):
         resp = client.get(f"/api/v1/saints?day=2026-04-12&traditions={tradition}")
         assert resp.status_code == 200

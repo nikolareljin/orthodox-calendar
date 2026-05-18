@@ -240,20 +240,58 @@ def _julian_to_gregorian(year: int, month: int, day: int) -> _date:
 # Pascha-relative day offsets → (canonical key, display title, feast_type).
 # These cover the major Byzantine movable feasts computed from the Julian computus.
 _PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
-    -48: ("clean_monday",       "Beginning of Great Lent (Clean Monday)",                     "Great Feast"),
-    -8:  ("lazarus_saturday",   "The Raising of Lazarus (Lazarus Saturday)",                   "Great Feast"),
-    -7:  ("palm_sunday",        "Entry of Our Lord into Jerusalem (Palm Sunday)",              "Great Feast"),
-    -3:  ("holy_thursday",      "Great and Holy Thursday",                                     "Great Feast"),
-    -2:  ("holy_friday",        "Great and Holy Friday",                                       "Great Feast"),
-    -1:  ("holy_saturday",      "Great and Holy Saturday",                                     "Great Feast"),
-     0:  ("pascha",             "HOLY PASCHA: The Resurrection of Our Lord",                   "Great Feast"),
-     1:  ("bright_monday",      "Bright Monday",                                               "Great Feast"),
-     7:  ("thomas_sunday",      "Antipascha: Saint Thomas Sunday",                             "Great Feast"),
-    24:  ("mid_pentecost",      "Midfeast of Pentecost",                                       "Great Feast"),
-    39:  ("ascension",          "The Ascension of our Lord, God and Savior Jesus Christ",      "Great Feast"),
-    49:  ("pentecost",          "Holy Pentecost (Trinity Sunday)",                             "Great Feast"),
-    56:  ("all_saints",         "Synaxis of All Saints",                                       "Great Feast"),
-    57:  ("apostles_fast",      "Beginning of the Apostles' Fast",                             "Minor Feast"),
+    # Pre-Triodion Sunday (11 weeks before Pascha)
+    -77: ("zacchaeus_sunday",       "Sunday of Zacchaeus",                                        "Great Feast"),
+    # Pre-Lent Triodion Sundays and Soul Saturdays
+    -70: ("publican_sunday",        "Sunday of the Publican and the Pharisee",                    "Great Feast"),
+    -63: ("prodigal_sunday",        "Sunday of the Prodigal Son",                                 "Great Feast"),
+    -57: ("meatfare_saturday",      "Soul Saturday of Meatfare Week",                             "Great Feast"),
+    -56: ("meatfare_sunday",        "Sunday of Meatfare of the Last Judgment",                    "Great Feast"),
+    -50: ("cheesefare_saturday",    "Saturday of Cheesefare (Commemoration of the Departed)",     "Great Feast"),
+    -49: ("forgiveness_sunday",     "Sunday of Cheesefare: Forgiveness Sunday",                   "Great Feast"),
+    # Great Lent — Clean Monday
+    -48: ("clean_monday",           "Beginning of Great Lent (Clean Monday)",                     "Great Feast"),
+    # Great Lent — Soul Saturdays and Sundays (weeks 1–5)
+    -43: ("lent_saturday_1",        "1st Saturday of Great Lent (Soul Saturday)",                 "Great Feast"),
+    -42: ("lent_sunday_1",          "1st Sunday of Great Lent (Sunday of Orthodoxy)",             "Great Feast"),
+    -36: ("lent_saturday_2",        "2nd Saturday of Great Lent (Soul Saturday)",                 "Great Feast"),
+    -35: ("lent_sunday_2",          "2nd Sunday of Great Lent (St Gregory Palamas)",              "Great Feast"),
+    -29: ("lent_saturday_3",        "3rd Saturday of Great Lent (Soul Saturday)",                 "Great Feast"),
+    -28: ("lent_sunday_3",          "3rd Sunday of Great Lent (Veneration of the Holy Cross)",    "Great Feast"),
+    -22: ("lent_saturday_4",        "4th Saturday of Great Lent (Akathist Saturday)",             "Great Feast"),
+    -21: ("lent_sunday_4",          "4th Sunday of Great Lent (St John Climacus)",                "Great Feast"),
+    -15: ("lent_saturday_5",        "5th Saturday of Great Lent",                                 "Great Feast"),
+    -14: ("lent_sunday_5",          "5th Sunday of Great Lent (St Mary of Egypt)",                "Great Feast"),
+    # Holy Week
+    -8:  ("lazarus_saturday",       "The Raising of Lazarus (Lazarus Saturday)",                  "Great Feast"),
+    -7:  ("palm_sunday",            "Entry of Our Lord into Jerusalem (Palm Sunday)",             "Great Feast"),
+    -6:  ("holy_monday",            "Great and Holy Monday",                                       "Great Feast"),
+    -5:  ("holy_tuesday",           "Great and Holy Tuesday",                                      "Great Feast"),
+    -4:  ("holy_wednesday",         "Great and Holy Wednesday",                                    "Great Feast"),
+    -3:  ("holy_thursday",          "Great and Holy Thursday",                                    "Great Feast"),
+    -2:  ("holy_friday",            "Great and Holy Friday",                                      "Great Feast"),
+    -1:  ("holy_saturday",          "Great and Holy Saturday",                                    "Great Feast"),
+    # Pascha and Bright Week
+     0:  ("pascha",                 "HOLY PASCHA: The Resurrection of Our Lord",                  "Great Feast"),
+     1:  ("bright_monday",          "Bright Monday",                                              "Great Feast"),
+     2:  ("bright_tuesday",         "Bright Tuesday",                                             "Great Feast"),
+     3:  ("bright_wednesday",       "Bright Wednesday",                                           "Great Feast"),
+     4:  ("bright_thursday",        "Bright Thursday",                                            "Great Feast"),
+     5:  ("bright_friday",          "Bright Friday — Life-Giving Spring of the Theotokos",        "Great Feast"),
+     6:  ("bright_saturday",        "Bright Saturday",                                            "Great Feast"),
+     7:  ("thomas_sunday",          "Antipascha: Saint Thomas Sunday",                            "Great Feast"),
+    # Post-Paschal Sundays
+    14:  ("myrrhbearers_sunday",    "Sunday of the Holy Myrrhbearing Women",                      "Great Feast"),
+    21:  ("paralytic_sunday",       "Sunday of the Paralytic",                                     "Great Feast"),
+    24:  ("mid_pentecost",          "Midfeast of Pentecost",                                      "Great Feast"),
+    28:  ("samaritan_sunday",       "Sunday of the Samaritan Woman",                              "Great Feast"),
+    35:  ("blind_sunday",           "Sunday of the Blind Man",                                    "Great Feast"),
+    38:  ("leavetaking_pascha",     "Leavetaking of Pascha",                                       "Great Feast"),
+    39:  ("ascension",              "The Ascension of our Lord, God and Savior Jesus Christ",     "Great Feast"),
+    48:  ("soul_saturday_pentecost","Soul Saturday before Pentecost",                             "Great Feast"),
+    49:  ("pentecost",              "Holy Pentecost (Trinity Sunday)",                            "Great Feast"),
+    56:  ("all_saints",             "Synaxis of All Saints",                                      "Great Feast"),
+    57:  ("apostles_fast",          "Beginning of the Apostles' Fast",                            "Minor Feast"),
 }
 
 # Title substrings (lower-cased) that identify a movable feast saint in the
@@ -261,36 +299,52 @@ _PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
 # are wrong for every other year; they are filtered out and re-injected by
 # movable_feast_for_date() instead.
 _MOVABLE_FEAST_KEYWORDS: frozenset[str] = frozenset({
-    # Pascha and Holy Week
-    "holy pascha",
-    "great and holy thursday",
-    "great and holy friday",
-    "great and holy saturday",
-    "lazarus saturday",
-    "entry of our lord into jerusalem",
-    # Bright Week (week after Pascha)
-    "bright monday",
-    "bright tuesday",
-    "bright wednesday",
-    "bright friday",
-    "bright saturday",
-    # Post-Paschal feasts
-    "antipascha",
-    "midfeast of pentecost",
-    "ascension of our lord",
-    "holy pentecost",
-    "postfeast of pentecost",
-    "day of the holy spirit",
-    "synaxis of all saints",
-    "beginning of the apostles",
-    # Pre-Lent and Great Lent
-    "beginning of great lent",
+    # Pre-Triodion
+    "sunday of zacchaeus",
+    "prodigal son",
+    # Pre-Lent Triodion and Great Lent
     "sunday of the publican",
+    "meatfare",
+    "cheesefare",
+    "beginning of great lent",
     "saturday of great lent",
     "sunday of great lent",
     "sunday of orthodoxy",
-    "meatfare",
-    "cheesefare",
+    # Holy Week — all days Mon–Sat plus Lazarus Saturday and Palm Sunday
+    "lazarus saturday",
+    "entry of our lord into jerusalem",
+    "great and holy monday",
+    "great and holy tuesday",
+    "great and holy wednesday",
+    "great and holy thursday",
+    "great and holy friday",
+    "great and holy saturday",
+    # Pascha.  OCA dataset title is "PASCHA: The Resurrection..." (no "Holy"),
+    # so both forms are listed to catch either phrasing.
+    "pascha: the resurrection",
+    "holy pascha",
+    # Bright Week
+    "bright monday",
+    "bright tuesday",
+    "bright wednesday",
+    "bright thursday",
+    "bright friday",
+    "bright saturday",
+    # Post-Paschal Sundays and feasts
+    "antipascha",
+    "myrrhbearing",
+    "sunday of the paralytic",
+    "samaritan woman",
+    "sunday of the blind",
+    "midfeast of pentecost",
+    "leavetaking of pascha",
+    "ascension of our lord",
+    "memorial saturday",
+    # Pentecost season.  OCA stores bare "Pentecost" so match on the noun itself.
+    "pentecost",
+    "day of the holy spirit",
+    "synaxis of all saints",
+    "beginning of the apostles",
 })
 
 
