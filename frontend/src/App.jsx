@@ -66,7 +66,10 @@ function getEthiopianDate(gYear, gMonth, gDay) {
   const currDate = makeDate(gYear, gMonth - 1, gDay);
   const daysSinceNY = Math.round((currDate - nyDate) / 86400000);
   const ethMonthIdx = Math.min(12, Math.floor(daysSinceNY / 30));
-  const ethDay = (daysSinceNY % 30) + 1;
+  const ethDayRaw = (daysSinceNY % 30) + 1;
+  // Pagume (month 13) has only 5 days normally, 6 in an Ethiopian leap year (ethYear % 4 === 3)
+  const maxPagumeDay = ethYear % 4 === 3 ? 6 : 5;
+  const ethDay = ethMonthIdx === 12 ? Math.min(ethDayRaw, maxPagumeDay) : ethDayRaw;
   return { year: ethYear, monthName: ETH_MONTH_NAMES[ethMonthIdx], day: ethDay };
 }
 

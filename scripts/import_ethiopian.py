@@ -65,8 +65,8 @@ def eth_to_gregorian_md(month_name: str, day: int) -> str:
     """Convert Ethiopian calendar month + day to Gregorian MM-DD."""
     for k, (m, d) in _ETH_MONTHS.items():
         if k.lower() == month_name.lower():
-            # Use a non-leap reference year for month arithmetic
-            start = date(2024, m, d)
+            # Use a non-leap reference year for month arithmetic (2024 is a leap year)
+            start = date(2023, m, d)
             result = start + timedelta(days=day - 1)
             return result.strftime("%m-%d")
     raise ValueError(f"Unknown Ethiopian month: {month_name}")

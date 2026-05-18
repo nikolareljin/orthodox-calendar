@@ -57,7 +57,7 @@ _FEAST_TYPE_HINTS = [
     (re.compile(r"apostle", re.I), "Apostle"),
     (re.compile(r"archbishop|patriarch|bishop|metropolitan", re.I), "Hierarch"),
     (re.compile(r"prince|king|queen|tsar|despot", re.I), "Righteous"),
-    (re.compile(r"monk|nun|abbess|abbess", re.I), "Venerable"),
+    (re.compile(r"monk|nun|abbess|abbot", re.I), "Venerable"),
 ]
 
 
