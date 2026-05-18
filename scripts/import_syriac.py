@@ -8,7 +8,7 @@ All dates stored as Julian MM-DD (Syriac church follows Julian calendar).
 
 Usage:
     python3 scripts/import_syriac.py --out backend/app/data/traditions/syriac_saints.json
-    python3 scripts/import_syriac.py --wiki-only --out /path/to/output.json
+    python3 scripts/import_syriac.py --no-wiki --out /path/to/output.json
 """
 
 import argparse
@@ -270,11 +270,6 @@ def main() -> None:
         "--out",
         default="backend/app/data/traditions/syriac_saints.json",
         help="Output JSON file path",
-    )
-    parser.add_argument(
-        "--wiki-only",
-        action="store_true",
-        help="Only fetch Wikipedia data (skips curated fallback)",
     )
     parser.add_argument(
         "--no-wiki",

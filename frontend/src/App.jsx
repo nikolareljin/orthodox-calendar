@@ -62,8 +62,8 @@ function getEthiopianDate(gYear, gMonth, gDay) {
   const isAfterNewYear = gMonth > 9 || (gMonth === 9 && gDay >= nyDay);
   const ethYear = isAfterNewYear ? gYear - 7 : gYear - 8;
   const nyGYear = isAfterNewYear ? gYear : gYear - 1;
-  const nyDate = makeDate(nyGYear, 8, ethNewYearDay(nyGYear));
-  const currDate = makeDate(gYear, gMonth - 1, gDay);
+  const nyDate = Date.UTC(nyGYear, 8, ethNewYearDay(nyGYear));
+  const currDate = Date.UTC(gYear, gMonth - 1, gDay);
   const daysSinceNY = Math.round((currDate - nyDate) / 86400000);
   const ethMonthIdx = Math.min(12, Math.floor(daysSinceNY / 30));
   const ethDayRaw = (daysSinceNY % 30) + 1;
