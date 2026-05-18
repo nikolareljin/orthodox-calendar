@@ -85,7 +85,6 @@ def scrape_all(page) -> dict[str, dict[str, list[str]]]:
             const idMatch = label.id.match(/(\d{6})$/);
             if (!idMatch) return;
             const monthKey = idMatch[1]; // "YYYYMM"
-            const year = parseInt(monthKey.slice(0, 4));
             const month = parseInt(monthKey.slice(4, 6));
 
             const cells = m.querySelectorAll('td.has_events');

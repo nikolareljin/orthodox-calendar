@@ -20,7 +20,6 @@ import re
 import sys
 import time
 import urllib.request
-import urllib.parse
 from html.parser import HTMLParser
 from pathlib import Path
 
