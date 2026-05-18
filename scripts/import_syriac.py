@@ -50,6 +50,29 @@ _FEAST_PARAMS = re.compile(
 )
 
 
+def _infobox_text(wikitext: str) -> str:
+    """Extract the first {{Infobox ...}} block by counting brace depth."""
+    for prefix in ("{{Infobox", "{{infobox"):
+        start = wikitext.find(prefix)
+        if start != -1:
+            break
+    else:
+        return wikitext[:3000]
+    depth, i = 0, start
+    while i < len(wikitext):
+        if wikitext[i:i+2] == "{{":
+            depth += 1
+            i += 2
+        elif wikitext[i:i+2] == "}}":
+            depth -= 1
+            i += 2
+            if depth == 0:
+                return wikitext[start:i]
+        else:
+            i += 1
+    return wikitext[start:start + 3000]
+
+
 # ── Curated Syriac Orthodox Saints ───────────────────────────────────────────
 # Sources: Beth Mardutho Syriac Institute, Syriac Orthodox Church official
 # liturgical calendar, and Voobus "A History of Asceticism in the Syrian Orient"
@@ -210,8 +233,8 @@ def _fetch_wikitext(slug: str) -> str | None:
 
 
 def _parse_feast_date(wikitext: str) -> str | None:
-    """Extract feast date from Wikipedia infobox wikitext."""
-    for m in _FEAST_PARAMS.finditer(wikitext):
+    """Extract feast date from the Wikipedia infobox (not navboxes or citations)."""
+    for m in _FEAST_PARAMS.finditer(_infobox_text(wikitext)):
         raw = m.group(1).strip()
         raw = re.sub(r"\[\[([^\]|]+)(?:\|[^\]]+)?\]\]", r"\1", raw)
         raw = re.sub(r"\{\{[^}]+\}\}", "", raw).strip()

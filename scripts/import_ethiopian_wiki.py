@@ -85,9 +85,32 @@ _SKIP_TARGETS = frozenset({
 })
 
 _INFOBOX_FEAST_RE = re.compile(
-    r"\|\s*(?:feast_day|feast_date|feast|venerated_date|death_date_and_age|death_date)\s*=\s*([^\n|}{]+)",
+    r"\|\s*(?:feast_day|feast_date|feast|venerated_date)\s*=\s*([^\n|}{]+)",
     re.IGNORECASE,
 )
+
+
+def _infobox_text(wikitext: str) -> str:
+    """Extract the first {{Infobox ...}} block by counting brace depth."""
+    for prefix in ("{{Infobox", "{{infobox"):
+        start = wikitext.find(prefix)
+        if start != -1:
+            break
+    else:
+        return wikitext[:3000]
+    depth, i = 0, start
+    while i < len(wikitext):
+        if wikitext[i:i+2] == "{{":
+            depth += 1
+            i += 2
+        elif wikitext[i:i+2] == "}}":
+            depth -= 1
+            i += 2
+            if depth == 0:
+                return wikitext[start:i]
+        else:
+            i += 1
+    return wikitext[start:start + 3000]
 _DATE_RE = re.compile(
     r"(\d{1,2})\s+(january|february|march|april|may|june|july|august|september|october|november|december)"
     r"|(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2})",
@@ -321,9 +344,9 @@ def parse_category_saints(delay: float = 0.5) -> list[dict]:
             print(f"    SKIP {title}: {exc}", file=sys.stderr)
             continue
 
-        # Extract feast date from infobox
+        # Extract feast date from infobox only (avoid navboxes/citations)
         md = None
-        for fm in _INFOBOX_FEAST_RE.finditer(wikitext):
+        for fm in _INFOBOX_FEAST_RE.finditer(_infobox_text(wikitext)):
             raw = fm.group(1).strip()
             raw = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]|]+)\]\]", r"\1", raw)
             raw = re.sub(r"\{\{[^}]+\}\}", "", raw).strip()

@@ -379,7 +379,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
         {tradition === "ethiopian" && (() => {
           const eth = getEthiopianDate(year, month, day);
           return (
-            <p className="cal-date-note eth-date-note">
+            <p className="cal-date-note trad-date-note">
               {eth.monthName} {eth.day}, {eth.year} ዓ.ም. — Ethiopian Calendar
             </p>
           );
@@ -387,7 +387,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
         {tradition === "coptic" && (() => {
           const copt = getCopticDate(year, month, day);
           return (
-            <p className="cal-date-note eth-date-note">
+            <p className="cal-date-note trad-date-note">
               {copt.monthName} {copt.day}, {copt.year} Ⲁ.Ⲙ. — Coptic Calendar
             </p>
           );
@@ -395,7 +395,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
         {tradition === "assyrian" && (() => {
           const ass = getAssyrianDate(year, month, day);
           return (
-            <p className="cal-date-note eth-date-note">
+            <p className="cal-date-note trad-date-note">
               {ass.monthName} {ass.day}, {ass.year} — Assyrian Calendar
             </p>
           );
