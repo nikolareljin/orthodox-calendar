@@ -95,16 +95,19 @@ def _oca_feast_url(id_slug: str | None, feast_date: date) -> str | None:
     )
 
 
-def _fix_oca_url_year(url: str | None, calendar_date: str | None) -> str | None:
-    """Replace the year in an OCA URL with the tradition's calendar year.
+def _build_oca_url(url: str | None, calendar_date: str | None) -> str | None:
+    """Build an OCA URL from the stored URL's id-slug and the tradition's calendar date.
 
-    OCA organises saints pages by Julian calendar date.  The dataset was scraped
-    in 2024 so every URL contains the literal year 2024.  This function swaps
-    that year for the year derived from *calendar_date* (the tradition's own
-    calendar representation of the requested Gregorian date), which is:
-      - the Julian year for Julian traditions (e.g. Serbian Christmas on
-        Gregorian Jan 7 2026 → calendar_date "2025-12-25" → year 2025)
-      - the Gregorian/Revised-Julian year for all other traditions
+    OCA saints pages are keyed by the Julian calendar date.  The stored URL
+    contains only the stable id-slug; the full date prefix (year, month, day)
+    is rebuilt entirely from *calendar_date* — the tradition's own calendar
+    representation of the requested date.  This means:
+      - Julian traditions: calendar_date is the Julian date
+        (e.g. Serbian Christmas Gregorian Jan 7 2026 → "2025-12-25")
+      - Revised-Julian / Gregorian traditions: calendar_date equals the
+        Gregorian date (same as Julian until the 2800 divergence)
+    The stored URL's date portion is ignored completely; only the id-slug
+    (the stable saint identifier) is extracted from it.
     Non-OCA URLs (no regex match) are returned unchanged.
     """
     if not url or not calendar_date:
@@ -112,20 +115,26 @@ def _fix_oca_url_year(url: str | None, calendar_date: str | None) -> str | None:
     m = _OCA_URL_DATE_RE.match(url)
     if not m:
         return url
-    calendar_year = calendar_date.split("-")[0]
-    return f"{m.group(1)}{calendar_year}/{m.group(2)}/{m.group(3)}"
+    try:
+        cal_year, cal_month, cal_day = calendar_date.split("-")
+        return (
+            f"https://www.oca.org/saints/lives/"
+            f"{cal_year}/{int(cal_month):02d}/{int(cal_day):02d}/{m.group(3)}"
+        )
+    except (ValueError, AttributeError):
+        return url
 
 
 def _resolve_hagiography_url(saint: Saint, calendar_date: str | None = None) -> str | None:
     """Return the hagiography URL for the configured HAGIOGRAPHY_SOURCE.
 
-    Always fixes the year in OCA URLs to match the tradition's calendar date
-    (Julian year for Julian traditions, Gregorian year for all others).
-    "goarch" → uses saint.goarch_url when set, then falls back to year-fixed OCA URL.
+    OCA URLs are fully rebuilt from the tradition's calendar date + the stored
+    id-slug — no date from the static dataset is carried through.
+    "goarch" → uses saint.goarch_url when set, then falls back to rebuilt OCA URL.
     """
     if HAGIOGRAPHY_SOURCE == "goarch":
-        return saint.goarch_url or _fix_oca_url_year(saint.hagiography_url, calendar_date)
-    return _fix_oca_url_year(saint.hagiography_url, calendar_date)
+        return saint.goarch_url or _build_oca_url(saint.hagiography_url, calendar_date)
+    return _build_oca_url(saint.hagiography_url, calendar_date)
 
 
 # Common honorific prefixes that vary across sources for the same saint
