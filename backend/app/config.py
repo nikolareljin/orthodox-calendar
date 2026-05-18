@@ -10,7 +10,14 @@ from .models import CalendarSystem, Tradition
 # When "goarch", saints with a goarch_url field use the GOARCH chapel URL;
 # saints without one fall back to the OCA URL.
 # Switch to "goarch" once the dataset is enriched with GOARCH content IDs.
-HAGIOGRAPHY_SOURCE: str = os.environ.get("HAGIOGRAPHY_SOURCE", "oca")
+_VALID_HAGIOGRAPHY_SOURCES = frozenset({"oca", "goarch"})
+_raw_hagiography_source = os.environ.get("HAGIOGRAPHY_SOURCE", "oca").lower().strip()
+if _raw_hagiography_source not in _VALID_HAGIOGRAPHY_SOURCES:
+    raise ValueError(
+        f"HAGIOGRAPHY_SOURCE={_raw_hagiography_source!r} is not valid. "
+        f"Accepted values: {sorted(_VALID_HAGIOGRAPHY_SOURCES)}"
+    )
+HAGIOGRAPHY_SOURCE: str = _raw_hagiography_source
 
 # Canonical tradition metadata. These can be adjusted per deployment if a parish
 # follows a different reckoning.

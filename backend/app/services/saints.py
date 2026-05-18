@@ -11,7 +11,7 @@ from ..calendar_logic import (
     effective_calendar,
     is_movable_feast_title,
     julian_pascha_as_gregorian,
-    movable_feast_for_date,
+    PASCHA_OFFSETS,
     resolve_tradition,
 )
 from ..config import HAGIOGRAPHY_SOURCE
@@ -153,6 +153,8 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.feast_type = overlay.feast_type
     if overlay.hagiography_url and not base.hagiography_url:
         base.hagiography_url = overlay.hagiography_url
+    if overlay.goarch_url and not base.goarch_url:
+        base.goarch_url = overlay.goarch_url
     if overlay.icon_url and not base.icon_url:
         base.icon_url = overlay.icon_url
     if overlay.notes and not base.notes:
@@ -236,7 +238,9 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         # dates — wrong for every other year.  Strip those entries from the
         # base data only, then inject the correctly computed feast for the
         # requested year.  Tradition overlays are left untouched.
-        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED):
+        # Guard: only the OCA base dataset has 2024-scraped movable feast entries;
+        # non-OCA Julian traditions (syriac, oriental) must not be affected.
+        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED) and base_key == "oca":
             base_entries = [
                 e.model_copy(
                     update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
@@ -245,10 +249,11 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
             ]
             base_entries = [e for e in base_entries if e.saints]
 
-            feast = movable_feast_for_date(day)
+            pascha = julian_pascha_as_gregorian(day.year)
+            delta = (day - pascha).days
+            feast = PASCHA_OFFSETS.get(delta)
             if feast:
                 feast_key, feast_title, feast_type = feast
-                delta = (day - julian_pascha_as_gregorian(day.year)).days
                 id_slug, notes = _MOVABLE_META.get(delta, (None, None))
                 movable_entry = CalendarEntry(
                     month_day=month_day,
@@ -294,7 +299,7 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
         base_day = list(base_by_md.get(month_day, []))
         overlay_day = list(overlay_by_md.get(month_day, [])) if overlay_by_md else []
 
-        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED):
+        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED) and base_key == "oca":
             base_day = [
                 e.model_copy(
                     update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
@@ -302,10 +307,10 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
                 for e in base_day
             ]
             base_day = [e for e in base_day if e.saints]
-            feast = movable_feast_for_date(d)
+            delta = (d - pascha_of_year).days
+            feast = PASCHA_OFFSETS.get(delta)
             if feast:
                 feast_key, feast_title, feast_type = feast
-                delta = (d - pascha_of_year).days
                 id_slug, notes = _MOVABLE_META.get(delta, (None, None))
                 base_day = [
                     CalendarEntry(

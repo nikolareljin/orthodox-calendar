@@ -19,7 +19,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   2026-05-18 (today), Serbian and Georgian traditions showed "HOLY PASCHA" because Gregorian May 18 →
   Julian May 5 → static key "05-05" (2024 Pascha).  At the same time, the actual 2026 Pascha (April 12
   Gregorian) had no Pascha entry at all.
-  - `calendar_logic.py`: added `_PASCHA_OFFSETS` table (−70 to +57 days relative to Pascha), `_MOVABLE_FEAST_KEYWORDS`
+  - `calendar_logic.py`: added `PASCHA_OFFSETS` table (−77 to +57 days relative to Pascha), `_MOVABLE_FEAST_KEYWORDS`
     filter set, `is_movable_feast_title()`, and `movable_feast_for_date()` — returns the correct
     feast name/title/type for any Gregorian date that falls on a Byzantine movable feast in the
     requested year.

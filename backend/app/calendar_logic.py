@@ -239,7 +239,7 @@ def _julian_to_gregorian(year: int, month: int, day: int) -> _date:
 
 # Pascha-relative day offsets → (canonical key, display title, feast_type).
 # These cover the major Byzantine movable feasts computed from the Julian computus.
-_PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
+PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
     # Pre-Triodion Sunday (11 weeks before Pascha)
     -77: ("zacchaeus_sunday",       "Sunday of Zacchaeus",                                        "Great Feast"),
     # Pre-Lent Triodion Sundays and Soul Saturdays
@@ -377,7 +377,7 @@ def movable_feast_for_date(day: _date) -> Optional[tuple[str, str, str]]:
     """
     pascha = julian_pascha_as_gregorian(day.year)
     delta = (day - pascha).days
-    return _PASCHA_OFFSETS.get(delta)
+    return PASCHA_OFFSETS.get(delta)
 
 
 def movable_feasts(year: int, pascha: "_date | None" = None) -> dict:
