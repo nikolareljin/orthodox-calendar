@@ -112,7 +112,7 @@ def _clean_name(raw: str) -> str:
         raw = raw[:cyrillic_match.start()].strip()
     # Also strip trailing transliteration in Latin (often a repeat of English name)
     # Keep only up to first parenthetical or comma
-    raw = raw.split("  ")[0].strip()
+    raw = re.split(r"[,(]", raw)[0].strip()
     return raw
 
 

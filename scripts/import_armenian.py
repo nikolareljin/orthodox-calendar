@@ -5,7 +5,7 @@ Import Armenian Apostolic Church feast days from armenianchurch.org.
 Scrapes the 27 feast pages listed at:
   https://www.armenianchurch.org/en/Liturgical-Calendar/
 
-Each feast page has a date in the <h1> title as "FeastName DD.MM.YYYY".
+Each feast page has a date in the <h2 class="news-inner__block-title"> header as "FeastName<br>DD.MM.YYYY".
 Fixed feasts are stored as MM-DD keys; moveable feasts (Easter-cycle)
 are kept with a moveable flag in the notes field.
 

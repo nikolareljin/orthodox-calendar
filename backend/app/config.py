@@ -103,8 +103,9 @@ TRADITIONS: Dict[str, Tradition] = {
         aliases=["jacobite", "syriac-orthodox", "suryoyo"],
         # Julian-keyed dataset built by import_syriac.py
     ),
-    # "oriental" is the legacy key shared by Syriac/Malankara fallback data.
-    # The Coptic church now has its own "coptic" entry with a dedicated dataset.
+    # "oriental" is a legacy fallback key backed by oriental_saints.json.
+    # Syriac and Malankara each now have their own dedicated datasets/config entries;
+    # this key is kept for API compatibility but is no longer a shared fallback.
     "oriental": Tradition(
         name="Oriental Orthodox (shared)",
         calendar=CalendarSystem.JULIAN,

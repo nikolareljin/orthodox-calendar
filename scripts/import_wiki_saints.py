@@ -109,7 +109,9 @@ def fetch_wikitext(title: str) -> str:
 
 
 def _parse_feast_date(wikitext: str) -> str | None:
-    for m in _FEAST_PARAMS.finditer(wikitext):
+    # Scope search to infobox to avoid false matches in navboxes/citations
+    search_text = _infobox_text(wikitext)
+    for m in _FEAST_PARAMS.finditer(search_text):
         raw = m.group(1).strip()
         # Strip wikilinks [[X|Y]] → Y or X
         raw = re.sub(r"\[\[(?:[^\]|]+\|)?([^\]|]+)\]\]", r"\1", raw)

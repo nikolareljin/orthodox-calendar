@@ -33,7 +33,7 @@ class Saint(BaseModel):
     icon_url: Optional[str] = None
     notes: Optional[str] = None
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
-    canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental"
+    canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental" | "church-of-the-east"
     year_canonized: Optional[int] = None    # e.g. 2010
 
 

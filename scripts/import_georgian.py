@@ -22,6 +22,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from datetime import date, timedelta
 from pathlib import Path
 
 WIKI_API = "https://en.wikipedia.org/w/api.php"
@@ -151,8 +152,12 @@ def main() -> None:
             titles = [m["title"] for m in data.get("query", {}).get("categorymembers", [])]
             print(f"  Found {len(titles)} pages", file=sys.stderr)
 
-            # Dedup against curated list by wiki slug (5th tuple element) to avoid
-            # title/display-name mismatches (e.g. "Tamar I" vs "Queen Tamar of Georgia")
+            # Dedup against curated list by slug and display name.
+            # Also cover known Wikipedia redirect aliases that differ from curated titles.
+            _WIKI_ALIASES: dict[str, str] = {
+                "tamar i": "tamar_of_georgia",
+                "tamar of georgia": "tamar_of_georgia",
+            }
             curated_slugs = {slug.lower() for _, _, _, _, slug, _ in _CURATED if slug}
             curated_names = {name.lower() for _, _, _, name, _, _ in _CURATED}
 
@@ -173,7 +178,9 @@ def main() -> None:
 
             for title in titles:
                 slug = title.replace(" ", "_")
-                if title.lower() in curated_names or slug.lower() in curated_slugs:
+                alias_slug = _WIKI_ALIASES.get(title.lower(), "")
+                if (title.lower() in curated_names or slug.lower() in curated_slugs
+                        or alias_slug in curated_slugs):
                     continue
                 time.sleep(0.5)
                 wikitext = _fetch_wiki_feast(title, delay=0) or ""
@@ -191,7 +198,10 @@ def main() -> None:
                         else:
                             mo, d = _MONTH_MAP.get(dm.group(3).lower()), int(dm.group(4))
                         if mo and 1 <= d <= 31:
-                            md = f"{mo:02d}-{d:02d}"
+                            # Wikipedia feast days are Gregorian; convert to Julian (−13 days)
+                            proxy_year = 2000 if (mo == 2 and d == 29) else 2001
+                            julian = date(proxy_year, mo, d) - timedelta(days=13)
+                            md = f"{julian.month:02d}-{julian.day:02d}"
                             break
                 if md:
                     saint = {

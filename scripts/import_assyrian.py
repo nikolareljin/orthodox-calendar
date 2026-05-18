@@ -37,8 +37,6 @@ _SKIP_TEXTS = frozenset({
     "view as:", "month", "list", "today", "→", "←", "",
 })
 
-_NON_LATIN_RE = re.compile(r"[^\x00-\x7FÀ-ɏḀ-ỿ]")
-
 
 def _clean(text: str) -> str:
     text = re.sub(r"\s+", " ", text.strip())
