@@ -249,6 +249,11 @@ def main() -> None:
                 if not args.include_moveable:
                     continue
                 month_day = feast.get("month_day")
+                # For date-range feasts, use the start date as a deterministic key.
+                if not month_day and feast.get("date_range"):
+                    m = _DATE_RE.search(feast["date_range"])
+                    if m:
+                        month_day = f"{m.group(2)}-{m.group(1)}"
             else:
                 month_day = feast.get("month_day")
                 print(f"  {month_day}: {name}", file=sys.stderr)
