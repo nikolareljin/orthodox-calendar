@@ -96,18 +96,19 @@ def _oca_feast_url(id_slug: str | None, feast_date: date) -> str | None:
 
 
 def _build_oca_url(url: str | None, calendar_date: str | None) -> str | None:
-    """Build an OCA URL from the stored URL's id-slug and the tradition's calendar date.
+    """Build an OCA URL by extracting the id-slug from *url* and using *calendar_date* for the date.
 
-    OCA saints pages are keyed by the Julian calendar date.  The stored URL
-    contains only the stable id-slug; the full date prefix (year, month, day)
-    is rebuilt entirely from *calendar_date* — the tradition's own calendar
-    representation of the requested date.  This means:
+    The dataset stores full OCA URLs (with the 2024 scrape year and date), e.g.:
+      https://www.oca.org/saints/lives/2024/01/02/100941-seraphim-of-sarov
+    This function strips that stored date entirely — it extracts only the stable
+    id-slug (the last path segment) and rebuilds the URL with the tradition's own
+    calendar date:
       - Julian traditions: calendar_date is the Julian date
         (e.g. Serbian Christmas Gregorian Jan 7 2026 → "2025-12-25")
       - Revised-Julian / Gregorian traditions: calendar_date equals the
         Gregorian date (same as Julian until the 2800 divergence)
-    The stored URL's date portion is ignored completely; only the id-slug
-    (the stable saint identifier) is extracted from it.
+    Do NOT call this for movable feast saints — their OCA pages are keyed by
+    the Gregorian feast date, which differs from Julian calendar_date.
     Non-OCA URLs (no regex match) are returned unchanged.
     """
     if not url or not calendar_date:
@@ -255,9 +256,14 @@ def _merge_entries(
             merged_notes = entry.notes
     saints_out = []
     for s in merged.values():
-        resolved_url = _resolve_hagiography_url(s, calendar_date)
-        if resolved_url != s.hagiography_url:
-            s = s.model_copy(update={"hagiography_url": resolved_url})
+        # Movable feast URLs are keyed by the Gregorian feast date (injected by
+        # get_saints_for_date/month with the correct date already).  Applying
+        # _build_oca_url would replace that Gregorian date with the Julian
+        # calendar_date, producing a wrong URL.  Skip the rewrite for them.
+        if not is_movable_feast_title(s.title or ""):
+            resolved_url = _resolve_hagiography_url(s, calendar_date)
+            if resolved_url != s.hagiography_url:
+                s = s.model_copy(update={"hagiography_url": resolved_url})
         saints_out.append(s)
     return SaintsResponse(
         date=day,
