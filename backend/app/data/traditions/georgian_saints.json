@@ -146,23 +146,6 @@
     ]
   },
   {
-    "month_day": "05-14",
-    "tradition": "georgian",
-    "calendar": "julian",
-    "saints": [
-      {
-        "name": "Tamar I",
-        "title": "Tamar I",
-        "feast_type": "Righteous",
-        "hagiography_url": "https://en.wikipedia.org/wiki/Tamar_I",
-        "notes": null,
-        "canonized_by": "Georgian Orthodox and Apostolic Church",
-        "canonization_scope": "local",
-        "year_canonized": null
-      }
-    ]
-  },
-  {
     "month_day": "05-23",
     "tradition": "georgian",
     "calendar": "julian",

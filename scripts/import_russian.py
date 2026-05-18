@@ -70,22 +70,6 @@ _RUSSIAN_PATTERNS = [
 
 _RUSSIAN_RE = re.compile("|".join(_RUSSIAN_PATTERNS), re.IGNORECASE)
 
-FEAST_TYPE_NAMES = {
-    1: "Great Feast",
-    2: "Vigil",
-    3: "Polyeleos",
-    4: "Doxology",
-    5: "Minor Feast",
-    6: "Memorial",
-    7: "Hierarch",
-    8: "Martyr",
-    9: "Venerable",
-    10: "Righteous",
-    11: "Apostle",
-    12: "Prophet",
-    13: "Equal-to-Apostles",
-}
-
 
 def fetch_day(year: int, month: int, day: int) -> dict:
     url = f"{BASE_URL}/julian/{year}/{month}/{day}/"

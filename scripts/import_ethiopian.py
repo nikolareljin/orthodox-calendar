@@ -24,7 +24,6 @@ import re
 import sys
 import urllib.request
 from datetime import date, timedelta
-from html.parser import HTMLParser
 from pathlib import Path
 
 CALENDAR_URL = "https://ethiopianorthodox.org/english/calendar.html"
@@ -302,7 +301,6 @@ _CURATED: list[tuple] = [
 
 def build_curated() -> list[dict]:
     entries: list[dict] = []
-    seen_md: set[str] = set()
 
     for eth_month, eth_day, feast_type, title, short_name, notes in _CURATED:
         try:
