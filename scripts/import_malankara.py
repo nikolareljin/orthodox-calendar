@@ -434,7 +434,10 @@ def _parse_bs4(
               file=sys.stderr)
         return []
 
-    soup = BeautifulSoup(html, "lxml")
+    try:
+        soup = BeautifulSoup(html, "lxml")
+    except Exception:
+        soup = BeautifulSoup(html, "html.parser")
 
     for tag in soup(["script", "style", "nav", "footer", "header"]):
         tag.decompose()

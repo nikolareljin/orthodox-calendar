@@ -49,12 +49,13 @@ const ETH_MONTH_NAMES = [
   "Ginbot", "Sene", "Hamle", "Nehase", "Pagume",
 ];
 
+function isGregorianLeap(y) {
+  return y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0);
+}
+
 function ethNewYearDay(gYear) {
-  // Ethiopian New Year (Meskerem 1) falls on Sep 12 when the preceding Ethiopian
-  // year was a leap year. Ethiopian year Y is a leap year when Y % 4 === 3.
-  // The Ethiopian year starting in Gregorian year G is approximately G - 8,
-  // so Sep 12 occurs when (G - 8) % 4 === 3, i.e. G % 4 === 3.
-  return gYear % 4 === 3 ? 12 : 11;
+  // Meskerem 1 falls on Sep 12 when gYear+1 is a Gregorian leap year, Sep 11 otherwise.
+  return isGregorianLeap(gYear + 1) ? 12 : 11;
 }
 
 function getEthiopianDate(gYear, gMonth, gDay) {

@@ -102,7 +102,7 @@ def scrape_all(page) -> dict[str, dict[str, list[str]]]:
 
                 const titles = Array.from(cell.querySelectorAll('li.event span.title'))
                     .map(e => e.innerText.trim())
-                    .filter(t => t.length >= 4 && !/[^\x00-ɏ]/.test(t));
+                    .filter(t => t.length >= 4 && !/[\u0700-\u077F]/.test(t));
                 if (titles.length) days[key] = titles;
             });
 

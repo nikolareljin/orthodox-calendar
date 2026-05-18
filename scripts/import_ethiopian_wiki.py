@@ -39,8 +39,17 @@ _HEADERS = {
     "User-Agent": "orthodox-calendar-importer/1.0 (https://github.com/nikolareljin/orthodox-calendar)"
 }
 
-# Meskerem 1 (Sep 11) as Gregorian anchor for Ge'ez month day 1
-_MESKEREM_1 = date(2024, 9, 11)
+def _meskerem_1_for(anchor_year: int) -> date:
+    """Return the Gregorian date of Meskerem 1 for the given Gregorian year.
+
+    Falls on Sep 12 when anchor_year+1 is a Gregorian leap year (divisible by 4,
+    except centuries not divisible by 400), Sep 11 otherwise.
+    """
+    next_year = anchor_year + 1
+    is_next_leap = next_year % 4 == 0 and (next_year % 100 != 0 or next_year % 400 == 0)
+    return date(anchor_year, 9, 12 if is_next_leap else 11)
+
+_MESKEREM_1 = _meskerem_1_for(date.today().year)
 
 # Ethiopian months for parsing annual feast section
 _MONTH_NAMES = {
