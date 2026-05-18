@@ -9,7 +9,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
-## [0.4.1] - 2026-05-17
+## [0.4.0] - 2026-05-17
 
 ### Added
 - **Armenian bilingual calendar** — `import_armenian_ics.py` ingests both the English and Armenian-script (Հայ) ICS files from armenianorthodoxtheology.com; 144 feast entries with `name_hy` field storing the Armenian name alongside the English title. 87 entries enriched with Wikipedia descriptions and/or hagiography URLs from armenianchurch.ge.

@@ -49,7 +49,7 @@ class NameDayRequest(BaseModel):
 app = FastAPI(
     title="orthodox-calendar",
     description="Orthodox and Oriental Orthodox saints of the day with calendar/contacts hooks.",
-    version="0.4.1",
+    version="0.4.0",
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
     openapi_url="/api/v1/openapi.json",
