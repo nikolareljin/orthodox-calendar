@@ -776,6 +776,7 @@ export default function App() {
 
           <OrthodoxWorldSection />
           <AboutSection />
+          <SupportSection />
         </main>
       </div>
     </div>
@@ -824,6 +825,32 @@ function OrthodoxWorldSection() {
       </button>
       {open && (
         <div className="about-body">
+          <p className="about-text" style={{ marginBottom: "16px" }}>
+            Each tradition in this calendar corresponds to an autocephalous or autonomous church.
+            Below is a brief overview of each, with links to their official websites.
+          </p>
+          <div className="churches-grid" style={{ marginBottom: "32px" }}>
+            {Object.entries(TRADITIONS).map(([key, info]) => (
+              <div key={key} className="church-card">
+                <div className="church-logo">{info.logo}</div>
+                <div className="church-info">
+                  <a
+                    href={info.website}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className="church-name"
+                  >
+                    {info.label}
+                  </a>
+                  <span className="church-founded">Est. {info.founded}</span>
+                  {info.patron && (
+                    <span className="church-patron">Patron: {info.patron}</span>
+                  )}
+                  <p className="church-desc">{info.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
           <p className="about-text" style={{ marginBottom: "16px" }}>
             All recognized canonical churches worldwide. Links only — no commentary on questions of jurisdiction or recognition.
           </p>
@@ -922,69 +949,72 @@ function AboutSection() {
                 </a>
                 , or contact us through the repository. All are welcome.
               </p>
-            </div>
-
-            <div className="about-card about-card-full">
-              <h3 className="about-heading">Orthodox Churches</h3>
-              <p className="about-text" style={{ marginBottom: "16px" }}>
-                Each tradition in this calendar corresponds to an autocephalous or autonomous church.
-                Below is a brief overview of each, with links to their official websites.
-              </p>
-              <div className="churches-grid">
-                {Object.entries(TRADITIONS).map(([key, info]) => (
-                  <div key={key} className="church-card">
-                    <div className="church-logo">{info.logo}</div>
-                    <div className="church-info">
-                      <a
-                        href={info.website}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        className="church-name"
-                      >
-                        {info.label}
-                      </a>
-                      <span className="church-founded">Est. {info.founded}</span>
-                      {info.patron && (
-                        <span className="church-patron">Patron: {info.patron}</span>
-                      )}
-                      <p className="church-desc">{info.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="about-card about-card-full about-card-support">
-              <h3 className="about-heading">Support this project</h3>
-              <p className="about-text">
-                This calendar has been built and maintained by volunteers since 1993. Running a public
-                API and iCal feed costs real money — server hosting, bandwidth, and the many hours spent
-                curating and verifying liturgical data. If this calendar is useful to you, your parish,
-                or your community, please consider a donation.
-              </p>
-              <p className="about-text">
-                Every contribution — large or small — goes directly toward keeping the service free,
-                expanding the data set to more traditions, and improving the application for everyone.
-              </p>
-              <div className="support-links">
+              <div className="contribute-cta">
+                <h4 className="contribute-cta-heading">Help complete the calendar</h4>
+                <p className="about-text">
+                  Many traditions still have incomplete feast data — missing saints, missing hagiographies,
+                  missing feast links, or calendar events that have not been set up at all. You can help by
+                  providing context, correcting errors, adding saints' days for your church, or linking to
+                  authoritative sources. No coding required.
+                </p>
+                <p className="about-text">
+                  The easiest way to contribute is to{" "}
+                  <strong>open a GitHub Issue</strong> — describe what is missing or wrong, paste any
+                  source you have (a church website, a typikon scan, a synaxarion page), and we will
+                  integrate it. Every correction and addition goes live for every user.
+                </p>
                 <a
-                  href="https://ko-fi.com/nikolareljin"
+                  href="https://github.com/nikolareljin/orthodox-calendar/issues/new"
                   target="_blank"
                   rel="noreferrer"
-                  className="support-btn support-kofi"
+                  className="contribute-btn"
                 >
-                  ☕ Support on Ko-fi
+                  Open an Issue on GitHub →
                 </a>
               </div>
-              <p className="about-text" style={{ marginTop: "12px", fontSize: "13px" }}>
-                You can also contribute by improving the code, adding hagiography data, translating the
-                interface, or simply spreading the word. All forms of support are deeply appreciated.
-              </p>
             </div>
 
           </div>
         </div>
       )}
+    </div>
+  );
+}
+
+// ── Support Section ───────────────────────────────────────────────────────────
+function SupportSection() {
+  return (
+    <div className="about-section support-section-standalone">
+      <div className="support-standalone-inner">
+        <div className="support-standalone-text">
+          <h3 className="support-standalone-heading">☕ Support this Project</h3>
+          <p className="about-text">
+            This calendar has been a volunteer labour of faith since <strong>1993</strong>. Running a public
+            API and iCal feed has real costs — server hosting, bandwidth, and the many hours spent
+            curating and verifying liturgical data for every tradition.
+          </p>
+          <p className="about-text">
+            If this calendar serves you, your parish, or your community, please consider a donation.
+            Every contribution — large or small — goes directly toward keeping the service free,
+            expanding the data set to more traditions, and improving the application for everyone.
+          </p>
+          <p className="about-text" style={{ fontSize: "13px", opacity: 0.8 }}>
+            You can also contribute by improving the code, adding hagiography data, or simply spreading
+            the word. All forms of support are deeply appreciated.
+          </p>
+        </div>
+        <div className="support-standalone-action">
+          <a
+            href="https://ko-fi.com/nikolareljin"
+            target="_blank"
+            rel="noreferrer"
+            className="support-btn support-kofi support-kofi-large"
+          >
+            ☕ Support on Ko-fi
+          </a>
+          <p className="support-tagline">Keep the calendar free for everyone</p>
+        </div>
+      </div>
     </div>
   );
 }
