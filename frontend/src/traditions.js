@@ -127,7 +127,7 @@ export const TRADITIONS = {
   },
   // ── Church of the East ──────────────────────────────────────────────────────
   assyrian: {
-    label: "Assyrian", calendar: "Gregorian", note: "Church of the East",
+    label: "Assyrian", calendar: "Gregorian / Assyrian", note: "Church of the East",
     website: "https://www.assyrianchurch.org",
     founded: "1st century AD (Apostolic)",
     patron: "Saints Thomas, Addai, and Mari",
