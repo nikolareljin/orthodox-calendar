@@ -58,7 +58,7 @@ _RUSSIAN_PATTERNS = [
     r"\bmatrona\b",
     r"\bjohn.*kronstadt\b|\bkronstadt.*john\b",
     r"\bxenia.*petersburg\b",
-    r"\bherma.*alaska\b|\balaska.*herman\b",
+    r"\bherman.*alaska\b|\balaska.*herman\b",
     # Canonized by ROC explicit
     r"\bcanonized.*russian\b",
     r"\bpatriarch of moscow\b",

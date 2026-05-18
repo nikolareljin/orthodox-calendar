@@ -41,7 +41,7 @@ _ETH_MONTHS: dict[str, tuple[int, int]] = {
     "Hidar":    (11, 10),
     "Tahsas":   (12, 10),
     "Tir":      (1, 9),
-    "Ter":      (1, 9),     # spelling variant
+    "Ter":      (1, 9),     # attested variant spelling used by ethiopianorthodox.org
     "Yekatit":  (2, 8),
     "Megabit":  (3, 10),
     "Miyazya":  (4, 9),
@@ -49,7 +49,10 @@ _ETH_MONTHS: dict[str, tuple[int, int]] = {
     "Sene":     (6, 8),
     "Hamle":    (7, 8),
     "Nehase":   (8, 7),
-    "Nehassie": (8, 7),     # spelling variant
+    "Nehassie": (8, 7),     # attested variant spelling used by ethiopianorthodox.org
+    # NOTE: Pagume entries must use day <= 5 (6 in Ethiopian leap years only).
+    # Pagume 6 maps to Sep 11 = Meskerem 1 of the next year (collision avoided
+    # because day 6 only exists in a leap year where Meskerem 1 is Sep 12).
     "Pagume":   (9, 6),
 }
 

@@ -68,22 +68,6 @@ _DATE_RE = re.compile(r"\b(\d{2})\.(\d{2})\.(\d{4})\b")
 _DATE_RANGE_RE = re.compile(r"\b\d{2}\.\d{2}\.\d{4}\s*[-–]\s*\d{2}\.\d{2}\.\d{4}\b")
 
 
-class _LinkExtractor(HTMLParser):
-    def __init__(self, prefix: str):
-        super().__init__()
-        self.prefix = prefix
-        self.links: list[str] = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == "a":
-            attrs_dict = dict(attrs)
-            href = attrs_dict.get("href", "")
-            if href.startswith(self.prefix) and href != self.prefix:
-                full = BASE_URL + href if href.startswith("/") else href
-                if full not in self.links:
-                    self.links.append(full)
-
-
 class _FeastHeaderExtractor(HTMLParser):
     """Extract feast name + date from armenianchurch.org feast pages.
 

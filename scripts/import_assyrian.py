@@ -39,14 +39,6 @@ _SKIP_TEXTS = frozenset({
 
 _NON_LATIN_RE = re.compile(r"[^\x00-\x7FÀ-ɏḀ-ỿ]")
 
-_MOVEABLE_RE = re.compile(
-    r"\b(?:1st|2nd|3rd|4th|5th|6th|7th)\s+(?:sunday|week|friday)\b"
-    r"|\bsunday\s+of\b"
-    r"|\bpassover\b|\bpalm\b|\bpentecost\b"
-    r"|\bfast\s+of\s+(?:nineveh|virgi?n|apostles)\b",
-    re.IGNORECASE,
-)
-
 
 def _clean(text: str) -> str:
     text = re.sub(r"\s+", " ", text.strip())

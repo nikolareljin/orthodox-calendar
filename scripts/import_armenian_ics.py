@@ -46,6 +46,9 @@ _HEADERS = {
     "User-Agent": "orthodox-calendar-importer/1.0 (https://github.com/nikolareljin/orthodox-calendar)",
     "Referer": ICS_REFERER,
 }
+_WIKI_HEADERS = {
+    "User-Agent": "orthodox-calendar-importer/1.0 (https://github.com/nikolareljin/orthodox-calendar)",
+}
 
 # ──────────────────────────────────────────────────────────
 # ICS parsing
@@ -240,7 +243,7 @@ def _extract_text(page: dict) -> str | None:
 
 def _api_get(params: dict) -> dict:
     url = WIKI_API + "?" + urllib.parse.urlencode({**params, "format": "json"})
-    req = urllib.request.Request(url, headers=_HEADERS)
+    req = urllib.request.Request(url, headers=_WIKI_HEADERS)
     with urllib.request.urlopen(req, timeout=30) as r:
         return json.loads(r.read())
 
