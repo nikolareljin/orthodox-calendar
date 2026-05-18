@@ -359,7 +359,7 @@ function DayDetail({ saints, readings, moonPhase, loading, error, year, month, d
         <h2>{formatGregorianDate(year, month, day)}</h2>
         {entry && entry.calendar_date && (
           <p className="cal-date-note">
-            {entry.calendar_date} ({entry.calendar_system === "julian" ? "Old Style / Julian" : "New Calendar"})
+            {entry.calendar_date} ({entry.calendar_system === "julian" ? "Old Style / Julian" : "Revised / New Calendar"})
           </p>
         )}
         {tradition === "ethiopian" && (() => {
