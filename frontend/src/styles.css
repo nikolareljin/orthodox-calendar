@@ -754,7 +754,8 @@ body {
 .canonized-pill.scope-universal  { background: rgba(255,215,0,0.15); color: #c8a800; border: 1px solid rgba(255,215,0,0.3); }
 .canonized-pill.scope-pan-orthodox { background: rgba(100,160,255,0.15); color: #5090e0; border: 1px solid rgba(100,160,255,0.3); }
 .canonized-pill.scope-local      { background: rgba(120,200,120,0.15); color: #5a9e5a; border: 1px solid rgba(120,200,120,0.3); }
-.canonized-pill.scope-oriental   { background: rgba(200,130,50,0.15);  color: #b07030; border: 1px solid rgba(200,130,50,0.3); }
+.canonized-pill.scope-oriental         { background: rgba(200,130,50,0.15);  color: #b07030; border: 1px solid rgba(200,130,50,0.3); }
+.canonized-pill.scope-church-of-the-east { background: rgba(130,80,200,0.15); color: #8040c0; border: 1px solid rgba(130,80,200,0.3); }
 
 .expand-icon {
   font-size: 12px;
