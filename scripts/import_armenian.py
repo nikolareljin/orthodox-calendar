@@ -248,7 +248,7 @@ def main() -> None:
                 print(f"  MOVEABLE: {name} ({feast.get('date_range', '?')})", file=sys.stderr)
                 if not args.include_moveable:
                     continue
-                month_day = None
+                month_day = feast.get("month_day")
             else:
                 month_day = feast.get("month_day")
                 print(f"  {month_day}: {name}", file=sys.stderr)
@@ -256,12 +256,14 @@ def main() -> None:
             if not month_day:
                 continue
 
+            description = feast.get("description") or None
+            notes = (f"(moveable) {description}" if description else "(moveable)") if moveable else description
             saint = {
                 "name": _short_name(name),
                 "title": name,
                 "feast_type": _feast_type(name),
                 "hagiography_url": url,
-                "notes": feast.get("description") or None,
+                "notes": notes,
                 "canonized_by": "Armenian Apostolic Church",
                 "canonization_scope": "oriental",
                 "year_canonized": None,
