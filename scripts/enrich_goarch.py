@@ -36,7 +36,6 @@ import re
 import sys
 import time
 import urllib.request
-import urllib.parse
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -198,7 +197,6 @@ def main() -> None:
         for gs in goarch_saints:
             name = gs["name"]
             goarch_url = gs["goarch_url"]
-            contentid = gs["contentid"]
 
             norm_keys = saint_keys(name)
             matched_saint = None

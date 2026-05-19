@@ -50,10 +50,6 @@ _SAINT_TERMS = frozenset({
     "priest", "monk", "nun", "confessor", "deacon", "venerable", "blessed",
     "theologian", "abbot", "abbess", "hermit", "ascetic",
 })
-_RELIGIOUS_CONTEXT = frozenset({
-    "orthodox", "christian", "byzantine", "coptic", "catholic",
-    "church father", "canonized", "canonised", "hagiograph",
-})
 _WEAK_WORDS = frozenset({
     "thomas", "james", "simon", "peter", "mark", "john", "paul", "stephen",
     "michael", "george", "mary", "andrew", "philip", "matthew", "joseph",
@@ -82,7 +78,7 @@ def _is_religious(text: str) -> bool:
     """Return True only when the extract describes an actual saint or religious figure.
 
     Requires at least one term from _SAINT_TERMS (saint, martyr, bishop…).
-    _RELIGIOUS_CONTEXT alone ("orthodox", "christian") is insufficient — those words
+    Broad context words ("orthodox", "christian") are insufficient alone — they
     appear in many non-saint articles (institutions, movements, geography).
     """
     lower = text.lower()

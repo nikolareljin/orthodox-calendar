@@ -42,21 +42,26 @@ OCA_PATH = Path("backend/app/data/oca_julian.json")
 # orthocal.info Julian API takes CIVIL Gregorian dates and returns the saints
 # observed on that civil date by Julian-calendar churches.
 # Our oca_julian.json is keyed by JULIAN ECCLESIASTICAL dates.
-# Julian Jan 1 (ecclesiastical) = civil Jan 14 (21st century, +13 days).
-# So to get stories for "01-01" (Julian Jan 1) we must call the API at civil
-# January 14.  Conversion: civil_date = julian_date + 13 days.
-from datetime import date as _date, timedelta as _td  # noqa: E402
+# Conversion uses JDN arithmetic (works for any century, not just 1900–2099).
 
 
 def julian_mm_dd_to_civil(julian_month: int, julian_day: int, year: int = 2024) -> tuple[int, int, int]:
-    """Convert a Julian ecclesiastical MM-DD to its civil (Gregorian) year/month/day."""
-    try:
-        julian = _date(year, julian_month, julian_day)
-    except ValueError:
-        # Feb 29 Julian doesn't exist in non-leap years; use year 2024 (leap)
-        julian = _date(2024, julian_month, julian_day)
-    civil = julian + _td(days=13)
-    return civil.year, civil.month, civil.day
+    """Convert a Julian ecclesiastical MM-DD to its civil (Gregorian) year/month/day via JDN."""
+    # year=2024 (leap) ensures Feb 29 Julian is always valid as input
+    a = (14 - julian_month) // 12
+    y = year + 4800 - a
+    m = julian_month + 12 * a - 3
+    jdn = julian_day + (153 * m + 2) // 5 + 365 * y + y // 4 - 32083
+    a4 = jdn + 32044
+    b4 = (4 * a4 + 3) // 146097
+    c4 = a4 - (146097 * b4) // 4
+    d4 = (4 * c4 + 3) // 1461
+    e4 = c4 - (1461 * d4) // 4
+    m4 = (5 * e4 + 2) // 153
+    gday = e4 - (153 * m4 + 2) // 5 + 1
+    gmonth = m4 + 3 - 12 * (m4 // 10)
+    gyear = 100 * b4 + d4 - 4800 + m4 // 10
+    return gyear, gmonth, gday
 
 _STRIP_DATE_RE = re.compile(r"\s*\(?\d{3,4}\)?\s*$")  # strip trailing " (379)" year
 

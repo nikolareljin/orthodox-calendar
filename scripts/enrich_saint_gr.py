@@ -47,7 +47,6 @@ _GR_HONORIFICS = re.compile(
     r'Οσιομάρτυρας|Αθλοφόρος|Ομολογητής|Ανακομιδή|Σύναξη|Εύρεση)\s+',
     re.IGNORECASE,
 )
-_GR_SUFFIX = re.compile(r'\s+(?:ο|η|της|του|εκ|από|εν|ο\s+\w+)\s+\S+.*$', re.IGNORECASE)
 _PURE_EVENT_GR = re.compile(
     r'^(?:Ανακομιδή|Σύναξη|Εύρεση|Κατάθεση|Μεταφορά|Εγκαίνια|Πανήγυρις|'
     r'Μνήμη|Εορτή|Αποκεφαλισμός|Σύλληψη|Γέννηση|Κοίμηση|Μεταμόρφωση|'
@@ -88,17 +87,13 @@ _SAINT_TERMS = frozenset({
     "monk", "nun", "priest", "abbot", "confessor", "deacon", "hermit",
     "venerable", "blessed", "theologian",
 })
-_RELIGIOUS_CONTEXT = frozenset({
-    "orthodox", "christian", "byzantine", "coptic", "church father",
-    "canonized", "canonised", "hagiograph",
-})
 
 
 def _is_religious(text: str) -> bool:
     """Return True only when the extract describes an actual saint or religious figure.
 
     Requires at least one term from _SAINT_TERMS (saint, martyr, bishop…).
-    _RELIGIOUS_CONTEXT alone ("orthodox", "christian") is insufficient — those words
+    Broad context words ("orthodox", "christian") are insufficient alone — they
     appear in many non-saint articles (institutions, movements, geography).
     """
     lower = text.lower()
