@@ -422,8 +422,8 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
 
     Searches across all traditions. If month_day is given, searches only that
     date's entries first (faster + less ambiguity) before falling back to all
-    dates. Among all name matches, selects the candidate with the richest
-    hagiography text rather than the first hit.
+    dates. Among all name matches, selects the best candidate by field
+    priority (extended_notes > notes > hagiography_url) rather than first hit.
     """
     query_keys = set(_saint_keys(Saint(name=saint_name)))
 
@@ -480,10 +480,8 @@ def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
         source = "oca"
     elif saint.notes:
         source = "notes"
-    elif saint.hagiography_url:
-        # URL available but no local text
-        source = "oca"
     else:
+        # No local text — source reflects the hagiography field, not URL presence
         source = "not_found"
     # Return the raw stored URL — no calendar_date context is available here,
     # so rebuilding via _resolve_hagiography_url would emit a broken 0000 URL.
