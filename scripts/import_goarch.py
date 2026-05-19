@@ -38,6 +38,73 @@ CALENDAR_URL = CHAPEL_BASE + "/calendar"
 SAINT_URL_TEMPLATE = CHAPEL_BASE + "/saints?contentid={contentid}"
 
 # ---------------------------------------------------------------------------
+# Stealth: hide Playwright/automation signals from Cloudflare bot detection
+# ---------------------------------------------------------------------------
+
+_STEALTH_ARGS = [
+    "--disable-blink-features=AutomationControlled",
+    "--disable-infobars",
+    "--no-first-run",
+    "--no-default-browser-check",
+    "--disable-component-update",
+    "--disable-background-timer-throttling",
+    "--disable-renderer-backgrounding",
+    "--disable-backgrounding-occluded-windows",
+    "--start-maximized",
+]
+
+# Injected before every page script — patches all CF-visible automation signals.
+_STEALTH_JS = """
+// 1. Hide webdriver flag (primary CF signal)
+Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+try { delete navigator.__proto__.webdriver; } catch(_) {}
+
+// 2. Realistic plugin list (headless Chromium has none)
+const _pluginData = [
+    {name:'Chrome PDF Plugin',   filename:'internal-pdf-viewer',
+     description:'Portable Document Format'},
+    {name:'Chrome PDF Viewer',   filename:'mhjfbmdgcfjbbpaeojofohoefgiehjai',
+     description:''},
+    {name:'Native Client',       filename:'internal-nacl-plugin',
+     description:''},
+];
+Object.defineProperty(navigator, 'plugins', {
+    get: () => {
+        const arr = _pluginData.map(p => Object.assign(Object.create(Plugin.prototype), p));
+        Object.setPrototypeOf(arr, PluginArray.prototype);
+        return arr;
+    }
+});
+
+// 3. Languages
+Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
+
+// 4. window.chrome runtime (absent in automated Chromium)
+if (!window.chrome) window.chrome = {};
+if (!window.chrome.runtime) window.chrome.runtime = {};
+if (!window.chrome.loadTimes) window.chrome.loadTimes = function(){};
+if (!window.chrome.csi) window.chrome.csi = function(){};
+
+// 5. Permissions API — CF checks this for automation
+const _origPermQuery = window.navigator.permissions?.query?.bind(navigator.permissions);
+if (_origPermQuery) {
+    window.navigator.permissions.__proto__.query = (params) =>
+        params.name === 'notifications'
+            ? Promise.resolve({state: Notification.permission, onchange: null})
+            : _origPermQuery(params);
+}
+
+// 6. Hide Playwright-specific globals
+delete window.__playwright;
+delete window.__pw_manual;
+"""
+
+_USER_AGENT = (
+    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
+)
+
+# ---------------------------------------------------------------------------
 # Julian date handling
 # ---------------------------------------------------------------------------
 # GOARCH uses the New (Revised Julian) Calendar, whose fixed feast dates share
@@ -262,18 +329,37 @@ def main() -> None:
     print(f"Scraping GOARCH chapel calendar year={args.year} headless={headless}...", file=sys.stderr)
     print(f"Browser profile: {profile_dir}", file=sys.stderr)
 
+    # Prefer system Chromium (real binary = more realistic fingerprint than
+    # Playwright's bundled Chromium).  Fall back to Playwright's own build.
+    _SYSTEM_CHROME_CANDIDATES = [
+        "/snap/bin/chromium",
+        "/usr/bin/chromium",
+        "/usr/bin/chromium-browser",
+        "/usr/bin/google-chrome",
+        "/usr/bin/google-chrome-stable",
+    ]
+    executable_path = next(
+        (p for p in _SYSTEM_CHROME_CANDIDATES if Path(p).exists()), None
+    )
+    if executable_path:
+        print(f"Using system browser: {executable_path}", file=sys.stderr)
+    else:
+        print("Using Playwright bundled Chromium", file=sys.stderr)
+
     with sync_playwright() as pw:
         # Persistent context keeps cf_clearance cookie across navigations and reruns.
         context = pw.chromium.launch_persistent_context(
             str(profile_dir),
             headless=headless,
-            user_agent=(
-                "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-            ),
-            args=["--disable-blink-features=AutomationControlled"],
+            executable_path=executable_path,
+            user_agent=_USER_AGENT,
+            viewport={"width": 1280, "height": 900},
+            locale="en-US",
+            timezone_id="America/New_York",
+            args=_STEALTH_ARGS,
         )
         page = context.new_page()
+        page.add_init_script(_STEALTH_JS)
 
         # Pre-flight: navigate to goarch.org root once to acquire cf_clearance.
         # After solving the challenge here, subsequent month-page navigations
