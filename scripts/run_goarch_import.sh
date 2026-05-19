@@ -6,8 +6,17 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 cd "$REPO_ROOT"
 
+VENV="$REPO_ROOT/.venv-import"
+
+echo "=== Setting up virtual environment ==="
+if [ ! -d "$VENV" ]; then
+    python3 -m venv "$VENV"
+fi
+# shellcheck disable=SC1091
+source "$VENV/bin/activate"
+
 echo "=== Installing import dependencies ==="
-pip install -r scripts/requirements-import.txt
+pip install --quiet -r scripts/requirements-import.txt
 
 echo "=== Installing Playwright Chromium ==="
 playwright install chromium
