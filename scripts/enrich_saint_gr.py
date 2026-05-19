@@ -97,12 +97,12 @@ _RELIGIOUS_CONTEXT = frozenset({
 def _is_religious(text: str) -> bool:
     """Return True only when the extract describes an actual saint or religious figure.
 
-    Requires at least one strong saint-specific term (saint, martyr, bishop…) to avoid
-    accepting pages about buildings, organisations, or public figures that happen to
-    mention "church" or "holy" in passing.
+    Requires at least one term from _SAINT_TERMS (saint, martyr, bishop…).
+    _RELIGIOUS_CONTEXT alone ("orthodox", "christian") is insufficient — those words
+    appear in many non-saint articles (institutions, movements, geography).
     """
     lower = text.lower()
-    return any(t in lower for t in _SAINT_TERMS) or any(t in lower for t in _RELIGIOUS_CONTEXT)
+    return any(t in lower for t in _SAINT_TERMS)
 
 
 def wiki_search(term: str, delay: float) -> dict | None:

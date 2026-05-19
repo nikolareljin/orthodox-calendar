@@ -94,8 +94,9 @@ def _parse_contentid(href: str) -> int | None:
 
 def _parse_month_day(href: str, month: int) -> str | None:
     """Extract MM-DD from contentdate param or fall back to provided month."""
-    # Try URL-decoded first
-    href_decoded = href.replace("%2F", "/")
+    # Decode percent-encoding case-insensitively (%2F and %2f both → /)
+    import urllib.parse as _up
+    href_decoded = _up.unquote(href)
     m = _DATE_DECODED_RE.search(href_decoded)
     if m:
         mo, day = int(m.group(1)), int(m.group(2))

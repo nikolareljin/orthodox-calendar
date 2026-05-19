@@ -147,6 +147,7 @@ def main() -> None:
         args.end = "01-31"
 
     out_path = Path(args.out)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
     result: dict[str, list[dict]] = {}
 
     # Merge existing output if present (allows resuming interrupted runs)

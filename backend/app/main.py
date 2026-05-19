@@ -126,11 +126,15 @@ def readings(
 
     trad = TRADITIONS[canonical]
     calendar = effective_calendar(day, trad)
-    # orthocal.info always takes civil (Gregorian) dates. The "julian" path uses the
-    # Julian Pascha computus and returns the Old-Calendar liturgical cycle (fixed feasts
-    # + movable feasts relative to Julian Pascha). The "gregorian" path uses the same
-    # Julian computus but exposes the New/Revised-Julian Calendar cycle. Both endpoints
-    # are keyed by civil date, not by the tradition's internal calendar date.
+    # orthocal.info always takes civil (Gregorian) dates — do NOT convert to
+    # Julian calendar date before calling. The "julian" path selects the Old-
+    # Calendar liturgical cycle (fixed feasts + movable feasts relative to Julian
+    # Pascha); the "gregorian" path selects the New/Revised-Julian cycle.
+    #
+    # Empirically verified (civil 2026-05-19 = Julian 2026-05-06):
+    #   julian/2026/5/6  → weekday=3 (Wed), "4th Sunday of Pascha"  ← WRONG
+    #   julian/2026/5/19 → weekday=2 (Tue), "6th Sunday of Pascha"  ← correct
+    # Passing the Julian calendar date is the bug this line intentionally avoids.
     cal = "julian" if calendar == CalendarSystem.JULIAN else "gregorian"
     api_year, api_month, api_day = day.year, day.month, day.day
     url = f"https://orthocal.info/api/{cal}/{api_year}/{api_month}/{api_day}/"

@@ -81,11 +81,12 @@ def _extract_text(page: dict) -> str | None:
 def _is_religious(text: str) -> bool:
     """Return True only when the extract describes an actual saint or religious figure.
 
-    Requires a strong saint-specific term to avoid false positives on pages about
-    buildings, organisations, or public figures that mention "church" or "holy" incidentally.
+    Requires at least one term from _SAINT_TERMS (saint, martyr, bishop…).
+    _RELIGIOUS_CONTEXT alone ("orthodox", "christian") is insufficient — those words
+    appear in many non-saint articles (institutions, movements, geography).
     """
     lower = text.lower()
-    return any(t in lower for t in _SAINT_TERMS) or any(t in lower for t in _RELIGIOUS_CONTEXT)
+    return any(t in lower for t in _SAINT_TERMS)
 
 
 def fetch_extracts(titles: list[str], delay: float) -> dict[str, dict]:

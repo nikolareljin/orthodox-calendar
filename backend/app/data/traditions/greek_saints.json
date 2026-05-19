@@ -426,26 +426,6 @@
     ]
   },
   {
-    "month_day": "06-07",
-    "tradition": "greek",
-    "calendar": "revised",
-    "saints": [
-      {
-        "name": "Christoph Willibald Gluck",
-        "title": "Christoph Willibald Gluck",
-        "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/Christoph_Willibald_Gluck",
-        "notes": "Christoph Willibald Ritter von Gluck (; German: [ˈkʁɪstɔf ˈvɪlɪbalt ˈɡlʊk]; 2 July 1714 – 15 November 1787) was a composer of Italian and French opera in the early classical period. Born in the Upper Palatinate and raised in Bohemia, both part of the Holy Roman Empire at the time, he gained prominence at the Habsburg court in Vienna. There he brought about the practical reform of opera's dramaturg",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "local",
-        "year_canonized": null,
-        "saint_gr_id": 492,
-        "saint_gr_url": "https://www.saint.gr/492/saint.aspx",
-        "name_gr": "Άγιος Willibald"
-      }
-    ]
-  },
-  {
     "month_day": "06-24",
     "tradition": "greek",
     "calendar": "revised",
@@ -646,26 +626,6 @@
     ]
   },
   {
-    "month_day": "08-25",
-    "tradition": "greek",
-    "calendar": "revised",
-    "saints": [
-      {
-        "name": "Ebba",
-        "title": "Ebba",
-        "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/Ebba",
-        "notes": "Ebba is a feminine given name, the feminine version of Ebbe, which is a diminutive form of the Germanic name Eberhard or Everhard, meaning \"strong.\" Alternately, it may be a form of an Old English name Æbbe, of unknown derivation, which was the name of several early saints. The name was the 10th most popular name given to girls born in Sweden in 2009.",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "local",
-        "year_canonized": null,
-        "saint_gr_id": 3357,
-        "saint_gr_url": "https://www.saint.gr/3357/saint.aspx",
-        "name_gr": "Οσία Ebba η Πρεσβυτέρα"
-      }
-    ]
-  },
-  {
     "month_day": "08-27",
     "tradition": "greek",
     "calendar": "revised",
@@ -817,26 +777,6 @@
         "saint_gr_id": 2701,
         "saint_gr_url": "https://www.saint.gr/2701/saint.aspx",
         "name_gr": "Άγιος Eata του Hexham"
-      }
-    ]
-  },
-  {
-    "month_day": "11-03",
-    "tradition": "greek",
-    "calendar": "revised",
-    "saints": [
-      {
-        "name": "St Winefride's Well",
-        "title": "St Winefride's Well",
-        "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/St_Winefride%27s_Well",
-        "notes": "St Winefride's Well (Welsh: Ffynnon Wenffrewi) is a holy well and national shrine located in the town of Holywell in Flintshire, Wales. The patron saint of the well, St Winefride, was a 7th-century Christian martyr who according to legend was decapitated by a lustful prince and then miraculously restored to life. The well is said to have sprung up at the spot where her head hit the ground.",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "local",
-        "year_canonized": null,
-        "saint_gr_id": 2880,
-        "saint_gr_url": "https://www.saint.gr/2880/saint.aspx",
-        "name_gr": "Αγία Winefride του Treffynon"
       }
     ]
   },
