@@ -31,7 +31,7 @@ def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
 
     Scrape-year detection: tries to extract the year from the OCA URL of the Pascha
     entry (group 2 of _OCA_URL_DATE_RE). When the stored year is 0000 (year-neutral
-    storage), falls back to searching years 2015–2051 for one where
+    storage), falls back to searching years 2015–2050 for one where
     julian_pascha_as_gregorian(year) matches the Pascha entry's civil month/day.
     Notes are liturgically timeless and preserved as-is. URL date portions are
     stripped (only the stable id-slug tail is kept) and reconstructed at serve time.
