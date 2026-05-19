@@ -84,7 +84,7 @@ def fetch_stories(julian_month: int, julian_day: int) -> list[dict]:
             data = json.loads(resp.read())
         return [s for s in data.get("stories", []) if isinstance(s, dict) and s.get("story")]
     except Exception as exc:
-        print(f"  WARN {month:02d}-{day:02d}: {exc}", file=sys.stderr)
+        print(f"  WARN {julian_month:02d}-{julian_day:02d}: {exc}", file=sys.stderr)
         return []
 
 

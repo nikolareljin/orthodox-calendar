@@ -59,16 +59,26 @@ from datetime import date as _date, timedelta as _td
 
 
 def gregorian_to_julian_mm_dd(month: int, day: int, year: int = 2024) -> str:
-    """Convert a Gregorian civil date to its Julian calendar MM-DD equivalent.
+    """Convert a Gregorian civil date to its Julian calendar MM-DD equivalent via JDN.
 
-    For 21st-century dates the Julian calendar is 13 days BEHIND Gregorian,
-    so Julian date = Gregorian date − 13 days.  Only needed for saints whose
-    feast was assigned to a specific Gregorian civil date; traditional liturgical
-    feasts already share the same MM-DD in both calendars.
+    The Gregorian↔Julian offset grows over time (13 days in 1900–2099, 14 from 2100,
+    etc.), so the offset is computed from the year via Julian Day Number arithmetic
+    rather than being hardcoded.
     """
     greg = _date(year, month, day)
-    julian = greg - _td(days=13)
-    return f"{julian.month:02d}-{julian.day:02d}"
+    # Gregorian JDN
+    a = (14 - month) // 12
+    y = year + 4800 - a
+    m = month + 12 * a - 3
+    jdn = day + (153 * m + 2) // 5 + 365 * y + y // 4 - y // 100 + y // 400 - 32045
+    # JDN → Julian calendar
+    c = jdn + 32082
+    d4 = (4 * c + 3) // 1461
+    e4 = c - (1461 * d4) // 4
+    m4 = (5 * e4 + 2) // 153
+    jday = e4 - (153 * m4 + 2) // 5 + 1
+    jmonth = m4 + 3 - 12 * (m4 // 10)
+    return f"{jmonth:02d}-{jday:02d}"
 
 
 _CONTENTID_RE = re.compile(r"contentid=(\d+)", re.IGNORECASE)

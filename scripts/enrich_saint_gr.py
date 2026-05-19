@@ -83,16 +83,26 @@ def _extract_text(page: dict) -> str | None:
     return " ".join(sentences[:3])[:400].strip()
 
 
-_RELIGIOUS_TERMS = frozenset({
-    "saint", "martyr", "bishop", "patriarch", "apostle", "monk", "nun",
-    "priest", "abbot", "orthodox", "christian", "church", "theologian",
-    "venerable", "holy", "blessed", "confessor", "deacon", "hermit",
+_SAINT_TERMS = frozenset({
+    "saint", "martyr", "hieromartyr", "bishop", "patriarch", "apostle",
+    "monk", "nun", "priest", "abbot", "confessor", "deacon", "hermit",
+    "venerable", "blessed", "theologian",
+})
+_RELIGIOUS_CONTEXT = frozenset({
+    "orthodox", "christian", "byzantine", "coptic", "church father",
+    "canonized", "canonised", "hagiograph",
 })
 
 
 def _is_religious(text: str) -> bool:
+    """Return True only when the extract describes an actual saint or religious figure.
+
+    Requires at least one strong saint-specific term (saint, martyr, bishop…) to avoid
+    accepting pages about buildings, organisations, or public figures that happen to
+    mention "church" or "holy" in passing.
+    """
     lower = text.lower()
-    return any(t in lower for t in _RELIGIOUS_TERMS)
+    return any(t in lower for t in _SAINT_TERMS) or any(t in lower for t in _RELIGIOUS_CONTEXT)
 
 
 def wiki_search(term: str, delay: float) -> dict | None:

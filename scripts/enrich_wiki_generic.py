@@ -45,11 +45,14 @@ _PURE_LITURGICAL_RE = re.compile(
     r"thursday|friday|saturday|lent|holy week|pascha|easter)\b",
     re.IGNORECASE,
 )
-_RELIGIOUS_TERMS = frozenset({
-    "saint", "martyr", "bishop", "patriarch", "apostle", "pope", "priest",
-    "monk", "nun", "virgin", "confessor", "deacon", "church", "christian",
-    "blessed", "venerable", "holy", "orthodox", "byzantine", "coptic",
-    "catholic", "theologian", "abbot", "abbess", "hermit", "ascetic",
+_SAINT_TERMS = frozenset({
+    "saint", "martyr", "hieromartyr", "bishop", "patriarch", "apostle", "pope",
+    "priest", "monk", "nun", "confessor", "deacon", "venerable", "blessed",
+    "theologian", "abbot", "abbess", "hermit", "ascetic",
+})
+_RELIGIOUS_CONTEXT = frozenset({
+    "orthodox", "christian", "byzantine", "coptic", "catholic",
+    "church father", "canonized", "canonised", "hagiograph",
 })
 _WEAK_WORDS = frozenset({
     "thomas", "james", "simon", "peter", "mark", "john", "paul", "stephen",
@@ -76,8 +79,13 @@ def _extract_text(page: dict) -> str | None:
 
 
 def _is_religious(text: str) -> bool:
+    """Return True only when the extract describes an actual saint or religious figure.
+
+    Requires a strong saint-specific term to avoid false positives on pages about
+    buildings, organisations, or public figures that mention "church" or "holy" incidentally.
+    """
     lower = text.lower()
-    return any(term in lower for term in _RELIGIOUS_TERMS)
+    return any(t in lower for t in _SAINT_TERMS) or any(t in lower for t in _RELIGIOUS_CONTEXT)
 
 
 def fetch_extracts(titles: list[str], delay: float) -> dict[str, dict]:

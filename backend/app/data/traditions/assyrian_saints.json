@@ -59,8 +59,8 @@
         "name": "St. George the martyr",
         "title": "Commemoration of St. George the martyr",
         "feast_type": "Martyr",
-        "hagiography_url": "https://en.wikipedia.org/wiki/St_George_the_Martyr%2C_Southwark",
-        "notes": "St George the Martyr is a church in the historic Borough district of south London. It lies within the modern-day London Borough of Southwark, on Borough High Street at the junction with Long Lane, Marshalsea Road, and Tabard Street. St George the Martyr is named after Saint George.",
+        "hagiography_url": null,
+        "notes": null,
         "canonized_by": null,
         "canonization_scope": "church-of-the-east",
         "year_canonized": null
@@ -120,8 +120,8 @@
         "name": "The Virgin Mary",
         "title": "Commemoration of the Virgin Mary",
         "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/House_of_the_Virgin_Mary",
-        "notes": "The House of the Virgin Mary (Turkish: Meryemana Evi or Meryem Ana Evi, \"Mother Mary's House\") is a Catholic shrine located on Mt. Koressos (Turkish: Bülbüldağı, \"Mount Nightingale\") in the vicinity of Ephesus, 7 kilometres (4.3 mi) from Selçuk in Turkey. The house was discovered in the 19th century by following the descriptions in the reported visions of Blessed Anne Catherine Emmerich (1774–1824",
+        "hagiography_url": null,
+        "notes": null,
         "canonized_by": null,
         "canonization_scope": "church-of-the-east",
         "year_canonized": null
@@ -154,8 +154,8 @@
         "name": "St. Ephraim the Teacher",
         "title": "Commemoration of St. Ephraim the Teacher",
         "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/Ephraim_Kyriakos",
-        "notes": "Metropolitan Ephraim (secular name Michel Kyriakos; born April 15, 1943) is the Metropolitan Archbishop of the Archdiocese of Tripoli, al-Koura and Dependencies of the Greek Orthodox Patriarchate of Antioch and All the East.",
+        "hagiography_url": null,
+        "notes": null,
         "canonized_by": null,
         "canonization_scope": "church-of-the-east",
         "year_canonized": null
@@ -290,8 +290,8 @@
         "name": "The Virgin Mary",
         "title": "Commemoration of the Virgin Mary",
         "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/House_of_the_Virgin_Mary",
-        "notes": "The House of the Virgin Mary (Turkish: Meryemana Evi or Meryem Ana Evi, \"Mother Mary's House\") is a Catholic shrine located on Mt. Koressos (Turkish: Bülbüldağı, \"Mount Nightingale\") in the vicinity of Ephesus, 7 kilometres (4.3 mi) from Selçuk in Turkey. The house was discovered in the 19th century by following the descriptions in the reported visions of Blessed Anne Catherine Emmerich (1774–1824",
+        "hagiography_url": null,
+        "notes": null,
         "canonized_by": null,
         "canonization_scope": "church-of-the-east",
         "year_canonized": null

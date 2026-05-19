@@ -126,9 +126,11 @@ def readings(
 
     trad = TRADITIONS[canonical]
     calendar = effective_calendar(day, trad)
-    # orthocal.info always takes civil (Gregorian) dates; the "julian" vs "gregorian"
-    # path selects the Pascha computus (Julian = same for all Orthodox traditions),
-    # not the date coordinate system.
+    # orthocal.info always takes civil (Gregorian) dates. The "julian" path uses the
+    # Julian Pascha computus and returns the Old-Calendar liturgical cycle (fixed feasts
+    # + movable feasts relative to Julian Pascha). The "gregorian" path uses the same
+    # Julian computus but exposes the New/Revised-Julian Calendar cycle. Both endpoints
+    # are keyed by civil date, not by the tradition's internal calendar date.
     cal = "julian" if calendar == CalendarSystem.JULIAN else "gregorian"
     api_year, api_month, api_day = day.year, day.month, day.day
     url = f"https://orthocal.info/api/{cal}/{api_year}/{api_month}/{api_day}/"

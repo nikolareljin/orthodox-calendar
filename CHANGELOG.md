@@ -13,7 +13,7 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 - **Full hagiography text stored offline** — `oca_julian.json` now stores complete
-  hagiographic texts from `orthocal.info` stories for 230 major saints (Basil the Great,
+  hagiographic texts from `orthocal.info` stories for 408 major saints (Basil the Great,
   Seraphim of Sarov, Theophan the Recluse, etc. — up to 4,450 chars each).  Removes the
   need to open an external URL for these saints.  Previously notes were truncated at 500
   characters.

@@ -29,10 +29,11 @@ def test_readings_upstream_failure_returns_502(monkeypatch) -> None:
 
 
 def test_readings_always_pass_civil_date_to_orthocal(monkeypatch) -> None:
-    """orthocal.info always receives the civil (Gregorian) date; the julian/gregorian
-    path selects the Pascha computus only.  In year 2800 Revised Julian diverges from
-    Gregorian, but we still pass the civil date so the liturgical week (counted from the
-    civil Pascha date) is correct."""
+    """orthocal.info always receives the civil (Gregorian) date regardless of tradition.
+    The julian/gregorian path selects the upstream calendar cycle (Old vs New Calendar
+    liturgical cycle), not the date coordinate system.  In year 2800 Revised Julian
+    diverges from Gregorian, but we still pass the civil date so the liturgical week
+    is anchored to the correct civil Pascha date."""
     requested_urls = []
 
     class FakeResponse(BytesIO):

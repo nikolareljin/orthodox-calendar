@@ -747,26 +747,6 @@
     ]
   },
   {
-    "month_day": "09-23",
-    "tradition": "greek",
-    "calendar": "revised",
-    "saints": [
-      {
-        "name": "St Adamnan's Church, Lonan",
-        "title": "St Adamnan's Church, Lonan",
-        "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/St_Adamnan%27s_Church%2C_Lonan",
-        "notes": "St Adamnan's Church (also known as \"Lonan Old Church\" and originally known in Manx as Keeill ny-Traie, or \"the chapel by the shore\") is the former parish church of Lonan in the Isle of Man. The church is situated in an isolated position, surrounded by open farmland on the eastern coast of the island, between Groudle Glen and Baldrine. The eastern (and oldest) part of the church has been restored,",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "local",
-        "year_canonized": null,
-        "saint_gr_id": 2336,
-        "saint_gr_url": "https://www.saint.gr/2336/saint.aspx",
-        "name_gr": "Άγιος Adamnan"
-      }
-    ]
-  },
-  {
     "month_day": "09-24",
     "tradition": "greek",
     "calendar": "revised",
@@ -797,46 +777,6 @@
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "local",
         "year_canonized": null
-      }
-    ]
-  },
-  {
-    "month_day": "09-30",
-    "tradition": "greek",
-    "calendar": "revised",
-    "saints": [
-      {
-        "name": "Pope Honorius III",
-        "title": "Pope Honorius III",
-        "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/Pope_Honorius_III",
-        "notes": "Pope Honorius III (c. 1150 – 18 March 1227), born Cencio Savelli, was head of the Catholic Church and ruler of the Papal States from 18 July 1216 to his death. A canon at the Basilica di Santa Maria Maggiore, he came to hold a number of important administrative positions, including that of Camerlengo.",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "local",
-        "year_canonized": null,
-        "saint_gr_id": 1013,
-        "saint_gr_url": "https://www.saint.gr/1013/saint.aspx",
-        "name_gr": "Άγιος Honorius"
-      }
-    ]
-  },
-  {
-    "month_day": "10-11",
-    "tradition": "greek",
-    "calendar": "revised",
-    "saints": [
-      {
-        "name": "Kenneth Copeland",
-        "title": "Kenneth Copeland",
-        "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/Kenneth_Copeland",
-        "notes": "Kenneth Max Copeland (born December 6, 1936) is an American televangelist associated with the charismatic movement. He is the founder of Eagle Mountain International Church Inc. (EMIC), which is based in Tarrant County, Texas.",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "local",
-        "year_canonized": null,
-        "saint_gr_id": 2703,
-        "saint_gr_url": "https://www.saint.gr/2703/saint.aspx",
-        "name_gr": "Άγιος Kenneth"
       }
     ]
   },
@@ -877,26 +817,6 @@
         "saint_gr_id": 2701,
         "saint_gr_url": "https://www.saint.gr/2701/saint.aspx",
         "name_gr": "Άγιος Eata του Hexham"
-      }
-    ]
-  },
-  {
-    "month_day": "10-28",
-    "tradition": "greek",
-    "calendar": "revised",
-    "saints": [
-      {
-        "name": "Abban (musician)",
-        "title": "Abban (musician)",
-        "feast_type": "Saint",
-        "hagiography_url": "https://en.wikipedia.org/wiki/Abban_%28musician%29",
-        "notes": "Bernard Fiifi Abban (born 31 March 1989), ABBAN is a Reggae singer and songwriter from Ghana, West Africa. He deals in different genres of music ranging from Lovers Rock, Root Culture, Hip Life, Reggae, Dancehall. Abban graduated from Christian Methodist Senior High School in 2008 and proceeded to Jayee University College where he became the entertainment committee president.",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "local",
-        "year_canonized": null,
-        "saint_gr_id": 2831,
-        "saint_gr_url": "https://www.saint.gr/2831/saint.aspx",
-        "name_gr": "Άγιος Abban"
       }
     ]
   },
