@@ -16,7 +16,7 @@ from ..calendar_logic import (
 )
 from ..config import HAGIOGRAPHY_SOURCE
 from ..data_loader import build_index
-from ..models import CalendarEntry, CalendarSystem, Saint, SaintsResponse
+from ..models import CalendarEntry, CalendarSystem, HagiographyResponse, Saint, SaintsResponse
 
 _INDEX = build_index()
 
@@ -415,3 +415,54 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
             "calendar_date": calendar_date,
         }
     return result
+
+
+def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> HagiographyResponse:
+    """Find a saint by name (and optionally MM-DD) and return hagiography data.
+
+    Searches across all traditions. If month_day is given, searches only that
+    date's entries first (faster + less ambiguity) before falling back to all
+    dates. Returns the first match by name normalization.
+    """
+    query_keys = set(_saint_keys(Saint(name=saint_name)))
+
+    def _check_entries(entries: List[CalendarEntry]) -> Optional[Saint]:
+        for entry in entries:
+            for saint in entry.saints:
+                if query_keys.intersection(_saint_keys(saint)):
+                    return saint
+        return None
+
+    # Targeted search by date first
+    if month_day:
+        for tradition_entries in _INDEX.values():
+            dated = [e for e in tradition_entries if e.month_day == month_day]
+            found = _check_entries(dated)
+            if found:
+                return _format_hagiography_response(found)
+
+    # Full scan across all traditions
+    for tradition_entries in _INDEX.values():
+        found = _check_entries(tradition_entries)
+        if found:
+            return _format_hagiography_response(found)
+
+    return HagiographyResponse(saint=saint_name, source="not_found")
+
+
+def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
+    if saint.goarch_url:
+        source = "goarch"
+    elif saint.hagiography_url:
+        source = "oca"
+    elif saint.notes:
+        source = "notes"
+    else:
+        source = "not_found"
+    return HagiographyResponse(
+        saint=saint.title or saint.name,
+        hagiography=saint.extended_notes or saint.notes,
+        goarch_url=saint.goarch_url,
+        hagiography_url=saint.hagiography_url,
+        source=source,
+    )

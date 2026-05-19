@@ -18,9 +18,9 @@ from .calendar_logic import (
 )
 from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _moon_phase
 from .config import HAGIOGRAPHY_SOURCE, TRADITIONS
-from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
+from .models import CalendarSystem, Contact, HagiographyResponse, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
-from .services.saints import get_saints_for_date, get_saints_for_month
+from .services.saints import get_hagiography, get_saints_for_date, get_saints_for_month
 from .services.ical import generate_ical_feed
 
 
@@ -48,7 +48,7 @@ class NameDayRequest(BaseModel):
 app = FastAPI(
     title="orthodox-calendar",
     description="Orthodox and Oriental Orthodox saints of the day with calendar/contacts hooks.",
-    version="0.5.0",
+    version="0.6.0",
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
     openapi_url="/api/v1/openapi.json",
@@ -87,6 +87,20 @@ def saints(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     return get_saints_for_date(day, canonicalized)
+
+
+@app.get("/api/v1/hagiography", response_model=HagiographyResponse)
+def hagiography(
+    saint: str = Query(..., description="Saint name (partial match supported)"),
+    date: Optional[str] = Query(default=None, description="MM-DD on the tradition calendar"),
+) -> HagiographyResponse:
+    """Return hagiography data for a named saint.
+
+    Searches across all tradition datasets. If date (MM-DD) is given, prioritises
+    that date's entries to avoid false matches for saints sharing a similar name.
+    Source field indicates where the data came from: goarch, oca, notes, or not_found.
+    """
+    return get_hagiography(saint, date)
 
 
 @app.post("/api/v1/name-days", response_model=NameDayResponse)
