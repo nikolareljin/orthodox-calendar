@@ -37,7 +37,8 @@ def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
     """
     from datetime import date as _d
 
-    # Find the Pascha entry and extract the scrape year from its OCA URL
+    # Find the Pascha entry; derive the scrape year from the URL or by matching
+    # the entry's month_day (civil Gregorian date) against computed Pascha dates.
     scrape_pascha: _d | None = None
     for entry in _INDEX.get("oca", []):
         for s in entry.saints:
@@ -47,7 +48,16 @@ def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
                 m = _OCA_URL_DATE_RE.match(url)
                 if m:
                     scrape_year = int(m.group(2))
-                    scrape_pascha = julian_pascha_as_gregorian(scrape_year)
+                    if scrape_year > 0:
+                        scrape_pascha = julian_pascha_as_gregorian(scrape_year)
+                    else:
+                        # Year stored as 0000 — find year by matching civil month/day
+                        em, ed = (int(x) for x in entry.month_day.split("-"))
+                        for candidate in range(2015, 2050):
+                            p = julian_pascha_as_gregorian(candidate)
+                            if p.month == em and p.day == ed:
+                                scrape_pascha = p
+                                break
                 break
         if scrape_pascha:
             break
