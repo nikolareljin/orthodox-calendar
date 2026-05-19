@@ -32,11 +32,24 @@ Response structure:
 
 import argparse
 import json
+import re
 import sys
 import time
 import urllib.request
 from datetime import date, timedelta
 from pathlib import Path
+
+# OCA URLs from orthocal.info embed the scrape year, e.g.:
+#   https://www.oca.org/saints/lives/2024/01/02/100941-seraphim-of-sarov
+# Replace the year with "0000" so the stored URL is year-neutral.
+# The serve-time _build_oca_url() function in services/saints.py rebuilds
+# the URL with the correct tradition calendar year on every request.
+_OCA_YEAR_RE = re.compile(r"(https://www\.oca\.org/saints/lives/)\d{4}/")
+
+
+def _strip_oca_year(url: str) -> str:
+    """Replace the embedded year in an OCA URL with '0000'."""
+    return _OCA_YEAR_RE.sub(r"\g<1>0000/", url, count=1)
 
 
 FEAST_TYPE_NAMES = {
@@ -87,15 +100,16 @@ def parse_saints(data: dict, tradition: str, calendar: str, month_day: str) -> d
         feast_type = FEAST_TYPE_NAMES.get(feast_type_int, "Saint")
         source_url = comm.get("source_url") or comm.get("src", "")
 
-        # Try to get hagiography from stories
+        # Full hagiography text from orthocal.info stories field.
+        # Store complete text — no truncation — for offline/self-hosted display.
         story = stories_by_title.get(title, {})
-        notes = story.get("story", "")[:500] if story else ""  # truncate
+        notes = story.get("story", "").strip() if story else ""
 
         saints.append({
             "name": comm.get("subtitle") or title.split(",")[0],
             "title": title,
             "feast_type": feast_type,
-            "hagiography_url": source_url or None,
+            "hagiography_url": _strip_oca_year(source_url) if source_url else None,
             "notes": notes or None,
         })
 

@@ -9,6 +9,44 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.5.0] - 2026-05-19
+
+### Added
+- **Full hagiography text stored offline** — `oca_julian.json` now stores complete
+  hagiographic texts from `orthocal.info` stories for 230 major saints (Basil the Great,
+  Seraphim of Sarov, Theophan the Recluse, etc. — up to 4,450 chars each).  Removes the
+  need to open an external URL for these saints.  Previously notes were truncated at 500
+  characters.
+- **`scripts/enrich_oca_notes.py`** — enrichment script that fetches full hagiography
+  stories from `orthocal.info` and writes them into `oca_julian.json`, correctly converting
+  Julian ecclesiastical dates to civil dates before querying the API (+13 days in the 21st
+  century).
+- **GOARCH import infrastructure** (`scripts/import_goarch.py`) — Playwright-based scraper
+  for the GOARCH chapel calendar that extracts saint names and `contentid`s for all 366
+  days; produces `goarch_raw.json`.  Includes `--civil-to-julian` flag for converting
+  Gregorian civil dates to Julian ecclesiastical storage keys.  Note: GOARCH is currently
+  protected by Cloudflare managed challenge; the script is ready for when the site is
+  accessible or a bypass is available.
+- **`scripts/enrich_goarch.py`** — merges `goarch_raw.json` into `oca_julian.json`
+  (populates `goarch_url` for matched saints) and `greek_saints.json` (adds Greek saints
+  not present in the OCA Synaxarion as new EP canonization entries).
+- **`scripts/enrich_wiki_generic.py`** — generic Wikipedia enrichment pass for any
+  tradition JSON; two-pass (direct fetch → search fallback) with relevance + religious-
+  content guards.  Used to enrich Assyrian saints (0% → 38% URL coverage).
+- **`scripts/_name_utils.py`** — shared saint-name normalization module extracted from
+  `services/saints.py`; used by all new import/enrichment scripts for consistent matching.
+- **Assyrian hagiography URLs** — `assyrian_saints.json` enriched via Wikipedia: 13 saints
+  now have `hagiography_url` and biographical notes (up from 0%).
+
+### Changed
+- **`scripts/import_orthocal.py`** — `hagiography_url` is now stored with year `0000`
+  instead of the scrape year (e.g. `…/lives/0000/01/02/…`).  The serve-time
+  `_build_oca_url()` in `services/saints.py` already strips and rebuilds the year
+  dynamically — this change makes the stored data year-neutral and intent-clear for future
+  re-imports.
+
+---
+
 ## [0.4.1] - 2026-05-18
 
 ### Added
