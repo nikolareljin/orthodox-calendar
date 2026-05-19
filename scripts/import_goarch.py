@@ -54,7 +54,6 @@ SAINT_URL_TEMPLATE = CHAPEL_BASE + "/saints?contentid={contentid}"
 # for those cases, or handle them manually after the initial import.
 # ---------------------------------------------------------------------------
 
-import calendar as _cal_module  # noqa: E402  (used for leap-year day count)
 from datetime import date as _date, timedelta as _td
 
 
@@ -92,8 +91,8 @@ def _parse_contentid(href: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
-def _parse_month_day(href: str, month: int) -> str | None:
-    """Extract MM-DD from contentdate param or fall back to provided month."""
+def _parse_month_day(href: str) -> str | None:
+    """Extract MM-DD from contentdate param in a GOARCH chapel saint href."""
     # Decode percent-encoding case-insensitively (%2F and %2f both → /)
     import urllib.parse as _up
     href_decoded = _up.unquote(href)
@@ -130,7 +129,7 @@ def _wait_past_cf(page, url: str, cf_timeout: int = 60) -> None:
     raise TimeoutError(f"Cloudflare challenge not resolved within {cf_timeout}s for {url}")
 
 
-def scrape_month(page, month: int, year: int, delay: float) -> dict[str, list[dict]]:
+def scrape_month(page, month: int, year: int) -> dict[str, list[dict]]:
     """Return {MM-DD: [{name, contentid, goarch_url}]} for one calendar month."""
     url = f"{CALENDAR_URL}?month={month}&year={year}"
     _wait_past_cf(page, url)
@@ -207,7 +206,7 @@ def scrape_month(page, month: int, year: int, delay: float) -> dict[str, list[di
         seen_ids.add(contentid)
 
         # Determine MM-DD from href or from day_num
-        month_day = _parse_month_day(href, month)
+        month_day = _parse_month_day(href)
         if not month_day and day_num:
             month_day = f"{month:02d}-{day_num:02d}"
         if not month_day:
@@ -261,7 +260,7 @@ def main() -> None:
         for month in months:
             print(f"  Month {month:02d}/{args.year}...", file=sys.stderr, end=" ")
             try:
-                result = scrape_month(page, month, args.year, args.delay)
+                result = scrape_month(page, month, args.year)
                 # Optionally shift dates from civil-Gregorian to Julian (−13 days)
                 if args.civil_to_julian:
                     shifted: dict[str, list[dict]] = {}

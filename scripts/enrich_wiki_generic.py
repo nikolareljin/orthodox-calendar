@@ -113,7 +113,7 @@ def fetch_extracts(titles: list[str], delay: float) -> dict[str, dict]:
         for page in data.get("query", {}).get("pages", {}).values():
             title = page.get("title", "")
             desc = _extract_text(page)
-            if not desc:
+            if not desc or not _is_religious(desc):
                 continue
             url = "https://en.wikipedia.org/wiki/" + urllib.parse.quote(title.replace(" ", "_"))
             result[title] = {"description": desc, "url": url}

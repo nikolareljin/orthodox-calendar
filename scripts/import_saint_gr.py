@@ -27,7 +27,6 @@ import re
 import sys
 import time
 import urllib.request
-from collections import defaultdict
 from datetime import date, timedelta
 from pathlib import Path
 
@@ -122,7 +121,6 @@ def fetch_day(month: int, day: int) -> list[dict]:
 def iter_days(start_mm_dd: str = "01-01", end_mm_dd: str = "12-31"):
     """Yield (month, day) tuples for a leap year bounded by start/end."""
     # Use 2024 (leap year) to include Feb 29
-    anchor = date(2024, 1, 1)
     end_date = date(2024, int(end_mm_dd[:2]), int(end_mm_dd[3:]))
     cur = date(2024, int(start_mm_dd[:2]), int(start_mm_dd[3:]))
     while cur <= end_date:

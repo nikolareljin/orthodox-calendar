@@ -36,7 +36,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from _name_utils import normalize  # noqa: E402
 
-ORTHOCAL_API = "https://orthocal.info/api/julian/2024/{month}/{day}/"
+ORTHOCAL_API = "https://orthocal.info/api/julian/{year}/{month}/{day}/"
 OCA_PATH = Path("backend/app/data/oca_julian.json")
 
 # orthocal.info Julian API takes CIVIL Gregorian dates and returns the saints
@@ -48,15 +48,15 @@ OCA_PATH = Path("backend/app/data/oca_julian.json")
 from datetime import date as _date, timedelta as _td  # noqa: E402
 
 
-def julian_mm_dd_to_civil(julian_month: int, julian_day: int, year: int = 2024) -> tuple[int, int]:
-    """Convert a Julian ecclesiastical MM-DD to its civil (Gregorian) month/day."""
+def julian_mm_dd_to_civil(julian_month: int, julian_day: int, year: int = 2024) -> tuple[int, int, int]:
+    """Convert a Julian ecclesiastical MM-DD to its civil (Gregorian) year/month/day."""
     try:
         julian = _date(year, julian_month, julian_day)
     except ValueError:
         # Feb 29 Julian doesn't exist in non-leap years; use year 2024 (leap)
         julian = _date(2024, julian_month, julian_day)
     civil = julian + _td(days=13)
-    return civil.month, civil.day
+    return civil.year, civil.month, civil.day
 
 _STRIP_DATE_RE = re.compile(r"\s*\(?\d{3,4}\)?\s*$")  # strip trailing " (379)" year
 
@@ -74,8 +74,8 @@ def fetch_stories(julian_month: int, julian_day: int) -> list[dict]:
     because orthocal.info's Julian endpoint takes civil (Gregorian) dates and
     returns the saints observed by Julian-calendar churches on that civil date.
     """
-    civil_month, civil_day = julian_mm_dd_to_civil(julian_month, julian_day)
-    url = ORTHOCAL_API.format(month=civil_month, day=civil_day)
+    civil_year, civil_month, civil_day = julian_mm_dd_to_civil(julian_month, julian_day)
+    url = ORTHOCAL_API.format(year=civil_year, month=civil_month, day=civil_day)
     try:
         with urllib.request.urlopen(
             urllib.request.Request(url, headers={"User-Agent": "orthodox-calendar-importer/1.0"}),
