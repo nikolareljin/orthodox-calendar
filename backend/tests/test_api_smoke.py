@@ -112,6 +112,38 @@ def test_pascha_shown_on_correct_gregorian_date_not_today() -> None:
     )
 
 
+def test_holy_fathers_first_council_shown_on_correct_date() -> None:
+    """Regression: Sunday of Holy Fathers of First Ecumenical Council (Pascha+42) must
+    appear on its computed Gregorian date, not on the stale 2024-scraped key date.
+
+    In 2026 Pascha = April 12, so Pascha+42 = May 24.
+    The OCA dataset stored this feast at month_day "06-16" (2024 scrape date).
+    For Serbian (Julian), key "06-16" matches Gregorian June 29 (Julian June 16).
+    For Greek (Revised-Julian), key "06-16" matches Gregorian June 16.
+    """
+    keyword = "holy fathers of the first ecumenical council"
+
+    for tradition in ("serbian", "greek"):
+        resp = client.get(f"/api/v1/saints?day=2026-05-24&traditions={tradition}")
+        assert resp.status_code == 200
+        saints = resp.json()
+        assert saints, f"{tradition}: no saints on 2026-05-24"
+        titles = [s["title"] for entry in saints for s in entry["saints"]]
+        assert any(keyword in (t or "").lower() for t in titles), (
+            f"{tradition}: Holy Fathers feast missing on 2026-05-24; got {titles[:5]}"
+        )
+
+    # Must NOT appear on the stale 2024 drift dates
+    for tradition, stale_day in [("serbian", "2026-06-29"), ("greek", "2026-06-16")]:
+        resp = client.get(f"/api/v1/saints?day={stale_day}&traditions={tradition}")
+        assert resp.status_code == 200
+        saints = resp.json()
+        titles = [s["title"] for entry in saints for s in entry["saints"]]
+        assert not any(keyword in (t or "").lower() for t in titles), (
+            f"{tradition}: Holy Fathers wrongly shown on {stale_day}; got {titles[:5]}"
+        )
+
+
 def test_oca_urls_use_tradition_calendar_year_not_2024() -> None:
     """OCA hagiography URLs must reflect the tradition's calendar year, not the 2024 scrape year.
 

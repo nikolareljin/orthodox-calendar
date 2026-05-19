@@ -289,6 +289,7 @@ PASCHA_OFFSETS: dict[int, tuple[str, str, str]] = {
     35:  ("blind_sunday",           "Sunday of the Blind Man",                                    "Great Feast"),
     38:  ("leavetaking_pascha",     "Leavetaking of Pascha",                                       "Great Feast"),
     39:  ("ascension",              "The Ascension of Our Lord, God and Savior Jesus Christ",     "Great Feast"),
+    42:  ("holy_fathers_first_council", "Sunday of the Holy Fathers of the First Ecumenical Council", "Great Feast"),
     48:  ("soul_saturday_pentecost","Soul Saturday before Pentecost",                             "Great Feast"),
     49:  ("pentecost",              "Holy Pentecost (Trinity Sunday)",                            "Great Feast"),
     50:  ("day_of_holy_spirit",     "Postfeast of Pentecost — Day of the Holy Spirit",            "Great Feast"),
@@ -328,6 +329,8 @@ _MOVABLE_FEAST_KEYWORDS: frozenset[str] = frozenset({
     "holy pascha",
     # Bright Week and Radonitsa
     "day of rejoicing",
+    # 7th Sunday of Pascha (First Ecumenical Council)
+    "holy fathers of the first ecumenical council",
     "bright monday",
     "bright tuesday",
     "bright wednesday",
