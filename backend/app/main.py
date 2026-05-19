@@ -13,7 +13,6 @@ from pydantic import BaseModel
 
 from .calendar_logic import (
     canonical_tradition_key,
-    convert_to_tradition_month_day,
     effective_calendar,
     julian_pascha_as_gregorian,
 )
@@ -127,13 +126,11 @@ def readings(
 
     trad = TRADITIONS[canonical]
     calendar = effective_calendar(day, trad)
-    if calendar in {CalendarSystem.JULIAN, CalendarSystem.REVISED}:
-        cal = "julian" if calendar == CalendarSystem.JULIAN else "gregorian"
-        _, calendar_date = convert_to_tradition_month_day(day, trad)
-        api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
-    else:
-        cal = "gregorian"
-        api_year, api_month, api_day = day.year, day.month, day.day
+    # orthocal.info always takes civil (Gregorian) dates; the "julian" vs "gregorian"
+    # path selects the Pascha computus (Julian = same for all Orthodox traditions),
+    # not the date coordinate system.
+    cal = "julian" if calendar == CalendarSystem.JULIAN else "gregorian"
+    api_year, api_month, api_day = day.year, day.month, day.day
     url = f"https://orthocal.info/api/{cal}/{api_year}/{api_month}/{api_day}/"
     try:
         with _urllib_request.urlopen(url, timeout=8) as resp:  # noqa: S310
