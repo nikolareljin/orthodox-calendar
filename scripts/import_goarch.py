@@ -97,10 +97,32 @@ def _parse_month_day(href: str, month: int) -> str | None:
     return None
 
 
+def _wait_past_cf(page, url: str, cf_timeout: int = 60) -> None:
+    """Navigate to url and wait for Cloudflare challenge to resolve.
+
+    Headed mode: CF challenge runs JS, redirects to the real page.
+    We wait up to cf_timeout seconds for the 'Just a moment...' page to go away.
+    """
+    page.goto(url, wait_until="load", timeout=90000)
+    import time as _time
+    deadline = _time.time() + cf_timeout
+    while _time.time() < deadline:
+        title = page.title()
+        if "just a moment" not in title.lower():
+            # Past the CF challenge — wait for network to settle
+            try:
+                page.wait_for_load_state("networkidle", timeout=10000)
+            except Exception:
+                pass
+            return
+        _time.sleep(2)
+    raise TimeoutError(f"Cloudflare challenge not resolved within {cf_timeout}s for {url}")
+
+
 def scrape_month(page, month: int, year: int, delay: float) -> dict[str, list[dict]]:
     """Return {MM-DD: [{name, contentid, goarch_url}]} for one calendar month."""
     url = f"{CALENDAR_URL}?month={month}&year={year}"
-    page.goto(url, wait_until="networkidle", timeout=30000)
+    _wait_past_cf(page, url)
 
     # Extract all saint links from the calendar
     # GOARCH chapel calendar links look like:
@@ -206,16 +228,19 @@ def main() -> None:
                         help="Convert GOARCH civil-Gregorian dates to Julian MM-DD (−13 days). "
                              "Not needed for traditional liturgical feasts (same MM-DD in both "
                              "calendars) but useful for recently canonized saints on civil dates.")
+    parser.add_argument("--no-headless", action="store_true",
+                        help="Run browser with visible window (required to pass Cloudflare on local machine)")
     args = parser.parse_args()
 
     months = range(1, 2) if args.dry_run else range(1, 13)
     out_path = Path(args.out)
     all_saints: dict[str, list[dict]] = {}
+    headless = not args.no_headless
 
-    print(f"Scraping GOARCH chapel calendar year={args.year}...", file=sys.stderr)
+    print(f"Scraping GOARCH chapel calendar year={args.year} headless={headless}...", file=sys.stderr)
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=True)
+        browser = pw.chromium.launch(headless=headless)
         context = browser.new_context(user_agent=(
             "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
             "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
