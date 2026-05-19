@@ -181,3 +181,12 @@ def test_moon_phase_returns_expected_shape() -> None:
     assert 0 <= payload["phase"] <= 1
     assert 0 <= payload["illumination"] <= 1
     assert payload["phase_name"]
+
+
+def test_config_endpoint_returns_hagiography_source() -> None:
+    response = client.get("/api/v1/config")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert "hagiography_source" in payload
+    assert payload["hagiography_source"] in ("oca", "goarch")

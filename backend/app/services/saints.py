@@ -293,13 +293,14 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         # Guard: only the OCA base dataset has 2024-scraped movable feast entries;
         # non-OCA Julian traditions (syriac, oriental) must not be affected.
         if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED) and base_key == "oca":
-            base_entries = [
-                e.model_copy(
-                    update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
-                )
-                for e in base_entries
-            ]
-            base_entries = [e for e in base_entries if e.saints]
+            if any(is_movable_feast_title(s.title or "") for e in base_entries for s in e.saints):
+                base_entries = [
+                    e.model_copy(
+                        update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
+                    )
+                    for e in base_entries
+                ]
+                base_entries = [e for e in base_entries if e.saints]
 
             pascha = julian_pascha_as_gregorian(day.year)
             feast = movable_feast_for_date(day, pascha)
@@ -340,6 +341,17 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
     base_by_md = _build_month_day_index(_INDEX.get(base_key, []))
     overlay_by_md = _build_month_day_index(_INDEX.get(canonical, [])) if tradition.data_key else {}
     pascha_of_year = julian_pascha_as_gregorian(year)
+    # Precompute once: which month_days in the OCA base have movable-feast saints
+    # so the per-day filter is skipped on the vast majority of days that don't.
+    oca_movable_month_days: set[str] = (
+        {
+            entry.month_day
+            for entry in _INDEX.get(base_key, [])
+            if any(is_movable_feast_title(s.title or "") for s in entry.saints)
+        }
+        if base_key == "oca"
+        else set()
+    )
 
     result: Dict[str, Any] = {}
     for day_num in range(1, _cal.monthrange(year, month)[1] + 1):
@@ -351,13 +363,14 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
         overlay_day = list(overlay_by_md.get(month_day, [])) if overlay_by_md else []
 
         if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED) and base_key == "oca":
-            base_day = [
-                e.model_copy(
-                    update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
-                )
-                for e in base_day
-            ]
-            base_day = [e for e in base_day if e.saints]
+            if month_day in oca_movable_month_days:
+                base_day = [
+                    e.model_copy(
+                        update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
+                    )
+                    for e in base_day
+                ]
+                base_day = [e for e in base_day if e.saints]
             feast = movable_feast_for_date(d, pascha_of_year)
             if feast:
                 feast_key, feast_title, feast_type = feast
