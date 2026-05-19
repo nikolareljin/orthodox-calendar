@@ -178,6 +178,17 @@ def main() -> None:
     new_greek: dict[str, list[dict]] = {}  # MM-DD → new Greek saints
     already_have_goarch = 0   # saints already had goarch_url
 
+    # Filter out placeholder/metadata keys (e.g. _comment, _note) and non-list values
+    # left by the unfilled goarch_raw.json stub.
+    goarch_raw = {
+        k: v for k, v in goarch_raw.items()
+        if not k.startswith("_") and isinstance(v, list)
+    }
+    if not goarch_raw:
+        print("ERROR: goarch_raw.json contains no saint data. Run import_goarch.py first.",
+              file=sys.stderr)
+        sys.exit(1)
+
     total_goarch = sum(len(v) for v in goarch_raw.values())
     print(f"GOARCH input: {total_goarch} saints across {len(goarch_raw)} days", file=sys.stderr)
 
