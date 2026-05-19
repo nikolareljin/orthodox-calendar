@@ -18,7 +18,7 @@ from .calendar_logic import (
     julian_pascha_as_gregorian,
 )
 from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _moon_phase
-from .config import TRADITIONS
+from .config import HAGIOGRAPHY_SOURCE, TRADITIONS
 from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
 from .services.saints import get_saints_for_date, get_saints_for_month
@@ -49,7 +49,7 @@ class NameDayRequest(BaseModel):
 app = FastAPI(
     title="orthodox-calendar",
     description="Orthodox and Oriental Orthodox saints of the day with calendar/contacts hooks.",
-    version="0.4.0",
+    version="0.4.1",
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
     openapi_url="/api/v1/openapi.json",
@@ -66,6 +66,12 @@ app.add_middleware(
 @app.get("/health")
 def health() -> dict:
     return {"status": "ok"}
+
+
+@app.get("/api/v1/config")
+def api_config() -> dict:
+    """Expose active runtime configuration for frontend/diagnostic use."""
+    return {"hagiography_source": HAGIOGRAPHY_SOURCE}
 
 
 @app.get("/api/v1/saints", response_model=List[SaintsResponse])

@@ -5,11 +5,131 @@ import re as _re
 from datetime import date
 from typing import Any, Dict, List, Optional
 
-from ..calendar_logic import canonical_tradition_key, convert_to_tradition_month_day, effective_calendar, resolve_tradition
+from ..calendar_logic import (
+    canonical_tradition_key,
+    convert_to_tradition_month_day,
+    effective_calendar,
+    is_movable_feast_title,
+    julian_pascha_as_gregorian,
+    movable_feast_for_date,
+    resolve_tradition,
+)
+from ..config import HAGIOGRAPHY_SOURCE
 from ..data_loader import build_index
-from ..models import CalendarEntry, Saint, SaintsResponse
+from ..models import CalendarEntry, CalendarSystem, Saint, SaintsResponse
 
 _INDEX = build_index()
+
+
+_OCA_URL_DATE_RE = _re.compile(
+    r"(https://www\.oca\.org/saints/lives/)(\d{4})/(\d{2}/\d{2})/(.*)"
+)
+
+
+def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
+    """Pre-index Pascha-relative delta → (url_id_slug, notes) from OCA scraped data.
+
+    Detects the dataset's scrape year by parsing the year directly from the OCA
+    URL of the Pascha entry (group 2 of _OCA_URL_DATE_RE).  This is simpler and
+    more reliable than matching month_day against a range of computed years.
+    Notes are liturgically timeless and preserved as-is.  URL date portions are
+    stripped (only the stable id-slug tail is kept) and reconstructed at serve time.
+    """
+    from datetime import date as _d
+
+    # Find the Pascha entry and extract the scrape year from its OCA URL
+    scrape_pascha: _d | None = None
+    for entry in _INDEX.get("oca", []):
+        for s in entry.saints:
+            tl = (s.title or "").lower()
+            if "pascha" in tl and is_movable_feast_title(s.title or ""):
+                url = s.hagiography_url or ""
+                m = _OCA_URL_DATE_RE.match(url)
+                if m:
+                    scrape_year = int(m.group(2))
+                    scrape_pascha = julian_pascha_as_gregorian(scrape_year)
+                break
+        if scrape_pascha:
+            break
+
+    if not scrape_pascha:
+        return {}
+
+    meta: dict[int, tuple[str | None, str | None]] = {}
+    for entry in _INDEX.get("oca", []):
+        em, ed = entry.month_day.split("-")
+        try:
+            key_date = _d(scrape_pascha.year, int(em), int(ed))
+        except ValueError:
+            continue
+        delta = (key_date - scrape_pascha).days
+        for s in entry.saints:
+            if is_movable_feast_title(s.title or ""):
+                url = s.hagiography_url
+                id_slug: str | None = None
+                if url:
+                    m = _OCA_URL_DATE_RE.match(url)
+                    id_slug = m.group(4) if m else None
+                meta[delta] = (id_slug, s.notes)
+                break
+    return meta
+
+
+_MOVABLE_META: dict[int, tuple[str | None, str | None]] = _build_movable_meta()
+
+
+def _oca_feast_url(id_slug: str | None, feast_date: date) -> str | None:
+    """Reconstruct a year-correct OCA URL for a dynamically computed movable feast."""
+    if not id_slug:
+        return None
+    return (
+        f"https://www.oca.org/saints/lives/"
+        f"{feast_date.year}/{feast_date.month:02d}/{feast_date.day:02d}/{id_slug}"
+    )
+
+
+def _build_oca_url(url: str | None, calendar_date: str | None) -> str | None:
+    """Build an OCA URL by extracting the id-slug from *url* and using *calendar_date* for the date.
+
+    The dataset stores full OCA URLs (with the 2024 scrape year and date), e.g.:
+      https://www.oca.org/saints/lives/2024/01/02/100941-seraphim-of-sarov
+    This function strips that stored date entirely — it extracts only the stable
+    id-slug (the last path segment) and rebuilds the URL with the tradition's own
+    calendar date:
+      - Julian traditions: calendar_date is the Julian date
+        (e.g. Serbian Christmas Gregorian Jan 7 2026 → "2025-12-25")
+      - Revised-Julian / Gregorian traditions: calendar_date equals the
+        Gregorian date (same as Julian until the 2800 divergence)
+    Do NOT call this for movable feast saints — their OCA pages are keyed by
+    the Gregorian feast date, which differs from Julian calendar_date.
+    Non-OCA URLs (no regex match) are returned unchanged.
+    """
+    if not url or not calendar_date:
+        return url
+    m = _OCA_URL_DATE_RE.match(url)
+    if not m:
+        return url
+    try:
+        cal_year, cal_month, cal_day = calendar_date.split("-")
+        return (
+            f"https://www.oca.org/saints/lives/"
+            f"{cal_year}/{int(cal_month):02d}/{int(cal_day):02d}/{m.group(4)}"
+        )
+    except (ValueError, AttributeError):
+        return url
+
+
+def _resolve_hagiography_url(saint: Saint, calendar_date: str | None = None) -> str | None:
+    """Return the hagiography URL for the configured HAGIOGRAPHY_SOURCE.
+
+    OCA URLs are fully rebuilt from the tradition's calendar date + the stored
+    id-slug — no date from the static dataset is carried through.
+    "goarch" → uses saint.goarch_url when set, then falls back to rebuilt OCA URL.
+    """
+    if HAGIOGRAPHY_SOURCE == "goarch":
+        return saint.goarch_url or _build_oca_url(saint.hagiography_url, calendar_date)
+    return _build_oca_url(saint.hagiography_url, calendar_date)
+
 
 # Common honorific prefixes that vary across sources for the same saint
 # (e.g. base has "Seraphim of Sarov", overlay has "Saint Seraphim of Sarov").
@@ -80,6 +200,8 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.feast_type = overlay.feast_type
     if overlay.hagiography_url and not base.hagiography_url:
         base.hagiography_url = overlay.hagiography_url
+    if overlay.goarch_url and not base.goarch_url:
+        base.goarch_url = overlay.goarch_url
     if overlay.icon_url and not base.icon_url:
         base.icon_url = overlay.icon_url
     if overlay.notes and not base.notes:
@@ -125,11 +247,22 @@ def _merge_entries(
                     key_index[key] = primary_key
         if entry.notes and not merged_notes:
             merged_notes = entry.notes
+    saints_out = []
+    for s in merged.values():
+        # Movable feast URLs are keyed by the Gregorian feast date (injected by
+        # get_saints_for_date/month with the correct date already).  Applying
+        # _build_oca_url would replace that Gregorian date with the Julian
+        # calendar_date, producing a wrong URL.  Skip the rewrite for them.
+        if not is_movable_feast_title(s.title or ""):
+            resolved_url = _resolve_hagiography_url(s, calendar_date)
+            if resolved_url != s.hagiography_url:
+                s = s.model_copy(update={"hagiography_url": resolved_url})
+        saints_out.append(s)
     return SaintsResponse(
         date=day,
         tradition=tradition.name,
         calendar_date=calendar_date,
-        saints=list(merged.values()),
+        saints=saints_out,
         calendar_system=effective_calendar(day, tradition),
         notes=merged_notes,
     )
@@ -141,15 +274,52 @@ def get_saints_for_date(day: date, traditions: List[str]) -> List[SaintsResponse
         tradition = resolve_tradition(tradition_name)
         canonical = canonical_tradition_key(tradition_name)
         month_day, calendar_date = convert_to_tradition_month_day(day, tradition)
+        cal = effective_calendar(day, tradition)
 
         base_key = tradition.data_key or canonical
-        day_entries = [e for e in _INDEX.get(base_key, []) if e.month_day == month_day]
+        base_entries = [e for e in _INDEX.get(base_key, []) if e.month_day == month_day]
+        # Tradition-specific overlays are intentional and must never be filtered.
+        overlay_entries = (
+            [e for e in _INDEX.get(canonical, []) if e.month_day == month_day]
+            if tradition.data_key
+            else []
+        )
 
-        # Also include tradition-specific overlay entries
-        if tradition.data_key:
-            day_entries.extend(
-                e for e in _INDEX.get(canonical, []) if e.month_day == month_day
-            )
+        # Julian and Revised-Julian traditions share the Byzantine computus.
+        # The OCA base dataset stores movable feasts at their 2024 Gregorian
+        # dates — wrong for every other year.  Strip those entries from the
+        # base data only, then inject the correctly computed feast for the
+        # requested year.  Tradition overlays are left untouched.
+        # Guard: only the OCA base dataset has 2024-scraped movable feast entries;
+        # non-OCA Julian traditions (syriac, oriental) must not be affected.
+        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED) and base_key == "oca":
+            if any(is_movable_feast_title(s.title or "") for e in base_entries for s in e.saints):
+                base_entries = [
+                    e.model_copy(
+                        update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
+                    )
+                    for e in base_entries
+                ]
+                base_entries = [e for e in base_entries if e.saints]
+
+            pascha = julian_pascha_as_gregorian(day.year)
+            feast = movable_feast_for_date(day, pascha)
+            if feast:
+                feast_key, feast_title, feast_type = feast
+                id_slug, notes = _MOVABLE_META.get((day - pascha).days, (None, None))
+                movable_entry = CalendarEntry(
+                    month_day=month_day,
+                    tradition=base_key,
+                    calendar=cal,
+                    saints=[Saint(
+                        name=feast_key, title=feast_title, feast_type=feast_type,
+                        hagiography_url=_oca_feast_url(id_slug, day),
+                        notes=notes,
+                    )],
+                )
+                base_entries = [movable_entry] + base_entries
+
+        day_entries = base_entries + overlay_entries
 
         if not day_entries:
             continue
@@ -170,15 +340,55 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
 
     base_by_md = _build_month_day_index(_INDEX.get(base_key, []))
     overlay_by_md = _build_month_day_index(_INDEX.get(canonical, [])) if tradition.data_key else {}
+    pascha_of_year = julian_pascha_as_gregorian(year)
+    # Precompute once: which month_days in the OCA base have movable-feast saints
+    # so the per-day filter is skipped on the vast majority of days that don't.
+    oca_movable_month_days: set[str] = (
+        {
+            entry.month_day
+            for entry in _INDEX.get(base_key, [])
+            if any(is_movable_feast_title(s.title or "") for s in entry.saints)
+        }
+        if base_key == "oca"
+        else set()
+    )
 
     result: Dict[str, Any] = {}
     for day_num in range(1, _cal.monthrange(year, month)[1] + 1):
         d = date(year, month, day_num)
         month_day, calendar_date = convert_to_tradition_month_day(d, tradition)
+        cal = effective_calendar(d, tradition)
 
-        day_entries = base_by_md.get(month_day, [])
-        if overlay_by_md:
-            day_entries = day_entries + overlay_by_md.get(month_day, [])
+        base_day = list(base_by_md.get(month_day, []))
+        overlay_day = list(overlay_by_md.get(month_day, [])) if overlay_by_md else []
+
+        if cal in (CalendarSystem.JULIAN, CalendarSystem.REVISED) and base_key == "oca":
+            if month_day in oca_movable_month_days:
+                base_day = [
+                    e.model_copy(
+                        update={"saints": [s for s in e.saints if not is_movable_feast_title(s.title or "")]}
+                    )
+                    for e in base_day
+                ]
+                base_day = [e for e in base_day if e.saints]
+            feast = movable_feast_for_date(d, pascha_of_year)
+            if feast:
+                feast_key, feast_title, feast_type = feast
+                id_slug, notes = _MOVABLE_META.get((d - pascha_of_year).days, (None, None))
+                base_day = [
+                    CalendarEntry(
+                        month_day=month_day,
+                        tradition=base_key,
+                        calendar=cal,
+                        saints=[Saint(
+                            name=feast_key, title=feast_title, feast_type=feast_type,
+                            hagiography_url=_oca_feast_url(id_slug, d),
+                            notes=notes,
+                        )],
+                    )
+                ] + base_day
+
+        day_entries = base_day + overlay_day
         if not day_entries:
             continue
 

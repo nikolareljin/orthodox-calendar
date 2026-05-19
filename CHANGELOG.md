@@ -9,6 +9,34 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.4.1] - 2026-05-18
+
+### Added
+- **`GET /api/v1/config`** — returns active runtime configuration (currently `hagiography_source`).
+- **`HAGIOGRAPHY_SOURCE` env var** — controls which hagiography URLs are served: `"oca"` (default,
+  OCA date-keyed URLs rebuilt dynamically from the tradition's calendar date) or `"goarch"` (GOARCH
+  chapel URLs when available, falling back to OCA).  An invalid value raises a `ValueError` at startup.
+
+### Fixed
+- **Cardinal bug: Pascha and all Julian-computus movable feasts now computed dynamically per year.**
+  The OCA dataset (scraped in 2024) stored Pascha and related feasts at their 2024 Gregorian dates
+  as Julian-keyed month-day strings.  Because the Julian calendar is 13 days behind Gregorian, any
+  year where `gregorian_date − 13 days = 2024_pascha_julian_key` produced a false match.  On
+  2026-05-18 (today), Serbian and Georgian traditions showed "HOLY PASCHA" because Gregorian May 18 →
+  Julian May 5 → static key "05-05" (2024 Pascha).  At the same time, the actual 2026 Pascha (April 12
+  Gregorian) had no Pascha entry at all.
+  - `calendar_logic.py`: added `PASCHA_OFFSETS` table (−77 to +57 days relative to Pascha), `_MOVABLE_FEAST_KEYWORDS`
+    filter set, `is_movable_feast_title()`, and `movable_feast_for_date()` — returns the correct
+    feast name/title/type for any Gregorian date that falls on a Byzantine movable feast in the
+    requested year.
+  - `services/saints.py`: for all Julian and Revised-Julian traditions, static OCA saints whose title
+    matches a movable feast keyword are stripped before merging, and the correctly computed feast is
+    prepended instead.
+  - `backend/tests/test_api_smoke.py`: regression test verifying Pascha appears on 2026-04-12 and
+    is absent on 2026-05-18 for Serbian and Georgian traditions.
+
+---
+
 ## [0.4.0] - 2026-05-17
 
 ### Added
