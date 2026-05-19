@@ -422,55 +422,75 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
 
     Searches across all traditions. If month_day is given, searches only that
     date's entries first (faster + less ambiguity) before falling back to all
-    dates. Returns the first match by name normalization.
+    dates. Among all name matches, selects the candidate with the richest
+    hagiography text rather than the first hit.
     """
     query_keys = set(_saint_keys(Saint(name=saint_name)))
 
-    def _check_entries(entries: List[CalendarEntry]) -> Optional[Saint]:
-        for entry in entries:
-            for saint in entry.saints:
-                if any(
-                    qk in sk or sk in qk
-                    for qk in query_keys
-                    for sk in _saint_keys(saint)
-                ):
-                    return saint
-        return None
+    def _collect_matches(entries: List[CalendarEntry]) -> List[Saint]:
+        return [
+            saint
+            for entry in entries
+            for saint in entry.saints
+            if any(
+                qk in sk or sk in qk
+                for qk in query_keys
+                for sk in _saint_keys(saint)
+            )
+        ]
+
+    def _best(candidates: List[Saint]) -> Optional[Saint]:
+        if not candidates:
+            return None
+        return max(
+            candidates,
+            key=lambda s: (bool(s.extended_notes), bool(s.notes), bool(s.hagiography_url)),
+        )
 
     # Targeted search by date first
     if month_day:
+        all_dated: List[Saint] = []
         for tradition_entries in _INDEX.values():
             dated = [e for e in tradition_entries if e.month_day == month_day]
-            found = _check_entries(dated)
-            if found:
-                return _format_hagiography_response(found)
-
-    # Full scan across all traditions
-    for tradition_entries in _INDEX.values():
-        found = _check_entries(tradition_entries)
+            all_dated.extend(_collect_matches(dated))
+        found = _best(all_dated)
         if found:
             return _format_hagiography_response(found)
+
+    # Full scan across all traditions
+    all_matches: List[Saint] = []
+    for tradition_entries in _INDEX.values():
+        all_matches.extend(_collect_matches(tradition_entries))
+    found = _best(all_matches)
+    if found:
+        return _format_hagiography_response(found)
 
     return HagiographyResponse(saint=saint_name, source="not_found")
 
 
 def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
     hagiography = saint.extended_notes or saint.notes
-    # Source reflects the text actually returned, not URL presence.
-    # notes may coexist with hagiography_url (e.g. Wikipedia overlay saints);
-    # calling that "oca" would misrepresent provenance.
+    oca_url = saint.hagiography_url or ""
+    # Source reflects the text actually returned.
+    # OCA dataset stores hagiography text in notes alongside an oca.org URL;
+    # check the URL hostname so those entries report source=oca, not notes.
     if saint.extended_notes:
         source = "goarch"
+    elif saint.notes and "oca.org" in oca_url:
+        source = "oca"
     elif saint.notes:
         source = "notes"
     elif saint.hagiography_url:
+        # URL available but no local text
         source = "oca"
     else:
         source = "not_found"
+    # Return the raw stored URL — no calendar_date context is available here,
+    # so rebuilding via _resolve_hagiography_url would emit a broken 0000 URL.
     return HagiographyResponse(
         saint=saint.title or saint.name,
         hagiography=hagiography,
         goarch_url=saint.goarch_url,
-        hagiography_url=_resolve_hagiography_url(saint),
+        hagiography_url=saint.hagiography_url,
         source=source,
     )

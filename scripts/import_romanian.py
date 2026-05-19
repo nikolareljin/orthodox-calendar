@@ -33,13 +33,6 @@ _MONTH_MAP = {
     "september": 9, "october": 10, "november": 11, "december": 12,
 }
 
-# Romanian month names
-_MONTH_MAP_RO = {
-    "ianuarie": 1, "februarie": 2, "martie": 3, "aprilie": 4,
-    "mai": 5, "iunie": 6, "iulie": 7, "august": 8,
-    "septembrie": 9, "octombrie": 10, "noiembrie": 11, "decembrie": 12,
-}
-
 _DATE_RE = re.compile(
     r"(\d{1,2})\s+(january|february|march|april|may|june|july|august"
     r"|september|october|november|december)"
