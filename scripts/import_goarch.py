@@ -99,11 +99,6 @@ delete window.__playwright;
 delete window.__pw_manual;
 """
 
-_USER_AGENT = (
-    "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-    "(KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36"
-)
-
 # ---------------------------------------------------------------------------
 # Julian date handling
 # ---------------------------------------------------------------------------
@@ -174,16 +169,17 @@ def _parse_month_day(href: str) -> str | None:
     return None
 
 
-def _navigate(page, url: str) -> None:
+def _navigate(page, url: str, cf_timeout: int = 300) -> None:
     """Navigate to url and wait for network to settle.
 
     If CF challenge appears, polls every 2 s until the title is no longer
-    "Just a moment..." — no hard timeout; prints a reminder every 30 s so the
-    user knows to click/solve in the browser window.
+    "Just a moment...". Raises TimeoutError if cf_timeout seconds elapse
+    without clearing the challenge (default 300 s).
     """
     import time as _time
     page.goto(url, wait_until="domcontentloaded", timeout=90000)
     warned_at = _time.time()
+    deadline = warned_at + cf_timeout
     while True:
         title = page.title()
         if "just a moment" not in title.lower():
@@ -193,19 +189,25 @@ def _navigate(page, url: str) -> None:
                 pass
             return
         now = _time.time()
+        if now >= deadline:
+            raise TimeoutError(
+                f"Cloudflare challenge not resolved within {cf_timeout}s for {url}"
+            )
         if now - warned_at >= 30:
+            remaining = int(deadline - now)
             print(
-                "\n  [CF] Still on challenge page — solve it in the browser window...",
+                f"\n  [CF] Still on challenge page — solve it in the browser window "
+                f"({remaining}s remaining)...",
                 file=sys.stderr,
             )
             warned_at = now
         _time.sleep(2)
 
 
-def scrape_month(page, month: int, year: int) -> dict[str, list[dict]]:
+def scrape_month(page, month: int, year: int, cf_timeout: int = 300) -> dict[str, list[dict]]:
     """Return {MM-DD: [{name, contentid, goarch_url}]} for one calendar month."""
     url = f"{CALENDAR_URL}?month={month}&year={year}"
-    _navigate(page, url)
+    _navigate(page, url, cf_timeout=cf_timeout)
 
     # Extract all saint links from the calendar
     # GOARCH chapel calendar links look like:
@@ -316,6 +318,8 @@ def main() -> None:
     parser.add_argument("--profile-dir", default=None,
                         help="Persistent Chrome profile directory path (default: scripts/.goarch-profile). "
                              "Reusing a profile that already has cf_clearance skips the CF challenge.")
+    parser.add_argument("--cf-timeout", type=int, default=300,
+                        help="Seconds to wait for Cloudflare challenge to clear before aborting (default 300)")
     args = parser.parse_args()
 
     months = range(1, 2) if args.dry_run else range(1, 13)
@@ -352,7 +356,6 @@ def main() -> None:
             str(profile_dir),
             headless=headless,
             executable_path=executable_path,
-            user_agent=_USER_AGENT,
             viewport={"width": 1280, "height": 900},
             locale="en-US",
             timezone_id="America/New_York",
@@ -365,13 +368,13 @@ def main() -> None:
         # After solving the challenge here, subsequent month-page navigations
         # will reuse the cookie and should not be challenged again.
         print("  Pre-flight: opening goarch.org to acquire CF clearance cookie...", file=sys.stderr)
-        _navigate(page, "https://www.goarch.org/")
+        _navigate(page, "https://www.goarch.org/", cf_timeout=args.cf_timeout)
         print("  goarch.org loaded. Proceeding to calendar pages...", file=sys.stderr)
 
         for month in months:
             print(f"  Month {month:02d}/{args.year}...", file=sys.stderr, end=" ")
             try:
-                result = scrape_month(page, month, args.year)
+                result = scrape_month(page, month, args.year, cf_timeout=args.cf_timeout)
                 # Optionally shift dates from civil-Gregorian to Julian (−13 days)
                 if args.civil_to_julian:
                     shifted: dict[str, list[dict]] = {}

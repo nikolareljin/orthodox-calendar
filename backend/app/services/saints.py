@@ -429,7 +429,11 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
     def _check_entries(entries: List[CalendarEntry]) -> Optional[Saint]:
         for entry in entries:
             for saint in entry.saints:
-                if query_keys.intersection(_saint_keys(saint)):
+                if any(
+                    qk in sk or sk in qk
+                    for qk in query_keys
+                    for sk in _saint_keys(saint)
+                ):
                     return saint
         return None
 
@@ -451,7 +455,10 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
 
 
 def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
-    if saint.goarch_url:
+    hagiography = saint.extended_notes or saint.notes
+    # Source reflects what text is actually returned, not merely URL presence.
+    # goarch_url may exist without scraped text (after URL-only enrichment).
+    if saint.extended_notes:
         source = "goarch"
     elif saint.hagiography_url:
         source = "oca"
@@ -461,8 +468,8 @@ def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
         source = "not_found"
     return HagiographyResponse(
         saint=saint.title or saint.name,
-        hagiography=saint.extended_notes or saint.notes,
+        hagiography=hagiography,
         goarch_url=saint.goarch_url,
-        hagiography_url=saint.hagiography_url,
+        hagiography_url=_resolve_hagiography_url(saint),
         source=source,
     )

@@ -188,6 +188,45 @@ def test_moon_phase_returns_expected_shape() -> None:
     assert payload["phase_name"]
 
 
+def test_hagiography_known_saint_returns_oca_or_notes() -> None:
+    response = client.get("/api/v1/hagiography?saint=Basil+the+Great&date=01-01")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["source"] in ("oca", "notes", "goarch")
+    assert payload["saint"]
+
+
+def test_hagiography_partial_name_match() -> None:
+    """Partial token match: 'Seraphim' should find 'Seraphim of Sarov' (01-02)."""
+    response = client.get("/api/v1/hagiography?saint=Seraphim&date=01-02")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["source"] != "not_found", "Partial name match failed for 'Seraphim'"
+
+
+def test_hagiography_unknown_saint_returns_not_found() -> None:
+    response = client.get("/api/v1/hagiography?saint=ZzzUnknownSaintXxx")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["source"] == "not_found"
+    assert payload["saint"] == "ZzzUnknownSaintXxx"
+
+
+def test_hagiography_source_reflects_text_not_url() -> None:
+    """source must match the text actually returned, not just URL presence."""
+    response = client.get("/api/v1/hagiography?saint=Basil+the+Great&date=01-01")
+
+    assert response.status_code == 200
+    payload = response.json()
+    if payload.get("hagiography"):
+        assert payload["source"] in ("oca", "notes", "goarch")
+    else:
+        assert payload["source"] == "not_found"
+
+
 def test_config_endpoint_returns_hagiography_source() -> None:
     response = client.get("/api/v1/config")
 
