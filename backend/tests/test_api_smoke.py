@@ -28,7 +28,12 @@ def test_readings_upstream_failure_returns_502(monkeypatch) -> None:
     assert response.json()["detail"] == "Readings upstream is unavailable"
 
 
-def test_revised_julian_readings_use_revised_calendar_date_after_divergence(monkeypatch) -> None:
+def test_readings_always_pass_civil_date_to_orthocal(monkeypatch) -> None:
+    """orthocal.info always receives the civil (Gregorian) date regardless of tradition.
+    The julian/gregorian path selects the upstream calendar cycle (Old vs New Calendar
+    liturgical cycle), not the date coordinate system.  In year 2800 Revised Julian
+    diverges from Gregorian, but we still pass the civil date so the liturgical week
+    is anchored to the correct civil Pascha date."""
     requested_urls = []
 
     class FakeResponse(BytesIO):
@@ -44,10 +49,10 @@ def test_revised_julian_readings_use_revised_calendar_date_after_divergence(monk
 
     monkeypatch.setattr(main._urllib_request, "urlopen", fake_urlopen)
 
+    # Greek (Revised Julian) — civil 2800-03-01 passed as-is
     response = client.get("/api/v1/readings?day=2800-03-01&tradition=greek")
-
     assert response.status_code == 200
-    assert requested_urls == ["https://orthocal.info/api/gregorian/2800/3/2/"]
+    assert requested_urls == ["https://orthocal.info/api/gregorian/2800/3/1/"]
 
 
 def test_month_calendar_returns_date_keyed_summary() -> None:

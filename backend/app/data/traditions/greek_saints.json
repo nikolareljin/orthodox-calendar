@@ -68,6 +68,66 @@
     ]
   },
   {
+    "month_day": "01-24",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Cadoc",
+        "title": "Cadoc",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Cadoc",
+        "notes": "Saint Cadoc, also spelled Cadog (Medieval Latin: Cadocus; also Modern Welsh: Catawg or Catwg; born c. 497 or before), was a 5th–6th-century abbot of Llancarfan,  near Cowbridge in Glamorgan, Wales, a monastery famous from the era of the Celtic church as a centre of learning, where Illtud spent the first period of his religious life under Cadoc's tutelage. Cadoc is credited with the establishment o",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 3532,
+        "saint_gr_url": "https://www.saint.gr/3532/saint.aspx",
+        "name_gr": "Άγιος Cadoc"
+      }
+    ]
+  },
+  {
+    "month_day": "01-29",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Gildas",
+        "title": "Gildas",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Gildas",
+        "notes": "Gildas (English pronunciation: , Breton: Gweltaz; c. 450/500 – c. 570) – also known as  Gildas Badonicus, Gildas fab Caw (in Middle Welsh texts and antiquarian works) and Gildas Sapiens (Gildas the Wise) – was a 6th-century British monk best known for his religious polemic De Excidio et Conquestu Britanniae, which recounts the history of the Britons before and during the coming of the Saxons.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 3554,
+        "saint_gr_url": "https://www.saint.gr/3554/saint.aspx",
+        "name_gr": "Άγιος Gildas ο σοφός"
+      }
+    ]
+  },
+  {
+    "month_day": "02-16",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Tanco",
+        "title": "Tanco",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Tanco",
+        "notes": "Saint Tanco (or Tancho, Tanchon, Tatta, etc.; died 815 AD) was a Scottish abbot, bishop, and martyr in what is now Germany. He is venerated as a saint in the Eastern Orthodox Church and Roman Catholic Church, with his feast day on 6 February or 15 February depending on the liturgical calendar.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 3729,
+        "saint_gr_url": "https://www.saint.gr/3729/saint.aspx",
+        "name_gr": "Άγιος Tanco Επίσκοπος Βέρντεν"
+      }
+    ]
+  },
+  {
     "month_day": "02-19",
     "tradition": "greek",
     "calendar": "revised",
@@ -81,6 +141,26 @@
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "local",
         "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "02-24",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Boisil",
+        "title": "Boisil",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Boisil",
+        "notes": "Boisil (died 661) was a monk of Melrose Abbey, an offshoot of Lindisfarne, then in the Anglo-Saxon Kingdom of Northumbria, but now in Scotland, where he must have been one of the first generation of monks. He probably moved to the new foundation of Melrose when it was started, some time in the late 640s.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 2507,
+        "saint_gr_url": "https://www.saint.gr/2507/saint.aspx",
+        "name_gr": "Όσιος Boisil εκ Σκωτίας"
       }
     ]
   },
@@ -289,6 +369,26 @@
     ]
   },
   {
+    "month_day": "05-25",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Aldhelm",
+        "title": "Aldhelm",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Aldhelm",
+        "notes": "Aldhelm (Old English: Ealdhelm, Latin: Aldhelmus Malmesberiensis; c. 639 – 25 May 709), Abbot of Malmesbury Abbey, Bishop of Sherborne, and a writer and scholar of Latin poetry, was born before the middle of the 7th century. He is said to have been the son of Kenten, who was of the royal house of Wessex.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 2687,
+        "saint_gr_url": "https://www.saint.gr/2687/saint.aspx",
+        "name_gr": "Άγιος Aldhelm"
+      }
+    ]
+  },
+  {
     "month_day": "05-29",
     "tradition": "greek",
     "calendar": "revised",
@@ -302,6 +402,26 @@
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "local",
         "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "06-05",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Saint Boniface",
+        "title": "Saint Boniface",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Saint_Boniface",
+        "notes": "Boniface (born Wynfreth; c. 675 – 5 June 754) was an English Benedictine monk and leading figure in the Anglo-Saxon mission to the Germanic parts of Francia during the eighth century. He organised significant foundations of the church in Germany and was made Archbishop of Mainz by Pope Gregory III.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 1823,
+        "saint_gr_url": "https://www.saint.gr/1823/saint.aspx",
+        "name_gr": "Άγιος Boniface"
       }
     ]
   },
@@ -336,6 +456,26 @@
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "local",
         "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "07-01",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Leonorus",
+        "title": "Leonorus",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Leonorus",
+        "notes": "Saint Leonorus (or Leonorious, Leonorius, Léonor, Lunaire; died 560) was a Welsh monk who was active in Brittany.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 1965,
+        "saint_gr_url": "https://www.saint.gr/1965/saint.aspx",
+        "name_gr": "Άγιος Leonorus"
       }
     ]
   },
@@ -547,6 +687,26 @@
     ]
   },
   {
+    "month_day": "09-16",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Ninian",
+        "title": "Ninian",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Ninian",
+        "notes": "Ninian is a Christian saint, first mentioned in the 8th century as being an early missionary among the Pictish peoples of what is now Scotland. For this reason, he is known as the Apostle to the Southern Picts, and there are numerous dedications to him in those parts of Scotland with a Pictish heritage, throughout the Scottish Lowlands, and in parts of Northern England with a Northumbrian heritage",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 2450,
+        "saint_gr_url": "https://www.saint.gr/2450/saint.aspx",
+        "name_gr": "Άγιος Ninian"
+      }
+    ]
+  },
+  {
     "month_day": "09-24",
     "tradition": "greek",
     "calendar": "revised",
@@ -581,6 +741,46 @@
     ]
   },
   {
+    "month_day": "10-12",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Wilfrid",
+        "title": "Wilfrid",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Wilfrid",
+        "notes": "Wilfrid (c. 633 – 709 or 710) was an English bishop and saint. Born a Northumbrian noble, he entered religious life as a teenager and studied at Lindisfarne, at Canterbury, in Francia, and at Rome; he returned to Northumbria in about 660, and became the abbot of a newly founded monastery at Ripon.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 2725,
+        "saint_gr_url": "https://www.saint.gr/2725/saint.aspx",
+        "name_gr": "Άγιος Wilfrid της Υόρκης"
+      }
+    ]
+  },
+  {
+    "month_day": "10-26",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Eata of Hexham",
+        "title": "Eata of Hexham",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Eata_of_Hexham",
+        "notes": "Eata (died 26 October 686), also known as Eata of Lindisfarne, was Bishop of Hexham from 678 until 681, and of then Bishop of Lindisfarne from before 681 until 685. He then was translated back to Hexham where he served until his death in 685 or 686. He was the first native of Northumbria to occupy the bishopric of Lindisfarne.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 2701,
+        "saint_gr_url": "https://www.saint.gr/2701/saint.aspx",
+        "name_gr": "Άγιος Eata του Hexham"
+      }
+    ]
+  },
+  {
     "month_day": "11-04",
     "tradition": "greek",
     "calendar": "revised",
@@ -604,6 +804,26 @@
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "local",
         "year_canonized": null
+      }
+    ]
+  },
+  {
+    "month_day": "11-07",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Willibrord",
+        "title": "Willibrord",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Willibrord",
+        "notes": "Willibrord (Latin: Villibrordus; c. 658 – 7 November AD 739) was an Anglo-Saxon monk, bishop, and missionary. He became the first Bishop of Utrecht in what is now the Netherlands, dying at Echternach in Luxembourg, and is known as the \"Apostle to the Frisians\".",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 2941,
+        "saint_gr_url": "https://www.saint.gr/2941/saint.aspx",
+        "name_gr": "Άγιος Willibrord"
       }
     ]
   },
@@ -638,6 +858,19 @@
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "local",
         "year_canonized": null
+      },
+      {
+        "name": "Justus",
+        "title": "Justus",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Justus",
+        "notes": "Justus (died on 10 November between 627 and 631) was the fourth archbishop of Canterbury. Pope Gregory the Great sent Justus from Italy to England on a mission to Christianise the Anglo-Saxons from their native paganism; he probably arrived with the second group of missionaries dispatched in 601. Justus became the first bishop of Rochester in 604 and signed a letter to the Irish bishops urging the",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 2975,
+        "saint_gr_url": "https://www.saint.gr/2975/saint.aspx",
+        "name_gr": "Άγιος Justus"
       }
     ]
   },
@@ -676,6 +909,26 @@
     ]
   },
   {
+    "month_day": "11-17",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Hilda of Whitby",
+        "title": "Hilda of Whitby",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Hilda_of_Whitby",
+        "notes": "Hilda of Whitby (or Hild; c. 614 – 680) was a saint of the early Church in Britain. She was the founder and first abbess of the monastery at Whitby which was chosen as the venue for the Synod of Whitby in 664.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 3033,
+        "saint_gr_url": "https://www.saint.gr/3033/saint.aspx",
+        "name_gr": "Αγία Hilda"
+      }
+    ]
+  },
+  {
     "month_day": "11-22",
     "tradition": "greek",
     "calendar": "revised",
@@ -689,6 +942,46 @@
         "canonized_by": "Church of Greece",
         "canonization_scope": "local",
         "year_canonized": 2017
+      }
+    ]
+  },
+  {
+    "month_day": "11-23",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Deiniol",
+        "title": "Deiniol",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Deiniol",
+        "notes": "Saint Deiniol (died 572) was traditionally the first Bishop of Bangor in the Kingdom of Gwynedd, Wales. The present Bangor Cathedral, dedicated to Deiniol, is said to be on the site where his monastery stood. He is venerated in Brittany as Saint Denoual.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 3086,
+        "saint_gr_url": "https://www.saint.gr/3086/saint.aspx",
+        "name_gr": "Άγιος Deiniol"
+      }
+    ]
+  },
+  {
+    "month_day": "11-29",
+    "tradition": "greek",
+    "calendar": "revised",
+    "saints": [
+      {
+        "name": "Brendan the Navigator",
+        "title": "Brendan the Navigator",
+        "feast_type": "Saint",
+        "hagiography_url": "https://en.wikipedia.org/wiki/Brendan_the_Navigator",
+        "notes": "Brendan of Clonfert (c. AD 484 – c. 577) is one of the early Irish monastic saints and one of the Twelve Apostles of Ireland.",
+        "canonized_by": "Ecumenical Patriarchate of Constantinople",
+        "canonization_scope": "local",
+        "year_canonized": null,
+        "saint_gr_id": 3107,
+        "saint_gr_url": "https://www.saint.gr/3107/saint.aspx",
+        "name_gr": "Άγιος Brendan"
       }
     ]
   },

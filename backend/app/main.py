@@ -13,7 +13,6 @@ from pydantic import BaseModel
 
 from .calendar_logic import (
     canonical_tradition_key,
-    convert_to_tradition_month_day,
     effective_calendar,
     julian_pascha_as_gregorian,
 )
@@ -49,7 +48,7 @@ class NameDayRequest(BaseModel):
 app = FastAPI(
     title="orthodox-calendar",
     description="Orthodox and Oriental Orthodox saints of the day with calendar/contacts hooks.",
-    version="0.4.1",
+    version="0.5.0",
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
     openapi_url="/api/v1/openapi.json",
@@ -127,13 +126,17 @@ def readings(
 
     trad = TRADITIONS[canonical]
     calendar = effective_calendar(day, trad)
-    if calendar in {CalendarSystem.JULIAN, CalendarSystem.REVISED}:
-        cal = "julian" if calendar == CalendarSystem.JULIAN else "gregorian"
-        _, calendar_date = convert_to_tradition_month_day(day, trad)
-        api_year, api_month, api_day = (int(part) for part in calendar_date.split("-"))
-    else:
-        cal = "gregorian"
-        api_year, api_month, api_day = day.year, day.month, day.day
+    # orthocal.info always takes civil (Gregorian) dates — do NOT convert to
+    # Julian calendar date before calling. The "julian" path selects the Old-
+    # Calendar liturgical cycle (fixed feasts + movable feasts relative to Julian
+    # Pascha); the "gregorian" path selects the New/Revised-Julian cycle.
+    #
+    # Empirically verified (civil 2026-05-19 = Julian 2026-05-06):
+    #   julian/2026/5/6  → weekday=3 (Wed), "4th Sunday of Pascha"  ← WRONG
+    #   julian/2026/5/19 → weekday=2 (Tue), "6th Sunday of Pascha"  ← correct
+    # Passing the Julian calendar date is the bug this line intentionally avoids.
+    cal = "julian" if calendar == CalendarSystem.JULIAN else "gregorian"
+    api_year, api_month, api_day = day.year, day.month, day.day
     url = f"https://orthocal.info/api/{cal}/{api_year}/{api_month}/{api_day}/"
     try:
         with _urllib_request.urlopen(url, timeout=8) as resp:  # noqa: S310
