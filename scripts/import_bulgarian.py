@@ -61,14 +61,22 @@ def _wiki_get(params: dict) -> dict:
 
 
 def _cat_pages(category: str) -> list[str]:
-    data = _wiki_get({
+    titles: list[str] = []
+    params: dict = {
         "action": "query",
         "list": "categorymembers",
         "cmtitle": f"Category:{category}",
         "cmlimit": "500",
         "cmtype": "page",
-    })
-    return [m["title"] for m in data.get("query", {}).get("categorymembers", [])]
+    }
+    while True:
+        data = _wiki_get(params)
+        titles.extend(m["title"] for m in data.get("query", {}).get("categorymembers", []))
+        cont = data.get("continue", {}).get("cmcontinue")
+        if not cont:
+            break
+        params["cmcontinue"] = cont
+    return titles
 
 
 def _extract_date_from_wikitext(wikitext: str) -> str | None:

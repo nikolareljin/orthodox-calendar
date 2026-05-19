@@ -456,14 +456,15 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
 
 def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
     hagiography = saint.extended_notes or saint.notes
-    # Source reflects what text is actually returned, not merely URL presence.
-    # goarch_url may exist without scraped text (after URL-only enrichment).
+    # Source reflects the text actually returned, not URL presence.
+    # notes may coexist with hagiography_url (e.g. Wikipedia overlay saints);
+    # calling that "oca" would misrepresent provenance.
     if saint.extended_notes:
         source = "goarch"
-    elif saint.hagiography_url:
-        source = "oca"
     elif saint.notes:
         source = "notes"
+    elif saint.hagiography_url:
+        source = "oca"
     else:
         source = "not_found"
     return HagiographyResponse(
