@@ -486,6 +486,21 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
     return HagiographyResponse(saint=saint_name, source="not_found")
 
 
+def _hagio_url(saint: Saint) -> str | None:
+    """Return the hagiography URL for the response, respecting HAGIOGRAPHY_SOURCE.
+
+    OCA URLs with placeholder year 0000 are normalized to the current year for
+    fixed-feast saints. Movable-feast saints have year-dependent month/day in
+    their stored URLs, so normalization would produce a wrong date — their URLs
+    are omitted (None) to avoid serving a broken link.
+    """
+    if HAGIOGRAPHY_SOURCE == "goarch" and saint.goarch_url:
+        return saint.goarch_url
+    if is_movable_feast_title(saint.title or saint.name or ""):
+        return None
+    return _normalize_oca_url(saint.hagiography_url)
+
+
 def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
     hagiography = saint.extended_notes or saint.notes
     oca_url = saint.hagiography_url or ""
@@ -505,10 +520,6 @@ def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
         saint=saint.title or saint.name,
         hagiography=hagiography,
         goarch_url=saint.goarch_url,
-        hagiography_url=(
-            saint.goarch_url or _normalize_oca_url(saint.hagiography_url)
-            if HAGIOGRAPHY_SOURCE == "goarch"
-            else _normalize_oca_url(saint.hagiography_url)
-        ),
+        hagiography_url=_hagio_url(saint),
         source=source,
     )
