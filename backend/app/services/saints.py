@@ -245,6 +245,8 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.icon_url = overlay.icon_url
     if overlay.notes and not base.notes:
         base.notes = overlay.notes
+    if overlay.extended_notes and not base.extended_notes:
+        base.extended_notes = overlay.extended_notes
     if overlay.canonized_by and not base.canonized_by:
         base.canonized_by = overlay.canonized_by
     if overlay.canonization_scope and not base.canonization_scope:
@@ -503,6 +505,10 @@ def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
         saint=saint.title or saint.name,
         hagiography=hagiography,
         goarch_url=saint.goarch_url,
-        hagiography_url=_normalize_oca_url(saint.hagiography_url),
+        hagiography_url=(
+            saint.goarch_url or _normalize_oca_url(saint.hagiography_url)
+            if HAGIOGRAPHY_SOURCE == "goarch"
+            else _normalize_oca_url(saint.hagiography_url)
+        ),
         source=source,
     )

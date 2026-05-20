@@ -188,7 +188,7 @@ def test_moon_phase_returns_expected_shape() -> None:
     assert payload["phase_name"]
 
 
-def test_hagiography_known_saint_returns_oca_or_notes() -> None:
+def test_hagiography_known_saint_returns_valid_source() -> None:
     response = client.get("/api/v1/hagiography?saint=Basil+the+Great&date=01-01")
 
     assert response.status_code == 200
