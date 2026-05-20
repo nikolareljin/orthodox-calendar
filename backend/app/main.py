@@ -91,7 +91,7 @@ def saints(
 
 @app.get("/api/v1/hagiography", response_model=HagiographyResponse)
 def hagiography(
-    saint: str = Query(..., description="Saint name (prefix/substring token match after normalization)"),
+    saint: str = Query(..., min_length=1, description="Saint name (prefix/substring token match after normalization)"),
     date: Optional[str] = Query(default=None, description="MM-DD on the tradition calendar", pattern=r"^\d{2}-\d{2}$"),
 ) -> HagiographyResponse:
     """Return hagiography data for a named saint.

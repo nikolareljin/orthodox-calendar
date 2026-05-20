@@ -35,7 +35,7 @@ class Saint(BaseModel):
     goarch_url: Optional[str] = None       # GOARCH chapel URL (contentid-keyed; date-independent)
     icon_url: Optional[str] = None
     notes: Optional[str] = None
-    extended_notes: Optional[str] = None  # full hagiography text (GOARCH or neobyzantine source)
+    extended_notes: Optional[str] = None  # full hagiography text scraped from GOARCH (source="goarch")
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
     canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental" | "church-of-the-east"
     year_canonized: Optional[int] = None    # e.g. 2010

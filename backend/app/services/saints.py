@@ -199,6 +199,16 @@ def _saint_keys(saint: Saint) -> List[str]:
     return keys or [saint.name.lower().strip()]
 
 
+# Flat cache of (frozenset_of_keys, saint, month_day) built once at import time.
+# Avoids recomputing _saint_keys in nested loops on every hagiography request.
+_HAGIO_CACHE: List[tuple[frozenset[str], Saint, str]] = [
+    (frozenset(_saint_keys(saint)), saint, entry.month_day)
+    for entries in _INDEX.values()
+    for entry in entries
+    for saint in entry.saints
+]
+
+
 def _apply_overlay(base: Saint, overlay: Saint) -> None:
     """Merge overlay fields into base saint in-place.
 
@@ -420,24 +430,19 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
 def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> HagiographyResponse:
     """Find a saint by name (and optionally MM-DD) and return hagiography data.
 
-    Searches across all traditions. If month_day is given, searches only that
-    date's entries first (faster + less ambiguity) before falling back to all
-    dates. Among all name matches, selects the best candidate by field
-    priority (extended_notes > notes > hagiography_url) rather than first hit.
+    Searches across all traditions using _HAGIO_CACHE (keys precomputed at
+    module load). If month_day is given, restricts to that date first, then
+    falls back to a full scan. Among all name matches, selects the best
+    candidate by field priority (extended_notes > notes > hagiography_url).
     """
+    saint_name = saint_name.strip()
+    if not saint_name:
+        return HagiographyResponse(saint=saint_name, source="not_found")
+
     query_keys = set(_saint_keys(Saint(name=saint_name)))
 
-    def _collect_matches(entries: List[CalendarEntry]) -> List[Saint]:
-        return [
-            saint
-            for entry in entries
-            for saint in entry.saints
-            if any(
-                qk in sk or sk in qk
-                for qk in query_keys
-                for sk in _saint_keys(saint)
-            )
-        ]
+    def _matches(entry_keys: frozenset[str]) -> bool:
+        return any(qk in sk or sk in qk for qk in query_keys for sk in entry_keys)
 
     def _best(candidates: List[Saint]) -> Optional[Saint]:
         if not candidates:
@@ -447,20 +452,13 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
             key=lambda s: (bool(s.extended_notes), bool(s.notes), bool(s.hagiography_url)),
         )
 
-    # Targeted search by date first
     if month_day:
-        all_dated: List[Saint] = []
-        for tradition_entries in _INDEX.values():
-            dated = [e for e in tradition_entries if e.month_day == month_day]
-            all_dated.extend(_collect_matches(dated))
-        found = _best(all_dated)
+        dated = [s for (ks, s, md) in _HAGIO_CACHE if md == month_day and _matches(ks)]
+        found = _best(dated)
         if found:
             return _format_hagiography_response(found)
 
-    # Full scan across all traditions
-    all_matches: List[Saint] = []
-    for tradition_entries in _INDEX.values():
-        all_matches.extend(_collect_matches(tradition_entries))
+    all_matches = [s for (ks, s, _) in _HAGIO_CACHE if _matches(ks)]
     found = _best(all_matches)
     if found:
         return _format_hagiography_response(found)
