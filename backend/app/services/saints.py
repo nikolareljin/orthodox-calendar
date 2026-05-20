@@ -24,6 +24,9 @@ _INDEX = build_index()
 _OCA_URL_DATE_RE = _re.compile(
     r"(https://www\.oca\.org/saints/lives/)(\d{4})/(\d{2}/\d{2})/(.*)"
 )
+_OCA_ZERO_YEAR_RE = _re.compile(
+    r"(https://www\.oca\.org/saints/lives/)0000/(\d{2}/\d{2}/.*)"
+)
 
 
 def _build_movable_meta() -> dict[int, tuple[str | None, str | None]]:
@@ -128,6 +131,21 @@ def _build_oca_url(url: str | None, calendar_date: str | None) -> str | None:
         )
     except (ValueError, AttributeError):
         return url
+
+
+def _normalize_oca_url(url: str | None) -> str | None:
+    """Replace the 0000 placeholder year in a stored OCA URL with the current year.
+
+    OCA hagiography pages are not year-specific for fixed feasts; substituting
+    the current year produces a valid, working link without needing calendar context.
+    Non-OCA URLs or already-valid years are returned unchanged.
+    """
+    if not url:
+        return url
+    m = _OCA_ZERO_YEAR_RE.match(url)
+    if not m:
+        return url
+    return f"{m.group(1)}{date.today().year}/{m.group(2)}"
 
 
 def _resolve_hagiography_url(saint: Saint, calendar_date: str | None = None) -> str | None:
@@ -481,12 +499,10 @@ def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
     else:
         # No local text — source reflects the hagiography field, not URL presence
         source = "not_found"
-    # Return the raw stored URL — no calendar_date context is available here,
-    # so rebuilding via _resolve_hagiography_url would emit a broken 0000 URL.
     return HagiographyResponse(
         saint=saint.title or saint.name,
         hagiography=hagiography,
         goarch_url=saint.goarch_url,
-        hagiography_url=saint.hagiography_url,
+        hagiography_url=_normalize_oca_url(saint.hagiography_url),
         source=source,
     )
