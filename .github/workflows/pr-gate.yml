@@ -36,7 +36,7 @@ jobs:
                 break
                 ;;
             esac
-          done < <(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+          done < <(git diff --name-only "$BASE_SHA...$HEAD_SHA")
           echo "run_scans=$run_scans" >> "$GITHUB_OUTPUT"
 
   gitleaks:
@@ -87,3 +87,34 @@ jobs:
           done < <(find backend/app/data -type f -name '*.json' -print0)
           [[ $found -eq 0 ]] || exit 1
           echo "Data safety check passed."
+
+  pr-gate:
+    needs: [changes, gitleaks, frontend-scan, backend-scan, data-safety]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require completed scan jobs
+        env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
+          RUN_SCANS: ${{ needs.changes.outputs.run_scans }}
+          GITLEAKS_RESULT: ${{ needs.gitleaks.result }}
+          FRONTEND_RESULT: ${{ needs.frontend-scan.result }}
+          BACKEND_RESULT: ${{ needs.backend-scan.result }}
+          DATA_SAFETY_RESULT: ${{ needs.data-safety.result }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$CHANGES_RESULT" == "success" ]] || exit 1
+          if [[ "$RUN_SCANS" != "true" ]]; then
+            echo "Documentation-only PR: scan jobs intentionally skipped."
+            exit 0
+          fi
+
+          for result in \
+            "$GITLEAKS_RESULT" \
+            "$FRONTEND_RESULT" \
+            "$BACKEND_RESULT" \
+            "$DATA_SAFETY_RESULT"; do
+            [[ "$result" == "success" ]] || exit 1
+          done
+          echo "PR gate checks passed."
