@@ -7,7 +7,7 @@ on:
       - "release/**"
     paths-ignore:
       - "docs/**"
-      - "*.md"
+      - "**/*.md"
 
 jobs:
   gitleaks:
