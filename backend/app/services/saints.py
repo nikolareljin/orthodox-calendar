@@ -230,8 +230,19 @@ def _saint_keys(saint: Saint) -> List[str]:
     return keys or [saint.name.lower().strip()]
 
 
+# Calendar systems that use the Byzantine MM-DD space (Julian and Revised-Julian).
+# The month_day parameter on /hagiography is documented as a Byzantine fixed-feast
+# key, so non-Byzantine calendars (Coptic, Ethiopian) are excluded when it is set.
+_BYZANTINE_CALENDARS: frozenset[CalendarSystem] = frozenset(
+    {CalendarSystem.JULIAN, CalendarSystem.REVISED}
+)
+
+# Cache entry type: (search-keys, saint, month_day, calendar)
+_CacheEntry = Tuple[frozenset[str], Saint, str, CalendarSystem]
+
+
 @functools.lru_cache(maxsize=None)
-def _get_hagio_cache() -> Tuple[Tuple[frozenset[str], Saint, str], ...]:
+def _get_hagio_cache() -> Tuple[_CacheEntry, ...]:
     """Build and return the hagiography lookup cache (built once, thread-safe via lru_cache).
 
     Groups all index entries by (month_day, calendar) — not just month_day —
@@ -243,10 +254,10 @@ def _get_hagio_cache() -> Tuple[Tuple[frozenset[str], Saint, str], ...]:
     fill only missing values via _apply_overlay.  This ensures goarch_url and
     extended_notes from tradition overlays are visible to /hagiography.
 
-    Returns a tuple (structurally immutable) of (keys, saint, month_day) triples.
-    The contained Saint objects are shared across all callers and must be treated
-    as read-only; mutating them would corrupt the cache for subsequent requests.
-    Use saint.model_copy() before making any field modifications.
+    Returns a tuple (structurally immutable) of (keys, saint, month_day, calendar)
+    4-tuples.  The contained Saint objects are shared across all callers and must
+    be treated as read-only; mutating them would corrupt the cache for subsequent
+    requests.  Use saint.model_copy() before making any field modifications.
     """
     # Group every raw entry by (month_day, calendar) across all traditions.
     by_md_cal: Dict[Tuple[str, CalendarSystem], List[CalendarEntry]] = {}
@@ -255,8 +266,8 @@ def _get_hagio_cache() -> Tuple[Tuple[frozenset[str], Saint, str], ...]:
             key = (entry.month_day, entry.calendar)
             by_md_cal.setdefault(key, []).append(entry)
 
-    result: List[Tuple[frozenset[str], Saint, str]] = []
-    for (month_day, _cal_sys), md_entries in by_md_cal.items():
+    result: List[_CacheEntry] = []
+    for (month_day, cal_sys), md_entries in by_md_cal.items():
         # Merge saints within the same (month_day, calendar) group.
         merged: Dict[str, Saint] = {}   # primary_key -> merged saint
         key_index: Dict[str, str] = {}  # any normalised key -> primary_key
@@ -280,9 +291,29 @@ def _get_hagio_cache() -> Tuple[Tuple[frozenset[str], Saint, str], ...]:
                         key_index[k] = primary_key
 
         for primary_key, saint in merged.items():
-            result.append((frozenset(all_keys[primary_key]), saint, month_day))
+            result.append((frozenset(all_keys[primary_key]), saint, month_day, cal_sys))
 
     return tuple(result)
+
+
+@functools.lru_cache(maxsize=None)
+def _get_hagio_byzantine_index() -> Dict[str, Tuple[_CacheEntry, ...]]:
+    """Pre-index Byzantine (Julian/Revised-Julian) cache entries by month_day.
+
+    Built once from _get_hagio_cache() and cached. Reduces the month_day filter
+    path in get_hagiography() from O(N) over the full cache to O(1) lookup + O(k)
+    match scan where k = saints on that Byzantine date.
+
+    Non-Byzantine calendars (Coptic, Ethiopian) are intentionally excluded: the
+    month_day parameter is documented as a Byzantine fixed-feast MM-DD key, so
+    Coptic/Ethiopian entries whose MM-DD string coincidentally matches are ignored.
+    """
+    index: Dict[str, List[_CacheEntry]] = {}
+    for entry in _get_hagio_cache():
+        _ks, _saint, month_day, cal = entry
+        if cal in _BYZANTINE_CALENDARS:
+            index.setdefault(month_day, []).append(entry)
+    return {md: tuple(entries) for md, entries in index.items()}
 
 
 def _apply_overlay(base: Saint, overlay: Saint) -> None:
@@ -556,10 +587,13 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         )
         return saint
 
-    cache = _get_hagio_cache()
-
     if month_day:
-        dated = [(ks, s, md) for (ks, s, md) in cache if md == month_day and _matches(ks)]
+        # Use the pre-indexed Byzantine-only lookup: O(1) dict access + O(k) match
+        # scan where k = saints on that Byzantine date.  Non-Byzantine calendars
+        # (Coptic, Ethiopian) are excluded because month_day is documented as a
+        # Byzantine fixed-feast MM-DD key.
+        byzantine_entries = _get_hagio_byzantine_index().get(month_day, ())
+        dated = [(ks, s, md) for (ks, s, md, _cal) in byzantine_entries if _matches(ks)]
         found = _best(dated)
         if found:
             return _format_hagiography_response(found)
@@ -567,7 +601,7 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         # than silently falling through to a full scan that may return a different saint.
         return HagiographyResponse(saint=saint_name, source="not_found")
 
-    all_matches = [(ks, s, md) for (ks, s, md) in cache if _matches(ks)]
+    all_matches = [(ks, s, md) for (ks, s, md, _cal) in _get_hagio_cache() if _matches(ks)]
     found = _best(all_matches)
     if found:
         return _format_hagiography_response(found)

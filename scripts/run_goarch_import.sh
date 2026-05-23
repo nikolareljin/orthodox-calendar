@@ -19,7 +19,7 @@ echo "=== Installing import dependencies ==="
 pip install --quiet -r scripts/requirements-import.txt
 
 echo "=== Installing Playwright Chromium ==="
-playwright install chromium
+playwright install --with-deps chromium
 
 echo "=== Scraping GOARCH chapel calendar (headed browser — interact if CF challenge appears) ==="
 python3 scripts/import_goarch.py \
