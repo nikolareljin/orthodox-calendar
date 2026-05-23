@@ -224,7 +224,7 @@ def _saint_keys(saint: Saint) -> List[str]:
 
 
 @functools.lru_cache(maxsize=None)
-def _get_hagio_cache() -> Tuple[Tuple[frozenset, Saint, str], ...]:
+def _get_hagio_cache() -> Tuple[Tuple[frozenset[str], Saint, str], ...]:
     """Build and return the hagiography lookup cache (built once, thread-safe via lru_cache).
 
     Groups all index entries by (month_day, calendar) — not just month_day —
@@ -248,12 +248,12 @@ def _get_hagio_cache() -> Tuple[Tuple[frozenset, Saint, str], ...]:
             key = (entry.month_day, entry.calendar)
             by_md_cal.setdefault(key, []).append(entry)
 
-    result: List[Tuple[frozenset, Saint, str]] = []
+    result: List[Tuple[frozenset[str], Saint, str]] = []
     for (month_day, _cal_sys), md_entries in by_md_cal.items():
         # Merge saints within the same (month_day, calendar) group.
         merged: Dict[str, Saint] = {}   # primary_key -> merged saint
         key_index: Dict[str, str] = {}  # any normalised key -> primary_key
-        all_keys: Dict[str, List[str]] = {}  # primary_key -> all keys seen
+        all_keys: Dict[str, set[str]] = {}  # primary_key -> all keys seen
         for entry in md_entries:
             for saint in entry.saints:
                 keys = _saint_keys(saint)
@@ -264,11 +264,11 @@ def _get_hagio_cache() -> Tuple[Tuple[frozenset, Saint, str], ...]:
                     _apply_overlay(merged[primary_key], saint)
                     for k in keys:
                         key_index.setdefault(k, primary_key)
-                        all_keys[primary_key].append(k)
+                        all_keys[primary_key].add(k)
                 else:
                     primary_key = keys[0]
                     merged[primary_key] = saint.model_copy()
-                    all_keys[primary_key] = list(keys)
+                    all_keys[primary_key] = set(keys)
                     for k in keys:
                         key_index[k] = primary_key
 
