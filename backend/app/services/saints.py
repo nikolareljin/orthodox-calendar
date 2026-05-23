@@ -3,6 +3,7 @@ from __future__ import annotations
 import calendar as _cal
 import functools
 import re as _re
+import unicodedata
 from datetime import date
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -15,7 +16,6 @@ from ..calendar_logic import (
     movable_feast_for_date,
     resolve_tradition,
 )
-from fastapi import HTTPException
 from ..config import HAGIOGRAPHY_SOURCE
 from ..data_loader import build_index
 from ..models import CalendarEntry, CalendarSystem, HagiographyResponse, Saint, SaintsResponse
@@ -195,6 +195,13 @@ _DROP_TOKENS = {
 
 
 def _normalize_saint_text(value: str) -> str:
+    # Fold diacritics (e.g. "Șaguna" → "saguna", "Pčinja" → "pcinja") before
+    # stripping non-ASCII so Romanian/Bulgarian saints remain findable with
+    # plain ASCII queries.
+    value = "".join(
+        c for c in unicodedata.normalize("NFKD", value)
+        if not unicodedata.category(c).startswith("M")
+    )
     value = _EVENT_PREFIX_RE.sub("", value.lower().strip())
     value = _HONORIFIC_RE.sub("", value)
     value = _re.sub(r"[^a-z0-9]+", " ", value)
@@ -523,11 +530,8 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
     q_tokens = [t for t in normalized_query.split() if len(t) >= 2]
     if not q_tokens:
         # Nothing searchable survived normalization (e.g. "st", "saint", "the").
-        # Raise 422 rather than silently returning not_found.
-        raise HTTPException(
-            status_code=422,
-            detail="saint name contains no searchable tokens after normalization",
-        )
+        # Raise ValueError; the route handler translates this to HTTP 422.
+        raise ValueError("saint name contains no searchable tokens after normalization")
 
     def _matches(entry_keys: frozenset[str]) -> bool:
         if not q_tokens:

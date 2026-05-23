@@ -112,7 +112,10 @@ def hagiography(
     """
     if not saint.strip():
         raise HTTPException(status_code=422, detail="saint must not be blank")
-    return get_hagiography(saint, month_day)
+    try:
+        return get_hagiography(saint, month_day)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
 
 
 @app.post("/api/v1/name-days", response_model=NameDayResponse)
