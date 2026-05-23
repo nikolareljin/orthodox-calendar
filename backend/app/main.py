@@ -96,10 +96,13 @@ def hagiography(
 ) -> HagiographyResponse:
     """Return hagiography data for a named saint.
 
-    Searches across all tradition datasets. If date (MM-DD) is given, prioritises
-    that date's entries to avoid false matches for saints sharing a similar name.
+    Searches across all tradition datasets. If date (MM-DD) is given, only
+    saints commemorated on that date are considered; no fallback to a full
+    scan is performed. Whitespace-only saint names are rejected with 422.
     Source field indicates where the data came from: goarch, oca, notes, or not_found.
     """
+    if not saint.strip():
+        raise HTTPException(status_code=422, detail="saint must not be blank")
     return get_hagiography(saint, date)
 
 

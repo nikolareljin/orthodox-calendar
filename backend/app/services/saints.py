@@ -461,17 +461,20 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
     (extended_notes > notes > hagiography_url), with month_day + name as a
     stable tie-breaker to ensure deterministic results across dataset changes.
     """
+    original_name = saint_name
     saint_name = saint_name.strip()
     if not saint_name:
-        return HagiographyResponse(saint=saint_name, source="not_found")
+        # Echo the original (pre-strip) value so clients can correlate the response.
+        return HagiographyResponse(saint=original_name, source="not_found")
 
     query_keys = set(_saint_keys(Saint(name=saint_name)))
 
+    # Precompute once: split each normalized query key into tokens (min 2 chars).
+    # Requires ALL tokens to appear as substrings in at least one saint key,
+    # preventing very short or common tokens from matching unrelated saints.
+    q_tokens = [t for qk in query_keys for t in qk.split() if len(t) >= 2]
+
     def _matches(entry_keys: frozenset[str]) -> bool:
-        # Split each normalized query key into tokens (min 2 chars); require
-        # ALL of them to appear as substrings in at least one saint key.
-        # This prevents very short or common tokens from matching unrelated saints.
-        q_tokens = [t for qk in query_keys for t in qk.split() if len(t) >= 2]
         if not q_tokens:
             return False
         return all(any(qt in sk for sk in entry_keys) for qt in q_tokens)
