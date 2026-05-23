@@ -92,7 +92,7 @@ def saints(
 @app.get("/api/v1/hagiography", response_model=HagiographyResponse)
 def hagiography(
     saint: str = Query(..., min_length=1, description="Saint name (prefix/substring token match after normalization)"),
-    date: Optional[str] = Query(
+    month_day: Optional[str] = Query(
         default=None,
         description=(
             "Byzantine fixed-feast MM-DD key (Julian/Revised-Julian calendar). "
@@ -105,14 +105,14 @@ def hagiography(
 ) -> HagiographyResponse:
     """Return hagiography data for a named saint.
 
-    Searches across all tradition datasets. If date (MM-DD) is given, only
+    Searches across all tradition datasets. If month_day (MM-DD) is given, only
     saints commemorated on that date are considered; no fallback to a full
     scan is performed. Whitespace-only saint names are rejected with 422.
     Source field indicates where the data came from: goarch, oca, notes, or not_found.
     """
     if not saint.strip():
         raise HTTPException(status_code=422, detail="saint must not be blank")
-    return get_hagiography(saint, date)
+    return get_hagiography(saint, month_day)
 
 
 @app.post("/api/v1/name-days", response_model=NameDayResponse)
