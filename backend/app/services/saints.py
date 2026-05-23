@@ -227,14 +227,51 @@ _HAGIO_CACHE: Optional[List[tuple[frozenset[str], Saint, str]]] = None
 
 
 def _get_hagio_cache() -> List[tuple[frozenset[str], Saint, str]]:
+    """Return the lazy hagiography cache, building it on first call.
+
+    Groups all index entries by month_day and applies the same overlay-merge
+    logic as _merge_entries, so saints that span multiple tradition datasets
+    (e.g. OCA base + Greek overlay) appear as a single fully-merged record.
+    This ensures goarch_url and extended_notes from overlay entries are visible
+    to the /hagiography endpoint even when the base entry lacks them.
+    """
     global _HAGIO_CACHE
     if _HAGIO_CACHE is None:
-        _HAGIO_CACHE = [
-            (frozenset(_saint_keys(saint)), saint, entry.month_day)
-            for entries in _INDEX.values()
-            for entry in entries
-            for saint in entry.saints
-        ]
+        # Group every raw entry by month_day across all traditions.
+        by_md: Dict[str, List[CalendarEntry]] = {}
+        for tradition_entries in _INDEX.values():
+            for entry in tradition_entries:
+                by_md.setdefault(entry.month_day, []).append(entry)
+
+        result: List[tuple[frozenset[str], Saint, str]] = []
+        for month_day, md_entries in by_md.items():
+            # Merge saints within the same month_day the same way _merge_entries
+            # does: first occurrence wins for each field; overlays fill gaps.
+            merged: Dict[str, Saint] = {}   # primary_key -> merged saint
+            key_index: Dict[str, str] = {}  # any normalised key -> primary_key
+            all_keys: Dict[str, List[str]] = {}  # primary_key -> all keys seen
+            for entry in md_entries:
+                for saint in entry.saints:
+                    keys = _saint_keys(saint)
+                    primary_key = next(
+                        (key_index[k] for k in keys if k in key_index), None
+                    )
+                    if primary_key:
+                        _apply_overlay(merged[primary_key], saint)
+                        for k in keys:
+                            key_index.setdefault(k, primary_key)
+                            all_keys[primary_key].append(k)
+                    else:
+                        primary_key = keys[0]
+                        merged[primary_key] = saint.model_copy()
+                        all_keys[primary_key] = list(keys)
+                        for k in keys:
+                            key_index[k] = primary_key
+
+            for primary_key, saint in merged.items():
+                result.append((frozenset(all_keys[primary_key]), saint, month_day))
+
+        _HAGIO_CACHE = result
     return _HAGIO_CACHE
 
 
