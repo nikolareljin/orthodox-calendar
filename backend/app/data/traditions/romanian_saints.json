@@ -260,11 +260,11 @@
     "calendar": "revised",
     "saints": [
       {
-        "name": "Dasius of Durostorum",
-        "title": "Dasius of Durostorum",
+        "name": "Dasius of Dorostorum",
+        "title": "Dasius of Dorostorum",
         "feast_type": "Martyr",
         "hagiography_url": "https://en.wikipedia.org/wiki/Dasius_of_Durostorum",
-        "notes": "Dasius of Durostorum (Bulgarian: Дазий Доростолски, Greek: Δάσιος ο μάρτυρας) is a Christian martyr of the early 4th century AD. He was a Roman soldier of Legio XI Claudiana at Durostorum (modern Silistra), Moesia Inferior who was beheaded in the early 4th century after his refusal to take the part of \"king\" in the local Saturnalia celebrations.",
+        "notes": "Dasius of Dorostorum (Bulgarian: Дазий Доростолски, Greek: Δάσιος ο μάρτυρας) is a Christian martyr of the early 4th century AD. He was a Roman soldier of Legio XI Claudiana at Durostorum (modern Silistra), Moesia Inferior who was beheaded in the early 4th century after his refusal to take the part of \"king\" in the local Saturnalia celebrations.",
         "canonized_by": "Romanian Orthodox Church",
         "canonization_scope": "local",
         "year_canonized": null

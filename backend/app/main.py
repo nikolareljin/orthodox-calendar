@@ -92,7 +92,16 @@ def saints(
 @app.get("/api/v1/hagiography", response_model=HagiographyResponse)
 def hagiography(
     saint: str = Query(..., min_length=1, description="Saint name (prefix/substring token match after normalization)"),
-    date: Optional[str] = Query(default=None, description="MM-DD on the tradition calendar", pattern=r"^\d{2}-\d{2}$"),
+    date: Optional[str] = Query(
+        default=None,
+        description=(
+            "Byzantine fixed-feast MM-DD key (Julian/Revised-Julian calendar). "
+            "When provided, only saints commemorated on this date are considered; "
+            "non-Byzantine calendars (Coptic, Ethiopian) use different MM-DD spaces "
+            "and are not reliably filtered by this parameter."
+        ),
+        pattern=r"^\d{2}-\d{2}$",
+    ),
 ) -> HagiographyResponse:
     """Return hagiography data for a named saint.
 
