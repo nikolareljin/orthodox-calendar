@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Dict, List, Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -86,7 +86,7 @@ class HagiographyResponse(BaseModel):
     hagiography: Optional[str] = None
     goarch_url: Optional[str] = None
     hagiography_url: Optional[str] = None
-    source: str  # "goarch" | "oca" | "notes" | "not_found"
+    source: Literal["goarch", "oca", "notes", "not_found"]
 
 
 class MovableFeastsResponse(BaseModel):

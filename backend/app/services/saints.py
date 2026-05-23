@@ -221,14 +221,21 @@ def _saint_keys(saint: Saint) -> List[str]:
     return keys or [saint.name.lower().strip()]
 
 
-# Flat cache of (frozenset_of_keys, saint, month_day) built once at import time.
-# Avoids recomputing _saint_keys in nested loops on every hagiography request.
-_HAGIO_CACHE: List[tuple[frozenset[str], Saint, str]] = [
-    (frozenset(_saint_keys(saint)), saint, entry.month_day)
-    for entries in _INDEX.values()
-    for entry in entries
-    for saint in entry.saints
-]
+# Lazy cache of (frozenset_of_keys, saint, month_day). Built on first call to
+# _get_hagio_cache() so import time is not penalised when /hagiography is unused.
+_HAGIO_CACHE: Optional[List[tuple[frozenset[str], Saint, str]]] = None
+
+
+def _get_hagio_cache() -> List[tuple[frozenset[str], Saint, str]]:
+    global _HAGIO_CACHE
+    if _HAGIO_CACHE is None:
+        _HAGIO_CACHE = [
+            (frozenset(_saint_keys(saint)), saint, entry.month_day)
+            for entries in _INDEX.values()
+            for entry in entries
+            for saint in entry.saints
+        ]
+    return _HAGIO_CACHE
 
 
 def _apply_overlay(base: Saint, overlay: Saint) -> None:
@@ -489,6 +496,7 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
             key=lambda t: (
                 bool(t[1].extended_notes),
                 bool(t[1].notes),
+                "oca.org" in (t[1].hagiography_url or ""),  # prefer OCA-backed entries
                 bool(t[1].hagiography_url),
                 t[2],       # month_day: stable lexicographic sort
                 t[1].name,  # name: final stable tie-breaker
@@ -496,8 +504,10 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         )
         return saint
 
+    cache = _get_hagio_cache()
+
     if month_day:
-        dated = [(ks, s, md) for (ks, s, md) in _HAGIO_CACHE if md == month_day and _matches(ks)]
+        dated = [(ks, s, md) for (ks, s, md) in cache if md == month_day and _matches(ks)]
         found = _best(dated)
         if found:
             return _format_hagiography_response(found)
@@ -505,7 +515,7 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         # than silently falling through to a full scan that may return a different saint.
         return HagiographyResponse(saint=saint_name, source="not_found")
 
-    all_matches = [(ks, s, md) for (ks, s, md) in _HAGIO_CACHE if _matches(ks)]
+    all_matches = [(ks, s, md) for (ks, s, md) in cache if _matches(ks)]
     found = _best(all_matches)
     if found:
         return _format_hagiography_response(found)
