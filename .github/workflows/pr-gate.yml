@@ -1,0 +1,115 @@
+name: PR Gate
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: pr-gate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      run_scans: ${{ steps.filter.outputs.run_scans }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Fetch base ref
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+        run: git fetch --no-tags origin "$BASE_REF"
+
+      - name: Detect non-documentation changes
+        id: filter
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          run_scans=false
+          while IFS= read -r path; do
+            case "$path" in
+              docs/*|*.md)
+                ;;
+              *)
+                run_scans=true
+                break
+                ;;
+            esac
+          done < <(git diff --name-only "$BASE_SHA...$HEAD_SHA")
+          echo "run_scans=$run_scans" >> "$GITHUB_OUTPUT"
+
+  gitleaks:
+    needs: changes
+    if: needs.changes.outputs.run_scans == 'true'
+    uses: nikolareljin/ci-helpers/.github/workflows/gitleaks-scan.yml@production
+    with:
+      fail_on_findings: true
+
+  frontend-scan:
+    needs: changes
+    if: needs.changes.outputs.run_scans == 'true'
+    uses: nikolareljin/ci-helpers/.github/workflows/react-scan.yml@production
+    with:
+      working_directory: frontend
+      node_version: "22"
+      install_command: "npm ci"
+      lint_command: ""
+      test_command: ""
+      build_command: "npm run build"
+      audit_command: "npm audit --audit-level=high"
+
+  backend-scan:
+    needs: changes
+    if: needs.changes.outputs.run_scans == 'true'
+    uses: nikolareljin/ci-helpers/.github/workflows/python-scan.yml@production
+    with:
+      working_directory: backend
+      python_version: "3.12"
+
+  data-safety:
+    needs: changes
+    if: needs.changes.outputs.run_scans == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: nikolareljin/ci-helpers/.github/actions/data-safety-scan@0.9.0
+        with:
+          scan_path: backend/app/data
+
+  pr-gate:
+    needs: [changes, gitleaks, frontend-scan, backend-scan, data-safety]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require completed scan jobs
+        env:
+          CHANGES_RESULT: ${{ needs.changes.result }}
+          RUN_SCANS: ${{ needs.changes.outputs.run_scans }}
+          GITLEAKS_RESULT: ${{ needs.gitleaks.result }}
+          FRONTEND_RESULT: ${{ needs.frontend-scan.result }}
+          BACKEND_RESULT: ${{ needs.backend-scan.result }}
+          DATA_SAFETY_RESULT: ${{ needs.data-safety.result }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$CHANGES_RESULT" == "success" ]] || exit 1
+          if [[ "$RUN_SCANS" != "true" ]]; then
+            echo "Documentation-only PR: scan jobs intentionally skipped."
+            exit 0
+          fi
+
+          for result in \
+            "$GITLEAKS_RESULT" \
+            "$FRONTEND_RESULT" \
+            "$BACKEND_RESULT" \
+            "$DATA_SAFETY_RESULT"; do
+            [[ "$result" == "success" ]] || exit 1
+          done
+          echo "PR gate checks passed."
