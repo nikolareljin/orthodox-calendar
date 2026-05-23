@@ -227,6 +227,32 @@ def test_hagiography_source_reflects_text_not_url() -> None:
         assert payload["source"] == "not_found"
 
 
+def test_romanian_tradition_data_loads() -> None:
+    """Regression: Romanian tradition dataset wires correctly — Stephen the Great on 07-02."""
+    response = client.get("/api/v1/saints?day=2024-07-02&traditions=romanian")
+
+    assert response.status_code == 200
+    results = response.json()
+    assert results, "Romanian tradition returned no entries for 2024-07-02"
+    saint_names = [s["name"] for entry in results for s in entry["saints"]]
+    assert any("Stephen" in n for n in saint_names), (
+        f"Expected 'Stephen the Great' in romanian saints on 07-02; got {saint_names[:5]}"
+    )
+
+
+def test_bulgarian_tradition_data_loads() -> None:
+    """Regression: Bulgarian tradition dataset wires correctly — John of Rila on 10-19."""
+    response = client.get("/api/v1/saints?day=2024-10-19&traditions=bulgarian")
+
+    assert response.status_code == 200
+    results = response.json()
+    assert results, "Bulgarian tradition returned no entries for 2024-10-19"
+    saint_names = [s["name"] for entry in results for s in entry["saints"]]
+    assert any("John of Rila" in n or "Rila" in n for n in saint_names), (
+        f"Expected 'John of Rila' in bulgarian saints on 10-19; got {saint_names[:5]}"
+    )
+
+
 def test_config_endpoint_returns_hagiography_source() -> None:
     response = client.get("/api/v1/config")
 
