@@ -15,6 +15,7 @@ from ..calendar_logic import (
     movable_feast_for_date,
     resolve_tradition,
 )
+from fastapi import HTTPException
 from ..config import HAGIOGRAPHY_SOURCE
 from ..data_loader import build_index
 from ..models import CalendarEntry, CalendarSystem, HagiographyResponse, Saint, SaintsResponse
@@ -514,12 +515,19 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         # Echo the original (pre-strip) value so clients can correlate the response.
         return HagiographyResponse(saint=original_name, source="not_found")
 
-    query_keys = set(_saint_keys(Saint(name=saint_name)))
-
-    # Precompute once: split each normalized query key into tokens (min 2 chars).
-    # Requires ALL tokens to appear as substrings in at least one saint key,
-    # preventing very short or common tokens from matching unrelated saints.
-    q_tokens = [t for qk in query_keys for t in qk.split() if len(t) >= 2]
+    # Normalize the query directly via _normalize_saint_text (drops honorifics,
+    # stop-words, punctuation) rather than routing through _saint_keys, which
+    # falls back to the raw lowercased input when all tokens are dropped — that
+    # fallback causes honorific-only queries like "saint" or "st" to match broadly.
+    normalized_query = _normalize_saint_text(saint_name)
+    q_tokens = [t for t in normalized_query.split() if len(t) >= 2]
+    if not q_tokens:
+        # Nothing searchable survived normalization (e.g. "st", "saint", "the").
+        # Raise 422 rather than silently returning not_found.
+        raise HTTPException(
+            status_code=422,
+            detail="saint name contains no searchable tokens after normalization",
+        )
 
     def _matches(entry_keys: frozenset[str]) -> bool:
         if not q_tokens:
