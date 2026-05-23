@@ -38,7 +38,7 @@ class Saint(BaseModel):
     extended_notes: Optional[str] = Field(
         default=None,
         exclude=True,  # omitted from list-endpoint responses (/saints, /name-days) to prevent large payloads
-        description="Full hagiography text scraped from GOARCH; served via /hagiography endpoint only.",
+        description="Extended hagiography text; served via /hagiography only.",
     )
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
     canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental" | "church-of-the-east"
