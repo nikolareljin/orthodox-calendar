@@ -134,10 +134,12 @@ def _build_oca_url(url: str | None, calendar_date: str | None) -> str | None:
 
 
 def _normalize_oca_url(url: str | None) -> str | None:
-    """Replace the 0000 placeholder year in a stored OCA URL with the current year.
+    """Replace the 0000 placeholder year in a stored OCA URL with an appropriate year.
 
     OCA hagiography pages are not year-specific for fixed feasts; substituting
     the current year produces a valid, working link without needing calendar context.
+    Exception: Feb 29 only exists in leap years, so those URLs use 2024 (a known
+    leap year) regardless of the current year.
     Non-OCA URLs or already-valid years are returned unchanged.
     """
     if not url:
@@ -145,7 +147,9 @@ def _normalize_oca_url(url: str | None) -> str | None:
     m = _OCA_ZERO_YEAR_RE.match(url)
     if not m:
         return url
-    return f"{m.group(1)}{date.today().year}/{m.group(2)}"
+    path = m.group(2)
+    year = 2024 if path.startswith("02/29/") else date.today().year
+    return f"{m.group(1)}{year}/{path}"
 
 
 def _resolve_hagiography_url(saint: Saint, calendar_date: str | None = None) -> str | None:
