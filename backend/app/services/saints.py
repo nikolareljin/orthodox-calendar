@@ -461,8 +461,9 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
 def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> HagiographyResponse:
     """Find a saint by name (and optionally MM-DD) and return hagiography data.
 
-    Searches across all traditions using _HAGIO_CACHE (keys precomputed at
-    module load). If month_day is given, only saints on that date are considered;
+    Searches across all traditions using a lazy-initialised cache (built on
+    first call via _get_hagio_cache()). If month_day is given, only saints on
+    that date are considered;
     no fallback to a full scan is performed so the parameter acts as a true filter.
     Among all name matches, selects the best candidate by field priority
     (extended_notes > notes > hagiography_url), with month_day + name as a

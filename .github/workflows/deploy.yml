@@ -151,19 +151,9 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Reject sensitive keys in data files
-        shell: bash
-        run: |
-          set -euo pipefail
-          found=0
-          while IFS= read -r -d '' f; do
-            if grep -qiE '"(api_key|api_secret|password|passwd|token|secret|auth|cookie|session|credential|private_key)"\s*:' "$f"; then
-              echo "::error::Potentially sensitive key found in $f"
-              found=1
-            fi
-          done < <(find backend/app/data -type f -name '*.json' -print0)
-          [[ $found -eq 0 ]] || exit 1
-          echo "Data safety check passed."
+      - uses: nikolareljin/ci-helpers/.github/actions/data-safety-scan@0.9.0
+        with:
+          scan_path: backend/app/data
 
 # ── Stage 2 (parallel): auto-tag ─────────────────────────────────────────────
 # auto-tag-release.yml uses context.sha + listPullRequestsAssociatedWithCommit
