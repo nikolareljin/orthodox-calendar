@@ -455,9 +455,11 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
     """Find a saint by name (and optionally MM-DD) and return hagiography data.
 
     Searches across all traditions using _HAGIO_CACHE (keys precomputed at
-    module load). If month_day is given, restricts to that date first, then
-    falls back to a full scan. Among all name matches, selects the best
-    candidate by field priority (extended_notes > notes > hagiography_url).
+    module load). If month_day is given, only saints on that date are considered;
+    no fallback to a full scan is performed so the parameter acts as a true filter.
+    Among all name matches, selects the best candidate by field priority
+    (extended_notes > notes > hagiography_url), with month_day + name as a
+    stable tie-breaker to ensure deterministic results across dataset changes.
     """
     saint_name = saint_name.strip()
     if not saint_name:
@@ -466,23 +468,41 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
     query_keys = set(_saint_keys(Saint(name=saint_name)))
 
     def _matches(entry_keys: frozenset[str]) -> bool:
-        return any(qk in sk or sk in qk for qk in query_keys for sk in entry_keys)
+        # Split each normalized query key into tokens (min 2 chars); require
+        # ALL of them to appear as substrings in at least one saint key.
+        # This prevents very short or common tokens from matching unrelated saints.
+        q_tokens = [t for qk in query_keys for t in qk.split() if len(t) >= 2]
+        if not q_tokens:
+            return False
+        return all(any(qt in sk for sk in entry_keys) for qt in q_tokens)
 
-    def _best(candidates: List[Saint]) -> Optional[Saint]:
+    # Carry (ks, saint, month_day) tuples so _best can use month_day as a
+    # deterministic tie-breaker without re-indexing.
+    def _best(candidates: List[tuple[frozenset[str], Saint, str]]) -> Optional[Saint]:
         if not candidates:
             return None
-        return max(
+        _, saint, _ = max(
             candidates,
-            key=lambda s: (bool(s.extended_notes), bool(s.notes), bool(s.hagiography_url)),
+            key=lambda t: (
+                bool(t[1].extended_notes),
+                bool(t[1].notes),
+                bool(t[1].hagiography_url),
+                t[2],       # month_day: stable lexicographic sort
+                t[1].name,  # name: final stable tie-breaker
+            ),
         )
+        return saint
 
     if month_day:
-        dated = [s for (ks, s, md) in _HAGIO_CACHE if md == month_day and _matches(ks)]
+        dated = [(ks, s, md) for (ks, s, md) in _HAGIO_CACHE if md == month_day and _matches(ks)]
         found = _best(dated)
         if found:
             return _format_hagiography_response(found)
+        # month_day given but no match on that date — treat as not found rather
+        # than silently falling through to a full scan that may return a different saint.
+        return HagiographyResponse(saint=saint_name, source="not_found")
 
-    all_matches = [s for (ks, s, _) in _HAGIO_CACHE if _matches(ks)]
+    all_matches = [(ks, s, md) for (ks, s, md) in _HAGIO_CACHE if _matches(ks)]
     found = _best(all_matches)
     if found:
         return _format_hagiography_response(found)
