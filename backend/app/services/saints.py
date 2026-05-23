@@ -235,7 +235,10 @@ def _get_hagio_cache() -> Tuple[Tuple[frozenset, Saint, str], ...]:
     fill only missing values via _apply_overlay.  This ensures goarch_url and
     extended_notes from tradition overlays are visible to /hagiography.
 
-    Returns an immutable tuple so callers cannot mutate the shared cache.
+    Returns a tuple (structurally immutable) of (keys, saint, month_day) triples.
+    The contained Saint objects are shared across all callers and must be treated
+    as read-only; mutating them would corrupt the cache for subsequent requests.
+    Use saint.model_copy() before making any field modifications.
     """
     # Group every raw entry by (month_day, calendar) across all traditions.
     by_md_cal: Dict[Tuple[str, CalendarSystem], List[CalendarEntry]] = {}
