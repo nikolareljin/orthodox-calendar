@@ -91,27 +91,49 @@ def saints(
 
 @app.get("/api/v1/hagiography", response_model=HagiographyResponse)
 def hagiography(
-    saint: str = Query(..., min_length=2, description="Saint name (prefix/substring token match after normalization; must be at least 2 characters after normalization)"),
+    saint: str = Query(
+        ...,
+        min_length=2,
+        description=(
+            "Saint name for prefix/substring token match. "
+            "The value is normalized (diacritics folded, honorifics and stop-words "
+            "like 'st', 'saint', 'the' removed) before searching; at least one "
+            "token of 2+ characters must survive normalization, otherwise 422 is "
+            "returned. Example: 'Seraphim', 'Basil the Great', 'Saguna'."
+        ),
+    ),
     month_day: Optional[str] = Query(
         default=None,
         description=(
             "Byzantine fixed-feast MM-DD key (Julian/Revised-Julian calendar). "
-            "When provided, only saints commemorated on this date are considered; "
-            "non-Byzantine calendars (Coptic, Ethiopian) use different MM-DD spaces "
-            "and are not reliably filtered by this parameter."
+            "Month must be 01–12, day 01–31; calendar-impossible dates such as "
+            "02-30 or 04-31 are rejected with 422. "
+            "When provided, only Byzantine-calendar saints commemorated on this "
+            "date are considered; non-Byzantine calendars (Coptic, Ethiopian) use "
+            "different MM-DD spaces and are excluded by this filter."
         ),
-        pattern=r"^\d{2}-\d{2}$",
+        pattern=r"^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$",
     ),
 ) -> HagiographyResponse:
     """Return hagiography data for a named saint.
 
     Searches across all tradition datasets. If month_day (MM-DD) is given, only
-    saints commemorated on that date are considered; no fallback to a full
-    scan is performed. Whitespace-only saint names are rejected with 422.
+    Byzantine-calendar saints commemorated on that date are considered; no
+    fallback to a full scan is performed. Invalid or impossible dates (e.g.
+    02-30) and blank/honorific-only saint names are rejected with 422.
     Source field indicates where the data came from: goarch, oca, notes, or not_found.
     """
     if not saint.strip():
         raise HTTPException(status_code=422, detail="saint must not be blank")
+    if month_day:
+        mm, dd = int(month_day[:2]), int(month_day[3:])
+        try:
+            date(2000, mm, dd)  # 2000 is a leap year — Feb 29 accepted
+        except ValueError:
+            raise HTTPException(
+                status_code=422,
+                detail=f"month_day '{month_day}' is not a valid calendar date",
+            )
     try:
         return get_hagiography(saint, month_day)
     except ValueError as exc:
