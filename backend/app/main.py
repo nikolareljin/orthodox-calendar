@@ -18,9 +18,9 @@ from .calendar_logic import (
 )
 from .calendar_logic import movable_feasts as _movable_feasts, moon_phase as _moon_phase
 from .config import HAGIOGRAPHY_SOURCE, TRADITIONS
-from .models import CalendarSystem, Contact, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
+from .models import CalendarSystem, Contact, HagiographyResponse, MovableFeastsResponse, MoonPhaseResponse, NameDayResponse, SaintsResponse
 from .services.name_days import find_name_days
-from .services.saints import get_saints_for_date, get_saints_for_month
+from .services.saints import get_hagiography, get_saints_for_date, get_saints_for_month
 from .services.ical import generate_ical_feed
 
 
@@ -48,7 +48,7 @@ class NameDayRequest(BaseModel):
 app = FastAPI(
     title="orthodox-calendar",
     description="Orthodox and Oriental Orthodox saints of the day with calendar/contacts hooks.",
-    version="0.5.0",
+    version="0.6.0",
     docs_url="/api/v1/docs",
     redoc_url="/api/v1/redoc",
     openapi_url="/api/v1/openapi.json",
@@ -87,6 +87,57 @@ def saints(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
     return get_saints_for_date(day, canonicalized)
+
+
+@app.get("/api/v1/hagiography", response_model=HagiographyResponse)
+def hagiography(
+    saint: str = Query(
+        ...,
+        min_length=2,
+        description=(
+            "Saint name for prefix/substring token match. "
+            "The value is normalized (diacritics folded, honorifics and stop-words "
+            "like 'st', 'saint', 'the' removed) before searching; at least one "
+            "token of 2+ characters must survive normalization, otherwise 422 is "
+            "returned. Example: 'Seraphim', 'Basil the Great', 'Saguna'."
+        ),
+    ),
+    month_day: Optional[str] = Query(
+        default=None,
+        description=(
+            "Byzantine fixed-feast MM-DD key (Julian/Revised-Julian calendar). "
+            "Month must be 01–12, day 01–31; calendar-impossible dates such as "
+            "02-30 or 04-31 are rejected with 422. "
+            "When provided, only Byzantine-calendar saints commemorated on this "
+            "date are considered; non-Byzantine calendars (Coptic, Ethiopian) use "
+            "different MM-DD spaces and are excluded by this filter."
+        ),
+        pattern=r"^(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$",
+    ),
+) -> HagiographyResponse:
+    """Return hagiography data for a named saint.
+
+    Searches across all tradition datasets. If month_day (MM-DD) is given, only
+    Byzantine-calendar saints commemorated on that date are considered; no
+    fallback to a full scan is performed. Invalid or impossible dates (e.g.
+    02-30) and blank/honorific-only saint names are rejected with 422.
+    Source field indicates where the data came from: goarch, oca, notes, or not_found.
+    """
+    if not saint.strip():
+        raise HTTPException(status_code=422, detail="saint must not be blank")
+    if month_day:
+        mm, dd = int(month_day[:2]), int(month_day[3:])
+        try:
+            date(2000, mm, dd)  # 2000 is a leap year — Feb 29 accepted
+        except ValueError:
+            raise HTTPException(
+                status_code=422,
+                detail=f"month_day '{month_day}' is not a valid calendar date",
+            )
+    try:
+        return get_hagiography(saint, month_day)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
 
 
 @app.post("/api/v1/name-days", response_model=NameDayResponse)

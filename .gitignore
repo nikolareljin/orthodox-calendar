@@ -1,3 +1,9 @@
+# GOARCH import artefacts (large, regeneratable)
+scripts/goarch_raw.json
+backend/app/data/goarch_hagiographies.json
+scripts/.goarch-profile/
+.venv-import/
+
 # Local overrides — never commit secrets
 .env
 .env.local

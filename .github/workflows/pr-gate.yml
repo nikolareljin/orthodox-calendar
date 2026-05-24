@@ -18,11 +18,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Fetch base ref
-        env:
-          BASE_REF: ${{ github.event.pull_request.base.ref }}
-        run: git fetch --no-tags origin "$BASE_REF"
-
       - name: Detect non-documentation changes
         id: filter
         env:

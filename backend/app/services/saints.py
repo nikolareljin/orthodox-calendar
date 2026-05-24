@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import calendar as _cal
+import functools
 import re as _re
+import unicodedata
 from datetime import date
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from ..calendar_logic import (
     canonical_tradition_key,
@@ -16,13 +18,16 @@ from ..calendar_logic import (
 )
 from ..config import HAGIOGRAPHY_SOURCE
 from ..data_loader import build_index
-from ..models import CalendarEntry, CalendarSystem, Saint, SaintsResponse
+from ..models import CalendarEntry, CalendarSystem, HagiographyResponse, Saint, SaintsResponse
 
 _INDEX = build_index()
 
 
 _OCA_URL_DATE_RE = _re.compile(
     r"(https://www\.oca\.org/saints/lives/)(\d{4})/(\d{2}/\d{2})/(.*)"
+)
+_OCA_ZERO_YEAR_RE = _re.compile(
+    r"(https://www\.oca\.org/saints/lives/)0000/(\d{2}/\d{2}/.*)"
 )
 
 
@@ -130,6 +135,25 @@ def _build_oca_url(url: str | None, calendar_date: str | None) -> str | None:
         return url
 
 
+def _normalize_oca_url(url: str | None) -> str | None:
+    """Replace the 0000 placeholder year in a stored OCA URL with an appropriate year.
+
+    OCA hagiography pages are not year-specific for fixed feasts; substituting
+    the current year produces a valid, working link without needing calendar context.
+    Exception: Feb 29 only exists in leap years, so those URLs use 2024 (a known
+    leap year) regardless of the current year.
+    Non-OCA URLs or already-valid years are returned unchanged.
+    """
+    if not url:
+        return url
+    m = _OCA_ZERO_YEAR_RE.match(url)
+    if not m:
+        return url
+    path = m.group(2)
+    year = 2024 if path.startswith("02/29/") else date.today().year
+    return f"{m.group(1)}{year}/{path}"
+
+
 def _resolve_hagiography_url(saint: Saint, calendar_date: str | None = None) -> str | None:
     """Return the hagiography URL for the configured HAGIOGRAPHY_SOURCE.
 
@@ -171,6 +195,13 @@ _DROP_TOKENS = {
 
 
 def _normalize_saint_text(value: str) -> str:
+    # Fold diacritics (e.g. "Șaguna" → "saguna", "Pčinja" → "pcinja") before
+    # stripping non-ASCII so Romanian/Bulgarian saints remain findable with
+    # plain ASCII queries.
+    value = "".join(
+        c for c in unicodedata.normalize("NFKD", value)
+        if not unicodedata.category(c).startswith("M")
+    )
     value = _EVENT_PREFIX_RE.sub("", value.lower().strip())
     value = _HONORIFIC_RE.sub("", value)
     value = _re.sub(r"[^a-z0-9]+", " ", value)
@@ -199,6 +230,92 @@ def _saint_keys(saint: Saint) -> List[str]:
     return keys or [saint.name.lower().strip()]
 
 
+# Calendar systems that use the Byzantine MM-DD space (Julian and Revised-Julian).
+# The month_day parameter on /hagiography is documented as a Byzantine fixed-feast
+# key, so non-Byzantine calendars (Coptic, Ethiopian) are excluded when it is set.
+_BYZANTINE_CALENDARS: frozenset[CalendarSystem] = frozenset(
+    {CalendarSystem.JULIAN, CalendarSystem.REVISED}
+)
+
+# Cache entry type: (search-keys, saint, month_day, calendar)
+_CacheEntry = Tuple[frozenset[str], Saint, str, CalendarSystem]
+
+
+@functools.lru_cache(maxsize=None)
+def _get_hagio_cache() -> Tuple[_CacheEntry, ...]:
+    """Build and return the hagiography lookup cache (built once, thread-safe via lru_cache).
+
+    Groups all index entries by (month_day, calendar) — not just month_day —
+    so saints from different calendar systems that share an identical MM-DD
+    string (e.g. Coptic "01-01" vs Byzantine "01-01") are never merged together.
+
+    Within each (month_day, calendar) group the same overlay-merge logic as
+    _merge_entries is applied: first occurrence wins per field, later entries
+    fill only missing values via _apply_overlay.  This ensures goarch_url and
+    extended_notes from tradition overlays are visible to /hagiography.
+
+    Returns a tuple (structurally immutable) of (keys, saint, month_day, calendar)
+    4-tuples.  The contained Saint objects are shared across all callers and must
+    be treated as read-only; mutating them would corrupt the cache for subsequent
+    requests.  Use saint.model_copy() before making any field modifications.
+    """
+    # Group every raw entry by (month_day, calendar) across all traditions.
+    by_md_cal: Dict[Tuple[str, CalendarSystem], List[CalendarEntry]] = {}
+    for tradition_entries in _INDEX.values():
+        for entry in tradition_entries:
+            key = (entry.month_day, entry.calendar)
+            by_md_cal.setdefault(key, []).append(entry)
+
+    result: List[_CacheEntry] = []
+    for (month_day, cal_sys), md_entries in by_md_cal.items():
+        # Merge saints within the same (month_day, calendar) group.
+        merged: Dict[str, Saint] = {}   # primary_key -> merged saint
+        key_index: Dict[str, str] = {}  # any normalised key -> primary_key
+        all_keys: Dict[str, set[str]] = {}  # primary_key -> all keys seen
+        for entry in md_entries:
+            for saint in entry.saints:
+                keys = _saint_keys(saint)
+                primary_key = next(
+                    (key_index[k] for k in keys if k in key_index), None
+                )
+                if primary_key:
+                    _apply_overlay(merged[primary_key], saint)
+                    for k in keys:
+                        key_index.setdefault(k, primary_key)
+                        all_keys[primary_key].add(k)
+                else:
+                    primary_key = keys[0]
+                    merged[primary_key] = saint.model_copy()
+                    all_keys[primary_key] = set(keys)
+                    for k in keys:
+                        key_index[k] = primary_key
+
+        for primary_key, saint in merged.items():
+            result.append((frozenset(all_keys[primary_key]), saint, month_day, cal_sys))
+
+    return tuple(result)
+
+
+@functools.lru_cache(maxsize=None)
+def _get_hagio_byzantine_index() -> Dict[str, Tuple[_CacheEntry, ...]]:
+    """Pre-index Byzantine (Julian/Revised-Julian) cache entries by month_day.
+
+    Built once from _get_hagio_cache() and cached. Reduces the month_day filter
+    path in get_hagiography() from O(N) over the full cache to O(1) lookup + O(k)
+    match scan where k = saints on that Byzantine date.
+
+    Non-Byzantine calendars (Coptic, Ethiopian) are intentionally excluded: the
+    month_day parameter is documented as a Byzantine fixed-feast MM-DD key, so
+    Coptic/Ethiopian entries whose MM-DD string coincidentally matches are ignored.
+    """
+    index: Dict[str, List[_CacheEntry]] = {}
+    for entry in _get_hagio_cache():
+        _ks, _saint, month_day, cal = entry
+        if cal in _BYZANTINE_CALENDARS:
+            index.setdefault(month_day, []).append(entry)
+    return {md: tuple(entries) for md, entries in index.items()}
+
+
 def _apply_overlay(base: Saint, overlay: Saint) -> None:
     """Merge overlay fields into base saint in-place.
 
@@ -217,6 +334,8 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.icon_url = overlay.icon_url
     if overlay.notes and not base.notes:
         base.notes = overlay.notes
+    if overlay.extended_notes and not base.extended_notes:
+        base.extended_notes = overlay.extended_notes
     if overlay.canonized_by and not base.canonized_by:
         base.canonized_by = overlay.canonized_by
     if overlay.canonization_scope and not base.canonization_scope:
@@ -415,3 +534,115 @@ def get_saints_for_month(year: int, month: int, tradition_name: str) -> Dict[str
             "calendar_date": calendar_date,
         }
     return result
+
+
+def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> HagiographyResponse:
+    """Find a saint by name (and optionally MM-DD) and return hagiography data.
+
+    Searches across all traditions using a lazy-initialised cache (built on
+    first call via _get_hagio_cache()). If month_day is given, only saints on
+    that date are considered;
+    no fallback to a full scan is performed so the parameter acts as a true filter.
+    Among all name matches, selects the best candidate by field priority
+    (extended_notes > notes > hagiography_url), with month_day + name as a
+    stable tie-breaker to ensure deterministic results across dataset changes.
+    """
+    original_name = saint_name
+    saint_name = saint_name.strip()
+    if not saint_name:
+        # Echo the original (pre-strip) value so clients can correlate the response.
+        return HagiographyResponse(saint=original_name, source="not_found")
+
+    # Normalize the query directly via _normalize_saint_text (drops honorifics,
+    # stop-words, punctuation) rather than routing through _saint_keys, which
+    # falls back to the raw lowercased input when all tokens are dropped — that
+    # fallback causes honorific-only queries like "saint" or "st" to match broadly.
+    normalized_query = _normalize_saint_text(saint_name)
+    q_tokens = [t for t in normalized_query.split() if len(t) >= 2]
+    if not q_tokens:
+        # Nothing searchable survived normalization (e.g. "st", "saint", "the").
+        # Raise ValueError; the route handler translates this to HTTP 422.
+        raise ValueError("saint name contains no searchable tokens after normalization")
+
+    def _matches(entry_keys: frozenset[str]) -> bool:
+        if not q_tokens:
+            return False
+        return all(any(qt in sk for sk in entry_keys) for qt in q_tokens)
+
+    # Carry (ks, saint, month_day) tuples so _best can use month_day as a
+    # deterministic tie-breaker without re-indexing.
+    def _best(candidates: List[tuple[frozenset[str], Saint, str]]) -> Optional[Saint]:
+        if not candidates:
+            return None
+        _, saint, _ = max(
+            candidates,
+            key=lambda t: (
+                bool(t[1].extended_notes),
+                bool(t[1].notes),
+                "oca.org" in (t[1].hagiography_url or ""),  # prefer OCA-backed entries
+                bool(t[1].hagiography_url),
+                t[2],       # month_day: stable lexicographic sort
+                t[1].name,  # name: final stable tie-breaker
+            ),
+        )
+        return saint
+
+    if month_day:
+        # Use the pre-indexed Byzantine-only lookup: O(1) dict access + O(k) match
+        # scan where k = saints on that Byzantine date.  Non-Byzantine calendars
+        # (Coptic, Ethiopian) are excluded because month_day is documented as a
+        # Byzantine fixed-feast MM-DD key.
+        byzantine_entries = _get_hagio_byzantine_index().get(month_day, ())
+        dated = [(ks, s, md) for (ks, s, md, _cal) in byzantine_entries if _matches(ks)]
+        found = _best(dated)
+        if found:
+            return _format_hagiography_response(found)
+        # month_day given but no match on that date — treat as not found rather
+        # than silently falling through to a full scan that may return a different saint.
+        return HagiographyResponse(saint=saint_name, source="not_found")
+
+    all_matches = [(ks, s, md) for (ks, s, md, _cal) in _get_hagio_cache() if _matches(ks)]
+    found = _best(all_matches)
+    if found:
+        return _format_hagiography_response(found)
+
+    return HagiographyResponse(saint=saint_name, source="not_found")
+
+
+def _hagio_url(saint: Saint) -> str | None:
+    """Return the hagiography URL for the response, respecting HAGIOGRAPHY_SOURCE.
+
+    OCA URLs with placeholder year 0000 are normalized to the current year for
+    fixed-feast saints. Movable-feast saints have year-dependent month/day in
+    their stored URLs, so normalization would produce a wrong date — their URLs
+    are omitted (None) to avoid serving a broken link.
+    """
+    if HAGIOGRAPHY_SOURCE == "goarch" and saint.goarch_url:
+        return saint.goarch_url
+    if is_movable_feast_title(saint.title or saint.name or ""):
+        return None
+    return _normalize_oca_url(saint.hagiography_url)
+
+
+def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
+    hagiography = saint.extended_notes or saint.notes
+    oca_url = saint.hagiography_url or ""
+    # Source reflects the text actually returned.
+    # OCA dataset stores hagiography text in notes alongside an oca.org URL;
+    # check the URL hostname so those entries report source=oca, not notes.
+    if saint.extended_notes:
+        source = "goarch"
+    elif saint.notes and "oca.org" in oca_url:
+        source = "oca"
+    elif saint.notes:
+        source = "notes"
+    else:
+        # No local text — source reflects the hagiography field, not URL presence
+        source = "not_found"
+    return HagiographyResponse(
+        saint=saint.title or saint.name,
+        hagiography=hagiography,
+        goarch_url=saint.goarch_url,
+        hagiography_url=_hagio_url(saint),
+        source=source,
+    )

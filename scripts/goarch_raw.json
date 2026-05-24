@@ -1,5 +1,0 @@
-{
-  "_comment": "Output of scripts/import_goarch.py. Run the scraper to populate this file.",
-  "_note": "GOARCH chapel is currently Cloudflare-protected; run with --no-headless on a local machine.",
-  "_format": "{ \"MM-DD\": [{\"name\": \"...\", \"contentid\": NNN, \"goarch_url\": \"https://www.goarch.org/chapel/saints?contentid=NNN\"}] }"
-}

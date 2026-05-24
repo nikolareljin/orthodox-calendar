@@ -188,6 +188,71 @@ def test_moon_phase_returns_expected_shape() -> None:
     assert payload["phase_name"]
 
 
+def test_hagiography_known_saint_returns_valid_source() -> None:
+    response = client.get("/api/v1/hagiography?saint=Basil+the+Great&month_day=01-01")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["source"] in ("oca", "notes", "goarch")
+    assert payload["saint"]
+
+
+def test_hagiography_partial_name_match() -> None:
+    """Partial token match: 'Seraphim' should find 'Seraphim of Sarov' (01-02)."""
+    response = client.get("/api/v1/hagiography?saint=Seraphim&month_day=01-02")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["source"] != "not_found", "Partial name match failed for 'Seraphim'"
+
+
+def test_hagiography_unknown_saint_returns_not_found() -> None:
+    response = client.get("/api/v1/hagiography?saint=ZzzUnknownSaintXxx")
+
+    assert response.status_code == 200
+    payload = response.json()
+    assert payload["source"] == "not_found"
+    assert payload["saint"] == "ZzzUnknownSaintXxx"
+
+
+def test_hagiography_source_reflects_text_not_url() -> None:
+    """source must match the text actually returned, not just URL presence."""
+    response = client.get("/api/v1/hagiography?saint=Basil+the+Great&month_day=01-01")
+
+    assert response.status_code == 200
+    payload = response.json()
+    if payload.get("hagiography"):
+        assert payload["source"] in ("oca", "notes", "goarch")
+    else:
+        assert payload["source"] == "not_found"
+
+
+def test_romanian_tradition_data_loads() -> None:
+    """Regression: Romanian tradition dataset wires correctly — Stephen the Great on 07-02."""
+    response = client.get("/api/v1/saints?day=2024-07-02&traditions=romanian")
+
+    assert response.status_code == 200
+    results = response.json()
+    assert results, "Romanian tradition returned no entries for 2024-07-02"
+    saint_names = [s["name"] for entry in results for s in entry["saints"]]
+    assert any("Stephen" in n for n in saint_names), (
+        f"Expected 'Stephen the Great' in romanian saints on 07-02; got {saint_names[:5]}"
+    )
+
+
+def test_bulgarian_tradition_data_loads() -> None:
+    """Regression: Bulgarian tradition dataset wires correctly — John of Rila on 10-19."""
+    response = client.get("/api/v1/saints?day=2024-10-19&traditions=bulgarian")
+
+    assert response.status_code == 200
+    results = response.json()
+    assert results, "Bulgarian tradition returned no entries for 2024-10-19"
+    saint_names = [s["name"] for entry in results for s in entry["saints"]]
+    assert any("John of Rila" in n or "Rila" in n for n in saint_names), (
+        f"Expected 'John of Rila' in bulgarian saints on 10-19; got {saint_names[:5]}"
+    )
+
+
 def test_config_endpoint_returns_hagiography_source() -> None:
     response = client.get("/api/v1/config")
 

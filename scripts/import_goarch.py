@@ -38,6 +38,68 @@ CALENDAR_URL = CHAPEL_BASE + "/calendar"
 SAINT_URL_TEMPLATE = CHAPEL_BASE + "/saints?contentid={contentid}"
 
 # ---------------------------------------------------------------------------
+# Stealth: hide Playwright/automation signals from Cloudflare bot detection
+# ---------------------------------------------------------------------------
+
+_STEALTH_ARGS = [
+    "--disable-blink-features=AutomationControlled",
+    "--disable-infobars",
+    "--no-first-run",
+    "--no-default-browser-check",
+    "--disable-component-update",
+    "--disable-background-timer-throttling",
+    "--disable-renderer-backgrounding",
+    "--disable-backgrounding-occluded-windows",
+    "--start-maximized",
+]
+
+# Injected before every page script — patches all CF-visible automation signals.
+_STEALTH_JS = """
+// 1. Hide webdriver flag (primary CF signal)
+Object.defineProperty(navigator, 'webdriver', {get: () => undefined});
+try { delete navigator.__proto__.webdriver; } catch(_) {}
+
+// 2. Realistic plugin list (headless Chromium has none)
+const _pluginData = [
+    {name:'Chrome PDF Plugin',   filename:'internal-pdf-viewer',
+     description:'Portable Document Format'},
+    {name:'Chrome PDF Viewer',   filename:'mhjfbmdgcfjbbpaeojofohoefgiehjai',
+     description:''},
+    {name:'Native Client',       filename:'internal-nacl-plugin',
+     description:''},
+];
+Object.defineProperty(navigator, 'plugins', {
+    get: () => {
+        const arr = _pluginData.map(p => Object.assign(Object.create(Plugin.prototype), p));
+        Object.setPrototypeOf(arr, PluginArray.prototype);
+        return arr;
+    }
+});
+
+// 3. Languages
+Object.defineProperty(navigator, 'languages', {get: () => ['en-US', 'en']});
+
+// 4. window.chrome runtime (absent in automated Chromium)
+if (!window.chrome) window.chrome = {};
+if (!window.chrome.runtime) window.chrome.runtime = {};
+if (!window.chrome.loadTimes) window.chrome.loadTimes = function(){};
+if (!window.chrome.csi) window.chrome.csi = function(){};
+
+// 5. Permissions API — CF checks this for automation
+const _origPermQuery = window.navigator.permissions?.query?.bind(navigator.permissions);
+if (_origPermQuery) {
+    window.navigator.permissions.__proto__.query = (params) =>
+        params.name === 'notifications'
+            ? Promise.resolve({state: Notification.permission, onchange: null})
+            : _origPermQuery(params);
+}
+
+// 6. Hide Playwright-specific globals
+delete window.__playwright;
+delete window.__pw_manual;
+"""
+
+# ---------------------------------------------------------------------------
 # Julian date handling
 # ---------------------------------------------------------------------------
 # GOARCH uses the New (Revised Julian) Calendar, whose fixed feast dates share
@@ -107,32 +169,45 @@ def _parse_month_day(href: str) -> str | None:
     return None
 
 
-def _wait_past_cf(page, url: str, cf_timeout: int = 60) -> None:
-    """Navigate to url and wait for Cloudflare challenge to resolve.
+def _navigate(page, url: str, cf_timeout: int = 300) -> None:
+    """Navigate to url and wait for network to settle.
 
-    Headed mode: CF challenge runs JS, redirects to the real page.
-    We wait up to cf_timeout seconds for the 'Just a moment...' page to go away.
+    If CF challenge appears, polls every 2 s until the title is no longer
+    "Just a moment...". Raises TimeoutError if cf_timeout seconds elapse
+    without clearing the challenge (default 300 s).
     """
-    page.goto(url, wait_until="load", timeout=90000)
     import time as _time
-    deadline = _time.time() + cf_timeout
-    while _time.time() < deadline:
+    page.goto(url, wait_until="domcontentloaded", timeout=90000)
+    warned_at = _time.time()
+    deadline = warned_at + cf_timeout
+    while True:
         title = page.title()
         if "just a moment" not in title.lower():
-            # Past the CF challenge — wait for network to settle
             try:
                 page.wait_for_load_state("networkidle", timeout=10000)
             except Exception:
                 pass
             return
+        now = _time.time()
+        if now >= deadline:
+            raise TimeoutError(
+                f"Cloudflare challenge not resolved within {cf_timeout}s for {url}"
+            )
+        if now - warned_at >= 30:
+            remaining = int(deadline - now)
+            print(
+                f"\n  [CF] Still on challenge page — solve it in the browser window "
+                f"({remaining}s remaining)...",
+                file=sys.stderr,
+            )
+            warned_at = now
         _time.sleep(2)
-    raise TimeoutError(f"Cloudflare challenge not resolved within {cf_timeout}s for {url}")
 
 
-def scrape_month(page, month: int, year: int) -> dict[str, list[dict]]:
+def scrape_month(page, month: int, year: int, cf_timeout: int = 300) -> dict[str, list[dict]]:
     """Return {MM-DD: [{name, contentid, goarch_url}]} for one calendar month."""
     url = f"{CALENDAR_URL}?month={month}&year={year}"
-    _wait_past_cf(page, url)
+    _navigate(page, url, cf_timeout=cf_timeout)
 
     # Extract all saint links from the calendar
     # GOARCH chapel calendar links look like:
@@ -240,6 +315,11 @@ def main() -> None:
                              "calendars) but useful for recently canonized saints on civil dates.")
     parser.add_argument("--no-headless", action="store_true",
                         help="Run browser with visible window (required to pass Cloudflare on local machine)")
+    parser.add_argument("--profile-dir", default=None,
+                        help="Persistent Chrome profile directory path (default: scripts/.goarch-profile). "
+                             "Reusing a profile that already has cf_clearance skips the CF challenge.")
+    parser.add_argument("--cf-timeout", type=int, default=300,
+                        help="Seconds to wait for Cloudflare challenge to clear before aborting (default 300)")
     args = parser.parse_args()
 
     months = range(1, 2) if args.dry_run else range(1, 13)
@@ -247,20 +327,54 @@ def main() -> None:
     all_saints: dict[str, list[dict]] = {}
     headless = not args.no_headless
 
+    profile_dir = Path(args.profile_dir) if args.profile_dir else Path(__file__).parent / ".goarch-profile"
+    profile_dir.mkdir(parents=True, exist_ok=True)
+
     print(f"Scraping GOARCH chapel calendar year={args.year} headless={headless}...", file=sys.stderr)
+    print(f"Browser profile: {profile_dir}", file=sys.stderr)
+
+    # Prefer system Chromium (real binary = more realistic fingerprint than
+    # Playwright's bundled Chromium).  Fall back to Playwright's own build.
+    _SYSTEM_CHROME_CANDIDATES = [
+        "/snap/bin/chromium",
+        "/usr/bin/chromium",
+        "/usr/bin/chromium-browser",
+        "/usr/bin/google-chrome",
+        "/usr/bin/google-chrome-stable",
+    ]
+    executable_path = next(
+        (p for p in _SYSTEM_CHROME_CANDIDATES if Path(p).exists()), None
+    )
+    if executable_path:
+        print(f"Using system browser: {executable_path}", file=sys.stderr)
+    else:
+        print("Using Playwright bundled Chromium", file=sys.stderr)
 
     with sync_playwright() as pw:
-        browser = pw.chromium.launch(headless=headless)
-        context = browser.new_context(user_agent=(
-            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
-            "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-        ))
+        # Persistent context keeps cf_clearance cookie across navigations and reruns.
+        context = pw.chromium.launch_persistent_context(
+            str(profile_dir),
+            headless=headless,
+            executable_path=executable_path,
+            viewport={"width": 1280, "height": 900},
+            locale="en-US",
+            timezone_id="America/New_York",
+            args=_STEALTH_ARGS,
+        )
         page = context.new_page()
+        page.add_init_script(_STEALTH_JS)
+
+        # Pre-flight: navigate to goarch.org root once to acquire cf_clearance.
+        # After solving the challenge here, subsequent month-page navigations
+        # will reuse the cookie and should not be challenged again.
+        print("  Pre-flight: opening goarch.org to acquire CF clearance cookie...", file=sys.stderr)
+        _navigate(page, "https://www.goarch.org/", cf_timeout=args.cf_timeout)
+        print("  goarch.org loaded. Proceeding to calendar pages...", file=sys.stderr)
 
         for month in months:
             print(f"  Month {month:02d}/{args.year}...", file=sys.stderr, end=" ")
             try:
-                result = scrape_month(page, month, args.year)
+                result = scrape_month(page, month, args.year, cf_timeout=args.cf_timeout)
                 # Optionally shift dates from civil-Gregorian to Julian (−13 days)
                 if args.civil_to_julian:
                     shifted: dict[str, list[dict]] = {}
@@ -284,7 +398,7 @@ def main() -> None:
             if month < 12 and not args.dry_run:
                 time.sleep(args.delay)
 
-        browser.close()
+        context.close()
 
     total = sum(len(v) for v in all_saints.values())
     print(f"\nTotal: {total} saints across {len(all_saints)} days", file=sys.stderr)

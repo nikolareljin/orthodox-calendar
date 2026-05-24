@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import date
 from enum import Enum
-from typing import Dict, List, Optional
+from typing import Dict, List, Literal, Optional
 
 from pydantic import BaseModel, Field
 
@@ -35,6 +35,11 @@ class Saint(BaseModel):
     goarch_url: Optional[str] = None       # GOARCH chapel URL (contentid-keyed; date-independent)
     icon_url: Optional[str] = None
     notes: Optional[str] = None
+    extended_notes: Optional[str] = Field(
+        default=None,
+        exclude=True,  # omitted from list-endpoint responses (/saints, /name-days) to prevent large payloads
+        description="Extended hagiography text; served via /hagiography only.",
+    )
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
     canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental" | "church-of-the-east"
     year_canonized: Optional[int] = None    # e.g. 2010
@@ -74,6 +79,14 @@ class NameDayMatch(BaseModel):
 class NameDayResponse(BaseModel):
     matches: List[NameDayMatch]
     checked_date: date
+
+
+class HagiographyResponse(BaseModel):
+    saint: str
+    hagiography: Optional[str] = None
+    goarch_url: Optional[str] = None
+    hagiography_url: Optional[str] = None
+    source: Literal["goarch", "oca", "notes", "not_found"]
 
 
 class MovableFeastsResponse(BaseModel):
