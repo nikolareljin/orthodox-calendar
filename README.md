@@ -162,3 +162,11 @@ orthodox-calendar/
 - `./start [-b]` / `./stop` — Docker Compose shortcuts.
 
 Full documentation: [`docs/`](docs/README.md) — architecture, API reference, frontend guide, and dev workflows.
+
+---
+
+## Clone traffic
+
+![Clone traffic](https://raw.githubusercontent.com/nikolareljin/stats/main/charts/orthodox-calendar.svg)
+
+_Updated daily by [repo-sentinel](https://github.com/nikolareljin/repo-sentinel). Total and unique cloners over the last 14 days._
