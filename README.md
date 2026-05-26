@@ -169,4 +169,4 @@ Full documentation: [`docs/`](docs/README.md) — architecture, API reference, f
 
 ![Clone traffic](https://raw.githubusercontent.com/nikolareljin/stats/main/charts/orthodox-calendar.svg)
 
-_Updated daily by [repo-sentinel](https://github.com/nikolareljin/repo-sentinel). Total and unique cloners over the last 14 days._
+_Updated daily. Total and unique cloners over the last 14 days._
