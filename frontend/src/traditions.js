@@ -139,6 +139,8 @@ export const TRADITIONS = {
 // ── World Orthodox Directory ──────────────────────────────────────────────────
 // Canonical, recognized churches only. No self-proclaimed bodies.
 // Symbols: ☦ Eastern Orthodox (Chalcedonian)  ✙ Oriental Orthodox  ✝ Church of the East
+// lat/lng = patriarchal see / principal seat coordinates (WGS84).
+// Used for future map view showing Orthodox tradition heartlands.
 export const WORLD_CHURCHES = [
   {
     category: "Eastern Orthodox",
@@ -146,28 +148,28 @@ export const WORLD_CHURCHES = [
     symbol: "☦",
     churches: [
       // Autocephalous — canonical diptychs order
-      { name: "Ecumenical Patriarchate of Constantinople",   url: "https://www.patriarchate.org" },
-      { name: "Greek Orthodox Patriarchate of Alexandria",   url: "https://www.patriarchateofalexandria.com" },
-      { name: "Greek Orthodox Patriarchate of Antioch",      url: "https://antiochpatriarchate.org" },
-      { name: "Greek Orthodox Patriarchate of Jerusalem",    url: "https://www.jerusalem-patriarchate.info" },
-      { name: "Russian Orthodox Church",                     url: "https://www.patriarchia.ru" },
-      { name: "Georgian Orthodox Church",                    url: "https://www.patriarchate.ge" },
-      { name: "Serbian Orthodox Church",                     url: "https://www.spc.rs" },
-      { name: "Romanian Orthodox Church",                    url: "https://patriarhia.ro" },
-      { name: "Bulgarian Orthodox Church",                   url: "https://bg-patriarshia.bg" },
-      { name: "Church of Cyprus",                            url: "https://www.churchofcyprus.org.cy" },
-      { name: "Church of Greece",                            url: "https://www.ecclesia.gr" },
-      { name: "Polish Orthodox Church",                      url: "https://www.orthodox.pl" },
-      { name: "Albanian Orthodox Church",                    url: "https://orthodoxalbania.org" },
-      { name: "Czech and Slovak Orthodox Church",            url: "https://www.pravoslavnacirkev.cz" },
-      { name: "Orthodox Church in America",                  url: "https://www.oca.org" },
-      { name: "Orthodox Church of Ukraine",                  url: "https://www.pcu.ua" },
-      { name: "Ukrainian Orthodox Church",                   url: "https://church.ua" },
-      { name: "Orthodox Ohrid Archdiocese",                  url: "https://www.ohridarchdiocese.org" },
+      { name: "Ecumenical Patriarchate of Constantinople",   url: "https://www.patriarchate.org",              lat: 41.031,  lng: 28.952,  seat: "Phanar, Istanbul" },
+      { name: "Greek Orthodox Patriarchate of Alexandria",   url: "https://www.patriarchateofalexandria.com",  lat: 30.044,  lng: 31.236,  seat: "Cairo" },
+      { name: "Greek Orthodox Patriarchate of Antioch",      url: "https://antiochpatriarchate.org",            lat: 33.510,  lng: 36.291,  seat: "Damascus" },
+      { name: "Greek Orthodox Patriarchate of Jerusalem",    url: "https://www.jerusalem-patriarchate.info",   lat: 31.778,  lng: 35.229,  seat: "Jerusalem" },
+      { name: "Russian Orthodox Church",                     url: "https://www.patriarchia.ru",                lat: 55.751,  lng: 37.618,  seat: "Moscow" },
+      { name: "Georgian Orthodox Church",                    url: "https://www.patriarchate.ge",               lat: 41.693,  lng: 44.801,  seat: "Tbilisi" },
+      { name: "Serbian Orthodox Church",                     url: "https://www.spc.rs",                        lat: 44.804,  lng: 20.465,  seat: "Belgrade" },
+      { name: "Romanian Orthodox Church",                    url: "https://patriarhia.ro",                     lat: 44.432,  lng: 26.103,  seat: "Bucharest" },
+      { name: "Bulgarian Orthodox Church",                   url: "https://bg-patriarshia.bg",                 lat: 42.697,  lng: 23.322,  seat: "Sofia" },
+      { name: "Church of Cyprus",                            url: "https://www.churchofcyprus.org.cy",         lat: 35.166,  lng: 33.364,  seat: "Nicosia" },
+      { name: "Church of Greece",                            url: "https://www.ecclesia.gr",                   lat: 37.977,  lng: 23.732,  seat: "Athens" },
+      { name: "Polish Orthodox Church",                      url: "https://www.orthodox.pl",                   lat: 52.229,  lng: 21.012,  seat: "Warsaw" },
+      { name: "Albanian Orthodox Church",                    url: "https://orthodoxalbania.org",               lat: 41.328,  lng: 19.818,  seat: "Tirana" },
+      { name: "Czech and Slovak Orthodox Church",            url: "https://www.pravoslavnacirkev.cz",          lat: 50.087,  lng: 14.421,  seat: "Prague" },
+      { name: "Orthodox Church in America",                  url: "https://www.oca.org",                       lat: 38.889,  lng: -77.050, seat: "Washington D.C." },
+      { name: "Orthodox Church of Ukraine",                  url: "https://www.pcu.ua",                        lat: 50.450,  lng: 30.524,  seat: "Kyiv" },
+      { name: "Ukrainian Orthodox Church",                   url: "https://church.ua",                         lat: 50.433,  lng: 30.517,  seat: "Kyiv" },
+      { name: "Orthodox Ohrid Archdiocese",                  url: "https://www.ohridarchdiocese.org",          lat: 41.113,  lng: 20.801,  seat: "Ohrid" },
       // Autonomous
-      { name: "Finnish Orthodox Church",                     url: "https://www.ort.fi" },
-      { name: "Estonian Apostolic Orthodox Church",          url: "https://www.eaoc.ee" },
-      { name: "Japanese Orthodox Church",                    url: "https://www.orthodoxjapan.jp" },
+      { name: "Finnish Orthodox Church",                     url: "https://www.ort.fi",                        lat: 60.169,  lng: 24.935,  seat: "Helsinki" },
+      { name: "Estonian Apostolic Orthodox Church",          url: "https://www.eaoc.ee",                       lat: 59.437,  lng: 24.754,  seat: "Tallinn" },
+      { name: "Japanese Orthodox Church",                    url: "https://www.orthodoxjapan.jp",              lat: 35.706,  lng: 139.732, seat: "Tokyo" },
     ],
   },
   {
@@ -175,15 +177,15 @@ export const WORLD_CHURCHES = [
     subtitle: "Non-Chalcedonian",
     symbol: "✙",
     churches: [
-      { name: "Coptic Orthodox Church of Alexandria",        url: "https://www.copticchurch.net" },
-      { name: "Syriac Orthodox Church of Antioch",           url: "https://syriacpatriarchate.org" },
-      { name: "Armenian Apostolic Church — Etchmiadzin",     url: "https://www.armenianchurch.am" },
-      { name: "Armenian Apostolic Church — Cilicia",         url: "https://www.catholicateofcilicia.org" },
-      { name: "Armenian Patriarchate of Constantinople",     url: "https://www.armenianpatriarchate.org.tr" },
-      { name: "Armenian Patriarchate of Jerusalem",          url: "https://armenian-patriarchate.com" },
-      { name: "Ethiopian Orthodox Tewahedo Church",          url: "https://www.ethiopianorthodox.org" },
-      { name: "Eritrean Orthodox Tewahedo Church",           url: "https://eritreanorthodox.net" },
-      { name: "Malankara Orthodox Syrian Church",            url: "https://www.mosc.in" },
+      { name: "Coptic Orthodox Church of Alexandria",        url: "https://www.copticchurch.net",              lat: 30.044,  lng: 31.236,  seat: "Cairo" },
+      { name: "Syriac Orthodox Church of Antioch",           url: "https://syriacpatriarchate.org",            lat: 33.510,  lng: 36.291,  seat: "Damascus" },
+      { name: "Armenian Apostolic Church — Etchmiadzin",     url: "https://www.armenianchurch.am",             lat: 40.165,  lng: 44.293,  seat: "Vagharshapat" },
+      { name: "Armenian Apostolic Church — Cilicia",         url: "https://www.catholicateofcilicia.org",      lat: 33.836,  lng: 35.902,  seat: "Antelias, Lebanon" },
+      { name: "Armenian Patriarchate of Constantinople",     url: "https://www.armenianpatriarchate.org.tr",   lat: 41.009,  lng: 28.952,  seat: "Istanbul" },
+      { name: "Armenian Patriarchate of Jerusalem",          url: "https://armenian-patriarchate.com",         lat: 31.778,  lng: 35.229,  seat: "Jerusalem" },
+      { name: "Ethiopian Orthodox Tewahedo Church",          url: "https://www.ethiopianorthodox.org",         lat: 9.031,   lng: 38.740,  seat: "Addis Ababa" },
+      { name: "Eritrean Orthodox Tewahedo Church",           url: "https://eritreanorthodox.net",              lat: 15.338,  lng: 38.931,  seat: "Asmara" },
+      { name: "Malankara Orthodox Syrian Church",            url: "https://www.mosc.in",                       lat: 9.931,   lng: 76.267,  seat: "Kottayam, India" },
     ],
   },
   {
@@ -191,8 +193,8 @@ export const WORLD_CHURCHES = [
     subtitle: "East Syriac tradition",
     symbol: "✝",
     churches: [
-      { name: "Assyrian Church of the East",                 url: "https://www.assyrianchurch.org" },
-      { name: "Ancient Church of the East",                  url: "https://ancientchurchoftheeast.org" },
+      { name: "Assyrian Church of the East",                 url: "https://www.assyrianchurch.org",            lat: 33.886,  lng: -84.468, seat: "Morton Grove, IL" },
+      { name: "Ancient Church of the East",                  url: "https://ancientchurchoftheeast.org",        lat: 33.341,  lng: 44.401,  seat: "Baghdad" },
     ],
   },
 ];

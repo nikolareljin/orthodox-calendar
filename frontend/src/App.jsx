@@ -191,7 +191,7 @@ const SCOPE_LABEL = {
 // ── SaintCard ───────────────────────────────────────────────────────────────
 function SaintCard({ saint }) {
   const [expanded, setExpanded] = useState(false);
-  const hasBody = saint.notes || saint.hagiography_url;
+  const hasBody = saint.notes || saint.hagiography_url || saint.neobyzantine_url;
   const pillClass = ["feast-pill", saint.feast_type === "Great Feast" ? "great-feast" : ""].filter(Boolean).join(" ");
 
   return (
@@ -227,6 +227,17 @@ function SaintCard({ saint }) {
           {saint.hagiography_url && (
             <a href={saint.hagiography_url} target="_blank" rel="noreferrer" className="saint-link">
               Read full hagiography →
+            </a>
+          )}
+          {saint.neobyzantine_url && (
+            <a
+              href={saint.neobyzantine_url}
+              target="_blank"
+              rel="noreferrer"
+              className="saint-link saint-link-nb"
+              style={{ color: '#CFB53B' }}
+            >
+              Learn more on NeoByzantine.org →
             </a>
           )}
         </div>

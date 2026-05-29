@@ -321,6 +321,10 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
 
     Overlay entries carry tradition-specific canonization data and richer
     hagiography fields that the shared base dataset may lack.
+
+    Priority: neobyzantine_hagiographies.json notes → extended_notes on the base
+    (so they surface at /hagiography even when OCA notes already exist).
+    neobyzantine_url and neobyzantine_actor_slug propagate when the overlay has them.
     """
     if overlay.title and not base.title:
         base.title = overlay.title
@@ -334,6 +338,10 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.icon_url = overlay.icon_url
     if overlay.notes and not base.notes:
         base.notes = overlay.notes
+    # Overlay notes become extended_notes when base has none — this lets the
+    # neobyzantine_hagiographies.json notes surface at /hagiography as curated content.
+    if overlay.notes and not base.extended_notes:
+        base.extended_notes = overlay.notes
     if overlay.extended_notes and not base.extended_notes:
         base.extended_notes = overlay.extended_notes
     if overlay.canonized_by and not base.canonized_by:
@@ -342,6 +350,11 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.canonization_scope = overlay.canonization_scope
     if overlay.year_canonized and not base.year_canonized:
         base.year_canonized = overlay.year_canonized
+    # Cross-links to neobyzantine.org (populated when actor_slug is present in hagiographies JSON)
+    if overlay.neobyzantine_url and not base.neobyzantine_url:
+        base.neobyzantine_url = overlay.neobyzantine_url
+    if overlay.neobyzantine_actor_slug and not base.neobyzantine_actor_slug:
+        base.neobyzantine_actor_slug = overlay.neobyzantine_actor_slug
 
 
 def _build_month_day_index(entries: List[CalendarEntry]) -> Dict[str, List[CalendarEntry]]:
