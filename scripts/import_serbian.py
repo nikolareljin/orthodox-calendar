@@ -17,6 +17,7 @@ Usage:
 """
 
 import argparse
+import html
 import json
 import re
 import sys
@@ -61,8 +62,14 @@ _FEAST_TYPE_HINTS = [
 ]
 
 
-def _strip_tags(html: str) -> str:
-    return re.sub(r"<[^>]+>", " ", html)
+def _strip_tags(html_text: str) -> str:
+    text = re.sub(r"<[^>]+>", " ", html_text)
+    text = html.unescape(text)
+    # Remove Wikipedia footnote refs like [73], [ 74 ]
+    text = re.sub(r"\[\s*\d+\s*\]", "", text)
+    # Thin space (U+2009) and other non-breaking spaces → regular space
+    text = text.replace(" ", " ").replace(" ", " ").replace(" ", " ")
+    return text
 
 
 def _parse_date(text: str) -> str | None:
