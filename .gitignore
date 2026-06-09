@@ -2,6 +2,7 @@
 scripts/goarch_raw.json
 backend/app/data/goarch_hagiographies.json
 scripts/.goarch-profile/
+scripts/goarch_hagio_cache.json
 .venv-import/
 
 # Local overrides — never commit secrets

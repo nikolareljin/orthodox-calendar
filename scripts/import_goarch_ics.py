@@ -74,12 +74,13 @@ _MOVABLE_FEAST_RE = re.compile(
     r"|(?:great\s+and\s+)?holy\s+pascha|thomas\s+sunday"
     # Movable Apodosis/leave-taking of Pascha-cycle feasts
     r"|apodosis\s+of\s+(?:pascha|the\s+feast\s+of\s+the\s+holy|holy\s+(?:ascension|pentecost))"
-    # Holy Ascension and Holy Pentecost as standalone feast titles
-    r"|^holy\s+(?:ascension|pentecost)$"
+    # Holy Ascension, Pentecost, Saturday as standalone feast titles
+    r"|^holy\s+(?:ascension|pentecost|saturday)$"
     # Saturday of the Departed / Soul Saturdays
     r"|saturday of the departed|soul saturday"
-    # Lent-period Sunday titles
-    r"|holy and great|sunday of (?:orthodoxy|the prodigal|meatfare|cheesefare|the publican)",
+    # Lent-period Sunday titles + Paschaltide Sundays
+    r"|holy and great|sunday of (?:orthodoxy|the prodigal|meatfare|cheesefare|the publican)"
+    r"|sunday of the myrrh.bearing",
     re.IGNORECASE,
 )
 

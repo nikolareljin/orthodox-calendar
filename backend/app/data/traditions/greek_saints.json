@@ -394,7 +394,9 @@
         "title": "Theophan the Recluse",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1923",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1923"
       }
     ]
   },
@@ -478,7 +480,9 @@
         "title": "Gregory of the Kiev Caves",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1925",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1925"
       },
       {
         "name": "Pega the Virgin, Hermitess of Peakirk",
@@ -513,7 +517,9 @@
         "title": "Eustratios the Wonderworker",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1926",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1926"
       },
       {
         "name": "Peter, Bishop of Sebaste, brother of Basil the Great and Gregory of Nyssa",
@@ -555,7 +561,9 @@
         "title": "Theosebia the Deaconess, sister of Basil the Great & Gregory of Nyssa",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1929",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1929"
       },
       {
         "name": "Afterfeast of the Theophany of Our Lord and Saviour Jesus Christ",
@@ -611,7 +619,9 @@
         "title": "Vitalis of Gaza",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1930",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1930"
       }
     ]
   },
@@ -702,7 +712,9 @@
         "title": "Maximos the Righteous of Kapsokalyvia, Mount Athos",
         "feast_type": "Righteous",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1932",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1932"
       },
       {
         "name": "Hilary of Poitiers",
@@ -1164,7 +1176,9 @@
         "title": "Demetrios the New Martyr of Constantinople",
         "feast_type": "New Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1947",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1947"
       }
     ]
   },
@@ -1241,7 +1255,9 @@
         "title": "Laurence the Recluse of the Kiev Caves",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1952",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1952"
       },
       {
         "name": "Gildas the Wise",
@@ -1416,7 +1432,9 @@
         "title": "Agathadoros the Martyr of Cappadocia",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1960",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1960"
       }
     ]
   },
@@ -1458,7 +1476,9 @@
         "title": "Nicholas, Archbishop & Enlightener of Japan",
         "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1961",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1961"
       },
       {
         "name": "Ansgar of Hamburg-Bremen",
@@ -1500,7 +1520,9 @@
         "title": "John the Righteous, Bishop of Irinopolis",
         "feast_type": "Righteous",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1962",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1962"
       },
       {
         "name": "Theodosios the Righteous",
@@ -1696,7 +1718,9 @@
         "title": "Nicephoros & Stephanos the Martyrs",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=1970",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=1970"
       },
       {
         "name": "Afterfeast of the Presentation of Our Lord and Savior in the Temple",
@@ -3155,7 +3179,9 @@
         "title": "Marinos the Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2027",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2027"
       },
       {
         "name": "Theocteristos the Confessor",
@@ -3218,7 +3244,9 @@
         "title": "Demetrios the New Martyr",
         "feast_type": "New Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2029",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2029"
       }
     ]
   },
@@ -3239,7 +3267,9 @@
         "title": "Myron the New Martyr of Crete",
         "feast_type": "New Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2031",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2031"
       },
       {
         "name": "Cuthbert the Wonderworker, Bishop of Lindisfarne",
@@ -3316,14 +3346,18 @@
         "title": "Kalliniki & Vassilisa the Martyrs",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2032",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2032"
       },
       {
         "name": "Euthemios the New Martyr",
         "title": "Euthemios the New Martyr",
         "feast_type": "New Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2033",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2033"
       }
     ]
   },
@@ -3351,7 +3385,9 @@
         "title": "Luke the New Martyr of Mytilene",
         "feast_type": "New Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2034",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2034"
       },
       {
         "name": "First Saturday of Lent: The Commemoration of the Miracle of Kollyva wrought by Saint Theodore the Tyro",
@@ -3393,7 +3429,9 @@
         "title": "Zachariah the Recluse",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2035",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2035"
       }
     ]
   },
@@ -3603,7 +3641,11 @@
         "title": "Mary of Egypt",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2",
+        "notes": "When Mary was only twelve years old, she left her parents and departed to Alexandria, where she lived a depraved life for seventeen years. Then, moved by curios",
+        "extended_notes": "When Mary was only twelve years old, she left her parents and departed to Alexandria, where she lived a depraved life for seventeen years. Then, moved by curiosity, she went with many pilgrims to Jerusalem, that she might see the Exaltation of the venerable Cross. Even in the Holy City she gave herself over to every kind of licentiousness and drew many into the depth of perdition. Desiring to go into the church on the day of the Exaltation of the Cross, time and again she perceived a certain invisible power preventing her entrance, whereas the multitude of people about her entered unhindered. Therefore, wounded in heart by this, she decided to change her way of life and reconcile herself to God by means of repentance. Invoking our Lady the Theotokos as her protectress, she asked her to open the way for her to worship the Cross, and vowed that she would renounce the world. And thus, returning once again to the church, she entered easily. When she had worshipped the precious Wood, she departed that same day from Jerusalem and passed over the Jordan. She went into the inner wilderness and for forty-seven years lived a most harsh manner of life, surpassing human strength; alone, she prayed to God alone. Toward the end of her life, she met a certain hermit named Zosimas, and she related to him her life from the beginning. She requested of him to bring her the immaculate Mysteries that she might partake of them. According to her request, he did this the following year on Holy and Great Thursday. One year after this, Zosimas again went thither and found her dead, laid upon the ground, and letters written in the sand near her which said: \"Abba Zosimas, bury here the body of wretched Mary. I died on the very day I partook of the immaculate Mysteries. Pray for me.\" Her death is reckoned by some to have taken place in 378, by some, in 437, and by others, in 522. She is commemorated also on the Fifth Sunday of Great Lent. Her life was recorded by Saint Sophronius of Jerusalem."
       },
       {
         "name": "Euthemios of Suzdal",
@@ -3841,7 +3883,11 @@
         "title": "George, Bishop of Mytilene",
         "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=10",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=10",
+        "notes": "The righteous George struggled in behalf of the holy icons, and reposed in peace about the year 821.",
+        "extended_notes": "The righteous George struggled in behalf of the holy icons, and reposed in peace about the year 821."
       },
       {
         "name": "Gerasimos the God-Bearer of Byzantium",
@@ -3960,7 +4006,11 @@
         "title": "Terence and his Companions beheaded at Carthage",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=13",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=13",
+        "notes": "These Saints were from Africa, and they all contested during the reign of Decius, in 251. After many torments, they were beheaded at the command of Fortunatus t",
+        "extended_notes": "These Saints were from Africa, and they all contested during the reign of Decius, in 251. After many torments, they were beheaded at the command of Fortunatus the Governor."
       },
       {
         "name": "150 and more Righteous Martyr Fathers of the Sacred Monastery of Pantocrator Daou Pentelis",
@@ -3974,7 +4024,9 @@
         "title": "Gregory V, the Holy Martyr and Patriarch of Constantinople",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=14",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=14"
       },
       {
         "name": "Holy Father Theonas, Archbishop of Thessolonica",
@@ -3998,18 +4050,15 @@
     "calendar": "revised",
     "saints": [
       {
-        "name": "Holy Saturday",
-        "title": "Holy Saturday",
-        "feast_type": "Saint",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
-      },
-      {
         "name": "Hieromartyr Antipas, Bishop of Pergamum",
         "title": "Hieromartyr Antipas, Bishop of Pergamum",
         "feast_type": "Hieromartyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=15",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=15",
+        "notes": "Saint Antipas was a contemporary of the holy Apostles, by whom he was made Bishop of Pergamum. He contested during the reign of Domitian, when he was cast, as i",
+        "extended_notes": "Saint Antipas was a contemporary of the holy Apostles, by whom he was made Bishop of Pergamum. He contested during the reign of Domitian, when he was cast, as it is said, into a bronze bull that had been heated exceedingly. The Evangelist John writes of him in the Book of Revelation, and says (as it were from the mouth of Christ, Who says to the Angel [that is, the Bishop] of the Church of Pergamum): \"I know thy works, and where thou dwellest, even where Satan's seat is; and thou holdest fast My Name, and hast not denied My Faith, even in those days wherein Antipas was my faithful Martyr, who was slain among you, where Satan dwelleth\" (Rev. 2:13). The faithful pray to this Saint for ailments of the teeth."
       },
       {
         "name": "Pharmuthios the Anchorite",
@@ -4079,7 +4128,11 @@
         "title": "Martin the Confessor, Pope of Rome",
         "feast_type": "Confessor",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=17",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=17",
+        "notes": "Saint Martin was born in Tuscany. He had been the papal delegate at Constantinople; upon the death of Pope Theodore, Saint Martin was elected his successor. At ",
+        "extended_notes": "Saint Martin was born in Tuscany. He had been the papal delegate at Constantinople; upon the death of Pope Theodore, Saint Martin was elected his successor. At this time the Emperor Constans II, also known as Constantine Pogonatus (reigned 641-668), was seeking support of his confession of faith called the Typos, which espoused the Monothelite heresy, that is, that there is only one will and energy in the Incarnate Son of God. But the newly-consecrated Pope not only did not accept the Typos, but convened the Lateran Council of 649 (attended by 105 of his bishops, and Saint Maximus the Confessor, who was then in Rome), which anathematized the Typos and the Monothelite heresy. Because of this Saint Martin was seized by an imperial force in 653 and brought to Constantinople, where he was charged with sending money to the Saracens and conspiring with them, and blaspheming against the most holy Mother of God. Though innocent of these accusations, he was exiled to Cherson on the Black Sea, where, after many sufferings and privations, he received the crown of his courageous confession in the year 655."
       },
       {
         "name": "Theodosios the Martyr",
@@ -4163,14 +4216,20 @@
         "title": "Crescens the Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=20",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=20",
+        "notes": "This Martyr was from Myra of Lycia, born of an illustrious family. Of his own accord he went amidst the idolaters and admonished them to leave off their futile ",
+        "extended_notes": "This Martyr was from Myra of Lycia, born of an illustrious family. Of his own accord he went amidst the idolaters and admonished them to leave off their futile religion and worship the only true God, Who is worshipped by the Christians; for this he was arrested. When asked by the ruler what his name and lineage were, the Saint would answer only that he was a Christian; counseled to offer sacrifice to the idols, he refused. For this, he was hung up and beaten, was scraped, and then was cast into fire, in which he gave up his holy soul into the hands of God, though not even the hair of his head was harmed by the flames."
       },
       {
         "name": "Leonidas, Bishop of Athens",
         "title": "Leonidas, Bishop of Athens",
         "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=19",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=19"
       },
       {
         "name": "Michael the New Martyr of Smyrna",
@@ -4565,13 +4624,6 @@
     "calendar": "revised",
     "saints": [
       {
-        "name": "Sunday of the Myrrh-Bearing Women",
-        "title": "Sunday of the Myrrh-Bearing Women",
-        "feast_type": "Saint",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
-      },
-      {
         "name": "Basil the Holy Martyr Bishop of Amasea",
         "title": "Basil the Holy Martyr Bishop of Amasea",
         "feast_type": "Martyr",
@@ -4932,13 +4984,6 @@
         "name": "Athanasios, Bishop of Corinth",
         "title": "Athanasios, Bishop of Corinth",
         "feast_type": "Hierarch",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
-      },
-      {
-        "name": "Holy Saturday",
-        "title": "Holy Saturday",
-        "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       }
@@ -5554,13 +5599,6 @@
       {
         "name": "Theotima & Kyriake the Martyrs",
         "title": "Theotima & Kyriake the Martyrs",
-        "feast_type": "Saint",
-        "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
-      },
-      {
-        "name": "Sunday of the Myrrh-Bearing Women",
-        "title": "Sunday of the Myrrh-Bearing Women",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
@@ -6249,7 +6287,9 @@
         "title": "Kalliope the Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=105",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=105"
       },
       {
         "name": "Melania the Righteous",
@@ -6928,7 +6968,11 @@
         "title": "David the Righteous of Thessalonika",
         "feast_type": "Righteous",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=100",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=100",
+        "notes": "Saint David, who was from Thessalonica, lived a most holy and ascetical life. For some years, he took up his dwelling in the branches of an almond tree, exposed",
+        "extended_notes": "Saint David, who was from Thessalonica, lived a most holy and ascetical life. For some years, he took up his dwelling in the branches of an almond tree, exposed to all the elements and extremes of the weather. He reposed in peace during the reign of Saint Justinian the Great, in the sixth century."
       },
       {
         "name": "Appearance of the Icon of Our Most Holy Lady the Theotokos of Tikhvin",
@@ -6984,7 +7028,11 @@
         "title": "Finding of the Relics of Cyrus and John the Unmercenaries",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=102",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=102",
+        "notes": "These Saints lived during the years of Diocletian. Saint Cyrus was from Alexandria, and Saint John was from Edessa of Mesopotamia. Because of the persecution of",
+        "extended_notes": "These Saints lived during the years of Diocletian. Saint Cyrus was from Alexandria, and Saint John was from Edessa of Mesopotamia. Because of the persecution of that time, Cyrus fled to the Gulf of Arabia, where there was a small community of monks. John, who was a soldier, heard of Cyrus' fame and came to join him. Henceforth, they passed their life working every virtue, and healing every illness and disease freely by the grace of Christ; hence their title of \"Unmercenaries.\" They heard that a certain woman, named Athanasia, had been apprehended together with her three daughters, Theodora, Theoctiste, and Eudoxia, and taken to the tribunal for their confession of the Faith. Fearing lest the tender young maidens be terrified by the torments and renounce Christ, they went to strengthen them in their contest in martyrdom; therefore they too were seized. After Cyrus and John and those sacred women had been greatly tormented, all were beheaded in the year 292. Their tomb became a renowned shrine in Egypt, and a place of universal pilgrimage. It was found in the area of the modern day resort near Alexandria named Abu Kyr."
       },
       {
         "name": "Sergios the Magister",
@@ -7033,7 +7081,11 @@
         "title": "Peter and Paul, the Holy Apostles",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=103",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=103",
+        "notes": "The divinely-blessed Peter was from Bethsaida of Galilee. He was the son of Jonas and the brother of Andrew the First-called. He was a fisherman by trade, unlea",
+        "extended_notes": "The divinely-blessed Peter was from Bethsaida of Galilee. He was the son of Jonas and the brother of Andrew the First-called. He was a fisherman by trade, unlearned and poor, and was called Simon; later he was renamed Peter by the Lord Jesus Christ Himself, Who looked at him and said, \"Thou art Simon the son of Jonas; thou shalt be called Cephas (which is by interpretation, Peter)\" (John 1:42). On being raised by the Lord to the dignity of an Apostle and becoming inseparable from Him as His zealous disciple, he followed Him from the beginning of His preaching of salvation up until the very Passion, when, in the court of Caiaphas the high priest, he denied Him thrice because of his fear of the Jews and of the danger at hand. But again, after many bitter tears, he received complete forgiveness of his transgression. After the Resurrection of Christ and the descent of the Holy Spirit, he preached in Judea, Antioch, and certain parts of Asia, and finally came to Rome, where he was crucified upside down by Nero, and thus he ascended to the eternal habitations about the year 66 or 68, leaving two Catholic (General) Epistles to the Church of Christ."
       }
     ]
   },
@@ -7145,7 +7197,11 @@
         "title": "Hyacinth the Martyr of Caesarea & Theodotos and Theodota the Martyrs",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=107",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=107",
+        "notes": "The Martyr Hyacinth, who was from Caesarea of Cappadocia, was the chamberlain of the Emperor Trajan. On being constrained by the Emperor to partake of the sacri",
+        "extended_notes": "The Martyr Hyacinth, who was from Caesarea of Cappadocia, was the chamberlain of the Emperor Trajan. On being constrained by the Emperor to partake of the sacrifices offered to idols and not wishing to do so, he was shut up in prison without food, where he gave up his spirit to God in the year 108."
       },
       {
         "name": "Anatolius, Patriarch of Constantinople",
@@ -7180,7 +7236,11 @@
         "title": "Andrew of Crete Author of the Great Canon",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=109",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=109",
+        "notes": "Saint Andrew was from Damascus; his parents' names were George and Gregoria. He became a cleric and secretary of Theodore and Patriarch of Jerusalem; from this,",
+        "extended_notes": "Saint Andrew was from Damascus; his parents' names were George and Gregoria. He became a cleric and secretary of Theodore and Patriarch of Jerusalem; from this, he is called \"the Jerusalemite.\" He was present at the Sixth Ecumenical Council in Constantinople, which was convoked in 680 during the reign of Emperor Constantine IV (668-685). He became deacon of the Great church in Constantinople, that is, the Church of the Holy Wisdom of God, then Archbishop of Crete. He reposed in 720 or 723. Beside his other sacred writings, he also composed various hymns, among which is the famous Great Canon, which is chanted during Great Lent (see the Thursday of the Fifth Week of the Fast)."
       },
       {
         "name": "Martha, mother of St. Symeon Stylites the Younger",
@@ -7292,7 +7352,11 @@
         "title": "Thomas the Righteous of Malea",
         "feast_type": "Righteous",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=114",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=114",
+        "notes": "Saint Thomas, though wealthy in material goods, though illustrious for the military trophies he had won in wars against the barbarians, forsook all that he had ",
+        "extended_notes": "Saint Thomas, though wealthy in material goods, though illustrious for the military trophies he had won in wars against the barbarians, forsook all that he had that he might gain Christ, and was led by a pillar of fire to Mount Maleon. By divine grace he wrought wonders, cast out demons, gave sight to the blind, caused springs of water to gush forth, healed many, and while in prayer appeared as a pillar of fire. The century in which he lived is not known."
       },
       {
         "name": "Akakios of Sinai",
@@ -7327,7 +7391,9 @@
         "title": "Theophilos the Myrrhbearer of Pantokrator Monastery",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=116",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=116"
       },
       {
         "name": "Appearance of the Icon of the Most Holy Theotokos of Kazan",
@@ -7460,7 +7526,11 @@
         "title": "Euphemia the Great Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=207",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=207",
+        "notes": "Saint Euphemia was from Chalcedon and lived in virginity. According to some, she suffered martyrdom during the reign of Diocletian, in 303; according to others,",
+        "extended_notes": "Saint Euphemia was from Chalcedon and lived in virginity. According to some, she suffered martyrdom during the reign of Diocletian, in 303; according to others, in 307. Her sacred relics are preserved in the Patriarchate in Constantinople."
       },
       {
         "name": "The All-Praised Olga, Equal-to-the-Apostles, Princess of Kiev",
@@ -7803,7 +7873,11 @@
         "title": "Macrina the Righteous, sister of St. Basil",
         "feast_type": "Righteous",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=133",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=133",
+        "notes": "Saint Macrina, the elder sister of Saints Basil the Great and Gregory of Nyssa, was sought after by many as a bride because of her beauty, wisdom, and illustrio",
+        "extended_notes": "Saint Macrina, the elder sister of Saints Basil the Great and Gregory of Nyssa, was sought after by many as a bride because of her beauty, wisdom, and illustrious birth, and in tender youth was espoused by her parents to a bridegroom of fitting nobility. When her betrothed died, Macrina refused any other suitors, and devoted herself to a life of virginity, asceticism, and prayer. When her brother Basil returned from a brilliant career in the best schools of Constantinople and Athens, puffed up with not a little youthful pride-for knowledge puffeth up-it was the ardent admonitions and holy example of his blessed sister that persuaded him to turn from seeking worldly glory to the service of God. Saint Macrina founded a convent, where she ended her earthly life in the year 379, and was buried by her brother Gregory, who wrote a moving account of her last days and his grief at seeing such a light pass out of the world."
       },
       {
         "name": "Dius, Abbot of Antioch",
@@ -7908,14 +7982,22 @@
         "title": "Phocas the Holy Martyr, Bishop of Sinope",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=137",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=137",
+        "notes": "This saint was known for the many miracles he worked and for his apostolic zeal in shepherding the flock of Sinope. He contested for the Faith during the reign ",
+        "extended_notes": "This saint was known for the many miracles he worked and for his apostolic zeal in shepherding the flock of Sinope. He contested for the Faith during the reign of the Emperor Trajan, in the year 102, when he was burned to death in a bath-house. A homily in his honour was composed by Saint John Chrysostom. The translation of his holy relics is celebrated on July 23."
       },
       {
         "name": "Ezekiel the Prophet",
         "title": "Ezekiel the Prophet",
         "feast_type": "Prophet",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=138",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=138",
+        "notes": "The Prophet Ezekiel (\"God is strong\") was the son of Buzi and a priest by rank. He was taken captive and brought to Babylon during the reign of Jechonias. In th",
+        "extended_notes": "The Prophet Ezekiel (\"God is strong\") was the son of Buzi and a priest by rank. He was taken captive and brought to Babylon during the reign of Jechonias. In the fifth year of this captivity, about 594 or 593 B.C., he began to prophesy. Having prophesied for about twenty-eight years, he was murdered, it is said, by the tribe of Gad, because he reproached them for their idolatry. His book of prophecy, divided into forty-eight chapters, is ranked third among the greater Prophets. It is richly filled with mystical imagery and marvelous prophetic visions and allegories, of which the dread Chariot of Cherubim described in the first Chapter is the most famous; in the \"gate that was shut,\" through which the Lord alone entered, he darkly foretold of the Word's Incarnation from the Virgin (44:1-3); through the \"dry bones\" that came to life again (37:1-14), he prophesied both of the restoration of captive Israel, and the general resurrection of our race."
       },
       {
         "name": "Pelagia the Righteous of Tinos",
@@ -7964,7 +8046,11 @@
         "title": "Christina the Great Martyr of Tyre",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=139",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=139",
+        "notes": "Saint Christina was from Tyre in Syria, the daughter of a pagan named Urban. Enlightened in her heart to believe in Christ, she broke her father's idols, made o",
+        "extended_notes": "Saint Christina was from Tyre in Syria, the daughter of a pagan named Urban. Enlightened in her heart to believe in Christ, she broke her father's idols, made of gold and silver, and distributed the pieces to the poor. When her father learned this, he punished her ruthlessly, then cast her into prison. The rulers subjected her to imprisonments, hunger, torments, the cutting off of her breasts and tongue, and finally impalement, in the year 200, during the reign of the Emperor Septimius Severus."
       },
       {
         "name": "Athenagorus the Apologist",
@@ -8776,7 +8862,9 @@
         "title": "Forefeast of the Dormition of our Most Holy Lady the Theotokos and Ever Virgin Mary",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=164",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=164"
       },
       {
         "name": "The Holy Prophet Michaias",
@@ -8811,7 +8899,11 @@
         "title": "The Dormition of our Most Holy Lady the Theotokos and Ever Virgin Mary",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=165",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=165",
+        "notes": "Concerning the Dormition of the Theotokos, this is what the Church has received from ancient times from the tradition of the Fathers. When the time drew nigh th",
+        "extended_notes": "Concerning the Dormition of the Theotokos, this is what the Church has received from ancient times from the tradition of the Fathers. When the time drew nigh that our Savior was well-pleased to take His Mother to Himself, He declared unto her through an Angel that three days hence, He would translate her from this temporal life to eternity and bliss. On hearing this, she went up with haste to the Mount of Olives, where she prayed continuously. Giving thanks to God, she returned to her house and prepared whatever was necessary for her burial. While these things were taking place, clouds caught up the Apostles from the ends of the earth, where each one happened to be preaching, and brought them at once to the house of the Mother of God, who informed them of the cause of their sudden gathering. As a mother, she consoled them in their affliction as was meet, and then raised her hands to Heaven and prayed for the peace of the world. She blessed the Apostles, and, reclining upon her bed with seemliness, gave up her all-holy spirit into the hands of her Son and God."
       }
     ]
   },
@@ -8825,14 +8917,22 @@
         "title": "Translation of the Image of Our Lord and God and Savior, Jesus Christ",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=167",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=167",
+        "notes": "When the fame of our Lord Jesus Christ came to Abgar, the ruler of Edessa, who was suffering from leprosy, Abgar sent a messenger named Ananias, through him ask",
+        "extended_notes": "When the fame of our Lord Jesus Christ came to Abgar, the ruler of Edessa, who was suffering from leprosy, Abgar sent a messenger named Ananias, through him asking the Savior to heal him of his disease, while bidding Ananias bring back a depiction of Him. When Ananias came to Jerusalem, and was unable to capture the likeness of our Lord, He, the Knower of hearts, asked for water, and having washed His immaculate and divine face, wiped it dry with a certain cloth, which He gave to Ananias to take to Abgar; the form of the Lord's face had been wondrously printed upon the cloth. As soon as Abgar received the cloth, which is called the Holy Napkin (Mandylion), he reverenced it with joy, and was healed of his leprosy; only his forehead remained afflicted. After the Lord's Death, Resurrection, and Ascension, the Apostle Thaddaeus (see Aug. 21) came to Edessa, and when he had baptized Abgar and all his men, Abgar's remaining leprosy also was healed. Abgar had the holy image of our Savior fixed to a board and placed at the city gate, commanding that all who entered the city reverence it as they passed through. Abgar's grandson, however, returned to the worship of the idols, and the Bishop of Edessa learned of his intention to replace the Holy Napkin with an idol. Since the place where it stood above the city gate was a rounded hollow, he set a burning lamp before the Holy Napkin, put a tile facing it, then bricked up the place and smoothed it over, so that the holy icon made without hands was no longer to be seen, and the ungodly ruler gave no further thought to it."
       },
       {
         "name": "Diomedes the Physician & Martyr of Tarsus",
         "title": "Diomedes the Physician & Martyr of Tarsus",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=166",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=166",
+        "notes": "The holy Martyr Diomedes was from Tarsus in Cilicia, a physician who treated bodies with his healing art and souls with his piety. In the days of the Emperor Di",
+        "extended_notes": "The holy Martyr Diomedes was from Tarsus in Cilicia, a physician who treated bodies with his healing art and souls with his piety. In the days of the Emperor Diocletian, about the year 288, Diomedes left Tarsus and came to Nicaea, where he benefited many both as a physician and as a preacher of the Faith. He was accused to Diocletian, who sent men to fetch him. When they arrived, although finding that he had already given up his soul to the Lord, they cut off his head to take it to the Emperor, and because of their inhumanity were stricken with blindness. When Diocletian saw the Saint's head, he commanded them to take it back and put it on the body in its place; when they had done so, they received their sight again. Saint Diomedes is one of the Holy Unmercenaries."
       },
       {
         "name": "Timothy of Euripus, founder of the Monastery of Pentele",
@@ -8916,7 +9016,11 @@
         "title": "Myron the Martyr of Cyzicus",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=168",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=168",
+        "notes": "Saint Myron was a priest during the reign of Decius, when Antipater was ruler of Achaia. On the day of our Lord's Nativity, Antipater entered the church to seiz",
+        "extended_notes": "Saint Myron was a priest during the reign of Decius, when Antipater was ruler of Achaia. On the day of our Lord's Nativity, Antipater entered the church to seize the Christians and punish them. Saint Myron, kindled with holy zeal, roundly insulted Antipater, for which he was hung up and scraped, then cast into a raging furnace, but was preserved unharmed. When Myron refused to worship the idols, Antipater commanded that strips be cut in the Saint's flesh from his shoulders to his feet; the Saint took one of the strips of his flesh and flung it in the tyrant's face. He was beaten, and scraped again upon his beaten flesh; then he was thrown to wild beasts, but when Antipater saw them leaving off their fierce nature and protecting the Saint from harm, he was overcome with unbearable shame and slew himself. The Saint was then sent to Cyzicus, where the proconsul had him beheaded, about the year 250."
       },
       {
         "name": "Straton, Philip, Eutychian, & Cyprian the Martyrs of Nicomedea",
@@ -8965,7 +9069,11 @@
         "title": "Floros & Lauros the Monk-martyrs of Illyria",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=169",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=169",
+        "notes": "These Martyrs were twin brothers, and stonemasons. After the martyrdom of their teachers Proclus and Maximus, they left Byzantium and came to the city of Ulpian",
+        "extended_notes": "These Martyrs were twin brothers, and stonemasons. After the martyrdom of their teachers Proclus and Maximus, they left Byzantium and came to the city of Ulpiana in Illyricum, where a certain Licinius hired them to build a temple for the idols. The wages he gave them, they distributed to the poor, and when the temple was built, Floros and Lauros gathered the paupers, and with their help put ropes about the necks of the idols, pulled them to the ground, and furnished the temple as a church. When Licinius learned of this, he had the paupers burned alive in a furnace. Floros and Lauros were tormented, then cast into a deep well, where they gave up their souls to the Lord. When their holy relics were recovered years later, they poured forth myrrh and worked many miracles; they were enshrined in Constantinople."
       },
       {
         "name": "Leontus the martyr",
@@ -9028,7 +9136,11 @@
         "title": "Andrew the General & Martyr & his 2,593 soldiers",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=170",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=170",
+        "notes": "During the reign of Maximian, about the year 289, Antiochus the Commander-in-Chief of the Roman forces sent Andrew with many other soldiers against the Persians",
+        "extended_notes": "During the reign of Maximian, about the year 289, Antiochus the Commander-in-Chief of the Roman forces sent Andrew with many other soldiers against the Persians, who had overrun the borders of the Roman dominion. Saint Andrew persuaded his men to call upon the Name of Christ, and when they had defeated the Persians with unexpected triumph, his soldiers believed in Christ with him. Antiochus, learning of this, had them brought before him. When they confessed Christ to be God, he had Andrew spread out upon a bed of iron heated fiery hot, and had the hands of his fellow soldiers nailed to blocks of wood. Antiochus then commanded some thousand soldiers to chase the Saints beyond the borders of the empire. Through the instructions of Saint Andrew, these soldiers also believed in Christ. At the command of Antiochus, they were all beheaded in the mountain passes of the Taurus mountains of Cilicia."
       },
       {
         "name": "Holy Martyrs Timothy, Agapius and Thecla",
@@ -9070,7 +9182,11 @@
         "title": "Samuel the Prophet",
         "feast_type": "Prophet",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=171",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=171",
+        "notes": "This most holy man, a Prophet of God from childhood, was the last judge of the Israelite people, and anointed the first two Kings of Israel. He was born in the ",
+        "extended_notes": "This most holy man, a Prophet of God from childhood, was the last judge of the Israelite people, and anointed the first two Kings of Israel. He was born in the twelfth century before Christ, in the city of Armathaim Sipha, from the tribe of Levi, the son of Elkanah and Hannah (Anna). He was the fruit of prayer, for his mother, being barren, conceived him only after she had supplicated the Lord with many tears; wherefore she called him Samuel, that is, \"heard by God.\" As soon as Hannah had weaned him, she brought him to the city of Silom (Shiloh), where the Ark was kept, and she consecrated him, though yet a babe, to the service of God, giving thanks to Him with the hymn found in the Third Ode of the Psalter: \"My heart hath been established in the Lord . . .\" Samuel remained in Silom under the protection of Eli the priest. He served in the Tabernacle of God, and through his most venerable way of life became well-pleasing to God and man (I Kings 2: 26). While yet a child, sleeping in the tabernacle near the Ark of God, he heard the voice of God calling his name, and foretelling the downfall of Eli; for although Eli's two sons, Ophni and Phineas, were most lawless, and despisers of God, Eli did not correct them. Even after Samuel had told Eli of the divine warning, Eli did not properly chastise his sons, and afterwards, through various misfortunes, his whole house was blotted out in one day."
       },
       {
         "name": "Holy Martyr Luke of Bouleutos",
@@ -9672,14 +9788,22 @@
         "title": "Mammas the Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=190",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=190",
+        "notes": "Saint Mammas was from Gangra of Paphlagonia. He was born in prison, where his parents were suffering for Christ's sake and ended their lives. He was named Mamma",
+        "extended_notes": "Saint Mammas was from Gangra of Paphlagonia. He was born in prison, where his parents were suffering for Christ's sake and ended their lives. He was named Mammas because, after he had long remained without speaking, he addressed his foster mother Ammia as \"mamma.\" He contested for Christ about the year 275."
       },
       {
         "name": "John the Abstainer, Patriarch of Constantinople",
         "title": "John the Abstainer, Patriarch of Constantinople",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=189",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=189",
+        "notes": "Saint John became Patriarch during the reign of Tiberius, in the year 582, governed the Church for thirteen years and five months, and reposed in peace in 595. ",
+        "extended_notes": "Saint John became Patriarch during the reign of Tiberius, in the year 582, governed the Church for thirteen years and five months, and reposed in peace in 595. It was during this Patriarch's reign, in the year 586, that the title \"Ecumenical Patriarch,\" not used before this, came to be instituted."
       },
       {
         "name": "Paul, Patriarch of Constantinople",
@@ -9763,14 +9887,22 @@
         "title": "Babylas the Holy Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=193",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=193",
+        "notes": "Saint Babylas was the twelfth Bishop of Antioch, being the successor of Zebinus (or Zebinas); he was beheaded during the reign of Decius, in the year 250, and a",
+        "extended_notes": "Saint Babylas was the twelfth Bishop of Antioch, being the successor of Zebinus (or Zebinas); he was beheaded during the reign of Decius, in the year 250, and at his own request was buried in the chains with which he was bound. The Emperor Gallus (reigned 351-354) built a church in his honour at Daphne, a suburb of Antioch, to put an end to the demonic oracles at the nearby temple of Apollo. When Julian the Apostate came in 362 to consult the oracle about his campaign against the Persians, the oracle (that is, the demon within it) remained dumb until at last, answering Julian's many sacrifices and supplications, it told him, \"The dead prevent me from speaking.\" It told Julian to dig up the bones and move them. Julian, then, in the words of Saint John Chrysostom, \"leaving all the other dead, moved only that Martyr.\" He commanded the Christians to take away Saint Babylas' bones, which they did with great solemnity and triumph. When this had been done, a thunderbolt fell from heaven destroying with fire the shrine of Apollo, which Julian did not dare rebuild. Saint John Chrysostom preached a sermon on this within a generation after."
       },
       {
         "name": "Moses the Prophet & Godseer",
         "title": "Moses the Prophet & Godseer",
         "feast_type": "Prophet",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=192",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=192",
+        "notes": "The Prophet Moses-whose name means \"one who draws forth,\" or \"is drawn from,\" that is, from the water-was the pinnacle of the lovers of wisdom, the supremely wi",
+        "extended_notes": "The Prophet Moses-whose name means \"one who draws forth,\" or \"is drawn from,\" that is, from the water-was the pinnacle of the lovers of wisdom, the supremely wise lawgiver, the most ancient historian of all. He was of the tribe of Levi, the son of Amram and Jochabed (Num. 26:59). He was born in Egypt in the seventeenth century before Christ. While yet a babe of three months, he was placed in a basket made of papyrus and covered with pitch, and cast into the streams of the Nile for fear of Pharaoh's decree to the mid-wives of the Hebrews, that all the male children of the Hebrews be put to death. He was taken up from the river by Pharaoh's daughter, became her adopted son, and was reared and dwelt in the King's palace for forty years. Afterward, when he was some sixty years old, he fled to Madian, where, on Mount Horeb, he saw the vision of the burning bush. Thus he was ordained by God to lead Israel and bring it out of the land of Egypt. He led Israel through the Red Sea as it were dry land and governed the people for forty years. He wrought many signs and wonders, and wrote the first five books of the Old Testament, which are called the Pentateuch. When he reached the land of Moab, he ascended Mount Nabau, on the peak called Phasga, and there, by divine command, he reposed in the sixteenth century before Christ, having lived for some 120 years. The first two Odes of the Old Testament, \"Let us sing to the Lord\" and \"Attend, O heaven, and I will speak,\" were written by him. Of these hymns, the first was chanted by the shore of the Red Sea as soon as the Israelites had crossed it; the second, in the land of Moab, a few days before his repose. The Holy High Priest Aaron was the elder brother of the Holy Prophet Moses. He was appointed by God to serve as the spokesman of Moses before the people, and also before Pharaoh, in Egypt. Afterwards, in the wilderness, he was called to the ministry of the high priesthood, as narrated in the books of Exodus, Leviticus, and Numbers in the Old Testament. The name Aaron means \"enlightened.\""
       },
       {
         "name": "Our Righteous Father Anthimus of Coroucle in Cephallenia",
@@ -9861,14 +9993,20 @@
         "title": "The Forefeast of the Nativity of the Theotokos",
         "feast_type": "Great Feast",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=196",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=196"
       },
       {
         "name": "Sozon the Martyr",
         "title": "Sozon the Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=197",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=197",
+        "notes": "This holy Martyr was a shepherd in Lycaonia. Born a pagan, named Tarasius, he received holy Baptism and was renamed Sozon. Filled with zeal for the truth, he ta",
+        "extended_notes": "This holy Martyr was a shepherd in Lycaonia. Born a pagan, named Tarasius, he received holy Baptism and was renamed Sozon. Filled with zeal for the truth, he taught his countrymen to desist from the worship of idols. Once he entered the temple of Artemis in Pompeiopolis of Cilicia, cut off the golden hand of the idol, and breaking it in pieces, distributed it among the poor. When he saw that many were being unjustly punished for the theft, of his own accord he gave himself up to Maximian the Governor. He was beaten with rods until his bones were broken. According to some, he suffered martyrdom in 288; according to others, in 304."
       },
       {
         "name": "Kassiani the Hymnographer",
@@ -9917,7 +10055,11 @@
         "title": "The Nativity of Our Most Holy Lady the Theotokos and Ever-Virgin Mary",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=198",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=198",
+        "notes": "According to the ancient tradition of the Church, the Theotokos was born of barren and aged parents, Joachim and Anna, about the year 16 or 17 before the birth ",
+        "extended_notes": "According to the ancient tradition of the Church, the Theotokos was born of barren and aged parents, Joachim and Anna, about the year 16 or 17 before the birth of Christ. Joachim was descended from the royal line of David, of the tribe of Judah. Anna was of the priestly tribe of Levi, a daughter of the priest Matthan and Mary, his wife."
       },
       {
         "name": "Sophronios, Bishop of Iberia",
@@ -9938,14 +10080,22 @@
         "title": "The Holy & Righteous Ancestors of God, Joachim and Anna",
         "feast_type": "Righteous",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=201",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=201",
+        "notes": "Today, the day following the Nativity of the most holy Theotokos, we celebrate the synaxis of Saints Joachim and Anna, honouring them as her parents.",
+        "extended_notes": "Today, the day following the Nativity of the most holy Theotokos, we celebrate the synaxis of Saints Joachim and Anna, honouring them as her parents."
       },
       {
         "name": "Severian the Martyr of Sebastia",
         "title": "Severian the Martyr of Sebastia",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=202",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=202",
+        "notes": "Saint Severian, a senator from Sebastia, was both an illustrious man of wealth and a fearless Christian. Because he encouraged the holy Forty Martyrs of Sebasti",
+        "extended_notes": "Saint Severian, a senator from Sebastia, was both an illustrious man of wealth and a fearless Christian. Because he encouraged the holy Forty Martyrs of Sebastia to stand fast in their confession, he was given over to terrible torments, and received his own crown during the reign of Licinius and Lysius the Duke, about the year 315."
       },
       {
         "name": "Theophanes the Confessor",
@@ -9980,7 +10130,11 @@
         "title": "Menodora, Metrodora, & Nymphodora the Martyrs",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=199",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=199",
+        "notes": "These Martyrs, sisters according to the flesh, were from Bithynia. They lived in virginity on a mountain near the Pythian hot springs of Bithynia, devoting them",
+        "extended_notes": "These Martyrs, sisters according to the flesh, were from Bithynia. They lived in virginity on a mountain near the Pythian hot springs of Bithynia, devoting themselves to asceticism and prayer. Betrayed to the local governor, Fronto, they were subjected to frightful tortures, and so gave up their holy souls into the hands of God. They contested for the Faith during the reign of Maximian, in the year 304."
       },
       {
         "name": "Poulcheria the Empress",
@@ -10015,7 +10169,11 @@
         "title": "Theodora of Alexandria",
         "feast_type": "Saint",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=200",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=200",
+        "notes": "This saint lived in the fifth century. Out of remorse for the adultery that she committed with another man, she fled from her husband's house, renamed herself T",
+        "extended_notes": "This saint lived in the fifth century. Out of remorse for the adultery that she committed with another man, she fled from her husband's house, renamed herself Theodore, clothed herself as a man, and pretending to be a eunuch, entered a monastery of men. Her identity as a woman was discovered only after her death."
       },
       {
         "name": "Euphrosynos the Cook",
@@ -10134,7 +10292,11 @@
         "title": "Cornelius the Centurion & Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=204",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=204",
+        "notes": "Saint Cornelius was a Roman by race, a pagan by religion, a centurion in rank, an inhabitant of Caesarea of Palestine, a man pious and God-fearing who gave many",
+        "extended_notes": "Saint Cornelius was a Roman by race, a pagan by religion, a centurion in rank, an inhabitant of Caesarea of Palestine, a man pious and God-fearing who gave many alms to the people and prayed continually unto God. In accordance with an angelic vision granted to him, he sent to Joppa that they might bring the Apostle Peter. Saint Peter catechized him in the Faith of Christ and baptized all his household (Acts, ch.10). This became the beginning and the first fruits of the calling of the nations. It is said that, after this, he became a bishop, as some say, of Caesarea; but others say of Scepsis, which is not far from Troas; and that he died as a martyr."
       },
       {
         "name": "Aristides the Philosopher",
@@ -10162,7 +10324,11 @@
         "title": "The Elevation of the Venerable and Life-Giving Cross",
         "feast_type": "Venerable",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=205",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=205",
+        "notes": "Saint Helen, the mother of Saint Constantine the Great, when she was already advanced in years, undertook, in her great piety, the hardships of a journey to Jer",
+        "extended_notes": "Saint Helen, the mother of Saint Constantine the Great, when she was already advanced in years, undertook, in her great piety, the hardships of a journey to Jerusalem in search of the cross, about the year 325. A temple to Aphrodite had been raised up by the Emperor Hadrian upon Golgotha, to defile and cover with oblivion the place where the saving Passion had been suffered. The venerable Helen had the statue of Aphrodite destroyed, and the earth removed, revealing the Tomb of our Lord, and three crosses. Of these, it was believed that one must be that of our Lord, the other two of the thieves crucified with Him; but Saint Helen was at a loss which one might be the Wood of our salvation. At the inspiration of Saint Macarius, Archbishop of Jerusalem, a lady of Jerusalem, who was already at the point of death from a certain disease, was brought to touch the crosses, and as soon as she came near to the Cross of our Lord, she was made perfectly whole. Consequently, the precious Cross was lifted on high by Archbishop Macarius of Jerusalem; as he stood on the ambo, and when the people beheld it, they cried out, \"Lord have mercy.\" It should be noted that after its discovery, a portion of the venerable Cross was taken to Constantinople as a blessing. The rest was left in Jerusalem in the magnificent church built by Saint Helen, until the year 614. At that time, the Persians plundered Palestine and took the Cross to their own country (see Jan. 22, Saint Anastasius the Persian). Late, in the year 628, Emperor Heraclius set out on a military campaign, retrieved the Cross, and after bringing it to Constantinople, himself escorted it back to Jerusalem, where he restored it to its place."
       },
       {
         "name": "Commemoration of the 6th Ecumenical Council",
@@ -10183,7 +10349,11 @@
         "title": "Nikitas the Great Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=206",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=206",
+        "notes": "This Saint was of high birth among the Goths beyond the Danube River. He was taken by Athanaric, pagan ruler of the Goths, and after being tortured, was burned ",
+        "extended_notes": "This Saint was of high birth among the Goths beyond the Danube River. He was taken by Athanaric, pagan ruler of the Goths, and after being tortured, was burned to death for his confession of Christ. According to some, this took place during the reign of Saint Constantine the Great; according to others, under the Emperor Gratian."
       },
       {
         "name": "Philotheos the Righteous",
@@ -10239,7 +10409,11 @@
         "title": "Euphemia the Great Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=207",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=207",
+        "notes": "Saint Euphemia was from Chalcedon and lived in virginity. According to some, she suffered martyrdom during the reign of Diocletian, in 303; according to others,",
+        "extended_notes": "Saint Euphemia was from Chalcedon and lived in virginity. According to some, she suffered martyrdom during the reign of Diocletian, in 303; according to others, in 307. Her sacred relics are preserved in the Patriarchate in Constantinople."
       },
       {
         "name": "Sebastiana, Disciple of St. Paul the Apostle",
@@ -10491,7 +10665,11 @@
         "title": "Phocas the Martyr, Bishop of Sinope",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=137",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=137",
+        "notes": "This saint was known for the many miracles he worked and for his apostolic zeal in shepherding the flock of Sinope. He contested for the Faith during the reign ",
+        "extended_notes": "This saint was known for the many miracles he worked and for his apostolic zeal in shepherding the flock of Sinope. He contested for the Faith during the reign of the Emperor Trajan, in the year 102, when he was burned to death in a bath-house. A homily in his honour was composed by Saint John Chrysostom. The translation of his holy relics is celebrated on July 23."
       },
       {
         "name": "Phocas the Gardener",
@@ -11443,7 +11621,9 @@
         "title": "Marinos the Martyr",
         "feast_type": "Martyr",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
-        "canonization_scope": "universal"
+        "canonization_scope": "universal",
+        "goarch_url": "https://www.goarch.org/chapel/saints?contentid=2027",
+        "hagiography_url": "https://www.goarch.org/chapel/saints?contentid=2027"
       }
     ]
   },
