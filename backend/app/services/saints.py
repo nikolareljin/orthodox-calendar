@@ -340,10 +340,15 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.notes = overlay.notes
     # Overlay notes become extended_notes when base has none — this lets the
     # neobyzantine_hagiographies.json notes surface at /hagiography as curated content.
+    # Track provenance so _format_hagiography_response can label the source correctly.
     if overlay.notes and not base.extended_notes:
         base.extended_notes = overlay.notes
+        if overlay.neobyzantine_actor_slug or overlay.neobyzantine_url:
+            base.extended_notes_source = "neobyzantine"
     if overlay.extended_notes and not base.extended_notes:
         base.extended_notes = overlay.extended_notes
+        if overlay.neobyzantine_actor_slug or overlay.neobyzantine_url:
+            base.extended_notes_source = "neobyzantine"
     if overlay.canonized_by and not base.canonized_by:
         base.canonized_by = overlay.canonized_by
     if overlay.canonization_scope and not base.canonization_scope:
@@ -644,7 +649,7 @@ def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
     # OCA dataset stores hagiography text in notes alongside an oca.org URL;
     # check the URL hostname so those entries report source=oca, not notes.
     if saint.extended_notes:
-        source = "goarch"
+        source = saint.extended_notes_source or "goarch"
     elif saint.notes and "oca.org" in oca_url:
         source = "oca"
     elif saint.notes:

@@ -193,7 +193,7 @@ export const WORLD_CHURCHES = [
     subtitle: "East Syriac tradition",
     symbol: "✝",
     churches: [
-      { name: "Assyrian Church of the East",                 url: "https://www.assyrianchurch.org",            lat: 33.886,  lng: -84.468, seat: "Morton Grove, IL" },
+      { name: "Assyrian Church of the East",                 url: "https://www.assyrianchurch.org",            lat: 36.191,  lng: 44.009,  seat: "Erbil, Iraq" },
       { name: "Ancient Church of the East",                  url: "https://ancientchurchoftheeast.org",        lat: 33.341,  lng: 44.401,  seat: "Baghdad" },
     ],
   },
