@@ -4,6 +4,8 @@ Open-source liturgical calendar for all canonical Orthodox and Oriental Orthodox
 
 [![Support on Ko-fi](https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/nikolareljin)
 
+👉 See it motion: https://nikolareljin.github.io/orthodox-calendar/ 👈
+
 ## Screenshots
 
 <table>
