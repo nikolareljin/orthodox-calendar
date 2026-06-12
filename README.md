@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="docs/header.svg" alt="Orthodox Calendar" width="900"/>
+</p>
+
 # Orthodox Calendar
 
 Open-source liturgical calendar for all canonical Orthodox and Oriental Orthodox churches, with saints, hagiographies, fasting rules, and Epistle/Gospel readings for every day of the year.
