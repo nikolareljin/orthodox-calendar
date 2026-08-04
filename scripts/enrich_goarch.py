@@ -43,7 +43,7 @@ from pathlib import Path
 # ---------------------------------------------------------------------------
 
 sys.path.insert(0, str(Path(__file__).parent))
-from _name_utils import saint_keys, normalize  # noqa: E402
+from _name_utils import saint_keys  # noqa: E402
 
 
 # ---------------------------------------------------------------------------

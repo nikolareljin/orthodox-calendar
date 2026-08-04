@@ -116,7 +116,6 @@ delete window.__pw_manual;
 # for those cases, or handle them manually after the initial import.
 # ---------------------------------------------------------------------------
 
-from datetime import date as _date, timedelta as _td
 
 
 def gregorian_to_julian_mm_dd(month: int, day: int, year: int = 2024) -> str:
@@ -126,7 +125,6 @@ def gregorian_to_julian_mm_dd(month: int, day: int, year: int = 2024) -> str:
     etc.), so the offset is computed from the year via Julian Day Number arithmetic
     rather than being hardcoded.
     """
-    greg = _date(year, month, day)
     # Gregorian JDN
     a = (14 - month) // 12
     y = year + 4800 - a

@@ -177,7 +177,7 @@ def main() -> None:
                 entries.append(entry)
                 print(f"  02-29 (Julian leap day): {len(entry['saints'])} saints", file=sys.stderr)
             else:
-                print(f"  02-29: no Russian-specific saints", file=sys.stderr)
+                print("  02-29: no Russian-specific saints", file=sys.stderr)
         except Exception as exc:
             print(f"  02-29: ERROR — {exc}", file=sys.stderr)
             errors += 1
