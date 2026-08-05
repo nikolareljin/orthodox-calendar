@@ -114,7 +114,7 @@ def scrape_official_site() -> list[dict]:
         start = max(0, m.start() - 200)
         context = text[start:m.start()].strip()
         # Last non-empty line before the date
-        lines = [l.strip() for l in context.split("\n") if l.strip()]
+        lines = [line.strip() for line in context.split("\n") if line.strip()]
         name = lines[-1] if lines else gregorian_text
 
         name = re.sub(r"\s+", " ", name).strip()

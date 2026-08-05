@@ -1,0 +1,33 @@
+# The rule *selection*. Half of what makes this gate deterministic.
+#
+# There was no configuration here, so the rule set was whatever the newest ruff
+# release happened to default to. That is why the gate broke without anybody
+# touching the code: ruff 0.16 turned on pyupgrade and flake8-bugbear, and 366
+# findings appeared in a repository that had been green. A linter whose rules
+# change underneath you is not a gate.
+#
+# This file alone is not enough, and saying otherwise would be the same mistake
+# in a different place: it fixes which rules run, not which ruff runs, and a new
+# release can still change what an already-selected rule flags. The tool version
+# is pinned alongside it in .github/workflows/{ci,pr-gate}.yml via
+# `lint_command`. Both have to move together, and each move is then a deliberate
+# change with its own review.
+#
+# What follows is ruff's own historical default selection, written down.
+target-version = "py312"
+
+[lint]
+select = ["E4", "E7", "E9", "F"]
+
+# Deliberately not selected:
+#
+#   B008  flags FastAPI's `def endpoint(x = Query(...))`, which is the
+#         framework's entire dependency-injection idiom. Enabling it would
+#         have the linter argue with the framework.
+#   UP    the pyupgrade rules are worth adopting -- typing.Tuple for tuple and
+#         so on -- but that is a 245-file change and belongs in a pull request
+#         about modernising annotations, not one about a CI pin.
+
+[lint.per-file-ignores]
+# Import scripts run top to bottom and are read that way.
+"scripts/*" = ["E402"]

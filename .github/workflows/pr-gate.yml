@@ -66,6 +66,33 @@ jobs:
     with:
       working_directory: backend
       python_version: "3.12"
+      # Pinned. ruff.toml fixes the rule *selection*; this fixes the tool.
+      # Without both, a new ruff release can still change what existing
+      # rules flag and break a gate nobody touched -- which is exactly how
+      # 366 findings appeared here in a green repository.
+      lint_command: "python -m pip install ruff==0.16.1 && ruff check ."
+
+  # scripts/ was covered by nothing.
+  #
+  # backend-scan is scoped to working_directory: backend, so `ruff check .` and
+  # pytest both stop at that directory. scripts/ holds the import pipeline --
+  # the code that decides which saint lands on which day -- plus 19 tests that
+  # no job has ever run. The `scripts/*` entry in ruff.toml was dead config for
+  # the same reason: nothing linted the path it names.
+  #
+  # A green tick that covers half a repository is worse than a red one, because
+  # it gets trusted.
+  scripts-scan:
+    needs: changes
+    if: needs.changes.outputs.run_scans == 'true'
+    uses: nikolareljin/ci-helpers/.github/workflows/python-scan.yml@production
+    with:
+      working_directory: .
+      python_version: "3.12"
+      install_command: "python -m pip install pytest"
+      # Same pin as backend-scan; the two must move together.
+      lint_command: "python -m pip install ruff==0.16.1 && ruff check scripts/"
+      unit_command: "python -m pytest scripts/tests -q"
 
   data-safety:
     needs: changes
@@ -74,12 +101,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - uses: nikolareljin/ci-helpers/.github/actions/data-safety-scan@0.9.0
+      - uses: nikolareljin/ci-helpers/.github/actions/data-safety-scan@production
         with:
           scan_path: backend/app/data
 
   pr-gate:
-    needs: [changes, gitleaks, frontend-scan, backend-scan, data-safety]
+    needs: [changes, gitleaks, frontend-scan, backend-scan, scripts-scan, data-safety]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -90,6 +117,7 @@ jobs:
           GITLEAKS_RESULT: ${{ needs.gitleaks.result }}
           FRONTEND_RESULT: ${{ needs.frontend-scan.result }}
           BACKEND_RESULT: ${{ needs.backend-scan.result }}
+          SCRIPTS_RESULT: ${{ needs.scripts-scan.result }}
           DATA_SAFETY_RESULT: ${{ needs.data-safety.result }}
         shell: bash
         run: |
@@ -104,6 +132,7 @@ jobs:
             "$GITLEAKS_RESULT" \
             "$FRONTEND_RESULT" \
             "$BACKEND_RESULT" \
+            "$SCRIPTS_RESULT" \
             "$DATA_SAFETY_RESULT"; do
             [[ "$result" == "success" ]] || exit 1
           done

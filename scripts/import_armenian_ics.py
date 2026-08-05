@@ -446,7 +446,7 @@ def main() -> None:
             print(f"  {md}: {name_en[:60]}", file=sys.stderr)
             if name_hy:
                 print(f"       {name_hy[:60]}", file=sys.stderr)
-        print(f"\n  (dry-run — no file written)", file=sys.stderr)
+        print("\n  (dry-run — no file written)", file=sys.stderr)
         return
 
     enrichment: dict[str, dict] = {}
