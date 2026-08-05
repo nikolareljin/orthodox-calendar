@@ -31,6 +31,11 @@ jobs:
     with:
       working_directory: backend
       python_version: "3.12"
+      # Pinned. ruff.toml fixes the rule *selection*; this fixes the tool.
+      # Without both, a new ruff release can still change what existing
+      # rules flag and break a gate nobody touched -- which is exactly how
+      # 366 findings appeared here in a green repository.
+      lint_command: "python -m pip install ruff==0.16.1 && ruff check ."
 
   data-safety:
     runs-on: ubuntu-latest

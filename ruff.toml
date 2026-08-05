@@ -1,14 +1,19 @@
-# Pinned so the gate is deterministic.
+# The rule *selection*. Half of what makes this gate deterministic.
 #
-# There was no configuration here and pr-gate installs ruff unpinned, so the
-# rule set was whatever the newest release happened to default to. That is why
-# this gate broke without anybody touching the code: ruff 0.16 turned on
-# pyupgrade and flake8-bugbear, and 366 findings appeared in a repository that
-# had been green. A linter whose rules change underneath you is not a gate.
+# There was no configuration here, so the rule set was whatever the newest ruff
+# release happened to default to. That is why the gate broke without anybody
+# touching the code: ruff 0.16 turned on pyupgrade and flake8-bugbear, and 366
+# findings appeared in a repository that had been green. A linter whose rules
+# change underneath you is not a gate.
 #
-# This is ruff's own historical default selection, written down. The gate now
-# fails when the code changes rather than when a tool ships, and widening the
-# selection becomes a deliberate change with its own review.
+# This file alone is not enough, and saying otherwise would be the same mistake
+# in a different place: it fixes which rules run, not which ruff runs, and a new
+# release can still change what an already-selected rule flags. The tool version
+# is pinned alongside it in .github/workflows/{ci,pr-gate}.yml via
+# `lint_command`. Both have to move together, and each move is then a deliberate
+# change with its own review.
+#
+# What follows is ruff's own historical default selection, written down.
 target-version = "py312"
 
 [lint]
