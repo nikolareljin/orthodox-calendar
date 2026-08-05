@@ -24,6 +24,7 @@ import re
 import sys
 import time
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 try:
@@ -125,6 +126,19 @@ def gregorian_to_julian_mm_dd(month: int, day: int, year: int = 2024) -> str:
     etc.), so the offset is computed from the year via Julian Day Number arithmetic
     rather than being hardcoded.
     """
+    # Reject an impossible civil date before converting it.
+    #
+    # The month and day here come from scraped GOARCH URLs, so 02-30 and 13-01
+    # are reachable inputs. The JDN arithmetic below is pure integer maths: it
+    # accepts them happily and returns a plausible-looking wrong answer, which
+    # would file saints under a date nobody could trace back.
+    #
+    # This validation used to happen by accident, as a side effect of an unused
+    # `greg = date(...)` assignment. Removing that unused variable to satisfy
+    # the linter silently removed the check with it, so it is spelled out here
+    # as the deliberate thing it always was.
+    date(year, month, day)
+
     # Gregorian JDN
     a = (14 - month) // 12
     y = year + 4800 - a
