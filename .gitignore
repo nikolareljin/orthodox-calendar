@@ -2,6 +2,7 @@
 scripts/goarch_raw.json
 backend/app/data/goarch_hagiographies.json
 scripts/.goarch-profile/
+scripts/goarch_hagio_cache.json
 .venv-import/
 
 # Local overrides — never commit secrets
@@ -24,3 +25,4 @@ frontend/dist/
 # Ignore Claude memory files outside the repo root
 CLAUDE.md
 !/CLAUDE.md
+docs/traffic/*

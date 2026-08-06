@@ -43,6 +43,17 @@ class Saint(BaseModel):
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
     canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental" | "church-of-the-east"
     year_canonized: Optional[int] = None    # e.g. 2010
+    neobyzantine_url: Optional[str] = None  # link to neobyzantine.org/actors/{slug} (Phase 10)
+    neobyzantine_actor_slug: Optional[str] = Field(
+        default=None,
+        exclude=True,  # internal linking key; not exposed in list responses
+        description="neobyzantine-org Actor slug for cross-linking, populated from neobyzantine_hagiographies.json.",
+    )
+    extended_notes_source: Optional[str] = Field(
+        default=None,
+        exclude=True,  # internal provenance tag; not exposed in API responses
+        description="Tracks where extended_notes was populated from (e.g. 'neobyzantine', 'goarch').",
+    )
 
 
 class CalendarEntry(BaseModel):
@@ -86,7 +97,7 @@ class HagiographyResponse(BaseModel):
     hagiography: Optional[str] = None
     goarch_url: Optional[str] = None
     hagiography_url: Optional[str] = None
-    source: Literal["goarch", "oca", "notes", "not_found"]
+    source: Literal["goarch", "neobyzantine", "oca", "notes", "not_found"]
 
 
 class MovableFeastsResponse(BaseModel):

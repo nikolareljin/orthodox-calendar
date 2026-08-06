@@ -9,6 +9,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.7.0] - 2026-05-29
+
+### Added
+- `neobyzantine_url` and `neobyzantine_actor_slug` fields on `Saint` model — links saints to neobyzantine.org actor pages
+- `_apply_overlay()` now propagates overlay `notes` as `extended_notes`, surfacing `neobyzantine_hagiographies.json` curated content at `/hagiography` endpoint
+- `SaintCard` frontend component shows "Learn more on NeoByzantine.org →" link (Byzantine gold `#CFB53B`) when `neobyzantine_url` is present
+- `lat`, `lng`, `seat` coordinates added to all 40+ `WORLD_CHURCHES` entries (patriarchal see coordinates, WGS84) — groundwork for future map view
+- `scripts/sync-neobyzantine.py` — syncs exported `saints-links.json` from neobyzantine-org into `neobyzantine_hagiographies.json`; `--dry-run` supported
+
+### Changed
+- `scripts/script-helpers` updated to 0.13.0
+
+---
+
 ## [0.5.0] - 2026-05-19
 
 ### Added
