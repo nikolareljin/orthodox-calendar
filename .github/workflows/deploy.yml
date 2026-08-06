@@ -164,7 +164,7 @@ jobs:
     concurrency:
       group: release-tag
       cancel-in-progress: false
-    uses: nikolareljin/ci-helpers/.github/workflows/auto-tag-release.yml@production
+    uses: nikolareljin/ci-helpers/.github/workflows/auto-tag.yml@production
     with:
       update_production_tag: false
 
