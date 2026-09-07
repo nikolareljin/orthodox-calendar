@@ -137,3 +137,35 @@ def test_passion_bearer_is_not_the_passion():
 def test_martyrdom_rules_still_outrank_the_feast_rules():
     assert igi._feast_type("Hieromartyr Ignatius, Bishop of Antioch") == "Hieromartyr"
     assert igi._feast_type("Martyr Stephen at the Nativity") == "Martyr"
+
+
+def test_dedup_key_ignores_punctuation_and_case():
+    assert igi._dedup_key("Basil, the Great") == igi._dedup_key("Basil the Great")
+    assert igi._dedup_key("BASIL THE GREAT") == igi._dedup_key("basil the great")
+
+
+def test_dedup_key_and_saint_key_agree():
+    # merge_entries dedups against existing data with _saint_key, and
+    # events_to_entries dedups within a day; they must not disagree.
+    saint = {"name": "Basil, the Great"}
+    assert igi._saint_key(saint) == igi._dedup_key(saint["name"])
+
+
+def test_same_saint_with_varied_punctuation_appears_once():
+    events = [{
+        "month_day": "01-01",
+        "summary": "",
+        "saints": ["Basil the Great", "Basil, the Great", "Basil  the  Great"],
+    }]
+    (entry,) = igi.events_to_entries(events)
+    assert len(entry["saints"]) == 1
+
+
+def test_distinct_saints_on_a_day_are_kept():
+    events = [{
+        "month_day": "01-01",
+        "summary": "",
+        "saints": ["Basil the Great", "Gregory the Theologian"],
+    }]
+    (entry,) = igi.events_to_entries(events)
+    assert len(entry["saints"]) == 2

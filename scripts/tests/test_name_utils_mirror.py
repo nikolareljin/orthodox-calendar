@@ -18,7 +18,7 @@ _BACKEND_SAINTS = Path(__file__).resolve().parents[2] / "backend" / "app" / "ser
 
 
 def _backend_module() -> ast.Module:
-    return ast.parse(_BACKEND_SAINTS.read_text())
+    return ast.parse(_BACKEND_SAINTS.read_text(encoding="utf-8"))
 
 
 def _assigned_value(name: str) -> ast.expr:

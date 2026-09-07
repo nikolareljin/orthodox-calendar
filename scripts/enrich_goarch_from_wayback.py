@@ -216,7 +216,7 @@ def crawl(contentids: list[int], cache_path: Path, delay: float) -> dict:
     """Fetch all contentids and save cache. Returns {contentid: entry}."""
     existing: dict = {}
     if cache_path.exists():
-        existing = json.loads(cache_path.read_text())
+        existing = json.loads(cache_path.read_text(encoding="utf-8"))
         print(f"Loaded {len(existing)} existing cache entries from {cache_path}", file=sys.stderr)
 
     # Direct timestamp URLs never redirect to live GOARCH, so a timestamp map is
@@ -224,7 +224,7 @@ def crawl(contentids: list[int], cache_path: Path, delay: float) -> dict:
     cdx_ts: dict[str, str] = {}
     for f in _cdx_search_paths():
         if f.exists():
-            raw = json.loads(f.read_text())
+            raw = json.loads(f.read_text(encoding="utf-8"))
             cdx_ts = {cid: v["timestamp"] for cid, v in raw.items()}
             print(f"Loaded {len(cdx_ts)} CDX timestamps from {f}", file=sys.stderr)
             break
@@ -243,11 +243,11 @@ def crawl(contentids: list[int], cache_path: Path, delay: float) -> dict:
             print(f"  [{i}/{len(to_fetch)}] {cid}: (not found)", file=sys.stderr)
 
         if i % 20 == 0:  # checkpoint every 20 entries
-            cache_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
+            cache_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
 
         time.sleep(delay)
 
-    cache_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2))
+    cache_path.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
     valid = {k: v for k, v in existing.items() if v}
     print(f"Cache: {len(valid)} valid entries → {cache_path}", file=sys.stderr)
     return existing
@@ -259,7 +259,7 @@ def crawl(contentids: list[int], cache_path: Path, delay: float) -> dict:
 
 def enrich(cache: dict, greek_path: Path, dry_run: bool = False) -> None:
     """Match cache entries against greek_saints.json and fill in GOARCH data."""
-    greek = json.loads(greek_path.read_text())
+    greek = json.loads(greek_path.read_text(encoding="utf-8"))
 
     # Build normalized name index from cache
     # {norm_key: entry}
@@ -308,7 +308,7 @@ def enrich(cache: dict, greek_path: Path, dry_run: bool = False) -> None:
     print(f"Matched {matched}/{total_needing_url} saints with GOARCH data", file=sys.stderr)
 
     if not dry_run:
-        greek_path.write_text(json.dumps(greek, ensure_ascii=False, indent=2))
+        greek_path.write_text(json.dumps(greek, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"Wrote → {greek_path}", file=sys.stderr)
 
 
@@ -336,14 +336,14 @@ def main() -> None:
         if not cids_file.exists():
             print(f"ERROR: contentids file not found: {cids_file}", file=sys.stderr)
             sys.exit(1)
-        contentids = [int(line.strip()) for line in cids_file.read_text().splitlines() if line.strip().isdigit()]
+        contentids = [int(line.strip()) for line in cids_file.read_text(encoding="utf-8").splitlines() if line.strip().isdigit()]
         print(f"Loaded {len(contentids)} contentids from {cids_file}", file=sys.stderr)
         cache = crawl(contentids, cache_path, args.delay)
     else:
         if not cache_path.exists():
             print(f"ERROR: cache not found: {cache_path}", file=sys.stderr)
             sys.exit(1)
-        cache = json.loads(cache_path.read_text())
+        cache = json.loads(cache_path.read_text(encoding="utf-8"))
         print(f"Loaded {len(cache)} cache entries", file=sys.stderr)
 
     if not args.crawl_only:

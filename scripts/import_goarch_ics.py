@@ -222,6 +222,18 @@ def _clean_title(name: str) -> str:
 # Convert events → greek_saints.json entries
 # ---------------------------------------------------------------------------
 
+def _dedup_key(name: str) -> str:
+    """Lowercase, letters only -- the key both dedup passes use.
+
+    Punctuation and spacing vary between ICS rows for the same commemoration
+    ("Basil, the Great" vs "Basil the Great"), so a bare name.lower() let the
+    same saint through twice within a day. events_to_entries and merge_entries
+    share this so a saint deduped inside a day and one deduped against existing
+    data cannot disagree.
+    """
+    return re.sub(r"[^a-z]", "", name.lower())
+
+
 def events_to_entries(events: list[dict]) -> list[dict]:
     """Convert parsed ICS events to the greek_saints.json entry format."""
     by_md: dict[str, list[dict]] = {}
@@ -237,8 +249,8 @@ def events_to_entries(events: list[dict]) -> list[dict]:
             name = _clean_name(saint_name)
             if not name or len(name) < 3:
                 continue
-            norm = name.lower()
-            if norm in seen_names:
+            norm = _dedup_key(name)
+            if not norm or norm in seen_names:
                 continue
             seen_names.add(norm)
 
@@ -271,8 +283,7 @@ def events_to_entries(events: list[dict]) -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def _saint_key(s: dict) -> str:
-    name = (s.get("name") or s.get("title") or "").lower()
-    return re.sub(r"[^a-z]", "", name)
+    return _dedup_key(s.get("name") or s.get("title") or "")
 
 
 def merge_entries(existing: list[dict], new: list[dict]) -> list[dict]:

@@ -95,6 +95,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   scripts that write the data produced `basil` where the service that reads it produced
   `basil great`. `scripts/tests/test_name_utils_mirror.py` now fails if they drift again.
 - Corrected a comment pointing at `backend/_name_utils.py`, a path that does not exist.
+- `events_to_entries()` deduplicates saints with the same key `merge_entries()` uses.
+  It compared raw `name.lower()`, so "Basil, the Great" and "Basil the Great" could both
+  land on one day, and the two passes could disagree about whether a saint was already
+  present.
+- Every `read_text`/`write_text` in the import and enrichment scripts names `utf-8`.
+  They defaulted to the platform encoding, which under a POSIX locale is ASCII — so
+  writing `greek_saints.json` with `ensure_ascii=False` raised `UnicodeEncodeError` on the
+  Greek names the scripts exist to produce.
 
 ---
 

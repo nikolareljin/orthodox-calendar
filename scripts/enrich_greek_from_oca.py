@@ -154,8 +154,8 @@ def enrich(
     dry_run: bool = False,
     min_score: float = DEFAULT_MIN_SCORE,
 ) -> None:
-    greek = json.loads(greek_path.read_text())
-    oca = json.loads(oca_path.read_text())
+    greek = json.loads(greek_path.read_text(encoding="utf-8"))
+    oca = json.loads(oca_path.read_text(encoding="utf-8"))
 
     # Index OCA by month_day for fast lookup.
     # Both Revised Julian (Greek) and Julian (OCA) share the same nominal month-day
@@ -246,7 +246,7 @@ def enrich(
     print(f"Still unmatched: {unmatched}", file=sys.stderr)
 
     if not dry_run:
-        greek_path.write_text(json.dumps(greek, ensure_ascii=False, indent=2))
+        greek_path.write_text(json.dumps(greek, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f"Wrote → {greek_path}", file=sys.stderr)
 
 
