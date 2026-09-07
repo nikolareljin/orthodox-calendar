@@ -150,13 +150,28 @@ _FEAST_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bprophet\b|\bprophetess\b", re.I), "Prophet"),
     (re.compile(r"\barchbishop\b|\bpatriarch\b|\bmetropolitan\b|\bbishop\b", re.I), "Hierarch"),
     (re.compile(r"\bpriest\b|\bdeacon\b|\bhierodeacon\b", re.I), "Priest"),
-    (re.compile(r"\bsaint\b|\bst\.\b|\bholy\b", re.I), "Saint"),
+    # Forefeast, Afterfeast and Apodosis days attend a Great Feast without being
+    # one, and they name the feast they attend ("Afterfeast of the Dormition"),
+    # so they must be tested before the Great Feast pattern. "Great Feast" drives
+    # calendar highlighting in the frontend (App.jsx getDayClass); without this
+    # rule the eight afterfeast days of the Dormition would each light up as a
+    # Great Feast. "Feast" is the existing type for these days.
+    # "Leavetaking" is the spelling GOARCH actually uses; the hyphen and space
+    # are allowed because other sources write "leave-taking" / "leave taking".
+    (re.compile(r"\bforefeast\b|\bafterfeast\b|\bapodosis\b|\bleave[- ]?taking\b", re.I), "Feast"),
+    # Before the generic "Saint" rule, which matches \bholy\b: the Dormition is
+    # titled "our Most Holy Lady the Theotokos ...", so first-match ordering was
+    # classifying the feast itself as a plain Saint.
     (re.compile(
         r"\btransfiguration\b|\bassumption\b|\bnativity\b|\bpresentation\b"
         r"|\bannunciation\b|\bdormition\b|\btheophany\b|\bpentecost\b"
-        r"|\beaster\b|\bpassion\b|\bpalm sunday\b|\bexaltation\b|\bcircumcision\b",
+        # "passion" excludes "Passion-bearer", a martyr category (Boris and Gleb)
+        # rather than the Passion of Christ.
+        r"|\beaster\b|\bpassion\b(?![- ]?bearer)|\bpalm sunday\b|\bexaltation\b"
+        r"|\bcircumcision\b",
         re.I,
     ), "Great Feast"),
+    (re.compile(r"\bsaint\b|\bst\.\b|\bholy\b", re.I), "Saint"),
 ]
 
 _TITLE_PREFIXES_TO_STRIP = re.compile(

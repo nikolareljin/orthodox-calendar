@@ -100,3 +100,40 @@ def test_existing_hierarch_and_priest_terms_still_classify():
 def test_martyr_still_outranks_hierarch():
     # _FEAST_TYPE_RULES is first-match; the martyrdom rules come first.
     assert igi._feast_type("Hieromartyr Ignatius, Bishop of Antioch") == "Hieromartyr"
+
+
+def test_great_feast_beats_the_generic_saint_rule():
+    # _FEAST_TYPE_RULES is first-match and the Saint rule matches \bholy\b, so
+    # "our Most Holy Lady the Theotokos" was classifying the feast as a Saint.
+    assert igi._feast_type(
+        "The Dormition of our Most Holy Lady the Theotokos and Ever Virgin Mary"
+    ) == "Great Feast"
+    assert igi._feast_type("The Holy Theophany of Our Lord") == "Great Feast"
+
+
+def test_attendant_days_are_not_great_feasts():
+    # These name the feast they attend, so they match the Great Feast pattern
+    # too. "Great Feast" drives calendar highlighting, so the eight afterfeast
+    # days of the Dormition must not each light up as one.
+    for name in (
+        "Forefeast of the Dormition of our Most Holy Lady the Theotokos",
+        "Afterfeast of the Transfiguration of our Lord and Savior Jesus Christ",
+        "Apodosis of the Nativity of Our Lord and Savior, Jesus Christ",
+        "Leavetaking of the Theophany of Our Lord and Saviour Jesus Christ",
+    ):
+        assert igi._feast_type(name) == "Feast", name
+
+
+def test_leavetaking_spelling_variants_all_match():
+    for variant in ("Leavetaking", "Leave-taking", "Leave taking"):
+        assert igi._feast_type(f"{variant} of the Theophany") == "Feast", variant
+
+
+def test_passion_bearer_is_not_the_passion():
+    # "Passion-bearer" is a martyr category, not the Passion of Christ.
+    assert igi._feast_type("Boris and Gleb, the Passion-bearers") == "Saint"
+
+
+def test_martyrdom_rules_still_outrank_the_feast_rules():
+    assert igi._feast_type("Hieromartyr Ignatius, Bishop of Antioch") == "Hieromartyr"
+    assert igi._feast_type("Martyr Stephen at the Nativity") == "Martyr"

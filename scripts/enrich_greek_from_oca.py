@@ -55,9 +55,11 @@ _DROP_TOKENS = frozenset({
     "hierarch", "deacon", "hieromonk",
 })
 
-# Greek "ios"/"ias" vs Latin "ius"/"ias"/"ias" suffix equivalence:
-# Strip final vowel-consonant suffixes that vary between traditions.
-_SUFFIX_NORM_RE = re.compile(r"(ios|ius|ios|ias|is|os|us|as)$")
+# Greek "-ios"/"-os" vs Latin "-ius"/"-us" suffix equivalence (Methodios /
+# Methodius, Eustathios / Eustathius). Strip the final vowel-consonant suffix so
+# the two spellings stem alike. Three-character suffixes are listed first so the
+# alternation prefers the longest match.
+_SUFFIX_NORM_RE = re.compile(r"(ios|ius|ias|is|os|us|as)$")
 
 
 _OCA_AND_PREFIX_RE = re.compile(

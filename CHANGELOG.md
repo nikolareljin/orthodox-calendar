@@ -72,6 +72,20 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   scoring scheme, so raising the threshold must not move it.
 - `rel="noopener"` added alongside `noreferrer` on every `target="_blank"` link in
   `App.jsx`, including the new NeoByzantine link.
+- Feast-type detection put the generic `Saint` rule (which matches `holy`) ahead of the
+  `Great Feast` rule, so "The Dormition of our Most Holy Lady the Theotokos" was
+  classified as a plain `Saint`. `Great Feast` is now tested first.
+- Forefeast, Afterfeast, Apodosis and Leavetaking days are classified `Feast` rather than
+  `Great Feast`. They name the feast they attend, and `Great Feast` drives calendar
+  highlighting, so 42 attendant days were lighting up as Great Feasts — every afterfeast
+  of Theophany, the Nativity, the Transfiguration and the Presentation. 71 entries in
+  `greek_saints.json` were reclassified; the file now marks 17 Great Feast days, not 88.
+- `\bpassion\b` no longer matches "Passion-bearer", a martyr category rather than the
+  Passion of Christ, which was making Boris and Gleb a Great Feast.
+- Trimmed an encoded-quote scrape artifact from one URL in
+  `scripts/goarch_cdx_timestamps.json`.
+- `_SUFFIX_NORM_RE` in `scripts/enrich_greek_from_oca.py` listed `ios` twice; deduplicated
+  and the comment corrected. Verified behaviour-identical over 4,834 name tokens.
 
 ---
 
