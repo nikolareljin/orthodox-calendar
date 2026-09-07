@@ -10,6 +10,14 @@ from .models import CalendarEntry
 
 DEFAULT_DATA_FILES = ["oca_julian.json", "neobyzantine_hagiographies.json"]
 
+# Datasets whose saint notes are curated hagiography rather than incidental
+# remarks, mapped to the provenance recorded on load. _apply_overlay only
+# promotes notes into extended_notes for a saint carrying one of these tags, so
+# the tag is what separates curated content from an ordinary tradition overlay.
+# Keyed by filename because provenance is a property of the source file: the
+# entries themselves declare tradition "oca" and carry no distinguishing field.
+_DATASET_PROVENANCE = {"neobyzantine_hagiographies.json": "neobyzantine"}
+
 # Files excluded from directory scans (demo/sample data not for production).
 _EXCLUDED_FILENAMES = frozenset({"saints_sample.json"})
 
@@ -61,8 +69,26 @@ def load_calendar_entries() -> List[CalendarEntry]:
             continue
         with data_file.open("r", encoding="utf-8") as handle:
             raw = json.load(handle)
-        entries.extend(CalendarEntry(**entry) for entry in raw)
+        provenance = _DATASET_PROVENANCE.get(data_file.name)
+        for entry in raw:
+            parsed = CalendarEntry(**entry)
+            if provenance:
+                _stamp_provenance(parsed, provenance)
+            entries.append(parsed)
     return entries
+
+
+def _stamp_provenance(entry: CalendarEntry, provenance: str) -> None:
+    """Record which dataset a saint's hagiography text came from.
+
+    Applied only to files listed in _DATASET_PROVENANCE, and never over a
+    provenance the entry states for itself.
+    """
+    for saint in entry.saints:
+        if saint.extended_notes_source:
+            continue
+        if saint.notes or saint.extended_notes:
+            saint.extended_notes_source = provenance
 
 
 def build_index() -> Dict[str, List[CalendarEntry]]:

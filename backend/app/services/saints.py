@@ -177,6 +177,10 @@ _EVENT_PREFIX_RE = _re.compile(
     r"|(?:repose|translation|uncovering|discovery|opening) of (?:the )?)+",
     _re.IGNORECASE,
 )
+# Sentinel rank for a candidate matched only as a substring, so every such
+# candidate sorts below any whole-word match without special-casing.
+_NO_WHOLE_WORD_KEY = 1_000_000
+
 _DROP_TOKENS = {
     "saint",
     "st",
@@ -188,10 +192,14 @@ _DROP_TOKENS = {
     "new",
     "righteous",
     "wonderworker",
-    "great",
     "of",
     "the",
 }
+# "great" is deliberately absent. The tokens above are honorifics applied to
+# every saint, so dropping them helps two sources agree. "the Great" is an
+# epithet that *identifies* one -- Basil, Anthony, Constantine -- and dropping
+# it collapsed "Basil the Great" to the single token "basil", which then ranked
+# behind any other Basil carrying more text.
 
 
 def _normalize_saint_text(value: str) -> str:
@@ -325,6 +333,14 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
     Priority: neobyzantine_hagiographies.json notes → extended_notes on the base
     (so they surface at /hagiography even when OCA notes already exist).
     neobyzantine_url and neobyzantine_actor_slug propagate when the overlay has them.
+
+    Promoting notes into extended_notes is gated on the overlay carrying a known
+    provenance (extended_notes_source, stamped at load time by data_loader, or
+    neobyzantine cross-link metadata). Ordinary tradition overlays (Armenian,
+    Serbian, ...) carry none, so their notes stay in notes: promoting them would
+    both shadow the base OCA hagiography at /hagiography and be reported as
+    source="goarch", which _format_hagiography_response assumes for any
+    extended_notes with no source recorded.
     """
     if overlay.title and not base.title:
         base.title = overlay.title
@@ -338,17 +354,25 @@ def _apply_overlay(base: Saint, overlay: Saint) -> None:
         base.icon_url = overlay.icon_url
     if overlay.notes and not base.notes:
         base.notes = overlay.notes
-    # Overlay notes become extended_notes when base has none — this lets the
-    # neobyzantine_hagiographies.json notes surface at /hagiography as curated content.
-    # Track provenance so _format_hagiography_response can label the source correctly.
-    if overlay.notes and not base.extended_notes:
+    # Provenance of the overlay's hagiography text, or None for a plain tradition
+    # overlay. data_loader stamps extended_notes_source on curated datasets; the
+    # cross-link fields are the fallback signal for entries that carry them.
+    overlay_source = overlay.extended_notes_source or (
+        "neobyzantine"
+        if (overlay.neobyzantine_actor_slug or overlay.neobyzantine_url)
+        else None
+    )
+    # Only a provenance-tagged overlay may promote its notes to extended_notes —
+    # that is what lets neobyzantine_hagiographies.json surface at /hagiography as
+    # curated content without an untagged tradition overlay doing the same and
+    # being mislabeled as GOARCH.
+    if overlay_source and overlay.notes and not base.extended_notes:
         base.extended_notes = overlay.notes
-        if overlay.neobyzantine_actor_slug or overlay.neobyzantine_url:
-            base.extended_notes_source = "neobyzantine"
+        base.extended_notes_source = overlay_source
     if overlay.extended_notes and not base.extended_notes:
         base.extended_notes = overlay.extended_notes
-        if overlay.neobyzantine_actor_slug or overlay.neobyzantine_url:
-            base.extended_notes_source = "neobyzantine"
+        if overlay_source:
+            base.extended_notes_source = overlay_source
     if overlay.canonized_by and not base.canonized_by:
         base.canonized_by = overlay.canonized_by
     if overlay.canonization_scope and not base.canonization_scope:
@@ -582,10 +606,44 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         # Raise ValueError; the route handler translates this to HTTP 422.
         raise ValueError("saint name contains no searchable tokens after normalization")
 
+    def _matches_whole_word(entry_keys: frozenset[str]) -> bool:
+        """Every query token appears as a whole word in some key."""
+        return all(
+            any(qt in sk.split() for sk in entry_keys)
+            for qt in q_tokens
+        )
+
     def _matches(entry_keys: frozenset[str]) -> bool:
-        if not q_tokens:
-            return False
+        """Every query token appears anywhere in some key, substring included.
+
+        Kept as the fallback tier so partial and inflected queries still resolve.
+        On its own it is too loose to rank on: keys are normalized to bare words,
+        so the token "basil" is a substring of "cabasilas" and of "basilisk", and
+        a query for Basil the Great returned Nicholas Cabasilas -- a confident
+        answer about a different saint.
+        """
         return all(any(qt in sk for sk in entry_keys) for qt in q_tokens)
+
+    _query_tokens = frozenset(q_tokens)
+
+    def _extra_tokens(entry_keys: frozenset[str]) -> int:
+        """How many tokens beyond the query the tightest whole-word key carries.
+
+        A composite commemoration ("Synaxis of the Three Hierarchs: Basil the
+        Great, Gregory the Theologian, & John Chrysostom") contains the query as
+        a subset just as the saint's own entry does, and carries more text, so
+        ranking on text alone handed the query to the composite. Preferring the
+        tightest key picks the entry that is *about* the saint asked for.
+
+        Substring-tier candidates have no whole-word key and all score equally,
+        leaving their relative order to the tie-breakers below.
+        """
+        extras = [
+            len(toks - _query_tokens)
+            for toks in (frozenset(sk.split()) for sk in entry_keys)
+            if _query_tokens <= toks
+        ]
+        return min(extras) if extras else _NO_WHOLE_WORD_KEY
 
     # Carry (ks, saint, month_day) tuples so _best can use month_day as a
     # deterministic tie-breaker without re-indexing.
@@ -595,6 +653,7 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         _, saint, _ = max(
             candidates,
             key=lambda t: (
+                -_extra_tokens(t[0]),  # closest name first, before text richness
                 bool(t[1].extended_notes),
                 bool(t[1].notes),
                 "oca.org" in (t[1].hagiography_url or ""),  # prefer OCA-backed entries
@@ -605,22 +664,34 @@ def get_hagiography(saint_name: str, month_day: Optional[str] = None) -> Hagiogr
         )
         return saint
 
+    def _select(entries) -> List[tuple[frozenset[str], Saint, str]]:
+        """Whole-word matches if there are any, else the looser substring tier.
+
+        Two tiers rather than one so precision does not cost recall: an exact
+        name resolves to that saint, while a partial query that matches nothing
+        as a whole word still falls back to substring matching.
+        """
+        whole = [
+            (ks, s, md) for (ks, s, md, _cal) in entries if _matches_whole_word(ks)
+        ]
+        if whole:
+            return whole
+        return [(ks, s, md) for (ks, s, md, _cal) in entries if _matches(ks)]
+
     if month_day:
         # Use the pre-indexed Byzantine-only lookup: O(1) dict access + O(k) match
         # scan where k = saints on that Byzantine date.  Non-Byzantine calendars
         # (Coptic, Ethiopian) are excluded because month_day is documented as a
         # Byzantine fixed-feast MM-DD key.
         byzantine_entries = _get_hagio_byzantine_index().get(month_day, ())
-        dated = [(ks, s, md) for (ks, s, md, _cal) in byzantine_entries if _matches(ks)]
-        found = _best(dated)
+        found = _best(_select(byzantine_entries))
         if found:
             return _format_hagiography_response(found)
         # month_day given but no match on that date — treat as not found rather
         # than silently falling through to a full scan that may return a different saint.
         return HagiographyResponse(saint=saint_name, source="not_found")
 
-    all_matches = [(ks, s, md) for (ks, s, md, _cal) in _get_hagio_cache() if _matches(ks)]
-    found = _best(all_matches)
+    found = _best(_select(_get_hagio_cache()))
     if found:
         return _format_hagiography_response(found)
 
@@ -650,6 +721,12 @@ def _format_hagiography_response(saint: Saint) -> HagiographyResponse:
     # check the URL hostname so those entries report source=oca, not notes.
     if saint.extended_notes:
         source = saint.extended_notes_source or "goarch"
+    elif saint.notes and saint.extended_notes_source:
+        # A curated dataset stamps provenance at load time, so its text is
+        # attributable whether or not a merge promoted it into extended_notes.
+        # Without this the same neobyzantine entry reported "neobyzantine" when
+        # it overlaid an OCA saint and "notes" when it stood alone.
+        source = saint.extended_notes_source
     elif saint.notes and "oca.org" in oca_url:
         source = "oca"
     elif saint.notes:

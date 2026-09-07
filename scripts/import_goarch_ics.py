@@ -52,7 +52,12 @@ from pathlib import Path
 _VEVENT_RE = re.compile(r"BEGIN:VEVENT(.*?)END:VEVENT", re.DOTALL)
 _DTSTART_RE = re.compile(r"DTSTART[^:]*:(\d{4})(\d{2})(\d{2})")
 _SUMMARY_RE = re.compile(r"^SUMMARY:(.+)$", re.MULTILINE)
-_DESC_RE = re.compile(r"^DESCRIPTION:(.+)$", re.MULTILINE | re.DOTALL)
+# No re.DOTALL: _parse_events unfolds the ICS first, so DESCRIPTION occupies a
+# single physical line and "." must stop at its end. With DOTALL the greedy ".+"
+# ran to the end of the VEVENT and backtracked to the last line break, swallowing
+# every property that followed (UID, DTEND, ...) into desc and polluting the
+# saints extraction.
+_DESC_RE = re.compile(r"^DESCRIPTION:(.+)$", re.MULTILINE)
 # Match the saints section after unescaping (actual \n\n newlines, not ICS-escaped \n\n)
 _SAINTS_SECTION_RE = re.compile(r"Saints and Feasts:(.*?)(?:\n\n|$)", re.DOTALL)
 
@@ -172,6 +177,23 @@ def _feast_type(name: str) -> str:
 
 def _clean_name(name: str) -> str:
     """Strip leading title prefixes (kept in the title field) to get a clean name."""
+    name = _clean_title(name)
+    # Strip honorifics repeatedly: "Holy Martyrs Sergius" drops "Holy", then
+    # "Martyrs". Applied after _clean_title so parentheticals and whitespace are
+    # already normalized. The pattern requires trailing whitespace, so the last
+    # remaining token is never stripped and the name cannot be emptied
+    # ("Holy Martyrs" -> "Martyrs", not ""); the empty check is a guard against a
+    # future pattern that could.
+    while True:
+        stripped = _TITLE_PREFIXES_TO_STRIP.sub("", name, count=1).strip()
+        if not stripped or stripped == name:
+            break
+        name = stripped
+    return name
+
+
+def _clean_title(name: str) -> str:
+    """Normalize a raw ICS name for the title field, keeping its honorifics."""
     # Remove parenthetical alternates "(also known as X)"
     name = re.sub(r"\s*\(.*?\)", "", name)
     # Normalize whitespace
@@ -205,7 +227,10 @@ def events_to_entries(events: list[dict]) -> list[dict]:
             ft = _feast_type(saint_name)
             entry: dict = {
                 "name": name,
-                "title": name,
+                # The honorific is data, not noise: it is what _feast_type reads
+                # and what a reader expects to see, so title keeps it while name
+                # stays prefix-free for consistent dedup.
+                "title": _clean_title(saint_name),
                 "feast_type": ft,
                 "canonized_by": "Ecumenical Patriarchate of Constantinople",
                 "canonization_scope": "universal",

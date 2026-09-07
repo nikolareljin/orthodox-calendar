@@ -178,6 +178,28 @@ def _saint_key(name: str, title: str | None = None) -> str:
 # Phase 1: Crawl
 # ---------------------------------------------------------------------------
 
+_SCRIPTS_DIR = Path(__file__).resolve().parent
+_REPO_ROOT = _SCRIPTS_DIR.parent
+
+
+def _cdx_search_paths() -> list[Path]:
+    """CDX timestamp files to try, in precedence order.
+
+    A scratch crawl in the system /tmp, then the repo-local tmp/ working
+    directory, then the snapshot committed alongside this script. The first two
+    are overrides from a fresh crawl; the last is what ships with the repo.
+
+    The repo-local entry previously resolved to _SCRIPTS_DIR.parent.parent.parent
+    -- one level *above* the repository -- and was never added to the search
+    list, so that location was computed and then silently never read.
+    """
+    return [
+        Path("/tmp/cdx_timestamps.json"),
+        _REPO_ROOT / "tmp" / "cdx_timestamps.json",
+        _SCRIPTS_DIR / "goarch_cdx_timestamps.json",
+    ]
+
+
 def crawl(contentids: list[int], cache_path: Path, delay: float) -> dict:
     """Fetch all contentids and save cache. Returns {contentid: entry}."""
     existing: dict = {}
@@ -185,14 +207,10 @@ def crawl(contentids: list[int], cache_path: Path, delay: float) -> dict:
         existing = json.loads(cache_path.read_text())
         print(f"Loaded {len(existing)} existing cache entries from {cache_path}", file=sys.stderr)
 
-    # Load CDX timestamps if available — direct timestamp URLs never redirect to live GOARCH.
-    cdx_file = Path(__file__).parent.parent.parent / "tmp" / "cdx_timestamps.json"
-    _cdx_file_search = [
-        Path("/tmp/cdx_timestamps.json"),
-        Path(__file__).parent / "goarch_cdx_timestamps.json",
-    ]
+    # Direct timestamp URLs never redirect to live GOARCH, so a timestamp map is
+    # what keeps the crawl on archived pages.
     cdx_ts: dict[str, str] = {}
-    for f in _cdx_file_search:
+    for f in _cdx_search_paths():
         if f.exists():
             raw = json.loads(f.read_text())
             cdx_ts = {cid: v["timestamp"] for cid, v in raw.items()}

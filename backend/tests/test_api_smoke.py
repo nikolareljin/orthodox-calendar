@@ -1,12 +1,22 @@
 import urllib.error
 from io import BytesIO
 
+from typing import get_args
+
 from fastapi.testclient import TestClient
 
 from app import main
+from app.models import HagiographyResponse
 
 
 client = TestClient(main.app)
+
+# Derived from the response model rather than restated, so adding a source value
+# cannot leave these assertions quietly out of date -- which is how they came to
+# reject "neobyzantine", a value the model already declared.
+_TEXT_SOURCES = frozenset(get_args(HagiographyResponse.model_fields["source"].annotation)) - {
+    "not_found"
+}
 
 
 def test_health_endpoint() -> None:
@@ -193,7 +203,7 @@ def test_hagiography_known_saint_returns_valid_source() -> None:
 
     assert response.status_code == 200
     payload = response.json()
-    assert payload["source"] in ("oca", "notes", "goarch")
+    assert payload["source"] in _TEXT_SOURCES
     assert payload["saint"]
 
 
@@ -222,7 +232,7 @@ def test_hagiography_source_reflects_text_not_url() -> None:
     assert response.status_code == 200
     payload = response.json()
     if payload.get("hagiography"):
-        assert payload["source"] in ("oca", "notes", "goarch")
+        assert payload["source"] in _TEXT_SOURCES
     else:
         assert payload["source"] == "not_found"
 

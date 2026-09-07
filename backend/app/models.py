@@ -52,7 +52,12 @@ class Saint(BaseModel):
     extended_notes_source: Optional[str] = Field(
         default=None,
         exclude=True,  # internal provenance tag; not exposed in API responses
-        description="Tracks where extended_notes was populated from (e.g. 'neobyzantine', 'goarch').",
+        description=(
+            "Provenance of this saint's hagiography text (e.g. 'neobyzantine', 'goarch'). "
+            "Stamped at load time from the source dataset, so it is set even before "
+            "notes are promoted into extended_notes; _apply_overlay uses it to gate "
+            "that promotion and _format_hagiography_response to label the response."
+        ),
     )
 
 
