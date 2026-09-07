@@ -151,11 +151,23 @@ def fetch_saint(contentid: int, timestamp: str = "2025") -> dict | None:
 
 
 # ---------------------------------------------------------------------------
-# Name normalization (mirrors backend/_name_utils.py)
+# Name normalization
 # ---------------------------------------------------------------------------
+#
+# This is a local scheme, not the shared one: it strips honorifics anywhere in
+# the string and then discards every non-letter, producing a squashed key
+# ("basilcaesarea"). scripts/_name_utils.py keeps tokens and is what the other
+# enrichment scripts use. An earlier comment here pointed at
+# "backend/_name_utils.py", which does not exist.
+#
+# "st" rather than "st\.": \b cannot match between "." and the space that
+# follows, both being non-word characters, so \bst\.\b never matched anything
+# and "St. Basil" keyed as "stbasil" while "Saint Basil" keyed as "basil". The
+# trailing dot is removed by the non-letter strip below, so "st" covers both
+# "St." and a bare "St".
 
 _NORM_STRIP = re.compile(
-    r"\bthe\b|\bblessed\b|\bholy\b|\bsaint\b|\bst\.\b|\bvenerable\b|\brighteous\b"
+    r"\bthe\b|\bblessed\b|\bholy\b|\bsaint\b|\bst\b|\bvenerable\b|\brighteous\b"
     r"|\bmartyr\b|\bapostle\b|\bprophet\b|\bhieromartyr\b|\bhierarch\b"
     r"|\bconfessor\b|\bdeacon\b|\bbishop\b|\barchbishop\b|\bpatriarch\b"
     r"|\bmetropolitan\b|\bpresbyter\b|\bmonk\b|\bnun\b|\babbess\b|\babbot\b",

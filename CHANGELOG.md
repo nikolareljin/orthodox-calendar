@@ -86,6 +86,15 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `scripts/goarch_cdx_timestamps.json`.
 - `_SUFFIX_NORM_RE` in `scripts/enrich_greek_from_oca.py` listed `ios` twice; deduplicated
   and the comment corrected. Verified behaviour-identical over 4,834 name tokens.
+- `\bst\.\b` could never match, because `\b` cannot sit between `.` and the space after
+  it. "St. Basil" normalized to `stbasil` where "Saint Basil" gave `basil`, so the two
+  never matched during GOARCH enrichment. Fixed in `enrich_goarch_from_wayback.py` and in
+  the feast-type `Saint` rule, which carried the same dead alternative.
+- `scripts/_name_utils.py` no longer drops `great`, restoring the match keys it documents
+  itself as mirroring from `backend/app/services/saints.py`. The two had diverged, so the
+  scripts that write the data produced `basil` where the service that reads it produced
+  `basil great`. `scripts/tests/test_name_utils_mirror.py` now fails if they drift again.
+- Corrected a comment pointing at `backend/_name_utils.py`, a path that does not exist.
 
 ---
 

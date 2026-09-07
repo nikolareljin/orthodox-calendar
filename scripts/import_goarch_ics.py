@@ -171,7 +171,10 @@ _FEAST_TYPE_RULES: list[tuple[re.Pattern, str]] = [
         r"|\bcircumcision\b",
         re.I,
     ), "Great Feast"),
-    (re.compile(r"\bsaint\b|\bst\.\b|\bholy\b", re.I), "Saint"),
+    # "st" not "st\.": \b cannot match between "." and the following space, so
+    # \bst\.\b never matched. Harmless here because "Saint" is also the default
+    # return, but a rule that cannot fire should not read as though it can.
+    (re.compile(r"\bsaint\b|\bst\b|\bholy\b", re.I), "Saint"),
 ]
 
 _TITLE_PREFIXES_TO_STRIP = re.compile(

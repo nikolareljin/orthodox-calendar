@@ -30,3 +30,28 @@ def test_scratch_overrides_precede_the_committed_snapshot():
     assert paths.index(_REPO_ROOT / "tmp" / "cdx_timestamps.json") < paths.index(
         _REPO_ROOT / "scripts" / "goarch_cdx_timestamps.json"
     )
+
+
+def test_st_abbreviation_is_stripped():
+    # \bst\.\b could never match: "." and the space after it are both non-word
+    # characters, so there is no boundary between them. "St. Basil" keyed as
+    # "stbasil" while "Saint Basil" keyed as "basil", and the two never matched.
+    assert ew._normalize("St. Basil") == ew._normalize("Saint Basil")
+
+
+def test_bare_st_is_also_stripped():
+    assert ew._normalize("St Basil") == ew._normalize("Basil")
+
+
+def test_names_beginning_with_st_are_untouched():
+    # \bst\b must not eat the start of "Stephen" or "Stylianos".
+    assert ew._normalize("Stephen") == "stephen"
+    assert ew._normalize("Stylianos the Wonderworker").startswith("stylianos")
+
+
+def test_saint_key_uses_title_when_present():
+    assert ew._saint_key("Basil", "St. Basil the Great") == ew._normalize("St. Basil the Great")
+
+
+def test_normalization_discards_punctuation_and_case():
+    assert ew._normalize("St. Basil, the Great") == ew._normalize("saint basil the great")
