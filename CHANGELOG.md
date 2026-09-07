@@ -62,6 +62,16 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - A curated entry's hagiography is attributed to its dataset whether or not an overlay
   merge promoted it, instead of reporting `neobyzantine` when merged and `notes` when
   standing alone.
+- Feast-type detection matched `patriar` and `hierodea`, which `\b` can never match
+  inside "Patriarch" or "Hierodeacon". 47 patriarchs and one hierodeacon in
+  `greek_saints.json` were classified as the generic `Saint`; the patterns are now the
+  full words and the data is backfilled.
+- `--min-score` in `scripts/enrich_greek_from_oca.py` reaches the acceptance check. It
+  was parsed and discarded, leaving the threshold hard-coded. The separate `0.5` that
+  marks a primary-name-only match is now `_PRIMARY_ONLY_SCORE`: it is a constant of the
+  scoring scheme, so raising the threshold must not move it.
+- `rel="noopener"` added alongside `noreferrer` on every `target="_blank"` link in
+  `App.jsx`, including the new NeoByzantine link.
 
 ---
 

@@ -1095,7 +1095,7 @@
       {
         "name": "Makarios, Hierodeacon of Kalogera, Patmos",
         "title": "Makarios, Hierodeacon of Kalogera, Patmos",
-        "feast_type": "Saint",
+        "feast_type": "Priest",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/01/19/100233-venerable-makarios-the-roman-of-novgorod",
@@ -1799,7 +1799,7 @@
       {
         "name": "Polyeuktos, Patriarch Of Constantinople",
         "title": "Polyeuktos, Patriarch Of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -1841,7 +1841,7 @@
       {
         "name": "Photius the Great, Patriarch of Constantinople",
         "title": "Photius the Great, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/06/100442-saint-photius-patriarch-of-constantinople",
@@ -2049,7 +2049,7 @@
       {
         "name": "Anastasios, Patriarch of Jerusalem",
         "title": "Anastasios, Patriarch of Jerusalem",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -2166,7 +2166,7 @@
       {
         "name": "Eulogios, Patriarch of Alexandria",
         "title": "Eulogios, Patriarch of Alexandria",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/13/100517-saint-eulogius-archbishop-of-alexandria",
@@ -2252,7 +2252,7 @@
       {
         "name": "Onesimos, Patriarch of Constantinople",
         "title": "Onesimos, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/15/100526-apostle-onesimus-of-the-seventy",
@@ -2293,7 +2293,7 @@
       {
         "name": "Flavianos, Patriarch of Constantinople",
         "title": "Flavianos, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/16/109046-saint-flavian-archbishop-of-antioch",
@@ -2358,7 +2358,7 @@
       {
         "name": "Hermogenes, Patriarch of Moscow",
         "title": "Hermogenes, Patriarch of Moscow",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/17/100548-hieromartyr-hermogenes-patriarch-of-moscow-wonderworker-of-all-r",
@@ -2498,7 +2498,7 @@
       {
         "name": "John III, Patriarch of Constantinople",
         "title": "John III, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/21/109057-saint-john-scholasticus-patriarch-of-constantinople",
@@ -2518,7 +2518,7 @@
       {
         "name": "Zachariah, Patriarch of Jerusalem",
         "title": "Zachariah, Patriarch of Jerusalem",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/21/109058-saint-zacharias-patriarch-of-jerusalem",
@@ -2662,7 +2662,7 @@
       {
         "name": "Tarasius, Patriarch of Constantinople",
         "title": "Tarasius, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/02/25/100605-saint-tarasius-archbishop-of-constantinople",
@@ -3349,7 +3349,7 @@
       {
         "name": "Sophronius, Patriarch of Jerusalem",
         "title": "Sophronius, Patriarch of Jerusalem",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/03/11/100777-saint-sophronius-patriarch-of-jerusalem",
@@ -3445,7 +3445,7 @@
       {
         "name": "Removal of the relics of Nicephorus, Patriarch of Constantinople",
         "title": "Removal of the relics of Nicephorus, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -3660,7 +3660,7 @@
       {
         "name": "Cyril, Patriarch of Jerusalem",
         "title": "Cyril, Patriarch of Jerusalem",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/03/18/100829-saint-cyril-archbishop-of-jerusalem",
@@ -3777,7 +3777,7 @@
       {
         "name": "Thomas I, Patriarch of Constantinople",
         "title": "Thomas I, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/03/21/100860-saint-thomas-patriarch-of-constantinople",
@@ -4366,7 +4366,7 @@
       {
         "name": "Eutychius, Patriarch of Constantinople",
         "title": "Eutychius, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/04/06/101008-saint-eutychius-patriarch-of-constantinople",
@@ -4455,7 +4455,7 @@
       {
         "name": "Tikhon, Patriarch of Moscow and Enlightener of North America",
         "title": "Tikhon, Patriarch of Moscow and Enlightener of North America",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       }
@@ -4655,7 +4655,7 @@
       {
         "name": "Sergius II, Patriarch of Constantinople",
         "title": "Sergius II, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -4997,7 +4997,7 @@
       {
         "name": "Tryphon, Patriarch of Constantinople",
         "title": "Tryphon, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/04/19/101152-saint-tryphon-patriarch-of-constantinople",
@@ -5088,7 +5088,7 @@
       {
         "name": "Our Holy Father Maximian, Patriarch of Constantinople",
         "title": "Our Holy Father Maximian, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -5994,7 +5994,7 @@
       {
         "name": "Germanos, Patriarch of Constantinople",
         "title": "Germanos, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/05/12/101357-saint-germanus-patriarch-of-constantinople",
@@ -6090,7 +6090,7 @@
       {
         "name": "Leontius, Patriarch of Jerusalem",
         "title": "Leontius, Patriarch of Jerusalem",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/05/14/101380-saint-leontius-patriarch-of-jerusalem",
@@ -6182,7 +6182,7 @@
       {
         "name": "Nicholas the Mystic, Patriarch of Constantinople",
         "title": "Nicholas the Mystic, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/05/16/100130-new-martyr-nicholas-of-metsovo",
@@ -6301,7 +6301,7 @@
       {
         "name": "Stephen I, Patriarch of Constantinople",
         "title": "Stephen I, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -6817,7 +6817,7 @@
       {
         "name": "Eustathios, Patriarch of Constantinople",
         "title": "Eustathios, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -7159,7 +7159,7 @@
       {
         "name": "Cyril, Patriarch of Alexandria",
         "title": "Cyril, Patriarch of Alexandria",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/06/09/101595-saint-cyril-archbishop-of-alexandria",
@@ -7643,7 +7643,7 @@
       {
         "name": "Kallistos I, Patriarch of Constantinople",
         "title": "Kallistos I, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -8112,7 +8112,7 @@
       {
         "name": "Juvenal, Patriarch of Jerusalem",
         "title": "Juvenal, Patriarch of Jerusalem",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/07/02/101868-saint-juvenal-patriarch-of-jerusalem",
@@ -8160,7 +8160,7 @@
       {
         "name": "Anatolius, Patriarch of Constantinople",
         "title": "Anatolius, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/07/03/101890-saint-anatolius-patriarch-of-constantinople",
@@ -9332,7 +9332,7 @@
       {
         "name": "Constantine III, Patriarch of Constantinople",
         "title": "Constantine III, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/07/29/102124-venerable-constantine-and-cosmas-abbots-of-kosinsk",
@@ -9593,7 +9593,7 @@
       {
         "name": "Euthymios, Patriarch of Constantinople",
         "title": "Euthymios, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -9798,7 +9798,7 @@
       {
         "name": "Constantine, Patriarch of Constantinople",
         "title": "Constantine, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -9893,7 +9893,7 @@
       {
         "name": "Our Holy Father Niphonus, Patriarch of Constantinople",
         "title": "Our Holy Father Niphonus, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -10453,7 +10453,7 @@
       {
         "name": "Athanasios Patelaros, Patriarch of Constantinople",
         "title": "Athanasios Patelaros, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -10566,7 +10566,7 @@
       {
         "name": "Our Holy Father Kallinikos, Patriarch of Constantinople",
         "title": "Our Holy Father Kallinikos, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -10960,7 +10960,7 @@
       {
         "name": "Gennadius Scholarus, Patriarch of Constantinople",
         "title": "Gennadius Scholarus, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/08/31/102444-saint-gennadius-patriarch-of-constantinople",
@@ -11084,7 +11084,7 @@
       {
         "name": "John the Abstainer, Patriarch of Constantinople",
         "title": "John the Abstainer, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "goarch_url": "https://www.goarch.org/chapel/saints?contentid=189",
@@ -11095,7 +11095,7 @@
       {
         "name": "Paul, Patriarch of Constantinople",
         "title": "Paul, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -12371,7 +12371,7 @@
       {
         "name": "Dionysios I, Patriarch of Constantinople",
         "title": "Dionysios I, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       }
@@ -12940,7 +12940,7 @@
       {
         "name": "Meletios of Pegas, Patriarch of Alexandria",
         "title": "Meletios of Pegas, Patriarch of Alexandria",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -13436,7 +13436,7 @@
       {
         "name": "Kyriakos, Patriarch of Constantinople",
         "title": "Kyriakos, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -13544,7 +13544,7 @@
       {
         "name": "Joseph, Patriarch of Constantinople",
         "title": "Joseph, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       }
@@ -13981,7 +13981,7 @@
       {
         "name": "John the Merciful, Patriarch of Alexandria",
         "title": "John the Merciful, Patriarch of Alexandria",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/11/12/103286-saint-john-the-merciful-patriarch-of-alexandria",
@@ -14001,7 +14001,7 @@
       {
         "name": "Leondos Styppi, Patriarch of Constantinople",
         "title": "Leondos Styppi, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -14356,7 +14356,7 @@
       {
         "name": "Kallistos Xanthopoulos, Patriarch of Constantinople",
         "title": "Kallistos Xanthopoulos, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/11/22/103373-saint-kallistos-ii-patriarch-of-constantinople",
@@ -14404,7 +14404,7 @@
       {
         "name": "Dionysios, Patriarch of Constantinople",
         "title": "Dionysios, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -15338,7 +15338,7 @@
       {
         "name": "Nicholas Chrysoberges, Patriarch of Constantinople",
         "title": "Nicholas Chrysoberges, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal"
       },
@@ -15769,7 +15769,7 @@
       {
         "name": "Theodore, Patriarch of Constantinople",
         "title": "Theodore, Patriarch of Constantinople",
-        "feast_type": "Saint",
+        "feast_type": "Hierarch",
         "canonized_by": "Ecumenical Patriarchate of Constantinople",
         "canonization_scope": "universal",
         "hagiography_url": "https://www.oca.org/saints/lives/0000/12/27/103662-saint-theodore-archbishop-of-constantinople",

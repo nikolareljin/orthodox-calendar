@@ -136,7 +136,22 @@ def _match_score(greek_name: str, oca_name: str) -> float:
 # Main enrichment logic
 # ---------------------------------------------------------------------------
 
-def enrich(greek_path: Path, oca_path: Path, dry_run: bool = False) -> None:
+# A score of exactly 0.5 means the primary name stem matched and no secondary
+# token did (see _match_score: 0.5 primary + up to 0.5 Jaccard). It is a constant
+# of the scoring scheme, not an acceptance threshold, so --min-score must not
+# move it -- at --min-score 0.7 this guard still has to recognise the
+# primary-only case in order to reject it as ambiguous.
+_PRIMARY_ONLY_SCORE = 0.5
+
+DEFAULT_MIN_SCORE = 0.5
+
+
+def enrich(
+    greek_path: Path,
+    oca_path: Path,
+    dry_run: bool = False,
+    min_score: float = DEFAULT_MIN_SCORE,
+) -> None:
     greek = json.loads(greek_path.read_text())
     oca = json.loads(oca_path.read_text())
 
@@ -197,15 +212,15 @@ def enrich(greek_path: Path, oca_path: Path, dry_run: bool = False) -> None:
             # Penalize ambiguous primary-name-only matches:
             # if 2+ OCA saints share the same primary name stem on this date
             # and the score is exactly 0.5 (no secondary confirmation), skip.
-            if best_score == 0.5:
+            if best_score == _PRIMARY_ONLY_SCORE:
                 g_tokens = _tokenize(g_name)
                 if g_tokens:
                     g_primary_stem = _stem(g_tokens[0])
                     if oca_primary_counts.get(g_primary_stem, 0) > 1:
                         continue  # ambiguous — multiple candidates, no secondary match
 
-            # Accept match at score ≥ 0.5 (primary name must match)
-            if best_oca and best_score >= 0.5:
+            # Accept match at score >= min_score (primary name must match)
+            if best_oca and best_score >= min_score:
                 if dry_run:
                     o_name = best_oca.get("title") or best_oca.get("name") or ""
                     print(f"  {md} ({best_score:.2f}) '{g_name[:45]}'  →  '{o_name[:45]}'")
@@ -238,10 +253,24 @@ def main() -> None:
     parser.add_argument("--greek", default="backend/app/data/traditions/greek_saints.json")
     parser.add_argument("--oca", default="backend/app/data/oca_julian.json")
     parser.add_argument("--dry-run", action="store_true")
-    parser.add_argument("--min-score", type=float, default=0.5)
+    parser.add_argument(
+        "--min-score",
+        type=float,
+        default=DEFAULT_MIN_SCORE,
+        help=(
+            "Minimum match score to accept an OCA saint, in [0, 1]. "
+            f"A primary-name-only match scores {_PRIMARY_ONLY_SCORE}; "
+            "raise this to require secondary tokens to agree as well."
+        ),
+    )
     args = parser.parse_args()
 
-    enrich(Path(args.greek), Path(args.oca), dry_run=args.dry_run)
+    enrich(
+        Path(args.greek),
+        Path(args.oca),
+        dry_run=args.dry_run,
+        min_score=args.min_score,
+    )
 
 
 if __name__ == "__main__":

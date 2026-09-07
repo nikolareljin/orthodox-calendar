@@ -225,7 +225,7 @@ function SaintCard({ saint }) {
         <div className="saint-body">
           {saint.notes && <p className="saint-hagio">{saint.notes}</p>}
           {saint.hagiography_url && (
-            <a href={saint.hagiography_url} target="_blank" rel="noreferrer" className="saint-link">
+            <a href={saint.hagiography_url} target="_blank" rel="noreferrer noopener" className="saint-link">
               Read full hagiography →
             </a>
           )}
@@ -233,7 +233,7 @@ function SaintCard({ saint }) {
             <a
               href={saint.neobyzantine_url}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="saint-link saint-link-nb"
               style={{ color: '#CFB53B' }}
             >
@@ -779,7 +779,7 @@ export default function App() {
             <h3>Subscribe via iCal</h3>
             <div className="ics-row">
               <code className="ics-code">{icsUrl}</code>
-              <a className="btn-ghost" href={icsUrl} target="_blank" rel="noreferrer">
+              <a className="btn-ghost" href={icsUrl} target="_blank" rel="noreferrer noopener">
                 Open ICS
               </a>
             </div>
@@ -955,7 +955,7 @@ function AboutSection() {
               </ul>
               <p className="about-text">
                 Open an issue or pull request at{" "}
-                <a href="https://github.com/nikolareljin/orthodox-calendar" target="_blank" rel="noreferrer" className="saint-link">
+                <a href="https://github.com/nikolareljin/orthodox-calendar" target="_blank" rel="noreferrer noopener" className="saint-link">
                   github.com/nikolareljin/orthodox-calendar
                 </a>
                 , or contact us through the repository. All are welcome.
@@ -977,7 +977,7 @@ function AboutSection() {
                 <a
                   href="https://github.com/nikolareljin/orthodox-calendar/issues/new"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noreferrer noopener"
                   className="contribute-btn"
                 >
                   Open an Issue on GitHub →
@@ -1018,7 +1018,7 @@ function SupportSection() {
           <a
             href="https://ko-fi.com/nikolareljin"
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener"
             className="support-btn support-kofi support-kofi-large"
           >
             ☕ Support on Ko-fi

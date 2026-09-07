@@ -78,3 +78,25 @@ def test_entries_carry_prefix_free_name_and_honorific_title():
     assert saint["title"] == "Righteous Mark the Deaf"
     # feast_type is derived from the raw name, so the honorific still classifies it.
     assert saint["feast_type"] == "Righteous"
+
+
+def test_patriarch_is_classified_as_a_hierarch():
+    # The pattern read "patriar", which \b can never match inside "Patriarch",
+    # so 47 patriarchs in greek_saints.json fell through to the generic "Saint".
+    assert igi._feast_type("Photius the Great, Patriarch of Constantinople") == "Hierarch"
+
+
+def test_hierodeacon_is_classified_as_a_priest():
+    assert igi._feast_type("Makarios, Hierodeacon of Kalogera, Patmos") == "Priest"
+
+
+def test_existing_hierarch_and_priest_terms_still_classify():
+    assert igi._feast_type("Basil, Archbishop of Caesarea") == "Hierarch"
+    assert igi._feast_type("Nicholas, Bishop of Myra") == "Hierarch"
+    assert igi._feast_type("Metropolitan Philip") == "Hierarch"
+    assert igi._feast_type("Deacon Stephen") == "Priest"
+
+
+def test_martyr_still_outranks_hierarch():
+    # _FEAST_TYPE_RULES is first-match; the martyrdom rules come first.
+    assert igi._feast_type("Hieromartyr Ignatius, Bishop of Antioch") == "Hieromartyr"

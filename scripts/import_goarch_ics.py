@@ -148,8 +148,8 @@ _FEAST_TYPE_RULES: list[tuple[re.Pattern, str]] = [
     (re.compile(r"\bequal.to.apostles?\b", re.I), "Equal-to-Apostles"),
     (re.compile(r"\bapostle\b", re.I), "Apostle"),
     (re.compile(r"\bprophet\b|\bprophetess\b", re.I), "Prophet"),
-    (re.compile(r"\barchbishop\b|\bpatriar\b|\bmetropolitan\b|\bbishop\b", re.I), "Hierarch"),
-    (re.compile(r"\bpriest\b|\bdeacon\b|\bhierodea\b", re.I), "Priest"),
+    (re.compile(r"\barchbishop\b|\bpatriarch\b|\bmetropolitan\b|\bbishop\b", re.I), "Hierarch"),
+    (re.compile(r"\bpriest\b|\bdeacon\b|\bhierodeacon\b", re.I), "Priest"),
     (re.compile(r"\bsaint\b|\bst\.\b|\bholy\b", re.I), "Saint"),
     (re.compile(
         r"\btransfiguration\b|\bassumption\b|\bnativity\b|\bpresentation\b"
