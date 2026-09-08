@@ -20,8 +20,13 @@ _EVENT_PREFIX_RE = re.compile(
 _DROP_TOKENS = frozenset({
     "saint", "st", "venerable", "blessed", "holy",
     "hieromartyr", "martyr", "new", "righteous",
-    "wonderworker", "great", "of", "the",
+    "wonderworker", "of", "the",
 })
+# "great" is deliberately absent, matching saints._DROP_TOKENS. It is an epithet
+# that identifies a saint (Basil, Anthony, Constantine) rather than an honorific
+# applied to every saint, and dropping it collapsed "Basil the Great" to "basil".
+# These scripts write the data the backend reads, so the two must agree;
+# tests/test_name_utils_mirror.py fails if they drift.
 
 
 def normalize(value: str) -> str:

@@ -43,6 +43,22 @@ class Saint(BaseModel):
     canonized_by: Optional[str] = None      # e.g. "Serbian Orthodox Church", "Ecumenical Patriarchate"
     canonization_scope: Optional[str] = None  # "universal" | "pan-orthodox" | "local" | "oriental" | "church-of-the-east"
     year_canonized: Optional[int] = None    # e.g. 2010
+    neobyzantine_url: Optional[str] = None  # link to neobyzantine.org/actors/{slug} (Phase 10)
+    neobyzantine_actor_slug: Optional[str] = Field(
+        default=None,
+        exclude=True,  # internal linking key; not exposed in list responses
+        description="neobyzantine-org Actor slug for cross-linking, populated from neobyzantine_hagiographies.json.",
+    )
+    extended_notes_source: Optional[str] = Field(
+        default=None,
+        exclude=True,  # internal provenance tag; not exposed in API responses
+        description=(
+            "Provenance of this saint's hagiography text (e.g. 'neobyzantine', 'goarch'). "
+            "Stamped at load time from the source dataset, so it is set even before "
+            "notes are promoted into extended_notes; _apply_overlay uses it to gate "
+            "that promotion and _format_hagiography_response to label the response."
+        ),
+    )
 
 
 class CalendarEntry(BaseModel):
@@ -86,7 +102,7 @@ class HagiographyResponse(BaseModel):
     hagiography: Optional[str] = None
     goarch_url: Optional[str] = None
     hagiography_url: Optional[str] = None
-    source: Literal["goarch", "oca", "notes", "not_found"]
+    source: Literal["goarch", "neobyzantine", "oca", "notes", "not_found"]
 
 
 class MovableFeastsResponse(BaseModel):

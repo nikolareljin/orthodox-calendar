@@ -9,6 +9,103 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.7.0] - 2026-05-29
+
+### Added
+- `neobyzantine_url` and `neobyzantine_actor_slug` fields on `Saint` model — links saints to neobyzantine.org actor pages
+- `extended_notes_source` field on `Saint` — records which dataset a saint's hagiography text came from, so `/hagiography` can report an accurate `source`
+- `neobyzantine` added to the `HagiographyResponse.source` values
+- `_apply_overlay()` promotes a curated overlay's `notes` into `extended_notes`, surfacing `neobyzantine_hagiographies.json` content at `/hagiography` even when OCA notes already exist
+- `data_loader` stamps dataset provenance on load, which is what gates that promotion (see Fixed)
+- `SaintCard` frontend component shows "Learn more on NeoByzantine.org →" link (Byzantine gold `#CFB53B`) when `neobyzantine_url` is present
+- `lat`, `lng`, `seat` coordinates added to all 40+ `WORLD_CHURCHES` entries (patriarchal see coordinates, WGS84) — groundwork for future map view
+- **`scripts/import_goarch_ics.py`** — imports the GOARCH chapel calendar from an ICS
+  export into `greek_saints.json`. Parses VEVENT blocks, extracts the "Saints and Feasts"
+  section, and skips movable Paschaltide/Pentecostarion markers, which are year-specific
+  and would be wrong if stored as static `MM-DD` keys.
+- **`scripts/enrich_goarch_from_wayback.py`** — fetches GOARCH hagiography text through
+  the Wayback Machine (the live site is behind a Cloudflare managed challenge) and merges
+  it into `greek_saints.json`. Ships `scripts/goarch_cdx_timestamps.json` and
+  `scripts/goarch_contentids.txt` as the crawl inputs.
+- **`scripts/enrich_greek_from_oca.py`** — enriches Greek saints with OCA hagiographies
+  in place.
+
+### Changed
+- `greek_saints.json` — 1,616 saints, now carrying OCA and GOARCH hagiography text
+- `serbian_saints.json` — re-imported; entity-decoded text, Wikipedia footnote refs
+  (`[73]`) and thin spaces removed by `scripts/import_serbian.py`
+- `scripts/import_goarch_ics.py` writes prefix-free `name` values and keeps the honorific
+  in `title`, so generated entries dedup consistently
+- `.gitignore` — ignore generated `docs/traffic/*`
+
+### Fixed
+- Overlay `notes` are no longer promoted into `extended_notes` for ordinary tradition
+  overlays. Previously any overlay with `notes` could shadow the base OCA hagiography at
+  `/hagiography` and be reported as `source=goarch`, because that is what
+  `_format_hagiography_response` assumes for `extended_notes` with no recorded source.
+  Promotion now requires the overlay to carry a provenance tag.
+- `_DESC_RE` in `scripts/import_goarch_ics.py` no longer uses `re.DOTALL`. The ICS is
+  unfolded before matching, so the greedy `.+` was consuming every VEVENT property after
+  `DESCRIPTION` (`UID`, `DTEND`, ...) into the description text.
+- `scripts/enrich_goarch_from_wayback.py` searches the repo-local `tmp/cdx_timestamps.json`
+  it computes. The path was resolving one level above the repository and was never added
+  to the search list, so that source was silently never read.
+- `/hagiography` returned a confident answer about the wrong saint. Query tokens were
+  matched as raw substrings against normalized keys, so `Basil the Great` matched
+  *Ca**basil**as* and *Basilisk*; whole-word matches are now preferred, with the substring
+  behaviour kept as a fallback so partial queries still resolve.
+- `the Great` is no longer discarded as an honorific. It identifies a saint rather than
+  decorating one, and dropping it collapsed `Basil the Great` to the single token `basil`.
+- Candidates are ranked by name closeness before text volume. The Synaxis of the Three
+  Hierarchs names Basil, Gregory and John together and carries more text than any of their
+  own entries, so it was answering all three queries.
+- A curated entry's hagiography is attributed to its dataset whether or not an overlay
+  merge promoted it, instead of reporting `neobyzantine` when merged and `notes` when
+  standing alone.
+- Feast-type detection matched `patriar` and `hierodea`, which `\b` can never match
+  inside "Patriarch" or "Hierodeacon". 47 patriarchs and one hierodeacon in
+  `greek_saints.json` were classified as the generic `Saint`; the patterns are now the
+  full words and the data is backfilled.
+- `--min-score` in `scripts/enrich_greek_from_oca.py` reaches the acceptance check. It
+  was parsed and discarded, leaving the threshold hard-coded. The separate `0.5` that
+  marks a primary-name-only match is now `_PRIMARY_ONLY_SCORE`: it is a constant of the
+  scoring scheme, so raising the threshold must not move it.
+- `rel="noopener"` added alongside `noreferrer` on every `target="_blank"` link in
+  `App.jsx`, including the new NeoByzantine link.
+- Feast-type detection put the generic `Saint` rule (which matches `holy`) ahead of the
+  `Great Feast` rule, so "The Dormition of our Most Holy Lady the Theotokos" was
+  classified as a plain `Saint`. `Great Feast` is now tested first.
+- Forefeast, Afterfeast, Apodosis and Leavetaking days are classified `Feast` rather than
+  `Great Feast`. They name the feast they attend, and `Great Feast` drives calendar
+  highlighting, so 42 attendant days were lighting up as Great Feasts — every afterfeast
+  of Theophany, the Nativity, the Transfiguration and the Presentation. 71 entries in
+  `greek_saints.json` were reclassified; the file now marks 17 Great Feast days, not 88.
+- `\bpassion\b` no longer matches "Passion-bearer", a martyr category rather than the
+  Passion of Christ, which was making Boris and Gleb a Great Feast.
+- Trimmed an encoded-quote scrape artifact from one URL in
+  `scripts/goarch_cdx_timestamps.json`.
+- `_SUFFIX_NORM_RE` in `scripts/enrich_greek_from_oca.py` listed `ios` twice; deduplicated
+  and the comment corrected. Verified behaviour-identical over 4,834 name tokens.
+- `\bst\.\b` could never match, because `\b` cannot sit between `.` and the space after
+  it. "St. Basil" normalized to `stbasil` where "Saint Basil" gave `basil`, so the two
+  never matched during GOARCH enrichment. Fixed in `enrich_goarch_from_wayback.py` and in
+  the feast-type `Saint` rule, which carried the same dead alternative.
+- `scripts/_name_utils.py` no longer drops `great`, restoring the match keys it documents
+  itself as mirroring from `backend/app/services/saints.py`. The two had diverged, so the
+  scripts that write the data produced `basil` where the service that reads it produced
+  `basil great`. `scripts/tests/test_name_utils_mirror.py` now fails if they drift again.
+- Corrected a comment pointing at `backend/_name_utils.py`, a path that does not exist.
+- `events_to_entries()` deduplicates saints with the same key `merge_entries()` uses.
+  It compared raw `name.lower()`, so "Basil, the Great" and "Basil the Great" could both
+  land on one day, and the two passes could disagree about whether a saint was already
+  present.
+- Every `read_text`/`write_text` in the import and enrichment scripts names `utf-8`.
+  They defaulted to the platform encoding, which under a POSIX locale is ASCII — so
+  writing `greek_saints.json` with `ensure_ascii=False` raised `UnicodeEncodeError` on the
+  Greek names the scripts exist to produce.
+
+---
+
 ## [0.5.0] - 2026-05-19
 
 ### Added
