@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build && npm run seo:check",
+    "preview": "vite preview",
+    "seo:check": "node scripts/check-seo.mjs"
   },
   "dependencies": {
     "react": "^18.3.1",
