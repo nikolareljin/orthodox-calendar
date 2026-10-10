@@ -9,6 +9,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ---
 
+## [0.7.1] - 2026-10-10
+
+### Added
+- GitHub Pages SEO metadata: canonical URL, Open Graph and Twitter card tags, and `WebApplication` JSON-LD.
+- `sitemap.xml`, a 1200x630 social preview image, and the Google Search Console verification page.
+- Frontend build validation for the published metadata, sitemap, social image dimensions, and verification page.
+
+### Fixed
+- Updated `source-map-js` to 1.2.2, resolving the high-severity frontend audit finding.
+
+---
+
 ## [0.7.0] - 2026-05-29
 
 ### Added
